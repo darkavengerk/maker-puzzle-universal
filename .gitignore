@@ -1,3 +1,4 @@
+config/secrets.js
 node_modules
 npm-debug.log
 .tmp
@@ -6,4 +7,4 @@ public
 compiled
 *.swp
 .vscode
-config/secrets.js
+
