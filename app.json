@@ -1,9 +1,9 @@
 {
-  "name": "React Node Express Mongo",
+  "name": "Maker Puzzle React Unversal Server",
   "description": "A barebones Node.js app using Express 4 with MongoDB, and ReactJS in Flux, using Webpack as a module bundler",
-  "repository": "https://github.com/choonkending/react-webpack-node",
-  "logo": "https://node-js-sample.herokuapp.com/node.svg",
-  "keywords": ["node", "express", "static", "react", "webpack", "mongodb"],
+  "repository": "https://github.com/darkavengerk/maker-puzzle-universal",
+  "logo": "",
+  "keywords": ["Maker-Puzzle"],
   "addons" : [
   	"mongolab"
   ]
