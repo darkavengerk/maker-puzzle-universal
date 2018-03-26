@@ -11,6 +11,7 @@ export function all(req, res) {
       return res.status(500).send('Something went wrong getting the data');
     }
 
+    console.log(`Found: ${topics.length} records`);
     return res.json(topics);
   });
 }
@@ -19,6 +20,7 @@ export function all(req, res) {
  * Add a Topic
  */
 export function add(req, res) {
+  console.log(req.body);
   Topic.create(req.body, (err) => {
     if (err) {
       console.log(err);
