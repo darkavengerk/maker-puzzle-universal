@@ -8,6 +8,8 @@ import flash from 'express-flash';
 import methodOverride from 'method-override';
 import gzip from 'compression';
 import helmet from 'helmet';
+import cors from 'cors';
+
 import unsupportedMessage from '../db/unsupportedMessage';
 import { sessionSecret, sessionId } from '../../config/secrets';
 import { DB_TYPE, ENV } from '../../config/env';
@@ -96,4 +98,6 @@ export default (app) => {
   app.use(passport.session());
 
   app.use(flash());
+
+  app.use(cors());
 };
