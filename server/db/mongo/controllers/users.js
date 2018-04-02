@@ -1,6 +1,18 @@
 import passport from 'passport';
 import User from '../models/user';
 
+
+export function all(req, res) {
+  User.find({}).exec((err, topics) => {
+    if (err) {
+      console.log('Error in first query');
+      return res.status(500).send('Something went wrong getting the data');
+    }
+
+    return res.json(topics);
+  });
+}
+
 /**
  * POST /login
  */
@@ -54,6 +66,7 @@ export function signUp(req, res, next) {
 }
 
 export default {
+  all,
   login,
   logout,
   signUp

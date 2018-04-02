@@ -11,6 +11,7 @@ const topicsController = controllers && controllers.topics;
 export default (app) => {
   // user routes
   if (usersController) {
+    app.get('/user', usersController.all);
     app.post('/sessions', usersController.login);
     app.post('/users', usersController.signUp);
     app.delete('/sessions', usersController.logout);
