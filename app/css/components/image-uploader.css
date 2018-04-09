@@ -1,0 +1,10 @@
+@import '../common/typography';
+
+
+.image-uploader h1 {
+  @apply --heading;
+}
+
+.image-uploader .file-input {
+  display: none;
+}

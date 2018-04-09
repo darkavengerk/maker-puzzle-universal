@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import styles from '../css/components/vote';
+import { default as ImageUploader } from '../components/ImageUploader';
 
 const cx = classNames.bind(styles);
 
@@ -19,6 +20,10 @@ class Main extends Component {
       <div>
         <div>
           Users
+        </div>
+        <div>
+          ImageUpload
+          <ImageUploader title="uploader" name="photo-uploader" />
         </div>
         <div>
           {peoplelist}
