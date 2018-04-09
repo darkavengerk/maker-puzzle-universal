@@ -5,8 +5,10 @@ import passport from 'passport';
 import unsupportedMessage from '../db/unsupportedMessage';
 import { controllers, passport as passportConfig } from '../db';
 
-const usersController = controllers && controllers.users;
 const topicsController = controllers && controllers.topics;
+
+const usersController = controllers && controllers.users;
+const projectController = controllers && controllers.project;
 
 export default (app) => {
   // user routes
@@ -15,6 +17,16 @@ export default (app) => {
     app.post('/sessions', usersController.login);
     app.post('/users', usersController.signUp);
     app.delete('/sessions', usersController.logout);
+  } else {
+    console.warn(unsupportedMessage('users routes'));
+  }
+
+  if(projectController) {
+    app.get('/project', projectController.all);
+    app.get('/project/:id', projectController.one);
+    app.post('/project', projectController.add);
+    app.put('/project/:id', projectController.update);
+    app.delete('/project/:id', projectController.remove);
   } else {
     console.warn(unsupportedMessage('users routes'));
   }
