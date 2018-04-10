@@ -65,4 +65,20 @@ export default (app) => {
   } else {
     console.warn(unsupportedMessage('topics routes'));
   }
+
+  app.post('/image', (req, res) => {
+    const fs = require('fs');
+    const data = req.body;
+    var chopper_index = 0; // safeguard
+
+    var base64_marker = ';base64,';
+    chopper_index = data.file.src.indexOf(base64_marker) + base64_marker.length;
+
+    // Remove obsolete header
+    var binary_buffer = Buffer.from(data.file.src.substr(chopper_index), 'base64');
+
+    fs.writeFile('public/images/' + data.name, binary_buffer, null, 'Binary', (err, result) => {
+      res.send('ok');
+    });
+  });
 };

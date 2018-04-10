@@ -1,7 +1,7 @@
 /* eslint consistent-return: 0, no-else-return: 0*/
 import md5 from 'spark-md5';
 import * as types from '../types';
-import { voteService } from '../services';
+import { Image } from '../services';
 
 
 function createTopicRequest(data) {
@@ -26,11 +26,20 @@ export function uploadFile(file) {
     // If the text box is empty
     if (file.name && file.name.trim().length <= 0) return;
 
-    const { fileUpload : { files }} = getState();
     let reader = new FileReader();
 
     reader.onloadend = () => {
       file.src = reader.result;
+
+      Image().upload({ data : {file:file, name:file.name, username:'test', count:0}}).then((res) => {
+        if (res.status === 200) {
+          // return dispatch();
+        }
+      })
+      .catch(() => {
+        // return dispatch(createTopicFailure({ id, error: 'Oops! Something went wrong and we couldn\'t create your topic'}));
+      });
+
       return dispatch({
         type: types.UPLOADER_FILE_SELECTED,
         file: file

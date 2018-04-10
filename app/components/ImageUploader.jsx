@@ -23,7 +23,6 @@ class ImageUploader extends React.Component {
 
   onFileSelected = function (e) {
     e.preventDefault();
-    let reader = new FileReader();
     let target = document.getElementById(this.props.name);
     let file = target.files[0];
     this.props.uploadFile(file);
