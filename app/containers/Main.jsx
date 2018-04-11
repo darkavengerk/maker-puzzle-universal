@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import styles from '../css/components/vote';
 import { default as ImageUploader } from '../components/ImageUploader';
+import { Col } from 'react-bootstrap';
 
 const cx = classNames.bind(styles);
 
@@ -23,7 +24,9 @@ class Main extends Component {
         </div>
         <div>
           ImageUpload
-          <ImageUploader title="uploader" name="photo-uploader" />
+          <Col sm={6} xs={12}>
+            <ImageUploader title="uploader" name="photo-uploader" />
+          </Col>
         </div>
         <div>
           {peoplelist}

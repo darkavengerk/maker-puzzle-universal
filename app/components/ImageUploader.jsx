@@ -5,6 +5,7 @@ import classNames from 'classnames/bind';
 import TopicTextInput from '../components/TopicTextInput';
 import styles from '../css/components/image-uploader';
 import { uploadFile } from '../actions/fileUpload';
+import { Col, Row } from 'react-bootstrap';
 
 const cx = classNames.bind(styles);
 
@@ -30,7 +31,12 @@ class ImageUploader extends React.Component {
 
   render() {
     const { files } = this.props;
-    const images = files.map(f => (<img src={f.src} key={f.name} />))
+    const images = files.map(f => (
+      <Col sm={3} xs={6}>
+        <img src={f.src} key={f.name} className="img-responsive" />
+      </Col>
+    ));
+
     return (
       <div className={cx('image-uploader')}>
         <h1>{this.props.title} {this.props.name}</h1>
@@ -38,7 +44,9 @@ class ImageUploader extends React.Component {
           <input type="file" className={cx('file-input')} id={this.props.name} onChange={this.onFileSelected} />
           <input type="button" value="value" onClick={this.onLoad} />
         </form>
-        {images}
+        <Row>
+          {images}
+        </Row>
       </div>
     );
   }
