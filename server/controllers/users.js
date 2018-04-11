@@ -1,6 +1,5 @@
 import passport from 'passport';
-import User from '../models/user';
-
+import User from '../db/mongo/models/user';
 
 export function all(req, res) {
   User.find({}).exec((err, topics) => {

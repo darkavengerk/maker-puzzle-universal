@@ -3,12 +3,13 @@
  */
 import passport from 'passport';
 import unsupportedMessage from '../db/unsupportedMessage';
-import { controllers, passport as passportConfig } from '../db';
+import { passport as passportConfig } from '../db';
+import controllers from '../controllers';
 
 const topicsController = controllers && controllers.topics;
 
 const usersController = controllers && controllers.users;
-const projectController = controllers && controllers.project;
+const projectController = controllers && controllers.projects;
 
 export default (app) => {
   // user routes
@@ -28,7 +29,7 @@ export default (app) => {
     app.put('/project/:id', projectController.update);
     app.delete('/project/:id', projectController.remove);
   } else {
-    console.warn(unsupportedMessage('users routes'));
+    console.warn(unsupportedMessage('project routes'));
   }
 
   if (passportConfig && passportConfig.google) {

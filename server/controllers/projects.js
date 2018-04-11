@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import Project from '../models/project';
+import Project from '../db/mongo/models/project';
 
 /**
  * List

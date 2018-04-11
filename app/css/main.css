@@ -19,6 +19,29 @@ body {
   font-smoothing: antialiased;
 }
 
+@media all and (orientation:portrait) and (max-width:450px) {
+  html {
+    font-size: 7px;
+  }
+}
+
+@media all and (orientation:portrait) and (min-width:450px) {
+  html {
+    font-size: 10px;
+  }
+}
+
+@media all and (orientation:landscape) and (max-height:450px) {
+  html {
+    font-size: 7px;
+  }
+}
+
+@media all and (orientation:landscape) and (min-height:450px) {
+  html {
+    font-size: 10px;
+  }
+}
 
 /* Add your global styles below... */
 

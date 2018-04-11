@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import Topic from '../models/topics';
+import Topic from '../db/mongo/models/topics';
 
 /**
  * List
