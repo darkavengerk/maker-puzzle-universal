@@ -3,7 +3,7 @@ import assets from '../../../public/assets/manifest.json';
 
 const createAppScript = () => `<script async type="text/javascript" charset="utf-8" src="/assets/${assets['app.js']}"></script>`;
 
-const createTrackingScript = () => GOOGLE_ANALYTICS_ID ? createAnalyticsSnippet(GOOGLE_ANALYTICS_ID) : '';
+// const createTrackingScript = () => GOOGLE_ANALYTICS_ID ? createAnalyticsSnippet(GOOGLE_ANALYTICS_ID) : '';
 
 const createAnalyticsSnippet = id =>
   `<script>
@@ -15,8 +15,9 @@ ga('send', 'pageview');
 
 const createStylesheets = () => `
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="/assets/${assets['app.css']}" />
 `;
 
-export { createAppScript, createTrackingScript, createStylesheets };
+export { createAppScript, createStylesheets };
 

@@ -21,7 +21,6 @@ const buildPage = ({ componentHTML, initialState, headAssets }) => {
     ${headAssets.meta.toString()}
     ${headAssets.link.toString()}
     ${staticAssets.createStylesheets()}
-    ${staticAssets.createTrackingScript()}
   </head>
   <body>
     <div id="app">${componentHTML}</div>

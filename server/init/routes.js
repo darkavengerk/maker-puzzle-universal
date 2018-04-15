@@ -3,12 +3,13 @@
  */
 import passport from 'passport';
 import unsupportedMessage from '../db/unsupportedMessage';
-import { controllers, passport as passportConfig } from '../db';
+import { passport as passportConfig } from '../db';
+import controllers from '../controllers';
 
 const topicsController = controllers && controllers.topics;
 
 const usersController = controllers && controllers.users;
-const projectController = controllers && controllers.project;
+const projectController = controllers && controllers.projects;
 
 export default (app) => {
   // user routes
@@ -28,7 +29,7 @@ export default (app) => {
     app.put('/project/:id', projectController.update);
     app.delete('/project/:id', projectController.remove);
   } else {
-    console.warn(unsupportedMessage('users routes'));
+    console.warn(unsupportedMessage('project routes'));
   }
 
   if (passportConfig && passportConfig.google) {
@@ -67,7 +68,7 @@ export default (app) => {
   }
 
   app.post('/image', (req, res) => {
-    const fs = require('fs');
+    const fs = require('fs-extra');
     const data = req.body;
     var chopper_index = 0; // safeguard
 
@@ -77,7 +78,7 @@ export default (app) => {
     // Remove obsolete header
     var binary_buffer = Buffer.from(data.file.src.substr(chopper_index), 'base64');
 
-    fs.writeFile('public/images/' + data.name, binary_buffer, null, 'Binary', (err, result) => {
+    fs.outputFile('public/images/' + data.name, binary_buffer, 'Binary', (err, result) => {
       res.send('ok');
     });
   });
