@@ -33,7 +33,7 @@ const topics = (
 ) => {
   switch (action.type) {
     case types.REQUEST_SUCCESS:
-      if (action.data) return action.data;
+      if (action.data && action.data.vote ) return action.data.vote;
       return state;
     case types.CREATE_TOPIC_REQUEST:
       return [...state, topic(undefined, action)];

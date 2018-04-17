@@ -2,40 +2,33 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
-// import styles from '../css/components/vote';
+import ImageUploader from '../components/ImageUploader';
+import TopTitle from '../components/TopTitle';
+import styles from '../css/components/maker';
 
-// const cx = classNames.bind(styles);
+const cx = classNames.bind(styles);
 
 class Maker extends Component {
   render() {
-    console.log(this.props);
-    // const {newTopic, topics, typing, createTopic, destroyTopic, incrementCount, decrementCount } = this.props;
+    const { maker } = this.props;
     return (
       <div>
-        <h1>Maker2</h1>
-        abc
+        <TopTitle title={maker.userid} thumbnailURL={maker.imgURL} />
+        {maker.email}
+        <ImageUploader title="uploader" name="photo-uploader" />
       </div>
     );
   }
 }
 
 Maker.propTypes = {
-  // topics: PropTypes.array.isRequired,
-  // typing: PropTypes.func.isRequired,
-  // createTopic: PropTypes.func.isRequired,
-  // destroyTopic: PropTypes.func.isRequired,
-  // incrementCount: PropTypes.func.isRequired,
-  // decrementCount: PropTypes.func.isRequired,
-  // newTopic: PropTypes.string
+  maker: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    // topics: state.topic.topics,
-    // newTopic: state.topic.newTopic
+    maker: state.maker.maker
   };
 }
 
-// Read more about where to place `connect` here:
-// https://github.com/rackt/react-redux/issues/75#issuecomment-135436563
-export default connect(mapStateToProps, {  })(Maker);
+export default connect(mapStateToProps, {})(Maker);

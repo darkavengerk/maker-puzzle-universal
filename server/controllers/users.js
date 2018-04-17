@@ -18,7 +18,6 @@ export function single(req, res) {
       console.log('Error in first query', err);
       return res.status(500).send('Something went wrong getting the data');
     }
-    console.log(user);
     return res.json(user);
   });
 }
