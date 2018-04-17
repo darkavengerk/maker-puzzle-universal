@@ -2,13 +2,24 @@ import passport from 'passport';
 import User from '../db/mongo/models/user';
 
 export function all(req, res) {
-  User.find({}).exec((err, topics) => {
+  User.find({}).exec((err, users) => {
     if (err) {
       console.log('Error in first query');
       return res.status(500).send('Something went wrong getting the data');
     }
 
-    return res.json(topics);
+    return res.json(users);
+  });
+}
+
+export function single(req, res) {
+  User.findOne({userid:req.params.id}).exec((err, user) => {
+    if (err) {
+      console.log('Error in first query', err);
+      return res.status(500).send('Something went wrong getting the data');
+    }
+    console.log(user);
+    return res.json(user);
   });
 }
 
@@ -66,6 +77,7 @@ export function signUp(req, res, next) {
 
 export default {
   all,
+  single,
   login,
   logout,
   signUp
