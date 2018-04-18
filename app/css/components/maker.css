@@ -1,7 +1,6 @@
 @import '../common/typography';
 
-.header {
-  @apply --heading;
+.main-section {
   text-align: center;
 }
 

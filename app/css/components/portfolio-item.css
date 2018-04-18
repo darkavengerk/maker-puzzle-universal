@@ -1,0 +1,43 @@
+@import '../settings';
+@import '../common/typography';
+@import '../common/card';
+
+.main-section {
+  display: inline-block;
+  width: 21.4rem;
+  height: 26.7rem;
+  margin: 0 0.9rem 0.9rem 0;
+  border: 1px solid;
+}
+
+.text-section {
+  width: 21.4rem;
+  height: 5.4rem;
+  padding-top: 0.9rem;
+}
+
+.text-section h1 {
+  margin: 0rem;
+  font-family: AppleSDGothicNeo;
+  font-size: 1.5rem;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  text-align: center;
+  color: #4a4a4a;
+}
+
+.text-section p {
+  margin: 0rem;
+  font-family: AppleSDGothicNeo;
+  font-size: 1.2rem;
+  font-weight: 200;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.67;
+  letter-spacing: normal;
+  text-align: center;
+  color: #4a4a4a;
+}

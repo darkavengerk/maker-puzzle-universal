@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
-import TopicItem from '../components/TopicItem';
 import styles from '../css/components/top-title';
+import ProfileImage from '../components/FlexibleImage';
 
 const cx = classNames.bind(styles);
 
@@ -13,7 +13,7 @@ const TitleSection = ({ title, thumbnailURL }) => {
   return (
     <div className={cx('main-section')}>
       <div className={cx('bar')} >
-        <img src={url} className={cx('thumbnail')} />
+        <ProfileImage thumbnailURL={url} x={40} y={40} />
         <span className={cx('title')}>
           {title}
         </span>

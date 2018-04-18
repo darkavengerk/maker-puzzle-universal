@@ -41,7 +41,6 @@ Main.propTypes = {
 };
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     people: state.people.people
   };

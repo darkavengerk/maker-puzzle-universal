@@ -1,8 +1,5 @@
-@import '../common/typography';
 
 .main-section {
-  @apply --normal;
-
   height: 9.2rem;
   width: 100%;
   text-align: center;
@@ -11,19 +8,11 @@
   background-color: #bcbcbc;
 }
 
-.thumbnail {    
-  height: 4rem;
-  width: 4rem;
-  margin-right:2.3rem;
-}
-
 .bar {
   display: inline-block;
 }
 
 .title {
-  width: 13.6rem;
-  height: 3.5rem;
   line-height: 3.5rem;
   font-family: NanumBarunGothic;
   font-size: 3.0rem;
@@ -34,7 +23,6 @@
   letter-spacing: normal;
   vertical-align: middle;
   color: #000000;
+  margin-left:2.3rem;
 }
 
-.description { @apply --normal; }
-.contribute { @apply --small; }
