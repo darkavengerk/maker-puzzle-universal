@@ -8,12 +8,12 @@ const cx = classNames.bind(styles);
 
 const TitleSection = ({ title, thumbnailURL }) => {
 
-  const url = thumbnailURL? thumbnailURL : "/images/IU-2.jpg";
+  const url = thumbnailURL? thumbnailURL : "/images/default_profile.jpg";
 
   return (
     <div className={cx('main-section')}>
       <div className={cx('bar')} >
-        <ProfileImage thumbnailURL={url} x={40} y={40} />
+        <ProfileImage src={url} x={40} y={40} />
         <span className={cx('title')}>
           {title}
         </span>

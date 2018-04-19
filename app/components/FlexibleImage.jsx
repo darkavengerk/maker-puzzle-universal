@@ -5,9 +5,9 @@ import styles from '../css/components/flexible-image';
 
 const cx = classNames.bind(styles);
 
-const ProfileImage = ({ thumbnailURL, x=40, y=40 }) => {
+const ProfileImage = ({ src, x=40, y=40 }) => {
 
-  const url = thumbnailURL? thumbnailURL : "/images/IU-2.jpg";
+  const url = src? src : "/images/default.jpg";
 
   var imageSize = {
     height: x/10+'rem',
@@ -22,7 +22,7 @@ const ProfileImage = ({ thumbnailURL, x=40, y=40 }) => {
 };
 
 ProfileImage.propTypes = {
-  thumbnailURL: PropTypes.string,
+  src: PropTypes.string,
   x: PropTypes.number,
   y: PropTypes.number
 };
