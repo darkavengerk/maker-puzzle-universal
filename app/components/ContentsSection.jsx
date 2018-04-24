@@ -20,7 +20,9 @@ const ContentsSection = ({ owner, contentsType }) => {
       </span>
       <span className={cx('main-panel')} >
         <p className={cx('main-panel-title')}>포트폴리오</p>
-        {portfolios}
+        <div className={cx('portfolio-list')}>
+          {portfolios}
+        </div>
       </span>
     </div>
   );

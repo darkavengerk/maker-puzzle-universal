@@ -1,8 +1,6 @@
 .main-section {
   display: inline-block;
   width: 144rem;
-  border-top: solid 2px #dddddd;
-  border-bottom: solid 2px #dddddd;
 }
 
 .left-panel {
@@ -19,7 +17,14 @@
   display: inline-block;
   text-align: left;
   vertical-align: top;
+  border-left: solid 2px #dddddd;
+  margin-left: -1px;
+}
 
+.portfolio-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .main-panel-title {

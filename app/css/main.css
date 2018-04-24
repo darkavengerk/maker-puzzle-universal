@@ -14,15 +14,17 @@ body {
 
 html, body{
   height:100%;
+  padding: 0;
 }
 
 
 
 .app {
-  @apply --box;
   height: 100%;
   font-weight: normal;
   font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
 }
 
 @media all and (orientation:portrait) and (max-width:800px) {

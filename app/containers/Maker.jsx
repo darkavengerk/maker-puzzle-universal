@@ -5,6 +5,7 @@ import classNames from 'classnames/bind';
 import ImageUploader from '../components/ImageUploader';
 import TopTitle from '../components/TopTitle';
 import ContentsSection from '../components/ContentsSection';
+import SingleLine from '../components/SingleLine';
 import styles from '../css/components/maker';
 
 const cx = classNames.bind(styles);
@@ -14,9 +15,11 @@ class Maker extends Component {
     const { maker } = this.props;
     return (
       <div className={cx('main-section')}>
+        <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
         <TopTitle title={maker.userid} thumbnailURL={maker.imgURL} />
+        <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
         <ContentsSection owner={maker} contentsType="maker" />
-        <ImageUploader title="uploader" name="photo-uploader" />
+        <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
       </div>
     );
   }
