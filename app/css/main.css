@@ -12,6 +12,12 @@ body {
   font-family: var(--fontMontserrat);
 }
 
+html, body{
+  height:100%;
+}
+
+
+
 .app {
   @apply --box;
   height: 100%;
