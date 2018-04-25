@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import { logOut } from '../actions/users';
+import Img from '../components/FlexibleImage';
 import styles from '../css/components/navigation';
 
 const cx = classNames.bind(styles);
@@ -11,7 +12,16 @@ const cx = classNames.bind(styles);
 const Navigation = ({ user, logOut }) => {
     return (
       <nav className={cx('navigation')} role="navigation">
-        <Link
+        <div className={cx('logo-area')}>
+          <Link to="/">
+            <Img src="/images/site/MAKER-PUZZLE-beta.png" x={307} y={62}/>
+          </Link>
+          <p className={cx('logo-text')}>건축인들을 위한 소셜 플랫폼 서비스</p>
+        </div>
+        <div className={cx('search-area')}>
+          <input type="text" className={cx('search-input')} />
+        </div>
+{/*        <Link
           to="/"
           className={cx('item', 'logo')}
           activeClassName={cx('active')}>Maker Puzzle</Link>
@@ -21,9 +31,12 @@ const Navigation = ({ user, logOut }) => {
               className={cx('item')} to="/">Logout</Link>
           ) : (
             <Link className={cx('item')} to="/login">Log in</Link>
-          )}
-        <Link className={cx('item')} to="/dashboard">Dashboard</Link>
-        <Link to="/about" className={cx('item')} activeClassName={cx('active')}>About</Link>
+          )}*/}
+        <div className={cx('option-area')}>
+          <Img src="/images/site/icon_person.png" x={32} y={30} /> 
+          <Img src="/images/site/icon_alert.png" x={39} y={39} />
+          <Img src="/images/site/icon_more.png" x={49} y={28} />
+        </div>
       </nav>
     );
 };

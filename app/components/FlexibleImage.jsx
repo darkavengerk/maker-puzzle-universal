@@ -10,8 +10,8 @@ const ProfileImage = ({ src, x=40, y=40 }) => {
   const url = src? src : "/images/default.jpg";
 
   var imageSize = {
-    height: x/10+'rem',
-    width: y/10+'rem'
+    height: y/10+'rem',
+    width: x/10+'rem'
   };
 
   return (

@@ -1,21 +1,71 @@
-@import '../common/colors';
-@import '../common/typography';
-
 .navigation {
-  padding: 0 28px;
+  height: 145px;
+  background-color: #ffffff;
+  padding: 3.7rem 4.1rem 2.5rem 3.0rem;
+  display: flex;
+  align-items: flex-end;
+}
+
+.logo-area {
+  width: 30.7rem;
+  height: 8.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-text {
+  font-family: AppleSDGothicNeo;
+  font-size: 13px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.54;
+  letter-spacing: normal;
+  text-align: right;
+  color: #f16c1f;
+}
+
+.search-area {
+  flex:1;
+  height: 36px;
+  border-radius: 12px;
+  box-shadow: 0 10px 55px 0 rgba(0, 0, 0, 0.07);
+  background-color: #ffffff;
+  border: solid 0.5px #979797;
+  display: flex;
+  align-items: center;
+  margin: 0 4.7rem 0 20rem;
+}
+
+.search-input {
+  display: inline-block;
+  background: none;
+  color: #f16c1f;
+  border: none;
+  outline: none;
+  margin: 0 2rem;
+  width: 100%;
+}
+
+.option-area {
+  width: 18.76rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.option-area div:nth-child(2) {
+  margin-top: 1rem;
 }
 
 .item {
   display: inline-block;
   text-decoration: none;
   padding: 16px 32px;
-  color: var(--colorBlack);
 }
 
 .logo {
-  font-size: var(--fontHuge);
 }
 
 .active {
-  color: var(--colorDodgerBlue);
 }
