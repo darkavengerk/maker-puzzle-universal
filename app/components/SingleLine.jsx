@@ -15,7 +15,7 @@ const SingleLine = ({width, color, thickness}) => {
 };
 
 SingleLine.propTypes = {
-  width: PropTypes.number,
+  width: PropTypes.string,
   color: PropTypes.string,
   thickness: PropTypes.number
 };

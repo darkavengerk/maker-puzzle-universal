@@ -27,25 +27,36 @@ html, body{
   flex-direction: column;
 }
 
-@media all and (orientation:portrait) and (max-width:800px) {
+@media all and (orientation:portrait) and (max-width:400px) {
   html {
     font-size: 7px;
+
+  }
+
+  img {
+    width: 70%;
+    background: #000;
   }
 }
 
-@media all and (orientation:portrait) and (min-width:800px) {
+@media all and (orientation:portrait) and (min-width:400px) {
   html {
     font-size: 10px;
   }
 }
 
-@media all and (orientation:landscape) and (max-height:800px) {
+@media all and (orientation:landscape) and (max-height:400px) {
   html {
     font-size: 7px;
   }
+
+  img {
+    width: 70%;
+    background: #000;
+  }
 }
 
-@media all and (orientation:landscape) and (min-height:800px) {
+@media all and (orientation:landscape) and (min-height:400px) {
   html {
     font-size: 10px;
   }
