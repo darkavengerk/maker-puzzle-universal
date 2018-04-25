@@ -8,7 +8,6 @@ const SingleLine = ({width, color, thickness}) => {
     width : width + 'px',
     'border-bottom': `solid ${thickness}px ${color}`
   };
-  console.log(style);
   return (
     <div style={style}>
     </div>
