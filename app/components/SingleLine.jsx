@@ -6,7 +6,7 @@ const SingleLine = ({width, color, thickness}) => {
   let style = {
     height : thickness + 'px',
     width : width + 'px',
-    'border-bottom': `solid ${thickness}px ${color}`
+    borderTop: `solid ${thickness}px ${color}`
   };
   return (
     <div style={style}>
@@ -15,7 +15,6 @@ const SingleLine = ({width, color, thickness}) => {
 };
 
 SingleLine.propTypes = {
-  width: PropTypes.string,
   color: PropTypes.string,
   thickness: PropTypes.number
 };

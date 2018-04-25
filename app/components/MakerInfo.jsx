@@ -12,9 +12,9 @@ const MakerInfo = ({ maker }) => {
     <div className={cx('main-section')}>
       <MakerProfile maker={maker} />
       <p className={cx('title')}>
-        {maker.name}
+        {maker.profile.name}
       </p>
-      Maker: {maker.userid}
+      Maker: {maker.profile.userid}
     </div>
   );
 };

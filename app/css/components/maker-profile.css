@@ -1,3 +1,13 @@
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
 .main-section {
   width: 100%;
 }
@@ -21,9 +31,17 @@
   padding-left: 0.7rem;
 }
 
-.name {
-  display: inline-block;
+.user-info {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   width: 22.8rem;
+  height: 14.4rem;
+  padding-top: 1.5rem;
+}
+
+.name {
   font-family: NanumBarunGothic;
   font-size: 2rem;
   font-weight: bold;
@@ -35,15 +53,10 @@
   color: #555555;
 }
 
-.middle-line {
-  display: inline-block;
-  width: 181px;
-  height: 2px;
-  border: solid 1px #dadada;
+.stats-area {
 }
 
 .maker-stats {
-  display: inline-block;
   width: 6rem;
 }
 
@@ -69,4 +82,22 @@
   letter-spacing: normal;
   text-align: center;
   color: #000000;
+}
+
+.follow-button {
+  width: 181px;
+  height: 20px;
+  border-radius: 1px;
+  background-color: #f36d20;
+  font-family: NanumBarunGothic;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 0.4rem;
+  color: #ffffff;
 }

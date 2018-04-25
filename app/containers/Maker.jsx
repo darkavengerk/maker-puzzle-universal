@@ -16,7 +16,7 @@ class Maker extends Component {
     return (
       <div className={cx('main-section')}>
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
-        <TopTitle title={maker.userid} thumbnailURL={maker.imgURL} />
+        <TopTitle title={maker.profile.userid} thumbnailURL={maker.imgURL} />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
         <ContentsSection owner={maker} contentsType="maker" />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />

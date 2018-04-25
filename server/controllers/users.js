@@ -13,7 +13,7 @@ export function all(req, res) {
 }
 
 export function single(req, res) {
-  User.findOne({userid:req.params.id}).exec((err, user) => {
+  User.findOne({'profile.userid':req.params.id}).exec((err, user) => {
     if (err) {
       console.log('Error in first query', err);
       return res.status(500).send('Something went wrong getting the data');

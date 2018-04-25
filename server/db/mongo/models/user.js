@@ -5,8 +5,9 @@
 
 import bcrypt from 'bcrypt-nodejs';
 import mongoose from 'mongoose';
+const ObjectId = mongoose.Schema.Types.ObjectId;
 
-// Other oauthtypes to be added
+const Portfolio = require('./portfolio');
 
 /*
  User Schema
@@ -16,16 +17,49 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, unique: true, lowercase: true },
   password: String,
   tokens: Array,
+  type: { type: String, default: 'person', required: true }, //person, company
+
   profile: {
     name: { type: String, default: '' },
+    userid: { type: String, required: true },
     gender: { type: String, default: '' },
     location: { type: String, default: '' },
     website: { type: String, default: '' },
     picture: { type: String, default: '' }
   },
+
+  makerProfile: {
+    companies: [{
+      cid: ObjectId,
+      name: String,
+      period: String,
+      position: String,
+      order: Number
+    }],
+    abilities: [{
+      title: String,
+      ability: Number,
+      order: Number
+    }]
+  },
+
+  companyProfile: {
+    projects: [ObjectId]
+  },
+
+  factors: [{
+    title: String,
+    content: String,
+    order: Number,
+    optional: Boolean // whether it is mandatory or not
+  }],
+
+  about: String,
+
+  portfolios : [Portfolio],
+
   resetPasswordToken: String,
   resetPasswordExpires: Date,
-  google: {}
 });
 
 function encryptPassword(next) {
