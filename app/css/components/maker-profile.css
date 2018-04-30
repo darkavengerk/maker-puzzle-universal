@@ -101,3 +101,61 @@
   padding-top: 0.4rem;
   color: #ffffff;
 }
+
+.col-name {
+  height: 20px;
+  font-family: NanumBarunGothic;
+  font-size: 11px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.82;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000000;
+}
+
+.col-info  {
+  height: 20px;
+  font-family: NanumBarunGothic;
+  font-size: 11px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.82;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
+}
+
+.col-selected {
+  font-weight: bold;
+  color: #ff5b00;
+}
+
+th {
+  height: 20px;
+  font-family: NanumBarunGothic;
+  font-size: 11px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.82;
+  letter-spacing: normal;
+  text-align: center;
+  color: #777777;
+}
+
+th, td {
+  border: solid 1px #dcdcdc;
+  height: 2rem;
+  vertical-align: middle;
+}
+
+.first-item {
+  border-left: solid 0px;
+}
+
+.last-item {
+  border-right: solid 0px;
+}

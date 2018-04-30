@@ -11,9 +11,6 @@ const MakerProfile = ({ maker }) => {
 
   return (
     <div className={cx('main-section')}>
-      <p className={cx('title')}>
-        메이커 프로필
-      </p>
       <span className={cx('flex-row')}>
         <FlexibleImage src="/images/default_profile.jpg" x={144} y={144} />
         <span className={cx('user-info')}>

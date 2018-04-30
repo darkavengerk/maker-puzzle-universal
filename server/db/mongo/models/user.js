@@ -34,7 +34,8 @@ const UserSchema = new mongoose.Schema({
       name: String,
       period: String,
       position: String,
-      order: Number
+      order: Number,
+      current: Boolean
     }],
     abilities: [{
       title: String,
