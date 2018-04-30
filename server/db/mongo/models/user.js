@@ -48,7 +48,7 @@ const UserSchema = new mongoose.Schema({
     projects: [ObjectId]
   },
 
-  factors: [{
+  features: [{
     title: String,
     content: String,
     order: Number,

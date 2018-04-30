@@ -5,12 +5,26 @@ import styles from '../css/components/maker-profile';
 
 const cx = classNames.bind(styles);
 
-const GreyTitle = ({ title }) => {
+const GreyTitle = ({ className='title', title, top=0, bottom=0 }) => {
+
+  let styleOption = {
+    'width': '100%',
+    'letterSpacing': 'normal',
+    'fontWeight': 'bold',
+    'fontStyle': 'normal',
+    'fontStretch': 'normal',
+    'letterSpacing': 'normal',
+    'textAlign': 'left',
+    'verticalAlign': 'middle',
+    'marginTop': `${top/10}rem`,
+    'marginBottom': `${bottom/10}rem`,
+    'paddingLeft': '0.7rem'
+  };
 
   return (
-    <p className={cx('title')}>
+    <div className={cx(className)} style={styleOption}>
       {title}
-    </p>
+    </div>
   );
 };
 

@@ -9,6 +9,59 @@ const cx = classNames.bind(styles);
 
 const MakerProfile = ({ maker }) => {
 
+  let stats = (
+    <span className={cx('stats-area', 'flex-row')}>
+      <span className={cx('maker-stats', 'flex-col')}>
+        <span className={cx('figure')}>
+          {maker.portfolios.length}
+        </span>
+        <span className={cx('keyword')}>
+          Portfolio
+        </span>
+      </span>
+      <span className={cx('maker-stats', 'flex-col')}>
+        <span className={cx('figure')}>
+          421
+        </span>
+        <span className={cx('keyword')}>
+          Follower
+        </span>
+      </span>
+      <span className={cx('maker-stats', 'flex-col')}>
+        <span className={cx('figure')}>
+          421
+        </span>
+        <span className={cx('keyword')}>
+          Following
+        </span>
+      </span>
+    </span>);
+
+  let splitLetters = word => {
+    return word.split('').map((letter,i) => {
+      return (<span key={i}>{letter}</span>);
+    })
+  }
+
+  let features = maker.features.map(feature => {
+    return (
+      <div className={cx('feature-item')} key={feature.title}>
+        <span className={cx('feature-title')}>
+          {splitLetters(feature.title)}
+        </span>
+        <span className={cx('feature')}>
+          {feature.content}
+        </span>
+      </div>
+    );
+  });
+
+  let featureArea = (
+    <div className={cx('feature-area')}>
+        {features}
+    </div>
+  );
+
   return (
     <div className={cx('main-section')}>
       <span className={cx('flex-row')}>
@@ -18,37 +71,18 @@ const MakerProfile = ({ maker }) => {
             {maker.profile.name}
           </span>
           <Border width={181} thickness={2} color={'#dadada'} />
-          <span className={cx('stats-area', 'flex-row')}>
-            <span className={cx('maker-stats', 'flex-col')}>
-              <span className={cx('figure')}>
-                80
-              </span>
-              <span className={cx('keyword')}>
-                Portfolio
-              </span>
-            </span>
-            <span className={cx('maker-stats', 'flex-col')}>
-              <span className={cx('figure')}>
-                421
-              </span>
-              <span className={cx('keyword')}>
-                Follower
-              </span>
-            </span>
-            <span className={cx('maker-stats', 'flex-col')}>
-              <span className={cx('figure')}>
-                421
-              </span>
-              <span className={cx('keyword')}>
-                Following
-              </span>
-            </span>
-          </span>
+          {stats}
           <span className={cx('follow-button')} role="button">
             FOLLOW
           </span>
         </span>
       </span>
+      <div>
+        {featureArea}
+        <div className={cx('about-maker')}>
+          {maker.about.split('\n').map((sen,i) => (<p key={i}>{sen}</p>))}
+        </div>
+      </div>
     </div>
   );
 };

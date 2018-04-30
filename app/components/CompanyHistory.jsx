@@ -17,14 +17,15 @@ const Component = ({ maker }) => {
         <td className={cx('col-info', (info.current? "col-selected": ""), 'last-item')}>{info.position}</td>
       </tr>)
   });
-  console.log(lines);
   return (
-    <table>
-      <th className={cx('first-item')}></th>
-      <th>기업명</th>
-      <th>재직여부</th>
-      <th className={cx('last-item')}>최종 직급</th>
+    <table className={cx('history')}>
       <tbody>
+        <tr>
+          <th className={cx('first-item')}></th>
+          <th>기업명</th>
+          <th>재직여부</th>
+          <th className={cx('last-item')}>최종 직급</th>
+        </tr>
         {lines}
       </tbody>
     </table>
