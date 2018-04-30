@@ -35,7 +35,7 @@ const Component = ({ abilities }) => {
 };
 
 Component.propTypes = {
-  abilities: PropTypes.object.isRequired
+  abilities: PropTypes.array.isRequired
 };
 
 export default Component;
