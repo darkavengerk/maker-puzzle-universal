@@ -1,15 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
-import { logOut } from '../actions/users';
 import Img from '../components/FlexibleImage';
 import styles from '../css/components/navigation';
 
 const cx = classNames.bind(styles);
 
-const Navigation = ({}) => {
+const components = ({}) => {
     return (
         <div className={cx('footer-area', 'flex-row')}>
           <div className={cx('eat')}>
@@ -41,4 +39,4 @@ const Navigation = ({}) => {
     );
 };
 
-export default Navigation;
+export default components;
