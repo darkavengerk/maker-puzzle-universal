@@ -10,14 +10,18 @@ const ProfileImage = ({ src, x=40, y=40 }) => {
   const url = src? src : "/images/default.jpg";
 
   var imageSize = {
+    backgroundImage: `url(${url})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    backgroundSize:'cover',
     height: y/10+'rem',
     width: x/10+'rem'
   };
 
   return (
-    <div className={cx('main-section')}>
-      <img src={url} style={imageSize} />
-    </div>
+    <span className={cx('main-section')} style={imageSize} >
+      {/*<img src={url} style={imageSize} />*/}
+    </span>
   );
 };
 

@@ -14,7 +14,7 @@ const Navigation = ({ user, logOut }) => {
       <nav className={cx('navigation')} role="navigation">
         <div className={cx('logo-area')}>
           <Link to="/">
-            <Img src="/images/site/MAKER-PUZZLE-beta.png" x={307} y={62}/>
+            <Img src="/images/site/MAKER-PUZZLE-beta.png" x={301} y={60}/>
           </Link>
           <p className={cx('logo-text')}>건축인들을 위한 소셜 플랫폼 서비스</p>
         </div>
