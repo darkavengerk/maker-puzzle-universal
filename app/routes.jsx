@@ -33,6 +33,7 @@ export default (store) => {
     <Route path="/" component={App}>
       <IndexRoute component={Vote} fetchData={fetchVoteData} />
       <Route exact path="main" component={Main} fetchData={fetchMainData} />
+      <Route path="maker/:id/portfolio/:pid" component={Maker} fetchData={fetchMakerData} />
       <Route path="maker/:id" component={Maker} fetchData={fetchMakerData} />
       <Route path="login" component={LoginOrRegister} onEnter={redirectAuth} />
       <Route path="dashboard" component={Dashboard} onEnter={requireAuth} />

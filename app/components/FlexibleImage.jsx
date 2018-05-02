@@ -9,7 +9,7 @@ const ProfileImage = ({ src, x=40, y=40 }) => {
 
   const url = src? src : "/images/default.jpg";
 
-  var imageSize = {
+  var imageStyle = {
     backgroundImage: `url(${url})`,
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
@@ -18,17 +18,21 @@ const ProfileImage = ({ src, x=40, y=40 }) => {
     width: x/10+'rem'
   };
 
+  if(typeof(x) === 'string') {
+    imageStyle.width = x;
+  }
+  if(typeof(y) === 'string') {
+    imageStyle.width = y;
+  }
+
   return (
-    <span className={cx('main-section')} style={imageSize} >
-      {/*<img src={url} style={imageSize} />*/}
+    <span className={cx('main-section')} style={imageStyle} >
     </span>
   );
 };
 
 ProfileImage.propTypes = {
   src: PropTypes.string,
-  x: PropTypes.number,
-  y: PropTypes.number
 };
 
 export default ProfileImage;

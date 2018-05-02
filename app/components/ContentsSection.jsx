@@ -3,15 +3,23 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import MakerInfo from '../components/MakerInfo';
 import PortfolioItem from '../components/PortfolioItem';
+import PortfolioDetail from '../components/PortfolioDetail';
 import styles from '../css/components/contents-section';
 
 const cx = classNames.bind(styles);
 
 const ContentsSection = ({ owner, contentsType }) => {
 
-  const portfolios = owner.portfolios.map(portfolio => {
+  let portfolios = owner.portfolios.map(portfolio => {
     return (<PortfolioItem portfolio={portfolio} key={portfolio.title} />);
   });
+
+  if(owner.portfolioSelected) {
+    if(owner.portfolios[0])
+      portfolios = (<PortfolioDetail portfolio={owner.portfolios[0]} />);
+    else
+      portfolios = (<PortfolioDetail />);
+  }
 
   return (
     <div className={cx('main-section')}>

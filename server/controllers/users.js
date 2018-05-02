@@ -13,11 +13,20 @@ export function all(req, res) {
 }
 
 export function single(req, res) {
-  User.findOne({'profile.userid':req.params.id}).exec((err, user) => {
+  User.findOne({'profile.userid':req.params.id}).lean().exec((err, user) => {
     if (err) {
       console.log('Error in first query', err);
       return res.status(500).send('Something went wrong getting the data');
     }
+
+    if(req.params.pid) {
+      user.portfolioSelected = req.params.pid;
+      let portfolios = user.portfolios.filter(pf => pf.pid === req.params.pid);
+      if(portfolios && portfolios[0]) {
+        user.portfolios = portfolios;
+      }
+    }
+
     return res.json(user);
   });
 }

@@ -12,6 +12,7 @@ const Schema = new mongoose.Schema({
   images: [{
       rid: String
   }],
+  pid: String
 });
 
 // Compiles the schema into a model, opening (or creating, if

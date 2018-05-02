@@ -14,6 +14,7 @@ const projectController = controllers && controllers.projects;
 export default (app) => {
   // user routes
   if (usersController) {
+    app.get('/user/:id/:pid', usersController.single);
     app.get('/user/:id', usersController.single);
     app.get('/user', usersController.all);
     app.post('/sessions', usersController.login);

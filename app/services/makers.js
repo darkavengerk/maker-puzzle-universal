@@ -12,6 +12,10 @@ export default () => {
       method: 'GET',
       url: `/user/${id}`
     }),
+    getMakerProfile: ({id, pid}) => client.request({
+      method: 'GET',
+      url: `/user/${id}/${pid}`
+    }),
     deleteTopic: ({ id }) => client.request({
       method: 'DELETE',
       url: `/topic/${id}`

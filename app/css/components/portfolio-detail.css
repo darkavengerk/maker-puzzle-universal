@@ -1,0 +1,59 @@
+@import '../settings';
+@import '../common/typography';
+@import '../common/card';
+
+.main-section {
+  display: inline-block;
+  width: 88.4rem;
+  background-color: #ffffff;
+  box-shadow: 0 5px 35px 0 rgba(163, 163, 163, 0.5);
+  
+  margin: 0 0.9rem 0.9rem 0;
+
+  padding: 2rem;
+
+}
+
+.portfolio-title {
+  height: 2.8rem;
+  font-family: NanumBarunGothic;
+  font-size: 2.5rem;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #555555;
+}
+.text-section {
+  width: 21.4rem;
+  height: 5.4rem;
+  padding-top: 0.9rem;
+}
+
+.text-section h1 {
+  margin: 0rem;
+  font-family: AppleSDGothicNeo;
+  font-size: 1.5rem;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  text-align: center;
+  color: #4a4a4a;
+}
+
+.text-section p {
+  margin: 0rem;
+  font-family: AppleSDGothicNeo;
+  font-size: 1.2rem;
+  font-weight: 200;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.67;
+  letter-spacing: normal;
+  text-align: center;
+  color: #4a4a4a;
+}

@@ -4,30 +4,23 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import Image from '../components/FlexibleImage';
-import styles from '../css/components/portfolio-item';
+import styles from '../css/components/portfolio-detail';
 
 const cx = classNames.bind(styles);
 
 const ContentsSection = ({ portfolio, user, maker }) => {
 
+  const imgs = portfolio.images.map(img => (<Image key={img} src={"/images/portfolio/" + img} y={523} x={'100%'} />));
+
   return (
     <div className={cx('main-section')}>
-      <div className={cx('text-section')}>
-        <Link to={`/maker/${maker.profile.userid}/portfolio/${portfolio.pid}`}>
-          <h1>
-            {portfolio.title}
-          </h1>
-        </Link>
-        <p>
-          {portfolio.descriptions}
-        </p>
-      </div>
-      <Link to={`/maker/${maker.profile.userid}/portfolio/${portfolio.pid}`}>
-        { portfolio.images && portfolio.images[0] ? 
-          <Image src={"/images/portfolio/"+portfolio.images[0]} x={214} y={214}/> : <Image x={214} y={214}/>
-        }
-      </Link>
-      
+      <h1>
+        {portfolio.title}
+      </h1>
+      <p>
+        {portfolio.descriptions}
+      </p>
+      {imgs}
     </div>
   );
 };
