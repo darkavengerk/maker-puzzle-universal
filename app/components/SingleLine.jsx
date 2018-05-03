@@ -8,6 +8,11 @@ const SingleLine = ({width, color, thickness}) => {
     width : width + 'px',
     borderTop: `solid ${thickness}px ${color}`
   };
+
+  if(typeof(width) === 'string') {
+    style.width = width;
+  }
+
   return (
     <div style={style}>
     </div>
@@ -16,7 +21,8 @@ const SingleLine = ({width, color, thickness}) => {
 
 SingleLine.propTypes = {
   color: PropTypes.string,
-  thickness: PropTypes.number
+  thickness: PropTypes.number,
+  extend: PropTypes.number
 };
 
 export default SingleLine;

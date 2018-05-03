@@ -1,15 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
-import styles from '../css/components/flexible-image';
+import PureImage from './PureImage';
 
-const cx = classNames.bind(styles);
-
-const ProfileImage = ({ src, x=40, y=40 }) => {
+const ProfileImage = ({ src, x, y, pureImage=false }) => {
 
   const url = src? src : "/images/default.jpg";
 
+  if(pureImage) {
+    return (<PureImage src={src} x={x} y={y} />);
+  }
+
+  if(!x) x=40;
+  if(!y) y=40;
+
   var imageStyle = {
+    display: 'inline-block',
     backgroundImage: `url(${url})`,
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
@@ -26,7 +32,7 @@ const ProfileImage = ({ src, x=40, y=40 }) => {
   }
 
   return (
-    <span className={cx('main-section')} style={imageStyle} >
+    <span style={imageStyle} >
     </span>
   );
 };
