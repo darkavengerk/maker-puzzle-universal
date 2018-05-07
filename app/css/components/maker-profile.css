@@ -172,6 +172,7 @@ th, td {
   letter-spacing: normal;
   text-align: left;
   color: #000000;
+  display: flex;
 }
 
 .feature-title {
@@ -182,7 +183,6 @@ th, td {
   display: inline-flex;
   justify-content: space-between;
 }
-
 
 .about-maker {
   font-family: NanumBarunGothic;

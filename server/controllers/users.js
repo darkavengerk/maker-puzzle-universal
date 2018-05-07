@@ -20,10 +20,10 @@ export function single(req, res) {
     }
 
     if(req.params.pid) {
-      user.portfolioSelected = req.params.pid;
+      user.portfolioSelected = {pid:req.params.pid};
       let portfolios = user.portfolios.filter(pf => pf.pid === req.params.pid);
       if(portfolios && portfolios[0]) {
-        user.portfolios = portfolios;
+        user.portfolioSelected.portfolio = portfolios[0];
       }
     }
 

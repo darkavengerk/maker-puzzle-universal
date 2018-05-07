@@ -15,10 +15,7 @@ const ContentsSection = ({ owner, contentsType }) => {
   });
 
   if(owner.portfolioSelected) {
-    if(owner.portfolios[0])
-      portfolios = (<PortfolioDetail portfolio={owner.portfolios[0]} />);
-    else
-      portfolios = (<PortfolioDetail />);
+    portfolios = (<PortfolioDetail portfolio={owner.portfolioSelected.portfolio} />);
   }
 
   return (

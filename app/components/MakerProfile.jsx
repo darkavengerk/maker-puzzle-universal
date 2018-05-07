@@ -5,6 +5,9 @@ import FlexibleImage from '../components/FlexibleImage';
 import Border from '../components/SingleLine';
 import styles from '../css/components/maker-profile';
 
+import ContentEditable from 'react-contenteditable'
+import jsxToString from 'jsx-to-string';
+
 const cx = classNames.bind(styles);
 
 const MakerProfile = ({ maker }) => {
@@ -43,15 +46,22 @@ const MakerProfile = ({ maker }) => {
     })
   }
 
+  const handleChange = ev => console.log(ev);
+
   let features = maker.features.map(feature => {
     return (
       <div className={cx('feature-item')} key={feature.title}>
         <span className={cx('feature-title')}>
           {splitLetters(feature.title)}
         </span>
-        <span className={cx('feature')}>
-          {feature.content}
-        </span>
+        <ContentEditable 
+          html={ jsxToString(<span className={cx('feature')}>
+            {feature.content}
+            </span>)
+          }
+          onChange={handleChange}
+        />
+        
       </div>
     );
   });
