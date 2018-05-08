@@ -184,6 +184,27 @@ th, td {
   justify-content: space-between;
 }
 
+[contenteditable=true]:empty:before {
+  content: attr(placeholder);
+  display: block; /* For Firefox */
+
+  font-family: NanumBarunGothic;
+  font-size: 12px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.67;
+  letter-spacing: normal;
+  text-align: left;
+  color: #999999;
+
+  background-color: #e7e7e7;
+}
+
+.feature {
+  width: 100%;
+}
+
 .about-maker {
   font-family: NanumBarunGothic;
   font-size: 11px;
