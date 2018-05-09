@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
+
+import { featureEdited } from '../actions/makers';
 import FlexibleImage from '../components/FlexibleImage';
 import Border from '../components/SingleLine';
 import ImageUploader from '../components/ImageUploader';
@@ -18,7 +20,7 @@ class MakerProfile extends Component {
   }
 
   render() {
-    const { maker } = this.props;
+    const { maker, context, featureEdited } = this.props;
 
     let stats = (
       <span className={cx('stats-area', 'flex-row')}>
@@ -54,21 +56,27 @@ class MakerProfile extends Component {
       })
     }
 
-    const handleChange = evt => {
-      if (evt.key === 'Enter') {
-          evt.preventDefault();
+    const handleChange = title => {
+      return evt => {
+        if (evt.key === 'Enter') {
+            evt.preventDefault();
+        }
+        else {
+          featureEdited(title, evt.target.innerText);
+        }
       }
-      return false;
     }
 
     const handleChange2 = evt => {
       let current = evt.target;
       let parent = current.parentElement.parentElement;
       let children = parent.childNodes;
+
+      // use innter text to sum up the result
       current.innerText;
     }
 
-    let features = maker.features.map(feature => {
+    let features = context.features.map(feature => {
       return (
         <div className={cx('feature-item')} key={feature.title}>
           <span className={cx('feature-title')}>
@@ -78,7 +86,7 @@ class MakerProfile extends Component {
             tagName="span"
             className={cx('feature')}
             html={ feature.content }
-            onKeyPress={handleChange}
+            onKeyUp={handleChange(feature.title)}
             placeholder="Say anything"
           />
           
@@ -127,13 +135,15 @@ class MakerProfile extends Component {
 }
 
 MakerProfile.propTypes = {
-  maker: PropTypes.object.isRequired
+  maker: PropTypes.object.isRequired,
+  featureEdited: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    maker: state.maker.maker
+    maker: state.maker.maker,
+    context: state.maker.context,
   };
 }
 
-export default connect(mapStateToProps, {})(MakerProfile);
+export default connect(mapStateToProps, {featureEdited})(MakerProfile);
