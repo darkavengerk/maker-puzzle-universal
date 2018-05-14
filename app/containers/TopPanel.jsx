@@ -21,19 +21,17 @@ const Navigation = ({ user, logOut }) => {
         <div className={cx('search-area')}>
           <input type="text" className={cx('search-input')} />
         </div>
-{/*        <Link
-          to="/"
-          className={cx('item', 'logo')}
-          activeClassName={cx('active')}>Maker Puzzle</Link>
+
+        <div className={cx('option-area')}>
           { user.authenticated ? (
             <Link
               onClick={logOut}
               className={cx('item')} to="/">Logout</Link>
-          ) : (
-            <Link className={cx('item')} to="/login">Log in</Link>
-          )}*/}
-        <div className={cx('option-area')}>
-          <Img src="/images/site/icon_person.png" x={32} y={30} /> 
+          ) : (<span></span>)}
+
+          <Link to={user.authenticated? ('/maker/Test') : '/login'}>
+            <Img src="/images/site/icon_person.png" x={32} y={30} /> 
+          </Link>
           <Img src="/images/site/icon_alert.png" x={39} y={39} />
           <Img src="/images/site/icon_more.png" x={49} y={28} />
         </div>

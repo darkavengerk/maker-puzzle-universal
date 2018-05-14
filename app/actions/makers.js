@@ -10,3 +10,9 @@ export function featureEdited(key, text) {
     }
   };
 }
+
+export function featureEditStart() {
+  return {
+    type: types.PROFILE_EDIT_START
+  };
+}

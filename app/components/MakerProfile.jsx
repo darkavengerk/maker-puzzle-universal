@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 
-import { featureEdited } from '../actions/makers';
 import FlexibleImage from '../components/FlexibleImage';
 import Border from '../components/SingleLine';
 import ImageUploader from '../components/ImageUploader';
 import styles from '../css/components/maker-profile';
+
+import { featureEdited, featureEditStart } from '../actions/makers';
 
 import ContentEditable from 'react-contenteditable'
 import jsxToString from 'jsx-to-string';

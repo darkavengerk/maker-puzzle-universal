@@ -45,7 +45,7 @@ export function login(req, res, next) {
     // logIn()) that can be used to establish a login session
     return req.logIn(user, (loginErr) => {
       if (loginErr) return res.sendStatus(401);
-      return res.sendStatus(200);
+      return res.json(user);
     });
   })(req, res, next);
 }
