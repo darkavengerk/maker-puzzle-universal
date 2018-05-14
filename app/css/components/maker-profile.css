@@ -77,13 +77,16 @@
   color: #000000;
 }
 
+.button-area {
+}
+
 .follow-button {
-  width: 181px;
-  height: 20px;
+  width: 18.1rem;
+  height: 2rem;
   border-radius: 1px;
   background-color: #f36d20;
   font-family: NanumBarunGothic;
-  font-size: 12px;
+  font-size: 1.2rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -93,6 +96,28 @@
   vertical-align: middle;
   padding-top: 0.4rem;
   color: #ffffff;
+}
+
+.system-button {
+  width: 8.7rem;
+  height: 2rem;
+  border-radius: 1px;
+  border: solid 1px #676767;
+
+  font-family: NanumBarunGothic;
+  font-size: 1.1rem;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  line-height: normal;
+  vertical-align: middle;
+  padding-top: 0.4rem;
+  color: #000000;
+
+  margin: 0 0.35rem;
 }
 
 .col-name {

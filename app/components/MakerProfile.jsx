@@ -6,9 +6,11 @@ import classNames from 'classnames/bind';
 import FlexibleImage from '../components/FlexibleImage';
 import Border from '../components/SingleLine';
 import ImageUploader from '../components/ImageUploader';
+import Features from '../components/Features';
 import styles from '../css/components/maker-profile';
 
 import { featureEdited, featureEditStart } from '../actions/makers';
+import { logOut } from '../actions/users';
 
 import ContentEditable from 'react-contenteditable'
 import jsxToString from 'jsx-to-string';
@@ -21,7 +23,7 @@ class MakerProfile extends Component {
   }
 
   render() {
-    const { maker, context, featureEdited } = this.props;
+    const { maker, context, user, featureEdited, logOut } = this.props;
 
     let stats = (
       <span className={cx('stats-area', 'flex-row')}>
@@ -51,23 +53,6 @@ class MakerProfile extends Component {
         </span>
       </span>);
 
-    let splitLetters = word => {
-      return word.split('').map((letter,i) => {
-        return (<span key={i}>{letter}</span>);
-      })
-    }
-
-    const handleChange = title => {
-      return evt => {
-        if (evt.key === 'Enter') {
-            evt.preventDefault();
-        }
-        else {
-          featureEdited(title, evt.target.innerText);
-        }
-      }
-    }
-
     const handleChange2 = evt => {
       let current = evt.target;
       let parent = current.parentElement.parentElement;
@@ -77,31 +62,18 @@ class MakerProfile extends Component {
       current.innerText;
     }
 
-    let longest = Math.max.apply(null, context.features.map(feature => feature.title.length));
+    let buttonArea = 
+      <span className={cx('follow-button')} role="button">
+        FOLLOW
+      </span>;
 
-    let features = context.features.map(feature => {
-      return (
-        <div className={cx('feature-item')} key={feature.title}>
-          <span className={cx('feature-title')} style={{width:longest*1.4+'rem'}}>
-            {splitLetters(feature.title)}
-          </span>
-          <ContentEditable 
-            tagName="span"
-            className={cx('feature')}
-            html={ feature.content }
-            onKeyUp={handleChange(feature.title)}
-            placeholder="Say anything"
-          />
-          
-        </div>
-      );
-    });
-
-    let featureArea = (
-      <div className={cx('feature-area')}>
-          {features}
-      </div>
-    );
+    if(user.account.profile && maker.profile.userid === user.account.profile.userid) {
+      buttonArea = 
+      <span className={cx('button-area')}>
+        <label className={cx('system-button')} role="button">정보 수정</label>
+        <label className={cx('system-button')} role="button" onClick={logOut} >로그아웃</label>
+      </span>;
+    }
 
     return (
       <div className={cx('main-section')}>
@@ -113,13 +85,22 @@ class MakerProfile extends Component {
             </span>
             <Border width={181} thickness={2} color={'#dadada'} />
             {stats}
-            <span className={cx('follow-button')} role="button">
-              FOLLOW
-            </span>
+            {buttonArea}
           </span>
         </span>
         <div>
-          {featureArea}
+          <Features 
+            className={cx('feature-area')}
+            features={context.features}
+            featureEdited={featureEdited}
+            classNames={{
+              title: cx('feature-title'),
+              content: cx('feature'),
+              row: cx('feature-item')
+            }}
+            placeHolder={'Hello World'}
+          />
+
           <ContentEditable 
             className={cx('about-maker')}
             html={ jsxToString(
@@ -139,14 +120,16 @@ class MakerProfile extends Component {
 
 MakerProfile.propTypes = {
   maker: PropTypes.object.isRequired,
-  featureEdited: PropTypes.func.isRequired
+  featureEdited: PropTypes.func.isRequired,
+  logOut: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
   return {
     maker: state.maker.maker,
     context: state.maker.context,
+    user: state.user
   };
 }
 
-export default connect(mapStateToProps, {featureEdited})(MakerProfile);
+export default connect(mapStateToProps, {featureEdited, logOut})(MakerProfile);
