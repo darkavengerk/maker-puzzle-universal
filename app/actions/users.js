@@ -64,7 +64,7 @@ export function manualLogin(data) {
     return authService().login(data)
       .then((response) => {
           dispatch(loginSuccess('You have been successfully logged in', response.data));
-          dispatch(push('/'));
+          dispatch(push('/maker/'+response.data.profile.userid));
       })
       .catch((err) => {
         dispatch(loginError('Oops! Invalid username or password'));

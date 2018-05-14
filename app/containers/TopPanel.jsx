@@ -24,9 +24,9 @@ const Navigation = ({ user, logOut }) => {
 
         <div className={cx('option-area')}>
           { user.authenticated ? (
-            <Link
+            <span
               onClick={logOut}
-              className={cx('item')} to="/">Logout</Link>
+              className={cx('item')} to="/">Logout</span>
           ) : (<span></span>)}
 
           <Link to={user.authenticated? ('/maker/Test') : '/login'}>
