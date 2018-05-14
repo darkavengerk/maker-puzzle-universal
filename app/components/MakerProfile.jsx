@@ -77,10 +77,12 @@ class MakerProfile extends Component {
       current.innerText;
     }
 
+    let longest = Math.max.apply(null, context.features.map(feature => feature.title.length));
+
     let features = context.features.map(feature => {
       return (
         <div className={cx('feature-item')} key={feature.title}>
-          <span className={cx('feature-title')}>
+          <span className={cx('feature-title')} style={{width:longest*1.4+'rem'}}>
             {splitLetters(feature.title)}
           </span>
           <ContentEditable 
