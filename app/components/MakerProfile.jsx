@@ -9,7 +9,7 @@ import ImageUploader from '../components/ImageUploader';
 import Features from '../components/Features';
 import styles from '../css/components/maker-profile';
 
-import { featureEdited, featureEditStart } from '../actions/makers';
+import { featureEdited, featureEditStart, featureEditSave, featureEditCancel } from '../actions/makers';
 import { logOut } from '../actions/users';
 
 import ContentEditable from 'react-contenteditable'
@@ -18,12 +18,18 @@ import jsxToString from 'jsx-to-string';
 const cx = classNames.bind(styles);
 
 class MakerProfile extends Component {
+
   constructor(props) {
     super(props);
+    this.cancelEdit = this.cancelEdit.bind(this);
+  }
+
+  cancelEdit() {
+    this.props.featureEditCancel(this.props.maker);
   }
 
   render() {
-    const { maker, context, user, featureEdited, logOut } = this.props;
+    const { maker, context, user, featureEdited, featureEditStart, featureEditCancel, logOut } = this.props;
 
     let stats = (
       <span className={cx('stats-area', 'flex-row')}>
@@ -62,6 +68,8 @@ class MakerProfile extends Component {
       current.innerText;
     }
 
+    
+
     let buttonArea = 
       <span className={cx('follow-button')} role="button">
         FOLLOW
@@ -70,9 +78,17 @@ class MakerProfile extends Component {
     if(user.account.profile && maker.profile.userid === user.account.profile.userid) {
       buttonArea = 
       <span className={cx('button-area')}>
-        <label className={cx('system-button')} role="button">정보 수정</label>
+        <label className={cx('system-button')} role="button" onClick={featureEditStart}>정보 수정</label>
         <label className={cx('system-button')} role="button" onClick={logOut} >로그아웃</label>
       </span>;
+
+      if(context.editing) {
+        buttonArea = 
+          <span className={cx('button-area')}>
+            <label className={cx('system-button', 'important')} role="button" onClick={featureEditSave}>변경내용 저장</label> 
+            <label className={cx('system-button')} role="button" onClick={this.cancelEdit}>취소</label>
+          </span>;
+      }
     }
 
     return (
@@ -99,6 +115,7 @@ class MakerProfile extends Component {
               row: cx('feature-item')
             }}
             placeHolder={'Hello World'}
+            editing={context.editing}
           />
 
           <ContentEditable 
@@ -132,4 +149,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {featureEdited, logOut})(MakerProfile);
+export default connect(mapStateToProps, {featureEdited, featureEditStart, featureEditSave, featureEditCancel, logOut})(MakerProfile);

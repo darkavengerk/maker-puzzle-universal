@@ -34,7 +34,10 @@ const context = (
 
     case types.PROFILE_EDIT_ITEM_UPDATE:
       return {...state, features: updateFeature(state, data.key, data.text)};
-    
+    case types.PROFILE_EDIT_START:
+      return {...state, editing: true};
+    case types.PROFILE_EDIT_CANCEL:
+      return {...state, features:action.data.maker.features, editing:false}
     default:
       return state;
   }

@@ -120,6 +120,12 @@
   margin: 0 0.35rem;
 }
 
+.important {
+  background-color: #ff5b00;
+  border: 0;
+  color: #ffffff;
+}
+
 .col-name {
   height: 20px;
   font-family: NanumBarunGothic;

@@ -16,3 +16,18 @@ export function featureEditStart() {
     type: types.PROFILE_EDIT_START
   };
 }
+
+export function featureEditSave() {
+  return {
+    type: types.PROFILE_EDIT_REQUEST
+  };
+}
+
+export function featureEditCancel(maker) {
+  return {
+    type: types.PROFILE_EDIT_CANCEL,
+    data: {
+      maker: maker
+    }
+  };
+}
