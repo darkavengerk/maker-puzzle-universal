@@ -22,7 +22,7 @@ const ContentsSection = ({ portfolio, user, maker }) => {
           {portfolio.descriptions}
         </p>
       </div>
-      <Link to={`/maker/${maker.profile.userid}/portfolio/${portfolio.pid}`}>
+      <Link to={`/maker/${maker.userid}/portfolio/${portfolio.pid}`}>
         { portfolio.images && portfolio.images[0] ? 
           <Image src={"/images/portfolio/"+portfolio.images[0]} x={214} y={214}/> : <Image x={214} y={214}/>
         }

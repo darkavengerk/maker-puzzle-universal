@@ -29,7 +29,7 @@ class MakerProfile extends Component {
   }
 
   render() {
-    const { maker, context, user, featureEdited, featureEditStart, featureEditCancel, logOut } = this.props;
+    const { maker, context, user, featureEdited, featureEditStart, featureEditCancel, featureEditSave, logOut } = this.props;
 
     let stats = (
       <span className={cx('stats-area', 'flex-row')}>
@@ -149,4 +149,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {featureEdited, featureEditStart, featureEditSave, featureEditCancel, logOut})(MakerProfile);
+export default connect(
+  mapStateToProps, 
+  {featureEdited, featureEditStart, featureEditSave, featureEditCancel, logOut}
+)(MakerProfile);

@@ -18,8 +18,17 @@ export function featureEditStart() {
 }
 
 export function featureEditSave() {
-  return {
-    type: types.PROFILE_EDIT_REQUEST
+  return (dispatch, getState) => {
+    const { maker } = getState();
+    const features = maker.context.features;
+    dispatch({type:types.PROFILE_EDIT_FAILURE});
+    return Maker().updateMakerFeatures({id:maker.maker.userid, data:maker.context})
+      .then((res) => {
+        if (res.status === 200) {
+          return dispatch({type:types.PROFILE_EDIT_SUCCESS, data:maker.context});
+        }
+        return dispatch({type:types.PROFILE_EDIT_FAILURE});
+      });
   };
 }
 

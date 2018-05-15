@@ -15,13 +15,13 @@ const Portfolio = require('./portfolio');
 
 const UserSchema = new mongoose.Schema({
   email: { type: String, unique: true, lowercase: true },
+  userid: { type: String, required: true },
   password: String,
   tokens: Array,
   type: { type: String, default: 'person', required: true }, //person, company
 
   profile: {
     name: { type: String, default: '' },
-    userid: { type: String, required: true },
     gender: { type: String, default: '' },
     location: { type: String, default: '' },
     website: { type: String, default: '' },

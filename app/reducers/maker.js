@@ -13,6 +13,8 @@ const maker = (
     case types.REQUEST_SUCCESS:
       if (action.data && action.data.maker) return action.data.maker;
       return state;
+    case types.PROFILE_EDIT_SUCCESS:
+      return {...state, features:action.data.features, about:action.data.about}
     default:
       return state;
   }
@@ -38,6 +40,10 @@ const context = (
       return {...state, editing: true};
     case types.PROFILE_EDIT_CANCEL:
       return {...state, features:action.data.maker.features, editing:false}
+    case types.PROFILE_EDIT_FAILURE:
+      return {...state, editing:true}
+    case types.PROFILE_EDIT_SUCCESS:
+      return {...state, features:action.data.features, about:action.data.about, editing:false}
     default:
       return state;
   }

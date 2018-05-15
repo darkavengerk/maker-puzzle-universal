@@ -13,9 +13,10 @@ export function all(req, res) {
 }
 
 export function single(req, res) {
-  User.findOne({'profile.userid':req.params.id}).lean().exec((err, user) => {
-    if (err) {
+  User.findOne({'userid':req.params.id}).lean().exec((err, user) => {
+    if (err || !user) {
       console.log('Error in first query', err);
+      console.log(user);
       return res.status(500).send('Something went wrong getting the data');
     }
 
@@ -48,6 +49,21 @@ export function login(req, res, next) {
       return res.json(user);
     });
   })(req, res, next);
+}
+
+export function updateFeatures(req, res) {
+  const userid = req.params.id;
+  const {features, about} = req.body;
+
+  User.update({userid:userid}, {$set:{features, about}}, (err, result) => {
+
+    if (err) {
+      console.log(err);
+      return res.status(500).send('Something went wrong getting the data');
+    }
+
+    res.json(result);
+  });
 }
 
 /**
@@ -88,5 +104,6 @@ export default {
   single,
   login,
   logout,
-  signUp
+  signUp,
+  updateFeatures
 };

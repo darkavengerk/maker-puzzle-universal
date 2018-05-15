@@ -15,7 +15,12 @@ export default () => {
     getMakerProfile: ({id, pid}) => client.request({
       method: 'GET',
       url: `/user/${id}/${pid}`
-    })
+    }),
+    updateMakerFeatures: ({id, data}) => client.request({
+      method: 'POST',
+      url: `/user/${id}/features`,
+      data
+    }),
   };
 };
 

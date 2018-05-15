@@ -13,16 +13,14 @@ const TitleSection = ({ title, thumbnailURL, props, maker }) => {
   const url = thumbnailURL? thumbnailURL : "/images/default_profile.jpg";
 
   return (
-    <Link to={`/maker/${maker.profile.userid}/`}>
-    <div className={cx('main-section')}>
+      <Link to={`/maker/${maker.userid}/`} className={cx('main-section')}>
         <span className={cx('profile-image')}>
             <ProfileImage src={url} x={40} y={40} />
         </span>
           <label className={cx('title')}>
             {title}
           </label>
-    </div>
-    </Link>
+      </Link>
   );
 };
 
