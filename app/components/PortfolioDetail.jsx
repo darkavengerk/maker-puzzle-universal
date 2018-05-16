@@ -12,8 +12,8 @@ const cx = classNames.bind(styles);
 const ContentsSection = ({ portfolio, user, maker }) => {
 
   const imgs = portfolio.images.map(img => (
-    <div className={cx('image')} >
-      <Image key={img} src={"/images/portfolio/" + img} x={'100%'} pureImage={true}/>
+    <div key={img} className={cx('image')} >
+      <Image src={"/images/portfolio/" + img} x={'100%'} pureImage={true}/>
     </div>)
   );
 

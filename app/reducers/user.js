@@ -80,7 +80,7 @@ const account = (
   switch (action.type) {
     case types.LOGIN_SUCCESS_USER:
     case types.SIGNUP_SUCCESS_USER:
-      return {email:user.email, profile:user.profile};
+      return user;
     case types.LOGIN_ERROR_USER:
     case types.SIGNUP_ERROR_USER:
     case types.LOGOUT_SUCCESS_USER:
