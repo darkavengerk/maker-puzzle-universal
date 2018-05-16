@@ -10,7 +10,7 @@ const Component = ({ maker }) => {
   let history = maker.makerProfile.companies;
   let lines = history.map(info => {
     return (
-      <tr key={info.name}>
+      <tr key={info.name} draggable="true">
         <td className={cx('col-info', 'first-item')}>{info.order + 1}</td>
         <td className={cx('col-name', (info.current? "col-selected": ""))}>{info.name}</td>
         <td className={cx('col-info', (info.current? "col-selected": ""))}>{info.period}</td>

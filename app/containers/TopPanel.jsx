@@ -23,12 +23,6 @@ const Navigation = ({ user, logOut }) => {
         </div>
 
         <div className={cx('option-area')}>
-          { user.authenticated ? (
-            <span
-              onClick={logOut}
-              className={cx('item')} to="/">Logout</span>
-          ) : (<span></span>)}
-
           <Link to={user.authenticated? ('/maker/Test') : '/login'}>
             <Img src="/images/site/icon_person.png" x={32} y={30} /> 
           </Link>
