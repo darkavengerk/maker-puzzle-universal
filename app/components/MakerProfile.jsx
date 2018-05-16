@@ -59,23 +59,13 @@ class MakerProfile extends Component {
         </span>
       </span>);
 
-    const handleChange2 = evt => {
-      let current = evt.target;
-      let parent = current.parentElement.parentElement;
-      let children = parent.childNodes;
-
-      // use innter text to sum up the result
-      current.innerText;
-    }
-
-    
-
     let buttonArea = 
       <span className={cx('follow-button')} role="button">
         FOLLOW
       </span>;
 
-    if(user.account.profile && maker.profile.userid === user.account.profile.userid) {
+    if(user.account.profile && (maker.profile.userid === user.account.profile.userid)) { 
+
       buttonArea = 
       <span className={cx('button-area')}>
         <label className={cx('system-button')} role="button" onClick={featureEditStart}>정보 수정</label>
@@ -91,10 +81,20 @@ class MakerProfile extends Component {
       }
     }
 
+    const handleChange = evt => {
+      // use innter text to sum up the result
+      featureEdited('about', evt.target.innerText);
+    }
+
     return (
       <div className={cx('main-section')}>
         <span className={cx('flex-row')}>
-          <FlexibleImage src="/images/default_profile.jpg" x={144} y={144} />
+          <span style={{position:'relative', height:'14.4rem'}}>
+            <FlexibleImage src="/images/default_profile.jpg" x={144} y={144} />
+            <span style={{position:'absolute', bottom:'0.3rem', right:'0.4rem', 'zIndex':1}}>
+              {context.editing? <FlexibleImage src="/images/site/camera-1.png" x={34} y={34} />:''}
+            </span>
+          </span>
           <span className={cx('user-info')}>
             <span className={cx('name')}>
               {maker.profile.name}
@@ -104,28 +104,27 @@ class MakerProfile extends Component {
             {buttonArea}
           </span>
         </span>
-        <div>
+        <div className={cx('feature-area')}>
           <Features 
-            className={cx('feature-area')}
-            features={context.features}
+            features={maker.features}
             featureEdited={featureEdited}
             classNames={{
               title: cx('feature-title'),
-              content: cx('feature'),
+              content: cx('feature', context.editing? 'editing':''),
               row: cx('feature-item')
             }}
-            placeHolder={'Hello World'}
             editing={context.editing}
           />
 
           <ContentEditable 
-            className={cx('about-maker')}
+            className={cx('about-maker', context.editing? 'editing':'')}
             html={ jsxToString(
               <div>
                 {maker.about.split('\n').map((sen,i) => (<p key={i}>{sen}</p>))}
               </div>
             ) } 
-            onKeyPress={handleChange2}
+            onKeyUp={handleChange}
+            disabled={!context.editing}
           />
           
         </div>

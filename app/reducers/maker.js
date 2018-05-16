@@ -35,7 +35,10 @@ const context = (
       return state;
 
     case types.PROFILE_EDIT_ITEM_UPDATE:
-      return {...state, features: updateFeature(state, data.key, data.text)};
+      if(data.key==='about') 
+        return {...state, about:data.text };
+      else
+        return {...state, features: updateFeature(state, data.key, data.text) };
     case types.PROFILE_EDIT_START:
       return {...state, editing: true};
     case types.PROFILE_EDIT_CANCEL:
@@ -50,6 +53,7 @@ const context = (
 };
 
 const updateFeature = (maker, key, text) => {
+
   const features = maker.features;
   const updatedFeatures = features.map(feature => {
     if(feature.title === key) {

@@ -7,7 +7,7 @@ import classNames from 'classnames/bind';
 import ContentEditable from 'react-contenteditable'
 
 
-const Comp = ({ features, featureEdited, classNames, placeHolder, editing=false, ...props }) => {
+const Comp = ({ features, featureEdited, classNames, editing=false, ...props }) => {
 
   let splitLetters = word => {
     return word.split('').map((letter,i) => {
@@ -41,7 +41,7 @@ const Comp = ({ features, featureEdited, classNames, placeHolder, editing=false,
           html={ feature.content }
           onKeyPress={preventEnter}
           onKeyUp={handleChange(feature.title)}
-          placeholder={placeHolder}
+          placeholder={feature.placeHolder}
           disabled={!editing}
         />
         
@@ -62,7 +62,6 @@ Comp.propTypes = {
   features: PropTypes.array.isRequired,
   featureEdited: PropTypes.func,
   classNames: PropTypes.object,
-  placeHolder: PropTypes.string,
   editing: PropTypes.bool
 };
 
