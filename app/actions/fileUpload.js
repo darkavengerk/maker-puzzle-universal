@@ -21,7 +21,7 @@ function createTopicFailure(data) {
   };
 }
 
-export function uploadFile(file) {
+export function uploadFile(userid, file, cb) {
   return (dispatch, getState) => {
     // If the text box is empty
     if (file.name && file.name.trim().length <= 0) return;
@@ -31,12 +31,13 @@ export function uploadFile(file) {
     reader.onloadend = () => {
       file.src = reader.result;
 
-      Image().upload({ data : {file:file, name:file.name, username:'test', count:0}}).then((res) => {
+      Image().upload({ data : {file:file, name:file.name, userid:userid}}).then((res) => {
         if (res.status === 200) {
-          // return dispatch();
+          if(cb) cb(null, res.data);
         }
       })
-      .catch(() => {
+      .catch((res) => {
+        console.log(res);
         // return dispatch(createTopicFailure({ id, error: 'Oops! Something went wrong and we couldn\'t create your topic'}));
       });
 

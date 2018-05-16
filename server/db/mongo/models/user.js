@@ -18,6 +18,9 @@ const UserSchema = new mongoose.Schema({
   userid: { type: String, required: true },
   password: String,
   tokens: Array,
+
+  uploadCount: {type: Number, default: 0},
+
   type: { type: String, default: 'person', required: true }, //person, company
 
   profile: {

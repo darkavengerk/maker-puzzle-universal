@@ -9,7 +9,7 @@ import ImageUploader from '../components/ImageUploader';
 import Features from '../components/Features';
 import styles from '../css/components/maker-profile';
 
-import { featureEdited, featureEditStart, featureEditSave, featureEditCancel } from '../actions/makers';
+import { featureEdited, featureEditStart, featureEditSave, featureEditCancel, updateProfileImage } from '../actions/makers';
 import { logOut } from '../actions/users';
 
 import ContentEditable from 'react-contenteditable'
@@ -29,7 +29,7 @@ class MakerProfile extends Component {
   }
 
   render() {
-    const { maker, context, user, featureEdited, featureEditStart, featureEditCancel, featureEditSave, logOut } = this.props;
+    const { maker, context, user, featureEdited, featureEditStart, featureEditCancel, featureEditSave, updateProfileImage, logOut } = this.props;
 
     let stats = (
       <span className={cx('stats-area', 'flex-row')}>
@@ -86,13 +86,23 @@ class MakerProfile extends Component {
       featureEdited('about', evt.target.innerText);
     }
 
+    const handleProfileImageUpdate = (err, img) => {
+      updateProfileImage(img);
+    };
+
+    const profileImage = context.editing? context.profile.picture : maker.profile.picture;
+
     return (
       <div className={cx('main-section')}>
         <span className={cx('flex-row')}>
           <span style={{position:'relative', height:'14.4rem'}}>
-            <FlexibleImage src="/images/default_profile.jpg" x={144} y={144} />
+            <FlexibleImage src={profileImage || "/images/default_profile.jpg"} x={144} y={144} />
             <span style={{position:'absolute', bottom:'0.3rem', right:'0.4rem', 'zIndex':1}}>
-              {context.editing? <FlexibleImage src="/images/site/camera-1.png" x={34} y={34} />:''}
+              {context.editing? 
+                <ImageUploader name="ImageUploader" callback={handleProfileImageUpdate} >
+                  <FlexibleImage src={"/images/site/camera-1.png"} x={34} y={34} />
+                </ImageUploader>
+                : ''}
             </span>
           </span>
           <span className={cx('user-info')}>
@@ -128,7 +138,7 @@ class MakerProfile extends Component {
           />
           
         </div>
-        <ImageUploader name="ImageUploader" />
+        
       </div>
     );
   }
@@ -150,5 +160,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps, 
-  {featureEdited, featureEditStart, featureEditSave, featureEditCancel, logOut}
+  {featureEdited, featureEditStart, featureEditSave, featureEditCancel, updateProfileImage, logOut}
 )(MakerProfile);

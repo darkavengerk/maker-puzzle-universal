@@ -14,7 +14,8 @@ const maker = (
       if (action.data && action.data.maker) return action.data.maker;
       return state;
     case types.PROFILE_EDIT_SUCCESS:
-      return {...state, features:action.data.features, about:action.data.about}
+      const data = action.data;
+      return {...state, features: data.features, about: data.about, profile: data.profile}
     default:
       return state;
   }
@@ -46,7 +47,11 @@ const context = (
     case types.PROFILE_EDIT_FAILURE:
       return {...state, editing:true}
     case types.PROFILE_EDIT_SUCCESS:
-      return {...state, features:action.data.features, about:action.data.about, editing:false}
+      return {...state, editing:false}
+    case types.UPDATE_PROFILE_IMG:
+      let newState = {...state};
+      newState.profile.picture = action.data;
+      return newState;
     default:
       return state;
   }

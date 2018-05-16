@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import TopicTextInput from '../components/TopicTextInput';
+import FlexibleImage from '../components/FlexibleImage';
 import styles from '../css/components/image-uploader';
 import { uploadFile } from '../actions/fileUpload';
 import { Col, Row } from 'react-bootstrap';
@@ -26,27 +27,19 @@ class ImageUploader extends React.Component {
     e.preventDefault();
     let target = document.getElementById(this.props.name);
     let file = target.files[0];
-    this.props.uploadFile(file);
+    this.props.uploadFile(this.props.user.userid, file, this.props.callback);
   }
 
   render() {
     const { files } = this.props;
-    const images = files.map(f => (
-      <Col sm={3} xs={6}>
-        <img src={f.src} key={f.name} className="img-responsive" />
-      </Col>
-    ));
 
     return (
-      <div className={cx('image-uploader')}>
-        <h1>{this.props.title} {this.props.name}</h1>
-        <form>
+      <div >
+        {<div role="button" onClick={this.onLoad}>{this.props.children}</div>}
+        <form style={{display:'none'}}>
           <input type="file" className={cx('file-input')} id={this.props.name} onChange={this.onFileSelected} />
-          <input type="button" value="value" onClick={this.onLoad} />
+          <input type="button" value="value" />
         </form>
-        <Row>
-          {images}
-        </Row>
       </div>
     );
   }
@@ -54,12 +47,14 @@ class ImageUploader extends React.Component {
     
 ImageUploader.propTypes = {
   name: PropTypes.string.isRequired,
-  uploadFile: PropTypes.func
+  uploadFile: PropTypes.func,
+  callback: PropTypes.func
 };
   
 function mapStateToProps(state) {
   return {
-    files: state.fileUpload.files
+    files: state.fileUpload.files,
+    user: state.user.account,
   };
 }
     

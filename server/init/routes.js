@@ -10,6 +10,7 @@ const topicsController = controllers && controllers.topics;
 
 const usersController = controllers && controllers.users;
 const projectController = controllers && controllers.projects;
+const imageController = controllers && controllers.images;
 
 export default (app) => {
   // user routes
@@ -70,19 +71,5 @@ export default (app) => {
     console.warn(unsupportedMessage('topics routes'));
   }
 
-  app.post('/image', (req, res) => {
-    const fs = require('fs-extra');
-    const data = req.body;
-    var chopper_index = 0; // safeguard
-
-    var base64_marker = ';base64,';
-    chopper_index = data.file.src.indexOf(base64_marker) + base64_marker.length;
-
-    // Remove obsolete header
-    var binary_buffer = Buffer.from(data.file.src.substr(chopper_index), 'base64');
-
-    fs.outputFile('public/images/' + data.name, binary_buffer, 'Binary', (err, result) => {
-      res.send('ok');
-    });
-  });
+  app.post('/image', imageController.upload);
 };

@@ -10,7 +10,7 @@ const cx = classNames.bind(styles);
 
 const TitleSection = ({ title, thumbnailURL, props, maker }) => {
 
-  const url = thumbnailURL? thumbnailURL : "/images/default_profile.jpg";
+  const url = thumbnailURL? thumbnailURL : maker.profile.picture;
 
   return (
       <Link to={`/maker/${maker.userid}/`} className={cx('main-section')}>
