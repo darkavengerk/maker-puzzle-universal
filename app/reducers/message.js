@@ -16,6 +16,8 @@ export default function message(state = {
       return {...state, message: action.message, type: 'SUCCESS'};
     case types.DISMISS_MESSAGE:
       return {...state, message: '', type: 'SUCCESS'};
+    case types.PROFILE_EDIT_SUCCESS:
+      return {...state, message: 'Profile updated!', type: 'SUCCESS'};
     default:
       return state;
   }
