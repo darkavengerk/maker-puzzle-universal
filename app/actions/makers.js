@@ -18,15 +18,14 @@ export function featureEditStart() {
 }
 
 export function featureEditSave() {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
     const { maker } = getState();
-    return Maker().updateMakerFeatures({id:maker.maker.userid, data:maker.context})
-      .then((res) => {
-        if (res.status === 200) {
-          return dispatch({type:types.PROFILE_EDIT_SUCCESS, data:maker.context});
-        }
-        return dispatch({type:types.PROFILE_EDIT_FAILURE});
-      });
+    const res = await Maker().updateMakerFeatures({id:maker.maker.userid, data:maker.context});
+    
+    if (res.status === 200) {
+      return dispatch({type:types.PROFILE_EDIT_SUCCESS, data:maker.context});
+    }
+    return dispatch({type:types.PROFILE_EDIT_FAILURE});
   };
 }
 

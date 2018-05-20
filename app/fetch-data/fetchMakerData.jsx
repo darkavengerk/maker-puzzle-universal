@@ -1,16 +1,10 @@
 import { Maker } from '../services';
 
-const fetchData = (param) => {
-  let source = Maker().getMaker(param);
+const fetchData = async (param) => {
 
-  if(param.pid) {
-    source = Maker().getMakerProfile(param);
-  }
-  return source
-    .then(res => ({maker : res.data}))
-    // Returning [] as a placeholder now so it does not error out when this service
-    // fails. We should be handling this in our DISPATCH_REQUEST_FAILURE
-    .catch(() => ({}));
+  const source = param.pid ? Maker().getMakerProfile : Maker().getMaker;
+
+  return {maker : (await source(param)).data};
 };
 
 export default fetchData;

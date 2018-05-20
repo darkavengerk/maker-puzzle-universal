@@ -28,18 +28,14 @@ export function uploadFile(userid, file, cb) {
 
     let reader = new FileReader();
 
-    reader.onloadend = () => {
+    reader.onloadend = async () => {
       file.src = reader.result;
 
-      Image().upload({ data : {file:file, name:file.name, userid:userid}}).then((res) => {
-        if (res.status === 200) {
-          if(cb) cb(null, res.data);
-        }
-      })
-      .catch((res) => {
-        console.log(res);
-        // return dispatch(createTopicFailure({ id, error: 'Oops! Something went wrong and we couldn\'t create your topic'}));
-      });
+      const res = await Image().upload({ data : {file:file, name:file.name, userid:userid}});
+      
+      if (res.status === 200) {
+        if(cb) cb(null, res.data);
+      }
 
       return dispatch({
         type: types.UPLOADER_FILE_SELECTED,

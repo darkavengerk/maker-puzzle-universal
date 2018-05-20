@@ -58,17 +58,17 @@ export function toggleLoginMode() {
 }
 
 export function manualLogin(data) {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(beginLogin());
 
-    return authService().login(data)
-      .then((response) => {
-          dispatch(loginSuccess('You have been successfully logged in', response.data));
-          dispatch(push('/maker/'+response.data.userid));
-      })
-      .catch((err) => {
-        dispatch(loginError('Oops! Invalid username or password'));
-      });
+    try {
+      const response = await authService().login(data);
+      dispatch(loginSuccess('You have been successfully logged in', response.data));
+      dispatch(push('/maker/'+response.data.userid));
+    }
+    catch(err) {
+      dispatch(loginError('Oops! Invalid username or password'));
+    }
   };
 }
 

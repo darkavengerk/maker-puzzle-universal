@@ -56,7 +56,7 @@ export function typing(text) {
 // This function does not need to be pure, and thus allowed
 // to have side effects, including executing asynchronous API calls.
 export function createTopic(text) {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
     // If the text box is empty
     if (text.trim().length <= 0) return;
 
@@ -82,19 +82,18 @@ export function createTopic(text) {
     // First dispatch an optimistic update
     dispatch(createTopicRequest(data));
 
-    return voteService().createTopic({ id, data })
-      .then((res) => {
-        if (res.status === 200) {
-          // We can actually dispatch a CREATE_TOPIC_SUCCESS
-          // on success, but I've opted to leave that out
-          // since we already did an optimistic update
-          // We could return res.json();
-          return dispatch(createTopicSuccess());
-        }
-      })
-      .catch(() => {
-        return dispatch(createTopicFailure({ id, error: 'Oops! Something went wrong and we couldn\'t create your topic'}));
-      });
+    const res = await voteService().createTopic({ id, data });
+    
+    if (res.status === 200) {
+      // We can actually dispatch a CREATE_TOPIC_SUCCESS
+      // on success, but I've opted to leave that out
+      // since we already did an optimistic update
+      // We could return res.json();
+      return dispatch(createTopicSuccess());
+    }
+    else {
+      return dispatch(createTopicFailure({ id, error: 'Oops! Something went wrong and we couldn\'t create your topic'}));
+    }
   };
 }
 
