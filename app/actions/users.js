@@ -88,15 +88,16 @@ export function signUp(data) {
 }
 
 export function logOut() {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(beginLogout());
 
-    return authService().logOut()
-      .then((response) => {
-          dispatch(logoutSuccess());
-      })
-      .catch((err) => {
-        dispatch(logoutError());
-      });
+    try {
+      const response = await authService().logOut();
+      dispatch(logoutSuccess());
+      return response;
+    }
+    catch(err) {
+      dispatch(logoutError());
+    }
   };
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
+import _ from 'lodash';
 
 import FlexibleImage from '../components/FlexibleImage';
 import Border from '../components/SingleLine';
@@ -9,7 +10,7 @@ import ImageUploader from '../components/ImageUploader';
 import Features from '../components/Features';
 import styles from '../css/components/maker-profile';
 
-import { featureEdited, featureEditStart, featureEditSave, featureEditCancel, updateProfileImage } from '../actions/makers';
+import { featureEditSave } from '../actions/makers';
 import { logOut } from '../actions/users';
 
 import ContentEditable from 'react-contenteditable'
@@ -21,15 +22,55 @@ class MakerProfile extends Component {
 
   constructor(props) {
     super(props);
+
+    const { maker } = this.props;
+    this.state = {...maker};
+
+    this.submit = this.submit.bind(this);
     this.cancelEdit = this.cancelEdit.bind(this);
+    this.featureEdited = this.featureEdited.bind(this);
+    this.aboutEdited = this.aboutEdited.bind(this);
+    this.profileImageEdited = this.profileImageEdited.bind(this);
   }
 
   cancelEdit() {
-    this.props.featureEditCancel(this.props.maker);
+    const { maker } = this.props;
+    const { features, profile, about } = maker;
+    this.setState({ features, profile, about, editing: false });
+  }
+
+  featureEdited(key, text) {
+
+    const target = this.state;    
+    const features = target.features.map(feature => {
+      if(feature.title === key) {
+        return {...feature, content:text}
+      }
+      return feature;
+    });
+    this.setState({ features });
+  }
+
+  aboutEdited(evt) {
+    const about = evt.target.innerText;
+    this.setState({ about });
+  }
+
+  profileImageEdited(err, img) {
+    this.setState(_.merge({}, this.state, {profile: {picture : img}}));
+  };
+
+  async submit() {
+    const { featureEditSave } = this.props;
+    const res = await featureEditSave(this.state);
+    if (res.status === 200) {
+      this.setState({editing: false});
+    }
   }
 
   render() {
-    const { maker, context, user, featureEdited, featureEditStart, featureEditCancel, featureEditSave, updateProfileImage, logOut } = this.props;
+    const { maker, user, logOut } = this.props;
+    const isOwnPage = user.account.profile && (user.account.profile.userid === maker.profile.userid);
 
     let stats = (
       <span className={cx('stats-area', 'flex-row')}>
@@ -64,33 +105,24 @@ class MakerProfile extends Component {
         FOLLOW
       </span>;
 
-    if(user.account.profile && (maker.profile.userid === user.account.profile.userid)) { 
+    if(isOwnPage) { 
 
       buttonArea = 
       <span className={cx('button-area')}>
-        <label className={cx('system-button')} role="button" onClick={featureEditStart}>정보 수정</label>
+        <label className={cx('system-button')} role="button" onClick={() => this.setState({editing:true})}>정보 수정</label>
         <label className={cx('system-button')} role="button" onClick={logOut} >로그아웃</label>
       </span>;
 
-      if(context.editing) {
+      if(this.state.editing) {
         buttonArea = 
           <span className={cx('button-area')}>
-            <label className={cx('system-button', 'important')} role="button" onClick={featureEditSave}>변경내용 저장</label> 
+            <label className={cx('system-button', 'important')} role="button" onClick={this.submit}>변경내용 저장</label> 
             <label className={cx('system-button')} role="button" onClick={this.cancelEdit}>취소</label>
           </span>;
       }
     }
 
-    const handleChange = evt => {
-      // use innter text to sum up the result
-      featureEdited('about', evt.target.innerText);
-    }
-
-    const handleProfileImageUpdate = (err, img) => {
-      updateProfileImage(img);
-    };
-
-    const profileImage = context.editing? context.profile.picture : maker.profile.picture;
+    const profileImage = this.state.editing? this.state.profile.picture : maker.profile.picture;
 
     return (
       <div className={cx('main-section')}>
@@ -98,8 +130,8 @@ class MakerProfile extends Component {
           <span style={{position:'relative', height:'14.4rem'}}>
             <FlexibleImage src={profileImage || "/images/default_profile.jpg"} x={144} y={144} />
             <span style={{position:'absolute', bottom:'0.3rem', right:'0.4rem', 'zIndex':1}}>
-              {context.editing? 
-                <ImageUploader name="ImageUploader" callback={handleProfileImageUpdate} >
+              {this.state.editing? 
+                <ImageUploader name="ImageUploader" callback={this.profileImageEdited} >
                   <FlexibleImage src={"/images/site/camera-1.png"} x={34} y={34} />
                 </ImageUploader>
                 : ''}
@@ -116,25 +148,25 @@ class MakerProfile extends Component {
         </span>
         <div className={cx('feature-area')}>
           <Features 
-            features={maker.features}
-            featureEdited={featureEdited}
+            features={this.state.features}
+            featureEdited={this.featureEdited}
             classNames={{
               title: cx('feature-title'),
-              content: cx('feature', context.editing? 'editing':''),
+              content: cx('feature', this.state.editing? 'editing':''),
               row: cx('feature-item')
             }}
-            editing={context.editing}
+            editing={this.state.editing}
           />
 
           <ContentEditable 
-            className={cx('about-maker', context.editing? 'editing':'')}
+            className={cx('about-maker', this.state.editing? 'editing':'')}
             html={ jsxToString(
               <div>
                 {maker.about.split('\n').map((sen,i) => (<p key={i}>{sen}</p>))}
               </div>
             ) } 
-            onKeyUp={handleChange}
-            disabled={!context.editing}
+            onKeyUp={this.aboutEdited}
+            disabled={!this.state.editing}
           />
           
         </div>
@@ -146,7 +178,8 @@ class MakerProfile extends Component {
 
 MakerProfile.propTypes = {
   maker: PropTypes.object.isRequired,
-  featureEdited: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  featureEditSave: PropTypes.func.isRequired,
   logOut: PropTypes.func.isRequired
 };
 
@@ -160,5 +193,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps, 
-  {featureEdited, featureEditStart, featureEditSave, featureEditCancel, updateProfileImage, logOut}
+  {featureEditSave, logOut}
 )(MakerProfile);
