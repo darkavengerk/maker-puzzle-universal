@@ -7,6 +7,8 @@ const maker = (
   action
 ) => {
   switch (action.type) {
+    case types.LOGIN_SUCCESS_USER:
+      return action.data;
     case types.REQUEST_SUCCESS:
       if (action.data && action.data.maker) return action.data.maker;
       return state;

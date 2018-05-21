@@ -2,9 +2,13 @@ import { Maker } from '../services';
 
 const fetchData = async (param) => {
 
-  const source = param.pid ? Maker().getMakerProfile : Maker().getMaker;
+  if(param.id) {
 
-  return {maker : (await source(param)).data};
+    const source = param.pid ? Maker().getMakerProfile : Maker().getMaker;
+    return {maker : (await source(param)).data};
+  }
+  return {};
+
 };
 
 export default fetchData;

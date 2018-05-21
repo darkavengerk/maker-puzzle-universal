@@ -10,9 +10,9 @@ const cx = classNames.bind(styles);
 
 const ContentsSection = ({ owner, contentsType }) => {
 
-  let portfolios = owner.portfolios.map(portfolio => {
+  let portfolios = owner.portfolios? owner.portfolios.map(portfolio => {
     return (<PortfolioItem portfolio={portfolio} key={portfolio.title} />);
-  });
+  }) : [];
 
   if(owner.portfolioSelected) {
     portfolios = (<PortfolioDetail portfolio={owner.portfolioSelected.portfolio} />);

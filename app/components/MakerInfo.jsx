@@ -11,7 +11,7 @@ const cx = classNames.bind(styles);
 
 const MakerInfo = ({ maker }) => {
 
-  return (
+  return maker && maker.makerProfile ? (
     <div className={cx('main-section')}>
       <GreyTitle title={'메이커 프로필'} bottom="13" />
       <MakerProfile maker={maker} />
@@ -24,7 +24,7 @@ const MakerInfo = ({ maker }) => {
 
       <GreyTitle title={'관련된 메이커'} top="24" bottom="26" />
     </div>
-  );
+  ) : <div></div>;
 };
 
 MakerInfo.propTypes = {
