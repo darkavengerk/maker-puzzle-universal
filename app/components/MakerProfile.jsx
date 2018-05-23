@@ -27,10 +27,15 @@ class MakerProfile extends Component {
     this.state = {...maker};
 
     this.submit = this.submit.bind(this);
+    this.startEdit = this.startEdit.bind(this);
     this.cancelEdit = this.cancelEdit.bind(this);
     this.featureEdited = this.featureEdited.bind(this);
     this.aboutEdited = this.aboutEdited.bind(this);
     this.profileImageEdited = this.profileImageEdited.bind(this);
+  }
+
+  startEdit() {
+    this.setState({editing:true});
   }
 
   cancelEdit() {
@@ -109,7 +114,7 @@ class MakerProfile extends Component {
 
       buttonArea = 
       <span className={cx('button-area')}>
-        <label className={cx('system-button')} role="button" onClick={() => this.setState({editing:true})}>정보 수정</label>
+        <label className={cx('system-button')} role="button" onClick={this.startEdit}>정보 수정</label>
         <label className={cx('system-button')} role="button" onClick={logOut} >로그아웃</label>
       </span>;
 
