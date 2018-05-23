@@ -12,13 +12,14 @@ const cx = classNames.bind(styles);
 
 class Maker extends Component {
   render() {
-    const { maker } = this.props;
+    const { maker, user } = this.props;
+    const isOwnPage = user && maker && (maker.userid === user.userid);
     return (
       <div className={cx('main-section')}>
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
         <TopTitle title={maker.userid} thumbnailURL={maker.profile? maker.profile.picture : ''} />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
-        <ContentsSection owner={maker} contentsType="maker" />
+        <ContentsSection owner={maker} contentsType="maker" isOwnPage={isOwnPage} />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
       </div>
     );
@@ -31,7 +32,8 @@ Maker.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    maker: state.maker.maker
+    maker: state.maker.maker,
+    user: state.user.account
   };
 }
 

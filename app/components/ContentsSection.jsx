@@ -4,18 +4,24 @@ import classNames from 'classnames/bind';
 import MakerInfo from '../components/MakerInfo';
 import PortfolioItem from '../components/PortfolioItem';
 import PortfolioDetail from '../components/PortfolioDetail';
+import AddPortfolio from '../components/AddPortfolio';
+import Popup from '../components/Popup';
 import styles from '../css/components/contents-section';
 
 const cx = classNames.bind(styles);
 
-const ContentsSection = ({ owner, contentsType }) => {
+const ContentsSection = ({ owner, isOwnPage }) => {
 
   let portfolios = owner.portfolios? owner.portfolios.map(portfolio => {
     return (<PortfolioItem portfolio={portfolio} key={portfolio.title} />);
   }) : [];
 
+  if(isOwnPage) {
+    portfolios.unshift(<PortfolioItem key={'__new__'} />);
+  }
+
   if(owner.portfolioSelected) {
-    portfolios = (<PortfolioDetail portfolio={owner.portfolioSelected.portfolio} />);
+    portfolios = (<PortfolioDetail portfolio={owner.portfolioSelected.portfolio} edit={isOwnPage} />);
   }
 
   return (
@@ -28,6 +34,9 @@ const ContentsSection = ({ owner, contentsType }) => {
         <div className={cx('portfolio-list')}>
           {portfolios}
         </div>
+        <Popup show={owner.isAddingPortfolio} name="AddPortfolio" >
+          <AddPortfolio title="포트폴리오 수정하기" />
+        </Popup>
       </span>
     </div>
   );

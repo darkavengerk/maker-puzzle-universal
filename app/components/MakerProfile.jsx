@@ -191,7 +191,6 @@ MakerProfile.propTypes = {
 function mapStateToProps(state) {
   return {
     maker: state.maker.maker,
-    context: state.maker.context,
     user: state.user
   };
 }
