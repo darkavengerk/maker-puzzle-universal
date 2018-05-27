@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
-
 import ContentEditable from 'react-contenteditable'
+
+import Scatter from '../components/Scatter';
 
 
 const Comp = ({ features, featureEdited, classNames, editing=false, ...props }) => {
@@ -32,9 +33,7 @@ const Comp = ({ features, featureEdited, classNames, editing=false, ...props }) 
   let featureElements = features.map(feature => {
     return (
       <div className={classNames.row} key={feature.title}>
-        <span className={classNames.title} style={{width:longest*1.3 + 'rem'}}>
-          {splitLetters(feature.title)}
-        </span>
+        <Scatter text={feature.title} className={classNames.title} width={longest*1.3 + 'rem'} />
         <ContentEditable 
           tagName="span"
           className={classNames.content}

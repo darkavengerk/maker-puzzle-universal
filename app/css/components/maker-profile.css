@@ -211,8 +211,6 @@ th, td {
   height: 2rem;
   margin-right: 0.7rem;
   font-weight: normal;
-  display: inline-flex;
-  justify-content: space-between;
 }
 
 [contenteditable=true]:empty:before {
