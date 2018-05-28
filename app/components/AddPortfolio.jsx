@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
-import Switch from "react-switch";
 import _ from 'lodash';
 
+import Switch from "../components/Switch";
 import FlexibleImage from '../components/FlexibleImage';
 import ImageUploader from '../components/ImageUploader';
 import Scatter from '../components/Scatter';
-import Slider from '../components/Slider';
 import styles from '../css/components/add-portfolio';
 
 import { featureEditSave } from '../actions/makers';
@@ -56,13 +55,8 @@ class AddPortfolio extends Component {
                 <td className={cx('entity')}>
                   <Switch 
                       onChange={this.switchChanged}
-                      checked={this.state.isPublic}
-                      id="normal-switch"
-                      onColor="#ee5400"
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      width={56}
-                      handleDiameter={25}
+                      checked={this.state.isPublic || false}
+                      name="public-switch"
                     />
                 </td>
               </tr>

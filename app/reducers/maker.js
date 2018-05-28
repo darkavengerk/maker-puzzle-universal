@@ -21,6 +21,9 @@ const maker = (
     
     case types.PORTFOLIO_EDITOR_START:
       return {...state, isAddingPortfolio: true}
+
+    case types.PORTFOLIO_EDITOR_CANCEL:
+      return {...state, isAddingPortfolio: false}
     
     default:
       return state;

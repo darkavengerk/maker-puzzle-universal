@@ -22,3 +22,9 @@ export function portfoiloEditorStart() {
     type: types.PORTFOLIO_EDITOR_START
   }
 }
+
+export function portfoiloEditorCancel() {
+  return {
+    type: types.PORTFOLIO_EDITOR_CANCEL
+  }
+}

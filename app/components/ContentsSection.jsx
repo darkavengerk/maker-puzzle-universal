@@ -1,16 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
+
 import MakerInfo from '../components/MakerInfo';
 import PortfolioItem from '../components/PortfolioItem';
 import PortfolioDetail from '../components/PortfolioDetail';
 import AddPortfolio from '../components/AddPortfolio';
 import Popup from '../components/Popup';
+import { portfoiloEditorCancel } from '../actions/makers';
 import styles from '../css/components/contents-section';
 
 const cx = classNames.bind(styles);
 
-const ContentsSection = ({ owner, isOwnPage }) => {
+const ContentsSection = ({ owner, isOwnPage, portfoiloEditorCancel }) => {
 
   let portfolios = owner.portfolios? owner.portfolios.map(portfolio => {
     return (<PortfolioItem portfolio={portfolio} key={portfolio.title} />);
@@ -34,8 +37,10 @@ const ContentsSection = ({ owner, isOwnPage }) => {
         <div className={cx('portfolio-list')}>
           {portfolios}
         </div>
-        <Popup show={owner.isAddingPortfolio} name="AddPortfolio" >
-          <AddPortfolio title="포트폴리오 수정하기" />
+        <Popup show={owner.isAddingPortfolio} name="AddPortfolio" cancel={portfoiloEditorCancel} >
+          <AddPortfolio 
+            title="포트폴리오 수정하기"
+          />
         </Popup>
       </span>
     </div>
@@ -47,4 +52,4 @@ ContentsSection.propTypes = {
   contentsType: PropTypes.string.isRequired
 };
 
-export default ContentsSection;
+export default connect(null, {portfoiloEditorCancel})(ContentsSection);
