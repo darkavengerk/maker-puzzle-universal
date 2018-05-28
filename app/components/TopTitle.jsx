@@ -17,9 +17,9 @@ const TitleSection = ({ title, thumbnailURL, props, maker }) => {
         <span className={cx('profile-image')}>
             <ProfileImage src={url} x={40} y={40} />
         </span>
-          <label className={cx('title')}>
-            {title}
-          </label>
+        <span className={cx('title')}>
+          {title}
+        </span>
       </Link>
   );
 };
