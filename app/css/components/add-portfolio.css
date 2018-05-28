@@ -1,3 +1,5 @@
+
+
 .main-section {
   width: 102.4rem;
   background-color: #f4f4f4;
@@ -36,86 +38,90 @@
   border:none;
 }
 
-.entity-title {
-  width: 6.0rem;
-  height: 3.0rem;
-  font-family: AppleSDGothicNeo;
-  font-size: 1.6rem;
-  font-weight: 800;
+
+/* font */
+
+.entity-title, .entity, .entity-must, .entity-helper, .text-field {
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
+  font-weight: 300;
   color: #000000;
+  font-family: NanumBarunGothic;
+  font-size: 1rem;
+}
+
+.entity {
+  font-weight: normal;
+  font-size: 1.3rem;
+}
+
+.entity-title {
+  font-family: AppleSDGothicNeo;
+  font-weight: 800;
+  font-size: 1.6rem;
+}
+
+.entity-must {
+  color: #ff0000;
+}
+
+
+/* align */
+
+/* size */
+.entity-title, .entity {
+  height: 3.0rem;
 }
 
 .entity-row {
   height: 1.5rem;
 }
 
-.entity {
-  height: 3.0rem;
-  width: 20.0rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: left;
-  margin-left: 2.6rem;
-}
-
-.entity-must {
-  width: 27px;
-  height: 17px;
-  font-family: NanumBarunGothic;
-  font-size: 10px;
-  font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: center;
-  color: #ff0000;
-}
-
-.entity-helper {
-  width: 45rem;
-  height: 17px;
-  font-family: NanumBarunGothic;
-  font-size: 10px;
-  font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: left;
-  color: #000000;
-  padding-left: 4.1rem;
+.entity-must, .entity-helper {
+  height: 2rem;
 }
 
 .text-field {
   width: 32.7rem;
   height: 2.7rem;
-  background-color: #e8e8e8;
-  font-family: NanumBarunGothic;
-  font-size: 1.3rem;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
+}
+
+/* color */
+
+/* etc*/
+
+.entity-title {
+  width: 6.0rem;
+}
+
+.entity {
+  width: 20.0rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  margin-left: 2.6rem;  
+}
+
+.entity-must {
+  width: 2.7rem;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.entity-helper {
+  width: 45rem;
   text-align: left;
-  color: #000000;
-  padding: 0 1.5rem;
-  border: none;
+  padding-left: 4.1rem;
 }
 
 .area {
   height: 8.1rem;
 }
 
-.text-area {
-  width: 59.5rem;
-  height: 8.1rem;
+.text-field, .text-area {
   background-color: #e8e8e8;
   font-family: NanumBarunGothic;
   font-size: 1.3rem;
@@ -126,6 +132,14 @@
   letter-spacing: normal;
   text-align: left;
   color: #000000;
-  padding: 0.6rem 1.5rem 1rem;
   border: none;
+}
+
+.text-field {
+  padding: 0 1.5rem;
+}
+
+.text-area {
+  padding: 0.6rem 1.5rem 1rem;
+  width: 59.5rem;
 }

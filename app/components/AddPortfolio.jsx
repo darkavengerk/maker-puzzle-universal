@@ -46,8 +46,10 @@ class AddPortfolio extends Component {
           {title}
         </div>
         <div className={cx('details')}>
+          
           <table className={cx('detail-table')}>
             <tbody>
+              
               <tr className={cx('entity-row')}>
                 <td className={cx('entity-title')}>
                   <Scatter text="비밀설정" />
@@ -61,6 +63,7 @@ class AddPortfolio extends Component {
                 </td>
               </tr>
               <tr className={cx('entity-row')} />
+
               <tr>
                 <td className={cx('entity-title')}>
                   <Scatter text="현장명" />
@@ -69,7 +72,6 @@ class AddPortfolio extends Component {
                   <input type="text" className={cx('text-field')} />
                 </td>
               </tr>
-
               <tr>
                 <td className={cx('entity-must')}>
                   [필수]
@@ -79,6 +81,7 @@ class AddPortfolio extends Component {
                 </td>
               </tr>
               <tr className={cx('entity-row')} />
+              
               <tr>
                 <td className={cx('entity-title')}>
                   <Scatter text="제목" />
@@ -95,17 +98,28 @@ class AddPortfolio extends Component {
                   * 예시) 커튼월 구조 계산, 로비 인테리어 디자인, 외벽 경관조명 설치 등
                 </td>
               </tr>
+              <tr className={cx('entity-row')} />              
 
-              <tr className={cx('entity-row')} />
-              
               <tr>
-                <td className={cx('entity-title')}>
-                  <Scatter text="작품설명" />
+                <td className={cx('entity-title')} style={{verticalAlign:'top'}}>
+                  <span>
+                    <Scatter text="작품설명" />
+                  </span>
                 </td>
                 <td className={cx('entity', 'area')}>
                   <textarea rows="4" cols="50" className={cx('text-area')} />
                 </td>
               </tr>
+              <tr>
+                <td className={cx('entity-must')}>
+                </td>
+                <td>
+                  <span className={cx('entity-helper')}>
+                    * 수행한 포트폴리오의 상세 설명을 적어주세요
+                  </span>
+                </td>
+              </tr>
+
             </tbody>
           </table>
         </div>
