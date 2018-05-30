@@ -32,6 +32,7 @@ class AddPortfolio extends Component {
     this.tagChanged = this.tagChanged.bind(this);
     this.removeTag = this.removeTag.bind(this);
     this.detectEnter = this.detectEnter.bind(this);
+    this.imageSelected = this.imageSelected.bind(this);
   }
 
   startEdit() {
@@ -65,6 +66,10 @@ class AddPortfolio extends Component {
   detectEnter(evt) {
     if(evt.key === "Enter") 
       evt.target.blur();
+  }
+
+  imageSelected(err, img) {
+    this.setState({images: [img, ...this.state.images]});
   }
 
   componentDidUpdate(){
@@ -195,7 +200,7 @@ class AddPortfolio extends Component {
                           onKeyPress={this.detectEnter}
                           name="new" 
                         /> : 
-                        <label className={cx('add-tag')} onClick={this.addTagEntry}>
+                        <label className={cx('add-tag')} onClick={this.addTagEntry} role="button">
                           + 태그 추가하기
                         </label>
                     }
@@ -210,6 +215,31 @@ class AddPortfolio extends Component {
                   </span>
                 </td>
               </tr>
+              <tr className={cx('entity-row')} />
+
+              <tr>
+                <td className={cx('entity-title')} style={{verticalAlign:'top'}}>
+                  <span>
+                    <Scatter text="이미지 선택" />
+                  </span>
+                </td>
+                <td>
+                  <div className={cx('image-area')}>
+                    <ImageUploader name="PortfolioImageUploader" callback={this.imageSelected} >
+                      <span className={cx('image-upload-button')}>+</span>
+                    </ImageUploader>
+                    {
+                      this.state.images.map((img, i) => (
+                        <span className={cx('image-item')}>
+                          <FlexibleImage src={img} pureImage={true} y={'9.1rem'} key={i} />
+                        </span>
+                      ))
+                    }
+                  </div>
+                </td>
+              </tr>
+              
+              <tr className={cx('entity-row')} />
 
             </tbody>
           </table>

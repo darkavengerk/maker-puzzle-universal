@@ -182,3 +182,33 @@
   left: 11rem;
   top: 0.2rem;
 }
+
+.image-area {
+  width: 59.5rem;
+  height: 22.6rem;
+  overflow: auto;
+  background-color: #e8e8e8;
+  margin-left: 2.6rem;
+  padding: 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: top;
+  flex-wrap: wrap;
+}
+
+.image-item {
+  margin: 0 0.6rem 0.6rem 0;
+  display: inline-block;
+}
+
+.image-upload-button {
+  width: 11.7rem;
+  height: 9.1rem;
+  margin: 0 0.6rem 0.6rem 0;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ff5b00;
+  color: #ffffff;
+  font-size: 8rem;
+}
