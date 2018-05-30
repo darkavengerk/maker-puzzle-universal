@@ -163,7 +163,6 @@ class AddPortfolio extends Component {
                   </span>
                 </td>
                 <td className={cx('tags')}>
-                  <span id="tags-area">
                     {
                       this.state.tags.map(
                         (tag, i) => 
@@ -200,8 +199,6 @@ class AddPortfolio extends Component {
                           + 태그 추가하기
                         </label>
                     }
-                  </span>
-                  
                 </td>
               </tr>
               <tr>
