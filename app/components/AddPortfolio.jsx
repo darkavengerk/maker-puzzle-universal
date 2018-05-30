@@ -195,12 +195,13 @@ class AddPortfolio extends Component {
                           onBlur={this.tagChanged}
                           onKeyPress={this.detectEnter}
                           name="new" 
-                        /> : null
+                        /> : 
+                        <label className={cx('add-tag')} onClick={this.addTagEntry}>
+                          + 태그 추가하기
+                        </label>
                     }
                   </span>
-                  <label className={cx('add-tag')} onClick={this.addTagEntry}>
-                    + 태그 추가하기
-                  </label>
+                  
                 </td>
               </tr>
               <tr>
