@@ -30,6 +30,8 @@ class AddPortfolio extends Component {
     this.switchChanged = this.switchChanged.bind(this);
     this.addTagEntry = this.addTagEntry.bind(this);
     this.tagChanged = this.tagChanged.bind(this);
+    this.removeTag = this.removeTag.bind(this);
+    this.detectEnter = this.detectEnter.bind(this);
   }
 
   startEdit() {
@@ -43,12 +45,31 @@ class AddPortfolio extends Component {
   }
 
   addTagEntry() {
-    this.setState({tags: [...this.state.tags, '']});
+    this.setState({newTag: true});
+    // this.setState({tags: [...this.state.tags, '']});
   }
 
   tagChanged(evt) {
-    const target = evt.target;
-    this.setState({tags: _.map(target.parentNode.childNodes, e => e.value)});
+    const target = document.getElementsByClassName(cx("tag-field"));
+    this.setState({tags: _.map(target, e => e.value), newTag:false});
+  }
+
+  removeTag(ix) {
+    return evt => {
+      let tags = [...this.state.tags]
+      tags.splice(ix, 1);
+      this.setState({tags: tags});
+    }
+  }
+
+  detectEnter(evt) {
+    if(evt.key === "Enter") 
+      evt.target.blur();
+  }
+
+  componentDidUpdate(){
+    if(this.newTag) 
+      this.newTag.focus();
   }
 
   render() {
@@ -142,19 +163,39 @@ class AddPortfolio extends Component {
                   </span>
                 </td>
                 <td className={cx('tags')}>
-                  <span>
+                  <span id="tags-area">
                     {
                       this.state.tags.map(
                         (tag, i) => 
-                          <input 
-                            type="text" 
-                            className={cx('tag-field')} 
-                            value={tag}
-                            name={tag}
-                            onChange={this.tagChanged} 
-                            key={i} 
-                          />
+                          (<span style={{position:'relative'}} key={i}>
+                            <input 
+                              type="text" 
+                              className={cx('tag-field')} 
+                              value={tag}
+                              name={tag}
+                              onChange={this.tagChanged}
+                              onKeyPress={this.detectEnter}
+                            />
+                            <FlexibleImage 
+                              src={"/images/site/ic_highlight_remove_black_48dp.png"} 
+                              x={17} y={17} 
+                              className={cx('tag-delete')}
+                              role="button"
+                              onClick={this.removeTag(i)}
+                            />
+                          </span>)
                       )
+                    }
+                    { 
+                      this.state.newTag? 
+                        <input 
+                          type="text" 
+                          className={cx('tag-field')} 
+                          ref={(input) => { this.newTag = input; }} 
+                          onBlur={this.tagChanged}
+                          onKeyPress={this.detectEnter}
+                          name="new" 
+                        /> : null
                     }
                   </span>
                   <label className={cx('add-tag')} onClick={this.addTagEntry}>

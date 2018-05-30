@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import PureImage from './PureImage';
 
-const ProfileImage = ({ src, x, y, pureImage=false }) => {
+const ProfileImage = ({ src, x, y, pureImage=false, ...props }) => {
 
   const url = src? src : "/images/default.jpg";
 
   if(pureImage) {
-    return (<PureImage src={src} x={x} y={y} />);
+    return (<PureImage src={src} x={x} y={y} {...props} />);
   }
 
   if(!x) x=40;
@@ -32,7 +32,7 @@ const ProfileImage = ({ src, x, y, pureImage=false }) => {
   }
 
   return (
-    <span style={imageStyle} >
+    <span {...props} style={imageStyle} >
     </span>
   );
 };

@@ -176,3 +176,9 @@
   padding: 0.6rem 1.5rem 1rem;
   width: 59.5rem;
 }
+
+.tag-delete {
+  position: absolute;
+  left: 11rem;
+  top: 0.2rem;
+}

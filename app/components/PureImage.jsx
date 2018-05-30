@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 
-const ProfileImage = ({ src, x='auto', y='auto', pureImage=false }) => {
+const ProfileImage = ({ src, x='auto', y='auto', pureImage=false, ...props }) => {
 
   var imageStyle = {
     width : x,
@@ -18,7 +18,7 @@ const ProfileImage = ({ src, x='auto', y='auto', pureImage=false }) => {
   }
 
   return (
-    <img src={src} style={imageStyle} >
+    <img {...props} src={src} style={imageStyle} >
     </img>
   );
 };
