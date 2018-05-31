@@ -18,6 +18,8 @@ const OnOffSwitch = ({ onChange, checked, name, ...props }) => {
         checked={checked || false}
         id={name}
         onColor="#ee5400"
+        uncheckedIcon={false}
+        checkedIcon={false}
       />
   );
 }

@@ -37,7 +37,7 @@ const ContentsSection = ({ owner, isOwnPage, portfoiloEditorCancel }) => {
         <div className={cx('portfolio-list')}>
           {portfolios}
         </div>
-        <Popup show={owner.isAddingPortfolio} name="AddPortfolio" cancel={portfoiloEditorCancel} >
+        <Popup show={owner.isAddingPortfolio} name="AddPortfolio">
           <AddPortfolio 
             title="포트폴리오 수정하기"
           />

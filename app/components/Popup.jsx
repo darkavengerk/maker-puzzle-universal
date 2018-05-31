@@ -10,17 +10,20 @@ const cx = classNames.bind(styles);
 const Popup = ({ show, name, children, cancel }) => {
 
   const onClick = evt => {
-    if(evt.target.id === name) {
+    if(cancel && evt.target.id === name) {
       cancel();
     }
   }
 
-  if(show)
+  if(show) {
+    window.scrollTo(0, 0);
+
     return (
-      <div className={cx('main-section')} id={name} onClick={onClick}>
+      <div className={cx('main-section')} id={name} onClick={onClick} >
         {children}
       </div>
     );
+  }
   else return null;
 };
 
