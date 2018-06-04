@@ -3,19 +3,20 @@
  *
  */
 import mongoose from 'mongoose';
+const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const Schema = new mongoose.Schema({
   title: String,
-  descriptions: String,
+  description: String,
+  location: String,
+  // project: {type: ObjectId, ref: 'Project'},
+  // user: {type: ObjectId, ref: 'User'},
   tags: [String],
-  lastUpdateDt: Date,
-  images: [{
-      rid: String
-  }],
-  pid: String
+  lastUpdated: {type:Date, default: Date.now},
+  images: [String],
+  pid: String,
+  isPublic: Boolean
 });
 
-// Compiles the schema into a model, opening (or creating, if
-// nonexistent) the 'Topic' collection in the MongoDB database
 export default Schema;
 

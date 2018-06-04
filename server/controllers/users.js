@@ -66,6 +66,21 @@ export function updateFeatures(req, res) {
   });
 }
 
+export function addPortfolio(req, res) {
+  const userid = req.params.id;
+
+  const portfolio = req.body;
+
+  User.findOneAndUpdate({userid}, {$push:{portfolios:portfolio}}, (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).send('Something went wrong getting the data');
+    }
+
+    res.json(result);
+  });
+}
+
 /**
  * POST /logout
  */
@@ -105,5 +120,6 @@ export default {
   login,
   logout,
   signUp,
-  updateFeatures
+  updateFeatures,
+  addPortfolio
 };

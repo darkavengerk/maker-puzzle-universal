@@ -16,8 +16,6 @@ const Popup = ({ show, name, children, cancel }) => {
   }
 
   if(show) {
-    window.scrollTo(0, 0);
-
     return (
       <div className={cx('main-section')} id={name} onClick={onClick} >
         {children}

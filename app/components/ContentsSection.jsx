@@ -20,7 +20,7 @@ const ContentsSection = ({ owner, isOwnPage, portfoiloEditorCancel }) => {
   }) : [];
 
   if(isOwnPage) {
-    portfolios.unshift(<PortfolioItem key={'__new__'} />);
+    portfolios.push(<PortfolioItem key={'__new__'} />);
   }
 
   if(owner.portfolioSelected) {
@@ -37,7 +37,7 @@ const ContentsSection = ({ owner, isOwnPage, portfoiloEditorCancel }) => {
         <div className={cx('portfolio-list')}>
           {portfolios}
         </div>
-        <Popup show={owner.isAddingPortfolio} name="AddPortfolio">
+        <Popup show={owner.isAddingPortfolio} name="AddPortfolioPopup">
           <AddPortfolio 
             title="포트폴리오 수정하기"
           />

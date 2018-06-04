@@ -5,9 +5,9 @@
 
 import bcrypt from 'bcrypt-nodejs';
 import mongoose from 'mongoose';
-const ObjectId = mongoose.Schema.Types.ObjectId;
+import {default as Portfolio} from './portfolio';
 
-const Portfolio = require('./portfolio');
+const ObjectId = mongoose.Schema.Types.ObjectId;
 
 /*
  User Schema

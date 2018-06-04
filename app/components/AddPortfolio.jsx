@@ -11,7 +11,7 @@ import Scatter from '../components/Scatter';
 import SingleLine from '../components/SingleLine';
 import styles from '../css/components/add-portfolio';
 
-import { portfoiloEditorCancel } from '../actions/makers';
+import { portfoiloEditorCancel, portfoiloSubmit } from '../actions/makers';
 
 const cx = classNames.bind(styles);
 
@@ -22,12 +22,14 @@ class AddPortfolio extends Component {
 
     const { portfolio={
       tags: [],
-      images: []
+      images: [],
+      title: '',
+      description: '',
+      location: '',
+      isPublic: false,
     } } = this.props;
     this.state = {...portfolio};
 
-    this.startEdit = this.startEdit.bind(this);
-    this.cancelEdit = this.cancelEdit.bind(this);
     this.switchChanged = this.switchChanged.bind(this);
     this.addTagEntry = this.addTagEntry.bind(this);
     this.tagChanged = this.tagChanged.bind(this);
@@ -36,12 +38,8 @@ class AddPortfolio extends Component {
     this.imageSelected = this.imageSelected.bind(this);
     this.showCloseButton = this.showCloseButton.bind(this);
     this.removeImage = this.removeImage.bind(this);
-  }
-
-  startEdit() {
-  }
-
-  cancelEdit() {
+    this.onChage = this.onChage.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   switchChanged(isPublic) {
@@ -50,7 +48,6 @@ class AddPortfolio extends Component {
 
   addTagEntry() {
     this.setState({newTag: true});
-    // this.setState({tags: [...this.state.tags, '']});
   }
 
   tagChanged(evt) {
@@ -87,6 +84,20 @@ class AddPortfolio extends Component {
     }
   }
 
+  onChage(key) {
+    return (evt) => {
+      let newState = {};
+      newState[key] = evt.target.value;
+      this.setState(newState);
+    }
+  }
+
+  onSubmit(evt) {
+    const { maker, user, portfoiloSubmit } = this.props;
+    const pid = Math.max(...maker.portfolios.map(p => p.pid)) + 1;
+    portfoiloSubmit({...this.state, pid});
+  }
+
   componentDidUpdate(){
     if(this.newTag) 
       this.newTag.focus();
@@ -113,7 +124,7 @@ class AddPortfolio extends Component {
                   <td className={cx('entity')}>
                     <Switch 
                         onChange={this.switchChanged}
-                        checked={this.state.isPublic || false}
+                        checked={this.state.isPublic}
                         name="public-switch"
                       />
                   </td>
@@ -125,7 +136,7 @@ class AddPortfolio extends Component {
                     <Scatter text="현장명" />
                   </td>
                   <td className={cx('entity')}>
-                    <input type="text" className={cx('text-field')} />
+                    <input type="text" className={cx('text-field')} value={this.state.location} onChange={this.onChage('location')} />
                   </td>
                 </tr>
                 <tr>
@@ -143,7 +154,7 @@ class AddPortfolio extends Component {
                     <Scatter text="제목" />
                   </td>
                   <td className={cx('entity')}>
-                    <input type="text" className={cx('text-field')} />
+                    <input type="text" className={cx('text-field')} value={this.state.title} onChange={this.onChage('title')} />
                   </td>
                 </tr>
                 <tr>
@@ -163,7 +174,8 @@ class AddPortfolio extends Component {
                     </span>
                   </td>
                   <td className={cx('entity', 'area')}>
-                    <textarea rows="4" cols="50" className={cx('text-area')} />
+                    <textarea rows="4" cols="50" className={cx('text-area')} 
+                      value={this.state.description} onChange={this.onChage('description')} />
                   </td>
                 </tr>
                 <tr>
@@ -248,7 +260,8 @@ class AddPortfolio extends Component {
                         this.state.images.map((img, i) => (
                           <div className={cx('image-container')} 
                             onMouseEnter={this.showCloseButton(i)}
-                            onMouseLeave={this.showCloseButton(-1)}>
+                            onMouseLeave={this.showCloseButton(-1)}
+                            key={i} >
 
                             <FlexibleImage 
                               src={img} pureImage={true} y={'9.1rem'} key={i} 
@@ -277,7 +290,7 @@ class AddPortfolio extends Component {
         <SingleLine width={'100%'} color={'#dddddd'} thickness={3} />
         <div className={cx("button-area")}>
           <span role="button" className={cx('button', 'cancel')} onClick={portfoiloEditorCancel} >취 소</span>
-          <span role="button" className={cx('button', 'save')} >저장하기</span>
+          <span role="button" className={cx('button', 'save')} onClick={this.onSubmit} >저장하기</span>
         </div>
       </div>
     );
@@ -296,7 +309,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
-  mapStateToProps, 
-  {portfoiloEditorCancel}
-)(AddPortfolio);
+export default connect(mapStateToProps, {portfoiloEditorCancel, portfoiloSubmit})(AddPortfolio);

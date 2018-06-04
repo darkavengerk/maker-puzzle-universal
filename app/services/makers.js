@@ -21,6 +21,11 @@ export default () => {
       url: `/user/${id}/features`,
       data
     }),
+    submitPortfolio: ({id, data}) => client.request({
+      method: 'POST',
+      url: `/user/${id}/portfolio`,
+      data
+    }),
   };
 };
 

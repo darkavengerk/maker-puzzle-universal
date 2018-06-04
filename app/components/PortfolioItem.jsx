@@ -15,18 +15,18 @@ const ContentsSection = ({ portfolio, user, maker, portfoiloEditorStart }) => {
     return (
       <div className={cx('main-section')}>
         <div className={cx('text-section')}>
-          <Link to={`/maker/${maker.profile.userid}/portfolio/${portfolio.pid}`}>
+          <Link to={`/maker/${maker.userid}/portfolio/${portfolio.pid}`}>
             <h1>
               {portfolio.title}
             </h1>
           </Link>
           <p>
-            {portfolio.descriptions}
+            {portfolio.location}
           </p>
         </div>
         <Link to={`/maker/${maker.userid}/portfolio/${portfolio.pid}`}>
           { portfolio.images && portfolio.images[0] ? 
-            <Image src={"/images/portfolio/"+portfolio.images[0]} x={214} y={214}/> : <Image x={214} y={214}/>
+            <Image src={`${portfolio.images[0]}`} x={214} y={214}/> : <Image x={214} y={214}/>
           }
         </Link>
         

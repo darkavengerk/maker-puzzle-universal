@@ -13,7 +13,7 @@ const ContentsSection = ({ portfolio, user, maker }) => {
 
   const imgs = portfolio.images.map(img => (
     <div key={img} className={cx('image')} >
-      <Image src={"/images/portfolio/" + img} x={'100%'} pureImage={true}/>
+      <Image src={img} x={'100%'} pureImage={true}/>
     </div>)
   );
 
@@ -27,7 +27,7 @@ const ContentsSection = ({ portfolio, user, maker }) => {
       <SingleLine width='auto' color='#dadada' thickness={1} extend={20}/>
       <section className={cx('contents')}>
         <p className={cx('description')}>
-          {portfolio.descriptions}
+          {portfolio.description}
         </p>
         <div className={cx('tag-area')}>
           {tags}
