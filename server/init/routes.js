@@ -29,6 +29,7 @@ export default (app) => {
 
   if(projectController) {
     app.get('/project', projectController.all);
+    app.get('/project/search/:keyword', projectController.search);
     app.get('/project/:id', projectController.one);
     app.post('/project', projectController.add);
     app.put('/project/:id', projectController.update);

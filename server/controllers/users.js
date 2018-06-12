@@ -1,5 +1,6 @@
 import passport from 'passport';
 import User from '../db/mongo/models/user';
+import Project from '../db/mongo/models/project';
 
 export function all(req, res) {
   User.find({}).exec((err, users) => {
@@ -66,19 +67,19 @@ export function updateFeatures(req, res) {
   });
 }
 
-export function addPortfolio(req, res) {
+export async function addPortfolio(req, res) {
   const userid = req.params.id;
 
   const portfolio = req.body;
+  const location = portfolio.location;
 
-  User.findOneAndUpdate({userid}, {$push:{portfolios:portfolio}}, (err, result) => {
-    if (err) {
-      console.log(err);
-      return res.status(500).send('Something went wrong getting the data');
-    }
+  const [user, project] = await Promise.all([
+    User.findOneAndUpdate({userid}, {$push:{portfolios:portfolio}}), 
+    Project.findOneAndUpdate({name: location}, 
+      {$set:{name: location}, $push:{portfolios:portfolio}}, {upsert: true})
+  ]);
 
-    res.json(result);
-  });
+  res.json({user, project});
 }
 
 /**

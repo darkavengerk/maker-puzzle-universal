@@ -4,12 +4,14 @@
  */
 import mongoose from 'mongoose';
 
+const {AutoComplete} = require('../utils/autocomplete')
 const ObjectId = mongoose.Schema.Types.ObjectId;
-const Portfolio = require('./portfolio');
+
+import {default as Portfolio} from './portfolio';
 
 const Schema = new mongoose.Schema({
   name: String,
-  descriptions: String,
+  description: String,
   location: String,
   catagory: String,
   companies: [{type: ObjectId, ref: 'Company'}],
@@ -20,7 +22,19 @@ const Schema = new mongoose.Schema({
   portfolios : [Portfolio]
 });
 
-// Compiles the schema into a model, opening (or creating, if
-// nonexistent) the 'Topic' collection in the MongoDB database
-export default mongoose.model('Project' , Schema);
+const ProjectModel = mongoose.model('Project' , Schema);
 
+var configuration = {
+    autoCompleteFields : ['name'],
+    dataFields: ['name'],
+    maximumResults: 10,
+    model: ProjectModel
+}
+
+var projectNameAutoComplete = new AutoComplete(configuration, function(){
+  console.log("Loaded " + projectNameAutoComplete.getCacheSize() + " words in auto complete");
+});
+
+export default ProjectModel;
+
+export const autoComplete = projectNameAutoComplete;

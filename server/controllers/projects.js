@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import Project from '../db/mongo/models/project';
+import Project, {autoComplete} from '../db/mongo/models/project';
 
 /**
  * List
@@ -13,6 +13,21 @@ export function all(req, res) {
 
     return res.json(results);
   });
+}
+
+
+export function search(req, res) {
+  const {keyword} = req.params;
+
+  if(keyword) {
+    autoComplete.getResults(keyword, (err, results) => {
+      if (err) {
+        return res.json([]);
+      }
+      return res.json(results);
+    });
+  }
+  else return res.json([]);
 }
 
 export function one(req, res) {
@@ -74,6 +89,7 @@ export function remove(req, res) {
 
 export default {
   all,
+  search,
   one,
   add,
   update,

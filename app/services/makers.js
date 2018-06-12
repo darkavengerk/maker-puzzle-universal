@@ -26,6 +26,10 @@ export default () => {
       url: `/user/${id}/portfolio`,
       data
     }),
+    searchProjectsByName: ({keyword}) => client.request({
+      method: 'GET',
+      url: `/project/search/${keyword}`
+    }),
   };
 };
 

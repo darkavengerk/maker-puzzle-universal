@@ -13,6 +13,8 @@ import styles from '../css/components/add-portfolio';
 
 import { portfoiloEditorCancel, portfoiloSubmit } from '../actions/makers';
 
+import { Maker } from '../services';
+
 const cx = classNames.bind(styles);
 
 class AddPortfolio extends Component {
@@ -38,8 +40,9 @@ class AddPortfolio extends Component {
     this.imageSelected = this.imageSelected.bind(this);
     this.showCloseButton = this.showCloseButton.bind(this);
     this.removeImage = this.removeImage.bind(this);
-    this.onChage = this.onChage.bind(this);
+    this.onTextChage = this.onTextChage.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.showProjects = this.showProjects.bind(this);
   }
 
   switchChanged(isPublic) {
@@ -47,7 +50,8 @@ class AddPortfolio extends Component {
   }
 
   addTagEntry() {
-    this.setState({newTag: true});
+    if(this.state.tags.length < 7)
+      this.setState({newTag: true});
   }
 
   tagChanged(evt) {
@@ -64,8 +68,12 @@ class AddPortfolio extends Component {
   }
 
   detectEnter(evt) {
-    if(evt.key === "Enter") 
+    if(evt.key === "Enter" || evt.key === "Tab") {
+      evt.preventDefault();
       evt.target.blur();
+      evt.target.value = '';
+      this.addTagEntry();
+    }
   }
 
   imageSelected(err, img) {
@@ -84,10 +92,20 @@ class AddPortfolio extends Component {
     }
   }
 
-  onChage(key) {
+  onTextChage(key, lengthLimit=10) {
     return (evt) => {
       let newState = {};
-      newState[key] = evt.target.value;
+      let length = 0;
+      let text = '';
+
+      for(let ch of evt.target.value) {
+        length += (escape(ch).length > 4? 2 : 1);
+        text += ch;
+
+        if(length >= lengthLimit) break;
+      }
+
+      newState[key] = text;
       this.setState(newState);
     }
   }
@@ -96,6 +114,13 @@ class AddPortfolio extends Component {
     const { maker, user, portfoiloSubmit } = this.props;
     const pid = Math.max(...maker.portfolios.map(p => p.pid)) + 1;
     portfoiloSubmit({...this.state, pid});
+  }
+
+  async showProjects(evt) {
+    let text = evt.target.value;
+    if(text) {
+      const projects = await Maker().searchProjectsByName({keyword: text});
+    }
   }
 
   componentDidUpdate(){
@@ -136,7 +161,10 @@ class AddPortfolio extends Component {
                     <Scatter text="현장명" />
                   </td>
                   <td className={cx('entity')}>
-                    <input type="text" className={cx('text-field')} value={this.state.location} onChange={this.onChage('location')} />
+                    <input 
+                      id="project-name"
+                      type="text" className={cx('text-field')} 
+                      value={this.state.location} onChange={this.onTextChage('location', 20)} onKeyUp={this.showProjects} />
                   </td>
                 </tr>
                 <tr>
@@ -154,7 +182,7 @@ class AddPortfolio extends Component {
                     <Scatter text="제목" />
                   </td>
                   <td className={cx('entity')}>
-                    <input type="text" className={cx('text-field')} value={this.state.title} onChange={this.onChage('title')} />
+                    <input type="text" className={cx('text-field')} value={this.state.title} onChange={this.onTextChage('title', 20)} />
                   </td>
                 </tr>
                 <tr>
@@ -175,7 +203,7 @@ class AddPortfolio extends Component {
                   </td>
                   <td className={cx('entity', 'area')}>
                     <textarea rows="4" cols="50" className={cx('text-area')} 
-                      value={this.state.description} onChange={this.onChage('description')} />
+                      value={this.state.description} onChange={this.onTextChage('description', 1000)} />
                   </td>
                 </tr>
                 <tr>
@@ -225,7 +253,7 @@ class AddPortfolio extends Component {
                             className={cx('tag-field')} 
                             ref={(input) => { this.newTag = input; }} 
                             onBlur={this.tagChanged}
-                            onKeyPress={this.detectEnter}
+                            onKeyDown={this.detectEnter}
                             name="new" 
                           /> : (this.state.tags.length >= 8 ? null :
                                                   <label className={cx('add-tag')} onClick={this.addTagEntry} role="button">
