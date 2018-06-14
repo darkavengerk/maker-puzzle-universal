@@ -30,7 +30,7 @@ class AddPortfolio extends Component {
       location: '',
       isPublic: false,
     } } = this.props;
-    this.state = {...portfolio};
+    this.state = {...portfolio, projectSuggestion: [], showDropdown: false};
 
     this.switchChanged = this.switchChanged.bind(this);
     this.addTagEntry = this.addTagEntry.bind(this);
@@ -43,6 +43,14 @@ class AddPortfolio extends Component {
     this.onTextChage = this.onTextChage.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.showProjects = this.showProjects.bind(this);
+    this.hideDropdown = this.hideDropdown.bind(this);
+    this.autoComplete = this.autoComplete.bind(this);
+
+    document.body.addEventListener('mouseup', this.hideDropdown);
+  }
+
+  hideDropdown() {
+    this.setState({showDropdown: false});
   }
 
   switchChanged(isPublic) {
@@ -105,8 +113,32 @@ class AddPortfolio extends Component {
         if(length >= lengthLimit) break;
       }
 
-      newState[key] = text;
-      this.setState(newState);
+      if(this.state[key] !== text) {
+        newState[key] = text;
+        this.setState(newState);
+        return true;
+      }
+      else {
+        return false;
+      }
+
+    }
+  }
+
+  async showProjects(evt) {
+    const updated = this.onTextChage('location', 20)(evt);
+    let text = evt.target.value;
+    if(text) {
+      if(updated) {
+        const {data} = await Maker().searchProjectsByName({keyword: text});
+        const words = data.map(d => d.word);
+        if(words.length > 0) {
+          this.setState({showDropdown: true, projectSuggestion: words});
+        }
+      }
+    }
+    else {
+      this.setState({showDropdown: false});
     }
   }
 
@@ -116,16 +148,17 @@ class AddPortfolio extends Component {
     portfoiloSubmit({...this.state, pid});
   }
 
-  async showProjects(evt) {
-    let text = evt.target.value;
-    if(text) {
-      const projects = await Maker().searchProjectsByName({keyword: text});
-    }
+  autoComplete(word) {
+    return (evt) => this.setState({location: word});
   }
 
   componentDidUpdate(){
     if(this.newTag) 
       this.newTag.focus();
+  }
+
+  componentWillUnmount() {
+    document.body.removeEventListener('mouseup', this.hideDropdown);
   }
 
   render() {
@@ -160,11 +193,19 @@ class AddPortfolio extends Component {
                   <td className={cx('entity-title')}>
                     <Scatter text="현장명" />
                   </td>
-                  <td className={cx('entity')}>
+                  <td className={cx('entity', 'relative')}>
                     <input 
                       id="project-name"
                       type="text" className={cx('text-field')} 
-                      value={this.state.location} onChange={this.onTextChage('location', 20)} onKeyUp={this.showProjects} />
+                      value={this.state.location} 
+                      onChange={this.showProjects} 
+                      onBlur={this.hideDropdown} />
+                    {this.state.showDropdown ?
+                      <ul className={cx('auto-complete')}>
+                        {(this.state.projectSuggestion || []).map(
+                          word => <li key={word} className={cx('auto-complete-word')} onMouseDown={this.autoComplete(word)}>{word}</li>)}
+                      </ul> : null                      
+                    }
                   </td>
                 </tr>
                 <tr>

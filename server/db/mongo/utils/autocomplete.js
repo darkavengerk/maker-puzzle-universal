@@ -205,6 +205,9 @@ var autoComplete = (function(){
   }
 
   constructor.prototype = {
+
+    buildCache,
+
     getResults: function(string, cb){
       cachedData.getWordsWithData(string.toLowerCase(), maximumResults, function(err, result){
         if(err){
@@ -215,6 +218,7 @@ var autoComplete = (function(){
         }
       });
     },
+    
     getCacheSize: function(){
       return nbrCachedItems;
     }

@@ -40,6 +40,9 @@
   border:none;
 }
 
+.relative {
+  position: relative;
+}
 
 /* font */
 
@@ -101,6 +104,23 @@
 /* color */
 
 /* etc*/
+
+.auto-complete {
+  position: absolute;
+  background: white;
+  width: 32.7rem;
+  top: 2.7rem;
+  list-style-type: none;
+  padding: 0;
+}
+
+.auto-complete-word {
+  padding: 0.5rem;
+}
+
+.auto-complete-word:hover {
+  background: yellow;
+}
 
 .entity-title {
   width: 6.0rem;

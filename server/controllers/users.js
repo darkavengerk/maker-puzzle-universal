@@ -1,6 +1,6 @@
 import passport from 'passport';
 import User from '../db/mongo/models/user';
-import Project from '../db/mongo/models/project';
+import Project, {autoComplete} from '../db/mongo/models/project';
 
 export function all(req, res) {
   User.find({}).exec((err, users) => {
@@ -76,10 +76,10 @@ export async function addPortfolio(req, res) {
   const [user, project] = await Promise.all([
     User.findOneAndUpdate({userid}, {$push:{portfolios:portfolio}}), 
     Project.findOneAndUpdate({name: location}, 
-      {$set:{name: location}, $push:{portfolios:portfolio}}, {upsert: true})
+      {$set:{name: location}, $push:{portfolios:portfolio}}, {upsert: true}),
   ]);
 
-  res.json({user, project});
+  autoComplete.buildCache(err => res.json({user, project}));
 }
 
 /**
