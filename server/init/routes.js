@@ -15,7 +15,7 @@ const imageController = controllers && controllers.images;
 export default (app) => {
   // user routes
   if (usersController) {
-    app.get('/user/:id/:pid', usersController.single);
+    app.get('/user/:id/:pid', usersController.portfolio);
     app.get('/user/:id', usersController.single);
     app.get('/user', usersController.all);
     app.post('/user/:id/features', usersController.updateFeatures);

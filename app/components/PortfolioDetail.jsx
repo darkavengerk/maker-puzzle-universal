@@ -17,6 +17,18 @@ const ContentsSection = ({ portfolio, user, maker }) => {
     </div>)
   );
 
+  const project = portfolio.project;
+
+  const imageUrl = project.profileIimage? project.profileIimage : '/images/site/def_project.png';
+  const projectArea = (
+    <div className={cx('project-area')}>
+      <Image src={imageUrl} x={33} y={33} />
+      <span>
+        <Link className={cx('project-name')} to={`/project/${project.link_name}/`}>{project.name}</Link>
+      </span>
+    </div>
+  );
+
   const tags = portfolio.tags.map(tag => (<label key={tag} className={cx('tag')}>{tag}</label>));
 
   return (
@@ -26,6 +38,7 @@ const ContentsSection = ({ portfolio, user, maker }) => {
       </h1>
       <SingleLine width='auto' color='#dadada' thickness={1} extend={20}/>
       <section className={cx('contents')}>
+        {projectArea}
         <p className={cx('description')}>
           {portfolio.description}
         </p>

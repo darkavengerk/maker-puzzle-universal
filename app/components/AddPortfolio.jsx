@@ -28,7 +28,7 @@ class AddPortfolio extends Component {
       title: '',
       description: '',
       location: '',
-      isPublic: false,
+      isPrivate: false,
     } } = this.props;
     this.state = {...portfolio, projectSuggestion: [], showDropdown: false};
 
@@ -53,8 +53,8 @@ class AddPortfolio extends Component {
     this.setState({showDropdown: false});
   }
 
-  switchChanged(isPublic) {
-    this.setState({isPublic});
+  switchChanged(isPrivate) {
+    this.setState({isPrivate});
   }
 
   addTagEntry() {
@@ -144,7 +144,7 @@ class AddPortfolio extends Component {
 
   onSubmit(evt) {
     const { maker, user, portfoiloSubmit } = this.props;
-    const pid = Math.max(...maker.portfolios.map(p => p.pid)) + 1;
+    const pid = Math.max(0, ...maker.portfolios.map(p => p.pid)) + 1;
     portfoiloSubmit({...this.state, pid});
   }
 
@@ -182,7 +182,7 @@ class AddPortfolio extends Component {
                   <td className={cx('entity')}>
                     <Switch 
                         onChange={this.switchChanged}
-                        checked={this.state.isPublic}
+                        checked={this.state.isPrivate}
                         name="public-switch"
                       />
                   </td>

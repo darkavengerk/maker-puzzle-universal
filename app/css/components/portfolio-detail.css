@@ -78,6 +78,26 @@
   white-space:pre-wrap;
 }
 
+.project-area {
+  margin-top: 1.3rem;
+  display: flex;
+  align-items: center;
+}
+
+.project-name {
+  color: inherit; 
+  margin-left: 1.2rem;
+  font-family: NanumBarunGothic;
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #555555;
+}
+
 .tag-area {
   margin-top: 2.7rem;
 }

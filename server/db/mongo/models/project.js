@@ -10,7 +10,8 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 import {default as Portfolio} from './portfolio';
 
 const Schema = new mongoose.Schema({
-  name: String,
+  link_name: { type: String, unique: true },
+  name: { type: String, unique: true},
   description: String,
   location: String,
   catagory: String,
@@ -20,6 +21,11 @@ const Schema = new mongoose.Schema({
       rid: String
   }],
   portfolios : [Portfolio]
+});
+
+Schema.pre('save', function(next) {
+  this.link_name = this.name.replace(/\s/g, '_');
+  next();
 });
 
 const ProjectModel = mongoose.model('Project' , Schema);

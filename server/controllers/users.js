@@ -13,24 +13,33 @@ export function all(req, res) {
   });
 }
 
-export function single(req, res) {
-  User.findOne({'userid':req.params.id}).lean().exec((err, user) => {
-    if (err || !user) {
-      console.log('Error in first query', err);
-      console.log(user);
-      return res.status(500).send('Something went wrong getting the data');
-    }
+export async function single(req, res) {
+  let user = await User.findOne({'userid':req.params.id});
 
-    if(req.params.pid) {
-      user.portfolioSelected = {pid:req.params.pid};
-      let portfolios = user.portfolios.filter(pf => pf.pid === req.params.pid);
-      if(portfolios && portfolios[0]) {
-        user.portfolioSelected.portfolio = portfolios[0];
-      }
-    }
+  if (!user) {
+    console.log('Error in first query', err);
+    return res.status(500).send('Something went wrong getting the data');
+  }
 
-    return res.json(user);
-  });
+  return res.json(user);
+}
+
+export async function portfolio(req, res) {
+  const {pid} = req.params;
+  let user = await User.findOne({'userid':req.params.id}).populate('portfolios.project').lean();
+
+  if (!user) {
+    console.log('Error in first query', err);
+    return res.status(500).send('Something went wrong getting the data');
+  }
+
+  user.portfolioSelected = { pid };
+  let portfolios = user.portfolios.filter(pf => pf.pid === req.params.pid);
+  if(portfolios && portfolios[0]) {
+    user.portfolioSelected.portfolio = portfolios[0];
+  }
+
+  return res.json(user);
 }
 
 /**
@@ -73,11 +82,28 @@ export async function addPortfolio(req, res) {
   const portfolio = req.body;
   const location = portfolio.location;
 
-  const [user, project] = await Promise.all([
-    User.findOneAndUpdate({userid}, {$push:{portfolios:portfolio}}), 
-    Project.findOneAndUpdate({name: location}, 
-      {$set:{name: location}, $push:{portfolios:portfolio}}, {upsert: true}),
+  let [user, project] = await Promise.all([
+    User.findOne({userid}), 
+    Project.findOne({name: location}),
   ]);
+
+  portfolio.user = user._id;
+
+  if(project) {
+    portfolio.project = project._id;
+  } 
+  else {
+    project = new Project({name: location});
+    portfolio.project = project._id;
+  }
+
+  user.portfolios.push(portfolio);
+  project.portfolios.push(portfolio);
+  if(!project.users.includes(user._id)) {
+    project.users.push(user._id);
+  }
+
+  await Promise.all([user.save(), project.save()]);
 
   autoComplete.buildCache(err => res.json({user, project}));
 }
@@ -118,6 +144,7 @@ export function signUp(req, res, next) {
 export default {
   all,
   single,
+  portfolio,
   login,
   logout,
   signUp,
