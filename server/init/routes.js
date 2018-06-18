@@ -28,9 +28,9 @@ export default (app) => {
   }
 
   if(projectController) {
-    app.get('/project', projectController.all);
-    app.get('/project/search/:keyword', projectController.search);
-    app.get('/project/:id', projectController.one);
+    app.get('/api/project', projectController.all);
+    app.get('/api/project/search/:keyword', projectController.search);
+    app.get('/api/project/:link_name', projectController.one);
     app.post('/project', projectController.add);
     app.put('/project/:id', projectController.update);
     app.delete('/project/:id', projectController.remove);

@@ -30,17 +30,10 @@ export function search(req, res) {
   else return res.json([]);
 }
 
-export function one(req, res) {
-  const query = { _id: req.params.id };
-  Project.findOne(query).exec((err, result) => {
-
-    if (err) {
-      console.log('Error in first query');
-      return res.status(500).send('Something went wrong getting the data');
-    }
-
-    return res.json(result);
-  });
+export async function one(req, res) {
+  const { link_name } = req.params;
+  const result = await Project.findOne({ link_name });
+  return res.json(result);
 }
 
 export function add(req, res) {

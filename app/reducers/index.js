@@ -6,6 +6,7 @@ import topic from '../reducers/topic';
 import message from '../reducers/message';
 import people from '../reducers/people';
 import maker from '../reducers/maker';
+import project from '../reducers/project';
 import * as types from '../types';
 
 const isFetching = (state = false, action) => {
@@ -30,7 +31,8 @@ const rootReducer = combineReducers({
   message,
   routing,
   people,
-  maker
+  maker,
+  project
 });
 
 export default rootReducer;

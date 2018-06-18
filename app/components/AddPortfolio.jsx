@@ -13,7 +13,7 @@ import styles from '../css/components/add-portfolio';
 
 import { portfoiloEditorCancel, portfoiloSubmit } from '../actions/makers';
 
-import { Maker } from '../services';
+import { Maker, Project } from '../services';
 
 const cx = classNames.bind(styles);
 
@@ -130,7 +130,7 @@ class AddPortfolio extends Component {
     let text = evt.target.value;
     if(text) {
       if(updated) {
-        const {data} = await Maker().searchProjectsByName({keyword: text});
+        const {data} = await Project().searchProjectsByName({keyword: text});
         const words = data.map(d => d.word);
         if(words.length > 0) {
           this.setState({showDropdown: true, projectSuggestion: words});
