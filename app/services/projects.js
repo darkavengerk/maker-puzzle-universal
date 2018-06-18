@@ -1,9 +1,10 @@
 import { apiEndpoint } from '../../config/app';
 import createRestApiClient from '../utils/createRestApiClient';
-import { escape } from 'querystring'
 
 export default () => {
-  const client = createRestApiClient().withConfig({ baseURL: apiEndpoint, escape: true });
+  const client = createRestApiClient().withConfig({ baseURL: apiEndpoint });
+  const escape = typeof escape === 'undefined'? require('querystring-browser').escape : escape;
+
   return {
     getProjects: () => client.request({
       method: 'GET',

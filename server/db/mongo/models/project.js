@@ -12,13 +12,14 @@ import {default as Portfolio} from './portfolio';
 const Schema = new mongoose.Schema({
   link_name: { type: String, unique: true },
   name: { type: String, unique: true},
-  description: String,
-  location: String,
-  catagory: String,
+  profilePicture: String,
   companies: [{type: ObjectId, ref: 'Company'}],
   users: [{type: ObjectId, ref: 'User'}],
-  images: [{
-      rid: String
+  features: [{
+    title: String,
+    content: String,
+    editable: Boolean,
+    optional: Boolean // whether it is mandatory or not
   }],
   portfolios : [Portfolio]
 });

@@ -9,7 +9,9 @@ import styles from '../css/components/maker-info';
 
 const cx = classNames.bind(styles);
 
-const MakerInfo = ({ maker }) => {
+const MakerInfo = ({ owner }) => {
+
+  const maker = owner;
 
   return maker && maker.makerProfile ? (
     <div className={cx('main-section')}>
@@ -28,7 +30,7 @@ const MakerInfo = ({ maker }) => {
 };
 
 MakerInfo.propTypes = {
-  maker: PropTypes.object.isRequired
+  owner: PropTypes.object.isRequired
 };
 
 export default MakerInfo;
