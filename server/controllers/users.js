@@ -1,5 +1,6 @@
 import passport from 'passport';
 import User from '../db/mongo/models/user';
+import Metadata from '../db/mongo/models/metadata';
 import Project, {autoComplete} from '../db/mongo/models/project';
 
 export function all(req, res) {
@@ -17,7 +18,7 @@ export async function single(req, res) {
   let user = await User.findOne({'userid':req.params.id});
 
   if (!user) {
-    console.log('Error in first query', err);
+    console.log('Error in first query: User not found: ' + req.params.id);
     return res.status(500).send('Something went wrong getting the data');
   }
 
@@ -29,7 +30,7 @@ export async function portfolio(req, res) {
   let user = await User.findOne({'userid':req.params.id}).populate('portfolios.project').lean();
 
   if (!user) {
-    console.log('Error in first query', err);
+    console.log('Error in first query: User not found: ' + req.params.id);
     return res.status(500).send('Something went wrong getting the data');
   }
 
@@ -94,6 +95,7 @@ export async function addPortfolio(req, res) {
   } 
   else {
     project = new Project({name: location});
+    project = await Metadata.populateMetadata('Project', project);
     portfolio.project = project._id;
   }
 
