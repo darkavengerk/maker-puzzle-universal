@@ -1,6 +1,3 @@
-@import '../settings';
-@import '../common/typography';
-@import '../common/card';
 
 .main-section {
   display: inline-block;
@@ -18,7 +15,15 @@
   padding-top: 0.9rem;
 }
 
-.text-section h1 {
+.text-section-type2 {
+  width: 21.4rem;
+  height: 5.4rem;
+  padding-top: 0.9rem;
+  display: flex;
+  align-items: center;
+}
+
+.text-section h1, .text-section-type2 h1 {
   margin: 0rem;
   font-family: AppleSDGothicNeo;
   font-size: 1.5rem;
@@ -31,7 +36,7 @@
   color: #4a4a4a;
 }
 
-.text-section p {
+.text-section p, .text-section-type2 p {
   margin: 0rem;
   font-family: AppleSDGothicNeo;
   font-size: 1.2rem;
@@ -42,6 +47,15 @@
   letter-spacing: normal;
   text-align: center;
   color: #4a4a4a;
+}
+
+.text-section-type2 h1, .text-section-type2 p {
+  text-align: left;
+}
+
+.profile-image {
+  margin: 0 1rem;
+  border-radius: 50%;
 }
 
 .add-portfolio {

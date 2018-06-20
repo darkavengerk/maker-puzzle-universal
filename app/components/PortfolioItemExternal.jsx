@@ -11,24 +11,27 @@ const cx = classNames.bind(styles);
 
 const ContentsSection = ({ portfolio, maker, portfoiloEditorStart }) => {
 
-  const ownerId = maker.userid || portfolio.user.userid;
+  const user = portfolio.user;
 
   if(portfolio)
     return (
       <div className={cx('main-section')}>
-        <div className={cx('text-section')}>
-          <Link to={`/maker/${ownerId}/portfolio/${portfolio.pid}`}>
-            <h1>
-              {portfolio.title}
-            </h1>
+        <div className={cx('text-section-type2')}>
+          <Link to={`/maker/${user.userid}`}>
+            <Image src={user.profile.picture} x={31} y={31} className={cx('profile-image')} />
           </Link>
-          <Link to={`/project/${portfolio.location.replace(/\s/g, '_')}`}>
+          <span>
+            <Link to={`/maker/${user.userid}/portfolio/${portfolio.pid}`}>
+              <h1>
+                {portfolio.title}
+              </h1>
+            </Link>
             <p>
               {portfolio.location}
             </p>
-          </Link>
+          </span>
         </div>
-        <Link to={`/maker/${ownerId}/portfolio/${portfolio.pid}`}>
+        <Link to={`/maker/${user.userid}/portfolio/${portfolio.pid}`}>
           { portfolio.images && portfolio.images[0] ? 
             <Image src={`${portfolio.images[0]}`} x={214} y={214}/> : <Image x={214} y={214}/>
           }

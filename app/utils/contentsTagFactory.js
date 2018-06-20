@@ -2,6 +2,7 @@ import classNames from 'classnames/bind';
 
 import MakerInfo from '../components/MakerInfo';
 import PortfolioItem from '../components/PortfolioItem';
+import PortfolioItemExternal from '../components/PortfolioItemExternal';
 import PortfolioDetail from '../components/PortfolioDetail';
 
 import ProjectInfo from '../components/ProjectInfo';
@@ -19,7 +20,7 @@ class ContentsTagFactory {
       }, 
       project: {
         info: ProjectInfo,
-        item: PortfolioItem,
+        item: PortfolioItemExternal,
         detail: PortfolioDetail
       }
     }

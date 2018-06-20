@@ -70,7 +70,7 @@ class ProjectProfile extends Component {
         <div className={cx('feature-area')}>
           {project.features? 
             <Features 
-              features={project.features}
+              features={[{title:'프로젝트명', content: project.name}, ...project.features]}
               featureEdited={this.featureEdited}
               classNames={{
                 title: cx('feature-title'),
