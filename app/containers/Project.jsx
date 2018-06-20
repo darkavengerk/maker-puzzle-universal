@@ -16,7 +16,11 @@ class Project extends Component {
     return (
       <div className={cx('main-section')}>
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
-        <TopTitle title={project.name} thumbnailURL={project.profile? project.profile.picture : '/images/site/def_project.png'} />
+        <TopTitle 
+          title={project.name}
+          to={'/project/' + project.link_name}
+          thumbnailURL={project.profile? project.profile.picture : '/images/site/def_project.png'} 
+        />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
         <ContentsSection owner={project} contentsType="project" isOwnPage={false} />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
@@ -26,7 +30,7 @@ class Project extends Component {
 }
 
 Project.propTypes = {
-  maker: PropTypes.object
+  project: PropTypes.object
 };
 
 function mapStateToProps(state) {

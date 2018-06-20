@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
-import MakerProfile from '../components/MakerProfile';
+import ProjectProfile from '../components/ProjectProfile';
 import CompanyHistory from '../components/CompanyHistory';
 import GreyTitle from '../components/GreyTitle';
 import Abilities from '../components/Abilities';
@@ -13,9 +13,10 @@ const ProjectInfo = ({ owner }) => {
 
   const project = owner;
 
-  return project? (
+  return (project && project.name )? (
     <div className={cx('main-section')}>
       <GreyTitle title={'프로젝트 개요'} bottom="13" />
+      <ProjectProfile />
 
       <GreyTitle title={'참여 기업'} top="38" />
 

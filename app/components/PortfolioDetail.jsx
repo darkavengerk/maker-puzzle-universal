@@ -24,7 +24,7 @@ const ContentsSection = ({ portfolio, user, maker }) => {
     <div className={cx('project-area')}>
       <Image src={imageUrl} x={33} y={33} />
       <span>
-        <Link className={cx('project-name')} to={`/project/${project.link_name}/`}>{project.name}</Link>
+        <Link className={cx('project-name')} to={`/project/${project.link_name}`}>{project.name}</Link>
       </span>
     </div>
   );

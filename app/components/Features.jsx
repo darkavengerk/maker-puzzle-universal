@@ -10,6 +10,8 @@ import Scatter from '../components/Scatter';
 
 const Comp = ({ features, featureEdited, classNames, editing=false, ...props }) => {
 
+  if(!features) return <div></div>;
+
   let splitLetters = word => {
     return word.split('').map((letter,i) => {
       return (<span key={i}>{letter}</span>);
@@ -37,7 +39,7 @@ const Comp = ({ features, featureEdited, classNames, editing=false, ...props }) 
         <ContentEditable 
           tagName="span"
           className={classNames.content}
-          html={ feature.content }
+          html={ feature.content || '' }
           onKeyPress={preventEnter}
           onKeyUp={handleChange(feature.title)}
           placeholder={feature.placeHolder}

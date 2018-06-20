@@ -17,7 +17,11 @@ class Maker extends Component {
     return (
       <div className={cx('main-section')}>
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
-        <TopTitle title={maker.userid} thumbnailURL={maker.profile? maker.profile.picture : ''} />
+        <TopTitle 
+          title={maker.userid} 
+          to={'/maker/' + maker.userid}
+          thumbnailURL={maker.profile? maker.profile.picture : ''}
+        />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
         <ContentsSection owner={maker} contentsType="maker" isOwnPage={isOwnPage} />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />

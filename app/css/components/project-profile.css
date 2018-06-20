@@ -1,0 +1,49 @@
+.main-section {
+  width: 100%;
+}
+
+.feature-area {
+  margin: 0.9rem 2.1rem 0 0;
+}
+
+.feature-item {
+  font-family: NanumBarunGothic;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.67;
+  font-weight: 30rem;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000000;
+  display: flex;
+  margin-top: 0.3rem;
+}
+
+.feature-title {
+  height: 2rem;
+  margin-right: 0.7rem;
+  font-weight: normal;
+}
+
+.feature {
+  width: 100%;
+  height: 2rem;
+  padding: 0 0.7rem;
+}
+
+.editing {
+  content: attr(placeholder);
+  display: block; /* For Firefox */
+
+  font-family: NanumBarunGothic;
+  font-size: 1.2rem;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.67;
+  letter-spacing: normal;
+  text-align: left;
+
+  background-color: #e7e7e7;
+}

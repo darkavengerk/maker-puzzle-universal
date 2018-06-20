@@ -8,12 +8,12 @@ import ProfileImage from '../components/FlexibleImage';
 
 const cx = classNames.bind(styles);
 
-const TitleSection = ({ title, thumbnailURL, props, maker }) => {
+const TitleSection = ({ title, thumbnailURL, to, props}) => {
 
   const url = thumbnailURL? thumbnailURL : '';
 
   return (
-      <Link to={`/maker/${maker.userid}/`} className={cx('main-section')}>
+      <Link to={to} className={cx('main-section')}>
         <span className={cx('profile-image')}>
             <ProfileImage src={url} x={40} y={40} />
         </span>
@@ -32,7 +32,6 @@ TitleSection.propTypes = {
 function mapStateToProps(state) {
   return {
     user: state.user,
-    maker: state.maker.maker
   };
 }
 
