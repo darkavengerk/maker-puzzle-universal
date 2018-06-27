@@ -1,0 +1,33 @@
+.main-section {
+  width: 37.5rem;
+  height: 100%;
+  padding-top: 1.6rem;
+  padding-bottom: 1.6rem;
+  border-right: solid 2px #dddddd;
+  display: flex;
+  flex-direction: column;
+}
+
+.maker-area {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.maker-round {
+  width: 11rem;
+  text-align: center;
+  font-family: NanumBarunGothic;
+  font-size: 1.2rem;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.67;
+  letter-spacing: normal;
+  color: #4a4a4a;
+  margin-right: 1rem;
+  margin-bottom: 1.8rem;
+}
+
+.maker-round-image {
+  border-radius: 50%;
+}
