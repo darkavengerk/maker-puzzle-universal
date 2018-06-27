@@ -101,9 +101,7 @@ export async function addPortfolio(req, res) {
 
   user.portfolios.push(portfolio);
   project.portfolios.push(portfolio);
-  if(!project.users.includes(user._id)) {
-    project.users.push(user._id);
-  }
+  project.users.addToSet(user._id);
 
   await Promise.all([user.save(), project.save()]);
 
