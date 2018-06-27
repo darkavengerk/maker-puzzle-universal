@@ -35,9 +35,6 @@ const ProjectInfo = ({ owner }) => {
       <GreyTitle title={'프로젝트 참여 메이커'} top="33" bottom="26" />
       <div className={cx('maker-area')}>
         {users}
-        {users}
-        {users}
-        {users}
       </div>
 
     </div>
