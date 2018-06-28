@@ -35,6 +35,7 @@ export default (store) => {
       <Route exact path="main" component={Main} fetchData={fetchMainData} />
       <Route path="maker/:id/portfolio/:pid" component={Maker} fetchData={fetchMakerData} />
       <Route path="maker/:id" component={Maker} fetchData={fetchMakerData} />
+      <Route path="project/:link_name/maker/:mid/:pid" component={Project} fetchData={fetchProjectData} />
       <Route path="project/:link_name" component={Project} fetchData={fetchProjectData} />
       <Route path="login" component={LoginOrRegister} onEnter={redirectAuth} />
       <Route path="dashboard" component={Dashboard} onEnter={requireAuth} />

@@ -26,7 +26,7 @@ const ProjectInfo = ({ owner }) => {
 
   const project = owner;
 
-  const users = project.users.map(user => createRoundy(user));
+  const users = project.users? project.users.map(user => createRoundy(user)) : [];
 
   return (project && project.name )? (
     <div className={cx('main-section')}>

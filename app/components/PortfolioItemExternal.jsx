@@ -9,7 +9,7 @@ import { portfoiloEditorStart } from '../actions/makers';
 
 const cx = classNames.bind(styles);
 
-const ContentsSection = ({ portfolio, maker, portfoiloEditorStart }) => {
+const ContentsSection = ({ portfolio, maker, project, portfoiloEditorStart }) => {
 
   const user = portfolio.user;
 
@@ -21,7 +21,7 @@ const ContentsSection = ({ portfolio, maker, portfoiloEditorStart }) => {
             <Image src={user.profile.picture} x={31} y={31} className={cx('profile-image')} />
           </Link>
           <span>
-            <Link to={`/maker/${user.userid}/portfolio/${portfolio.pid}`}>
+            <Link to={`/project/${project.link_name}/maker/${user.userid}/${portfolio.pid}`}>
               <h1>
                 {portfolio.title}
               </h1>
@@ -31,7 +31,7 @@ const ContentsSection = ({ portfolio, maker, portfoiloEditorStart }) => {
             </p>
           </span>
         </div>
-        <Link to={`/maker/${user.userid}/portfolio/${portfolio.pid}`}>
+        <Link to={`/project/${project.link_name}/maker/${user.userid}/${portfolio.pid}`}>
           { portfolio.images && portfolio.images[0] ? 
             <Image src={`${portfolio.images[0]}`} x={214} y={214}/> : <Image x={214} y={214}/>
           }
@@ -59,12 +59,14 @@ const ContentsSection = ({ portfolio, maker, portfoiloEditorStart }) => {
 
 ContentsSection.propTypes = {
   portfolio: PropTypes.object,
-  maker: PropTypes.object
+  maker: PropTypes.object,
+  project: PropTypes.object
 };
 
 function mapStateToProps(state) {
   return {
-    maker: state.maker.maker
+    maker: state.maker.maker,
+    project: state.project.project
   };
 }
 

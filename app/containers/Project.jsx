@@ -12,7 +12,8 @@ const cx = classNames.bind(styles);
 
 class Project extends Component {
   render() {
-    const { project, user } = this.props;
+    const { project, user, param } = this.props;
+    const contentsType = (param.mid && param.pid) ? 'project_maker' : 'project';
     return (
       <div className={cx('main-section')}>
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
@@ -22,7 +23,7 @@ class Project extends Component {
           thumbnailURL={project.profile? project.profile.picture : '/images/site/def_project.png'} 
         />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
-        <ContentsSection owner={project} contentsType="project" isOwnPage={false} />
+        <ContentsSection owner={project} contentsType={contentsType} isOwnPage={false} />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
       </div>
     );
@@ -36,7 +37,8 @@ Project.propTypes = {
 function mapStateToProps(state) {
   return {
     project: state.project.project,
-    user: state.user.account
+    user: state.user.account,
+    param: state.param
   };
 }
 
