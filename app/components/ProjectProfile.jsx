@@ -65,13 +65,12 @@ class ProjectProfile extends Component {
 
   render() {
     const { user } = this.props;
-    const { profileImage } = this.state;
 
     const project = new Project(this.props.project);
 
     let image = null;
-    if(profileImage) {
-      image = <Image src={profileImage} x={349} y={248} />;
+    if(project.profileImage) {
+      image = <Image src={project.profileImage} x={349} y={248} />;
     }
     else {
       image = (

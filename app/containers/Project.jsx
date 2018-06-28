@@ -22,7 +22,7 @@ class ProjectContainer extends Component {
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
         <TopTitle 
           title={project.getName()}
-          to={'/project/' + project.getHomeLink()}
+          to={project.getHomeLink()}
           thumbnailURL={project.getProfileImage()} 
         />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
