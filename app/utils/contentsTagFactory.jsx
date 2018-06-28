@@ -7,6 +7,7 @@ import PortfolioItemExternal from '../components/PortfolioItemExternal';
 import PortfolioDetail from '../components/PortfolioDetail';
 
 import ProjectInfo from '../components/ProjectInfo';
+import { Maker, Project, Company } from '../utils/objects'
 
 import styles from '../css/components/contents-section';
 
@@ -19,7 +20,11 @@ class ContentsTagFactory {
         item: PortfolioItem,
         getDetail: function(owner, isOwnPage) {
           if(owner.portfolioSelected)
-            return <PortfolioDetail portfolio={owner.portfolioSelected.portfolio} edit={isOwnPage} />
+            return <PortfolioDetail 
+              portfolio={owner.portfolioSelected.portfolio} 
+              edit={isOwnPage}
+              referer={new Project(owner.portfolioSelected.portfolio.project)}
+            />
           return null;
         }
       }, 
@@ -36,8 +41,9 @@ class ContentsTagFactory {
         getDetail: function(owner) {
           const { pid } = param;
           for(let portfolio of owner.portfolios) {
+            console.log(portfolio.user);
             if(portfolio.pid === pid)
-              return <PortfolioDetail portfolio={portfolio} />
+              return <PortfolioDetail portfolio={portfolio} referer={new Maker(portfolio.user)} />
           }
           return <PortfolioDetail portfolio={{}} />
         }

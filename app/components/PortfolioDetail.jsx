@@ -5,11 +5,12 @@ import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import Image from '../components/FlexibleImage';
 import SingleLine from '../components/SingleLine';
+
 import styles from '../css/components/portfolio-detail';
 
 const cx = classNames.bind(styles);
 
-const ContentsSection = ({ portfolio, user, maker }) => {
+const ContentsSection = ({ portfolio, user, maker, referer }) => {
 
   const imgs = portfolio.images.map(img => (
     <div key={img} className={cx('image')} >
@@ -17,14 +18,12 @@ const ContentsSection = ({ portfolio, user, maker }) => {
     </div>)
   );
 
-  const project = portfolio.project;
-
-  const imageUrl = project.profileIimage? project.profileIimage : '/images/site/def_project.png';
+  const imageUrl = referer.getProfileImage();
   const projectArea = (
     <div className={cx('project-area')}>
       <Image src={imageUrl} x={33} y={33} />
       <span>
-        <Link className={cx('project-name')} to={`/project/${project.link_name}`}>{project.name}</Link>
+        <Link className={cx('project-name')} to={referer.getHomeLink()}>{referer.getName()}</Link>
       </span>
     </div>
   );

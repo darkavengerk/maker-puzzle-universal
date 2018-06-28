@@ -17,7 +17,7 @@ function createRoundy(maker) {
       <Link to={'/maker/'  + maker.userid}>
         <Image className={cx('maker-round-image')} src={maker.profile.picture} x={110} y={110} />
       </Link>
-      {maker.userid}
+      {maker.profile.name}
     </span>
   );
 }
