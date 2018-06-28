@@ -2,8 +2,17 @@
   width: 100%;
 }
 
+.empty-profile {
+  background-color: #c9c9c9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 34.9rem;
+  height: 24.8rem;
+}
+
 .feature-area {
-  margin: 0.9rem 2.1rem 0 0;
+  margin: 2rem 2.1rem 0 0;
 }
 
 .feature-item {

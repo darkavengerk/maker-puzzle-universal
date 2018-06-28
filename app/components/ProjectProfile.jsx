@@ -8,9 +8,12 @@ import FlexibleImage from '../components/FlexibleImage';
 import Border from '../components/SingleLine';
 import ImageUploader from '../components/ImageUploader';
 import Features from '../components/Features';
+import Image from '../components/FlexibleImage';
+
 import styles from '../css/components/project-profile';
 
 import { featureEditSave } from '../actions/makers';
+import { Project } from '../utils/objects';
 
 const cx = classNames.bind(styles);
 
@@ -19,9 +22,7 @@ class ProjectProfile extends Component {
   constructor(props) {
     super(props);
 
-    const { project } = this.props;
-
-    this.state = {...project};
+    this.state = {...this.props.project};
 
     this.submit = this.submit.bind(this);
     this.startEdit = this.startEdit.bind(this);
@@ -63,10 +64,26 @@ class ProjectProfile extends Component {
   }
 
   render() {
-    const { project, user } = this.props;
+    const { user } = this.props;
+    const { profileImage } = this.state;
+
+    const project = new Project(this.props.project);
+
+    let image = null;
+    if(profileImage) {
+      image = <Image src={profileImage} x={349} y={248} />;
+    }
+    else {
+      image = (
+        <div className={cx('empty-profile')}>
+          <Image src={project.getProfileImage()} x={80} y={80} />
+        </div>
+      );
+    }
 
     return (
       <div className={cx('main-section')}>
+        {image}
         <div className={cx('feature-area')}>
           {project.features? 
             <Features 

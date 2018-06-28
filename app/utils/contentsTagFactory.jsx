@@ -41,7 +41,6 @@ class ContentsTagFactory {
         getDetail: function(owner) {
           const { pid } = param;
           for(let portfolio of owner.portfolios) {
-            console.log(portfolio.user);
             if(portfolio.pid === pid)
               return <PortfolioDetail portfolio={portfolio} referer={new Maker(portfolio.user)} />
           }

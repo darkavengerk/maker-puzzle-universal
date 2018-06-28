@@ -30,7 +30,7 @@ const ProjectInfo = ({ owner }) => {
 
   return (project && project.name )? (
     <div className={cx('main-section')}>
-      <GreyTitle title={'프로젝트 개요'} bottom="13" />
+      <GreyTitle title={'프로젝트 개요'} bottom="12" />
       <ProjectProfile />
 
       <GreyTitle title={'참여 기업'} top="38" />

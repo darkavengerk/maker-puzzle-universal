@@ -6,21 +6,24 @@ import ImageUploader from '../components/ImageUploader';
 import TopTitle from '../components/TopTitle';
 import ContentsSection from '../components/ContentsSection';
 import SingleLine from '../components/SingleLine';
+import { Project } from '../utils/objects';
+
 import styles from '../css/components/maker';
 
 const cx = classNames.bind(styles);
 
-class Project extends Component {
+class ProjectContainer extends Component {
   render() {
-    const { project, user, param } = this.props;
+    const { project:data, user, param } = this.props;
+    const project = new Project(data);
     const contentsType = (param.mid && param.pid) ? 'project_maker' : 'project';
     return (
       <div className={cx('main-section')}>
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
         <TopTitle 
-          title={project.name}
-          to={'/project/' + project.link_name}
-          thumbnailURL={project.profile? project.profile.picture : '/images/site/def_project.png'} 
+          title={project.getName()}
+          to={'/project/' + project.getHomeLink()}
+          thumbnailURL={project.getProfileImage()} 
         />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
         <ContentsSection owner={project} contentsType={contentsType} isOwnPage={false} />
@@ -30,7 +33,7 @@ class Project extends Component {
   }
 }
 
-Project.propTypes = {
+ProjectContainer.propTypes = {
   project: PropTypes.object
 };
 
@@ -42,4 +45,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {})(Project);
+export default connect(mapStateToProps, {})(ProjectContainer);
