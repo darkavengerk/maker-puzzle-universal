@@ -10,6 +10,7 @@ const topicsController = controllers && controllers.topics;
 
 const usersController = controllers && controllers.users;
 const projectController = controllers && controllers.projects;
+const companyController = controllers && controllers.companies;
 const imageController = controllers && controllers.images;
 
 export default (app) => {
@@ -34,6 +35,17 @@ export default (app) => {
     app.post('/project', projectController.add);
     app.put('/project/:id', projectController.update);
     app.delete('/project/:id', projectController.remove);
+  } else {
+    console.warn(unsupportedMessage('project routes'));
+  }
+
+  if(companyController) {
+    app.get('/api/company/search/:keyword', companyController.search);
+    app.get('/api/company/:link_name', companyController.one);
+    app.get('/api/company', companyController.all);
+    app.post('/api/company', companyController.add);
+    app.put('/api/company/:id', companyController.update);
+    app.delete('/api/company/:id', companyController.remove);
   } else {
     console.warn(unsupportedMessage('project routes'));
   }

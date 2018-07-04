@@ -11,9 +11,8 @@ const cx = classNames.bind(styles);
 
 const ContentsSection = ({ portfolio, maker, portfoiloEditorStart }) => {
 
-  const ownerId = maker.userid || portfolio.user.userid;
-
-  if(portfolio)
+  if(portfolio) {
+    const ownerId = maker.userid || portfolio.user.userid;
     return (
       <div className={cx('main-section')}>
         <div className={cx('text-section')}>
@@ -36,6 +35,7 @@ const ContentsSection = ({ portfolio, maker, portfoiloEditorStart }) => {
         
       </div>
     );
+  }
   else 
     return (
       <div className={cx('main-section')}>

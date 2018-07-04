@@ -8,37 +8,39 @@ import mongoose from 'mongoose';
 import {default as Portfolio} from './portfolio';
 
 const ObjectId = mongoose.Schema.Types.ObjectId;
+const {AutoComplete} = require('../utils/autocomplete');
 
 /*
  User Schema
  */
 
 const UserSchema = new mongoose.Schema({
+
   email: { type: String, unique: true, lowercase: true },
-  userid: { type: String, required: true },
+  userid: { type: String, unique: true, required: true },
   password: String,
   tokens: Array,
 
   uploadCount: {type: Number, default: 0},
 
-  type: { type: String, default: 'person', required: true }, //person, company
+  type: { type: String, default: 'maker', required: true }, //person, company
 
   profile: {
     name: { type: String, default: '' },
-    gender: { type: String, default: '' },
-    location: { type: String, default: '' },
-    website: { type: String, default: '' },
     picture: { type: String, default: '' }
   },
 
   makerProfile: {
-    companies: [{
-      cid: ObjectId,
+    gender: { type: String, default: '' },
+    companies: [{type: ObjectId, ref: 'User'}],
+    companiesInfo: [{
       name: String,
+      link_name: String,
       period: String,
       position: String,
       order: Number,
-      current: Boolean
+      current: Boolean,
+      profileImage: String,
     }],
     abilities: [{
       title: String,
@@ -48,11 +50,16 @@ const UserSchema = new mongoose.Schema({
   },
 
   companyProfile: {
-    projects: [ObjectId]
+    link_name: { type: String, unique: true },
+    projects: [{type: ObjectId, ref: 'Project'}],
+    location: { type: String, default: '' },
+    website: { type: String, default: '' },
+    officialName: String
   },
 
   features: [{
     title: String,
+    repr: String,
     content: String,
     order: Number,
     optional: Boolean // whether it is mandatory or not
@@ -84,6 +91,13 @@ function encryptPassword(next) {
  */
 UserSchema.pre('save', encryptPassword);
 
+UserSchema.pre('save', function(next) {
+  if(this.type === 'company') {
+    this.companyProfile.link_name = this.profile.name.replace(/\s/g, '_');
+  }
+  next();
+});
+
 /*
  Defining our own custom document instance method
  */
@@ -102,4 +116,19 @@ UserSchema.methods = {
 
 UserSchema.statics = {};
 
-export default mongoose.model('User', UserSchema);
+const model = mongoose.model('User' , UserSchema);
+
+// var configuration = {
+//     autoCompleteFields : ['userid'],
+//     dataFields: ['userid'],
+//     maximumResults: 10,
+//     model: model
+// }
+
+// var projectNameAutoComplete = new AutoComplete(configuration, function(){
+//   console.log("Loaded " + projectNameAutoComplete.getCacheSize() + " companies in auto complete");
+// });
+
+export default model;
+
+// export const autoComplete = projectNameAutoComplete;

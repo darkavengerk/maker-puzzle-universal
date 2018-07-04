@@ -3,17 +3,17 @@
  *
  */
 import mongoose from 'mongoose';
+import {default as Portfolio} from './portfolio';
 
 const {AutoComplete} = require('../utils/autocomplete')
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
-import {default as Portfolio} from './portfolio';
 
 const Schema = new mongoose.Schema({
   link_name: { type: String, unique: true },
   name: { type: String, unique: true},
   profilePicture: String,
-  companies: [{type: ObjectId, ref: 'Company'}],
+  companies: [{type: ObjectId, ref: 'User'}],
   users: [{type: ObjectId, ref: 'User'}],
   features: [{
     title: String,
@@ -39,7 +39,7 @@ var configuration = {
 }
 
 var projectNameAutoComplete = new AutoComplete(configuration, function(){
-  console.log("Loaded " + projectNameAutoComplete.getCacheSize() + " words in auto complete");
+  console.log("Loaded " + projectNameAutoComplete.getCacheSize() + " projects in auto complete");
 });
 
 export default ProjectModel;

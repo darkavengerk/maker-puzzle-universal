@@ -3,13 +3,15 @@
  *
  */
 import mongoose from 'mongoose';
+import {default as Portfolio} from './portfolio';
 
-const Portfolio = require('./portfolio');
 const ObjectId = mongoose.Schema.Types.ObjectId;
+const {AutoComplete} = require('../utils/autocomplete')
 
 const Schema = new mongoose.Schema({
   workType: String,
   name: String,
+  link_name: String,
   location: String,
   homepage: String,
   telephone: String,
@@ -25,7 +27,24 @@ const Schema = new mongoose.Schema({
   portfolios : [Portfolio]
 });
 
-// Compiles the schema into a model, opening (or creating, if
-// nonexistent) the 'Topic' collection in the MongoDB database
-export default mongoose.model('Company' , Schema);
+Schema.pre('save', function(next) {
+  this.link_name = this.name.replace(/\s/g, '_');
+  next();
+});
 
+const model = mongoose.model('Company' , Schema);
+
+var configuration = {
+    autoCompleteFields : ['name'],
+    dataFields: ['name'],
+    maximumResults: 10,
+    model: model
+}
+
+var projectNameAutoComplete = new AutoComplete(configuration, function(){
+  console.log("Loaded " + projectNameAutoComplete.getCacheSize() + " companies in auto complete");
+});
+
+export default model;
+
+export const autoComplete = projectNameAutoComplete;

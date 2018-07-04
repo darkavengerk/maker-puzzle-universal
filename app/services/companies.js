@@ -6,20 +6,28 @@ export default () => {
   return {
     getCompanies: () => client.request({
       method: 'GET',
-      url: '/company'
+      url: '/api/companies'
+    }),
+    getCompany: ({ id }) => client.request({
+      method: 'GET',
+      url: `/api/company/${id}`,
+    }),
+    getCompanyPortfolio: ({ id, pid }) => client.request({
+      method: 'GET',
+      url: `/api/company/${id}/${pid}`,
     }),
     deleteCompany: ({ id }) => client.request({
       method: 'DELETE',
-      url: `/company/${id}`
+      url: `/api/company/${id}`
     }),
     updateCompany: ({ id, data }) => client.request({
       method: 'PUT',
-      url: `/company/${id}`,
+      url: `/api/company/${id}`,
       data
     }),
     createCompany: ({ id, data }) => client.request({
       method: 'POST',
-      url: `/company/${id}`,
+      url: `/api/company/${id}`,
       data
     })
   };

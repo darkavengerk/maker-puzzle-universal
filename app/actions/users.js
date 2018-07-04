@@ -60,11 +60,10 @@ export function toggleLoginMode() {
 export function manualLogin(data) {
   return async (dispatch) => {
     dispatch(beginLogin());
-
     try {
-      const response = await authService().login(data);
-      dispatch(loginSuccess('You have been successfully logged in', response.data));
-      dispatch(push('/maker/'+response.data.userid));
+      const {data: user} = await authService().login(data);
+      dispatch(loginSuccess('You have been successfully logged in', user));
+      dispatch(push(`/${user.type}/${user.userid}`));
     }
     catch(err) {
       dispatch(loginError('Oops! Invalid username or password'));

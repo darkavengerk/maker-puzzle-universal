@@ -75,13 +75,13 @@ class MakerProfile extends Component {
 
   render() {
     const { maker, user, logOut } = this.props;
-    const isOwnPage = user.account.profile && (user.account.profile.userid === maker.profile.userid);
+    const isOwnPage = user.account.profile && (user.account.profile.userid === maker.userid);
 
     let stats = (
       <span className={cx('stats-area', 'flex-row')}>
         <span className={cx('maker-stats', 'flex-col')}>
           <span className={cx('figure')}>
-            {maker.portfolios.length}
+            {maker.portfolios? maker.portfolios.length : 0}
           </span>
           <span className={cx('keyword')}>
             Portfolio
@@ -190,7 +190,6 @@ MakerProfile.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    maker: state.maker.maker,
     user: state.user
   };
 }

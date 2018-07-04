@@ -18,7 +18,7 @@ class Maker extends Component {
       <div className={cx('main-section')}>
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
         <TopTitle 
-          title={maker.profile.name} 
+          title={maker.profile ? maker.profile.name : ''} 
           to={'/maker/' + maker.userid}
           thumbnailURL={maker.profile? maker.profile.picture : ''}
         />

@@ -6,6 +6,7 @@ import topic from '../reducers/topic';
 import message from '../reducers/message';
 import people from '../reducers/people';
 import maker from '../reducers/maker';
+import company from '../reducers/company';
 import project from '../reducers/project';
 import param from '../reducers/param';
 import * as types from '../types';
@@ -34,6 +35,7 @@ const rootReducer = combineReducers({
   people,
   maker,
   project,
+  company,
   param
 });
 

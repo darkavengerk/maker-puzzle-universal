@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames/bind';
 
 import MakerInfo from '../components/MakerInfo';
+import CompanyInfo from '../components/CompanyInfo';
 import PortfolioItem from '../components/PortfolioItem';
 import PortfolioItemExternal from '../components/PortfolioItemExternal';
 import PortfolioDetail from '../components/PortfolioDetail';
@@ -46,7 +47,14 @@ class ContentsTagFactory {
           }
           return <PortfolioDetail portfolio={{}} />
         }
-      }
+      },
+      company: {
+        info: CompanyInfo,
+        item: PortfolioItem,
+        getDetail: function(owner) {
+          return null;
+        }
+      },
     }
     [contentsType];
     this.param = param;
