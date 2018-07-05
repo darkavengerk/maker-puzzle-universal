@@ -19,7 +19,7 @@ class User {
   }
 
   getContent(param, isOwnPage) {
-    return this.factory.getContent(param, isOwnPage);
+    return null;
   }
 
 }
@@ -42,6 +42,10 @@ class Maker extends User {
   getHomeLink() {
     return '/maker/' + this.userid;
   }
+
+  getContent(param, isOwnPage) {
+    return this.factory.getMakerContent(param, isOwnPage);
+  }
 }
 
 class Company extends User {
@@ -63,6 +67,9 @@ class Company extends User {
     return '/company/' + this.userid;
   }
 
+  getContent(param, isOwnPage) {
+    return this.factory.getCompanyContent(param, isOwnPage);
+  }
 }
 
 class Project extends User {
@@ -81,6 +88,10 @@ class Project extends User {
 
   getHomeLink() {
     return '/project/' + this.link_name;
+  }
+
+  getContent(param, isOwnPage) {
+    return this.factory.getProjectContent(param, isOwnPage);
   }
 
 }
