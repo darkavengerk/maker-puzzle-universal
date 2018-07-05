@@ -67,7 +67,8 @@ class CompanyProfile extends Component {
 
   async submit() {
     const { featureEditSave } = this.props;
-    const res = await featureEditSave(this.state);
+    const { features, profile } = this.state;
+    const res = await featureEditSave({features, profile});
     if (res.status === 200) {
       this.setState({editing: false});
     }
