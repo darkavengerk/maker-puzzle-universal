@@ -30,43 +30,24 @@ class ContentsTagFactory {
         return  {
           info: MakerInfo,
           item: PortfolioItem,
-          getDetail: isOwnPage => {
-            if(this.source.portfolioSelected)
-              return <PortfolioDetail 
-                portfolio={this.source.portfolioSelected.portfolio} 
-                edit={isOwnPage}
-                referer={new Project(this.source.portfolioSelected.portfolio.project)}
-              />
-            return null;
-          }
+          
         };
       case 'project':
         return {
           info: ProjectInfo,
           item: PortfolioItemExternal,
-          getDetail: pid => {
-            for(let portfolio of this.source.portfolios) {
-              if(portfolio.pid === pid)
-                return <PortfolioDetail portfolio={portfolio} referer={new Maker(portfolio.user)} />
-            }
-            return <PortfolioDetail portfolio={{images:[], tags:[]}} />
-          }
+          
         };
       case 'company':
         return {
           info: CompanyInfo,
           item: PortfolioItem,
-          getDetail: () => {
-            return null;
-          }
+          
         };
       default:
         return {
           info: NULL,
           item: NULL,
-          getDetail: () => {
-            return NULL;
-          }
       }
     }
   }
@@ -84,11 +65,12 @@ class ContentsTagFactory {
   }
 
   getMakerContent(param, isOwnPage) {
-    const Item = this.getItemTag();
     
     if(param.pid) {
-      return this.set.getDetail(this.source, param.pid);
+      return this.getMakerDetail(this.source, param.pid);
     }
+
+    const Item = this.getItemTag();
 
     let contents = this.source.portfolios? this.source.portfolios.map(portfolio => {
       return (<Item portfolio={portfolio} key={portfolio.title} />);
@@ -110,15 +92,19 @@ class ContentsTagFactory {
   }
 
   getProjectContent(param, isOwnPage) {
+    if(param.pid) {
+      return this.getProjectDetail(param.pid) || this.getProjectContent({}, isOwnPage);
+    }
     return this.getMakerContent(param, isOwnPage);
   }
 
   getCompanyContent(param, isOwnPage) {
-    const Item = this.getItemTag();
     
     if(param.pid) {
-      return this.set.getDetail(this.source, param.pid);
+      return this.set.getCompanyDetail(this.source, param.pid);
     }
+
+    const Item = this.getItemTag();
 
     let contents = this.source.portfolios? this.source.portfolios.map(portfolio => {
       return (<Item portfolio={portfolio} key={portfolio.title} />);
@@ -145,6 +131,31 @@ class ContentsTagFactory {
               </Popup>
             </div>);
   }
+
+  getMakerDetail(isOwnPage) {
+    if(this.source.portfolioSelected)
+      return <PortfolioDetail 
+        portfolio={this.source.portfolioSelected.portfolio} 
+        edit={isOwnPage}
+        referer={new Project(this.source.portfolioSelected.portfolio.project)}
+      />
+    return null;
+  }
+
+  getProjectDetail(pid) {
+    if(!this.source.portfolios) return null;
+
+    for(let portfolio of this.source.portfolios) {
+      if(portfolio.pid === pid)
+        return <PortfolioDetail portfolio={portfolio} referer={new Maker(portfolio.user)} />
+    }
+    return null;
+  }
+
+  getCompanyDetail() {
+    return null;
+  }
+
 }
 
 export default ContentsTagFactory;

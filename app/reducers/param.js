@@ -10,6 +10,8 @@ const param = (
     case types.REQUEST_SUCCESS:
       if (action.data && action.data.param) return action.data.param;
       return state;
+    case types.CREATE_REQUEST:
+      return {};
 
     default:
       return state;
