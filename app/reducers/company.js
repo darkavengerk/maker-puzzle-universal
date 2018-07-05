@@ -15,18 +15,18 @@ const company = (
       if (action.data && action.data.company) return action.data.company;
       return state;
 
-    // case types.PROFILE_EDIT_SUCCESS:
-    //   const {features, about, profile} = action.data;
-    //   return {...state, features, about, profile}
+    case types.PROFILE_EDIT_SUCCESS:
+      const {features, about, profile} = action.data;
+      return {...state, features, about, profile}
     
-    // case types.PORTFOLIO_EDITOR_START:
-    //   return {...state, isAddingPortfolio: true}
+    case types.PORTFOLIO_EDITOR_START:
+      return {...state, isAddingPortfolio: true}
 
-    // case types.PORTFOLIO_EDITOR_CANCEL:
-    //   return {...state, isAddingPortfolio: false}
+    case types.PORTFOLIO_EDITOR_CANCEL:
+      return {...state, isAddingPortfolio: false}
     
-    // case types.PORTFOLIO_EDIT_SUCCESS:
-    //   return {...state, portfolios: [...state.portfolios, action.data], isAddingPortfolio: false}
+    case types.PORTFOLIO_EDIT_SUCCESS:
+      return {...state, portfolios: [...state.portfolios, action.data], isAddingPortfolio: false}
 
     default:
       return state;

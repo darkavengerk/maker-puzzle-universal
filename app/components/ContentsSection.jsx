@@ -10,15 +10,14 @@ import styles from '../css/components/contents-section';
 
 import createRestApiClient from '../utils/createRestApiClient';
 import ContentsTagFactory from '../utils/contentsTagFactory';
+import { createObject } from '../utils/objects';
 
 const cx = classNames.bind(styles);
 
 const ContentsSection = ({ owner, isOwnPage, param, contentsType, portfoiloEditorCancel }) => {
 
-  const factory = new ContentsTagFactory(contentsType, param);
-
-  const Info = factory.getInfoTag();
-  const contents = factory.getContent(owner, isOwnPage);
+  const Info = owner.getInfoTag();
+  const contents = owner.getContent(param, isOwnPage);
 
   return (
     <div className={cx('main-section')}>

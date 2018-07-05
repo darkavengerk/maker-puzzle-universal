@@ -7,21 +7,23 @@ import TopTitle from '../components/TopTitle';
 import ContentsSection from '../components/ContentsSection';
 import SingleLine from '../components/SingleLine';
 import styles from '../css/components/maker';
+import { Company } from '../utils/objects';
 
 const cx = classNames.bind(styles);
 
-class Company extends Component {
+class Container extends Component {
 
   render() {
-    const { company, user } = this.props;
+    const { company: data, user } = this.props;
+    const company = new Company(data);
     const isOwnPage = user && company && (company.userid === user.userid);
     return (
       <div className={cx('main-section')}>
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
         <TopTitle 
-          title={company.profile.name} 
-          to={'/company/' + company.profile.link_name}
-          thumbnailURL={company.profile? company.profile.picture : ''}
+          title={company.getName()}
+          to={company.getHomeLink()}
+          thumbnailURL={company.getProfileImage()} 
         />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
         <ContentsSection owner={company} contentsType="company" isOwnPage={isOwnPage} />
@@ -31,7 +33,7 @@ class Company extends Component {
   }
 }
 
-Company.propTypes = {
+Container.propTypes = {
   company: PropTypes.object
 };
 
@@ -42,4 +44,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {})(Company);
+export default connect(mapStateToProps, {})(Container);

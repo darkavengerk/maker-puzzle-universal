@@ -52,6 +52,7 @@ const UserSchema = new mongoose.Schema({
   companyProfile: {
     link_name: { type: String, unique: true },
     projects: [{type: ObjectId, ref: 'Project'}],
+    makers: [{type: ObjectId, ref: 'User'}],
     location: { type: String, default: '' },
     website: { type: String, default: '' },
     officialName: String

@@ -14,7 +14,7 @@ const cx = classNames.bind(styles);
 
 class ProjectContainer extends Component {
   render() {
-    const { project:data, user, param } = this.props;
+    const { project: data, user, param } = this.props;
     const project = new Project(data);
     const contentsType = (param.mid && param.pid) ? 'project_maker' : 'project';
     return (

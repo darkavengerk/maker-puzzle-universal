@@ -75,7 +75,7 @@ class MakerProfile extends Component {
 
   render() {
     const { maker, user, logOut } = this.props;
-    const isOwnPage = user.account.profile && (user.account.profile.userid === maker.userid);
+    const isOwnPage = (user.account.userid === maker.userid);
 
     let stats = (
       <span className={cx('stats-area', 'flex-row')}>

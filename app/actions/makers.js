@@ -3,8 +3,8 @@ import { Maker } from '../services';
 
 export function featureEditSave(data) {
   return async (dispatch, getState) => {
-    const { maker } = getState();
-    const res = await Maker().updateMakerFeatures({id:maker.maker.userid, data});
+    const { user } = getState();
+    const res = await Maker().updateMakerFeatures({id:user.account.userid, data});
     
     if (res.status === 200) {
       dispatch({type:types.PROFILE_EDIT_SUCCESS, data});

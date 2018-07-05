@@ -8,19 +8,22 @@ import ContentsSection from '../components/ContentsSection';
 import SingleLine from '../components/SingleLine';
 import styles from '../css/components/maker';
 
+import { Maker } from '../utils/objects';
+
 const cx = classNames.bind(styles);
 
-class Maker extends Component {
+class Container extends Component {
   render() {
-    const { maker, user } = this.props;
+    const { maker: data, user } = this.props;
+    const maker = new Maker(data);
     const isOwnPage = user && maker && (maker.userid === user.userid);
     return (
       <div className={cx('main-section')}>
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
         <TopTitle 
-          title={maker.profile ? maker.profile.name : ''} 
-          to={'/maker/' + maker.userid}
-          thumbnailURL={maker.profile? maker.profile.picture : ''}
+          title={maker.getName()}
+          to={maker.getHomeLink()}
+          thumbnailURL={maker.getProfileImage()} 
         />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
         <ContentsSection owner={maker} contentsType="maker" isOwnPage={isOwnPage} />
@@ -30,7 +33,7 @@ class Maker extends Component {
   }
 }
 
-Maker.propTypes = {
+Container.propTypes = {
   maker: PropTypes.object
 };
 
@@ -41,4 +44,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {})(Maker);
+export default connect(mapStateToProps, {})(Container);

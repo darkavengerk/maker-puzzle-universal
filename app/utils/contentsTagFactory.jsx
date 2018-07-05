@@ -6,6 +6,7 @@ import CompanyInfo from '../components/CompanyInfo';
 import PortfolioItem from '../components/PortfolioItem';
 import PortfolioItemExternal from '../components/PortfolioItemExternal';
 import PortfolioDetail from '../components/PortfolioDetail';
+import NULL from '../components/null';
 
 import ProjectInfo from '../components/ProjectInfo';
 import { Maker, Project, Company } from '../utils/objects'
@@ -14,50 +15,55 @@ import styles from '../css/components/contents-section';
 
 class ContentsTagFactory {
 
-  constructor(contentsType, param) {
-    this.set = {
-      maker: {
-        info: MakerInfo,
-        item: PortfolioItem,
-        getDetail: function(owner, isOwnPage) {
-          if(owner.portfolioSelected)
-            return <PortfolioDetail 
-              portfolio={owner.portfolioSelected.portfolio} 
-              edit={isOwnPage}
-              referer={new Project(owner.portfolioSelected.portfolio.project)}
-            />
-          return null;
-        }
-      }, 
-      project: {
-        info: ProjectInfo,
-        item: PortfolioItemExternal,
-        getDetail: function(owner) {
-          return null;
-        }
-      },
-      project_maker: {
-        info: ProjectInfo,
-        item: PortfolioItemExternal,
-        getDetail: function(owner) {
-          const { pid } = param;
-          for(let portfolio of owner.portfolios) {
-            if(portfolio.pid === pid)
-              return <PortfolioDetail portfolio={portfolio} referer={new Maker(portfolio.user)} />
+  constructor(contentsType) {
+    this.set = this.getSetups(contentsType);
+  }
+
+  getSetups(contentsType) {
+    switch(contentsType) {
+      case 'maker':
+        return  {
+          info: MakerInfo,
+          item: PortfolioItem,
+          getDetail: function(owner, isOwnPage) {
+            if(owner.portfolioSelected)
+              return <PortfolioDetail 
+                portfolio={owner.portfolioSelected.portfolio} 
+                edit={isOwnPage}
+                referer={new Project(owner.portfolioSelected.portfolio.project)}
+              />
+            return null;
           }
-          return <PortfolioDetail portfolio={{}} />
-        }
-      },
-      company: {
-        info: CompanyInfo,
-        item: PortfolioItem,
-        getDetail: function(owner) {
-          return null;
-        }
-      },
+        };
+      case 'project':
+        return {
+          info: ProjectInfo,
+          item: PortfolioItemExternal,
+          getDetail: function(owner, pid) {
+            for(let portfolio of owner.portfolios) {
+              if(portfolio.pid === pid)
+                return <PortfolioDetail portfolio={portfolio} referer={new Maker(portfolio.user)} />
+            }
+            return <PortfolioDetail portfolio={{images:[], tags:[]}} />
+          }
+        };
+      case 'company':
+        return {
+          info: CompanyInfo,
+          item: PortfolioItem,
+          getDetail: function(owner) {
+            return null;
+          }
+        };
+      default:
+        return {
+          info: NULL,
+          item: NULL,
+          getDetail: function(owner) {
+            return NULL;
+          }
+      }
     }
-    [contentsType];
-    this.param = param;
   }
 
   getInfoTag() {
@@ -76,12 +82,14 @@ class ContentsTagFactory {
     return this.set[name];
   }
 
-  getContent(owner, isOwnPage) {
-    const Info = this.getInfoTag();
+  getContent(param, owner, isOwnPage) {
+    
+    if(!this.set) return [];
+
     const Item = this.getItemTag();
     
-    if(this.param.pid) {
-      return this.set.getDetail(owner, isOwnPage);
+    if(param.pid) {
+      return this.set.getDetail(owner, param.pid);
     }
 
     let contents = owner.portfolios? owner.portfolios.map(portfolio => {

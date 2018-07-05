@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
-import MakerProfile from '../components/MakerProfile';
+import CompanyProfile from '../components/CompanyProfile';
 import CompanyHistory from '../components/CompanyHistory';
 import GreyTitle from '../components/GreyTitle';
 import Abilities from '../components/Abilities';
@@ -16,7 +16,7 @@ const CompanyInfo = ({ owner }) => {
   return company && company.companyProfile ? (
     <div className={cx('main-section')}>
       <GreyTitle title={'기업 정보'} bottom="13" />
-      <MakerProfile maker={company} />
+      <CompanyProfile company={company} />
 
       <GreyTitle title={'소속 메이커'} top="38" />
       {/*<CompanyHistory company={company} />*/}

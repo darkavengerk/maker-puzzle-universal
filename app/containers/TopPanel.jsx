@@ -23,7 +23,7 @@ const Navigation = ({ user, logOut }) => {
         </div>
 
         <div className={cx('option-area')}>
-          <Link to={user.authenticated? ('/maker/Test') : '/login'}>
+          <Link to={user.authenticated? (`/${user.account.type}/${user.account.userid}`) : '/login'}>
             <Img src="/images/site/icon_person.png" x={32} y={30} /> 
           </Link>
           <Img src="/images/site/icon_alert.png" x={39} y={39} />
