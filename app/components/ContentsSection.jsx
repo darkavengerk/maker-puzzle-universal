@@ -16,18 +16,17 @@ const cx = classNames.bind(styles);
 
 const ContentsSection = ({ owner, isOwnPage, param, contentsType, portfoiloEditorCancel }) => {
 
-  const Info = owner.getInfoTag();
-  const contents = owner.getContent(param, isOwnPage);
+  // const products = owner.getProductInfo(param, isOwnPage);
 
   return (
     <div className={cx('main-section')}>
       <span className={cx('left-panel')} >
-        <Info owner={owner} />
+        {owner.getInfo()}
       </span>
       <span className={cx('main-panel')} >
         <p className={cx('main-panel-title')}>포트폴리오</p>
         <div className={cx('portfolio-list')}>
-          {contents}
+          {owner.getContent(param, isOwnPage)}
         </div>
         <Popup show={owner.isAddingPortfolio} name="AddPortfolioPopup">
           <AddPortfolio title="포트폴리오 수정하기" />

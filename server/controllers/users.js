@@ -15,7 +15,7 @@ export function all(req, res) {
 }
 
 export async function single(req, res) {
-  let user = await User.findOne({'userid':req.params.id});
+  let user = await User.findOne({'userid':req.params.id}).lean();
 
   if (!user) {
     console.log('Error in first query: User not found: ' + req.params.id);

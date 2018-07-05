@@ -15,8 +15,9 @@ import styles from '../css/components/contents-section';
 
 class ContentsTagFactory {
 
-  constructor(contentsType) {
-    this.set = this.getSetups(contentsType);
+  constructor(source) {
+    this.source = source
+    this.set = this.getSetups(source.type);
   }
 
   getSetups(contentsType) {
@@ -82,17 +83,15 @@ class ContentsTagFactory {
     return this.set[name];
   }
 
-  getContent(param, owner, isOwnPage) {
+  getContent(param, isOwnPage) {
     
-    if(!this.set) return [];
-
     const Item = this.getItemTag();
     
     if(param.pid) {
-      return this.set.getDetail(owner, param.pid);
+      return this.set.getDetail(this.source, param.pid);
     }
 
-    let contents = owner.portfolios? owner.portfolios.map(portfolio => {
+    let contents = this.source.portfolios? this.source.portfolios.map(portfolio => {
       return (<Item portfolio={portfolio} key={portfolio.title} />);
     }) : [];
 

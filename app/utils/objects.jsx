@@ -10,15 +10,16 @@ class User {
       this[x] = data[x];
     }
     if(Factory)
-      this.factory = new Factory(data.type);
+      this.factory = new Factory(this);
   }
 
-  getInfoTag() {
-    return this.factory.getInfoTag();
+  getInfo() {
+    const Info = this.factory.getInfoTag();
+    return <Info owner={this} />;
   }
 
   getContent(param, isOwnPage) {
-    return this.factory.getContent(param, this.raw, isOwnPage);
+    return this.factory.getContent(param, isOwnPage);
   }
 
 }
@@ -61,6 +62,7 @@ class Company extends User {
   getHomeLink() {
     return '/company/' + this.userid;
   }
+
 }
 
 class Project extends User {
@@ -80,6 +82,7 @@ class Project extends User {
   getHomeLink() {
     return '/project/' + this.link_name;
   }
+
 }
 
 class Null extends User {

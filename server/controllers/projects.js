@@ -32,7 +32,7 @@ export function search(req, res) {
 
 export async function one(req, res) {
   const { link_name } = req.params;
-  const result = await Project.findOne({ link_name }).populate(['portfolios.user', 'users', 'companies']);
+  const result = await Project.findOne({ link_name }).populate(['portfolios.user', 'users', 'companies']).lean();
   return res.json(result);
 }
 
