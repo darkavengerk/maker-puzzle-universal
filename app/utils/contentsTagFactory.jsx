@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 import MakerInfo from '../components/MakerInfo';
 import CompanyInfo from '../components/CompanyInfo';
 import PortfolioItem from '../components/PortfolioItem';
+import PortfolioItemWide from '../components/PortfolioItemWide';
 import PortfolioItemExternal from '../components/PortfolioItemExternal';
 import PortfolioDetail from '../components/PortfolioDetail';
 import NULL from '../components/null';
@@ -41,7 +42,7 @@ class ContentsTagFactory {
       case 'company':
         return {
           info: CompanyInfo,
-          item: PortfolioItem,
+          item: PortfolioItemWide,
           
         };
       default:
@@ -104,30 +105,36 @@ class ContentsTagFactory {
       return this.set.getCompanyDetail(this.source, param.pid);
     }
 
-    const Item = this.getItemTag();
-
-    let contents = this.source.portfolios? this.source.portfolios.map(portfolio => {
-      return (<Item portfolio={portfolio} key={portfolio.title} />);
+    let contents1 = this.source.portfolios? this.source.portfolios.map(portfolio => {
+      return (<PortfolioItemWide portfolio={portfolio} key={portfolio.title} />);
     }) : [];
 
     if(isOwnPage) {
-      contents.push(<Item key={'__new__'} />);
+      contents1.push(<PortfolioItemWide key={'__new__'} />);
+    }
+
+    let contents2 = this.source.portfolios? this.source.portfolios.map(portfolio => {
+      return (<PortfolioItem portfolio={portfolio} key={portfolio.title} />);
+    }) : [];
+
+    if(isOwnPage) {
+      contents2.push(<PortfolioItem key={'__new__'} />);
     }
 
     return (<div>
               <p className={cx('main-panel-title')}>수행 프로젝트</p>
               <div className={cx('portfolio-list')}>
-                {contents}
+                {contents1}
               </div>
               <Popup show={this.source.isAddingPortfolio} name="AddPortfolioPopup">
-                <AddPortfolio title="포트폴리오 수정하기" />
+                <AddPortfolio title="포트폴리오 추가하기" />
               </Popup>
               <p className={cx('main-panel-title')}>제품 목록</p>
               <div className={cx('portfolio-list')}>
-                {contents}
+                {contents2}
               </div>
               <Popup show={this.source.isAddingPortfolio} name="AddPortfolioPopup">
-                <AddPortfolio title="포트폴리오 수정하기" />
+                <AddPortfolio title="보유 제품 추가하기" />
               </Popup>
             </div>);
   }

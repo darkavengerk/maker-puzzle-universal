@@ -9,6 +9,10 @@
   box-shadow: 0 5px 35px 0 rgba(163, 163, 163, 0.5);
 }
 
+.wide {
+  width: 43.7rem;
+}
+
 .text-section {
   width: 21.4rem;
   height: 5.4rem;
