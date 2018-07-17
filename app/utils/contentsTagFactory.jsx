@@ -20,33 +20,35 @@ const cx = classNames.bind(styles);
 
 class ContentsTagFactory {
 
-  constructor(source) {
+  constructor(source, type) {
     this.source = source || {};
-    this.set = this.getSetups(source.type);
+    this.getSetups(source.getType());
   }
 
   getSetups(contentsType) {
     switch(contentsType) {
       case 'maker':
-        return  {
+        this.set =  {
           info: MakerInfo,
           item: PortfolioItem,
           
         };
+        break;
       case 'project':
-        return {
+        this.set = {
           info: ProjectInfo,
           item: PortfolioItemExternal,
           
         };
+        break;
       case 'company':
-        return {
+        this.set = {
           info: CompanyInfo,
           item: PortfolioItemWide,
-          
         };
+        break;
       default:
-        return {
+        this.set = {
           info: NULL,
           item: NULL,
       }

@@ -128,7 +128,7 @@ class CompanyProfile extends Component {
       }
     }
 
-    const profileImage = this.state.editing? this.state.profile.picture : company.profile.picture;
+    const profileImage = this.state.editing? this.state.profilePicture : company.profilePicture;
 
     return (
       <div className={cx('main-section')}>
@@ -145,7 +145,7 @@ class CompanyProfile extends Component {
           </span>
           <span className={cx('user-info')}>
             <span className={cx('name')}>
-              {company.profile.name}
+              {company.name}
             </span>
             <Border width={181} thickness={2} color={'#dadada'} />
             {stats}

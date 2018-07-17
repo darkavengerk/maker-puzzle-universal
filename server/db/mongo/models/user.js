@@ -23,12 +23,14 @@ const UserSchema = new mongoose.Schema({
 
   uploadCount: {type: Number, default: 0},
 
-  type: { type: String, default: 'maker', required: true }, //person, company
+  type: { type: String, default: 'maker', required: true },
 
   profile: {
     name: { type: String, default: '' },
     picture: { type: String, default: '' }
   },
+
+  companiesOwned: [{type: ObjectId, ref: 'Company'}],
 
   makerProfile: {
     gender: { type: String, default: '' },
@@ -47,15 +49,6 @@ const UserSchema = new mongoose.Schema({
       ability: Number,
       order: Number
     }]
-  },
-
-  companyProfile: {
-    link_name: { type: String, unique: true },
-    projects: [{type: ObjectId, ref: 'Project'}],
-    makers: [{type: ObjectId, ref: 'User'}],
-    location: { type: String, default: '' },
-    website: { type: String, default: '' },
-    officialName: String
   },
 
   features: [{
@@ -117,19 +110,4 @@ UserSchema.methods = {
 
 UserSchema.statics = {};
 
-const model = mongoose.model('User' , UserSchema);
-
-// var configuration = {
-//     autoCompleteFields : ['userid'],
-//     dataFields: ['userid'],
-//     maximumResults: 10,
-//     model: model
-// }
-
-// var projectNameAutoComplete = new AutoComplete(configuration, function(){
-//   console.log("Loaded " + projectNameAutoComplete.getCacheSize() + " companies in auto complete");
-// });
-
-export default model;
-
-// export const autoComplete = projectNameAutoComplete;
+export default mongoose.model('User' , UserSchema);

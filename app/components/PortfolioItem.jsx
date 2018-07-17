@@ -15,24 +15,17 @@ const ContentsSection = ({ portfolio, maker, portfoiloEditorStart }) => {
     const ownerId = maker.userid || portfolio.user.userid;
     return (
       <div className={cx('main-section')}>
-        <div className={cx('text-section')}>
-          <Link to={`/maker/${ownerId}/portfolio/${portfolio.pid}`}>
-            <h1>
-              {portfolio.title}
-            </h1>
-          </Link>
-          <Link to={`/project/${portfolio.location.replace(/\s/g, '_')}`}>
-            <p>
-              {portfolio.location}
-            </p>
-          </Link>
-        </div>
         <Link to={`/maker/${ownerId}/portfolio/${portfolio.pid}`}>
-          { portfolio.images && portfolio.images[0] ? 
-            <Image src={`${portfolio.images[0]}`} x={214} y={214}/> : <Image x={214} y={214}/>
-          }
-        </Link>
-        
+          <div className={cx('text-section')}>
+            <h1>
+              {portfolio.location}
+            </h1>
+            <p>
+              {portfolio.title}
+            </p>
+          </div>
+          <Image src={`${portfolio.images[0]}`} x={214} y={214}/>
+        </Link>        
       </div>
     );
   }

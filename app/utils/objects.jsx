@@ -30,6 +30,10 @@ class Maker extends User {
     super( data.profile? data : { profile:{} } );
   }
 
+  getType() {
+    return 'maker';
+  }
+
   getProfileImage() {
     const { profile: { picture } } = this;
     return picture || '/images/site/def_maker.png';
@@ -51,20 +55,23 @@ class Maker extends User {
 class Company extends User {
 
   constructor(data) {
-    super(data.profile? data : { profile:{} });
+    super(data);
+  }
+
+  getType() {
+    return 'company';
   }
 
   getProfileImage() {
-    const { profile: { picture } } = this;
-    return picture || '/images/site/def_company.png';
+    return this.profilePicture || '/images/site/def_company.png';
   }
 
   getName() {
-    return this.profile.name;
+    return this.name;
   }
 
   getHomeLink() {
-    return '/company/' + this.userid;
+    return '/company/' + this.link_name;
   }
 
   getContent(param, isOwnPage) {
@@ -78,8 +85,12 @@ class Project extends User {
     super(data);
   }
 
+  getType() {
+    return 'project';
+  }
+
   getProfileImage() {
-    return this.profileImage || '/images/site/def_project.png';
+    return this.profilePicture || '/images/site/def_project.png';
   }
 
   getName() {
@@ -100,6 +111,10 @@ class Null extends User {
 
   constructor() {
     super({});
+  }
+
+  getType() {
+    return '';
   }
 
   getProfileImage() {

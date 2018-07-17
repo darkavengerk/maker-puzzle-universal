@@ -237,6 +237,35 @@ class AddPortfolio extends Component {
                 <tr className={cx('entity-row')} />
 
                 <tr>
+                  <td className={cx('entity-title')}>
+                    <Scatter text="소속 기업" />
+                  </td>
+                  <td className={cx('entity', 'relative')}>
+                    <input 
+                      id="company-name"
+                      type="text" className={cx('text-field')} 
+                      value={this.state.location} 
+                      onChange={this.showProjects} 
+                      onBlur={this.hideDropdown} />
+                    {this.state.showDropdown ?
+                      <ul className={cx('auto-complete')}>
+                        {(this.state.projectSuggestion || []).map(
+                          word => <li key={word} className={cx('auto-complete-word')} onMouseDown={this.autoComplete(word)}>{word}</li>)}
+                      </ul> : null                      
+                    }
+                  </td>
+                </tr>
+                <tr>
+                  <td className={cx('entity-must')}>
+                    [필수]
+                  </td>
+                  <td className={cx('entity-helper')}>
+                    * 포트폴리오를 수행했을 당시 소속되어 있던 기업을 선택해주세요
+                  </td>
+                </tr>
+                <tr className={cx('entity-row')} />
+
+                <tr>
                   <td className={cx('entity-title')} style={{verticalAlign:'top'}}>
                     <span>
                       <Scatter text="작품설명" />

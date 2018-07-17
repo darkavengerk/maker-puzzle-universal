@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import User, {autoComplete} from '../db/mongo/models/user';
+import Company, {autoComplete} from '../db/mongo/models/company';
 
 /**
  * List
@@ -32,7 +32,7 @@ export function search(req, res) {
 
 export async function one(req, res) {
   const { link_name } = req.params;
-  const result = await User.findOne({ 'companyProfile.link_name': link_name }).populate(['portfolios.user']).lean();
+  const result = await Company.findOne({ link_name }).populate(['portfolios.user']).lean();
   return res.json(result);
 }
 

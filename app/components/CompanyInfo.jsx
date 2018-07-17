@@ -13,7 +13,7 @@ const CompanyInfo = ({ owner }) => {
 
   const company = owner;
 
-  return company && company.companyProfile ? (
+  return company ? (
     <div className={cx('main-section')}>
       <GreyTitle title={'기업 정보'} bottom="13" />
       <CompanyProfile company={company} />

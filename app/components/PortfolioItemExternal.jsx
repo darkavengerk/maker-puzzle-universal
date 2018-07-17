@@ -16,27 +16,22 @@ const ContentsSection = ({ portfolio, maker, project, portfoiloEditorStart }) =>
   if(portfolio)
     return (
       <div className={cx('main-section')}>
-        <div className={cx('text-section-type2')}>
-          <Link to={`/maker/${user.userid}`}>
-            <Image src={user.profile.picture} x={31} y={31} className={cx('profile-image')} />
-          </Link>
-          <span>
-            <Link to={`/project/${project.link_name}/maker/${user.userid}/${portfolio.pid}`}>
-              <h1>
-                {portfolio.title}
-              </h1>
-            </Link>
-            <p>
-              {portfolio.location}
-            </p>
-          </span>
-        </div>
         <Link to={`/project/${project.link_name}/maker/${user.userid}/${portfolio.pid}`}>
-          { portfolio.images && portfolio.images[0] ? 
-            <Image src={`${portfolio.images[0]}`} x={214} y={214}/> : <Image x={214} y={214}/>
-          }
-        </Link>
-        
+          <div className={cx('text-section-type2')}>
+            <Link to={`/maker/${user.userid}`}>
+              <Image src={user.profile.picture} x={31} y={31} className={cx('profile-image')} />
+            </Link>
+            <span>
+              <h1>
+                {portfolio.location}
+              </h1>
+              <p>
+                {portfolio.title}
+              </p>
+            </span>
+          </div>
+          <Image src={`${portfolio.images[0]}`} x={214} y={214}/>
+        </Link>        
       </div>
     );
   else 

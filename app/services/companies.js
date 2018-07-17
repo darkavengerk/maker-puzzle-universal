@@ -8,9 +8,9 @@ export default () => {
       method: 'GET',
       url: '/api/companies'
     }),
-    getCompany: ({ id }) => client.request({
+    getCompany: ({ link_name }) => client.request({
       method: 'GET',
-      url: `/api/company/${id}`,
+      url: `/api/company/${link_name}`,
     }),
     getCompanyPortfolio: ({ id, pid }) => client.request({
       method: 'GET',

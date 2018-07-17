@@ -82,10 +82,12 @@ export async function addPortfolio(req, res) {
 
   const portfolio = req.body;
   const location = portfolio.location;
+  const companyName = portfolio.companyName;
 
-  let [user, project] = await Promise.all([
+  let [user, project, company] = await Promise.all([
     User.findOne({userid}), 
     Project.findOne({name: location}),
+    User.findOne({type:'company', 'profile.name': companyName})
   ]);
 
   portfolio.user = user._id;
@@ -99,11 +101,24 @@ export async function addPortfolio(req, res) {
     portfolio.project = project._id;
   }
 
+  if(company) {
+    portfolio.company = company._id;
+  } 
+  else {
+    company = new User({profile:{name: companyName}});
+    company = await Metadata.populateMetadata('Company', company);
+    portfolio.company = company._id;
+  }
+
   user.portfolios.push(portfolio);
   project.portfolios.push(portfolio);
   project.users.addToSet(user._id);
 
-  await Promise.all([user.save(), project.save()]);
+  company.portfolios.push(portfolio);
+  company.companyProfile.makers.addToSet(user._id);
+  company.companyProfile.projects.addToSet(project._id);
+
+  await Promise.all([user.save(), project.save(), company.save()]);
 
   autoComplete.buildCache(err => res.json({user, project}));
 }
