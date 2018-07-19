@@ -76,7 +76,7 @@ class CompanyProfile extends Component {
 
   render() {
     const { company, user, logOut } = this.props;
-    const isOwnPage = (user.account.userid === company.userid);
+    const isOwnPage = (user.authenticated && company.owner && user.account.userid === company.owner.userid);
 
     let stats = (
       <span className={cx('stats-area', 'flex-row')}>
