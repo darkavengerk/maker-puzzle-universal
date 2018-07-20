@@ -1,22 +1,19 @@
 .main-section {
-  display: inline-block;
-  width: 144rem;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: top;
+  max-width: 100%;
 }
 
 .left-panel {
   width: 37.4rem;
   height: 100%;
-  display: inline-block;
-  text-align: left;
-  vertical-align: top;
 }
 
 .main-panel {
   padding: 2rem 2.5rem;
   width: 98.1rem;
-  display: inline-block;
-  text-align: left;
-  vertical-align: top;
   border-left: solid 2px #dddddd;
   margin-left: -1px;
 }
