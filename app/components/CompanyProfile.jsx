@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import _ from 'lodash';
 
+import ContentEditable from 'react-contenteditable'
+import jsxToString from 'jsx-to-string';
+
 import FlexibleImage from '../components/FlexibleImage';
 import Border from '../components/SingleLine';
 import ImageUploader from '../components/ImageUploader';
@@ -13,8 +16,7 @@ import styles from '../css/components/maker-profile';
 import { featureEditSave } from '../actions/makers';
 import { logOut } from '../actions/users';
 
-import ContentEditable from 'react-contenteditable'
-import jsxToString from 'jsx-to-string';
+import { Company } from '../utils/objects';
 
 const cx = classNames.bind(styles);
 
@@ -75,7 +77,8 @@ class CompanyProfile extends Component {
   }
 
   render() {
-    const { company, user, logOut } = this.props;
+    const { company: data, user, logOut } = this.props;
+    const company = new Company(data);
     const isOwnPage = (user.authenticated && company.owner && user.account.userid === company.owner.userid);
 
     let stats = (
@@ -134,7 +137,7 @@ class CompanyProfile extends Component {
       <div className={cx('main-section')}>
         <span className={cx('flex-row')}>
           <span style={{position:'relative', height:'14.4rem'}}>
-            <FlexibleImage src={profileImage || "/images/default_profile.jpg"} x={144} y={144} />
+            <FlexibleImage src={company.getProfileImage()} x={144} y={144} />
             <span style={{position:'absolute', bottom:'0.3rem', right:'0.4rem', 'zIndex':1}}>
               {this.state.editing? 
                 <ImageUploader name="ImageUploader" callback={this.profileImageEdited} >
