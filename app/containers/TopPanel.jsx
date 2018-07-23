@@ -26,7 +26,7 @@ const Navigation = ({ user, logOut }) => {
           <Link to={user.authenticated? (`/${user.account.type}/${user.account.userid}`) : '/login'}>
             <Img src="/images/site/icon_person.png" x={32} y={30} /> 
           </Link>
-          <Img src="/images/site/icon_alert.png" x={39} y={39} />
+          <Img src="/images/site/icon_alert.png" x={39} y={39} onClick={logOut} />
           <Img src="/images/site/icon_more.png" x={49} y={28} />
         </div>
       </nav>
