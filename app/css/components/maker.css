@@ -1,7 +1,6 @@
 @import '../common/typography';
 
 .main-section {
-  text-align: center;
 }
 
 .description { @apply --normal; }

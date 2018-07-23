@@ -33,7 +33,6 @@ export function portfoiloSubmit(portfolio) {
   return async (dispatch, getState) => {
     const { maker, user } = getState();
     const res = await Maker().submitPortfolio({id:maker.maker.userid, data:portfolio});
-    
     if (res.status === 200) {
       dispatch({type:types.PORTFOLIO_EDIT_SUCCESS, data: portfolio});
     }

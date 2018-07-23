@@ -6,7 +6,7 @@ import Switch from "react-switch";
 const OnOffSwitch = ({ onChange, checked, name, ...props }) => {
 
   return (
-    <span style={{'text-align':'left'}}>
+    <span style={{'textAlign':'left'}}>
       <Switch 
           onChange={onChange}
           checked={checked || false}

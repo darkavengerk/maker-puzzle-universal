@@ -13,7 +13,7 @@ const Schema = new mongoose.Schema({
   link_name: { type: String, unique: true },
   name: { type: String, unique: true},
   profilePicture: String,
-  companies: [{type: ObjectId, ref: 'User'}],
+  companies: [{type: ObjectId, ref: 'Company'}],
   users: [{type: ObjectId, ref: 'User'}],
   features: [{
     title: String,

@@ -162,7 +162,7 @@
   width: 100%;
 }
 
-th {
+.history th {
   height: 20px;
   font-family: NanumBarunGothic;
   font-size: 11px;
@@ -175,7 +175,7 @@ th {
   color: #777777;
 }
 
-th, td {
+.history th, .history td {
   border: solid 1px #dcdcdc;
   height: 2rem;
   vertical-align: middle;

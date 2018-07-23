@@ -29,7 +29,11 @@ export default () => {
       method: 'POST',
       url: `/api/company/${id}`,
       data
-    })
+    }),
+    searchCompaniesByName: ({keyword}) => client.request({
+      method: 'GET',
+      url: `/api/company/search/${keyword}`
+    }),
   };
 };
 

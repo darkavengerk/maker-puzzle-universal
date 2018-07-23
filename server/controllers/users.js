@@ -1,12 +1,12 @@
 import passport from 'passport';
 import User from '../db/mongo/models/user';
+import Company, {autoComplete as companyAutoComplete} from '../db/mongo/models/company';
+import Project, {autoComplete as projectAutoComplete} from '../db/mongo/models/project';
 import Metadata from '../db/mongo/models/metadata';
-import Project, {autoComplete} from '../db/mongo/models/project';
 
 export function all(req, res) {
   User.find({}).exec((err, users) => {
     if (err) {
-      console.log('Error in first query');
       return res.status(500).send('Something went wrong getting the data');
     }
 
@@ -18,7 +18,6 @@ export async function single(req, res) {
   let user = await User.findOne({'userid':req.params.id}).lean();
 
   if (!user) {
-    console.log('Error in first query: User not found: ' + req.params.id);
     return res.status(500).send('Something went wrong getting the data');
   }
 
@@ -30,7 +29,6 @@ export async function portfolio(req, res) {
   let user = await User.findOne({'userid':req.params.id}).populate('portfolios.project').lean();
 
   if (!user) {
-    console.log('Error in first query: User not found: ' + req.params.id);
     return res.status(500).send('Something went wrong getting the data');
   }
 
@@ -69,7 +67,6 @@ export function updateFeatures(req, res) {
   User.update({userid:userid}, {$set:{features, about, 'profile.picture':profile.picture}}, (err, result) => {
 
     if (err) {
-      console.log(err);
       return res.status(500).send('Something went wrong getting the data');
     }
 
@@ -87,40 +84,31 @@ export async function addPortfolio(req, res) {
   let [user, project, company] = await Promise.all([
     User.findOne({userid}), 
     Project.findOne({name: location}),
-    User.findOne({type:'company', 'profile.name': companyName})
+    Company.findOne({'name': companyName})
   ]);
 
   portfolio.user = user._id;
 
-  if(project) {
-    portfolio.project = project._id;
-  } 
-  else {
+  if(!project) {
     project = new Project({name: location});
     project = await Metadata.populateMetadata('Project', project);
-    portfolio.project = project._id;
   }
-
-  if(company) {
-    portfolio.company = company._id;
-  } 
-  else {
-    company = new User({profile:{name: companyName}});
+  portfolio.project = project._id;
+  if(!company) {
+    company = new Company({name: companyName});
     company = await Metadata.populateMetadata('Company', company);
-    portfolio.company = company._id;
   }
-
+  portfolio.company = company._id;
   user.portfolios.push(portfolio);
   project.portfolios.push(portfolio);
   project.users.addToSet(user._id);
-
   company.portfolios.push(portfolio);
-  company.companyProfile.makers.addToSet(user._id);
-  company.companyProfile.projects.addToSet(project._id);
-
+  company.users.addToSet(user._id);
+  company.projects.addToSet(project._id);
   await Promise.all([user.save(), project.save(), company.save()]);
-
-  autoComplete.buildCache(err => res.json({user, project}));
+  res.json({user, project, company});
+  companyAutoComplete.buildCache(err => {});
+  projectAutoComplete.buildCache(err => {});
 }
 
 /**

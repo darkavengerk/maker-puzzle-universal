@@ -3,7 +3,7 @@ import * as types from '../types';
 import cloneDeep from 'lodash/cloneDeep';
 
 const company = (
-  state = {profile:{}, companyProfile:{}},
+  state = {portfolios:[]},
   action
 ) => {
   switch (action.type) {
@@ -14,10 +14,6 @@ const company = (
     case types.REQUEST_SUCCESS:
       if (action.data && action.data.company) return action.data.company;
       return state;
-
-    case types.PROFILE_EDIT_SUCCESS:
-      const {features, about, profile} = action.data;
-      return {...state, features, about, profile}
     
     case types.PORTFOLIO_EDITOR_START:
       return {...state, isAddingPortfolio: true}

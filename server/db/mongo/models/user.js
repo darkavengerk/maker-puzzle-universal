@@ -34,8 +34,8 @@ const UserSchema = new mongoose.Schema({
 
   makerProfile: {
     gender: { type: String, default: '' },
-    companies: [{type: ObjectId, ref: 'User'}],
-    companiesInfo: [{
+    companiesInfo: [{type: ObjectId, ref: 'Company'}],
+    companies: [{
       name: String,
       link_name: String,
       period: String,
