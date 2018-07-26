@@ -22,7 +22,8 @@ const Schema = new mongoose.Schema({
     editable: Boolean,
     optional: Boolean // whether it is mandatory or not
   }],
-  portfolios : [Portfolio]
+  portfolios : [Portfolio],
+  companyPortfolios : [Portfolio]
 });
 
 Schema.pre('save', function(next) {
