@@ -16,7 +16,7 @@ const ContentsSection = ({ portfolio, maker, portfoiloEditorStart }) => {
     return (
       <div className={cx('main-section')}>
         <Link to={`/maker/${ownerId}/portfolio/${portfolio.pid}`}>
-          <div className={cx('text-section')}>
+          <div className={cx('text', 'text-section')}>
             <h1>
               {portfolio.location}
             </h1>

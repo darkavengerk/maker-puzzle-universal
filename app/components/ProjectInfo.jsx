@@ -34,11 +34,13 @@ const ProjectInfo = ({ owner }) => {
       <ProjectProfile />
 
       <GreyTitle title={'참여 기업'} top="38" bottom="16" />
-      {project.portfolios.map((p,i) => 
+      {project.portfolios.map((p,i) => p.companyName && p.title?
         <div key={i}>
-          <div className={cx('ref-title')}>{p.companyName}</div>
+          <Link to={'/company/' + p.companyName.replace(' ', '_')}>
+            <div className={cx('ref-title')}>{p.companyName}</div>
+          </Link>
           <div className={cx('ref-content')}>{p.title}</div>
-        </div>)
+        </div> : null)
       }
 
       <GreyTitle title={'프로젝트 참여 메이커'} top="33" bottom="26" />

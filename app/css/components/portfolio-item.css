@@ -13,8 +13,24 @@
   width: 43.7rem;
 }
 
+.text h1, .text p {
+  margin: 0rem;
+  font-family: AppleSDGothicNeo;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #4a4a4a;
+}
+
 .text-section {
   width: 21.4rem;
+  height: 5.4rem;
+  padding-top: 0.9rem;
+}
+
+.text-section-wide {
+  width: 43.7rem;
   height: 5.4rem;
   padding-top: 0.9rem;
 }
@@ -24,33 +40,19 @@
   height: 5.4rem;
   padding-top: 0.9rem;
   display: flex;
-  align-items: center;
+  align-items: top;
 }
 
-.text-section h1, .text-section-type2 h1 {
-  margin: 0rem;
-  font-family: AppleSDGothicNeo;
+.text h1 {
   font-size: 1.5rem;
   font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
   line-height: 1.33;
-  letter-spacing: normal;
-  text-align: center;
-  color: #4a4a4a;
 }
 
-.text-section p, .text-section-type2 p {
-  margin: 0rem;
-  font-family: AppleSDGothicNeo;
+.text p {
   font-size: 1.2rem;
   font-weight: 200;
-  font-style: normal;
-  font-stretch: normal;
   line-height: 1.67;
-  letter-spacing: normal;
-  text-align: center;
-  color: #4a4a4a;
 }
 
 .text-section-type2 h1, .text-section-type2 p {
