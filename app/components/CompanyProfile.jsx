@@ -11,7 +11,7 @@ import FlexibleImage from '../components/FlexibleImage';
 import Border from '../components/SingleLine';
 import ImageUploader from '../components/ImageUploader';
 import Features from '../components/Features';
-import styles from '../css/components/maker-profile';
+import styles from '../css/components/company-profile';
 
 import { featureEditSave } from '../actions/makers';
 import { logOut } from '../actions/users';
@@ -81,6 +81,18 @@ class CompanyProfile extends Component {
     const company = new Company(data);
     const isOwnPage = (user.authenticated && company.owner && user.account.userid === company.owner.userid);
 
+    let image = null;
+    if(company.profileImage) {
+      image = <FlexibleImage src={company.profileImage} x={144} y={144} />;
+    }
+    else {
+      image = (
+        <div className={cx('empty-profile')}>
+          <FlexibleImage src={company.getProfileImage()} x={58} y={58} />
+        </div>
+      );
+    }
+
     let stats = (
       <span className={cx('stats-area', 'flex-row')}>
         <span className={cx('maker-stats', 'flex-col')}>
@@ -137,7 +149,7 @@ class CompanyProfile extends Component {
       <div className={cx('main-section')}>
         <span className={cx('flex-row')}>
           <span style={{position:'relative', height:'14.4rem'}}>
-            <FlexibleImage src={company.getProfileImage()} x={144} y={144} />
+            {image}
             <span style={{position:'absolute', bottom:'0.3rem', right:'0.4rem', 'zIndex':1}}>
               {this.state.editing? 
                 <ImageUploader name="ImageUploader" callback={this.profileImageEdited} >
