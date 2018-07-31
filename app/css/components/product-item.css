@@ -3,14 +3,10 @@
   display: inline-block;
   width: 16rem;
   height: 21.5rem;
-  margin: 0 0.9rem 0.9rem 0;
+  margin: 0 2rem 2rem 0;
 
   background-color: #ffffff;
   box-shadow: 0 5px 35px 0 rgba(163, 163, 163, 0.5);
-}
-
-.wide {
-  width: 43.7rem;
 }
 
 .text h1, .text p {
@@ -24,23 +20,9 @@
 }
 
 .text-section {
-  width: 21.4rem;
+  width: 16rem;
   height: 5.5rem;
   padding-top: 0.9rem;
-}
-
-.text-section-wide {
-  width: 43.7rem;
-  height: 5.4rem;
-  padding-top: 0.9rem;
-}
-
-.text-section-type2 {
-  width: 21.4rem;
-  height: 5.4rem;
-  padding-top: 0.9rem;
-  display: flex;
-  align-items: top;
 }
 
 .text h1 {
@@ -53,10 +35,6 @@
   font-size: 1.2rem;
   font-weight: 200;
   line-height: 1.67;
-}
-
-.text-section-type2 h1, .text-section-type2 p {
-  text-align: left;
 }
 
 .profile-image {
