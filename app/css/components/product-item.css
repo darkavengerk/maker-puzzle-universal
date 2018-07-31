@@ -1,0 +1,120 @@
+
+.main-section {
+  display: inline-block;
+  width: 16rem;
+  height: 21.5rem;
+  margin: 0 0.9rem 0.9rem 0;
+
+  background-color: #ffffff;
+  box-shadow: 0 5px 35px 0 rgba(163, 163, 163, 0.5);
+}
+
+.wide {
+  width: 43.7rem;
+}
+
+.text h1, .text p {
+  margin: 0rem;
+  font-family: AppleSDGothicNeo;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #4a4a4a;
+}
+
+.text-section {
+  width: 21.4rem;
+  height: 5.5rem;
+  padding-top: 0.9rem;
+}
+
+.text-section-wide {
+  width: 43.7rem;
+  height: 5.4rem;
+  padding-top: 0.9rem;
+}
+
+.text-section-type2 {
+  width: 21.4rem;
+  height: 5.4rem;
+  padding-top: 0.9rem;
+  display: flex;
+  align-items: top;
+}
+
+.text h1 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.33;
+}
+
+.text p {
+  font-size: 1.2rem;
+  font-weight: 200;
+  line-height: 1.67;
+}
+
+.text-section-type2 h1, .text-section-type2 p {
+  text-align: left;
+}
+
+.profile-image {
+  margin: 0 1rem;
+  border-radius: 50%;
+}
+
+.add-product {
+  display: flex;
+  flex-direction: column;
+  /*justify-content: center;*/
+  align-items: center;
+  margin: 3.6rem 0;
+}
+
+.add-product-title {
+  margin-bottom: 1rem;
+  width: 10rem;
+  font-family: NanumBarunGothic;
+  font-size: 2rem;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ff5b00;
+}
+
+.add-product-icon {
+  user-select: none;
+  margin-top: 1.1rem;
+  background: #ff5b00;;
+  width: 7.3rem;
+  height: 7.3rem;
+  border-radius: 50%;
+  position: relative;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 9rem;
+}
+
+.horizontal {
+  width: 5.3rem;
+  height: 0.4rem;
+  background: #ffffff;
+  position: relative;
+  left : 0.1rem;
+  top: 3.5rem;
+}
+
+.vertical {
+  height: 5.3rem;
+  width: 0.4rem;
+  background: #ffffff;
+  position: relative;
+  left : 1.5rem;
+  top : 0rem;
+}

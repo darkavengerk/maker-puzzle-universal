@@ -22,7 +22,10 @@ const company = (
       return {...state, isAddingPortfolio: false}
     
     case types.PORTFOLIO_EDIT_SUCCESS:
-      return {...state, portfolios: [...state.portfolios, action.data], isAddingPortfolio: false}
+      const { company, portfolio } = action.data;
+      if(company._id === state._id)
+        return {...state, portfolios: [...state.portfolios, portfolio], isAddingPortfolio: false};
+      return state;
 
     default:
       return state;

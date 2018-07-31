@@ -4,9 +4,11 @@ import classNames from 'classnames/bind';
 import MakerInfo from '../components/MakerInfo';
 import CompanyInfo from '../components/CompanyInfo';
 import PortfolioItem from '../components/PortfolioItem';
+import ProductItem from '../components/ProductItem';
 import PortfolioItemWide from '../components/PortfolioItemWide';
 import PortfolioItemExternal from '../components/PortfolioItemExternal';
 import PortfolioDetail from '../components/PortfolioDetail';
+import Padding from '../components/Padding';
 import NULL from '../components/null';
 
 import ProjectInfo from '../components/ProjectInfo';
@@ -76,7 +78,7 @@ class ContentsTagFactory {
     const Item = this.getItemTag();
 
     let contents = this.source.portfolios? this.source.portfolios.map(portfolio => {
-      return (<Item portfolio={portfolio} key={portfolio.title} />);
+      return (<Item portfolio={portfolio} key={portfolio.pid} />);
     }) : [];
 
     if(isOwnPage) {
@@ -107,37 +109,51 @@ class ContentsTagFactory {
       return this.set.getCompanyDetail(this.source, param.pid);
     }
 
-    let contents1 = this.source.portfolios? this.source.portfolios.map(portfolio => {
-      return (<PortfolioItemWide portfolio={portfolio} key={portfolio.title} />);
+    let companyPortfolios = this.source.portfolios? this.source.companyPortfolios.map(portfolio => {
+      return (<PortfolioItemWide portfolio={portfolio} key={portfolio.pid} />);
     }) : [];
 
     if(isOwnPage) {
-      contents1.push(<PortfolioItemWide key={'__new__'} />);
+      companyPortfolios.push(<PortfolioItemWide key={'__new__'} />);
     }
 
-    let contents2 = this.source.portfolios? this.source.portfolios.map(portfolio => {
-      return (<PortfolioItem portfolio={portfolio} key={portfolio.title} />);
+    let products = this.source.products? this.source.products.map(product => {
+      return (<ProductItem product={product} key={product.pid} />);
     }) : [];
 
     if(isOwnPage) {
-      contents2.push(<PortfolioItem key={'__new__'} />);
+      products.push(<ProductItem key={'__new__'} />);
     }
+
+    let portfolios = this.source.portfolios? this.source.portfolios.map(portfolio => {
+      return (<PortfolioItem portfolio={portfolio} key={portfolio.pid} />);
+    }) : [];
 
     return (<div>
               <p className={cx('main-panel-title')}>수행 프로젝트</p>
               <div className={cx('portfolio-list')}>
-                {contents1}
+                {companyPortfolios}
               </div>
               <Popup show={this.source.isAddingPortfolio} name="AddPortfolioPopup">
                 <AddPortfolio title="포트폴리오 추가하기" />
               </Popup>
+
+              <Padding height={'3.5rem'} />
+              
               <p className={cx('main-panel-title')}>제품 목록</p>
               <div className={cx('portfolio-list')}>
-                {contents2}
+                {products}
               </div>
               <Popup show={this.source.isAddingPortfolio} name="AddPortfolioPopup">
                 <AddPortfolio title="보유 제품 추가하기" />
               </Popup>
+
+              <Padding height={'3.5rem'} />
+              
+              <p className={cx('main-panel-title')}>메이커의 포트폴리오</p>
+              <div className={cx('portfolio-list')}>
+                {portfolios}
+              </div>
             </div>);
   }
 

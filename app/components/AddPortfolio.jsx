@@ -120,9 +120,8 @@ class AddPortfolio extends Component {
   }
 
   onSubmit(evt) {
-    const { maker, user, portfoiloSubmit } = this.props;
-    const pid = Math.max(0, ...maker.portfolios.map(p => p.pid)) + 1;
-    portfoiloSubmit({...this.state, pid});
+    const { portfoiloSubmit } = this.props;
+    portfoiloSubmit(this.state);
   }
 
   autoComplete(key) {

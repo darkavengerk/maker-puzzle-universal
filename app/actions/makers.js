@@ -34,7 +34,7 @@ export function portfoiloSubmit(portfolio) {
     const { maker, user } = getState();
     const res = await Maker().submitPortfolio({id:maker.maker.userid, data:portfolio});
     if (res.status === 200) {
-      dispatch({type:types.PORTFOLIO_EDIT_SUCCESS, data: portfolio});
+      dispatch({type:types.PORTFOLIO_EDIT_SUCCESS, data: res.data});
     }
     else {
       dispatch({type:types.PORTFOLIO_EDIT_FAILURE});

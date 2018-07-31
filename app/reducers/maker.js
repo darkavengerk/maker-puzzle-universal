@@ -26,7 +26,10 @@ const maker = (
       return {...state, isAddingPortfolio: false}
     
     case types.PORTFOLIO_EDIT_SUCCESS:
-      return {...state, portfolios: [...state.portfolios, action.data], isAddingPortfolio: false}
+      const { user, portfolio } = action.data;
+      if(user._id === state._id)
+        return {...state, portfolios: [...state.portfolios, portfolio], isAddingPortfolio: false};
+      return state;
 
     default:
       return state;

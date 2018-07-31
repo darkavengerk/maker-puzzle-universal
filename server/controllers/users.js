@@ -3,6 +3,7 @@ import User from '../db/mongo/models/user';
 import Company, {autoComplete as companyAutoComplete} from '../db/mongo/models/company';
 import Project, {autoComplete as projectAutoComplete} from '../db/mongo/models/project';
 import Metadata from '../db/mongo/models/metadata';
+import Misc from '../db/mongo/models/misc';
 
 export function all(req, res) {
   User.find({}).exec((err, users) => {
@@ -81,13 +82,15 @@ export async function addPortfolio(req, res) {
   const location = portfolio.location;
   const companyName = portfolio.companyName;
 
-  let [user, project, company] = await Promise.all([
+  let [user, project, company, pid] = await Promise.all([
     User.findOne({userid}), 
     Project.findOne({name: location}),
-    Company.findOne({'name': companyName})
+    Company.findOne({name: companyName}),
+    Misc.createID('portfolio')
   ]);
 
   portfolio.user = user._id;
+  portfolio.pid = pid;
 
   if(!project) {
     project = new Project({name: location});
@@ -106,7 +109,7 @@ export async function addPortfolio(req, res) {
   company.users.addToSet(user._id);
   company.projects.addToSet(project._id);
   await Promise.all([user.save(), project.save(), company.save()]);
-  res.json({user, project, company});
+  res.json({user, project, company, portfolio});
   companyAutoComplete.buildCache(err => {});
   projectAutoComplete.buildCache(err => {});
 }
