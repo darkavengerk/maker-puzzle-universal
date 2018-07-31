@@ -18,6 +18,13 @@
     align-items: center;
 }
 
+.logo {
+  position: fixed;
+  left:0;
+  top:0;
+  margin: 40px 0 0 40px;
+}
+
 .COMING-SOON {
   width: 401px;
   height: 43px;
