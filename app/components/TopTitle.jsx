@@ -10,13 +10,13 @@ const cx = classNames.bind(styles);
 
 const TitleSection = ({ title, thumbnailURL, to, props}) => {
 
-  const url = thumbnailURL? thumbnailURL : '';
+  const profileImage = thumbnailURL? <span className={cx('profile-image')}>
+            <ProfileImage src={thumbnailURL} x={40} y={40} />
+        </span> : null;
 
   return (
       <Link to={to} className={cx('main-section')}>
-        <span className={cx('profile-image')}>
-            <ProfileImage src={url} x={40} y={40} />
-        </span>
+        {profileImage}
         <span className={cx('title')}>
           {title}
         </span>

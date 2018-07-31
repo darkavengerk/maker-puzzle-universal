@@ -23,7 +23,7 @@ class Container extends Component {
         <TopTitle 
           title={company.getName()}
           to={company.getHomeLink()}
-          thumbnailURL={company.getProfileImage()} 
+          thumbnailURL={company.profileImage? company.getProfileImage():null} 
         />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
         <ContentsSection owner={company} contentsType="company" isOwnPage={isOwnPage} />
