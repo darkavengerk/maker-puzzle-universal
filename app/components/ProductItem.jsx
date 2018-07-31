@@ -5,11 +5,11 @@ import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import Image from '../components/FlexibleImage';
 import styles from '../css/components/product-item';
-import { portfoiloEditorStart } from '../actions/makers';
+import { productEditorStart } from '../actions/makers';
 
 const cx = classNames.bind(styles);
 
-const ContentsSection = ({ product, company, portfoiloEditorStart }) => {
+const ContentsSection = ({ product, company, productEditorStart }) => {
 
   if(product) {
     const companyLink = company.link_name || product.company.link_name;
@@ -39,7 +39,7 @@ const ContentsSection = ({ product, company, portfoiloEditorStart }) => {
           <div className={cx('add-product-title')}>
             추가하기
           </div>
-          <div className={cx('add-product-icon')} role="button" onClick={portfoiloEditorStart}>
+          <div className={cx('add-product-icon')} role="button" onClick={productEditorStart}>
             +
           </div>
         </div>
@@ -58,4 +58,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {portfoiloEditorStart})(ContentsSection);
+export default connect(mapStateToProps, {productEditorStart})(ContentsSection);

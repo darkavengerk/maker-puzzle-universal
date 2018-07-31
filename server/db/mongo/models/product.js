@@ -10,7 +10,7 @@ const ProductSchema = new mongoose.Schema({
   category: String,
   spec: String,
   companyName: String,
-  company: {type: ObjectId, ref: 'User'},
+  company: {type: ObjectId, ref: 'Company'},
   lastUpdated: {type:Date, default: Date.now},
   images: [String],
   pid: String,

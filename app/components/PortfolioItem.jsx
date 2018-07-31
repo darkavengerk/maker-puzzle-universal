@@ -9,10 +9,10 @@ import { portfoiloEditorStart } from '../actions/makers';
 
 const cx = classNames.bind(styles);
 
-const ContentsSection = ({ portfolio, maker, portfoiloEditorStart }) => {
+const ContentsSection = ({ portfolio, portfoiloEditorStart }) => {
 
   if(portfolio) {
-    const ownerId = maker.userid || portfolio.user.userid;
+    const ownerId = portfolio.user? portfolio.user.userid : 'unknown';
     return (
       <div className={cx('main-section')}>
         <Link to={`/maker/${ownerId}/portfolio/${portfolio.pid}`}>

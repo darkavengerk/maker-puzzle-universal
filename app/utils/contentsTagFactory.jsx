@@ -13,6 +13,7 @@ import NULL from '../components/null';
 
 import ProjectInfo from '../components/ProjectInfo';
 import AddPortfolio from '../components/AddPortfolio';
+import AddProduct from '../components/AddProduct';
 import Popup from '../components/Popup';
 
 import { Maker, Project, Company } from '../utils/objects'
@@ -144,8 +145,8 @@ class ContentsTagFactory {
               <div className={cx('portfolio-list')}>
                 {products}
               </div>
-              <Popup show={this.source.isAddingPortfolio} name="AddPortfolioPopup">
-                <AddPortfolio title="보유 제품 추가하기" />
+              <Popup show={this.source.isAddingProduct} name="AddProductPopup">
+                <AddProduct title="보유 제품 추가하기" company={this.source} />
               </Popup>
 
               <Padding height={'3.5rem'} />
