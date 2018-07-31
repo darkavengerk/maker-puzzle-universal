@@ -26,7 +26,6 @@
 }
 
 .COMING-SOON {
-  width: 401px;
   height: 43px;
   font-family: NanumBarunGothic;
   font-size: 60px;
@@ -41,7 +40,6 @@
 }
 
 .WHODIDTHIS {
-  width: 315px;
   height: 45px;
   font-family: NanumBarunGothic;
   font-size: 45px;
@@ -57,7 +55,6 @@
 }
 
 .DESC {
-  width: 418px;
   height: 38px;
   font-family: NanumBarunGothic;
   font-size: 20px;
@@ -69,6 +66,7 @@
   text-align: center;
   color: #ffb700;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  margin: 0  0 -10px;
 }
 
 .line {

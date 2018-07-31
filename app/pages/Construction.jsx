@@ -37,8 +37,8 @@ class Construction extends Component {
           <h1 className={cx('COMING-SOON')} >COMING SOON</h1>
           <div className={cx('line')}></div>
           <p className={cx('WHODIDTHIS')} >“여긴 누가 했지?”</p>
-          <p className={cx('DESC')} >도시 속 인상적인 공간을 만들어낸 메이커들이 모여있는
-건축인들을 위한 소셜 서비스가 곧 여러분을 찾아갑니다</p>
+          <p className={cx('DESC')} >도시 속 인상적인 공간을 만들어낸 메이커들이 모여있는</p>
+          <p className={cx('DESC')} >건축인들을 위한 소셜 서비스가 곧 여러분을 찾아갑니다</p>
           <div className={cx('bottom')}></div>
         </div>
       </Page>
