@@ -4,6 +4,7 @@
  */
 import mongoose from 'mongoose';
 import {default as Portfolio} from './portfolio';
+import {default as Product} from './portfolio';
 
 const {AutoComplete} = require('../utils/autocomplete')
 const ObjectId = mongoose.Schema.Types.ObjectId;
@@ -23,7 +24,8 @@ const Schema = new mongoose.Schema({
     optional: Boolean // whether it is mandatory or not
   }],
   portfolios : [Portfolio],
-  companyPortfolios : [Portfolio]
+  companyPortfolios : [Portfolio],
+  products : [Product]
 });
 
 Schema.pre('save', function(next) {
