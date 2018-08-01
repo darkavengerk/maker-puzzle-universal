@@ -16,7 +16,7 @@ export function all(req, res) {
 }
 
 export async function single(req, res) {
-  let user = await User.findOne({'userid':req.params.id}).lean();
+  let user = await User.findOne({'userid':req.params.id}).populate('portfolios.user').lean();
 
   if (!user) {
     return res.status(500).send('Something went wrong getting the data');

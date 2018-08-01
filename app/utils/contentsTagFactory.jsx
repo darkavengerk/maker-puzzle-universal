@@ -135,9 +135,6 @@ class ContentsTagFactory {
               <div className={cx('portfolio-list')}>
                 {companyPortfolios}
               </div>
-              <Popup show={this.source.isAddingPortfolio} name="AddPortfolioPopup">
-                <AddPortfolio title="포트폴리오 추가하기" />
-              </Popup>
 
               <Padding height={'3.5rem'} />
               
@@ -145,9 +142,6 @@ class ContentsTagFactory {
               <div className={cx('portfolio-list')}>
                 {products}
               </div>
-              <Popup show={this.source.isAddingProduct} name="AddProductPopup">
-                <AddProduct title="보유 제품 추가하기" company={this.source} />
-              </Popup>
 
               <Padding height={'3.5rem'} />
               
@@ -155,6 +149,13 @@ class ContentsTagFactory {
               <div className={cx('portfolio-list')}>
                 {portfolios}
               </div>
+              
+              <Popup show={this.source.isAddingPortfolio} name="AddPortfolioPopup">
+                <AddPortfolio title="포트폴리오 추가하기" />
+              </Popup>
+              <Popup show={this.source.isAddingProduct} name="AddProductPopup">
+                <AddProduct title="보유 제품 추가하기" company={this.source} />
+              </Popup>
             </div>);
   }
 
