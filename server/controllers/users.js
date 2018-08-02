@@ -16,18 +16,28 @@ export function all(req, res) {
 }
 
 export async function single(req, res) {
-  let user = await User.findOne({'userid':req.params.id}).populate('portfolios.user').lean();
+  let user = await User
+              .findOne({'userid':req.params.id})
+              .populate('picture')
+              .populate('portfolios.user')
+              .populate('portfolios.project')
+              .populate('portfolios.images')
+              .lean();
 
   if (!user) {
     return res.status(500).send('Something went wrong getting the data');
   }
-
   return res.json(user);
 }
 
 export async function portfolio(req, res) {
   const {pid} = req.params;
-  let user = await User.findOne({'userid':req.params.id}).populate('portfolios.project').lean();
+  let user = await User
+              .findOne({'userid':req.params.id})
+              .populate('picture')
+              .populate({path: 'portfolios.project', populate: 'profilePicture'})
+              .populate({path: 'portfolios.images'})
+              .lean();
 
   if (!user) {
     return res.status(500).send('Something went wrong getting the data');
@@ -63,14 +73,13 @@ export function login(req, res, next) {
 
 export function updateFeatures(req, res) {
   const userid = req.params.id;
-  const {features, about, profile} = req.body;
+  let {features, about, picture} = req.body;
+  picture = picture._id || picture;
 
-  User.update({userid:userid}, {$set:{features, about, 'profile.picture':profile.picture}}, (err, result) => {
-
+  User.update({userid:userid}, {$set:{features, about, picture}}, (err, result) => {
     if (err) {
       return res.status(500).send('Something went wrong getting the data');
     }
-
     res.json(result);
   });
 }
@@ -91,6 +100,8 @@ export async function addPortfolio(req, res) {
 
   portfolio.user = user._id;
   portfolio.pid = pid;
+  portfolio.images = portfolio.images.map(p => p._id);
+  console.log(portfolio);
 
   if(!project) {
     project = new Project({name: location});
@@ -102,12 +113,14 @@ export async function addPortfolio(req, res) {
     company = await Metadata.populateMetadata('Company', company);
   }
   portfolio.company = company._id;
+  console.log('push');
   user.portfolios.push(portfolio);
   project.portfolios.push(portfolio);
   project.users.addToSet(user._id);
   company.portfolios.push(portfolio);
   company.users.addToSet(user._id);
   company.projects.addToSet(project._id);
+  console.log('save');
   await Promise.all([user.save(), project.save(), company.save()]);
   res.json({user, project, company, portfolio});
   companyAutoComplete.buildCache(err => {});

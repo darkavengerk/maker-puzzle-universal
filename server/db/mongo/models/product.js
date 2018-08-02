@@ -12,7 +12,7 @@ const ProductSchema = new mongoose.Schema({
   companyName: String,
   company: {type: ObjectId, ref: 'Company'},
   lastUpdated: {type:Date, default: Date.now},
-  images: [String],
+  images: [{type: ObjectId, ref: 'ImageFile'}],
   pid: String,
   isPrivate: Boolean
 });

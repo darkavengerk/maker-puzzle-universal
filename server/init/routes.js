@@ -11,7 +11,7 @@ const topicsController = controllers && controllers.topics;
 const usersController = controllers && controllers.users;
 const projectController = controllers && controllers.projects;
 const companyController = controllers && controllers.companies;
-const imageController = controllers && controllers.images;
+const fileController = controllers && controllers.files;
 
 export default (app) => {
   // user routes
@@ -86,5 +86,5 @@ export default (app) => {
     console.warn(unsupportedMessage('topics routes'));
   }
 
-  app.post('/image', imageController.upload);
+  app.post('/file', fileController.upload);
 };

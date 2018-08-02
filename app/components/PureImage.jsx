@@ -4,6 +4,11 @@ import classNames from 'classnames/bind';
 
 const ProfileImage = ({ src, x='auto', y='auto', ...props }) => {
 
+  let url = src? src : "/images/default.jpg";
+  if(typeof(src) === 'object' && src.original) {
+    url = src.original;
+  }
+
   var imageStyle = {
     width : x,
     height : y
@@ -18,7 +23,7 @@ const ProfileImage = ({ src, x='auto', y='auto', ...props }) => {
   }
 
   return (
-    <img {...props} src={src} style={imageStyle} >
+    <img {...props} src={url} style={imageStyle} >
     </img>
   );
 };

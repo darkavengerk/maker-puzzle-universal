@@ -78,6 +78,9 @@
 }
 
 .button-area {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .follow-button {
@@ -103,7 +106,7 @@
   height: 2rem;
   border-radius: 1px;
   border: solid 1px #676767;
-
+  
   font-family: NanumBarunGothic;
   font-size: 1.1rem;
   font-weight: normal;

@@ -12,7 +12,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 const Schema = new mongoose.Schema({
   link_name: { type: String, unique: true },
   name: { type: String, unique: true},
-  profilePicture: String,
+  profilePicture: {type: ObjectId, ref: 'ImageFile'},
   companies: [{type: ObjectId, ref: 'Company'}],
   users: [{type: ObjectId, ref: 'User'}],
   features: [{

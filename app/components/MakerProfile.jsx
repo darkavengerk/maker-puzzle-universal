@@ -40,12 +40,11 @@ class MakerProfile extends Component {
 
   cancelEdit() {
     const { maker } = this.props;
-    const { features, profile, about } = maker;
-    this.setState({ features, profile, about, editing: false });
+    const { features, about, picture } = maker;
+    this.setState({ features, picture, about, editing: false });
   }
 
   featureEdited(key, text) {
-
     const target = this.state;    
     const features = target.features.map(feature => {
       if(feature.title === key) {
@@ -62,13 +61,13 @@ class MakerProfile extends Component {
   }
 
   profileImageEdited(err, img) {
-    this.setState(_.merge({}, this.state, {profile: {picture : img}}));
+    this.setState({picture : img});
   };
 
   async submit() {
     const { featureEditSave } = this.props;
-    const {features, about, profile} = this.state;
-    const res = await featureEditSave({features, about, profile});
+    const { picture, features, about } = this.state;
+    const res = await featureEditSave({ picture, features, about });
     if (res.status === 200) {
       this.setState({editing: false});
     }
@@ -128,7 +127,7 @@ class MakerProfile extends Component {
       }
     }
 
-    const profileImage = this.state.editing? this.state.profile.picture : maker.profile.picture;
+    const profileImage = this.state.editing? this.state.picture : maker.picture;
 
     return (
       <div className={cx('main-section')}>

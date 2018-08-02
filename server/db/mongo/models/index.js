@@ -4,4 +4,5 @@ export default function loadModels() {
   require('./company');
   require('./project');
   require('./metadata');
+  require('./image');
 }

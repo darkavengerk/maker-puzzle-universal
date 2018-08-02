@@ -27,7 +27,7 @@ class User {
 class Maker extends User {
 
   constructor(data) {
-    super( data.profile? data : { profile:{} } );
+    super( data.profile? data : {} );
   }
 
   getType() {
@@ -35,7 +35,7 @@ class Maker extends User {
   }
 
   getProfileImage() {
-    const { profile: { picture } } = this;
+    const { picture } = this;
     return picture || '/images/site/def_maker.png';
   }
 

@@ -160,7 +160,7 @@ class ContentsTagFactory {
   }
 
   getMakerDetail(isOwnPage) {
-    if(this.source.portfolioSelected)
+    if(this.source.portfolioSelected && this.source.portfolioSelected.portfolio)
       return <PortfolioDetail 
         portfolio={this.source.portfolioSelected.portfolio} 
         edit={isOwnPage}

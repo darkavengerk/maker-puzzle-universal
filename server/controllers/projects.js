@@ -32,7 +32,13 @@ export function search(req, res) {
 
 export async function one(req, res) {
   const { link_name } = req.params;
-  const result = await Project.findOne({ link_name }).populate(['portfolios.user', 'users', 'companies']).lean();
+  const result = await Project
+                    .findOne({ link_name })
+                    .populate({path:'portfolios.images'}) 
+                    .populate({path:'portfolios.user', populate:{path:'picture'}}) 
+                    .populate({path:'users', populate:{path:'picture'}}) 
+                    .populate({path:'companies', populate:{path:'profilePicture'}}) 
+                    .lean();
   return res.json(result);
 }
 

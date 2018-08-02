@@ -13,7 +13,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 const Schema = new mongoose.Schema({
   name: { type: String, unique: true},
   link_name: { type: String, unique: true },
-  profilePicture: String,
+  profilePicture: {type: ObjectId, ref: 'ImageFile'},
   owner: {type: ObjectId, ref: 'User', default: null},
   projects: [{type: ObjectId, ref: 'Project'}],
   users: [{type: ObjectId, ref: 'User'}],

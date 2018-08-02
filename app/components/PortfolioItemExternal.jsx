@@ -18,7 +18,7 @@ const ContentsSection = ({ portfolio, maker, project, portfoiloEditorStart }) =>
       <div className={cx('main-section')}>
           <div className={cx('text', 'text-section-type2')}>
             <Link to={`/maker/${user.userid}`}>
-              <Image src={user.profile.picture} x={31} y={31} className={cx('profile-image')} />
+              <Image src={user.picture} x={31} y={31} className={cx('profile-image')} />
             </Link>
             <Link to={`/project/${project.link_name}/maker/${user.userid}/${portfolio.pid}`}>
               <span>

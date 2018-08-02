@@ -24,7 +24,7 @@ const ContentsSection = ({ portfolio, portfoiloEditorStart }) => {
               {portfolio.title}
             </p>
           </div>
-          <Image src={`${portfolio.images[0]}`} x={214} y={214}/>
+          <Image src={portfolio.images[0]} x={214} y={214}/>
         </Link>        
       </div>
     );

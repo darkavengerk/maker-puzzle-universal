@@ -10,7 +10,7 @@ import styles from '../css/components/portfolio-detail';
 
 const cx = classNames.bind(styles);
 
-const ContentsSection = ({ portfolio, user, maker, referer }) => {
+const ContentsSection = ({ portfolio, user, referer }) => {
 
   const imgs = portfolio.images.map(img => (
     <div key={img} className={cx('image')} >
@@ -61,7 +61,6 @@ ContentsSection.propTypes = {
 function mapStateToProps(state) {
   return {
     user: state.user,
-    maker: state.maker.maker
   };
 }
 

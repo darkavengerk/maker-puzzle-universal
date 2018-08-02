@@ -25,10 +25,8 @@ const UserSchema = new mongoose.Schema({
 
   type: { type: String, default: 'maker', required: true },
 
-  profile: {
-    name: { type: String, default: '' },
-    picture: { type: String, default: '' }
-  },
+  name: { type: String, default: '' },
+  picture: {type: ObjectId, ref: 'ImageFile'},
 
   companiesOwned: [{type: ObjectId, ref: 'Company'}],
 

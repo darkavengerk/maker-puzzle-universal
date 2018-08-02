@@ -15,7 +15,7 @@ const Schema = new mongoose.Schema({
   company: {type: ObjectId, ref: 'User'},
   tags: [String],
   lastUpdated: {type:Date, default: Date.now},
-  images: [String],
+  images: [{type: ObjectId, ref: 'ImageFile'}],
   pid: String,
   isPrivate: Boolean
 });

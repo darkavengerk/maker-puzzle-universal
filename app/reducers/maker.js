@@ -16,8 +16,8 @@ const maker = (
       return state;
 
     case types.PROFILE_EDIT_SUCCESS:
-      const {features, about, profile} = action.data;
-      return {...state, features, about, profile}
+      const {features, about, picture} = action.data;
+      return {...state, features, about, picture}
     
     case types.PORTFOLIO_EDITOR_START:
       return {...state, isAddingPortfolio: true}

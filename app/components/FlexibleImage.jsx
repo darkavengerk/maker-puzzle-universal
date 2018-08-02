@@ -5,10 +5,13 @@ import PureImage from './PureImage';
 
 const ProfileImage = ({ src, x, y, pureImage=false, ...props }) => {
 
-  const url = src? src : "/images/default.jpg";
-
   if(pureImage) {
     return (<PureImage src={src} x={x} y={y} {...props} />);
+  }
+
+  let url = src? src : "/images/default.jpg";
+  if(typeof(src) === 'object' && src.original) {
+    url = src.original;
   }
 
   if(!x) x=40;
@@ -38,7 +41,6 @@ const ProfileImage = ({ src, x, y, pureImage=false, ...props }) => {
 };
 
 ProfileImage.propTypes = {
-  src: PropTypes.string,
 };
 
 export default ProfileImage;

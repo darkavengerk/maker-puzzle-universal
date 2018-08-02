@@ -1,7 +1,6 @@
 /* eslint consistent-return: 0, no-else-return: 0*/
-import md5 from 'spark-md5';
 import * as types from '../types';
-import { Image } from '../services';
+import { File } from '../services';
 
 
 function createTopicRequest(data) {
@@ -31,7 +30,7 @@ export function uploadFile(userid, file, cb) {
     reader.onloadend = async () => {
       file.src = reader.result;
 
-      const res = await Image().upload({ data : {file:file, name:file.name, userid:userid}});
+      const res = await File().upload({ data : {file:file, name:file.name, userid:userid}});
       
       if (res.status === 200) {
         if(cb) cb(null, res.data);

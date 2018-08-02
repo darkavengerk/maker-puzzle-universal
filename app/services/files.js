@@ -6,7 +6,7 @@ export default () => {
   return {
     upload: ({ data }) => client.request({
       method: 'POST',
-      url: `/image`,
+      url: `/file`,
       data
     })
   };
