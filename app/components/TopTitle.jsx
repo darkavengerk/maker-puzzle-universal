@@ -25,8 +25,7 @@ const TitleSection = ({ title, thumbnailURL, to, props}) => {
 };
 
 TitleSection.propTypes = {
-  title: PropTypes.string,
-  thumbnailURL: PropTypes.string
+  title: PropTypes.string
 };
 
 function mapStateToProps(state) {

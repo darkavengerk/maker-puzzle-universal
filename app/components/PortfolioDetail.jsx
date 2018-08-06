@@ -54,8 +54,7 @@ const ContentsSection = ({ portfolio, user, referer }) => {
 
 ContentsSection.propTypes = {
   portfolio: PropTypes.object.isRequired,
-  user: PropTypes.object,
-  maker: PropTypes.object.isRequired
+  user: PropTypes.object
 };
 
 function mapStateToProps(state) {

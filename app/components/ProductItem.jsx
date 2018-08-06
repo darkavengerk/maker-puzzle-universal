@@ -24,7 +24,7 @@ const ContentsSection = ({ product, company, productEditorStart }) => {
               {product.category}
             </p>
           </div>
-          <Image src={`${product.images[0]}`} x={160} y={160}/>
+          <Image src={product.images[0]} x={160} y={160}/>
         </Link>        
       </div>
     );

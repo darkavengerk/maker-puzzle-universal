@@ -40,7 +40,4 @@ const ProfileImage = ({ src, x, y, pureImage=false, ...props }) => {
   );
 };
 
-ProfileImage.propTypes = {
-};
-
 export default ProfileImage;

@@ -28,8 +28,4 @@ const ProfileImage = ({ src, x='auto', y='auto', ...props }) => {
   );
 };
 
-ProfileImage.propTypes = {
-  src: PropTypes.string,
-};
-
 export default ProfileImage;

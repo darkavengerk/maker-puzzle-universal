@@ -32,7 +32,7 @@ const ContentsSection = ({ portfolio, maker, project, portfoiloEditorStart }) =>
             </Link>        
           </div>
           <Link to={`/project/${project.link_name}/maker/${user.userid}/${portfolio.pid}`}>
-            <Image src={`${portfolio.images[0]}`} x={214} y={214}/>
+            <Image src={portfolio.images[0]} x={214} y={214}/>
           </Link>
       </div>
     );
