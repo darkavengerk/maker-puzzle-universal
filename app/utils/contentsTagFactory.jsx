@@ -70,7 +70,7 @@ class ContentsTagFactory {
     return this.set[name];
   }
 
-  getMakerContent(param, isOwnPage) {
+  getMakerContent({param, isOwnPage, portfoiloSubmit, portfoiloEditorCancel}) {
     
     if(param.pid) {
       return this.getMakerDetail(this.source, param.pid);
@@ -92,19 +92,20 @@ class ContentsTagFactory {
                 {contents}
               </div>
               <Popup show={this.source.isAddingPortfolio} name="AddPortfolioPopup">
-                <AddPortfolio title="포트폴리오 수정하기" />
+                <AddPortfolio title="포트폴리오 수정하기" submit={portfoiloSubmit} cancel={portfoiloEditorCancel} />
               </Popup>
             </div>);
   }
 
-  getProjectContent(param, isOwnPage) {
+  getProjectContent(props) {
+    const { param, isOwnPage } = props;
     if(param.pid) {
       return this.getProjectDetail(param.pid) || this.getProjectContent({}, isOwnPage);
     }
-    return this.getMakerContent(param, isOwnPage);
+    return this.getMakerContent(props);
   }
 
-  getCompanyContent(param, isOwnPage) {
+  getCompanyContent({param, isOwnPage}) {
     
     if(param.pid) {
       return this.set.getCompanyDetail(this.source, param.pid);

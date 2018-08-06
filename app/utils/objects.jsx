@@ -13,12 +13,12 @@ class User {
       this.factory = new Factory(this);
   }
 
-  getInfo() {
-    const Info = this.factory.getInfoTag();
+  getInfo(props) {
+    const Info = this.factory.getInfoTag(props);
     return <Info owner={this} />;
   }
 
-  getContent(param, isOwnPage) {
+  getContent(props) {
     return null;
   }
 
@@ -40,15 +40,15 @@ class Maker extends User {
   }
 
   getName() {
-    return this.profile.name;
+    return this.name;
   }
 
   getHomeLink() {
     return '/maker/' + this.userid;
   }
 
-  getContent(param, isOwnPage) {
-    return this.factory.getMakerContent(param, isOwnPage);
+  getContent(props) {
+    return this.factory.getMakerContent(props);
   }
 }
 
@@ -74,8 +74,8 @@ class Company extends User {
     return '/company/' + this.link_name;
   }
 
-  getContent(param, isOwnPage) {
-    return this.factory.getCompanyContent(param, isOwnPage);
+  getContent(props) {
+    return this.factory.getCompanyContent(props);
   }
 }
 
@@ -101,8 +101,8 @@ class Project extends User {
     return '/project/' + this.link_name;
   }
 
-  getContent(param, isOwnPage) {
-    return this.factory.getProjectContent(param, isOwnPage);
+  getContent(props) {
+    return this.factory.getProjectContent(props);
   }
 
 }

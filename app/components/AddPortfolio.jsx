@@ -12,8 +12,6 @@ import SingleLine from '../components/SingleLine';
 import AutoComplete from '../components/AutoComplete';
 import styles from '../css/components/add-portfolio';
 
-import { portfoiloEditorCancel, portfoiloSubmit } from '../actions/makers';
-
 import { Maker, Project, Company } from '../services';
 
 const cx = classNames.bind(styles);
@@ -120,8 +118,8 @@ class AddPortfolio extends Component {
   }
 
   onSubmit(evt) {
-    const { portfoiloSubmit } = this.props;
-    portfoiloSubmit(this.state);
+    const { submit } = this.props;
+    submit(this.state);
   }
 
   autoComplete(key) {
@@ -138,7 +136,7 @@ class AddPortfolio extends Component {
   }
 
   render() {
-    const { title, maker, user, portfolio, portfoiloEditorCancel } = this.props;
+    const { title, user, portfolio, cancel } = this.props;
 
     return (
       <div className={cx('container')}>
@@ -355,7 +353,7 @@ class AddPortfolio extends Component {
         </div>
         <SingleLine width={'100%'} color={'#dddddd'} thickness={3} />
         <div className={cx("button-area")}>
-          <span role="button" className={cx('button', 'cancel')} onClick={portfoiloEditorCancel} >취 소</span>
+          <span role="button" className={cx('button', 'cancel')} onClick={cancel} >취 소</span>
           <span role="button" className={cx('button', 'save')} onClick={this.onSubmit} >저장하기</span>
         </div>
       </div>
@@ -364,15 +362,13 @@ class AddPortfolio extends Component {
 }
 
 AddPortfolio.propTypes = {
-  maker: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    maker: state.maker.maker,
     user: state.user
   };
 }
 
-export default connect(mapStateToProps, {portfoiloEditorCancel, portfoiloSubmit})(AddPortfolio);
+export default connect(mapStateToProps)(AddPortfolio);

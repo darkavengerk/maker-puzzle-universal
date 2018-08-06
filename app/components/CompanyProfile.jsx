@@ -169,7 +169,7 @@ class CompanyProfile extends Component {
         </span>
         <div className={cx('feature-area')}>
           <Features 
-            features={this.state.features}
+            features={[{title:'기업명', content: company.name}, ...company.features]}
             featureEdited={this.featureEdited}
             classNames={{
               title: cx('feature-title'),
@@ -177,19 +177,7 @@ class CompanyProfile extends Component {
               row: cx('feature-item')
             }}
             editing={this.state.editing}
-          />
-
-          {/*<ContentEditable 
-            className={cx('about-maker', this.state.editing? 'editing':'')}
-            html={ jsxToString(
-              <div>
-                {company.about.split('\n').map((sen,i) => (<p key={i}>{sen}</p>))}
-              </div>
-            ) } 
-            onKeyUp={this.aboutEdited}
-            disabled={!this.state.editing}
-          />*/}
-          
+          />          
         </div>
         
       </div>

@@ -101,28 +101,29 @@ export async function addPortfolio(req, res) {
   portfolio.user = user._id;
   portfolio.pid = pid;
   portfolio.images = portfolio.images.map(p => p._id);
-  console.log(portfolio);
 
   if(!project) {
     project = new Project({name: location});
     project = await Metadata.populateMetadata('Project', project);
   }
   portfolio.project = project._id;
+
   if(!company) {
     company = new Company({name: companyName});
     company = await Metadata.populateMetadata('Company', company);
   }
   portfolio.company = company._id;
-  console.log('push');
+  
   user.portfolios.push(portfolio);
   project.portfolios.push(portfolio);
   project.users.addToSet(user._id);
   company.portfolios.push(portfolio);
   company.users.addToSet(user._id);
   company.projects.addToSet(project._id);
-  console.log('save');
   await Promise.all([user.save(), project.save(), company.save()]);
+
   res.json({user, project, company, portfolio});
+  
   companyAutoComplete.buildCache(err => {});
   projectAutoComplete.buildCache(err => {});
 }

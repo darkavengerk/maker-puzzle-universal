@@ -3,6 +3,8 @@ import createRestApiClient from '../utils/createRestApiClient';
 
 export default () => {
   const client = createRestApiClient().withConfig({ baseURL: apiEndpoint });
+  const escape = typeof escape === 'undefined'? require('querystring-browser').escape : escape;
+
   return {
     getCompanies: () => client.request({
       method: 'GET',
@@ -10,7 +12,7 @@ export default () => {
     }),
     getCompany: ({ link_name }) => client.request({
       method: 'GET',
-      url: `/api/company/${link_name}`,
+      url: `/api/company/${escape(link_name)}`
     }),
     getCompanyPortfolio: ({ id, pid }) => client.request({
       method: 'GET',

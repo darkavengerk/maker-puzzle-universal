@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 
-import { portfoiloEditorCancel } from '../actions/makers';
+import { portfoiloEditorCancel, portfoiloSubmit } from '../actions/makers';
 import styles from '../css/components/contents-section';
 
 import createRestApiClient from '../utils/createRestApiClient';
@@ -12,23 +12,22 @@ import { createObject } from '../utils/objects';
 
 const cx = classNames.bind(styles);
 
-const ContentsSection = ({ owner, isOwnPage, param, contentsType, portfoiloEditorCancel }) => {
+const ContentsSection = ({owner, ...props}) => {
 
   return (
     <div className={cx('main-section')}>
       <span className={cx('left-panel')} >
-        {owner.getInfo()}
+        {owner.getInfo(props)}
       </span>
       <span className={cx('main-panel')} >
-          {owner.getContent(param, isOwnPage)}
+        {owner.getContent(props)}
       </span>
     </div>
   );
 };
 
 ContentsSection.propTypes = {
-  owner: PropTypes.object.isRequired,
-  contentsType: PropTypes.string.isRequired
+  owner: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
@@ -37,4 +36,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { portfoiloEditorCancel })(ContentsSection);
+export default connect(mapStateToProps, { portfoiloEditorCancel, portfoiloSubmit })(ContentsSection);
