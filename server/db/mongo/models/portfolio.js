@@ -12,7 +12,7 @@ const Schema = new mongoose.Schema({
   companyName: String,
   project: {type: ObjectId, ref: 'Project'},
   user: {type: ObjectId, ref: 'User'},
-  company: {type: ObjectId, ref: 'User'},
+  company: {type: ObjectId, ref: 'Company'},
   tags: [String],
   lastUpdated: {type:Date, default: Date.now},
   images: [{type: ObjectId, ref: 'ImageFile'}],

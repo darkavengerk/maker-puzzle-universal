@@ -1,5 +1,5 @@
 import * as types from '../types';
-import { Maker } from '../services';
+import { Maker, Company } from '../services';
 
 export function featureEditSave(data) {
   return async (dispatch, getState) => {
@@ -29,22 +29,10 @@ export function portfoiloEditorCancel() {
   }
 }
 
-export function productEditorStart() {
-  return {
-    type: types.PRODUCT_EDITOR_START
-  }
-}
-
-export function productEditorCancel() {
-  return {
-    type: types.PORTFOLIO_EDITOR_CANCEL
-  }
-}
-
 export function portfoiloSubmit(portfolio) {
   return async (dispatch, getState) => {
-    const { maker, user } = getState();
-    const res = await Maker().submitPortfolio({id:maker.maker.userid, data:portfolio});
+    const { user } = getState();
+    const res = await Maker().submitPortfolio({id:user.account.userid, data:portfolio});
     if (res.status === 200) {
       dispatch({type:types.PORTFOLIO_EDIT_SUCCESS, data: res.data});
     }
@@ -55,16 +43,3 @@ export function portfoiloSubmit(portfolio) {
   };
 }
 
-export function productSubmit(product) {
-  return async (dispatch, getState) => {
-    const { company, user } = getState();
-    const res = await Maker().submitProduct({id:user.account.userid, data:product});
-    if (res.status === 200) {
-      dispatch({type:types.PRODUCT_EDIT_SUCCESS, data: res.data});
-    }
-    else {
-      dispatch({type:types.PRODUCT_EDIT_FAILURE});
-    } 
-    return res;
-  };
-}

@@ -4,18 +4,19 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import Image from '../components/FlexibleImage';
+import Window from '../components/PortfolioImagesWindow';
 import styles from '../css/components/portfolio-item';
 import { portfoiloEditorStart } from '../actions/makers';
 
 const cx = classNames.bind(styles);
 
-const ContentsSection = ({ portfolio, maker, portfoiloEditorStart }) => {
+const ContentsSection = ({ portfolio, portfoiloEditorStart, company }) => {
 
   if(portfolio) {
-    const ownerId = maker.userid || portfolio.user.userid;
+    const link_name = company.link_name;
     return (
       <div className={cx('main-section', 'wide')}>
-        <Link to={`/maker/${ownerId}/portfolio/${portfolio.pid}`}>
+        <Link to={`/company/${link_name}/portfolio/${portfolio.pid}`}>
           <div className={cx('text', 'text-section-wide', 'middle')}>
             <h1>
               {portfolio.location}
@@ -24,7 +25,7 @@ const ContentsSection = ({ portfolio, maker, portfoiloEditorStart }) => {
               {portfolio.title}
             </p>
           </div>
-          <Image src={portfolio.images[0]} x={437} y={214}/>
+          <Window images={portfolio.images} />
         </Link>        
       </div>
     );
@@ -46,12 +47,12 @@ const ContentsSection = ({ portfolio, maker, portfoiloEditorStart }) => {
 
 ContentsSection.propTypes = {
   portfolio: PropTypes.object,
-  maker: PropTypes.object
+  company: PropTypes.object
 };
 
 function mapStateToProps(state) {
   return {
-    maker: state.maker.maker
+    company: state.company.company
   };
 }
 

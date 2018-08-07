@@ -105,7 +105,7 @@ class ContentsTagFactory {
     return this.getMakerContent(props);
   }
 
-  getCompanyContent({param, isOwnPage}) {
+  getCompanyContent({param, isOwnPage, companyPortfoiloSubmit, companyPortfoiloEditorCancel}) {
     
     if(param.pid) {
       return this.set.getCompanyDetail(this.source, param.pid);
@@ -152,7 +152,12 @@ class ContentsTagFactory {
               </div>
               
               <Popup show={this.source.isAddingPortfolio} name="AddPortfolioPopup">
-                <AddPortfolio title="포트폴리오 추가하기" />
+                <AddPortfolio 
+                  title="포트폴리오 추가하기" 
+                  submit={companyPortfoiloSubmit} 
+                  cancel={companyPortfoiloEditorCancel}
+                  type={'company'}
+                />
               </Popup>
               <Popup show={this.source.isAddingProduct} name="AddProductPopup">
                 <AddProduct title="보유 제품 추가하기" company={this.source} />

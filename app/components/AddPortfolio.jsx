@@ -12,7 +12,7 @@ import SingleLine from '../components/SingleLine';
 import AutoComplete from '../components/AutoComplete';
 import styles from '../css/components/add-portfolio';
 
-import { Maker, Project, Company } from '../services';
+import { Project, Company } from '../services';
 
 const cx = classNames.bind(styles);
 
@@ -136,7 +136,7 @@ class AddPortfolio extends Component {
   }
 
   render() {
-    const { title, user, portfolio, cancel } = this.props;
+    const { title, user, portfolio, cancel, type } = this.props;
 
     return (
       <div className={cx('container')}>
@@ -186,7 +186,7 @@ class AddPortfolio extends Component {
                     * 예시) 여의도국제금융센터, 롯데월드몰, 경회루 등
                   </td>
                 </tr>
-                <tr className={cx('entity-row')} />
+                <tr className={cx('entity-row')} />                
                 
                 <tr>
                   <td className={cx('entity-title')}>
@@ -206,6 +206,7 @@ class AddPortfolio extends Component {
                 </tr>
                 <tr className={cx('entity-row')} />
 
+              {type==='company'? null : 
                 <tr>
                   <td className={cx('entity-title')}>
                     <Scatter text="소속 기업" />
@@ -221,6 +222,9 @@ class AddPortfolio extends Component {
                     />
                   </td>
                 </tr>
+              }
+
+              {type==='company'? null : 
                 <tr>
                   <td className={cx('entity-must')}>
                     [필수]
@@ -229,7 +233,9 @@ class AddPortfolio extends Component {
                     * 포트폴리오를 수행했을 당시 소속되어 있던 기업을 선택해주세요
                   </td>
                 </tr>
+              }
                 <tr className={cx('entity-row')} />
+
 
                 <tr>
                   <td className={cx('entity-title')} style={{verticalAlign:'top'}}>

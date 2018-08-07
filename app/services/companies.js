@@ -14,10 +14,21 @@ export default () => {
       method: 'GET',
       url: `/api/company/${escape(link_name)}`
     }),
-    getCompanyPortfolio: ({ id, pid }) => client.request({
+    getPortfolio: ({ id, pid }) => client.request({
       method: 'GET',
       url: `/api/company/${id}/${pid}`,
     }),
+    submitPortfolio: ({link_name, data}) => client.request({
+      method: 'POST',
+      url: `/api/company/${escape(link_name)}/portfolio`,
+      data
+    }),    
+    submitProduct: ({link_name, data}) => client.request({
+      method: 'POST',
+      url: `/api/company/${escape(link_name)}/product`,
+      data
+    }),
+
     deleteCompany: ({ id }) => client.request({
       method: 'DELETE',
       url: `/api/company/${id}`

@@ -128,25 +128,6 @@ export async function addPortfolio(req, res) {
   projectAutoComplete.buildCache(err => {});
 }
 
-export async function addProduct(req, res) {
-  const userid = req.params.id;
-  const product = req.body;
-  const location = product.location;
-  const companyName = product.companyName;
-
-  let [company, pid] = await Promise.all([
-    Company.findOne({name: companyName}),
-    Misc.createID('product')
-  ]);
-
-  product.pid = pid;
-  product.company = company._id;
-  company.products.push(product);
-
-  await company.save();
-  res.json({company, product});
-}
-
 /**
  * POST /logout
  */
@@ -189,5 +170,4 @@ export default {
   signUp,
   updateFeatures,
   addPortfolio,
-  addProduct
 };

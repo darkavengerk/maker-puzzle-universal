@@ -12,9 +12,9 @@ import SingleLine from '../components/SingleLine';
 import AutoComplete from '../components/AutoComplete';
 import styles from '../css/components/add-portfolio';
 
-import { productEditorCancel, productSubmit } from '../actions/makers';
+import { productEditorCancel, productSubmit } from '../actions/companies';
 
-import { Maker, Project, Company } from '../services';
+import { Project, Company } from '../services';
 
 const cx = classNames.bind(styles);
 
@@ -245,13 +245,11 @@ class AddProduct extends Component {
 }
 
 AddProduct.propTypes = {
-  maker: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    maker: state.maker.maker,
     user: state.user
   };
 }

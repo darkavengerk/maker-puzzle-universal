@@ -26,11 +26,6 @@ export default () => {
       url: `/user/${id}/portfolio`,
       data
     }),
-    submitProduct: ({id, data}) => client.request({
-      method: 'POST',
-      url: `/user/${id}/product`,
-      data
-    }),
   };
 };
 

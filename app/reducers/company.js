@@ -21,14 +21,14 @@ const company = (
     case types.PRODUCT_EDITOR_START:
       return {...state, isAddingProduct: true}
 
-    case types.PORTFOLIO_EDITOR_CANCEL:
+    case types.COMPANY_PORTFOLIO_EDITOR_CANCEL:
       return {...state, isAddingPortfolio: false}
     
-    case types.PORTFOLIO_EDIT_SUCCESS:
-      const { company, portfolio } = action.data;
-      if(company._id === state._id)
-        return {...state, portfolios: [...state.portfolios, portfolio], isAddingPortfolio: false};
-      return state;
+    case types.COMPANY_PORTFOLIO_EDIT_SUCCESS:
+      const { company, project, portfolio } = action.data;
+      portfolio.project = project;
+      portfolio.company = company;
+      return {...state, companyPortfolios: [...state.companyPortfolios, portfolio], isAddingPortfolio: false};
 
     case types.PRODUCT_EDIT_SUCCESS:
       const { product } = action.data;

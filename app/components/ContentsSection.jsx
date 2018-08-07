@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 
 import { portfoiloEditorCancel, portfoiloSubmit } from '../actions/makers';
+import { companyPortfoiloEditorCancel, companyPortfoiloSubmit } from '../actions/companies';
 import styles from '../css/components/contents-section';
 
 import createRestApiClient from '../utils/createRestApiClient';
@@ -36,4 +37,5 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { portfoiloEditorCancel, portfoiloSubmit })(ContentsSection);
+export default connect(mapStateToProps, { portfoiloEditorCancel, portfoiloSubmit, 
+                                          companyPortfoiloEditorCancel, companyPortfoiloSubmit })(ContentsSection);

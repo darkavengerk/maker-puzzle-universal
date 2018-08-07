@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import Image from '../components/FlexibleImage';
 import styles from '../css/components/product-item';
-import { productEditorStart } from '../actions/makers';
+import { productEditorStart } from '../actions/companies';
 
 const cx = classNames.bind(styles);
 

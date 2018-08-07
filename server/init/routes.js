@@ -21,7 +21,6 @@ export default (app) => {
     app.get('/user', usersController.all);
     app.post('/user/:id/features', usersController.updateFeatures);
     app.post('/user/:id/portfolio', usersController.addPortfolio);
-    app.post('/user/:id/product', usersController.addProduct);
     app.post('/sessions', usersController.login);
     app.post('/users', usersController.signUp);
     app.delete('/sessions', usersController.logout);
@@ -44,6 +43,8 @@ export default (app) => {
     app.get('/api/company/search/:keyword', companyController.search);
     app.get('/api/company/:link_name', companyController.one);
     app.get('/api/company', companyController.all);
+    app.post('/api/company/:link_name/portfolio', companyController.addPortfolio);
+    app.post('/api/company/:link_name/product', companyController.addProduct);
     app.post('/api/company', companyController.add);
     app.put('/api/company/:id', companyController.update);
     app.delete('/api/company/:id', companyController.remove);
