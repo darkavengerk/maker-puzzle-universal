@@ -5,7 +5,7 @@ export const isProduction = ENV === 'production';
 export const isDebug = ENV === 'development';
 export const isClient = typeof window !== 'undefined';
 
-export const apiEndpoint = isDebug ? 'http://localhost:3000' : 'http://13.209.54.193';
+export const apiEndpoint = isDebug ? 'http://localhost:3000' : 'http://www.maker-puzzle.com';
 // Replace with 'UA-########-#' or similar to enable tracking
 export const trackingID = null;
 

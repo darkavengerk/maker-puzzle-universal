@@ -25,7 +25,8 @@ export async function single(req, res) {
               .lean();
 
   if (!user) {
-    return res.status(500).send('Something went wrong getting the data');
+    // return res.status(500).send('Something went wrong getting the data');
+    return res.json({});
   }
   return res.json(user);
 }
