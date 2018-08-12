@@ -6,27 +6,17 @@ import ProjectProfile from '../components/ProjectProfile';
 import CompanyHistory from '../components/CompanyHistory';
 import GreyTitle from '../components/GreyTitle';
 import Abilities from '../components/Abilities';
+import Roundy from '../components/Roundy';
 import Image from '../components/FlexibleImage';
 import styles from '../css/components/project-info';
 
 const cx = classNames.bind(styles);
 
-function createRoundy(maker) {
-  return (
-    <span className={cx('maker-round')} key={maker.userid} >
-      <Link to={'/maker/'  + maker.userid}>
-        <Image className={cx('maker-round-image')} src={maker.picture} x={110} y={110} />
-      </Link>
-      {maker.profile.name}
-    </span>
-  );
-}
-
 const ProjectInfo = ({ owner }) => {
 
   const project = owner;
 
-  const users = project.users? project.users.map(user => createRoundy(user)) : [];
+  const users = project.users? project.users.map(user => <Roundy user={user} key={user.userid} ></Roundy>) : [];
 
   return (project && project.name )? (
     <div className={cx('main-section')}>

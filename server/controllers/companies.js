@@ -38,11 +38,13 @@ export async function one(req, res) {
   const { link_name } = req.params;
   const result = await Company
                     .findOne({ link_name })
-                    .populate({path:'portfolios.images'})
+                    .populate({path:'companyPortfolios.project'})
                     .populate({path:'companyPortfolios.images'})
-                    .populate({path:'portfolios.user', populate:{path:'picture'}})
                     .populate({path:'products.images'})
+                    .populate({path:'portfolios.images'})
+                    .populate({path:'portfolios.user', populate:{path:'picture'}})
                     .populate('owner')
+                    .populate({path:'users', populate:{path:'picture'}})
                     .lean();
   return res.json(result);
 }

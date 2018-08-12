@@ -16,7 +16,7 @@ export default () => {
     }),
     getPortfolio: ({ id, pid }) => client.request({
       method: 'GET',
-      url: `/api/company/${id}/${pid}`,
+      url: `/api/company/${id}/portfolio/${pid}`,
     }),
     submitPortfolio: ({link_name, data}) => client.request({
       method: 'POST',

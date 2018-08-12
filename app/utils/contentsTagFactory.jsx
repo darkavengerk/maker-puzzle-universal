@@ -108,7 +108,7 @@ class ContentsTagFactory {
   getCompanyContent({param, isOwnPage, companyPortfoiloSubmit, companyPortfoiloEditorCancel}) {
     
     if(param.pid) {
-      return this.set.getCompanyDetail(this.source, param.pid);
+      return this.getCompanyDetail(param.pid);
     }
 
     let companyPortfolios = this.source.portfolios? this.source.companyPortfolios.map(portfolio => {
@@ -185,7 +185,14 @@ class ContentsTagFactory {
     return null;
   }
 
-  getCompanyDetail() {
+  getCompanyDetail(pid) {
+    if(!this.source.portfolios) return null;
+
+    for(let portfolio of this.source.companyPortfolios) {
+      if(portfolio.pid === pid) {
+        return <PortfolioDetail portfolio={portfolio} referer={new Project(portfolio.project)} />
+      }
+    }
     return null;
   }
 
