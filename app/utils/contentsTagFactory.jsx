@@ -72,7 +72,7 @@ class ContentsTagFactory {
 
   getMakerContent({param, isOwnPage, portfoiloSubmit, portfoiloEditorCancel}) {
     
-    if(param.pid) {
+    if(param && param.pid) {
       return this.getMakerDetail(this.source, param.pid);
     }
 
@@ -99,7 +99,7 @@ class ContentsTagFactory {
 
   getProjectContent(props) {
     const { param, isOwnPage } = props;
-    if(param.pid) {
+    if(param && param.pid) {
       return this.getProjectDetail(param.pid) || this.getProjectContent({}, isOwnPage);
     }
     return this.getMakerContent(props);
