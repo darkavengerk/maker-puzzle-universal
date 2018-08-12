@@ -127,7 +127,6 @@ class CompanyProfile extends Component {
       </span>;
 
     if(isOwnPage) { 
-
       buttonArea = 
       <span className={cx('button-area')}>
         <label className={cx('system-button')} role="button" onClick={this.startEdit}>정보 수정</label>
@@ -169,7 +168,7 @@ class CompanyProfile extends Component {
         </span>
         <div className={cx('feature-area')}>
           <Features 
-            features={[{title:'기업명', content: company.name}, ...company.features]}
+            features={[{title:'기업명', content: company.name}, ...(company.features || [])]}
             featureEdited={this.featureEdited}
             classNames={{
               title: cx('feature-title'),

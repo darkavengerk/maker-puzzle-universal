@@ -3,7 +3,7 @@ import * as types from '../types';
 import cloneDeep from 'lodash/cloneDeep';
 
 const company = (
-  state = {portfolios:[], companyPortfolios:[], products:[] },
+  state = {portfolios:[], companyPortfolios:[], products:[], features:[] },
   action
 ) => {
   switch (action.type) {
