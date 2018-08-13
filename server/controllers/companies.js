@@ -24,7 +24,7 @@ export function search(req, res) {
   const {keyword} = req.params;
 
   if(keyword) {
-    autoComplete.getResults(keyword, (err, results) => {
+    companyAutoComplete.getResults(keyword, (err, results) => {
       if (err) {
         return res.json([]);
       }

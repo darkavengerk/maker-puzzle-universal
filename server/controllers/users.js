@@ -101,7 +101,7 @@ export async function addPortfolio(req, res) {
 
   portfolio.user = user._id;
   portfolio.pid = pid;
-  portfolio.images = portfolio.images.map(p => p._id);
+  // portfolio.images = portfolio.images.map(p => p._id);
 
   if(!project) {
     project = new Project({name: location});
