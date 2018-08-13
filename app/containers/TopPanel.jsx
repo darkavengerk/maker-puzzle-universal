@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
-import { logOut } from '../actions/users';
+import { logOut, loginMenu } from '../actions/users';
 import Img from '../components/FlexibleImage';
+import Login from '../components/Login';
+import Popup from '../components/Popup';
 import styles from '../css/components/navigation';
 
 const cx = classNames.bind(styles);
 
-const Navigation = ({ user, logOut }) => {
+const Navigation = ({ user, logOut, loginMenu }) => {
     return (
       <nav className={cx('navigation')} role="navigation">
         <div className={cx('logo-area')}>
@@ -23,12 +25,15 @@ const Navigation = ({ user, logOut }) => {
         </div>
 
         <div className={cx('option-area')}>
-          <Link to={user.authenticated? (`/${user.account.type}/${user.account.userid}`) : '/login'}>
-            <Img src="/images/site/icon_person.png" x={32} y={30} /> 
-          </Link>
+          <Img src="/images/site/icon_person.png" x={32} y={30} onClick={loginMenu} /> 
+          {/*<Link to={user.authenticated? (`/${user.account.type}/${user.account.userid}`) : '/login'}>
+          </Link>*/}
           <Img src="/images/site/icon_alert.png" x={39} y={39} onClick={logOut} />
           <Img src="/images/site/icon_more.png" x={49} y={28} />
         </div>
+        <Popup show={user.attempt === 'login'} name="LoginPopup">
+          <Login />
+        </Popup>
       </nav>
     );
 };
@@ -44,4 +49,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { logOut })(Navigation);
+export default connect(mapStateToProps, { logOut, loginMenu })(Navigation);

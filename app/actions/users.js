@@ -57,6 +57,10 @@ export function toggleLoginMode() {
   return { type: types.TOGGLE_LOGIN_MODE };
 }
 
+export function loginMenu() {
+  return { type: types.LOGIN_MENU };
+}
+
 export function manualLogin(data) {
   return async (dispatch) => {
     dispatch(beginLogin());
