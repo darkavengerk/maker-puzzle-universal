@@ -5,6 +5,7 @@ import classNames from 'classnames/bind';
 import { connect } from 'react-redux';
 import { manualLogin, signUp, toggleLoginMode } from '../actions/users';
 import styles from '../css/components/login';
+import SingleLine from '../components/SingleLine';
 import hourGlassSvg from '../images/hourglass.svg';
 
 const cx = classNames.bind(styles);
@@ -33,8 +34,8 @@ class LoginOrRegister extends Component {
     const { user: { isLogin }, toggleLoginMode } = this.props;
     if (isLogin) {
       return (
-        <div className={cx('header')}>
-          <h1 className={cx('heading')}>Login with Email</h1>
+        <div className={cx('main-section')}>
+          <h1 className={cx('heading')}>더 보려면 로그인하세요</h1>
           <div className={cx('alternative')}>
             Not what you want?
             <a
@@ -69,43 +70,50 @@ class LoginOrRegister extends Component {
           waiting: isWaiting
         })}
       >
-        <div className={cx('container')}>
-          { this.renderHeader() }
-          <img className={cx('loading')} alt="loading" src={hourGlassSvg} />
-          <div className={cx('email-container')}>
-            <form onSubmit={this.handleOnSubmit}>
-              <input
-                className={cx('input')}
-                type="email"
-                ref="email"
-               placeholder="email"
-              />
-              <input
-                className={cx('input')}
-                type="password"
-               ref="password"
-                placeholder="password"
-              />
-              <div className={cx('hint')}>
-                <div>Hint</div>
-                <div>email: example@ninja.com password: ninja</div>
-              </div>
-              <p
-                className={cx('message', {
-                'message-show': message && message.length > 0
-              })}>{message}</p>
-              <input
-                className={cx('button')}
-                type="submit"
-                value={isLogin ? 'Login' : 'Register'} />
-            </form>
+        <div className={cx('main-section')}>
+          <h1 className={cx('title')}>더 보려면 로그인하세요</h1>
+
+          <form onSubmit={this.handleOnSubmit} className={cx('form-area')}>
+            <input
+              className={cx('input')}
+              type="email"
+              ref="email"
+              placeholder="email"
+            />
+            <input
+              className={cx('input')}
+              type="password"
+             ref="password"
+              placeholder="password"
+            />
+            <p
+              className={cx('message', {
+              'message-show': message && message.length > 0
+            })}>{message}</p>
+            <input
+              className={cx('login-button')}
+              type="submit"
+              value={'로 그 인'} />
+          </form>
+
+          <div className={cx('alternative')}>
+            <div className={cx('alternative-message')} >아직 회원이 아니세요?</div>
+            <div
+              className={cx('alternative-link')}
+              onClick={toggleLoginMode}
+            >무료 회원가입</div>
           </div>
-          <div className={cx('google-container')}>
-            <h1 className={cx('heading')}>Google Login Demo</h1>
-            <a
-              className={cx('button')}
-              href="/auth/google">Login with Google</a>
+        
+          <SingleLine width="100%" color="#dbd8d8" thickness={1} />
+
+          <div className={cx('alternative')}>
+            <div className={cx('alternative-message')} >로그인 정보를 잊으셨나요?</div>
+            <div
+              className={cx('text-link')}
+              onClick={toggleLoginMode}
+            >비밀번호 찾기</div>
           </div>
+
         </div>
       </div>
     );

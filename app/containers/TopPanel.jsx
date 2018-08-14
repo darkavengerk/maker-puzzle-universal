@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
-import { logOut, loginMenu } from '../actions/users';
+import { logOut, loginMenu, cancelLogin } from '../actions/users';
 import Img from '../components/FlexibleImage';
 import Login from '../components/Login';
 import Popup from '../components/Popup';
@@ -11,7 +11,14 @@ import styles from '../css/components/navigation';
 
 const cx = classNames.bind(styles);
 
-const Navigation = ({ user, logOut, loginMenu }) => {
+
+const Navigation = ({ user, logOut, loginMenu, cancelLogin }) => {
+    const login = user.authenticated? 
+            <Link to={`/${user.account.type}/${user.account.userid}`}>
+              <Img src="/images/site/icon_person.png" x={32} y={30}/>
+            </Link> : 
+            <Img src="/images/site/icon_person.png" x={32} y={30} onClick={loginMenu} /> 
+
     return (
       <nav className={cx('navigation')} role="navigation">
         <div className={cx('logo-area')}>
@@ -25,13 +32,11 @@ const Navigation = ({ user, logOut, loginMenu }) => {
         </div>
 
         <div className={cx('option-area')}>
-          <Img src="/images/site/icon_person.png" x={32} y={30} onClick={loginMenu} /> 
-          {/*<Link to={user.authenticated? (`/${user.account.type}/${user.account.userid}`) : '/login'}>
-          </Link>*/}
+          {login}
           <Img src="/images/site/icon_alert.png" x={39} y={39} onClick={logOut} />
           <Img src="/images/site/icon_more.png" x={49} y={28} />
         </div>
-        <Popup show={user.attempt === 'login'} name="LoginPopup">
+        <Popup show={user.attempt === 'login'} name="LoginPopup" cancel={cancelLogin}>
           <Login />
         </Popup>
       </nav>
@@ -49,4 +54,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { logOut, loginMenu })(Navigation);
+export default connect(mapStateToProps, { logOut, loginMenu, cancelLogin })(Navigation);

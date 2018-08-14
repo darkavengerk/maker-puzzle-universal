@@ -57,6 +57,10 @@ export function toggleLoginMode() {
   return { type: types.TOGGLE_LOGIN_MODE };
 }
 
+export function cancelLogin() {
+  return { type: types.CANCEL_LOGIN };
+}
+
 export function loginMenu() {
   return { type: types.LOGIN_MENU };
 }

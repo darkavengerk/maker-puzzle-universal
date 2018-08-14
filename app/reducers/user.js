@@ -22,6 +22,7 @@ const attempt = (
       return 'login';
     case types.SIGNUP_MENU:
       return 'signup';
+    case types.CANCEL_LOGIN:
     case types.LOGIN_SUCCESS_USER:
     case types.SIGNUP_SUCCESS_USER:
       return '';
