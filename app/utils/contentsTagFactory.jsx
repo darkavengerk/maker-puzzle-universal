@@ -106,7 +106,7 @@ class ContentsTagFactory {
   }
 
   getCompanyContent({param, isOwnPage, companyPortfoiloSubmit, companyPortfoiloEditorCancel}) {
-    
+
     if(param.pid) {
       return this.getCompanyDetail(param.pid);
     }

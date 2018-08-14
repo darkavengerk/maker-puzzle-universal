@@ -11,8 +11,6 @@ const company = (
     if(action.pathname && action.pathname.startsWith('/company/'))
         return {portfolios:[], companyPortfolios:[], products:[], features:[] };
       return state;
-    case types.LOGIN_SUCCESS_USER:
-      return action.data;
     
     case types.REQUEST_SUCCESS:
       if (action.data && action.data.company) return action.data.company;
