@@ -8,7 +8,9 @@ const company = (
 ) => {
   switch (action.type) {
     case types.CREATE_REQUEST:
-      return {portfolios:[], companyPortfolios:[], products:[], features:[] };
+    if(action.pathname && action.pathname.startsWith('/company/'))
+        return {portfolios:[], companyPortfolios:[], products:[], features:[] };
+      return state;
     case types.LOGIN_SUCCESS_USER:
       return action.data;
     

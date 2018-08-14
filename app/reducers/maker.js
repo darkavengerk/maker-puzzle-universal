@@ -8,11 +8,10 @@ const maker = (
 ) => {
   switch (action.type) {
     case types.CREATE_REQUEST:
-      return {};
+      if(action.pathname && action.pathname.startsWith('/maker/'))
+        return {};
+      return state;
       
-    case types.LOGIN_SUCCESS_USER:
-      return action.data;
-    
     case types.REQUEST_SUCCESS:
       if (action.data && action.data.maker) return action.data.maker;
       return state;

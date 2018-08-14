@@ -27,7 +27,7 @@ class User {
 class Maker extends User {
 
   constructor(data) {
-    super( data.profile? data : {} );
+    super( data || {} );
   }
 
   getType() {

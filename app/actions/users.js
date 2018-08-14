@@ -67,7 +67,7 @@ export function manualLogin(data) {
     try {
       const {data: user} = await authService().login(data);
       dispatch(loginSuccess('You have been successfully logged in', user));
-      dispatch(push(`/${user.type}/${user.userid}`));
+      // dispatch(push(`/${user.type}/${user.userid}`));
     }
     catch(err) {
       dispatch(loginError('Oops! Invalid username or password'));
