@@ -7,7 +7,9 @@ const maker = (
   action
 ) => {
   switch (action.type) {
-    
+    case types.CREATE_REQUEST:
+      return {};
+      
     case types.LOGIN_SUCCESS_USER:
       return action.data;
     

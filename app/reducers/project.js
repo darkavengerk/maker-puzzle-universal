@@ -8,6 +8,8 @@ const project = (
 ) => {
   switch (action.type) {
     
+    case types.CREATE_REQUEST:
+      return {};
     case types.REQUEST_SUCCESS:
       if (action.data && action.data.project) return action.data.project;
       return state;

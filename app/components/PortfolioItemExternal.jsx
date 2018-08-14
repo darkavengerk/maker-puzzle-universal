@@ -13,6 +13,8 @@ const ContentsSection = ({ portfolio, maker, project, portfoiloEditorStart }) =>
 
   const user = portfolio.user;
 
+  if(!user) return null;
+
   if(portfolio)
     return (
       <div className={cx('main-section')}>

@@ -7,7 +7,9 @@ const company = (
   action
 ) => {
   switch (action.type) {
-    
+    case types.CREATE_REQUEST:
+      console.log('create:company');
+      return {portfolios:[], companyPortfolios:[], products:[], features:[] };
     case types.LOGIN_SUCCESS_USER:
       return action.data;
     
