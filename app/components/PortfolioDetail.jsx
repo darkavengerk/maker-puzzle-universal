@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import Image from '../components/FlexibleImage';
 import SingleLine from '../components/SingleLine';
+import Padding from '../components/Padding';
+import DateFormat from '../components/DateFormat';
 
 import styles from '../css/components/portfolio-detail';
 
@@ -32,9 +34,16 @@ const ContentsSection = ({ portfolio, user, referer }) => {
 
   return (
     <div className={cx('main-section')}>
-      <h1 className={cx('title-area')}>
-        {portfolio.title}
-      </h1>
+      <div className={cx('title-area')}>
+        <h1 className={cx('portfolio-title')}>
+          {portfolio.title}
+        </h1>
+        <div>
+          <div className={cx('create-date')} >등록 일자</div>
+          <Padding width={'0.8rem'} inline={true} />
+          <DateFormat className={cx('create-date')} datestring={portfolio.created || portfolio.lastUpdated} />
+        </div>
+      </div>
       <SingleLine width='auto' color='#dadada' thickness={1} extend={20}/>
       <section className={cx('contents')}>
         {projectArea}

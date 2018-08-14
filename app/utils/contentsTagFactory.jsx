@@ -167,11 +167,15 @@ class ContentsTagFactory {
 
   getMakerDetail(isOwnPage) {
     if(this.source.portfolioSelected && this.source.portfolioSelected.portfolio)
-      return <PortfolioDetail 
-        portfolio={this.source.portfolioSelected.portfolio} 
-        edit={isOwnPage}
-        referer={new Project(this.source.portfolioSelected.portfolio.project)}
-      />
+      return (
+          <div>
+            <p className={cx('main-panel-title')}>포트폴리오</p>
+            <PortfolioDetail 
+              portfolio={this.source.portfolioSelected.portfolio} 
+              edit={isOwnPage}
+              referer={new Project(this.source.portfolioSelected.portfolio.project)}
+            />
+          </div>)
     return null;
   }
 
@@ -180,7 +184,12 @@ class ContentsTagFactory {
 
     for(let portfolio of this.source.portfolios) {
       if(portfolio.pid === pid)
-        return <PortfolioDetail portfolio={portfolio} referer={new Maker(portfolio.user)} />
+        return (
+          <div>
+            <p className={cx('main-panel-title')}>포트폴리오</p>
+            <PortfolioDetail portfolio={portfolio} referer={new Maker(portfolio.user)} />
+          </div>
+        )
     }
     return null;
   }
@@ -190,7 +199,12 @@ class ContentsTagFactory {
 
     for(let portfolio of this.source.companyPortfolios) {
       if(portfolio.pid === pid) {
-        return <PortfolioDetail portfolio={portfolio} referer={new Project(portfolio.project)} />
+        return (
+          <div>
+            <p className={cx('main-panel-title')}>포트폴리오</p>
+            <PortfolioDetail portfolio={portfolio} referer={new Project(portfolio.project)} />
+          </div>
+        )
       }
     }
     return null;
