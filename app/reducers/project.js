@@ -9,7 +9,7 @@ const project = (
   switch (action.type) {
     
     case types.CREATE_REQUEST:
-      if(action.pathname && action.pathname.startsWith('/project/'))
+      if(action.pathname && !action.pathname.startsWith('/project/'))
         return {};
       return state;
     case types.REQUEST_SUCCESS:

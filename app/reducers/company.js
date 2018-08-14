@@ -8,7 +8,7 @@ const company = (
 ) => {
   switch (action.type) {
     case types.CREATE_REQUEST:
-    if(action.pathname && action.pathname.startsWith('/company/'))
+    if(action.pathname && !action.pathname.startsWith('/company/'))
         return {portfolios:[], companyPortfolios:[], products:[], features:[] };
       return state;
     
