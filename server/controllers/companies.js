@@ -1,13 +1,16 @@
 import _ from 'lodash';
 import User from '../db/mongo/models/user';
-import Company, {autoComplete as companyAutoComplete} from '../db/mongo/models/company';
-import Project, {autoComplete as projectAutoComplete} from '../db/mongo/models/project';
-import Metadata from '../db/mongo/models/metadata';
-import Misc from '../db/mongo/models/misc';
+import  { models } from '../db';
 
-/**
- * List
- */
+const { 
+  Company, 
+  companyAutoComplete, 
+  Project, 
+  projectAutoComplete,
+  Metadata,
+  Misc 
+} = models;
+
 export function all(req, res) {
   User.find({}).exec((err, results) => {
     if (err) {

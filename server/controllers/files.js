@@ -1,7 +1,12 @@
 import _ from 'lodash';
-import User from '../db/mongo/models/user';
-import ImageFile from '../db/mongo/models/image';
+import  { models } from '../db';
 import fs  from 'fs-extra';
+
+const { 
+  User,
+  Image : ImageFile 
+} = models;
+
 
 /**
  * List

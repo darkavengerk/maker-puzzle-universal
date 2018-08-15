@@ -1,9 +1,11 @@
 import _ from 'lodash';
-import Project, {autoComplete} from '../db/mongo/models/project';
+import  { models } from '../db';
 
-/**
- * List
- */
+const { 
+  Project, 
+  projectAutoComplete : autoComplete 
+} = models;
+
 export function all(req, res) {
   Project.find({}).exec((err, results) => {
     if (err) {

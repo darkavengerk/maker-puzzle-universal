@@ -18,7 +18,8 @@ const Schema = new mongoose.Schema({
   created: {type:Date, default: Date.now},
   images: [{type: ObjectId, ref: 'ImageFile'}],
   pid: String,
-  isPrivate: Boolean
+  isPrivate: Boolean,
+  type: String
 });
 
 export default Schema;
