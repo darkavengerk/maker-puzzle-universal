@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import User from '../db/mongo/models/user';
-import  { models } from '../db';
+import  { models, common } from '../db';
 
 const { 
   Company, 
@@ -54,30 +54,24 @@ export async function one(req, res) {
 
 export async function addPortfolio(req, res) {
   const { link_name } = req.params;
-
   const portfolio = req.body;
   const location = portfolio.location;
 
-  let [project, company, pid] = await Promise.all([
+  let [ project, company ] = await Promise.all([
     Project.findOne({name: location}),
-    Company.findOne({link_name}), 
-    Misc.createID('portfolio')
+    Company.findOne({name: link_name}),
   ]);
-
-  portfolio.pid = pid;
 
   if(!project) {
     project = new Project({name: location});
     project = await Metadata.populateMetadata('Project', project);
   }
-  portfolio.project = project._id;
 
-  project.portfolios.push(portfolio);
-  company.companyPortfolios.push(portfolio);
-  company.projects.addToSet(project._id);
-  await Promise.all([project.save(), company.save()]);
+  portfolio.type = 'company';
 
-  res.json({project, company, portfolio});
+  const result = await common.savePortfolio({portfolio, company, project});
+
+  res.json(result);
   
   projectAutoComplete.buildCache(err => {});
 }

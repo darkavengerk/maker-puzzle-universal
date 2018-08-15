@@ -19,7 +19,7 @@ const Schema = new mongoose.Schema({
   images: [{type: ObjectId, ref: 'ImageFile'}],
   pid: String,
   isPrivate: Boolean,
-  type: String
+  type: {type:String, default:'maker'}
 });
 
 export default Schema;
