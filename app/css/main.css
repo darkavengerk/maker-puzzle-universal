@@ -67,6 +67,10 @@ a:link {
   }
 }
 
+[role="button"] {
+  cursor: pointer;
+}
+
 /* Add your global styles below... */
 
 /* ex:
