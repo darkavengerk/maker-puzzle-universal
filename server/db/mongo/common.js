@@ -16,24 +16,24 @@ async function savePortfolio({ portfolio, project, company, user }) {
   portfolio.project = project._id;
   portfolio.company = company._id;
   
-  project.portfolios.push(portfolio);
-  company.projects.addToSet(project._id);
-  
-  if(portfolio.type == 'company') {
-    company.companyPortfolios.push(portfolio);
-  }
-  else {
-    company.portfolios.push(portfolio);
-  }
+  company.projects.addToSet(project._id);  
 
   const saving = [];
 
   if(user && user._id) {
     portfolio.user = user._id;
-    user.portfolios.push(portfolio);
+    user.portfolios.push(portfolio._id);
     project.users.addToSet(user._id);
     company.users.addToSet(user._id);
     saving.push(user.save());
+  }
+
+  project.portfolios.push(portfolio);
+  if(portfolio.type == 'company') {
+    company.companyPortfolios.push(portfolio);
+  }
+  else {
+    company.portfolios.push(portfolio);
   }
 
   saving.push(project.save());

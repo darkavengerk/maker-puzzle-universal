@@ -10,13 +10,13 @@ import { portfoiloEditorStart } from '../actions/makers';
 
 const cx = classNames.bind(styles);
 
-const ContentsSection = ({ portfolio, portfoiloEditorStart, company }) => {
+const ContentsSection = ({ portfolio, owner, referrer, portfoiloEditorStart, company }) => {
 
   if(portfolio) {
     const link_name = company.link_name;
     return (
       <div className={cx('main-section', 'wide')}>
-        <Link to={`/company/${link_name}/portfolio/${portfolio.pid}`}>
+        <Link to={referrer.createPortfolioLink(portfolio)}>
           <div className={cx('text', 'text-section-wide', 'middle')}>
             <h1>
               {portfolio.location}

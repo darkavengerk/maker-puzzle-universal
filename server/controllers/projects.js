@@ -38,6 +38,7 @@ export async function one(req, res) {
                     .findOne({ link_name })
                     .populate({path:'portfolios.images'}) 
                     .populate({path:'portfolios.user', populate:{path:'picture'}}) 
+                    .populate({path:'portfolios.company', populate:{path:'profilePicture'}}) 
                     .populate({path:'users', populate:{path:'picture'}}) 
                     .populate({path:'companies', populate:{path:'profilePicture'}}) 
                     .lean();

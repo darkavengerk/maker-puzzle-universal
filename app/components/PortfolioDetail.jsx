@@ -12,7 +12,7 @@ import styles from '../css/components/portfolio-detail';
 
 const cx = classNames.bind(styles);
 
-const ContentsSection = ({ portfolio, user, referer }) => {
+const ContentsSection = ({ portfolio, user, owner }) => {
 
   const imgs = portfolio.images.map(img => (
     <div key={img._id} className={cx('image')} >
@@ -20,12 +20,12 @@ const ContentsSection = ({ portfolio, user, referer }) => {
     </div>)
   );
 
-  const imageUrl = referer.getProfileImage();
+  const imageUrl = owner.getProfileImage();
   const projectArea = (
     <div className={cx('project-area')}>
       <Image src={imageUrl} x={33} y={33} />
       <span>
-        <Link className={cx('project-name')} to={referer.getHomeLink()}>{referer.getName()}</Link>
+        <Link className={cx('project-name')} to={owner.getHomeLink()}>{owner.getName()}</Link>
       </span>
     </div>
   );

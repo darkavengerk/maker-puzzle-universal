@@ -9,7 +9,7 @@ import { portfoiloEditorStart } from '../actions/makers';
 
 const cx = classNames.bind(styles);
 
-const ContentsSection = ({ portfolio, maker, project, portfoiloEditorStart }) => {
+const ContentsSection = ({ portfolio, referrer, owner, project, portfoiloEditorStart }) => {
 
   const user = portfolio.user;
 
@@ -19,10 +19,10 @@ const ContentsSection = ({ portfolio, maker, project, portfoiloEditorStart }) =>
     return (
       <div className={cx('main-section')}>
           <div className={cx('text', 'text-section-type2')}>
-            <Link to={`/maker/${user.userid}`}>
-              <Image src={user.picture} x={31} y={31} className={cx('profile-image')} />
+            <Link to={owner.getHomeLink()}>
+              <Image src={owner.getProfileImage()} x={31} y={31} className={cx('profile-image')} />
             </Link>
-            <Link to={`/project/${project.link_name}/maker/${user.userid}/${portfolio.pid}`}>
+            <Link to={referrer.createPortfolioLink(portfolio)}>
               <span>
                 <h1>
                   {portfolio.location}
@@ -33,7 +33,7 @@ const ContentsSection = ({ portfolio, maker, project, portfoiloEditorStart }) =>
               </span>
             </Link>        
           </div>
-          <Link to={`/project/${project.link_name}/maker/${user.userid}/${portfolio.pid}`}>
+          <Link to={referrer.createPortfolioLink(portfolio)}>
             <Image src={portfolio.images[0]} x={214} y={214}/>
           </Link>
       </div>
@@ -58,13 +58,11 @@ const ContentsSection = ({ portfolio, maker, project, portfoiloEditorStart }) =>
 
 ContentsSection.propTypes = {
   portfolio: PropTypes.object,
-  maker: PropTypes.object,
   project: PropTypes.object
 };
 
 function mapStateToProps(state) {
   return {
-    maker: state.maker.maker,
     project: state.project.project
   };
 }

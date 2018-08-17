@@ -38,7 +38,7 @@ export async function single(req, res) {
 }
 
 export async function portfolio(req, res) {
-  const {pid} = req.params;
+  const { pid } = req.params;
   let user = await User
               .findOne({'userid':req.params.id})
               .populate('picture')

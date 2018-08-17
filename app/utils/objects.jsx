@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames/bind';
-import Factory from '../utils/contentsTagFactory'
+import factory from '../utils/contentsTagFactory'
 
 class User {
 
@@ -9,12 +9,12 @@ class User {
     for(let x in data) {
       this[x] = data[x];
     }
-    if(Factory)
-      this.factory = new Factory(this);
+    // if(Factory)
+    //   factory = new Factory(this);
   }
 
   getInfo(props) {
-    const Info = this.factory.getInfoTag(props);
+    const Info = factory.getInfoTag(this);
     return <Info owner={this} />;
   }
 
@@ -47,8 +47,12 @@ class Maker extends User {
     return '/maker/' + this.userid;
   }
 
+  createPortfolioLink(portfolio) {
+    return this.getHomeLink() + '/portfolio/' + portfolio.pid;
+  }
+
   getContent(props) {
-    return this.factory.getMakerContent(props);
+    return factory.getMakerContent({source: this, ...props});
   }
 }
 
@@ -74,8 +78,14 @@ class Company extends User {
     return '/company/' + this.link_name;
   }
 
+  createPortfolioLink(portfolio) {
+    if(portfolio.type === 'company')
+      return this.getHomeLink() + '/portfolio/' + portfolio.pid;
+    return this.getHomeLink() + '/maker/' + portfolio.user.userid  + '/' + portfolio.pid;
+  }
+
   getContent(props) {
-    return this.factory.getCompanyContent(props);
+    return factory.getCompanyContent({source: this, ...props});
   }
 }
 
@@ -101,8 +111,14 @@ class Project extends User {
     return '/project/' + this.link_name;
   }
 
+  createPortfolioLink(portfolio) {
+    if(portfolio.type === 'company')
+      return this.getHomeLink() + '/company/' + portfolio.company.link_name  + '/' + portfolio.pid;
+    return this.getHomeLink() + '/maker/' + portfolio.user.userid  + '/' + portfolio.pid;
+  }
+
   getContent(props) {
-    return this.factory.getProjectContent(props);
+    return factory.getProjectContent({source: this, ...props});
   }
 
 }
@@ -126,6 +142,10 @@ class Null extends User {
   }
 
   getHomeLink() {
+    return '';
+  }
+
+  createPortfolioLink(portfolio) {
     return '';
   }
 }

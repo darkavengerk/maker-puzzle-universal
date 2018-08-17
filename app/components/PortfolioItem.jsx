@@ -9,13 +9,13 @@ import { portfoiloEditorStart } from '../actions/makers';
 
 const cx = classNames.bind(styles);
 
-const ContentsSection = ({ portfolio, portfoiloEditorStart }) => {
+const PortfolioItem = ({ portfolio, owner, referrer, portfoiloEditorStart }) => {
 
   if(portfolio) {
     const ownerId = portfolio.user? portfolio.user.userid : 'unknown';
     return (
       <div className={cx('main-section')}>
-        <Link to={`/maker/${ownerId}/portfolio/${portfolio.pid}`}>
+        <Link to={referrer.createPortfolioLink(portfolio)}>
           <div className={cx('text', 'text-section')}>
             <h1>
               {portfolio.location}
@@ -47,7 +47,7 @@ const ContentsSection = ({ portfolio, portfoiloEditorStart }) => {
     );
 };
 
-ContentsSection.propTypes = {
+PortfolioItem.propTypes = {
   portfolio: PropTypes.object,
   maker: PropTypes.object
 };
@@ -58,4 +58,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {portfoiloEditorStart})(ContentsSection);
+export default connect(mapStateToProps, {portfoiloEditorStart})(PortfolioItem);
