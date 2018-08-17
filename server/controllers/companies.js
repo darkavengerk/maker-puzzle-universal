@@ -46,6 +46,7 @@ export async function one(req, res) {
                     .populate({path:'products.images'})
                     .populate({path:'portfolios.images'})
                     .populate({path:'portfolios.user', populate:{path:'picture'}})
+                    .populate({path:'portfolios.project', populate:{path:'profilePicture'}})
                     .populate('owner')
                     .populate({path:'users', populate:{path:'picture'}})
                     .lean();

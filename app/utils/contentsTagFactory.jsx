@@ -97,20 +97,31 @@ class ContentsTagFactory {
       return this.getProjectDetail(source, param)
     }
 
-    let contents = source.portfolios? source.portfolios.map(portfolio => {
-      const owner = portfolio.type === 'company' ? createObject('company', portfolio.company) : createObject('maker', portfolio.user);
+    const portfolios = source.portfolios || [];
+    const companyPortfolios = portfolios.filter(portfolio => portfolio.type === 'company');
+    const makerPortfolios = portfolios.filter(portfolio => portfolio.type !== 'company');
+
+    let companyContents = companyPortfolios.map(portfolio => {
+      const owner = createObject('company', portfolio.company);
       const Item = this.getItemTag(owner);
       return (<Item portfolio={portfolio} referrer={source} owner={owner} key={portfolio.pid} />);
-    }) : [];
+    });
+
+    let makerContents = makerPortfolios.map(portfolio => {
+      const owner = createObject('maker', portfolio.user);
+      const Item = this.getItemTag(owner);
+      return (<Item portfolio={portfolio} referrer={source} owner={owner} key={portfolio.pid} />);
+    });
 
     if(isOwnPage) {
-      contents.push(<Item key={'__new__'} />);
+      companyContents.push(<Item key={'__new__'} />);
     }
 
     return (<div>
               <p className={cx('main-panel-title')}>포트폴리오</p>
               <div className={cx('portfolio-list')}>
-                {contents}
+                {companyContents}
+                {makerContents}
               </div>
               <Popup show={source.isAddingPortfolio} name="AddPortfolioPopup">
                 <AddPortfolio title="포트폴리오 수정하기" submit={portfoiloSubmit} cancel={portfoiloEditorCancel} />
@@ -142,8 +153,8 @@ class ContentsTagFactory {
     }
 
     let portfolios = source.portfolios? source.portfolios.map(portfolio => {
-      const owner = createObject('maker', portfolio.user);
-      return (<PortfolioItemExternal portfolio={portfolio} referrer={source} owner={owner} key={portfolio.pid} />);
+      const maker = createObject('maker', portfolio.user);
+      return (<PortfolioItemExternal portfolio={portfolio} referrer={source} owner={maker} key={portfolio.pid} />);
     }) : [];
 
     return (<div>
@@ -233,12 +244,9 @@ class ContentsTagFactory {
       }
     }
     if(portfolioFound) {
-      let owner = null;
+      let owner = [new Project(portfolioFound.project)];
       if(param.mid) {
-        owner = new Maker(portfolioFound.user);
-      }
-      else {
-        owner = new Project(portfolioFound.project);
+        owner.push(new Maker(portfolioFound.user));
       }
       return (
         <div>
