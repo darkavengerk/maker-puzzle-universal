@@ -22,7 +22,7 @@ for(let y = now-14; y > now-100; y--) {
 class LoginOrRegister extends Component {
   constructor(props) {
     super(props);
-    this.state = {loginMode: false};
+    this.state = {loginMode: true};
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
     this.toggleLoginMode = this.toggleLoginMode.bind(this);
     this.genderSelected = this.genderSelected.bind(this);

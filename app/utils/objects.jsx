@@ -51,6 +51,14 @@ class Maker extends User {
     return this.getHomeLink() + '/portfolio/' + portfolio.pid;
   }
 
+  createPortfolioTitle(portfolio) {
+    return portfolio.location;
+  }
+
+  createPortfolioSubtitle(portfolio) {
+    return portfolio.title;
+  }
+
   getContent(props) {
     return factory.getMakerContent({source: this, ...props});
   }
@@ -84,6 +92,14 @@ class Company extends User {
     return this.getHomeLink() + '/maker/' + portfolio.user.userid  + '/' + portfolio.pid;
   }
 
+  createPortfolioTitle(portfolio) {
+    return portfolio.location;
+  }
+
+  createPortfolioSubtitle(portfolio) {
+    return portfolio.title;
+  }
+
   getContent(props) {
     return factory.getCompanyContent({source: this, ...props});
   }
@@ -109,6 +125,18 @@ class Project extends User {
 
   getHomeLink() {
     return '/project/' + this.link_name;
+  }
+
+  createPortfolioTitle(portfolio) {
+    if(portfolio.type === 'company')
+      return portfolio.company.name;
+    return portfolio.title;
+  }
+
+  createPortfolioSubtitle(portfolio) {
+    if(portfolio.type === 'company')
+      return portfolio.title;
+    return portfolio.user.name;
   }
 
   createPortfolioLink(portfolio) {

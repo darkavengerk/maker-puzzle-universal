@@ -6,7 +6,6 @@ import CompanyInfo from '../components/CompanyInfo';
 import PortfolioItem from '../components/PortfolioItem';
 import ProductItem from '../components/ProductItem';
 import PortfolioItemWide from '../components/PortfolioItemWide';
-import PortfolioItemExternal from '../components/PortfolioItemExternal';
 import PortfolioDetail from '../components/PortfolioDetail';
 import Padding from '../components/Padding';
 import NULL from '../components/null';
@@ -38,7 +37,7 @@ class ContentsTagFactory {
       case 'project':
         return {
           info: ProjectInfo,
-          item: PortfolioItemExternal,
+          item: PortfolioItem,
         };
       case 'company':
         return {
@@ -74,7 +73,7 @@ class ContentsTagFactory {
 
     let contents = source.portfolios? source.portfolios.map(portfolio => {
       const owner = createObject('maker', portfolio.user);
-      return (<Item portfolio={portfolio} owner={owner} referrer={source} key={portfolio.pid} />);
+      return (<Item portfolio={portfolio} owner={owner} referrer={source} key={portfolio.pid} external={false} />);
     }) : [];
 
     if(isOwnPage) {
@@ -104,13 +103,13 @@ class ContentsTagFactory {
     let companyContents = companyPortfolios.map(portfolio => {
       const owner = createObject('company', portfolio.company);
       const Item = this.getItemTag(owner);
-      return (<Item portfolio={portfolio} referrer={source} owner={owner} key={portfolio.pid} />);
+      return (<Item portfolio={portfolio} referrer={source} owner={owner} key={portfolio.pid} external={true} />);
     });
 
     let makerContents = makerPortfolios.map(portfolio => {
       const owner = createObject('maker', portfolio.user);
       const Item = this.getItemTag(owner);
-      return (<Item portfolio={portfolio} referrer={source} owner={owner} key={portfolio.pid} />);
+      return (<Item portfolio={portfolio} referrer={source} owner={owner} key={portfolio.pid} external={true} />);
     });
 
     if(isOwnPage) {
@@ -137,7 +136,7 @@ class ContentsTagFactory {
 
     let companyPortfolios = source.companyPortfolios? source.companyPortfolios.map(portfolio => {
       const owner = createObject('project', portfolio.project);
-      return (<PortfolioItemWide portfolio={portfolio} referrer={source} owner={owner} key={portfolio.pid} />);
+      return (<PortfolioItemWide portfolio={portfolio} referrer={source} owner={owner} key={portfolio.pid} external={false} />);
     }) : [];
 
     if(isOwnPage) {
@@ -154,7 +153,7 @@ class ContentsTagFactory {
 
     let portfolios = source.portfolios? source.portfolios.map(portfolio => {
       const maker = createObject('maker', portfolio.user);
-      return (<PortfolioItemExternal portfolio={portfolio} referrer={source} owner={maker} key={portfolio.pid} />);
+      return (<PortfolioItem portfolio={portfolio} referrer={source} owner={maker} key={portfolio.pid} external={true} />);
     }) : [];
 
     return (<div>

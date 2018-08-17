@@ -9,20 +9,22 @@ import { portfoiloEditorStart } from '../actions/makers';
 
 const cx = classNames.bind(styles);
 
-const PortfolioItem = ({ portfolio, owner, referrer, portfoiloEditorStart }) => {
+const PortfolioItem = ({ portfolio, owner, referrer, portfoiloEditorStart, external }) => {
 
   if(portfolio) {
-    const ownerId = portfolio.user? portfolio.user.userid : 'unknown';
     return (
       <div className={cx('main-section')}>
         <Link to={referrer.createPortfolioLink(portfolio)}>
-          <div className={cx('text', 'text-section')}>
-            <h1>
-              {portfolio.location}
-            </h1>
-            <p>
-              {portfolio.title}
-            </p>
+          <div className={cx('text', 'text-section', external? 'type2' : '')}>
+            { external? <Image src={owner.getProfileImage()} x={31} y={31} className={cx('profile-image')} /> : null }
+            <span>
+              <h1>
+                {referrer.createPortfolioTitle(portfolio)}
+              </h1>
+              <p>
+                {referrer.createPortfolioSubtitle(portfolio)}
+              </p>
+            </span>
           </div>
           <Image src={portfolio.images[0]} x={214} y={214}/>
         </Link>        
