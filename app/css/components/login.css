@@ -1,47 +1,47 @@
 .main-section {
-  width: 427px;
+  width: 42.7rem;
   background-color: #f7f7f7;
-  box-shadow: 0 3px 35px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 0 .3rem 3.5rem 0 rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .title {
-  height: 43px;
+  height: 4.3rem;
   font-family: NanumBarunGothic;
-  font-size: 26px;
+  font-size: 2.6rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
   line-height: 1.65;
-  letter-spacing: -0.6px;
+  letter-spacing: -0.06rem;
   color: #000000;
-  margin: 25px 0 0 0;
+  margin: 2.5rem 0 0 0;
   /*text-align: center;*/
 }
 
 .form-area {
-  width:310px;
+  width:31.0rem;
 }
 
 .input {
-  width: 310px;
-  height: 36px;
-  border-radius: 5px;
+  width: 31.0rem;
+  height: 3.6rem;
+  border-radius: .5rem;
   background-color: #ffffff;
-  border: solid 1px #4e4e4e;
-  margin-bottom: 9px;
+  border: solid .1rem #4e4e4e;
+  margin-bottom: .9rem;
 
   font-family: NanumBarunGothic;
-  font-size: 13px;
+  font-size: 1.3rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
-  letter-spacing: -0.3px;
+  letter-spacing: -0.03rem;
   text-align: left;
-  padding-left: 10px;
+  padding-left: 1.0rem;
 }
 
 .input::placeholder {
@@ -51,13 +51,13 @@
 }
 
 .login-button {
-  width: 310px;
-  height: 33px;
-  border-radius: 5px;
+  width: 31.0rem;
+  height: 3.3rem;
+  border-radius: .5rem;
   background-color: #f46e1f;
 
   font-family: NanumBarunGothic;
-  font-size: 15px;
+  font-size: 1.5rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
@@ -75,29 +75,29 @@
   align-items: center;
   margin: 1.3rem 0 1.3rem;
   width: 31rem;
-  height: 33px;
+  height: 3.3rem;
 }
 
 .alternative-message {
   padding-left: 4rem;
   font-family: NanumBarunGothic;
-  font-size: 13px;
+  font-size: 1.3rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
   line-height: 1.54;
-  letter-spacing: -0.3px;
+  letter-spacing: -0.03rem;
   text-align: center;
   color: #141414;
 }
 
 .alternative-link {
-  width: 132px;
-  height: 33px;
-  border-radius: 5px;
+  width: 13.2rem;
+  height: 3.3rem;
+  border-radius: .5rem;
   background-color: #444444;
   font-family: NanumBarunGothic;
-  font-size: 15px;
+  font-size: 1.5rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
@@ -108,14 +108,14 @@
 }
 
 .text-link {
-  height: 20px;
+  height: 2.0rem;
   font-family: NanumBarunGothic;
-  font-size: 13px;
+  font-size: 1.3rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
   line-height: 1.54;
-  letter-spacing: -0.3px;
+  letter-spacing: -0.03rem;
   text-align: left;
   color: #f46e1f;
   background-color: none;
@@ -123,16 +123,16 @@
 }
 
 .helper {
-  width: 294px;
-  padding: 0 6px;
+  width: 29.4rem;
+  padding: 0 .6rem;
   font-family: NanumBarunGothic;
-  font-size: 11px;
+  font-size: 1.1rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
-  letter-spacing: -0.3px;
-  line-height: 12px;
+  letter-spacing: -0.03rem;
+  line-height: 1.2rem;
   text-align: left;
   color: #a3a3a3;
 }
@@ -142,8 +142,8 @@
 }
 
 .middle-size {
-  width: 221px;
-  height: 44px;
+  width: 22.1rem;
+  height: 4.4rem;
 }
 
 .space-between {
@@ -154,25 +154,25 @@
 
 .label {
   font-family: NanumBarunGothic;
-  font-size: 18px;
+  font-size: 1.8rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
   line-height: 1.8rem;
-  letter-spacing: -0.4px;
+  letter-spacing: -0.04rem;
   text-align: left;
   color: #000000;
 }
 
 .second-title {
-  height: 43px;
+  height: 4.3rem;
   font-family: NanumBarunGothic;
-  font-size: 20px;
+  font-size: 2.0rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
   line-height: 2.15;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.05rem;
   text-align: left;
   color: #000000;
 }
@@ -184,46 +184,49 @@
 
 .gender {
   display: inline-block;
-  width: 221px;
+  width: 22.1rem;
   font-family: NanumBarunGothic;
-  font-size: 13px;
+  font-size: 1.3rem;
   font-weight: 300;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
-  letter-spacing: -0.3px;
+  letter-spacing: -0.03rem;
   text-align: left;
   color: #000000;
 }
 
 .year-select {
-  width: 221px;
-  height: 36px;
+  width: 22.1rem;
+  height: 3.6rem;
 
   font-family: NanumBarunGothic;
-  font-size: 13px;
+  font-size: 1.3rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
-  letter-spacing: -0.3px;
+  letter-spacing: -0.03rem;
   text-align: center;
   color: #a3a3a3;
 }
 
 .check {
-  width: 310px;
-  height: 15px;
+  display: flex;
+  align-items: center;
+  /*justify-content: left;*/
+  width: 31.0rem;
+  height: 1.5rem;
   font-family: NanumBarunGothic;
-  font-size: 13px;
+  font-size: 1.3rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
-  line-height: normal;
-  letter-spacing: -0.3px;
+  line-height: 1.5rem;
+  letter-spacing: -0.03rem;
   text-align: left;
   color: #000000;
-  padding-left:  13px;
+  padding-left:  1.3rem;
 }
 
 .important {

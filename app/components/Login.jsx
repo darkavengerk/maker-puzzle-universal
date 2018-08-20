@@ -166,7 +166,11 @@ class LoginOrRegister extends Component {
               />
             </div>
 
+            <Padding height={'2rem'} />
+
             <SingleLine width="100%" color="#dbd8d8" thickness={1} />
+
+            <Padding height={'1.5rem'} />
 
             <div className={cx('form-area')}>
               <h1 className={cx('second-title')}>추가 정보</h1>
@@ -174,6 +178,9 @@ class LoginOrRegister extends Component {
                 입력된 정보는 외부에 노출되지 않고, <br/>
 보다 나은 서비스 제공을 위한 통계자료로만 활용됩니다.
               </p>
+
+              <Padding height={'2rem'} />
+
               <div className={cx('space-between')}>
                 <label className={cx('label')}>성별</label>
                 <div className={cx('gender')}>
@@ -186,6 +193,9 @@ class LoginOrRegister extends Component {
                   여자
                 </div>
               </div>
+
+              <Padding height={'2rem'} />
+
               <div className={cx('space-between')}>
                 <label className={cx('label')}>출생연도</label>
                 <Select 
@@ -197,14 +207,26 @@ class LoginOrRegister extends Component {
               </div>
             </div>
 
+            <Padding height={'1.8rem'} />
+
             <SingleLine width="100%" color="#dbd8d8" thickness={1} />
 
+            <Padding height={'2.5rem'} />
+
             <div className={cx('check')}>
-              <input type="checkbox" /><b className={cx('important')}>이용약관</b> 및 <b className={cx('important')}>개인정보 처리방침</b>에 동의합니다.
+              <input type="checkbox" />
+              <Padding width="1.5rem" inline={true} />
+              <b className={cx('important')}>이용약관</b>
+              <Padding width="0.2rem" inline={true} />및<Padding width="0.2rem" inline={true} />
+              <b className={cx('important')}>개인정보 처리방침</b>에 동의합니다.
             </div>
+            <Padding height="1.2rem"/>
             <div className={cx('check')}>
-              <input type="checkbox" />[선택]마케팅 목적 이메일 수신 동의하기
+              <input type="checkbox" />
+              <Padding width="1.5rem" inline={true} />
+              [선택]마케팅 목적 이메일 수신 동의하기
             </div>
+            <Padding height={'2rem'} />
             <div>
               <p
                 className={cx('message', {
@@ -217,7 +239,11 @@ class LoginOrRegister extends Component {
                 role="button" />
             </div>
 
+            <Padding height={'1.5rem'} />
+
             <SingleLine width="100%" color="#dbd8d8" thickness={1} />
+
+            {/*<Padding height={'1.5rem'} />*/}
 
             <div className={cx('alternative')}>
               <div className={cx('alternative-message')} >이미 회원이세요?</div>
