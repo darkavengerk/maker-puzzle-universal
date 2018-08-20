@@ -35,10 +35,7 @@
   padding-top: 0.9rem;
 }
 
-.text-section-type2 {
-  width: 21.4rem;
-  height: 5.4rem;
-  padding-top: 0.9rem;
+.type2 {
   display: flex;
   align-items: top;
 }
@@ -55,13 +52,17 @@
   line-height: 1.67;
 }
 
-.text-section-type2 h1, .text-section-type2 p {
+.type2 h1, .type2 p {
   text-align: left;
 }
 
 .profile-image {
   margin: 0 1rem;
   border-radius: 50%;
+}
+
+.company-image {
+  margin: 0 1.8rem 0 1.2rem;
 }
 
 .add-portfolio {

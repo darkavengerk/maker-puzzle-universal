@@ -10,20 +10,23 @@ import { portfoiloEditorStart } from '../actions/makers';
 
 const cx = classNames.bind(styles);
 
-const ContentsSection = ({ portfolio, portfoiloEditorStart, company }) => {
+const ContentsSection = ({ portfolio, owner, referrer, portfoiloEditorStart, company, external }) => {
 
   if(portfolio) {
     const link_name = company.link_name;
     return (
       <div className={cx('main-section', 'wide')}>
-        <Link to={`/company/${link_name}/portfolio/${portfolio.pid}`}>
-          <div className={cx('text', 'text-section-wide', 'middle')}>
-            <h1>
-              {portfolio.location}
-            </h1>
-            <p>
-              {portfolio.title}
-            </p>
+        <Link to={referrer.createPortfolioLink(portfolio)}>
+          <div className={cx('text', 'text-section-wide', external? 'type2' : null)}>
+            {external? <Image src={owner.getProfileImage()} x={50} y={39} className={cx('company-image')} /> : null }
+            <span>
+              <h1>
+                {referrer.createPortfolioTitle(portfolio)}
+              </h1>
+              <p>
+                {referrer.createPortfolioSubtitle(portfolio)}
+              </p>
+            </span>
           </div>
           <Window images={portfolio.images} />
         </Link>        

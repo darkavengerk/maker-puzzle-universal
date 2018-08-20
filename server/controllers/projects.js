@@ -1,9 +1,11 @@
 import _ from 'lodash';
-import Project, {autoComplete} from '../db/mongo/models/project';
+import  { models } from '../db';
 
-/**
- * List
- */
+const { 
+  Project, 
+  projectAutoComplete : autoComplete 
+} = models;
+
 export function all(req, res) {
   Project.find({}).exec((err, results) => {
     if (err) {
@@ -36,6 +38,7 @@ export async function one(req, res) {
                     .findOne({ link_name })
                     .populate({path:'portfolios.images'}) 
                     .populate({path:'portfolios.user', populate:{path:'picture'}}) 
+                    .populate({path:'portfolios.company', populate:{path:'profilePicture'}}) 
                     .populate({path:'users', populate:{path:'picture'}}) 
                     .populate({path:'companies', populate:{path:'profilePicture'}}) 
                     .lean();

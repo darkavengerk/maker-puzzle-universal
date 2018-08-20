@@ -1,13 +1,16 @@
 import _ from 'lodash';
 import User from '../db/mongo/models/user';
-import Company, {autoComplete as companyAutoComplete} from '../db/mongo/models/company';
-import Project, {autoComplete as projectAutoComplete} from '../db/mongo/models/project';
-import Metadata from '../db/mongo/models/metadata';
-import Misc from '../db/mongo/models/misc';
+import  { models, common } from '../db';
 
-/**
- * List
- */
+const { 
+  Company, 
+  companyAutoComplete, 
+  Project, 
+  projectAutoComplete,
+  Metadata,
+  Misc 
+} = models;
+
 export function all(req, res) {
   User.find({}).exec((err, results) => {
     if (err) {
@@ -43,6 +46,7 @@ export async function one(req, res) {
                     .populate({path:'products.images'})
                     .populate({path:'portfolios.images'})
                     .populate({path:'portfolios.user', populate:{path:'picture'}})
+                    .populate({path:'portfolios.project', populate:{path:'profilePicture'}})
                     .populate('owner')
                     .populate({path:'users', populate:{path:'picture'}})
                     .lean();
@@ -51,30 +55,24 @@ export async function one(req, res) {
 
 export async function addPortfolio(req, res) {
   const { link_name } = req.params;
-
   const portfolio = req.body;
   const location = portfolio.location;
 
-  let [project, company, pid] = await Promise.all([
+  let [ project, company ] = await Promise.all([
     Project.findOne({name: location}),
-    Company.findOne({link_name}), 
-    Misc.createID('portfolio')
+    Company.findOne({name: link_name}),
   ]);
-
-  portfolio.pid = pid;
 
   if(!project) {
     project = new Project({name: location});
     project = await Metadata.populateMetadata('Project', project);
   }
-  portfolio.project = project._id;
 
-  project.portfolios.push(portfolio);
-  company.companyPortfolios.push(portfolio);
-  company.projects.addToSet(project._id);
-  await Promise.all([project.save(), company.save()]);
+  portfolio.type = 'company';
 
-  res.json({project, company, portfolio});
+  const result = await common.savePortfolio({portfolio, company, project});
+
+  res.json(result);
   
   projectAutoComplete.buildCache(err => {});
 }

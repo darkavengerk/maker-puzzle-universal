@@ -9,20 +9,22 @@ import { portfoiloEditorStart } from '../actions/makers';
 
 const cx = classNames.bind(styles);
 
-const ContentsSection = ({ portfolio, portfoiloEditorStart }) => {
+const PortfolioItem = ({ portfolio, owner, referrer, portfoiloEditorStart, external }) => {
 
   if(portfolio) {
-    const ownerId = portfolio.user? portfolio.user.userid : 'unknown';
     return (
       <div className={cx('main-section')}>
-        <Link to={`/maker/${ownerId}/portfolio/${portfolio.pid}`}>
-          <div className={cx('text', 'text-section')}>
-            <h1>
-              {portfolio.location}
-            </h1>
-            <p>
-              {portfolio.title}
-            </p>
+        <Link to={referrer.createPortfolioLink(portfolio)}>
+          <div className={cx('text', 'text-section', external? 'type2' : '')}>
+            { external? <Image src={owner.getProfileImage()} x={31} y={31} className={cx('profile-image')} /> : null }
+            <span>
+              <h1>
+                {referrer.createPortfolioTitle(portfolio)}
+              </h1>
+              <p>
+                {referrer.createPortfolioSubtitle(portfolio)}
+              </p>
+            </span>
           </div>
           <Image src={portfolio.images[0]} x={214} y={214}/>
         </Link>        
@@ -47,7 +49,7 @@ const ContentsSection = ({ portfolio, portfoiloEditorStart }) => {
     );
 };
 
-ContentsSection.propTypes = {
+PortfolioItem.propTypes = {
   portfolio: PropTypes.object,
   maker: PropTypes.object
 };
@@ -58,4 +60,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {portfoiloEditorStart})(ContentsSection);
+export default connect(mapStateToProps, {portfoiloEditorStart})(PortfolioItem);

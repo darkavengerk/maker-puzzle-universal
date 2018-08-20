@@ -6,7 +6,6 @@ import CompanyInfo from '../components/CompanyInfo';
 import PortfolioItem from '../components/PortfolioItem';
 import ProductItem from '../components/ProductItem';
 import PortfolioItemWide from '../components/PortfolioItemWide';
-import PortfolioItemExternal from '../components/PortfolioItemExternal';
 import PortfolioDetail from '../components/PortfolioDetail';
 import Padding from '../components/Padding';
 import NULL from '../components/null';
@@ -16,7 +15,7 @@ import AddPortfolio from '../components/AddPortfolio';
 import AddProduct from '../components/AddProduct';
 import Popup from '../components/Popup';
 
-import { Maker, Project, Company } from '../utils/objects'
+import { Maker, Project, Company, create as createObject } from '../utils/objects'
 
 import styles from '../css/components/contents-section';
 const cx = classNames.bind(styles);
@@ -24,62 +23,57 @@ const cx = classNames.bind(styles);
 class ContentsTagFactory {
 
   constructor(source, type) {
-    this.source = source || {};
-    this.getSetups(source.getType());
+    // source = source || {};
+    // this.getSetups(source.getType());
   }
 
-  getSetups(contentsType) {
+  getSet(contentsType) {
     switch(contentsType) {
       case 'maker':
-        this.set =  {
+        return  {
           info: MakerInfo,
           item: PortfolioItem,
-          
         };
-        break;
       case 'project':
-        this.set = {
+        return {
           info: ProjectInfo,
-          item: PortfolioItemExternal,
-          
+          item: PortfolioItem,
         };
-        break;
       case 'company':
-        this.set = {
+        return {
           info: CompanyInfo,
           item: PortfolioItemWide,
         };
-        break;
       default:
-        this.set = {
+        return {
           info: NULL,
           item: NULL,
       }
     }
   }
 
-  getInfoTag() {
-    return this.getTag('info');
+  getInfoTag(source) {
+    return this.getTag(source, 'info');
   }
 
-  getItemTag() {
-    return this.getTag('item');
+  getItemTag(source) {
+    return this.getTag(source, 'item');
   }
 
-  getTag(name) {
-    return this.set[name];
+  getTag(source, name) {
+    return this.getSet(source.getType())[name];
   }
 
-  getMakerContent({param, isOwnPage, portfoiloSubmit, portfoiloEditorCancel}) {
-    
+  getMakerContent({source, param, isOwnPage, portfoiloSubmit, portfoiloEditorCancel}) {
     if(param && param.pid) {
-      return this.getMakerDetail(this.source, param.pid);
+      return this.getMakerDetail(source, param.pid);
     }
 
-    const Item = this.getItemTag();
+    const Item = this.getItemTag(source);
 
-    let contents = this.source.portfolios? this.source.portfolios.map(portfolio => {
-      return (<Item portfolio={portfolio} key={portfolio.pid} />);
+    let contents = source.portfolios? source.portfolios.map(portfolio => {
+      const owner = createObject('maker', portfolio.user);
+      return (<Item portfolio={portfolio} owner={owner} referrer={source} key={portfolio.pid} external={false} />);
     }) : [];
 
     if(isOwnPage) {
@@ -91,35 +85,65 @@ class ContentsTagFactory {
               <div className={cx('portfolio-list')}>
                 {contents}
               </div>
-              <Popup show={this.source.isAddingPortfolio} name="AddPortfolioPopup">
+              <Popup show={source.isAddingPortfolio} name="AddPortfolioPopup">
                 <AddPortfolio title="포트폴리오 수정하기" submit={portfoiloSubmit} cancel={portfoiloEditorCancel} />
               </Popup>
             </div>);
   }
 
-  getProjectContent(props) {
-    const { param, isOwnPage } = props;
-    if(param && param.pid) {
-      return this.getProjectDetail(param.pid) || this.getProjectContent({}, isOwnPage);
+  getProjectContent({source, param, isOwnPage, portfoiloSubmit, portfoiloEditorCancel}) {
+    if(source.name && param && param.pid) {
+      return this.getProjectDetail(source, param)
     }
-    return this.getMakerContent(props);
+
+    const portfolios = source.portfolios || [];
+    const companyPortfolios = portfolios.filter(portfolio => portfolio.type === 'company');
+    const makerPortfolios = portfolios.filter(portfolio => portfolio.type !== 'company');
+
+    let companyContents = companyPortfolios.map(portfolio => {
+      const owner = createObject('company', portfolio.company);
+      const Item = this.getItemTag(owner);
+      return (<Item portfolio={portfolio} referrer={source} owner={owner} key={portfolio.pid} external={true} />);
+    });
+
+    let makerContents = makerPortfolios.map(portfolio => {
+      const owner = createObject('maker', portfolio.user);
+      const Item = this.getItemTag(owner);
+      return (<Item portfolio={portfolio} referrer={source} owner={owner} key={portfolio.pid} external={true} />);
+    });
+
+    if(isOwnPage) {
+      companyContents.push(<Item key={'__new__'} />);
+    }
+
+    return (<div>
+              <p className={cx('main-panel-title')}>포트폴리오</p>
+              <div className={cx('portfolio-list')}>
+                {companyContents}
+                {makerContents}
+              </div>
+              <Popup show={source.isAddingPortfolio} name="AddPortfolioPopup">
+                <AddPortfolio title="포트폴리오 수정하기" submit={portfoiloSubmit} cancel={portfoiloEditorCancel} />
+              </Popup>
+            </div>);
   }
 
-  getCompanyContent({param, isOwnPage, companyPortfoiloSubmit, companyPortfoiloEditorCancel}) {
+  getCompanyContent({source, param, isOwnPage, companyPortfoiloSubmit, companyPortfoiloEditorCancel}) {
 
     if(param.pid) {
-      return this.getCompanyDetail(param.pid);
+      return this.getCompanyDetail(source, param);
     }
 
-    let companyPortfolios = this.source.portfolios? this.source.companyPortfolios.map(portfolio => {
-      return (<PortfolioItemWide portfolio={portfolio} key={portfolio.pid} />);
+    let companyPortfolios = source.companyPortfolios? source.companyPortfolios.map(portfolio => {
+      const owner = createObject('project', portfolio.project);
+      return (<PortfolioItemWide portfolio={portfolio} referrer={source} owner={owner} key={portfolio.pid} external={false} />);
     }) : [];
 
     if(isOwnPage) {
       companyPortfolios.push(<PortfolioItemWide key={'__new__'} />);
     }
 
-    let products = this.source.products? this.source.products.map(product => {
+    let products = source.products? source.products.map(product => {
       return (<ProductItem product={product} key={product.pid} />);
     }) : [];
 
@@ -127,8 +151,9 @@ class ContentsTagFactory {
       products.push(<ProductItem key={'__new__'} />);
     }
 
-    let portfolios = this.source.portfolios? this.source.portfolios.map(portfolio => {
-      return (<PortfolioItem portfolio={portfolio} key={portfolio.pid} />);
+    let portfolios = source.portfolios? source.portfolios.map(portfolio => {
+      const maker = createObject('maker', portfolio.user);
+      return (<PortfolioItem portfolio={portfolio} referrer={source} owner={maker} key={portfolio.pid} external={true} />);
     }) : [];
 
     return (<div>
@@ -151,7 +176,7 @@ class ContentsTagFactory {
                 {portfolios}
               </div>
               
-              <Popup show={this.source.isAddingPortfolio} name="AddPortfolioPopup">
+              <Popup show={source.isAddingPortfolio} name="AddPortfolioPopup">
                 <AddPortfolio 
                   title="포트폴리오 추가하기" 
                   submit={companyPortfoiloSubmit} 
@@ -159,57 +184,81 @@ class ContentsTagFactory {
                   type={'company'}
                 />
               </Popup>
-              <Popup show={this.source.isAddingProduct} name="AddProductPopup">
-                <AddProduct title="보유 제품 추가하기" company={this.source} />
+              <Popup show={source.isAddingProduct} name="AddProductPopup">
+                <AddProduct title="보유 제품 추가하기" company={source} />
               </Popup>
             </div>);
   }
 
-  getMakerDetail(isOwnPage) {
-    if(this.source.portfolioSelected && this.source.portfolioSelected.portfolio)
+  getMakerDetail(source, isOwnPage) {
+    if(source.portfolioSelected && source.portfolioSelected.portfolio)
       return (
           <div>
             <p className={cx('main-panel-title')}>포트폴리오</p>
             <PortfolioDetail 
-              portfolio={this.source.portfolioSelected.portfolio} 
+              portfolio={source.portfolioSelected.portfolio} 
               edit={isOwnPage}
-              referer={new Project(this.source.portfolioSelected.portfolio.project)}
+              owner={new Project(source.portfolioSelected.portfolio.project)}
             />
           </div>)
     return null;
   }
 
-  getProjectDetail(pid) {
-    if(!this.source.portfolios) return null;
+  getProjectDetail(source, param) {
+    let portfolios = source.portfolios;
+    let portfolioFound = null;
 
-    for(let portfolio of this.source.portfolios) {
-      if(portfolio.pid === pid)
-        return (
-          <div>
-            <p className={cx('main-panel-title')}>포트폴리오</p>
-            <PortfolioDetail portfolio={portfolio} referer={new Maker(portfolio.user)} />
-          </div>
-        )
+    for(let portfolio of portfolios) {
+      if(portfolio.pid === param.pid) {
+        portfolioFound = portfolio;
+        break;
+      }
+    }
+    if(portfolioFound) {
+      let owner = null;
+      if(param.mid) {
+        owner = new Maker(portfolioFound.user);
+      }
+      else {
+        owner = new Company(portfolioFound.company);
+      }
+      return (
+        <div>
+          <p className={cx('main-panel-title')}>포트폴리오</p>
+          <PortfolioDetail portfolio={portfolioFound} owner={owner} />
+        </div>
+      )
     }
     return null;
   }
 
-  getCompanyDetail(pid) {
-    if(!this.source.portfolios) return null;
+  getCompanyDetail(source, param) {
+    let portfolios = param.mid? source.portfolios : source.companyPortfolios;
+    let portfolioFound = null;
 
-    for(let portfolio of this.source.companyPortfolios) {
-      if(portfolio.pid === pid) {
-        return (
-          <div>
-            <p className={cx('main-panel-title')}>포트폴리오</p>
-            <PortfolioDetail portfolio={portfolio} referer={new Project(portfolio.project)} />
-          </div>
-        )
+    for(let portfolio of portfolios) {
+      if(portfolio.pid === param.pid) {
+        portfolioFound = portfolio;
+        break;
       }
+    }
+    if(portfolioFound) {
+      let owner = [new Project(portfolioFound.project)];
+      if(param.mid) {
+        owner.push(new Maker(portfolioFound.user));
+      }
+      return (
+        <div>
+          <p className={cx('main-panel-title')}>포트폴리오</p>
+          <PortfolioDetail portfolio={portfolioFound} owner={owner} />
+        </div>
+      )
     }
     return null;
   }
 
 }
 
-export default ContentsTagFactory;
+const factory = new ContentsTagFactory();
+
+export default factory;

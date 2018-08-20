@@ -12,23 +12,25 @@ import styles from '../css/components/portfolio-detail';
 
 const cx = classNames.bind(styles);
 
-const ContentsSection = ({ portfolio, user, referer }) => {
-
+const ContentsSection = ({ portfolio, user, owner }) => {
+  
   const imgs = portfolio.images.map(img => (
     <div key={img._id} className={cx('image')} >
       <Image src={img} x={'100%'} pureImage={true}/>
     </div>)
   );
 
-  const imageUrl = referer.getProfileImage();
-  const projectArea = (
-    <div className={cx('project-area')}>
-      <Image src={imageUrl} x={33} y={33} />
+  if(!Array.isArray(owner)) {
+    owner = [owner];
+  }
+  const ownerArea = owner.map(v => (
+    <div className={cx('project-area')} key={v.getHomeLink()} >
+      <Image src={v.getProfileImage()} x={33} y={33} />
       <span>
-        <Link className={cx('project-name')} to={referer.getHomeLink()}>{referer.getName()}</Link>
+        <Link className={cx('project-name')} to={v.getHomeLink()}>{v.getName()}</Link>
       </span>
     </div>
-  );
+  ));
 
   const tags = portfolio.tags.map(tag => (<label key={tag} className={cx('tag')}>{tag}</label>));
 
@@ -46,7 +48,7 @@ const ContentsSection = ({ portfolio, user, referer }) => {
       </div>
       <SingleLine width='auto' color='#dadada' thickness={1} extend={20}/>
       <section className={cx('contents')}>
-        {projectArea}
+        {ownerArea}
         <p className={cx('description')}>
           {portfolio.description}
         </p>

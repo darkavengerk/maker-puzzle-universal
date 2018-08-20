@@ -1,9 +1,15 @@
 import passport from 'passport';
-import User from '../db/mongo/models/user';
-import Company, {autoComplete as companyAutoComplete} from '../db/mongo/models/company';
-import Project, {autoComplete as projectAutoComplete} from '../db/mongo/models/project';
-import Metadata from '../db/mongo/models/metadata';
-import Misc from '../db/mongo/models/misc';
+import  { models, common } from '../db';
+
+const { 
+  User,
+  Company, 
+  companyAutoComplete, 
+  Project, 
+  projectAutoComplete,
+  Metadata,
+  Misc 
+} = models;
 
 export function all(req, res) {
   User.find({}).exec((err, users) => {
@@ -32,7 +38,7 @@ export async function single(req, res) {
 }
 
 export async function portfolio(req, res) {
-  const {pid} = req.params;
+  const { pid } = req.params;
   let user = await User
               .findOne({'userid':req.params.id})
               .populate('picture')
@@ -87,47 +93,77 @@ export function updateFeatures(req, res) {
 
 export async function addPortfolio(req, res) {
   const userid = req.params.id;
-
   const portfolio = req.body;
   const location = portfolio.location;
   const companyName = portfolio.companyName;
 
-  let [user, project, company, pid] = await Promise.all([
-    User.findOne({userid}), 
+  let [ user, project, company ] = await Promise.all([
+    User.findOne({userid}),
     Project.findOne({name: location}),
     Company.findOne({name: companyName}),
-    Misc.createID('portfolio')
   ]);
-
-  portfolio.user = user._id;
-  portfolio.pid = pid;
-  // portfolio.images = portfolio.images.map(p => p._id);
 
   if(!project) {
     project = new Project({name: location});
     project = await Metadata.populateMetadata('Project', project);
   }
-  portfolio.project = project._id;
 
   if(!company) {
     company = new Company({name: companyName});
     company = await Metadata.populateMetadata('Company', company);
   }
-  portfolio.company = company._id;
-  
-  user.portfolios.push(portfolio);
-  project.portfolios.push(portfolio);
-  project.users.addToSet(user._id);
-  company.portfolios.push(portfolio);
-  company.users.addToSet(user._id);
-  company.projects.addToSet(project._id);
-  await Promise.all([user.save(), project.save(), company.save()]);
 
-  res.json({user, project, company, portfolio});
+  const result = await common.savePortfolio({portfolio, user, company, project});
+
+  res.json(result);
   
   companyAutoComplete.buildCache(err => {});
   projectAutoComplete.buildCache(err => {});
 }
+
+// export async function addPortfolio(req, res) {
+//   const userid = req.params.id;
+
+//   const portfolio = req.body;
+//   const location = portfolio.location;
+//   const companyName = portfolio.companyName;
+
+//   let [user, project, company, pid] = await Promise.all([
+//     User.findOne({userid}), 
+//     Project.findOne({name: location}),
+//     Company.findOne({name: companyName}),
+//     Misc.createID('portfolio')
+//   ]);
+
+//   portfolio.user = user._id;
+//   portfolio.pid = pid;
+//   // portfolio.images = portfolio.images.map(p => p._id);
+
+//   if(!project) {
+//     project = new Project({name: location});
+//     project = await Metadata.populateMetadata('Project', project);
+//   }
+//   portfolio.project = project._id;
+
+//   if(!company) {
+//     company = new Company({name: companyName});
+//     company = await Metadata.populateMetadata('Company', company);
+//   }
+//   portfolio.company = company._id;
+  
+//   user.portfolios.push(portfolio);
+//   project.portfolios.push(portfolio);
+//   project.users.addToSet(user._id);
+//   company.portfolios.push(portfolio);
+//   company.users.addToSet(user._id);
+//   company.projects.addToSet(project._id);
+//   await Promise.all([user.save(), project.save(), company.save()]);
+
+//   res.json({user, project, company, portfolio});
+  
+//   companyAutoComplete.buildCache(err => {});
+//   projectAutoComplete.buildCache(err => {});
+// }
 
 /**
  * POST /logout
