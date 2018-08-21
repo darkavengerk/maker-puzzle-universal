@@ -112,9 +112,9 @@ class ContentsTagFactory {
       return (<Item portfolio={portfolio} referrer={source} owner={owner} key={portfolio.pid} external={true} />);
     });
 
-    if(isOwnPage) {
-      companyContents.push(<Item key={'__new__'} />);
-    }
+    // if(isOwnPage) {
+    //   companyContents.push(<Item key={'__new__'} />);
+    // }
 
     return (<div>
               <p className={cx('main-panel-title')}>포트폴리오</p>
