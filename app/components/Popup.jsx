@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
+import Padding from '../components/Padding';
 import styles from '../css/components/popup';
 
 const cx = classNames.bind(styles);
 
-const Popup = ({ show, name, children, cancel }) => {
+const Popup = ({ show, name, children, cancel, top='15rem' }) => {
 
   const onClick = evt => {
     if(cancel && evt.target.id === name) {
@@ -17,8 +18,13 @@ const Popup = ({ show, name, children, cancel }) => {
 
   if(show) {
     return (
-      <div className={cx('main-section')} id={name} onClick={onClick} >
-        {children}
+      <div>
+        <div className={cx('main-section', 'background')} id={name} onClick={onClick} >
+        </div>
+        <div className={cx('main-section')} id={name} onClick={onClick} >
+          <Padding height={top} />
+          {children}
+        </div>
       </div>
     );
   }
