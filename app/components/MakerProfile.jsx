@@ -127,13 +127,13 @@ class MakerProfile extends Component {
       }
     }
 
-    const profileImage = this.state.editing? this.state.picture : maker.picture;
+    const profileImage = this.state.editing? this.state.picture : maker.getProfileImage();
 
     return (
       <div className={cx('main-section')}>
         <span className={cx('flex-row')}>
           <span style={{position:'relative', height:'14.4rem'}}>
-            <FlexibleImage src={profileImage || "/images/default_profile.jpg"} x={144} y={144} />
+            <FlexibleImage src={profileImage} x={144} y={144} />
             <span style={{position:'absolute', bottom:'0.3rem', right:'0.4rem', 'zIndex':1}}>
               {this.state.editing? 
                 <ImageUploader name="ImageUploader" callback={this.profileImageEdited} >
@@ -144,7 +144,7 @@ class MakerProfile extends Component {
           </span>
           <span className={cx('user-info')}>
             <span className={cx('name')}>
-              {maker.profile.name}
+              {maker.name}
             </span>
             <Border width={181} thickness={2} color={'#dadada'} />
             {stats}

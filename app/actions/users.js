@@ -80,17 +80,16 @@ export function manualLogin(data) {
 }
 
 export function signUp(data) {
-  return (dispatch) => {
+  return async dispatch => {
     dispatch(beginSignUp());
-
-    return authService().signUp(data)
-      .then((response) => {
-          dispatch(signUpSuccess('You have successfully registered an account!', data));
-          dispatch(push('/'));
-      })
-      .catch((err) => {
-        dispatch(signUpError('Oops! Something went wrong when signing up'));
-      });
+    try {
+      const {data: newUser} = await authService().signUp(data);
+      dispatch(signUpSuccess('You have successfully registered an account!', newUser));
+      // dispatch(push('/'));
+    }
+    catch(err) {
+      dispatch(signUpError('Oops! Something went wrong when signing up'));
+    }
   };
 }
 

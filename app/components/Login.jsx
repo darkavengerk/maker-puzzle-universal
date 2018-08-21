@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import Select from 'react-select';
 
 import { manualLogin, signUp } from '../actions/users';
+import { dismissMessage } from '../actions/messages';
 import styles from '../css/components/login';
 import SingleLine from '../components/SingleLine';
 import Padding from '../components/Padding';
@@ -27,6 +28,7 @@ class LoginOrRegister extends Component {
     this.toggleLoginMode = this.toggleLoginMode.bind(this);
     this.genderSelected = this.genderSelected.bind(this);
     this.yearSelected = this.yearSelected.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   yearSelected(year) {
@@ -38,6 +40,8 @@ class LoginOrRegister extends Component {
   }
 
   toggleLoginMode() {
+    const { clearMessage } = this.props;
+    
     this.setState({loginMode: !this.state.loginMode});
   }
 
@@ -45,14 +49,23 @@ class LoginOrRegister extends Component {
     event.preventDefault();
 
     const { manualLogin, signUp, user: { isLogin } } = this.props;
-    const email = ReactDOM.findDOMNode(this.refs.email).value;
-    const password = ReactDOM.findDOMNode(this.refs.password).value;
 
     if (this.state.loginMode) {
-      manualLogin({ email, password });
+      manualLogin(this.state);
     } else {
-      signUp({ email, password });
+      console.log({ ...this.state, year: this.state.year.value });
+      signUp({ ...this.state, year: this.state.year.value });
     }
+  }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
   }
 
   render() {
@@ -73,13 +86,15 @@ class LoginOrRegister extends Component {
               <input
                 className={cx('input')}
                 type="email"
-                ref="email"
+                name="email"
+                onChange={this.handleInputChange}
                 placeholder="이메일 주소"
               />
               <input
                 className={cx('input')}
                 type="password"
-                ref="password"
+                name="password"
+                onChange={this.handleInputChange}
                 placeholder="비밀번호 입력"
               />
               <p
@@ -133,7 +148,8 @@ class LoginOrRegister extends Component {
               <input
                 className={cx('input')}
                 type="email"
-                ref="email"
+                name="email"
+                onChange={this.handleInputChange}
                 placeholder="이메일 주소"
               />
               <p className={cx('helper')}>
@@ -145,14 +161,16 @@ class LoginOrRegister extends Component {
                  <input
                   className={cx('input', 'middle-size')}
                   type="text"
-                  ref="name"
+                  name="name"
+                  onChange={this.handleInputChange} 
                   placeholder="이름을 입력해주세요"
                 />
               </div>
               <input
                 className={cx('input')}
                 type="password"
-               ref="password"
+                name="password"
+                onChange={this.handleInputChange}
                 placeholder="비밀번호 입력"
               />
               <p className={cx('helper')}>
@@ -161,7 +179,8 @@ class LoginOrRegister extends Component {
               <input
                 className={cx('input')}
                 type="password"
-               ref="passwordCheck"
+                name="passwordCheck"
+                onChange={this.handleInputChange}
                 placeholder="비밀번호 확인"
               />
             </div>
@@ -184,11 +203,11 @@ class LoginOrRegister extends Component {
               <div className={cx('space-between')}>
                 <label className={cx('label')}>성별</label>
                 <div className={cx('gender')}>
-                  <input type="radio" value="man" checked={this.state.gender === 'man'} onChange={this.genderSelected} />
+                  <input className="gender" type="radio" value="M" name="gender" onChange={this.handleInputChange} />
                   <Padding width="1.2rem" inline={true} />
                   남자
                   <Padding width="2.2rem" inline={true} />
-                  <input type="radio" value="woman" checked={this.state.gender === 'woman'} onChange={this.genderSelected} />
+                  <input className="gender" type="radio" value="W" name="gender" onChange={this.handleInputChange} />
                   <Padding width="1.2rem" inline={true} />
                   여자
                 </div>
@@ -199,8 +218,7 @@ class LoginOrRegister extends Component {
               <div className={cx('space-between')}>
                 <label className={cx('label')}>출생연도</label>
                 <Select 
-                  className={cx('year-select')} 
-                  value={this.state.year} 
+                  className={cx('year-select')}
                   onChange={this.yearSelected}
                   options={years}
                   placeholder="선택해 주세요" />
@@ -214,7 +232,7 @@ class LoginOrRegister extends Component {
             <Padding height={'2.5rem'} />
 
             <div className={cx('check')}>
-              <input type="checkbox" />
+              <input type="checkbox" name="agreed" onClick={this.handleInputChange} />
               <Padding width="1.5rem" inline={true} />
               <b className={cx('important')}>이용약관</b>
               <Padding width="0.2rem" inline={true} />및<Padding width="0.2rem" inline={true} />
@@ -222,7 +240,7 @@ class LoginOrRegister extends Component {
             </div>
             <Padding height="1.2rem"/>
             <div className={cx('check')}>
-              <input type="checkbox" />
+              <input type="checkbox" name="marketingAgreed" onClick={this.handleInputChange} />
               <Padding width="1.5rem" inline={true} />
               [선택]마케팅 목적 이메일 수신 동의하기
             </div>
@@ -234,9 +252,10 @@ class LoginOrRegister extends Component {
               })}>{message}</p>
               <input
                 className={cx('login-button')}
-                type="submit"
+                type="button"
                 value={'이메일로 회원가입'} 
-                role="button" />
+                role="button"
+                onClick={this.handleOnSubmit} />
             </div>
 
             <Padding height={'1.5rem'} />
@@ -277,5 +296,5 @@ function mapStateToProps({user}) {
 // Connects React component to the redux store
 // It does not modify the component class passed to it
 // Instead, it returns a new, connected component class, for you to use.
-export default connect(mapStateToProps, { manualLogin, signUp })(LoginOrRegister);
+export default connect(mapStateToProps, { manualLogin, signUp, clearMessage: dismissMessage })(LoginOrRegister);
 

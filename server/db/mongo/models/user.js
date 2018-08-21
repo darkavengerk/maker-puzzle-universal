@@ -57,9 +57,19 @@ const UserSchema = new mongoose.Schema({
     optional: Boolean // whether it is mandatory or not
   }],
 
-  about: String,
+  about: {
+    type: String,
+    default: ''
+  },
 
   portfolios : [Portfolio],
+
+  marketingAgreed : { 
+    type: Boolean,
+    default: false
+  },
+  gender : String,
+  birthYear: Number,
 
   resetPasswordToken: String,
   resetPasswordExpires: Date,
