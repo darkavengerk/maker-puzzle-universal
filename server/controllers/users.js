@@ -144,7 +144,6 @@ export async function signUp(req, res, next) {
     existingUser = await User.findOne({ userid });
   }
   userInfo['userid'] = userid;
-  userInfo['birthYear'] = userInfo.year;
 
   existingUser = await User.findOne({ email: userInfo.email });
   if (existingUser) {

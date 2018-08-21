@@ -40,21 +40,18 @@ class LoginOrRegister extends Component {
   }
 
   toggleLoginMode() {
-    const { clearMessage } = this.props;
-    
     this.setState({loginMode: !this.state.loginMode});
   }
 
   handleOnSubmit(event) {
     event.preventDefault();
 
-    const { manualLogin, signUp, user: { isLogin } } = this.props;
+    const { manualLogin, signUp } = this.props;
 
     if (this.state.loginMode) {
       manualLogin(this.state);
     } else {
-      console.log({ ...this.state, year: this.state.year.value });
-      signUp({ ...this.state, year: this.state.year.value });
+      signUp(this.state);
     }
   }
 

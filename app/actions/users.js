@@ -74,21 +74,39 @@ export function manualLogin(data) {
       // dispatch(push(`/${user.type}/${user.userid}`));
     }
     catch(err) {
-      dispatch(loginError('Oops! Invalid username or password'));
+      alert('Oops! Invalid username or password');
+      dispatch(loginError(''));
     }
   };
 }
 
 export function signUp(data) {
+  const checklist = ['name', 'email', 'password', 'passwordCheck', 'gender', 'year', 'agreed'];
+
   return async dispatch => {
+    for(let check of checklist) {
+      if(!data[check]) {
+        alert('Fill up all the required information.');
+        return;
+      }
+    }
+    if(data.password !== data.passwordCheck) {
+      alert('Password incorrect.');
+      return;
+    }
+
+    data.birthYear = data.year.value;
+
     dispatch(beginSignUp());
     try {
       const {data: newUser} = await authService().signUp(data);
-      dispatch(signUpSuccess('You have successfully registered an account!', newUser));
+      alert('You have successfully registered an account!');
+      dispatch(signUpSuccess('', newUser));
       // dispatch(push('/'));
     }
     catch(err) {
-      dispatch(signUpError('Oops! Something went wrong when signing up'));
+      alert('Oops! Something went wrong when signing up');
+      dispatch(signUpError(''));
     }
   };
 }
