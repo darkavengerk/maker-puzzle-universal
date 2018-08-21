@@ -81,7 +81,7 @@ export function login(req, res, next) {
 export function updateFeatures(req, res) {
   const userid = req.params.id;
   let {features, about, picture} = req.body;
-  picture = picture._id || picture;
+  picture = picture._id || null;
 
   User.update({userid:userid}, {$set:{features, about, picture}}, (err, result) => {
     if (err) {

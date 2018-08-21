@@ -129,6 +129,8 @@ class MakerProfile extends Component {
 
     const profileImage = this.state.editing? this.state.picture : maker.getProfileImage();
 
+    const aboutText = this.state.editing && !maker.about.trim()? '자기소개' : maker.about;
+
     return (
       <div className={cx('main-section')}>
         <span className={cx('flex-row')}>
@@ -167,7 +169,7 @@ class MakerProfile extends Component {
             className={cx('about-maker', this.state.editing? 'editing':'')}
             html={ jsxToString(
               <div>
-                {maker.about.split('\n').map((sen,i) => (<p key={i}>{sen}</p>))}
+                {aboutText.split('\n').map((sen,i) => (<p key={i}>{sen}</p>))}
               </div>
             ) } 
             onKeyUp={this.aboutEdited}
