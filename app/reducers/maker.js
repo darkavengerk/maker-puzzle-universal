@@ -8,7 +8,7 @@ const maker = (
 ) => {
   switch (action.type) {
     case types.CREATE_REQUEST:
-      if(action.pathname && !action.pathname.startsWith('/maker/'))
+      if(action.pathname && !action.pathname.startsWith('/maker/' + state.userid))
         return {};
       return state;
       
