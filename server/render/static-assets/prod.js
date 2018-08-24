@@ -16,7 +16,7 @@ ga('send', 'pageview');
 const createStylesheets = () => `
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed" />
 <link rel="stylesheet" href="/assets/${assets['app.css']}" />
-<link rel="stylesheet" href="/assets/bootstrap.css">
+<link rel="stylesheet" href="/site/css/bootstrap.css">
 `;
 
 export { createAppScript, createStylesheets };
