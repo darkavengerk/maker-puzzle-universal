@@ -7,10 +7,6 @@ import { portfoiloEditorCancel, portfoiloSubmit } from '../actions/makers';
 import { companyPortfoiloEditorCancel, companyPortfoiloSubmit } from '../actions/companies';
 import styles from '../css/components/contents-section';
 
-import createRestApiClient from '../utils/createRestApiClient';
-import ContentsTagFactory from '../utils/contentsTagFactory';
-import { createObject } from '../utils/objects';
-
 const cx = classNames.bind(styles);
 
 const ContentsSection = ({owner, ...props}) => {

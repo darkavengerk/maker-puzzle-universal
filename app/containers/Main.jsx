@@ -2,50 +2,41 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
-import styles from '../css/components/vote';
-import { default as ImageUploader } from '../components/ImageUploader';
-import { Col } from 'react-bootstrap';
+import ImageUploader from '../components/ImageUploader';
+import TopTitle from '../components/TopTitle';
+import ContentsSection from '../components/ContentsSection';
+import MainPage from '../components/MainPage';
+import SingleLine from '../components/SingleLine';
+
+import styles from '../css/components/maker';
+
+// import { Maker } from '../utils/objects';
 
 const cx = classNames.bind(styles);
 
-class Main extends Component {
-
+class Container extends Component {
   render() {
-    const { people } = this.props;
-    const peoplelist = people.map(person => {
-      return (
-        <div key={person.email}> {person.email} </div>
-      )
-    });
+    // const { maker: data, user } = this.props;
+    // const maker = new Maker(data);
+    // const isOwnPage = user && maker && (maker.userid === user.userid);
     return (
-      <div>
-        <div>
-          Users
-        </div>
-        <div>
-          ImageUpload
-          <Col sm={6} xs={12}>
-            <ImageUploader title="uploader" name="photo-uploader" />
-          </Col>
-        </div>
-        <div>
-          {peoplelist}
-        </div>
+      <div className={cx('main-section')}>
+        <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
+        <MainPage  />
+        <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
       </div>
     );
   }
 }
 
-Main.propTypes = {
-  people: PropTypes.array.isRequired
+Container.propTypes = {
+  user: PropTypes.object
 };
 
 function mapStateToProps(state) {
   return {
-    people: state.people.people
+    user: state.user.account
   };
 }
 
-// Read more about where to place `connect` here:
-// https://github.com/rackt/react-redux/issues/75#issuecomment-135436563
-export default connect(mapStateToProps, {  })(Main);
+export default connect(mapStateToProps, {})(Container);

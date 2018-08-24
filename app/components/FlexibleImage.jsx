@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import PureImage from './PureImage';
 
-const ProfileImage = ({ src, x, y, pureImage=false, ...props }) => {
+const ProfileImage = ({ src, x, y, children, pureImage=false, ...props }) => {
 
   if(pureImage) {
     return (<PureImage src={src} x={x} y={y} {...props} />);
@@ -35,8 +35,9 @@ const ProfileImage = ({ src, x, y, pureImage=false, ...props }) => {
   }
 
   return (
-    <span {...props} style={imageStyle} >
-    </span>
+    <div {...props} style={imageStyle} >
+      {children}
+    </div>
   );
 };
 
