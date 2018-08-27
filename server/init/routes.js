@@ -88,4 +88,5 @@ export default (app) => {
   }
 
   app.post('/file', fileController.upload);
+  app.get('/file/image/:image', fileController.image);
 };

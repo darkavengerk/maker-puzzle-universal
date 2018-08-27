@@ -24,10 +24,10 @@ export function all(req, res) {
 export async function single(req, res) {
   let user = await User
               .findOne({'userid':req.params.id})
-              .populate('picture')
+              // .populate('picture')
               .populate('portfolios.user')
               .populate('portfolios.project')
-              .populate('portfolios.images')
+              // .populate('portfolios.images')
               .lean();
 
   if (!user) {
@@ -41,9 +41,9 @@ export async function portfolio(req, res) {
   const { pid } = req.params;
   let user = await User
               .findOne({'userid':req.params.id})
-              .populate('picture')
-              .populate({path: 'portfolios.project', populate: 'profilePicture'})
-              .populate({path: 'portfolios.images'})
+              // .populate('picture')
+              .populate({path: 'portfolios.project'})
+              // .populate({path: 'portfolios.images'})
               .lean();
 
   if (!user) {

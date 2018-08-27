@@ -7,13 +7,13 @@ import styles from '../css/common/images';
 
 const cx = classNames.bind(styles);
 
-const Roundy = ({ user, ...props }) => {
+const Roundy = ({ user, x=110, y=110, showName=true, defaultImage, ...props }) => {
   return (
     <span className={cx('maker-round')} key={user.userid} >
       <Link to={'/maker/'  + user.userid}>
-        <Image className={cx('maker-round-image')} src={user.picture} x={110} y={110} />
+        <Image className={cx('maker-round-image')} src={user.picture || defaultImage} x={x} y={y} />
       </Link>
-      {user.name}
+      { showName? user.name : null}
     </span>
   );
 };

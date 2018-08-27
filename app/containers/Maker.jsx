@@ -23,7 +23,7 @@ class Container extends Component {
         <TopTitle 
           title={maker.getName()}
           to={maker.getHomeLink()}
-          thumbnailURL={maker.profile && maker.profile.picture? maker.getProfileImage():null} 
+          thumbnailURL={maker.picture? maker.getProfileImage():null} 
         />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
         <ContentsSection owner={maker} contentsType="maker" isOwnPage={isOwnPage} />

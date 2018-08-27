@@ -54,8 +54,23 @@
   align-items: center;
 }
 
-.option-area div:nth-child(2) {
-  margin-top: 1rem;
+
+
+.login-button {
+  font-family: NanumBarunGothic;
+  font-size: 1.2rem;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 3.6rem;
+  letter-spacing: normal;
+  text-align: center;
+  color: #979797;
+
+  width: 10.9rem;
+  height: 3.6rem;
+  border-radius: 1.2rem;
+  border: solid 0.05rem #979797;
 }
 
 .item {

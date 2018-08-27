@@ -1,44 +1,69 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
+
 import PureImage from './PureImage';
+import { loadImage } from '../actions/images';
 
-const ProfileImage = ({ src, x, y, children, pureImage=false, ...props }) => {
+class ProfileImage extends Component {
 
-  if(pureImage) {
-    return (<PureImage src={src} x={x} y={y} {...props} />);
+  render() {
+    const { src, x, y, children, image, loadImage, pureImage=false, ...props } = this.props;
+
+    let url;
+    if(typeof(src) === 'string') {
+      if(src.includes('/')) {
+        url = src;
+      }
+      else {
+        const newImage = loadImage(src);
+        url = newImage.original || '';
+      }
+    }
+    else {
+      url = src.original;
+    }
+
+    if(pureImage) {
+      return (<PureImage src={url} x={x} y={y} {...props} />);
+    }
+
+    const width = x || 40;
+    const height = y || 40;
+
+    var imageStyle = {
+      display: 'inline-block',
+      backgroundImage: `url(${url})`,
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center',
+      backgroundSize:'cover',
+      height: height/10+'rem',
+      width: width/10+'rem'
+    };
+
+    if(typeof(width) === 'string') {
+      imageStyle.width = width;
+    }
+    if(typeof(height) === 'string') {
+      imageStyle.height = height;
+    }
+
+    return (
+      <div {...props} style={imageStyle} >
+        {children}
+      </div>
+    );
   }
+}
 
-  let url = src? src : "/images/default.jpg";
-  if(typeof(src) === 'object' && src.original) {
-    url = src.original;
-  }
-
-  if(!x) x=40;
-  if(!y) y=40;
-
-  var imageStyle = {
-    display: 'inline-block',
-    backgroundImage: `url(${url})`,
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-    backgroundSize:'cover',
-    height: y/10+'rem',
-    width: x/10+'rem'
-  };
-
-  if(typeof(x) === 'string') {
-    imageStyle.width = x;
-  }
-  if(typeof(y) === 'string') {
-    imageStyle.width = y;
-  }
-
-  return (
-    <div {...props} style={imageStyle} >
-      {children}
-    </div>
-  );
+ProfileImage.propTypes = {
 };
 
-export default ProfileImage;
+function mapStateToProps(state) {
+  return {
+    image: state.image
+  };
+}
+
+export default connect(mapStateToProps, { loadImage })(ProfileImage);

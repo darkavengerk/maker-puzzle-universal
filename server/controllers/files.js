@@ -32,6 +32,13 @@ export async function upload(req, res) {
   }
 }
 
+export async function image(req, res) {
+  const imageid = req.params.image;
+  const imageFound = await ImageFile.findOne({ _id: imageid });
+  res.json(imageFound);
+}
+
 export default {
-  upload
+  upload,
+  image
 };

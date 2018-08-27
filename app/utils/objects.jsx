@@ -9,7 +9,6 @@ class User {
     for(let x in data) {
       this[x] = data[x];
     }
-    this.picture = this.picture || '/images/site/def_maker.png';
     // if(Factory)
     //   factory = new Factory(this);
   }
@@ -35,8 +34,8 @@ class Maker extends User {
     return 'maker';
   }
 
-  getProfileImage() {
-    return this.picture;
+  getProfileImage(alternative) {
+    return this.picture || '/images/site/def_maker.png';
   }
 
   getName() {

@@ -7,6 +7,7 @@ import { logOut, loginMenu, cancelLogin } from '../actions/users';
 import Img from '../components/FlexibleImage';
 import Login from '../components/Login';
 import Popup from '../components/Popup';
+import Roundy from '../components/Roundy';
 import styles from '../css/components/navigation';
 
 const cx = classNames.bind(styles);
@@ -14,10 +15,21 @@ const cx = classNames.bind(styles);
 
 const Navigation = ({ user, logOut, loginMenu, cancelLogin }) => {
     const login = user.authenticated? 
+          <div>
+            <Roundy 
+              user={user.account} 
+              x={36} y={36} 
+              showName={false}
+              defaultImage={'/site/images/header-signed_in-default.png'}
+            />
             <Link to={`/${user.account.type}/${user.account.userid}`}>
-              <Img src="/images/site/icon_person.png" x={32} y={30}/>
-            </Link> : 
-            <Img src="/images/site/icon_person.png" x={32} y={30} onClick={loginMenu} /> 
+              <Img src="/images/site/icon_alert.png" x={39} y={39} onClick={logOut} />
+            </Link>
+            
+          </div> : 
+          <div className={cx('login-button')} onClick={loginMenu} role="button">
+            로그인하기
+          </div>
 
     return (
       <nav className={cx('navigation')} role="navigation">
@@ -33,8 +45,7 @@ const Navigation = ({ user, logOut, loginMenu, cancelLogin }) => {
 
         <div className={cx('option-area')}>
           {login}
-          <Img src="/images/site/icon_alert.png" x={39} y={39} onClick={logOut} />
-          <Img src="/images/site/icon_more.png" x={49} y={28} />
+          <Img src="/site/images/header-more.png" x={38.5} y={36} />
         </div>
         <Popup show={user.attempt === 'login'} name="LoginPopup" cancel={cancelLogin}>
           <Login />
