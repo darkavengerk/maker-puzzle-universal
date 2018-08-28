@@ -22,7 +22,7 @@ async function savePortfolio({ portfolio, project, company, user }) {
 
   if(user && user._id) {
     portfolio.user = user._id;
-    user.portfolios.push(portfolio._id);
+    user.portfolios.push(portfolio);
     project.users.addToSet(user._id);
     company.users.addToSet(user._id);
     saving.push(user.save());
