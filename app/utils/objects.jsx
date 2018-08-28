@@ -35,7 +35,7 @@ class Maker extends User {
   }
 
   getProfileImage(alternative) {
-    return this.picture || '/images/site/def_maker.png';
+    return this.picture || '/site/images/default_Maker-01.jpg';
   }
 
   getName() {
@@ -74,7 +74,7 @@ class Company extends User {
   }
 
   getProfileImage() {
-    return this.profilePicture || '/images/site/def_company.png';
+    return this.profilePicture || '/site/images/default_Company-01.jpg';
   }
 
   getName() {
@@ -115,7 +115,7 @@ class Project extends User {
   }
 
   getProfileImage() {
-    return this.profilePicture || '/images/site/def_project.png';
+    return this.profilePicture || '/site/images/default_project-01.jpg';
   }
 
   getName() {

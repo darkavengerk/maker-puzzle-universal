@@ -68,21 +68,9 @@ class ProjectProfile extends Component {
 
     const project = new Project(this.props.project);
 
-    let image = null;
-    if(project.profileImage) {
-      image = <Image src={project.profileImage} x={349} y={248} />;
-    }
-    else {
-      image = (
-        <div className={cx('empty-profile')}>
-          <Image src={project.getProfileImage()} x={80} y={80} />
-        </div>
-      );
-    }
-
     return (
       <div className={cx('main-section')}>
-        {image}
+        <Image src={project.getProfileImage()} x={349} y={248} />
         <div className={cx('feature-area')}>
           {project.features? 
             <Features 

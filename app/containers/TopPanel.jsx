@@ -15,14 +15,12 @@ const cx = classNames.bind(styles);
 
 const Navigation = ({ user, logOut, loginMenu, cancelLogin }) => {
     const login = user.authenticated? 
-          <div>
-            <Roundy 
-              user={user.account} 
-              x={36} y={36} 
-              showName={false}
-              defaultImage={'/site/images/header-account.png'}
-            />            
-          </div> : 
+          <Roundy 
+            user={user.account} 
+            x={36} y={36} 
+            showName={false}
+            defaultImage={'/site/images/header-account.png'}
+          /> : 
           <div className={cx('login-button')} onClick={loginMenu} role="button">
             로그인하기
           </div>
@@ -41,9 +39,8 @@ const Navigation = ({ user, logOut, loginMenu, cancelLogin }) => {
 
         <div className={cx('option-area')}>
           {login}
-          {user.authenticated? <Link to={`/${user.account.type}/${user.account.userid}`}>
-              <Img src="/site/images/header-social.png" x={39} y={39} onClick={logOut} />
-            </Link>:null}
+          {user.authenticated? 
+            <Img src="/site/images/header-social.png" x={36} y={36} onClick={logOut} /> :null}
           <Img src="/site/images/header-more.png" x={38.5} y={36} />
         </div>
         <Popup show={user.attempt === 'login'} name="LoginPopup" cancel={cancelLogin}>

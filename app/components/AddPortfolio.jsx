@@ -77,7 +77,7 @@ class AddPortfolio extends Component {
   }
 
   imageSelected(err, img) {
-    this.setState({images: [img, ...this.state.images]});
+    this.setState({images: [...this.state.images, img]});
   }
 
   showCloseButton(i) {
@@ -323,9 +323,6 @@ class AddPortfolio extends Component {
                   </td>
                   <td>
                     <div className={cx('image-area')}>
-                      <ImageUploader name="PortfolioImageUploader" callback={this.imageSelected} >
-                        <span className={cx('image-upload-button')}>+</span>
-                      </ImageUploader>
                       {
                         this.state.images.map((img, i) => (
                           <div className={cx('image-container')} 
@@ -347,6 +344,9 @@ class AddPortfolio extends Component {
                           </div>
                         ))
                       }
+                      <ImageUploader name="PortfolioImageUploader" callback={this.imageSelected} >
+                        <span className={cx('image-upload-button')}>+</span>
+                      </ImageUploader>
                     </div>
                   </td>
                 </tr>
