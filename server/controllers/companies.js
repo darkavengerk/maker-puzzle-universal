@@ -42,13 +42,10 @@ export async function one(req, res) {
   const result = await Company
                     .findOne({ link_name })
                     .populate({path:'companyPortfolios.project'})
-                    .populate({path:'companyPortfolios.images'})
-                    .populate({path:'products.images'})
-                    .populate({path:'portfolios.images'})
-                    .populate({path:'portfolios.user', populate:{path:'picture'}})
-                    .populate({path:'portfolios.project', populate:{path:'profilePicture'}})
+                    .populate({path:'portfolios.user'})
+                    .populate({path:'portfolios.project'})
                     .populate('owner')
-                    .populate({path:'users', populate:{path:'picture'}})
+                    .populate({path:'users'})
                     .lean();
   return res.json(result);
 }

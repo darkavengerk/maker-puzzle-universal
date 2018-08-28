@@ -36,11 +36,10 @@ export async function one(req, res) {
   const { link_name } = req.params;
   const result = await Project
                     .findOne({ link_name })
-                    .populate({path:'portfolios.images'}) 
-                    .populate({path:'portfolios.user', populate:{path:'picture'}}) 
-                    .populate({path:'portfolios.company', populate:{path:'profilePicture'}}) 
-                    .populate({path:'users', populate:{path:'picture'}}) 
-                    .populate({path:'companies', populate:{path:'profilePicture'}}) 
+                    .populate({path:'portfolios.user'}) 
+                    .populate({path:'portfolios.company'}) 
+                    .populate({path:'users'}) 
+                    .populate({path:'companies'}) 
                     .lean();
   return res.json(result);
 }
