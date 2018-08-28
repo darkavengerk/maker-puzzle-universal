@@ -20,12 +20,8 @@ const Navigation = ({ user, logOut, loginMenu, cancelLogin }) => {
               user={user.account} 
               x={36} y={36} 
               showName={false}
-              defaultImage={'/site/images/header-signed_in-default.png'}
-            />
-            <Link to={`/${user.account.type}/${user.account.userid}`}>
-              <Img src="/images/site/icon_alert.png" x={39} y={39} onClick={logOut} />
-            </Link>
-            
+              defaultImage={'/site/images/header-account.png'}
+            />            
           </div> : 
           <div className={cx('login-button')} onClick={loginMenu} role="button">
             로그인하기
@@ -45,6 +41,9 @@ const Navigation = ({ user, logOut, loginMenu, cancelLogin }) => {
 
         <div className={cx('option-area')}>
           {login}
+          {user.authenticated? <Link to={`/${user.account.type}/${user.account.userid}`}>
+              <Img src="/site/images/header-social.png" x={39} y={39} onClick={logOut} />
+            </Link>:null}
           <Img src="/site/images/header-more.png" x={38.5} y={36} />
         </div>
         <Popup show={user.attempt === 'login'} name="LoginPopup" cancel={cancelLogin}>
