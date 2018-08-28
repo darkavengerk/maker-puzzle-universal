@@ -228,6 +228,7 @@
   color: #999999;
 
   background-color: #e7e7e7;
+  cursor: text;
 }
 
 .feature {
@@ -262,12 +263,8 @@
   letter-spacing: normal;
   text-align: left;
   color: #000000;
-}
-
-.about-maker p {
-  margin: 0;
-  margin-right: 2.8rem;
-  margin-top: 0.8rem;
+  min-height: 2rem;
+  margin-top: 0.3rem;
 }
 
 .ovalEmpty {

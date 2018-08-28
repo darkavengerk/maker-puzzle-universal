@@ -17,8 +17,10 @@ const Schema = new mongoose.Schema({
   users: [{type: ObjectId, ref: 'User'}],
   features: [{
     title: String,
+    repr: String,
     content: String,
-    editable: Boolean,
+    order: Number,
+    placeholder: String,
     optional: Boolean // whether it is mandatory or not
   }],
   portfolios : [Portfolio]

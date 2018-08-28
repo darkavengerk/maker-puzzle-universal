@@ -42,7 +42,7 @@ const Comp = ({ features, featureEdited, classNames, editing=false, ...props }) 
           html={ feature.content || '' }
           onKeyPress={preventEnter}
           onKeyUp={handleChange(feature.title)}
-          placeholder={feature.placeHolder}
+          placeholder={feature.placeholder}
           disabled={!editing}
         />
         

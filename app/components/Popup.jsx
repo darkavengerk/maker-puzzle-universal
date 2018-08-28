@@ -8,7 +8,7 @@ import styles from '../css/components/popup';
 
 const cx = classNames.bind(styles);
 
-const Popup = ({ show, name, children, cancel, top='15rem' }) => {
+const Popup = ({ show, name, children, cancel, top='15rem', target }) => {
 
   const onClick = evt => {
     if(cancel && evt.target.id === name) {
@@ -17,11 +17,29 @@ const Popup = ({ show, name, children, cancel, top='15rem' }) => {
   }
 
   if(show) {
+    if(target) {
+      if(!document.getElementById(target)) return null;
+
+      const targetElement = document.getElementById(target);
+
+      return (
+        <div>
+          <div className={cx('main-section', 'background')} id={name} onClick={onClick} >
+          </div>
+          <div className={cx('main-section')} id={name} onClick={onClick} >
+            <Padding height={targetElement.offsetTop} />
+            <Padding width={targetElement.offsetLeft} inline={true} />
+            {children}
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div>
-        <div className={cx('main-section', 'background')} id={name} onClick={onClick} >
+        <div className={cx('main-section', 'background', 'middle')} id={name} onClick={onClick} >
         </div>
-        <div className={cx('main-section')} id={name} onClick={onClick} >
+        <div className={cx('main-section', 'middle')} id={name} onClick={onClick} >
           <Padding height={top} />
           {children}
         </div>

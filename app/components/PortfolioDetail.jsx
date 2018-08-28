@@ -15,7 +15,7 @@ const cx = classNames.bind(styles);
 const ContentsSection = ({ portfolio, user, owner }) => {
   
   const imgs = portfolio.images.map(img => (
-    <div key={img._id} className={cx('image')} >
+    <div key={img} className={cx('image')} >
       <Image src={img} x={'100%'} pureImage={true}/>
     </div>)
   );

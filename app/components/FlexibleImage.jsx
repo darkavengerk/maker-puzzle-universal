@@ -22,7 +22,7 @@ class ProfileImage extends Component {
       }
     }
     else {
-      url = src.original;
+      url = src? src.original : null;
     }
 
     if(pureImage) {

@@ -54,6 +54,7 @@ const UserSchema = new mongoose.Schema({
     repr: String,
     content: String,
     order: Number,
+    placeholder: String,
     optional: Boolean // whether it is mandatory or not
   }],
 

@@ -19,7 +19,7 @@ const MakerInfo = ({ owner }) => {
       <MakerProfile maker={maker} />
 
       <GreyTitle title={'소속 기업'} top="38" />
-      <CompanyHistory maker={maker} />
+      <CompanyHistory maker={maker} id="company-history" />
 
       <GreyTitle title={'능력치'} top="33" bottom="27" />
       <Abilities abilities={maker.makerProfile.abilities} />

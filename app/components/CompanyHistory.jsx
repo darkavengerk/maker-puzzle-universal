@@ -5,7 +5,7 @@ import styles from '../css/components/maker-profile';
 
 const cx = classNames.bind(styles);
 
-const Component = ({ maker }) => {
+const Component = ({ maker, ...props }) => {
 
   let history = maker.makerProfile.companies;
   let lines = history.map(info => {
@@ -18,7 +18,7 @@ const Component = ({ maker }) => {
       </tr>)
   });
   return (
-    <table className={cx('history')}>
+    <table className={cx('history')} {...props} >
       <tbody>
         <tr>
           <th className={cx('first-item')}></th>

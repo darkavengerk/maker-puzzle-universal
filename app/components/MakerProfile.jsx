@@ -35,7 +35,8 @@ class MakerProfile extends Component {
   }
 
   startEdit() {
-    this.setState({editing:true});
+    const { maker } = this.props;
+    this.setState({editing:true, picture: maker.getProfileImage()});
   }
 
   cancelEdit() {
@@ -129,8 +130,6 @@ class MakerProfile extends Component {
 
     const profileImage = this.state.editing? this.state.picture : maker.getProfileImage();
 
-    const aboutText = this.state.editing && !maker.about.trim()? '자기소개' : maker.about;
-
     return (
       <div className={cx('main-section')}>
         <span className={cx('flex-row')}>
@@ -167,13 +166,11 @@ class MakerProfile extends Component {
 
           <ContentEditable 
             className={cx('about-maker', this.state.editing? 'editing':'')}
-            html={ jsxToString(
-              <div>
-                {aboutText.split('\n').map((sen,i) => (<p key={i}>{sen}</p>))}
-              </div>
-            ) } 
+            html={maker.about.trim()} 
+            tagName="pre"
             onKeyUp={this.aboutEdited}
             disabled={!this.state.editing}
+            placeholder="간단한 자기 소개를 입력해주세요."
           />
           
         </div>
