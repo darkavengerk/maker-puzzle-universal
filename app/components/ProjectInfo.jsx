@@ -6,7 +6,7 @@ import ProjectProfile from '../components/ProjectProfile';
 import CompanyHistory from '../components/CompanyHistory';
 import GreyTitle from '../components/GreyTitle';
 import Abilities from '../components/Abilities';
-import Roundy from '../components/Roundy';
+import MakerListRoundy from '../components/MakerListRoundy';
 import Image from '../components/FlexibleImage';
 import styles from '../css/components/project-info';
 
@@ -16,7 +16,7 @@ const ProjectInfo = ({ owner }) => {
 
   const project = owner;
 
-  const users = project.users? project.users.map(user => <Roundy user={user} key={user.userid} ></Roundy>) : [];
+  const users = <MakerListRoundy makers={project.users} />;
 
   return (project && project.name )? (
     <div className={cx('main-section')}>

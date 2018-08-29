@@ -5,7 +5,7 @@ import CompanyProfile from '../components/CompanyProfile';
 import CompanyHistory from '../components/CompanyHistory';
 import GreyTitle from '../components/GreyTitle';
 import Abilities from '../components/Abilities';
-import Roundy from '../components/Roundy';
+import MakerListRoundy from '../components/MakerListRoundy';
 
 import styles from '../css/components/company-info';
 
@@ -15,7 +15,7 @@ const CompanyInfo = ({ owner }) => {
 
   const company = owner;
 
-  const users = company.users? company.users.map(user => <Roundy user={user} key={user.userid} ></Roundy>) : [];
+  const users = <MakerListRoundy makers={company.users} />;
 
   return company ? (
     <div className={cx('main-section')}>

@@ -1,0 +1,9 @@
+.main-section {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.maker-roundy {
+  margin-right: 0.9rem;
+  text-align: center;
+}
