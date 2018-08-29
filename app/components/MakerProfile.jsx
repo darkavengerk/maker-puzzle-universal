@@ -138,7 +138,7 @@ class MakerProfile extends Component {
             <span style={{position:'absolute', bottom:'0.3rem', right:'0.4rem', 'zIndex':1}}>
               {this.state.editing? 
                 <ImageUploader name="ImageUploader" callback={this.profileImageEdited} >
-                  <FlexibleImage src={"/images/site/camera-1.png"} x={34} y={34} />
+                  <FlexibleImage className={cx('image-upload-trigger')} src={"/images/site/camera-1.png"} x={34} y={34} />
                 </ImageUploader>
                 : ''}
             </span>

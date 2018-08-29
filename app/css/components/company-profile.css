@@ -258,24 +258,6 @@
   background-color: #e7e7e7;
 }
 
-.about-maker {
-  font-family: NanumBarunGothic;
-  font-size: 11px;
-  font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 2;
-  letter-spacing: normal;
-  text-align: left;
-  color: #000000;
-}
-
-.about-maker p {
-  margin: 0;
-  margin-right: 2.8rem;
-  margin-top: 0.8rem;
-}
-
 .ovalEmpty {
   width: 1.8rem;
   height: 1.8rem;
@@ -293,30 +275,7 @@
   margin-top: 0.8rem;
 }
 
-.ability-section {
-  width:100%;
-  font-family: NanumBarunGothic;
-  font-size: 1.2rem;
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 3.1rem;
-  letter-spacing: normal;
-  text-align: center;
-  vertical-align: middle;
-  color: #4a4a4a;
-  padding-right: 3.5rem;
-}
-
-.ability-title {
-  width: 13.2rem;
-  height: 3.1rem;
-  border: solid 1px #676767;
-
-}
-
-.ability-item {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1.5rem;
+.image-upload-trigger {
+  box-shadow: 0 3px 10px 0 rgba(91, 91, 91, 0.5);
+  border-radius: 50%;
 }

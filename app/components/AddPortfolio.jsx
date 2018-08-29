@@ -345,7 +345,9 @@ class AddPortfolio extends Component {
                         ))
                       }
                       <ImageUploader name="PortfolioImageUploader" callback={this.imageSelected} >
-                        <span className={cx('image-upload-button')}>+</span>
+                        <span className={cx('image-upload-button')}>
+                          <FlexibleImage src={'/site/images/upload-button.jpg'} x={117} y={92} />
+                        </span>
                       </ImageUploader>
                     </div>
                   </td>

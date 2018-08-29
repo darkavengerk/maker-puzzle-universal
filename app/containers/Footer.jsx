@@ -9,31 +9,24 @@ const cx = classNames.bind(styles);
 
 const components = ({}) => {
     return (
-        <div className={cx('footer-area', 'flex-row')}>
-          <div className={cx('eat')}>
-            <Img src="/images/site/MAKER-PUZZLE-normal.png" x={232} y={47}/>
+        <div className={cx('footer-area')}>
+          <div className={cx('menu-items')}>
+            <Link className={cx('menu-item')} to="/">서비스 소개</Link>
+            <Link className={cx('menu-item')} to="/">이용약관</Link>
+            <Link className={cx('menu-item')} to="/">개인정보처리방침</Link>
+            <Link className={cx('menu-item')} to="/">의견게시판</Link>
+            <Link className={cx('menu-item')} to="/">메이커퍼즐 뉴스</Link>
           </div>
-          <div className={cx('flex-col', 'footer-title')} style={{marginRight:'2rem'}}>
-            <label>서울 본사</label>
-            <label>사업자등록증</label>
-            <label>대표 이사</label>
-            <label>고객 지원</label>
+          <div className={cx('company-info')}>
+            <label>주식회사 메이커퍼즐</label>|
+            <label>대표이사 : 남대근, 조승연</label>|
+            <label>서울특별시 강서구 마곡중앙6로 42, 1002호 (마곡동,사이언스타)</label>|
+            <label>개인정보보호관리자 : 남대근</label>
           </div>
-          <div className={cx('flex-col', 'footer-feature')} style={{marginRight:'6rem'}}>
-            <span>서울 강서구 마곡중앙6로 42 사이언스타 1002호</span>
-            <span>786-16-00686</span>
-            <span>남 대 근</span>
-            <span className={cx('flex-row')}>
-              help@maker-puzzle.com
-              <label className={cx('footer-title')} style={{margin:'0 1rem 0 2rem'}}>TEL</label>
-              02-2668-9505
-            </span>
-          </div>
-          <div className={cx('flex-col', 'footer-feature', 'eat')}>
-            <Link to="/">의견게시판</Link>
-            <Link to="/">메이커퍼즐 NEWS</Link>
-            <Link to="/">이용약관</Link>
-            <Link to="/">개인정보 취급방침</Link>
+          <div className={cx('company-info')}>
+            <label>사업자등록번호 : 403-88-01021</label>|
+            <label>고객지원 : help@maker-puzzle.com</label>|
+            <label>서비스문의 : 02-2668-9505</label>
           </div>
         </div>
     );
