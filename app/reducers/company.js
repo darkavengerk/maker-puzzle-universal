@@ -24,6 +24,9 @@ const company = (
 
     case types.COMPANY_PORTFOLIO_EDITOR_CANCEL:
       return {...state, isAddingPortfolio: false}
+
+    case types.PRODUCT_EDITOR_CANCEL:
+      return {...state, isAddingProduct: false}
     
     case types.COMPANY_PORTFOLIO_EDIT_SUCCESS:
       const { company, project, portfolio } = action.data;

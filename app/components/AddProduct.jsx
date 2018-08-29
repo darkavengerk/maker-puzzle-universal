@@ -53,7 +53,7 @@ class AddProduct extends Component {
   }
 
   imageSelected(err, img) {
-    this.setState({images: [img, ...this.state.images]});
+    this.setState({images: [...this.state.images, img]});
   }
 
   showCloseButton(i) {
@@ -107,7 +107,7 @@ class AddProduct extends Component {
   }
 
   render() {
-    const { title, user, product, portfoiloEditorCancel } = this.props;
+    const { title, user, product, productEditorCancel } = this.props;
 
     return (
       <div className={cx('container')}>
@@ -200,9 +200,6 @@ class AddProduct extends Component {
                   </td>
                   <td>
                     <div className={cx('image-area')}>
-                      <ImageUploader name="productImageUploader" callback={this.imageSelected} >
-                        <span className={cx('image-upload-button')}>+</span>
-                      </ImageUploader>
                       {
                         this.state.images.map((img, i) => (
                           <div className={cx('image-container')} 
@@ -224,6 +221,11 @@ class AddProduct extends Component {
                           </div>
                         ))
                       }
+                      <ImageUploader name="productImageUploader" callback={this.imageSelected} >
+                        <span className={cx('image-upload-button')}>
+                          <FlexibleImage src={'/site/images/upload-button.jpg'} x={117} y={92} />
+                        </span>
+                      </ImageUploader>
                     </div>
                   </td>
                 </tr>

@@ -104,6 +104,9 @@ const account = (
     case types.SIGNUP_ERROR_USER:
     case types.LOGOUT_SUCCESS_USER:
       return {};
+    case types.PROFILE_EDIT_SUCCESS:
+      const {features, about, picture} = action.data;
+      return {...state, features, about, picture}
     default:
       return state;
   }

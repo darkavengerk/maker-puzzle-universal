@@ -25,6 +25,7 @@ const MakerInfo = ({ owner }) => {
       <Abilities abilities={maker.makerProfile.abilities} />
 
       <GreyTitle title={'관련된 메이커'} top="24" bottom="26" />
+
     </div>
   ) : <div></div>;
 };

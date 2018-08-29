@@ -21,7 +21,7 @@ export function productEditorStart() {
 
 export function productEditorCancel() {
   return {
-    type: types.PORTFOLIO_EDITOR_CANCEL
+    type: types.PRODUCT_EDITOR_CANCEL
   }
 }
 
