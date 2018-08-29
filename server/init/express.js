@@ -24,8 +24,8 @@ export default (app) => {
     app.use(helmet());
   }
 
-  app.use(bodyParser.json({limit: '10mb'}));
-  app.use(bodyParser.urlencoded({ limit: '10mb', extended: true })); // for parsing application/x-www-form-urlencoded
+  app.use(bodyParser.json({limit: '30mb'}));
+  app.use(bodyParser.urlencoded({ limit: '30mb', extended: true })); // for parsing application/x-www-form-urlencoded
 
   app.use(methodOverride());
   app.use(cookieParser());

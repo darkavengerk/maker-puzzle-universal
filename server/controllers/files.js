@@ -22,7 +22,7 @@ export async function upload(req, res) {
   try {
     await User.update({userid}, {$inc:{uploadCount:1}});
     const userFound = await User.findOne({userid});
-    const fname = '/images/' + userid + '/' + userFound.uploadCount + '__' + data.name;
+    const fname = '/images/' + userid + '/' + userFound.uploadCount + '.' + _.last(data.name.split('.'));
     await fs.outputFile('public' + fname, binary_buffer, 'Binary');
     const image = await ImageFile.create({original: fname});
     res.send(image);
