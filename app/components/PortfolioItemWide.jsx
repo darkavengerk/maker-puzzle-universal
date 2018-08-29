@@ -41,7 +41,7 @@ const ContentsSection = ({ portfolio, owner, referrer, portfoiloEditorStart, com
             포트폴리오 추가하기
           </div>
           <div className={cx('add-portfolio-icon')} role="button" onClick={portfoiloEditorStart}>
-            +
+            <Image src={"/site/images/add-button-1.png"} x={73} y={73} />
           </div>
         </div>
       </div>

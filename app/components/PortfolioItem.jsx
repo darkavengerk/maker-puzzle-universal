@@ -42,7 +42,7 @@ const PortfolioItem = ({ portfolio, owner, referrer, portfoiloEditorStart, exter
             추가하기        
           </div>
           <div className={cx('add-portfolio-icon')} role="button" onClick={portfoiloEditorStart}>
-            +
+            <Image src={"/site/images/add-button-1.png"} x={73} y={73} />
           </div>
         </div>
       </div>

@@ -89,16 +89,6 @@
 .add-portfolio-icon {
   user-select: none;
   margin-top: 1.1rem;
-  background: #ff5b00;;
-  width: 7.3rem;
-  height: 7.3rem;
-  border-radius: 50%;
-  position: relative;
-  color: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 9rem;
 }
 
 .horizontal {
