@@ -1,37 +1,116 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
+
 import MakerProfile from '../components/MakerProfile';
 import CompanyHistory from '../components/CompanyHistory';
 import GreyTitle from '../components/GreyTitle';
 import Abilities from '../components/Abilities';
+
+import { featureEditSave } from '../actions/makers';
+import { logOut } from '../actions/users';
+
 import styles from '../css/components/maker-info';
 
 const cx = classNames.bind(styles);
 
-const MakerInfo = ({ owner }) => {
+class MakerInfo extends Component {
+  constructor(props) {
+    super(props);
 
-  const maker = owner;
+    const { owner } = this.props;
+    this.maker = owner;
+    this.state = {...this.maker};
 
-  return maker && maker.makerProfile ? (
-    <div className={cx('main-section')}>
-      <GreyTitle title={'메이커 프로필'} bottom="13" />
-      <MakerProfile maker={maker} />
+    this.submit = this.submit.bind(this);
+    this.startEdit = this.startEdit.bind(this);
+    this.edited = this.edited.bind(this);
+    this.cancelEdit = this.cancelEdit.bind(this);
+    this.featureEdited = this.featureEdited.bind(this);
+    this.aboutEdited = this.aboutEdited.bind(this);
+    this.profileImageEdited = this.profileImageEdited.bind(this);
+  }
 
-      <GreyTitle title={'소속 기업'} top="38" />
-      <CompanyHistory maker={maker} id="company-history" />
+  startEdit() {
+    this.setState({editing:true, picture: this.maker.getProfileImage()});
+  }
 
-      <GreyTitle title={'능력치'} top="33" bottom="27" />
-      <Abilities abilities={maker.makerProfile.abilities} />
+  edited(states) {
+    this.setState(states);
+  }
 
-      <GreyTitle title={'관련된 메이커'} top="24" bottom="26" />
+  cancelEdit() {
+    const { features, about, picture } = this.maker;
+    this.setState({ features, picture, about, editing: false });
+  }
 
-    </div>
-  ) : <div></div>;
-};
+  featureEdited(key, text) {
+    const target = this.state;    
+    const features = target.features.map(feature => {
+      if(feature.title === key) {
+        return {...feature, content:text}
+      }
+      return feature;
+    });
+    this.setState({ features });
+  }
+
+  aboutEdited(evt) {
+    const about = evt.target.innerText;
+    this.setState({ about });
+  }
+
+  profileImageEdited(err, img) {
+    this.setState({picture : img});
+  };
+
+  async submit() {
+    const { featureEditSave } = this.props;
+    const { picture, features, about } = this.state;
+    const res = await featureEditSave({ picture, features, about });
+    if (res.status === 200) {
+      this.setState({editing: false});
+    }
+  }
+
+  render() {
+    return this.maker && this.maker.makerProfile ? (
+      <div className={cx('main-section')}>
+        <GreyTitle title={'메이커 프로필'} bottom="13" />
+        <MakerProfile 
+          maker={this.state} 
+          startEdit={this.startEdit} 
+          cancelEdit={this.cancelEdit} 
+          editing={this.state.editing}
+          onChange={this.edited}
+          onSubmit={this.submit}
+        />
+
+        <GreyTitle title={'소속 기업'} top="38" />
+        <CompanyHistory maker={this.state} id="company-history" />
+
+        <GreyTitle title={'능력치'} top="33" bottom="27" />
+        <Abilities abilities={this.state.makerProfile.abilities} />
+
+        <GreyTitle title={'관련된 메이커'} top="24" bottom="26" />
+
+      </div>
+    ) : <div></div>;
+  }
+}
 
 MakerInfo.propTypes = {
   owner: PropTypes.object.isRequired
 };
 
-export default MakerInfo;
+function mapStateToProps(state) {
+  return {
+    user: state.user
+  };
+}
+
+export default connect(
+  mapStateToProps, 
+  {featureEditSave, logOut}
+)(MakerInfo);

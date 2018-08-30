@@ -23,59 +23,33 @@ class MakerProfile extends Component {
   constructor(props) {
     super(props);
 
-    const { maker } = this.props;
-    this.state = {...maker};
-
-    this.submit = this.submit.bind(this);
-    this.startEdit = this.startEdit.bind(this);
-    this.cancelEdit = this.cancelEdit.bind(this);
     this.featureEdited = this.featureEdited.bind(this);
     this.aboutEdited = this.aboutEdited.bind(this);
     this.profileImageEdited = this.profileImageEdited.bind(this);
   }
 
-  startEdit() {
-    const { maker } = this.props;
-    this.setState({editing:true, picture: maker.getProfileImage()});
-  }
-
-  cancelEdit() {
-    const { maker } = this.props;
-    const { features, about, picture } = maker;
-    this.setState({ features, picture, about, editing: false });
-  }
-
   featureEdited(key, text) {
-    const target = this.state;    
+    const target = this.props.maker;    
     const features = target.features.map(feature => {
       if(feature.title === key) {
         return {...feature, content:text}
       }
       return feature;
     });
-    this.setState({ features });
+    this.props.onChange({ features });
   }
 
   aboutEdited(evt) {
     const about = evt.target.innerText;
-    this.setState({ about });
+    this.props.onChange({ about });
   }
 
   profileImageEdited(err, img) {
-    this.setState({picture : img});
+    this.props.onChange({picture : img});
   };
 
-  async submit() {
-    const { featureEditSave } = this.props;
-    const { picture, features, about } = this.state;
-    const res = await featureEditSave({ picture, features, about });
-    if (res.status === 200) {
-      this.setState({editing: false});
-    }
-  }
-
   render() {
-    const { maker, user, logOut } = this.props;
+    const { maker, user, logOut, startEdit, editing, cancelEdit, onSubmit } = this.props;
     const isOwnPage = (user.account.userid === maker.userid);
 
     let stats = (
@@ -112,31 +86,28 @@ class MakerProfile extends Component {
       </span>;
 
     if(isOwnPage) { 
-
       buttonArea = 
       <span className={cx('button-area')}>
-        <label className={cx('system-button')} role="button" onClick={this.startEdit}>정보 수정</label>
+        <label className={cx('system-button')} role="button" onClick={startEdit}>정보 수정</label>
         <label className={cx('system-button')} role="button" onClick={logOut} >로그아웃</label>
       </span>;
 
-      if(this.state.editing) {
+      if(editing) {
         buttonArea = 
           <span className={cx('button-area')}>
-            <label className={cx('system-button', 'important')} role="button" onClick={this.submit}>변경내용 저장</label> 
-            <label className={cx('system-button')} role="button" onClick={this.cancelEdit}>취소</label>
+            <label className={cx('system-button', 'important')} role="button" onClick={onSubmit}>변경내용 저장</label> 
+            <label className={cx('system-button')} role="button" onClick={cancelEdit}>취소</label>
           </span>;
       }
     }
-
-    const profileImage = this.state.editing? this.state.picture : maker.getProfileImage();
 
     return (
       <div className={cx('main-section')}>
         <span className={cx('flex-row')}>
           <span style={{position:'relative', height:'14.4rem'}}>
-            <FlexibleImage src={profileImage} x={144} y={144} />
+            <FlexibleImage src={maker.picture} x={144} y={144} />
             <span style={{position:'absolute', bottom:'0.3rem', right:'0.4rem', 'zIndex':1}}>
-              {this.state.editing? 
+              {editing? 
                 <ImageUploader name="ImageUploader" callback={this.profileImageEdited} >
                   <FlexibleImage className={cx('image-upload-trigger')} src={"/images/site/camera-1.png"} x={34} y={34} />
                 </ImageUploader>
@@ -154,27 +125,25 @@ class MakerProfile extends Component {
         </span>
         <div className={cx('feature-area')}>
           <Features 
-            features={this.state.features}
+            features={maker.features}
             featureEdited={this.featureEdited}
             classNames={{
               title: cx('feature-title'),
-              content: cx('feature', this.state.editing? 'editing':''),
+              content: cx('feature', editing? 'editing':''),
               row: cx('feature-item')
             }}
-            editing={this.state.editing}
+            editing={editing}
           />
 
           <ContentEditable 
-            className={cx('about-maker', this.state.editing? 'editing':'')}
+            className={cx('about-maker', editing? 'editing':'')}
             html={maker.about.trim()} 
             tagName="pre"
             onKeyUp={this.aboutEdited}
-            disabled={!this.state.editing}
+            disabled={!editing}
             placeholder="간단한 자기 소개를 입력해주세요."
-          />
-          
-        </div>
-        
+          />          
+        </div>        
       </div>
     );
   }
