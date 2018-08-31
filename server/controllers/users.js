@@ -76,10 +76,9 @@ export function login(req, res, next) {
 
 export function updateFeatures(req, res) {
   const userid = req.params.id;
-  let {features, about, picture} = req.body;
-  picture = picture._id || null;
+  let {features, about, picture, makerProfile} = req.body;
 
-  User.update({userid:userid}, {$set:{features, about, picture}}, (err, result) => {
+  User.update({userid:userid}, {$set:{features, about, picture, makerProfile}}, (err, result) => {
     if (err) {
       return res.status(500).send('Something went wrong getting the data');
     }

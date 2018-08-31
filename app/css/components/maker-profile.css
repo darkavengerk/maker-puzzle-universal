@@ -126,21 +126,41 @@
   color: #ffffff;
 }
 
-.col-name {
-  height: 20px;
-  font-family: NanumBarunGothic;
-  font-size: 11px;
-  font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.82;
-  letter-spacing: normal;
+.company-title {  
+  width: 14.7rem;
   text-align: left;
-  color: #000000;
   padding-left: 1.1rem;
 }
 
-.col-info  {
+.compnay-period {  
+  width: 7.6rem;
+  text-align: left;
+  padding-left: 1.1rem;
+}
+
+.company-position {  
+  width: 10rem;
+  text-align: center;
+}
+
+.col-info {
+  width: 2rem;
+  text-align: center;
+}
+
+td[contenteditable=true]:empty:before {
+  font-family: NanumBarunGothic;
+  font-size: 10px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #b8b8b8;
+  background-color: white;
+}
+
+.text-input  {
   height: 20px;
   font-family: NanumBarunGothic;
   font-size: 11px;
@@ -149,13 +169,19 @@
   font-stretch: normal;
   line-height: 1.82;
   letter-spacing: normal;
-  text-align: center;
   color: #000000;
 }
 
 .col-selected {
   font-weight: bold;
   color: #ff5b00;
+}
+
+.comapny-history-area {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .history {
@@ -177,16 +203,40 @@
 
 .history th, .history td {
   border: solid 1px #dcdcdc;
+  border-top: solid 0px;
   height: 2rem;
   vertical-align: middle;
 }
 
 .first-item {
-  border-left: solid 0px;
+  border-left: solid 0px  !important;
 }
 
 .last-item {
-  border-right: solid 0px;
+  border-right: solid 0px !important;
+}
+
+.erase-buttons {
+  border: solid 0px !important;
+  height: 2rem;
+  vertical-align: middle;
+}
+
+.add-entry {
+  width: 28.9rem;
+  height: 2.6rem;
+  border: dashed 1px #c2c2c2;
+
+  font-family: NanumBarunGothic;
+  font-size: 1.2rem;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 2.6rem;
+  letter-spacing: normal;
+  text-align: center;
+  vertical-align: middle;
+  color: #c2c2c2;
 }
 
 .feature-area {

@@ -36,13 +36,16 @@ class MakerInfo extends Component {
     this.setState({editing:true, picture: this.maker.getProfileImage()});
   }
 
-  edited(states) {
-    this.setState(states);
+  edited(states, entry) {
+    if(entry) {
+      const subState = {...this.state[entry], ...states};
+      this.setState({[entry]: subState});
+    }
+    else this.setState(states);
   }
 
   cancelEdit() {
-    const { features, about, picture } = this.maker;
-    this.setState({ features, picture, about, editing: false });
+    this.setState({ ...this.maker, editing: false });
   }
 
   featureEdited(key, text) {
@@ -67,8 +70,7 @@ class MakerInfo extends Component {
 
   async submit() {
     const { featureEditSave } = this.props;
-    const { picture, features, about } = this.state;
-    const res = await featureEditSave({ picture, features, about });
+    const res = await featureEditSave(this.state);
     if (res.status === 200) {
       this.setState({editing: false});
     }
@@ -88,7 +90,12 @@ class MakerInfo extends Component {
         />
 
         <GreyTitle title={'소속 기업'} top="38" />
-        <CompanyHistory maker={this.state} id="company-history" />
+        <CompanyHistory 
+          id="company-history" 
+          maker={this.state} 
+          editing={this.state.editing}
+          onChange={this.edited}
+        />
 
         <GreyTitle title={'능력치'} top="33" bottom="27" />
         <Abilities abilities={this.state.makerProfile.abilities} />
