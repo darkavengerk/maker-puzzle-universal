@@ -19,10 +19,7 @@ class MakerInfo extends Component {
   constructor(props) {
     super(props);
 
-    const { owner } = this.props;
-    this.maker = owner;
-    this.state = {...this.maker};
-
+    this.state = {...(this.props.owner || {makerProfile:{}})};
     this.submit = this.submit.bind(this);
     this.startEdit = this.startEdit.bind(this);
     this.edited = this.edited.bind(this);
@@ -33,7 +30,8 @@ class MakerInfo extends Component {
   }
 
   startEdit() {
-    this.setState({editing:true, picture: this.maker.getProfileImage()});
+    const maker = this.props.owner;
+    this.setState({editing:true, picture: maker.getProfileImage()});
   }
 
   edited(states, entry) {
@@ -45,7 +43,8 @@ class MakerInfo extends Component {
   }
 
   cancelEdit() {
-    this.setState({ ...this.maker, editing: false });
+    const maker = this.props.owner;
+    this.setState({ ...maker, editing: false });
   }
 
   featureEdited(key, text) {
@@ -69,19 +68,20 @@ class MakerInfo extends Component {
   };
 
   async submit() {
-    const { featureEditSave } = this.props;
-    const res = await featureEditSave(this.state);
+    const { featureEditSave, owner: maker } = this.props;
+    const res = await featureEditSave({...maker, ...this.state});
     if (res.status === 200) {
       this.setState({editing: false});
     }
   }
 
   render() {
-    return this.maker && this.maker.makerProfile ? (
+    const maker = this.props.owner;
+    return (maker && maker.makerProfile) ? (
       <div className={cx('main-section')}>
         <GreyTitle title={'메이커 프로필'} bottom="13" />
         <MakerProfile 
-          maker={this.state} 
+          maker={this.state}
           startEdit={this.startEdit} 
           cancelEdit={this.cancelEdit} 
           editing={this.state.editing}
@@ -98,12 +98,16 @@ class MakerInfo extends Component {
         />
 
         <GreyTitle title={'능력치'} top="33" bottom="27" />
-        <Abilities abilities={this.state.makerProfile.abilities} />
+        <Abilities 
+          maker={this.state} 
+          editing={this.state.editing}
+          onChange={this.edited}
+        />
 
         <GreyTitle title={'관련된 메이커'} top="24" bottom="26" />
 
       </div>
-    ) : <div></div>;
+    ) : <div>Nothing</div>;
   }
 }
 

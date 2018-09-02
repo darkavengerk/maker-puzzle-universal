@@ -6,6 +6,7 @@ import ImageUploader from '../components/ImageUploader';
 import TopTitle from '../components/TopTitle';
 import ContentsSection from '../components/ContentsSection';
 import SingleLine from '../components/SingleLine';
+import Padding from '../components/Padding';
 import styles from '../css/components/maker';
 
 import { Maker } from '../utils/objects';
@@ -26,7 +27,11 @@ class Container extends Component {
           thumbnailURL={maker.picture? maker.getProfileImage():null} 
         />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
-        <ContentsSection owner={maker} contentsType="maker" isOwnPage={isOwnPage} />
+        {
+          maker && maker.makerProfile? 
+          <ContentsSection owner={maker} contentsType="maker" isOwnPage={isOwnPage} /> : 
+          <Padding height="60rem"/>
+        }
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
       </div>
     );

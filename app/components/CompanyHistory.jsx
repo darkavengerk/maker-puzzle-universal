@@ -13,6 +13,8 @@ const cx = classNames.bind(styles);
 
 const Component = ({ maker, editing, onChange, ...props }) => {
 
+  if(!(maker.makerProfile && maker.makerProfile.companies)) return null;
+
   let history = maker.makerProfile.companies;
 
   const featureChanged = (order, category) => evt => {

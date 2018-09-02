@@ -125,7 +125,7 @@ class MakerProfile extends Component {
         </span>
         <div className={cx('feature-area')}>
           <Features 
-            features={maker.features}
+            features={maker.features || []}
             featureEdited={this.featureEdited}
             classNames={{
               title: cx('feature-title'),
@@ -137,7 +137,7 @@ class MakerProfile extends Component {
 
           <ContentEditable 
             className={cx('about-maker', editing? 'editing':'')}
-            html={maker.about.trim()} 
+            html={maker.about? maker.about.trim() : ''} 
             tagName="pre"
             onKeyUp={this.aboutEdited}
             disabled={!editing}
