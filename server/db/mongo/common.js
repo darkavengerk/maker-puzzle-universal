@@ -17,6 +17,7 @@ async function savePortfolio({ portfolio, project, company, user }) {
   portfolio.company = company._id;
   
   company.projects.addToSet(project._id);  
+  project.companies.addToSet(company._id);  
 
   const saving = [];
 
@@ -25,6 +26,13 @@ async function savePortfolio({ portfolio, project, company, user }) {
     user.portfolios.push(portfolio);
     project.users.addToSet(user._id);
     company.users.addToSet(user._id);
+
+    const companyName = company.name;
+    const alreadyRegisterd = user.makerProfile.companies.filter(c => c.name === company.name);
+    
+    if(alreadyRegisterd.length === 0) {
+      user.makerProfile.companies.push({name: company.name, order: user.makerProfile.companies.length});
+    }
     saving.push(user.save());
   }
 

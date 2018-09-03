@@ -8,7 +8,7 @@ import CompanyHistory from '../components/CompanyHistory';
 import GreyTitle from '../components/GreyTitle';
 import Abilities from '../components/Abilities';
 
-import { featureEditSave } from '../actions/makers';
+import { featureEditSave, updateContext } from '../actions/makers';
 import { logOut } from '../actions/users';
 
 import styles from '../css/components/maker-info';
@@ -20,6 +20,8 @@ class MakerInfo extends Component {
     super(props);
 
     this.state = {...(this.props.owner || {makerProfile:{}})};
+
+    this.stateChanged = this.stateChanged.bind(this);
     this.submit = this.submit.bind(this);
     this.startEdit = this.startEdit.bind(this);
     this.edited = this.edited.bind(this);
@@ -29,62 +31,69 @@ class MakerInfo extends Component {
     this.profileImageEdited = this.profileImageEdited.bind(this);
   }
 
+  stateChanged(newState) {
+    const { updateContext } = this.props;
+    this.setState(newState);
+    updateContext(newState);
+  }
+
   startEdit() {
     const maker = this.props.owner;
-    this.setState({editing:true, picture: maker.getProfileImage()});
+    this.stateChanged({editing:true, picture: maker.getProfileImage()});
   }
 
   edited(states, entry) {
     if(entry) {
-      const subState = {...this.state[entry], ...states};
-      this.setState({[entry]: subState});
+      const { context } = this.props;
+      const subState = {...context[entry], ...states};
+      this.stateChanged({[entry]: subState});
     }
-    else this.setState(states);
+    else this.stateChanged(states);
   }
 
   cancelEdit() {
     const maker = this.props.owner;
-    this.setState({ ...maker, editing: false });
+    this.stateChanged({ ...maker, editing: false });
   }
 
   featureEdited(key, text) {
-    const target = this.state;    
+    const target = this.props.context;    
     const features = target.features.map(feature => {
       if(feature.title === key) {
         return {...feature, content:text}
       }
       return feature;
     });
-    this.setState({ features });
+    this.stateChanged({ features });
   }
 
   aboutEdited(evt) {
     const about = evt.target.innerText;
-    this.setState({ about });
+    this.stateChanged({ about });
   }
 
   profileImageEdited(err, img) {
-    this.setState({picture : img});
+    this.stateChanged({picture : img});
   };
 
   async submit() {
     const { featureEditSave, owner: maker } = this.props;
-    const res = await featureEditSave({...maker, ...this.state});
+    const res = await featureEditSave({...this.props.context});
     if (res.status === 200) {
-      this.setState({editing: false});
+      this.stateChanged({editing: false});
     }
   }
 
   render() {
-    const maker = this.props.owner;
-    return (maker && maker.makerProfile) ? (
+    const { context } = this.props;
+    return (context && context.makerProfile) ? (
       <div className={cx('main-section')}>
         <GreyTitle title={'메이커 프로필'} bottom="13" />
         <MakerProfile 
-          maker={this.state}
+          maker={context}
           startEdit={this.startEdit} 
           cancelEdit={this.cancelEdit} 
-          editing={this.state.editing}
+          editing={context.editing}
           onChange={this.edited}
           onSubmit={this.submit}
         />
@@ -92,15 +101,15 @@ class MakerInfo extends Component {
         <GreyTitle title={'소속 기업'} top="38" />
         <CompanyHistory 
           id="company-history" 
-          maker={this.state} 
-          editing={this.state.editing}
+          maker={context} 
+          editing={context.editing}
           onChange={this.edited}
         />
 
         <GreyTitle title={'능력치'} top="33" bottom="27" />
         <Abilities 
-          maker={this.state} 
-          editing={this.state.editing}
+          maker={context} 
+          editing={context.editing}
           onChange={this.edited}
         />
 
@@ -117,11 +126,12 @@ MakerInfo.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    user: state.user
+    user: state.user,
+    context: state.maker.context
   };
 }
 
 export default connect(
   mapStateToProps, 
-  {featureEditSave, logOut}
+  {featureEditSave, logOut, updateContext}
 )(MakerInfo);

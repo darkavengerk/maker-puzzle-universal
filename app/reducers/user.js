@@ -105,8 +105,8 @@ const account = (
     case types.LOGOUT_SUCCESS_USER:
       return {};
     case types.PROFILE_EDIT_SUCCESS:
-      const {features, about, picture} = action.data;
-      return {...state, features, about, picture}
+      const {features, about, picture, companyProfile} = action.data;
+      return {...state, features, about, picture, companyProfile}
     default:
       return state;
   }

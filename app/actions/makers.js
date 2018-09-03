@@ -29,6 +29,12 @@ export function portfoiloEditorCancel() {
   }
 }
 
+export function updateContext(data) {
+  return {
+    type: types.UPDATE_MAKER_CONTEXT, data
+  }
+}
+
 export function portfoiloSubmit(portfolio) {
   return async (dispatch, getState) => {
     const { user } = getState();

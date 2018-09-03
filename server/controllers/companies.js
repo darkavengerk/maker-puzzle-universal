@@ -66,6 +66,7 @@ export async function addPortfolio(req, res) {
   }
 
   portfolio.type = 'company';
+  portfolio.companyName = company.name;
 
   const result = await common.savePortfolio({portfolio, company, project});
 

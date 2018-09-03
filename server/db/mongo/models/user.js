@@ -36,8 +36,8 @@ const UserSchema = new mongoose.Schema({
     companies: [{
       name: String,
       link_name: String,
-      period: String,
-      position: String,
+      period: {type: String, default: ''},
+      position: {type: String, default: ''},
       order: Number,
       current: Boolean,
       profileImage: String,

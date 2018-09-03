@@ -74,16 +74,25 @@ export function login(req, res, next) {
   })(req, res, next);
 }
 
-export function updateFeatures(req, res) {
+export async function updateFeatures(req, res) {
   const userid = req.params.id;
   let {features, about, picture, makerProfile} = req.body;
 
-  User.update({userid:userid}, {$set:{features, about, picture, makerProfile}}, (err, result) => {
-    if (err) {
-      return res.status(500).send('Something went wrong getting the data');
-    }
+  try {
+    const result = await User.update({userid:userid}, {$set:{features, about, picture, makerProfile}});
     res.json(result);
-  });
+    const newCompanies = makerProfile.companies.filter(company => company.newItem);
+    const companyNames = newCompanies.map(company => company.name);
+    for(let name of companyNames) {
+      let company = new Company({ name });
+      company = await Metadata.populateMetadata('Company', company);
+      await company.save();
+    }
+  }
+  catch (err) {
+    console.log(err);
+    return res.status(500).send('Something went wrong getting the data');
+  }
 }
 
 export async function addPortfolio(req, res) {
