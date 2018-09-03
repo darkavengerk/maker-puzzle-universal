@@ -88,7 +88,7 @@ class Company extends User {
   createPortfolioLink(portfolio) {
     if(portfolio.type === 'company')
       return this.getHomeLink() + '/portfolio/' + portfolio.pid;
-    return this.getHomeLink() + '/maker/' + portfolio.user.userid  + '/' + portfolio.pid;
+    return this.getHomeLink() + '/maker/' + (portfolio.user? portfolio.user.userid : 'unknown')  + '/' + portfolio.pid;
   }
 
   createPortfolioTitle(portfolio) {

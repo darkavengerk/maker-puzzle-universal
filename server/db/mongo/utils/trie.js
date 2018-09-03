@@ -87,8 +87,10 @@ class Trie {
   }
   
   addWordWithData(word, data){
-    var lastLetterNode = this.insertLetter(this.trieRoot, word);
-    lastLetterNode.data = data;
+    if(word) {
+      var lastLetterNode = this.insertLetter(this.trieRoot, word);
+      lastLetterNode.data = data;
+    }
   }
 
   getWords(partialWord, maxResults, callback){
