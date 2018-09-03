@@ -78,10 +78,13 @@ class ContentsTagFactory {
 
     if(isOwnPage) {
       contents.push(<Item key={'__new__'} />);
+      if(contents.length >=12) {
+        contents = [<Item key={'__new__front_'} />, ...contents];
+      }
     }
 
     return (<div>
-              <p className={cx('main-panel-title')}>포트폴리오</p>
+              <p className={cx('main-panel-title')}>포트폴리오 {contents.length}</p>
               <div className={cx('portfolio-list')}>
                 {contents}
               </div>

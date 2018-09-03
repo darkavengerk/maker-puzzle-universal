@@ -17,6 +17,8 @@ const Popup = ({ show, name, children, cancel, top='15rem', target }) => {
   }
 
   if(show) {
+    window.scrollTo(0, 0);
+    
     if(target) {
       if(!document.getElementById(target)) return null;
 

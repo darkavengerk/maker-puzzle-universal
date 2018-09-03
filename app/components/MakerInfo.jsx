@@ -19,8 +19,6 @@ class MakerInfo extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {...(this.props.owner || {makerProfile:{}})};
-
     this.stateChanged = this.stateChanged.bind(this);
     this.submit = this.submit.bind(this);
     this.startEdit = this.startEdit.bind(this);
