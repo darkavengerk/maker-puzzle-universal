@@ -31,8 +31,8 @@ const Component = ({ maker, editing, onChange, ...props }) => {
   }
 
   const removeEntry = order => evt => {
-    const newState = history.filter(info => info.order !== order);
-    newState.map( (s, i) => s.order = i);
+    let newState = history.filter(info => info.order !== order);
+    newState = newState.map( (s, i) => ({...s, order: i}));
     onChange({companies: newState}, 'makerProfile');
   }
 

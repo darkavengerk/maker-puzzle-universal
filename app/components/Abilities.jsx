@@ -52,8 +52,8 @@ const Component = ({ maker, editing, onChange }) => {
   }
 
   const removeEntry = order => evt => {
-    const newState = abilities.filter(ab => ab.order !== order);
-    newState.map( (s, i) => s.order = i);
+    let  newState = abilities.filter(ab => ab.order !== order);
+    newState = newState.map( (s, i) => ({...s, order: i}));
     featureEdited(newState);
   }
 
