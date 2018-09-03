@@ -279,10 +279,11 @@ class AddPortfolio extends Component {
                                 onKeyPress={this.detectEnter}
                               />
                               <FlexibleImage 
-                                src={"/images/site/ic_highlight_remove_black_48dp.png"} 
+                                src={"/site/images/ic_highlight_remove_black_48dp.png"} 
                                 x={17} y={17} 
                                 className={cx('tag-delete')}
                                 role="button"
+                                pureImage={true}
                                 onClick={this.removeTag(i)}
                               />
                             </span>)

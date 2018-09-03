@@ -202,7 +202,7 @@
 .tag-delete {
   position: absolute;
   left: 11rem;
-  top: 0.2rem;
+  bottom: -2px;
 }
 
 .image-area {
