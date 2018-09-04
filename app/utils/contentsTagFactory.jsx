@@ -84,7 +84,7 @@ class ContentsTagFactory {
     }
 
     return (<div>
-              <p className={cx('main-panel-title')}>포트폴리오 {contents.length}</p>
+              <p className={cx('main-panel-title')}>포트폴리오</p>
               <div className={cx('portfolio-list')}>
                 {contents}
               </div>
