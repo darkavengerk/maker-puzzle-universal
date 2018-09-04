@@ -32,13 +32,12 @@ class MakerInfo extends Component {
 
   stateChanged(newState) {
     const { updateContext } = this.props;
-    this.setState(newState);
     updateContext(newState);
   }
 
   startEdit() {
     const maker = this.props.owner;
-    this.stateChanged({editing:true, picture: maker.getProfileImage()});
+    this.stateChanged({editing:true});
   }
 
   edited(states, entry) {
@@ -83,8 +82,14 @@ class MakerInfo extends Component {
     }
   }
 
+  componentWillMount() {
+    const { updateContext } = this.props;
+    updateContext({});
+  }
+
   render() {
     const { context } = this.props;
+    console.log(context);
     return (context && context.makerProfile) ? (
       <div className={cx('main-section')}>
         <GreyTitle title={'메이커 프로필'} bottom="13" />

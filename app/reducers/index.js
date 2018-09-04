@@ -31,7 +31,7 @@ const rootReducer = combineReducers({
   topic,
   fileUpload,
   user,
-  message,
+  // message,
   routing,
   people,
   maker,

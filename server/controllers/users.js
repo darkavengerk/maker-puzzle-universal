@@ -82,18 +82,27 @@ export async function updateFeatures(req, res) {
   try {
     const result = await User.update({userid:userid}, {$set:{features, about, picture, makerProfile}});
     res.json(result);
-    const newCompanies = makerProfile.companies.filter(company => company.newItem);
-    const companyNames = newCompanies.map(company => company.name);
-    for(let name of companyNames) {
-      let company = new Company({ name });
-      company = await Metadata.populateMetadata('Company', company);
-      await company.save();
-    }
   }
   catch (err) {
     console.log(err);
     return res.status(500).send('Something went wrong getting the data');
   }
+
+  const newCompanies = makerProfile.companies.filter(company => company.newItem);
+  const companyNames = newCompanies.map(company => company.name);
+  let isCompanyCreated = false;
+  for(let name of companyNames) {
+    try {
+      let company = new Company({ name });
+      company = await Metadata.populateMetadata('Company', company);
+      await company.save();
+      isCompanyCreated = true;
+    }
+    catch (err) {
+      console.log('Skip making company for: ' + name);
+    }
+  }
+  if(isCompanyCreated) companyAutoComplete.buildCache(err => {});
 }
 
 async function checkFollowingUsers(userid, followingUserId, isConnecting) {

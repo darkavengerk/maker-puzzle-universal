@@ -3,6 +3,10 @@ import * as types from '../types';
 import cloneDeep from 'lodash/cloneDeep';
 import { Maker } from '../utils/objects';
 
+function update(state, newState) {
+  return new Maker({...state.raw, ...newState});
+}
+
 const context = (
   state = {},
   action
@@ -14,22 +18,22 @@ const context = (
       return state;
         
     case types.UPDATE_MAKER_CONTEXT:
-      if (action.data) return {...state, ...action.data};
+      if (action.data) return update(state, action.data);
       return state;
 
     case types.REQUEST_SUCCESS:
-      if (action.data && action.data.maker) return new Maker(action.data.maker);
+      if (action.data && action.data.maker) return update(state, action.data.maker);
       return state;
 
     case types.PROFILE_EDIT_SUCCESS:
       const {features, about, picture} = action.data;
-      return {...state, features, about, picture}
+      return update(state, {features, about, picture});
     
     case types.PORTFOLIO_EDITOR_START:
-      return {...state, isAddingPortfolio: true}
+      return update(state, {isAddingPortfolio: true})
 
     case types.PORTFOLIO_EDITOR_CANCEL:
-      return {...state, isAddingPortfolio: false}
+      return update(state, {isAddingPortfolio: false})
 
     case types.PORTFOLIO_EDIT_SUCCESS:
       const { user, company, project, portfolio } = action.data;
@@ -37,11 +41,11 @@ const context = (
       portfolio.project = project;
       portfolio.company = company;
       if(user._id === state._id)
-        return {...user, portfolios: [...state.portfolios, portfolio], isAddingPortfolio: false}; 
+        return update(state, {portfolios: [...state.portfolios, portfolio], isAddingPortfolio: false}); 
       return state;
 
     case types.FOLLOWERS_UPDATED:
-      return {...state, followers: action.data.following.followers}
+      return update(state, {followers: action.data.following.followers})
     
     default:
       return state;

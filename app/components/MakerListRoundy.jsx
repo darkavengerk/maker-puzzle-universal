@@ -9,7 +9,14 @@ const cx = classNames.bind(styles);
 
 const MakerListRoundy = ({ makers=[] }) => {
 
-  const users = makers.map(user => <Roundy className={cx('maker-roundy')} user={user} key={user.userid} ></Roundy>);
+  const users = makers.map(user => 
+    <Roundy 
+      className={cx('maker-roundy')} 
+      user={user} 
+      key={user.userid}
+      defaultImage="/site/images/default_Maker-01.jpg"
+    ></Roundy>
+  );
 
   return <div className={cx('main-section')}>
             {users}

@@ -123,8 +123,8 @@ class MakerProfile extends Component {
     }
     else {
       buttonArea = isFollowing?
-      <span className={cx('follow-button')} role="button" onClick={this.unfollowClicked}>
-        UNFOLLOW
+      <span className={cx('following-button')} role="button" onClick={this.unfollowClicked}>
+        Following
       </span> :
       <span className={cx('follow-button')} role="button" onClick={this.followClicked}>
         FOLLOW
@@ -135,11 +135,11 @@ class MakerProfile extends Component {
       <div className={cx('main-section')}>
         <span className={cx('flex-row')}>
           <span style={{position:'relative', height:'14.4rem'}}>
-            <FlexibleImage src={maker.picture} x={144} y={144} />
+            <FlexibleImage src={maker.getProfileImage? maker.getProfileImage():''} x={144} y={144} />
             <span style={{position:'absolute', bottom:'0.3rem', right:'0.4rem', 'zIndex':1}}>
               {editing? 
                 <ImageUploader name="ImageUploader" callback={this.profileImageEdited} >
-                  <FlexibleImage className={cx('image-upload-trigger')} src={"/images/site/camera-1.png"} x={34} y={34} />
+                  <FlexibleImage className={cx('image-upload-trigger')} src={"/site/images/camera-1.png"} x={34} y={34} />
                 </ImageUploader>
                 : ''}
             </span>
