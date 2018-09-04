@@ -107,6 +107,8 @@ const account = (
     case types.PROFILE_EDIT_SUCCESS:
       const {features, about, picture, companyProfile} = action.data;
       return {...state, features, about, picture, companyProfile}
+    case types.FOLLOWERS_UPDATED:
+      return {...state, followings: action.data.follower.followings}
     default:
       return state;
   }

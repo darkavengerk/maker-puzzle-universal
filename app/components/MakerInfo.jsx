@@ -7,6 +7,7 @@ import MakerProfile from '../components/MakerProfile';
 import CompanyHistory from '../components/CompanyHistory';
 import GreyTitle from '../components/GreyTitle';
 import Abilities from '../components/Abilities';
+import MakerListRoundy from '../components/MakerListRoundy';
 
 import { featureEditSave, updateContext } from '../actions/makers';
 import { logOut } from '../actions/users';
@@ -112,6 +113,7 @@ class MakerInfo extends Component {
         />
 
         <GreyTitle title={'관련된 메이커'} top="24" bottom="26" />
+        <MakerListRoundy makers={context.followings} />
 
       </div>
     ) : <div>Nothing</div>;

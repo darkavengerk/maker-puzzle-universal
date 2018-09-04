@@ -21,6 +21,16 @@ export default () => {
       url: `/user/${id}/features`,
       data
     }),
+    follow: ({id, data}) => client.request({
+      method: 'POST',
+      url: `/user/${id}/follow`,
+      data
+    }),
+    unfollow: ({id, data}) => client.request({
+      method: 'POST',
+      url: `/user/${id}/unfollow`,
+      data
+    }),
     submitPortfolio: ({id, data}) => client.request({
       method: 'POST',
       url: `/user/${id}/portfolio`,

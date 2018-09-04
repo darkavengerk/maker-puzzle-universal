@@ -30,7 +30,7 @@ const context = (
 
     case types.PORTFOLIO_EDITOR_CANCEL:
       return {...state, isAddingPortfolio: false}
-    
+
     case types.PORTFOLIO_EDIT_SUCCESS:
       const { user, company, project, portfolio } = action.data;
       portfolio.user = user;
@@ -40,6 +40,9 @@ const context = (
         return {...user, portfolios: [...state.portfolios, portfolio], isAddingPortfolio: false}; 
       return state;
 
+    case types.FOLLOWERS_UPDATED:
+      return {...state, followers: action.data.following.followers}
+    
     default:
       return state;
   }
@@ -77,6 +80,9 @@ const maker = (
       if(user._id === state._id)
         return {...user, portfolios: [...state.portfolios, portfolio], isAddingPortfolio: false};
       return state;
+
+    case types.FOLLOWERS_UPDATED:
+      return {...state, followers: action.data.following.followers}
 
     default:
       return state;

@@ -10,7 +10,7 @@ import ImageUploader from '../components/ImageUploader';
 import Features from '../components/Features';
 import styles from '../css/components/maker-profile';
 
-import { featureEditSave } from '../actions/makers';
+import { featureEditSave, follow, unfollow } from '../actions/makers';
 import { logOut } from '../actions/users';
 
 import ContentEditable from 'react-contenteditable'
@@ -26,6 +26,8 @@ class MakerProfile extends Component {
     this.featureEdited = this.featureEdited.bind(this);
     this.aboutEdited = this.aboutEdited.bind(this);
     this.profileImageEdited = this.profileImageEdited.bind(this);
+    this.followClicked = this.followClicked.bind(this);
+    this.unfollowClicked = this.unfollowClicked.bind(this);
   }
 
   featureEdited(key, text) {
@@ -48,9 +50,31 @@ class MakerProfile extends Component {
     this.props.onChange({picture : img});
   };
 
+  followClicked() {
+    const {follow, unfollow, maker, user} = this.props;
+    follow({follower: user.account, following: maker});
+  }
+
+  unfollowClicked() {
+    const {follow, unfollow, maker, user} = this.props;
+    unfollow({follower: user.account, following: maker});
+  }
+
   render() {
-    const { maker, user, logOut, startEdit, editing, cancelEdit, onSubmit } = this.props;
+    const { 
+      maker, 
+      user, 
+      logOut, 
+      startEdit, 
+      editing, 
+      cancelEdit, 
+      onSubmit,
+      follow, 
+      unfollow
+    } = this.props;
+
     const isOwnPage = (user.account.userid === maker.userid);
+    const isFollowing = maker.followers.filter(u => u.userid === user.account.userid).length > 0;
 
     let stats = (
       <span className={cx('stats-area', 'flex-row')}>
@@ -64,7 +88,7 @@ class MakerProfile extends Component {
         </span>
         <span className={cx('maker-stats', 'flex-col')}>
           <span className={cx('figure')}>
-            421
+            {maker.followers.length}
           </span>
           <span className={cx('keyword')}>
             Follower
@@ -72,7 +96,7 @@ class MakerProfile extends Component {
         </span>
         <span className={cx('maker-stats', 'flex-col')}>
           <span className={cx('figure')}>
-            421
+            {maker.followings.length}
           </span>
           <span className={cx('keyword')}>
             Following
@@ -80,10 +104,7 @@ class MakerProfile extends Component {
         </span>
       </span>);
 
-    let buttonArea = 
-      <span className={cx('follow-button')} role="button">
-        FOLLOW
-      </span>;
+    let buttonArea;
 
     if(isOwnPage) { 
       buttonArea = 
@@ -99,6 +120,15 @@ class MakerProfile extends Component {
             <label className={cx('system-button')} role="button" onClick={cancelEdit}>취소</label>
           </span>;
       }
+    }
+    else {
+      buttonArea = isFollowing?
+      <span className={cx('follow-button')} role="button" onClick={this.unfollowClicked}>
+        UNFOLLOW
+      </span> :
+      <span className={cx('follow-button')} role="button" onClick={this.followClicked}>
+        FOLLOW
+      </span>;
     }
 
     return (
@@ -164,5 +194,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps, 
-  {featureEditSave, logOut}
+  {featureEditSave, logOut, follow, unfollow}
 )(MakerProfile);

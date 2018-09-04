@@ -21,6 +21,8 @@ export default (app) => {
     app.get('/user', usersController.all);
     app.post('/user/:id/features', usersController.updateFeatures);
     app.post('/user/:id/portfolio', usersController.addPortfolio);
+    app.post('/user/:id/follow', usersController.follow);
+    app.post('/user/:id/unfollow', usersController.unfollow);
     app.post('/sessions', usersController.login);
     app.post('/users', usersController.signUp);
     app.delete('/sessions', usersController.logout);

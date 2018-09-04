@@ -49,3 +49,29 @@ export function portfoiloSubmit(portfolio) {
   };
 }
 
+export function follow(data) {
+  return async (dispatch, getState) => {
+    const res = await Maker().follow({id: data.follower.userid, data: data.following});
+    if (res.status === 200) {
+      dispatch({type:types.FOLLOWERS_UPDATED, data: res.data});
+    }
+    else {
+      console.log(res);
+    } 
+    return res;
+  };
+}
+
+export function unfollow(data) {
+  return async (dispatch, getState) => {
+    const res = await Maker().unfollow({id: data.follower.userid, data: data.following});
+    if (res.status === 200) {
+      dispatch({type:types.FOLLOWERS_UPDATED, data: res.data});
+    }
+    else {
+      console.log(res);
+    } 
+    return res;
+  };
+}
+

@@ -26,6 +26,7 @@ export async function single(req, res) {
               .findOne({'userid':req.params.id})
               .populate('portfolios.user')
               .populate('portfolios.project')
+              .populate(['followers', 'followings'])
               .lean();
 
   if (!user) {
@@ -93,6 +94,45 @@ export async function updateFeatures(req, res) {
     console.log(err);
     return res.status(500).send('Something went wrong getting the data');
   }
+}
+
+async function checkFollowingUsers(userid, followingUserId, isConnecting) {
+
+  const [follower, following] = await Promise.all([
+    User.findOne({ userid }).populate('followings'), 
+    User.findOne({userid: followingUserId}).populate('followers')
+  ]);
+
+  if(isConnecting) {
+    follower.followings.addToSet(following);
+    following.followers.addToSet(follower);
+  }
+  else {
+    follower.followings.pull(following);
+    following.followers.pull(follower);
+  }
+
+  await Promise.all([follower.save(), following.save()]);
+
+  return [follower, following];
+}
+
+export async function follow(req, res) {
+  const userid = req.params.id;
+  let followingUserId = req.body.userid;
+
+  const [follower, following] = await checkFollowingUsers(userid, followingUserId, true);
+
+  res.json({follower, following});
+}
+
+export async function unfollow(req, res) {
+  const userid = req.params.id;
+  let followingUserId = req.body.userid;
+
+  const [follower, following] = await checkFollowingUsers(userid, followingUserId, false);
+
+  res.json({follower, following});
 }
 
 export async function addPortfolio(req, res) {
@@ -173,4 +213,6 @@ export default {
   signUp,
   updateFeatures,
   addPortfolio,
+  follow,
+  unfollow
 };
