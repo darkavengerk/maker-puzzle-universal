@@ -41,6 +41,7 @@ export async function portfolio(req, res) {
   let user = await User
               .findOne({'userid':req.params.id})
               .populate({path: 'portfolios.project'})
+              .populate(['followers', 'followings'])
               .lean();
 
   if (!user) {
