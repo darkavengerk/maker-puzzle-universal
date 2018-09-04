@@ -89,7 +89,6 @@ class MakerInfo extends Component {
 
   render() {
     const { context } = this.props;
-    console.log(context);
     return (context && context.makerProfile) ? (
       <div className={cx('main-section')}>
         <GreyTitle title={'메이커 프로필'} bottom="13" />
