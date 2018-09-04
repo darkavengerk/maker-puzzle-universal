@@ -1,6 +1,6 @@
 
 .main-section {
-  height: 9.2rem;
+  height: 6rem;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -9,7 +9,7 @@
 
 .title {
   font-family: NanumBarunGothic;
-  font-size: 3.0rem;
+  font-size: 2.5rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;

@@ -226,6 +226,8 @@ td[contenteditable=true]:empty:before {
 .erase-buttons {
   border: solid 0px !important;
   height: 2rem;
+  width: 1.7rem;
+  text-align: right;
   vertical-align: middle;
 }
 
