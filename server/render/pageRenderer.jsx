@@ -21,7 +21,6 @@ const buildPage = ({ componentHTML, initialState, headAssets }) => {
     ${headAssets.meta.toString()}
     ${headAssets.link.toString()}
     ${staticAssets.createStylesheets()}
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1">
   </head>
   <body>
     <div id="app">${componentHTML}</div>
