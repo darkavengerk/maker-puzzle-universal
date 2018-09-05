@@ -11,7 +11,7 @@ const metaAssets = () => {
     { charset: 'utf-8' },
     // Meta descriptions are commonly used on search engine result pages to
     // display preview snippets for a given page.
-    { name: 'description', content: 'Your One-Stop solution for a full-stack universal Redux App' },
+    { name: 'description', content: 'Maker Puzzle Web Page' },
     // Setting IE=edge tells Internet Explorer to use the latest engine to
     //  render the page and execute Javascript
     { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
@@ -22,7 +22,7 @@ const metaAssets = () => {
     // - include initial-scale=1 to establish 1:1 relationship between css pixels
     // and device-independent pixels
     // - ensure your page is accessible by not disabling user scaling.
-    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    { name: 'viewport', content: 'width=980, initial-scale=1' },
     // Disable tap highlight on IE
     { name: 'msapplication-tap-highlight', content: 'no' },
     // Add to homescreen for Chrome on Android
@@ -30,7 +30,7 @@ const metaAssets = () => {
     // Add to homescreen for Safari on IOS
     { name: 'apple-mobile-web-app-capable', content: 'yes' },
     { name: 'apple-mobile-web-app-status-bar-style', content: 'black' },
-    { name: 'apple-mobile-web-app-title', content: 'reactGo' },
+    { name: 'apple-mobile-web-app-title', content: 'Maker Puzzle' },
     // Tile icon for Win8 (144x144 + tile color)
     { name: 'msapplication-TileImage', content: msFavicon },
     { name: 'msapplication-TileColor', content: '#3372DF' }
@@ -52,6 +52,6 @@ const linkAssets = () => {
   return links;
 };
 
-export const title = 'reactGo - just ship it';
+export const title = 'Maker Puzzle';
 export const meta = metaAssets();
 export const link = linkAssets();
