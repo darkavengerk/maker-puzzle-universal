@@ -16,9 +16,10 @@ export async function upload(req, res) {
   const userid = data.userid;
   var chopper_index = 0; // safeguard
   var base64_marker = ';base64,';
-  chopper_index = data.file.src.indexOf(base64_marker) + base64_marker.length;
+  const src = data.file.src || data.file;
+  chopper_index = src.indexOf(base64_marker) + base64_marker.length;
   // Remove obsolete header
-  var binary_buffer = Buffer.from(data.file.src.substr(chopper_index), 'base64');
+  var binary_buffer = Buffer.from(src.substr(chopper_index), 'base64');
   try {
     await User.update({userid}, {$inc:{uploadCount:1}});
     const userFound = await User.findOne({userid});

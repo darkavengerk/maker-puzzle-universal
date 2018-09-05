@@ -45,3 +45,43 @@ export function uploadFile(userid, file, cb) {
     reader.readAsDataURL(file);
   };
 }
+
+export function uploadImage(userid, file, cb) {
+  return async (dispatch, getState) => {
+    // If the text box is empty
+    if (!file.name || file.name.trim().length === 0) return;
+
+    loadImage.parseMetaData(file, function(data) {
+
+      let orientation = 0;
+      //if exif data available, update orientation
+      if (data.exif) {
+          orientation = data.exif.get('Orientation');
+      }
+
+      //https://github.com/blueimp/JavaScript-Load-Image
+      const loadingImage = loadImage( 
+        file,
+        async canvas => {
+          var base64data = canvas.toDataURL('image/jpeg');
+          const res = await File().upload({ data : {file:base64data, name:file.name, userid:userid}});
+
+          if (res.status === 200) {
+            if(cb) cb(null, res.data);
+          }
+
+          return dispatch({
+            type: types.UPLOADER_FILE_SELECTED,
+            file: file
+          });
+        }, 
+        {
+          //should be set to canvas : true to activate auto fix orientation
+          canvas: true,
+          orientation: orientation,
+          maxWidth: 1024
+        }
+      );
+    });
+  };
+}

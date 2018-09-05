@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 import TopicTextInput from '../components/TopicTextInput';
 import FlexibleImage from '../components/FlexibleImage';
 import styles from '../css/components/image-uploader';
-import { uploadFile } from '../actions/fileUpload';
+import { uploadFile, uploadImage } from '../actions/fileUpload';
 import { Col, Row } from 'react-bootstrap';
 
 const cx = classNames.bind(styles);
@@ -27,7 +27,7 @@ class ImageUploader extends React.Component {
     e.preventDefault();
     let target = document.getElementById(this.props.name);
     let file = target.files[0];
-    this.props.uploadFile(this.props.user.userid, file, this.props.callback);
+    this.props.uploadImage(this.props.user.userid, file, this.props.callback);
   }
 
   render() {
@@ -58,4 +58,4 @@ function mapStateToProps(state) {
   };
 }
     
-export default connect(mapStateToProps, { uploadFile })(ImageUploader);
+export default connect(mapStateToProps, { uploadFile, uploadImage })(ImageUploader);
