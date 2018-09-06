@@ -8,12 +8,18 @@ import controllers from '../controllers';
 
 const topicsController = controllers && controllers.topics;
 
+const mainController = controllers && controllers.main;
 const usersController = controllers && controllers.users;
 const projectController = controllers && controllers.projects;
 const companyController = controllers && controllers.companies;
 const fileController = controllers && controllers.files;
 
 export default (app) => {
+
+  if (usersController) {
+    app.get('/api/main', mainController.main);
+  }
+
   // user routes
   if (usersController) {
     app.get('/user/:id/:pid', usersController.portfolio);

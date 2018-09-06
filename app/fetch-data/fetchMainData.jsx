@@ -1,11 +1,8 @@
-import { Company, Maker, Project } from '../services';
+import { Main } from '../services';
 
-const fetchData = () => {
-  return Maker().getMakers()
-  .then(res => ({people : res.data}))
-  // Returning [] as a placeholder now so it does not error out when this service
-  // fails. We should be handling this in our DISPATCH_REQUEST_FAILURE
-  .catch(() => []);
+const fetchData = async () => {
+  const res = await Main().getMain();
+  return {main : res.data};
 };
 
 export default fetchData;

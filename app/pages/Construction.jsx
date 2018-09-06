@@ -33,7 +33,7 @@ class Construction extends Component {
     return (
       <Page {...this.getMetaData()}>
         <div className={cx('main-section')}>
-          <Image className={cx('logo')} src={'/images/site/로고-화이트.png'} x={216} y={45} pureImage={true}/>
+          <Image className={cx('logo')} src={'/site/images/로고-화이트.png'} x={216} y={45} pureImage={true}/>
           <h1 className={cx('COMING-SOON')} >COMING SOON</h1>
           <div className={cx('line')}></div>
           <p className={cx('WHODIDTHIS')} >“여긴 누가 했지?”</p>

@@ -87,7 +87,7 @@ const Component = ({ maker, editing, onChange, ...props }) => {
       <table className={cx('history')} {...props} >
         <tbody>
           <tr>
-            <th className={cx('first-item')}></th>
+            {history.length? <th className={cx('first-item')}></th>: null}
             <th>기업명</th>
             <th>재직여부</th>
             <th className={cx('last-item')}>최종 직급</th>

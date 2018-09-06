@@ -1,0 +1,63 @@
+.project-tile {
+  width: 660px;
+  height: 320px;
+  background-color: #ffffff;
+  box-shadow: 0 5px 35px 0 rgba(163, 163, 163, 0.5);
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1rem;
+}
+
+.project-tile .header {
+  font-family: NanumBarunGothic;
+}
+
+.project-tile .header {
+  width: 270px;
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.project-tile .header .title{
+  font-family: NanumBarunGothic;
+  font-size: 25px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0.8;
+  letter-spacing: normal;
+  text-align: center;
+  color: #4a4a4a;
+}
+
+.project-tile .header .sub-title {
+  font-family: NanumBarunGothic;
+  font-size: 12px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.67;
+  letter-spacing: normal;
+  text-align: center;
+  color: #4a4a4a;
+}
+
+.project-tile .header .detail-button {
+  width: 153px;
+  height: 50px;
+  border-radius: 8px;
+  border: solid 2px #000000;
+
+  font-family: NanumBarunGothic;
+  font-size: 18px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 5rem;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
+}
