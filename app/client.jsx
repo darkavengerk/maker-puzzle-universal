@@ -34,7 +34,9 @@ function onUpdate() {
   store.dispatch({ type: types.CREATE_REQUEST, pathname: this.state.location.pathname });
   fetchDataForRoute(this.state)
     .then((data) => {
-      window.scrollTo(0, 0);
+      if(this.state.location.action === 'PUSH') {
+        window.scrollTo(0,0);
+      }
       return store.dispatch({ type: types.REQUEST_SUCCESS, data });
     });
 }
