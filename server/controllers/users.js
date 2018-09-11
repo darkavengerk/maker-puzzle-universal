@@ -36,27 +36,6 @@ export async function single(req, res) {
   return res.json(user);
 }
 
-export async function portfolio(req, res) {
-  const { pid } = req.params;
-  let user = await User
-              .findOne({'userid':req.params.id})
-              .populate({path: 'portfolios.project'})
-              .populate(['followers', 'followings'])
-              .lean();
-
-  if (!user) {
-    return res.status(500).send('Something went wrong getting the data');
-  }
-
-  user.portfolioSelected = { pid };
-  let portfolios = user.portfolios.filter(pf => pf.pid === req.params.pid);
-  if(portfolios && portfolios[0]) {
-    user.portfolioSelected.portfolio = portfolios[0];
-  }
-
-  return res.json(user);
-}
-
 /**
  * POST /login
  */
@@ -252,7 +231,6 @@ export async function signUp(req, res, next) {
 export default {
   all,
   single,
-  portfolio,
   login,
   logout,
   signUp,
