@@ -24,6 +24,39 @@ class User {
 
 }
 
+class Main extends User {
+
+  constructor(data) {
+    super(data);
+  }
+
+  getType() {
+    return 'main';
+  }
+
+  getHomeLink() {
+    return '/main';
+  }
+
+  createPortfolioLink(portfolio) {
+    if(portfolio.type === 'company')
+      return this.getHomeLink() + '/portfolio/' + portfolio.pid;
+    return this.getHomeLink() + '/maker/' + (portfolio.user? portfolio.user.userid : 'unknown')  + '/' + portfolio.pid;
+  }
+
+  createPortfolioTitle(portfolio) {
+    return portfolio.location;
+  }
+
+  createPortfolioSubtitle(portfolio) {
+    return portfolio.title;
+  }
+
+  getContent(props) {
+    return factory.getCompanyContent({source: this, ...props});
+  }
+}
+
 class Maker extends User {
 
   constructor(data) {

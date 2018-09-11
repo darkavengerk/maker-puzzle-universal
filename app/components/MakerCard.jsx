@@ -13,36 +13,28 @@ import styles from '../css/components/business-card';
 
 const cx = classNames.bind(styles);
 
-const ContentsSection = ({project, ...props}) => {
-
-  let location = project.features.filter(f => f.repr === 'location');
-  location = location[0]? location[0] : null;
-  const locationName = location && location.content? location.content : '';
+const ContentsSection = ({picture, title, subTitle, linkTo, ...props}) => {  
   return (
-    <Link className={cx('project-tile')} to={'/project/' + project.link_name} role="button">
+    <Link className={cx('maker-tile')} to={linkTo} role="button">
+      <FlexibleImage className={cx('maker-tile-image')} x={213} y={213} src={picture} >
+      </FlexibleImage>
       <div className={cx('header')}>
-        <Padding height="9rem" />
+        <Padding height="1.8rem" />
         <div className={cx('title')}>
-          {project.name}
+          {title}
         </div>
-        <Padding height="1rem" />
+        <Padding height="0.6rem" />
         <div className={cx('sub-title')}>
-          {locationName}
-        </div>
-        <Padding height="9rem" />
-        <div className={cx('detail-button')} role="button">
-          +{project.portfolios.length} Portfolios
+          {subTitle}
         </div>
       </div>
-      <FlexibleImage className={cx('project-tile-image')} x={390} y={320} src={project.portfolios[0].images[0]} >
-      </FlexibleImage>
     </Link>
 
   );
 };
 
 ContentsSection.propTypes = {
-  project: PropTypes.object.isRequired
+  maker: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {

@@ -8,7 +8,7 @@ const company = (
 ) => {
   switch (action.type) {
     case types.CREATE_REQUEST:
-    if(action.pathname && !action.pathname.startsWith('/company/' + state.link_name))
+    if(action.pathname && !action.pathname.startsWith('/company/'))
         return {portfolios:[], companyPortfolios:[], products:[], features:[] };
       return state;
     

@@ -15,9 +15,18 @@ const {
 export async function main(req, res) {
 
   const loadings = [
-    User.find({'portfolios.0': {$exists:true}}).lean(),
-    Project.find({'portfolios.0': {$exists:true}}).lean(),
-    Company.find({'portfolios.0': {$exists:true}}).lean()
+    User
+      .find({'portfolios.0': {$exists:true}})
+      .populate(['portfolios.user', 'portfolios.project'])
+      .lean(),
+    Project
+      .find({'portfolios.0': {$exists:true}})
+      .populate(['portfolios.user', 'portfolios.company'])
+      .lean(),
+    Company
+      .find({'companyPortfolios.0': {$exists:true}})
+      .populate(['companyPortfolios.project', 'companyPortfolios.company'])
+      .lean()
   ];
   const [users, projects, companies] = await Promise.all(loadings);
 

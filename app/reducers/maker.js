@@ -13,7 +13,7 @@ const context = (
 ) => {
   switch (action.type) {
     case types.CREATE_REQUEST:
-      if(action.pathname && !action.pathname.startsWith('/maker/' + state.userid))
+      if(action.pathname && !action.pathname.startsWith('/maker/'))
         return {};
       return state;
         
@@ -58,7 +58,7 @@ const maker = (
 ) => {
   switch (action.type) {
     case types.CREATE_REQUEST:
-      if(action.pathname && !action.pathname.startsWith('/maker/' + state.userid))
+      if(action.pathname && !action.pathname.startsWith('/maker/'))
         return {};
       return state;
       

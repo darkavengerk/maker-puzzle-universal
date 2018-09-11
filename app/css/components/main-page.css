@@ -91,7 +91,7 @@
 }
 
 .project-section {
-  width: 1440px;
+  width: 1450px;
   padding: 0 5.5rem;
 }
 
@@ -129,5 +129,10 @@
 .project-tiles {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
+}
+
+.maker-card {
+  display: inline-block;
+  margin-right: 10px;
 }

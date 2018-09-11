@@ -3,8 +3,12 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 
+import { Maker, Project, Company, create as createObject } from '../utils/objects'
 import ProjectCard from '../components/ProjectCard';
+import MakerCard from '../components/MakerCard';
 import Padding from '../components/Padding';
+import PortfolioItemWide from '../components/PortfolioItemWide';
+import PortfolioItem from '../components/PortfolioItem';
 
 // import { portfoiloEditorCancel, portfoiloSubmit } from '../actions/makers';
 // import { companyPortfoiloEditorCancel, companyPortfoiloSubmit } from '../actions/companies';
@@ -18,7 +22,63 @@ const ContentsSection = ({main, ...props}) => {
   for(let user of main.users) {
     userPortfolios = userPortfolios.concat(user.portfolios);
   }
-  console.log(userPortfolios);
+
+  let makerPortfoliosSorted = [...userPortfolios];
+  makerPortfoliosSorted.sort( (a,b) => a.lastUpdated < b.lastUpdated? 1 : -1);
+
+  let companyPortfolios = [];
+  for(let company of main.companies) {
+    companyPortfolios = companyPortfolios.concat(company.companyPortfolios);
+  }
+
+  let companyPortfoliosSorted = [...companyPortfolios];
+  companyPortfoliosSorted.sort( (a,b) => a.lastUpdated < b.lastUpdated? 1 : -1);
+
+  const popularCompanyPortfolios = companyPortfolios.slice(0,9).map(portfolio => {
+    const owner = createObject('company', portfolio.company);
+    return <PortfolioItemWide portfolio={portfolio} referrer={owner} owner={owner} key={portfolio.pid} external={true} />
+  })
+
+  const recentCompanyPortfolios = companyPortfoliosSorted.slice(0,6).map(portfolio => {
+    const owner = createObject('company', portfolio.company);
+    return <PortfolioItemWide portfolio={portfolio} referrer={owner} owner={owner} key={portfolio.pid} external={true} />
+  })
+
+  let popularMakerPortfolios = userPortfolios.map(portfolio => {
+      const referrer = createObject('project', portfolio.project);
+      const owner = createObject('maker', portfolio.user);
+      return (<PortfolioItem portfolio={portfolio} referrer={referrer} owner={owner} key={portfolio.pid} external={true} />);
+    });
+
+  let recentMakerPortfolios = makerPortfoliosSorted.map(portfolio => {
+      const referrer = createObject('project', portfolio.project);
+      const owner = createObject('maker', portfolio.user);
+      return (<PortfolioItem portfolio={portfolio} referrer={referrer} owner={owner} key={portfolio.pid} external={true} />);
+    });
+
+  const makerHighlights = main.users.map(maker => {
+    let occupation = maker.features.filter(f => f.repr === 'occupation');
+    occupation = occupation[0]? occupation[0] : null;
+    const occupationName = occupation && occupation.content? occupation.content : '';
+    return <MakerCard 
+              key={maker.userid} 
+              picture={maker.picture}
+              title={maker.name} 
+              subTitle={occupationName} 
+              linkTo={'/maker/' + maker.userid} />;
+  });
+
+  const companyHighlights = main.companies.map(maker => {
+    let business = maker.features.filter(f => f.repr === 'business');
+    business = business[0]? business[0] : null;
+    const businessName = business && business.content? business.content : '';
+    return <MakerCard 
+              key={maker.link} 
+              picture={maker.companyPortfolios[0].images[0]}
+              title={maker.name} 
+              subTitle={businessName} 
+              linkTo={'/company/' + maker.link_name} />;
+  });
 
   return (
     <div className={cx('main-section')}>
@@ -77,11 +137,19 @@ const ContentsSection = ({main, ...props}) => {
         <div className={cx('title')}>
           인기 수행실적 <span className={cx('more-detail')}>더 보기</span>
         </div>
+        <Padding height="2.5rem" />
+        <div className={cx('project-tiles')}>
+          {popularCompanyPortfolios}
+        </div>
       </section>
 
       <section className={cx('project-section')}>
         <div className={cx('title')}>
           인기 포트폴리오 <span className={cx('more-detail')}>더 보기</span>
+        </div>
+        <Padding height="2.5rem" />
+        <div className={cx('project-tiles')}>
+          {popularMakerPortfolios.slice(0, 18)}
         </div>
       </section>
 
@@ -89,11 +157,19 @@ const ContentsSection = ({main, ...props}) => {
         <div className={cx('title')}>
           새로 등록된 수행실적 <span className={cx('more-detail')}>더 보기</span>
         </div>
+        <Padding height="2.5rem" />
+        <div className={cx('project-tiles')}>
+          {recentCompanyPortfolios}
+        </div>
       </section>
 
       <section className={cx('project-section')}>
         <div className={cx('title')}>
           새로 등록된 포트폴리오 <span className={cx('more-detail')}>더 보기</span>
+        </div>
+        <Padding height="2.5rem" />
+        <div className={cx('project-tiles')}>
+          {recentMakerPortfolios.slice(0, 12)}
         </div>
       </section>
 
@@ -118,14 +194,29 @@ const ContentsSection = ({main, ...props}) => {
         <div className={cx('title')}>
           주목할만한 메이커들 <span className={cx('more-detail')}>더 보기</span>
         </div>
+        <Padding height="2.5rem" />
+        <div className={cx('project-tiles')}>
+          {
+            makerHighlights.slice(0,6).map(m => (<div className={cx('maker-card')}>
+                            { m }
+                          </div>))
+          }
+        </div>
       </section>
 
       <section className={cx('project-section')}>
         <div className={cx('title')}>
           주목할만한 기업들 <span className={cx('more-detail')}>더 보기</span>
         </div>
+        <Padding height="2.5rem" />
+        <div className={cx('project-tiles')}>
+          {
+            companyHighlights.slice(0,6).map(m => (<div className={cx('maker-card')}>
+                            { m }
+                          </div>))
+          }
+        </div>
       </section>
-
     </div>
 
   );
