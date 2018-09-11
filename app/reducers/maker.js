@@ -7,51 +7,6 @@ function update(state, newState) {
   return new Maker({...state.raw, ...newState});
 }
 
-const context = (
-  state = {},
-  action
-) => {
-  switch (action.type) {
-    case types.CREATE_REQUEST:
-      if(action.pathname && !action.pathname.startsWith('/maker/'))
-        return {};
-      return state;
-        
-    case types.UPDATE_MAKER_CONTEXT:
-      if (action.data) return update(state, action.data);
-      return state;
-
-    case types.REQUEST_SUCCESS:
-      if (action.data && action.data.maker) return update(state, action.data.maker);
-      return state;
-
-    case types.PROFILE_EDIT_SUCCESS:
-      const {features, about, picture} = action.data;
-      return update(state, {features, about, picture});
-    
-    case types.PORTFOLIO_EDITOR_START:
-      return update(state, {isAddingPortfolio: true})
-
-    case types.PORTFOLIO_EDITOR_CANCEL:
-      return update(state, {isAddingPortfolio: false})
-
-    case types.PORTFOLIO_EDIT_SUCCESS:
-      const { user, company, project, portfolio } = action.data;
-      portfolio.user = user;
-      portfolio.project = project;
-      portfolio.company = company;
-      if(user._id === state._id)
-        return update(state, {portfolios: [...state.portfolios, portfolio], isAddingPortfolio: false}); 
-      return state;
-
-    case types.FOLLOWERS_UPDATED:
-      return update(state, {followers: action.data.following.followers})
-    
-    default:
-      return state;
-  }
-};
-
 const maker = (
   state = {},
   action
@@ -78,11 +33,21 @@ const maker = (
     
     case types.PORTFOLIO_EDIT_SUCCESS:
       const { user, company, project, portfolio } = action.data;
-      portfolio.user = user;
-      portfolio.project = project;
-      portfolio.company = company;
-      if(user._id === state._id)
-        return {...user, portfolios: [...state.portfolios, portfolio], isAddingPortfolio: false};
+      if(user._id === state._id) {
+        portfolio.user = user;
+        portfolio.project = project;
+        portfolio.company = company;
+        let replaced = false;
+        const newPortfolios = state.portfolios.map(p => {
+          if(p.pid === portfolio.pid) {
+            replaced = true;
+            return portfolio;
+          }
+          else return p;
+        });
+        if(!replaced) newPortfolios.push(portfolio);
+        return {...user, portfolios: newPortfolios, isAddingPortfolio: false};
+      }
       return state;
 
     case types.FOLLOWERS_UPDATED:
@@ -90,6 +55,19 @@ const maker = (
 
     default:
       return state;
+  }
+};
+
+const context = (
+  state = {},
+  action
+) => {
+  switch (action.type) {
+    case types.UPDATE_MAKER_CONTEXT:
+      if (action.data) return update(state, action.data);
+      return state;
+    default:
+      return update(state, maker(state, action));
   }
 };
 

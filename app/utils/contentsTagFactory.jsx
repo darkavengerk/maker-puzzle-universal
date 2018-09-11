@@ -66,7 +66,7 @@ class ContentsTagFactory {
 
   getMakerContent({source, param, isOwnPage, portfoiloSubmit, portfoiloEditorCancel}) {
     if(param && param.pid) {
-      return this.getMakerDetail(source, param.pid);
+      return this.getMakerDetail(source, param, isOwnPage);
     }
 
     const Item = this.getItemTag(source);
@@ -193,18 +193,22 @@ class ContentsTagFactory {
             </div>);
   }
 
-  getMakerDetail(source, isOwnPage) {
-    if(source.portfolioSelected && source.portfolioSelected.portfolio)
+  getMakerDetail(source, param, isOwnPage) {
+    let portfolios = source.portfolios;
+    let portfolioFound = portfolios.filter(p => p.pid === param.pid);
+    if(portfolioFound.length > 0) {
+      portfolioFound = portfolioFound[0];
       return (
           <div>
             <p className={cx('main-panel-title')}>포트폴리오</p>
             <PortfolioDetail 
-              portfolio={source.portfolioSelected.portfolio} 
+              portfolio={portfolioFound} 
               edit={isOwnPage}
-              owner={new Project(source.portfolioSelected.portfolio.project)}
+              owner={new Project(portfolioFound.project)}
             />
           </div>)
-    return null;
+    }
+    else return null;
   }
 
   getProjectDetail(source, param) {

@@ -148,6 +148,23 @@ export async function unfollow(req, res) {
 export async function addPortfolio(req, res) {
   const userid = req.params.id;
   const portfolio = req.body;
+
+  let result;
+
+  if(portfolio.editing) {
+    result = await editPortfolio(userid, portfolio);
+  }
+  else {
+    result = await createPortfolio(userid, portfolio);
+  }
+
+  res.json(result);
+  
+  companyAutoComplete.buildCache(err => {});
+  projectAutoComplete.buildCache(err => {});
+}
+
+async function createPortfolio(userid, portfolio) {
   const location = portfolio.location;
   const companyName = portfolio.companyName;
 
@@ -167,12 +184,30 @@ export async function addPortfolio(req, res) {
     company = await Metadata.populateMetadata('Company', company);
   }
 
-  const result = await common.savePortfolio({portfolio, user, company, project});
+  return await common.savePortfolio({portfolio, user, company, project});
+}
 
-  res.json(result);
-  
-  companyAutoComplete.buildCache(err => {});
-  projectAutoComplete.buildCache(err => {});
+async function editPortfolio(userid, portfolio) {
+  const location = portfolio.location;
+  const companyName = portfolio.companyName;
+
+  if(portfolio.companyChanged) {
+    const prevCompany = await Company.findOne({'portfolios.pid' : portfolio.pid});
+    if(prevCompany) {
+      prevCompany.portfolios = prevCompany.portfolios.filter(p => p.pid !== portfolio.pid);
+      await prevCompany.save();
+    }
+  }
+
+  if(portfolio.locationChanged) {
+    const prevProject = await Project.findOne({'portfolios.pid' : portfolio.pid});
+    if(prevProject) {
+      prevProject.portfolios = prevProject.portfolios.filter(p => p.pid !== portfolio.pid);
+      await prevProject.save();
+    }
+  }
+
+  return await createPortfolio(userid, portfolio);
 }
 
 /**

@@ -8,11 +8,29 @@ import Misc from './models/misc';
 import Product from './models/product';
 import User from './models/user';
 
+function pushOrReplacePortfolio(portfolioList, portfolio) {
+  const shouldReplace = portfolioList.filter(p => p.pid === portfolio.pid).length > 0;
+
+  if(shouldReplace) {
+    return portfolioList.map(p => {
+      if(p.pid === portfolio.pid) return portfolio;
+      else return p;
+    });
+  }
+  else {
+    portfolioList.push(portfolio);
+    return portfolioList;
+  }
+}
+
 async function savePortfolio({ portfolio, project, company, user }) {
 
-  const pid = await Misc.createID('portfolio');
-
-  portfolio.pid = pid;
+  if(portfolio.pid) {
+    portfolio.lastUpdated = Date.now();
+  }
+  else {
+    portfolio.pid = await Misc.createID('portfolio');
+  }
   portfolio.project = project._id;
   portfolio.company = company._id;
   
@@ -23,7 +41,8 @@ async function savePortfolio({ portfolio, project, company, user }) {
 
   if(user && user._id) {
     portfolio.user = user._id;
-    user.portfolios.push(portfolio);
+    user.portfolios = pushOrReplacePortfolio(user.portfolios, portfolio);
+
     project.users.addToSet(user._id);
     company.users.addToSet(user._id);
 
@@ -36,12 +55,12 @@ async function savePortfolio({ portfolio, project, company, user }) {
     saving.push(user.save());
   }
 
-  project.portfolios.push(portfolio);
+  project.portfolios = pushOrReplacePortfolio(project.portfolios, portfolio);
   if(portfolio.type == 'company') {
-    company.companyPortfolios.push(portfolio);
+    company.companyPortfolios = pushOrReplacePortfolio(company.companyPortfolios, portfolio);
   }
   else {
-    company.portfolios.push(portfolio);
+    company.portfolios = pushOrReplacePortfolio(company.portfolios, portfolio);
   }
 
   saving.push(project.save());

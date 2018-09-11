@@ -113,6 +113,8 @@ const account = (
       return {...state, isAddingPortfolio: true}
     case types.PORTFOLIO_EDITOR_CANCEL:
       return {...state, isAddingPortfolio: false}
+    case types.PORTFOLIO_EDIT_SUCCESS:
+      return {...state, isAddingPortfolio: false}
     default:
       return state;
   }

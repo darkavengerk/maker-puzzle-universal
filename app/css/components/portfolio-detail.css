@@ -20,6 +20,12 @@
   align-items: baseline;
 }
 
+.title-area2 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+
 .contents {
   padding: 1rem 2.2rem 2rem;
 }
@@ -35,6 +41,28 @@
   vertical-align: middle;
   text-align: left;
   color: #555555;
+}
+
+.rectangle-1 {
+  width: 87px;
+  height: 24px;
+  padding: 0 0.5rem;
+  border-radius: 5px;
+  border: solid 1px #000000;
+
+  font-family: NanumBarunGothic;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 2.2rem;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .create-date {

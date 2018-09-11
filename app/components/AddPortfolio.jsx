@@ -118,8 +118,13 @@ class AddPortfolio extends Component {
   }
 
   onSubmit(evt) {
-    const { submit } = this.props;
-    submit(this.state);
+    const { submit, portfolio, editing } = this.props;
+    const submitData = {...this.state, editing};
+    if(editing) {
+      submitData.companyChanged = submitData.companyName !== portfolio.companyName;
+      submitData.locationChanged = submitData.location !== portfolio.location;
+    }
+    submit(submitData);
   }
 
   autoComplete(key) {
