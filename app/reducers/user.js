@@ -109,6 +109,10 @@ const account = (
       return {...state, features, about, picture, companyProfile}
     case types.FOLLOWERS_UPDATED:
       return {...state, followings: action.data.follower.followings}
+    case types.PORTFOLIO_EDITOR_START:
+      return {...state, isAddingPortfolio: true}
+    case types.PORTFOLIO_EDITOR_CANCEL:
+      return {...state, isAddingPortfolio: false}
     default:
       return state;
   }

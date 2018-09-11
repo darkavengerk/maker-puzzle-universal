@@ -24,39 +24,6 @@ class User {
 
 }
 
-class Main extends User {
-
-  constructor(data) {
-    super(data);
-  }
-
-  getType() {
-    return 'main';
-  }
-
-  getHomeLink() {
-    return '/main';
-  }
-
-  createPortfolioLink(portfolio) {
-    if(portfolio.type === 'company')
-      return this.getHomeLink() + '/portfolio/' + portfolio.pid;
-    return this.getHomeLink() + '/maker/' + (portfolio.user? portfolio.user.userid : 'unknown')  + '/' + portfolio.pid;
-  }
-
-  createPortfolioTitle(portfolio) {
-    return portfolio.location;
-  }
-
-  createPortfolioSubtitle(portfolio) {
-    return portfolio.title;
-  }
-
-  getContent(props) {
-    return factory.getCompanyContent({source: this, ...props});
-  }
-}
-
 class Maker extends User {
 
   constructor(data) {
@@ -183,6 +150,27 @@ class Project extends User {
 
 }
 
+class Main extends Project {
+
+  constructor() {
+    super();
+  }
+
+  getType() {
+    return 'main';
+  }
+
+  getHomeLink() {
+    return '/main';
+  }
+
+  createPortfolioLink(portfolio) {
+    if(portfolio.type === 'company')
+      return '/company/' + portfolio.company.link_name + '/portfolio/' + portfolio.pid;
+    return '/maker/' + portfolio.user.userid + '/portfolio/' + portfolio.pid;
+  }
+}
+
 class Null extends User {
 
   constructor() {
@@ -223,6 +211,8 @@ exports.create = function(type, data) {
       return new Company(data);
     case 'project':
       return new Project(data);
+    case 'main':
+      return new Main();
     default:
       return nullObject;
   }

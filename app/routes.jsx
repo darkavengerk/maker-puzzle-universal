@@ -31,8 +31,9 @@ export default (store) => {
   };
   return (
     <Route path="/" component={App}>
-      <IndexRoute component={Construction} />
-      <Route exact path="main" component={Main} fetchData={fetchMainData} />
+      {/*<IndexRoute component={Construction} />*/}
+      <IndexRoute component={Main} fetchData={fetchMainData} />
+      {/*<Route exact path="main" component={Main} fetchData={fetchMainData} />*/}
       <Route path="maker/:id/portfolio/:pid" component={Maker} fetchData={fetchMakerData} />
       <Route path="maker/:id" component={Maker} fetchData={fetchMakerData} />
       <Route path="project/:link_name/maker/:mid/:pid" component={Project} fetchData={fetchProjectData} />
