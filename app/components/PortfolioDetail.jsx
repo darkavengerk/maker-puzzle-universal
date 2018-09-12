@@ -14,7 +14,7 @@ import Popup from '../components/Popup';
 import AddPortfolio from '../components/AddPortfolio';
 
 import { portfoiloEditorStart, portfoiloEditorCancel, portfoiloSubmit, deletePortfoilo } from '../actions/makers';
-import { companyPortfoiloSubmit } from '../actions/companies';
+import { companyPortfoiloSubmit, deleteCompanyPortfoilo } from '../actions/companies';
 
 import styles from '../css/components/portfolio-detail';
 
@@ -22,8 +22,9 @@ import styles from '../css/components/portfolio-detail';
 const cx = classNames.bind(styles);
 
 const ContentsSection = (
-  { portfolio, user, owner, edit=false, 
-    portfoiloEditorStart, portfoiloEditorCancel, portfoiloSubmit, deletePortfoilo, companyPortfoiloSubmit }
+  { portfolio, user, company, owner, edit=false, 
+    portfoiloEditorStart, portfoiloEditorCancel, portfoiloSubmit, deletePortfoilo, 
+    companyPortfoiloSubmit, deleteCompanyPortfoilo }
 ) => {
   const imgs = portfolio.images.map(img => (
     <div key={img._id || img} className={cx('image')} >
@@ -61,6 +62,11 @@ const ContentsSection = (
     if(portfolio.type === 'maker') {
       deletePortfoilo(portfolio);
       browserHistory.replace('/maker/' + user.account.userid);
+    }
+
+    if(portfolio.type === 'company') {
+      deleteCompanyPortfoilo(portfolio);
+      browserHistory.replace('/company/' + company.link_name);
     }
   }
 
@@ -127,8 +133,10 @@ ContentsSection.propTypes = {
 function mapStateToProps(state) {
   return {
     user: state.user,
+    company: state.company.company
   };
 }
 
 export default connect(mapStateToProps, 
-  {portfoiloEditorStart, portfoiloEditorCancel, portfoiloSubmit, deletePortfoilo, companyPortfoiloSubmit})(ContentsSection);
+  {portfoiloEditorStart, portfoiloEditorCancel, portfoiloSubmit, deletePortfoilo, 
+    companyPortfoiloSubmit, deleteCompanyPortfoilo})(ContentsSection);

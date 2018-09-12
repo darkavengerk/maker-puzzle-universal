@@ -10,7 +10,7 @@ const project = (
     
     case types.CREATE_REQUEST:
       if(action.pathname && !action.pathname.startsWith('/project/'))
-        return {};
+        return {portfolios:[]};
       return state;
     case types.REQUEST_SUCCESS:
       if (action.data && action.data.project) return action.data.project;

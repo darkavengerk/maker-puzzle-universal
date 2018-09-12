@@ -15,7 +15,7 @@ const ContentsSection = ({ product, company, productEditorStart }) => {
     const companyLink = company.link_name || product.company.link_name;
     return (
       <div className={cx('main-section')}>
-        <Link to={`/company/${companyLink}/product/${product.pid}`}>
+        {/*<Link to={`/company/${companyLink}/product/${product.pid}`}>*/}
           <div className={cx('text', 'text-section')}>
             <h1>
               {product.title}
@@ -25,7 +25,7 @@ const ContentsSection = ({ product, company, productEditorStart }) => {
             </p>
           </div>
           <Image src={product.images[0]} x={160} y={160}/>
-        </Link>        
+        {/*</Link>        */}
       </div>
     );
   }

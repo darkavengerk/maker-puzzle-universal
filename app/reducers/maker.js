@@ -8,13 +8,13 @@ function update(state, newState) {
 }
 
 const maker = (
-  state = {},
+  state = {portfolios:[]},
   action
 ) => {
   switch (action.type) {
     case types.CREATE_REQUEST:
       if(action.pathname && !action.pathname.startsWith('/maker/'))
-        return {};
+        return {portfolios:[]};
       return state;
       
     case types.REQUEST_SUCCESS:

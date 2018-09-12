@@ -22,7 +22,11 @@ export default () => {
       method: 'POST',
       url: `/api/company/${escape(link_name)}/portfolio`,
       data
-    }),    
+    }),
+    deletePortfolio: ({link_name, pid}) => client.request({
+      method: 'DELETE',
+      url: `/api/company/${escape(link_name)}/portfolio/${pid}`
+    }),
     submitProduct: ({link_name, data}) => client.request({
       method: 'POST',
       url: `/api/company/${escape(link_name)}/product`,

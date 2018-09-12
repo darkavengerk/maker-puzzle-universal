@@ -100,6 +100,33 @@ export async function addPortfolio(req, res) {
   companyAutoComplete.buildCache(err => {});
 }
 
+export async function deletePortfolio(req, res) {
+  const link_name = req.params.link_name;
+  const pid = req.params.pid;
+
+  if(!(link_name && pid)) {
+    return res.json({error: 'Not enough data'});
+  }
+  try {
+    const prevCompany = await Company.findOne({ link_name, 'companyPortfolios.pid' : pid});
+    if(prevCompany) {
+      prevCompany.companyPortfolios = prevCompany.companyPortfolios.filter(p => p.pid !== pid);
+      await prevCompany.save();
+    }
+
+    const prevProject = await Project.findOne({'portfolios.pid' : pid});
+    if(prevProject) {
+      prevProject.portfolios = prevProject.portfolios.filter(p => p.pid !== pid);
+      await prevProject.save();
+    }
+
+    res.json({ pid });
+  }
+  catch(e) {
+    res.json({error: 'error in deleting portfolio ' + pid + ': ' + e});
+  }
+}
+
 export async function addProduct(req, res) {
   const link_name = req.params.link_name;
   const product = req.body;
@@ -167,6 +194,7 @@ export default {
   search,
   one,
   addPortfolio,
+  deletePortfolio,
   addProduct,
   add,
   update,

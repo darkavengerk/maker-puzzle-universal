@@ -39,6 +39,20 @@ export function companyPortfoiloSubmit(portfolio) {
   };
 }
 
+export function deleteCompanyPortfoilo(portfolio) {
+  return async (dispatch, getState) => {
+    const { company: { company: { link_name }} } = getState();
+    const res = await Company().deletePortfolio({link_name, pid:portfolio.pid});
+    if (res.status === 200 && !res.data.error) {
+      dispatch({type:types.PORTFOLIO_DELETE_SUCCESS, data: res.data});
+    }
+    else {
+      dispatch({type:types.PORTFOLIO_DELETE_FAILURE, data: res.data});
+    } 
+    return res;
+  };
+}
+
 export function productSubmit(product) {
   return async (dispatch, getState) => {
     const { company, user } = getState();

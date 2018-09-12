@@ -53,6 +53,7 @@ export default (app) => {
     app.get('/api/company/:link_name', companyController.one);
     app.get('/api/company', companyController.all);
     app.post('/api/company/:link_name/portfolio', companyController.addPortfolio);
+    app.delete('/api/company/:link_name/portfolio/:pid', companyController.deletePortfolio);
     app.post('/api/company/:link_name/product', companyController.addProduct);
     app.post('/api/company', companyController.add);
     app.put('/api/company/:id', companyController.update);
