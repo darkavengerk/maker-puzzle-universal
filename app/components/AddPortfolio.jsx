@@ -31,6 +31,9 @@ class AddPortfolio extends Component {
       isPrivate: false,
     } } = this.props;
     this.state = {...portfolio, projectSuggestion: [], showDropdown: false};
+    if(!this.state.companyName) {
+      this.state.companyName = this.props.company.name;
+    }
 
     this.switchChanged = this.switchChanged.bind(this);
     this.addTagEntry = this.addTagEntry.bind(this);
@@ -211,7 +214,7 @@ class AddPortfolio extends Component {
                 </tr>
                 <tr className={cx('entity-row')} />
 
-              {type==='company'? null : 
+              {(type || this.state.type) === 'company'? null : 
                 <tr>
                   <td className={cx('entity-title')}>
                     <Scatter text="소속 기업" />
@@ -229,7 +232,7 @@ class AddPortfolio extends Component {
                 </tr>
               }
 
-              {type==='company'? null : 
+              {(type || this.state.type) === 'company'? null : 
                 <tr>
                   <td className={cx('entity-must')}>
                     [필수]
@@ -381,7 +384,8 @@ AddPortfolio.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    user: state.user
+    user: state.user,
+    company: state.company.company
   };
 }
 

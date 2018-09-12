@@ -27,12 +27,31 @@ const company = (
 
     case types.PRODUCT_EDITOR_CANCEL:
       return {...state, isAddingProduct: false}
+
+    case types.PORTFOLIO_DELETE_SUCCESS:
+      const pidDeleted = action.data.pid;
+      if(pidDeleted) {
+        const portfolios = state.portfolios.filter(p => p.pid !== pidDeleted);
+        const cPortfolios = state.companyPortfolios.filter(p => p.pid !== pidDeleted);
+        return {...state, portfolios: portfolios, companyPortfolios: cPortfolios};
+      }
+      else return state;
     
     case types.COMPANY_PORTFOLIO_EDIT_SUCCESS:
       const { company, project, portfolio } = action.data;
       portfolio.project = project;
       portfolio.company = company;
-      return {...state, companyPortfolios: [...state.companyPortfolios, portfolio], isAddingPortfolio: false};
+
+      let replaced = false;
+      const newPortfolios = state.companyPortfolios.map(p => {
+        if(p.pid === portfolio.pid) {
+          replaced = true;
+          return portfolio;
+        }
+        else return p;
+      });
+      if(!replaced) newPortfolios.push(portfolio);
+      return {...state, companyPortfolios: newPortfolios, isAddingPortfolio: false};
 
     case types.PRODUCT_EDIT_SUCCESS:
       const { product } = action.data;

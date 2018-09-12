@@ -3,7 +3,7 @@ import * as types from '../types';
 import cloneDeep from 'lodash/cloneDeep';
 
 const project = (
-  state = {},
+  state = {portfolios:[]},
   action
 ) => {
   switch (action.type) {
@@ -15,6 +15,14 @@ const project = (
     case types.REQUEST_SUCCESS:
       if (action.data && action.data.project) return action.data.project;
       return state;
+
+    case types.PORTFOLIO_DELETE_SUCCESS:
+      const pidDeleted = action.data.pid;
+      if(pidDeleted) {
+        const portfolios = state.portfolios.filter(p => p.pid !== pidDeleted);
+        return {...state, portfolios};
+      }
+      else return state;
 
     default:
       return state;

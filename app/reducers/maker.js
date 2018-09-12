@@ -58,6 +58,8 @@ const maker = (
       }
       return state;
 
+    case types.COMPANY_PORTFOLIO_EDIT_SUCCESS:
+      return {...state, isAddingPortfolio: false}
     case types.FOLLOWERS_UPDATED:
       return {...state, followers: action.data.following.followers}
 

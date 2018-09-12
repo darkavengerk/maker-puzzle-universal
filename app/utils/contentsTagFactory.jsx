@@ -134,7 +134,7 @@ class ContentsTagFactory {
   getCompanyContent({source, param, isOwnPage, companyPortfoiloSubmit, companyPortfoiloEditorCancel}) {
 
     if(param.pid) {
-      return this.getCompanyDetail(source, param);
+      return this.getCompanyDetail(source, param, isOwnPage);
     }
 
     let companyPortfolios = source.companyPortfolios? source.companyPortfolios.map(portfolio => {
@@ -239,7 +239,7 @@ class ContentsTagFactory {
     return null;
   }
 
-  getCompanyDetail(source, param) {
+  getCompanyDetail(source, param, isOwnPage) {
     let portfolios = param.mid? source.portfolios : source.companyPortfolios;
     let portfolioFound = null;
 
@@ -257,7 +257,7 @@ class ContentsTagFactory {
       return (
         <div>
           <p className={cx('main-panel-title')}>포트폴리오</p>
-          <PortfolioDetail portfolio={portfolioFound} owner={owner} />
+          <PortfolioDetail portfolio={portfolioFound} owner={owner} edit={isOwnPage} />
         </div>
       )
     }

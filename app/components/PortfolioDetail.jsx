@@ -14,6 +14,7 @@ import Popup from '../components/Popup';
 import AddPortfolio from '../components/AddPortfolio';
 
 import { portfoiloEditorStart, portfoiloEditorCancel, portfoiloSubmit, deletePortfoilo } from '../actions/makers';
+import { companyPortfoiloSubmit } from '../actions/companies';
 
 import styles from '../css/components/portfolio-detail';
 
@@ -22,7 +23,7 @@ const cx = classNames.bind(styles);
 
 const ContentsSection = (
   { portfolio, user, owner, edit=false, 
-    portfoiloEditorStart, portfoiloEditorCancel, portfoiloSubmit, deletePortfoilo }
+    portfoiloEditorStart, portfoiloEditorCancel, portfoiloSubmit, deletePortfoilo, companyPortfoiloSubmit }
 ) => {
   const imgs = portfolio.images.map(img => (
     <div key={img._id || img} className={cx('image')} >
@@ -43,6 +44,15 @@ const ContentsSection = (
   ));
 
   const tags = portfolio.tags.map(tag => (<label key={tag} className={cx('tag')}>{tag}</label>));
+
+  function submitPortfolio(portfolio) {
+    if(portfolio.type === 'maker') {
+      portfoiloSubmit(portfolio);
+    }
+    if(portfolio.type === 'company') {
+      companyPortfoiloSubmit(portfolio);
+    }
+  }
 
   function removePortfolioClicked() {
 
@@ -102,7 +112,7 @@ const ContentsSection = (
           portfolio={portfolio} 
           title="포트폴리오 수정하기" 
           editing={true}
-          submit={portfoiloSubmit} 
+          submit={submitPortfolio} 
           cancel={portfoiloEditorCancel} />
       </Popup>
     </div>
@@ -120,4 +130,5 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {portfoiloEditorStart, portfoiloEditorCancel, portfoiloSubmit, deletePortfoilo})(ContentsSection);
+export default connect(mapStateToProps, 
+  {portfoiloEditorStart, portfoiloEditorCancel, portfoiloSubmit, deletePortfoilo, companyPortfoiloSubmit})(ContentsSection);

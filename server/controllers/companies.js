@@ -50,9 +50,8 @@ export async function one(req, res) {
   return res.json(result);
 }
 
-export async function addPortfolio(req, res) {
-  const { link_name } = req.params;
-  const portfolio = req.body;
+async function createPortfolio(link_name, portfolio) {
+
   const location = portfolio.location;
 
   let [ project, company ] = await Promise.all([
@@ -68,11 +67,37 @@ export async function addPortfolio(req, res) {
   portfolio.type = 'company';
   portfolio.companyName = company.name;
 
-  const result = await common.savePortfolio({portfolio, company, project});
+  return await common.savePortfolio({portfolio, company, project});
+}
+
+async function editPortfolio(link_name, portfolio) {
+  if(portfolio.locationChanged) {
+    const prevProject = await Project.findOne({'portfolios.pid' : portfolio.pid});
+    if(prevProject) {
+      prevProject.portfolios = prevProject.portfolios.filter(p => p.pid !== portfolio.pid);
+      await prevProject.save();
+    }
+  }
+
+  return await createPortfolio(link_name, portfolio);
+}
+
+export async function addPortfolio(req, res) {
+  const link_name = req.params.link_name;
+  const portfolio = req.body;
+
+  let result;
+
+  if(portfolio.editing) {
+    result = await editPortfolio(link_name, portfolio);
+  }
+  else {
+    result = await createPortfolio(link_name, portfolio);
+  }
 
   res.json(result);
   
-  projectAutoComplete.buildCache(err => {});
+  companyAutoComplete.buildCache(err => {});
 }
 
 export async function addProduct(req, res) {

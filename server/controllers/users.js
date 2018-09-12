@@ -200,8 +200,6 @@ async function createPortfolio(userid, portfolio) {
 }
 
 async function editPortfolio(userid, portfolio) {
-  const location = portfolio.location;
-  const companyName = portfolio.companyName;
 
   if(portfolio.companyChanged) {
     const prevCompany = await Company.findOne({'portfolios.pid' : portfolio.pid});
