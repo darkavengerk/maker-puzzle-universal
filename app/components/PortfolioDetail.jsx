@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
+import { browserHistory } from 'react-router';
+import { create as createObject } from '../utils/objects'
 
 import Image from '../components/FlexibleImage';
 import SingleLine from '../components/SingleLine';
@@ -11,7 +13,7 @@ import DateFormat from '../components/DateFormat';
 import Popup from '../components/Popup';
 import AddPortfolio from '../components/AddPortfolio';
 
-import { portfoiloEditorStart, portfoiloEditorCancel, portfoiloSubmit } from '../actions/makers';
+import { portfoiloEditorStart, portfoiloEditorCancel, portfoiloSubmit, deletePortfoilo } from '../actions/makers';
 
 import styles from '../css/components/portfolio-detail';
 
@@ -20,11 +22,10 @@ const cx = classNames.bind(styles);
 
 const ContentsSection = (
   { portfolio, user, owner, edit=false, 
-    portfoiloEditorStart, portfoiloEditorCancel, portfoiloSubmit }
+    portfoiloEditorStart, portfoiloEditorCancel, portfoiloSubmit, deletePortfoilo }
 ) => {
-  
   const imgs = portfolio.images.map(img => (
-    <div key={img} className={cx('image')} >
+    <div key={img._id || img} className={cx('image')} >
       <Image src={img} x={'100%'} pureImage={true}/>
     </div>)
   );
@@ -43,6 +44,16 @@ const ContentsSection = (
 
   const tags = portfolio.tags.map(tag => (<label key={tag} className={cx('tag')}>{tag}</label>));
 
+  function removePortfolioClicked() {
+
+    if(!confirm('Really?')) return;
+
+    if(portfolio.type === 'maker') {
+      deletePortfoilo(portfolio);
+      browserHistory.replace('/maker/' + user.account.userid);
+    }
+  }
+
   return (
     <div className={cx('main-section')}>
       <div className={cx('title-area')}>
@@ -54,8 +65,17 @@ const ContentsSection = (
           {edit? 
             <span className={cx('rectangle-1')} role="button" onClick={portfoiloEditorStart}>
               <Image src="/site/images/ic_pen.png" x={17} y={17} />
-              <Padding width="0.8rem" />
+              <Padding width="0.5rem" />
               내용 수정
+            </span>:null}
+          
+          <Padding width={'1rem'} />
+
+          {edit? 
+            <span className={cx('rectangle-1')} role="button" onClick={removePortfolioClicked}>
+              <Image src="/site/images/ic_delete.png" x={17} y={17} />
+              <Padding width="0.5rem" />
+              게시물 삭제
             </span>:null}
         </div>
         <div>
@@ -100,4 +120,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {portfoiloEditorStart, portfoiloEditorCancel, portfoiloSubmit})(ContentsSection);
+export default connect(mapStateToProps, {portfoiloEditorStart, portfoiloEditorCancel, portfoiloSubmit, deletePortfoilo})(ContentsSection);

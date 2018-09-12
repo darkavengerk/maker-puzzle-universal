@@ -36,6 +36,10 @@ export default () => {
       url: `/user/${id}/portfolio`,
       data
     }),
+    deletePortfolio: ({id, pid}) => client.request({
+      method: 'DELETE',
+      url: `/user/${id}/portfolio/${pid}`
+    }),
   };
 };
 

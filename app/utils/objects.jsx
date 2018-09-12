@@ -207,6 +207,8 @@ exports.create = function(type, data) {
   switch(type) {
     case 'maker':
       return new Maker(data);
+    case 'user':
+      return new Maker(data);
     case 'company':
       return new Company(data);
     case 'project':

@@ -49,6 +49,20 @@ export function portfoiloSubmit(portfolio) {
   };
 }
 
+export function deletePortfoilo(portfolio) {
+  return async (dispatch, getState) => {
+    const { user } = getState();
+    const res = await Maker().deletePortfolio({id:user.account.userid, pid:portfolio.pid});
+    if (res.status === 200 && !res.data.error) {
+      dispatch({type:types.PORTFOLIO_DELETE_SUCCESS, data: res.data});
+    }
+    else {
+      dispatch({type:types.PORTFOLIO_DELETE_FAILURE, data: res.data});
+    } 
+    return res;
+  };
+}
+
 export function follow(data) {
   return async (dispatch, getState) => {
     const res = await Maker().follow({id: data.follower.userid, data: data.following});

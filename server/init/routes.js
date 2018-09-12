@@ -31,6 +31,7 @@ export default (app) => {
     app.post('/user/:id/unfollow', usersController.unfollow);
     app.post('/sessions', usersController.login);
     app.post('/users', usersController.signUp);
+    app.delete('/user/:id/portfolio/:pid', usersController.deletePortfolio);
     app.delete('/sessions', usersController.logout);
   } else {
     console.warn(unsupportedMessage('users routes'));

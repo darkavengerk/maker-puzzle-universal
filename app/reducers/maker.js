@@ -31,6 +31,14 @@ const maker = (
     case types.PORTFOLIO_EDITOR_CANCEL:
       return {...state, isAddingPortfolio: false}
     
+    case types.PORTFOLIO_DELETE_SUCCESS:
+      const pidDeleted = action.data.pid;
+      if(pidDeleted) {
+        const portfolios = state.portfolios.filter(p => p.pid !== pidDeleted);
+        return {...state, portfolios: portfolios};
+      }
+      else return state;
+
     case types.PORTFOLIO_EDIT_SUCCESS:
       const { user, company, project, portfolio } = action.data;
       if(user._id === state._id) {
@@ -46,7 +54,7 @@ const maker = (
           else return p;
         });
         if(!replaced) newPortfolios.push(portfolio);
-        return {...user, portfolios: newPortfolios, isAddingPortfolio: false};
+        return {...state, portfolios: newPortfolios, isAddingPortfolio: false};
       }
       return state;
 

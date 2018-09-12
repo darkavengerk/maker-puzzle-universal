@@ -143,6 +143,39 @@ export async function addPortfolio(req, res) {
   projectAutoComplete.buildCache(err => {});
 }
 
+export async function deletePortfolio(req, res) {
+  const userid = req.params.id;
+  const pid = req.params.pid;
+
+  if(!(userid && pid)) {
+    return res.json({error: 'Not enough data'});
+  }
+  try {
+    const prevCompany = await Company.findOne({'portfolios.pid' : pid});
+    if(prevCompany) {
+      prevCompany.portfolios = prevCompany.portfolios.filter(p => p.pid !== pid);
+      await prevCompany.save();
+    }
+
+    const prevProject = await Project.findOne({'portfolios.pid' : pid});
+    if(prevProject) {
+      prevProject.portfolios = prevProject.portfolios.filter(p => p.pid !== pid);
+      await prevProject.save();
+    }
+
+    const userFound = await User.findOne({ userid });
+    if(userFound) {
+      userFound.portfolios = userFound.portfolios.filter(p => p.pid !== pid);
+      await userFound.save();
+    }
+
+    res.json({ pid });
+  }
+  catch(e) {
+    res.json({error: 'error in deleting portfolio ' + pid + ': ' + e});
+  }
+}
+
 async function createPortfolio(userid, portfolio) {
   const location = portfolio.location;
   const companyName = portfolio.companyName;
@@ -236,6 +269,7 @@ export default {
   signUp,
   updateFeatures,
   addPortfolio,
+  deletePortfolio,
   follow,
   unfollow
 };

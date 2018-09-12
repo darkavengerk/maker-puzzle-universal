@@ -44,9 +44,9 @@
 }
 
 .rectangle-1 {
-  width: 87px;
+  min-width: 87px;
   height: 24px;
-  padding: 0 0.5rem;
+  padding: 0 0.3rem;
   border-radius: 5px;
   border: solid 1px #000000;
 
