@@ -123,6 +123,9 @@ class AddPortfolio extends Component {
   onSubmit(evt) {
     const { submit, portfolio, editing } = this.props;
     const submitData = {...this.state, editing};
+
+    submitData.tags = submitData.tags.filter(t => t && t.trim().length > 0);
+    
     if(editing) {
       submitData.companyChanged = submitData.companyName !== portfolio.companyName;
       submitData.locationChanged = submitData.location !== portfolio.location;
