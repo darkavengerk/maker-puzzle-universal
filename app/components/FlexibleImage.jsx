@@ -6,7 +6,7 @@ import classNames from 'classnames/bind';
 import PureImage from './PureImage';
 import { loadImage } from '../actions/images';
 
-class ProfileImage extends Component {
+class FlexibleImage extends Component {
 
   constructor(props) {
     super(props);
@@ -69,14 +69,14 @@ class ProfileImage extends Component {
     }
 
     return (
-      <div {...props} style={imageStyle} >
+      <div className={this.props.className} style={imageStyle} >
         {children}
       </div>
     );
   }
 }
 
-ProfileImage.propTypes = {
+FlexibleImage.propTypes = {
 };
 
 function mapStateToProps(state) {
@@ -85,4 +85,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { loadImage })(ProfileImage);
+export default connect(mapStateToProps, { loadImage })(FlexibleImage);

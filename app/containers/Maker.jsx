@@ -17,7 +17,7 @@ class Container extends Component {
   render() {
     const { maker: data, user } = this.props;
     const maker = new Maker(data);
-    const isOwnPage = user && maker && (maker.userid === user.userid);
+    const isOwnPage = user.account && maker && (maker.userid === user.account.userid);
     return (
       <div className={cx('main-section')}>
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
@@ -29,7 +29,7 @@ class Container extends Component {
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
         {
           maker && maker.makerProfile? 
-          <ContentsSection owner={maker} contentsType="maker" isOwnPage={isOwnPage} /> : 
+          <ContentsSection user={user} owner={maker} contentsType="maker" isOwnPage={isOwnPage} /> : 
           <Padding height="60rem"/>
         }
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
@@ -45,7 +45,7 @@ Container.propTypes = {
 function mapStateToProps(state) {
   return {
     maker: state.maker.maker,
-    user: state.user.account
+    user: state.user
   };
 }
 

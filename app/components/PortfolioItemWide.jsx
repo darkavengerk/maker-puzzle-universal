@@ -10,7 +10,7 @@ import { portfoiloEditorStart } from '../actions/makers';
 
 const cx = classNames.bind(styles);
 
-const ContentsSection = ({ portfolio, owner, referrer, portfoiloEditorStart, company, external }) => {
+const PortfolioItemWideSection = ({ portfolio, owner, referrer, portfoiloEditorStart, company, external }) => {
 
   if(portfolio) {
     const link_name = company.link_name;
@@ -48,7 +48,7 @@ const ContentsSection = ({ portfolio, owner, referrer, portfoiloEditorStart, com
     );
 };
 
-ContentsSection.propTypes = {
+PortfolioItemWideSection.propTypes = {
   portfolio: PropTypes.object,
   company: PropTypes.object
 };
@@ -59,4 +59,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {portfoiloEditorStart})(ContentsSection);
+export default connect(mapStateToProps, {portfoiloEditorStart})(PortfolioItemWideSection);

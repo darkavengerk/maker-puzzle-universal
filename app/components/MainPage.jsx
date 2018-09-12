@@ -21,7 +21,7 @@ import styles from '../css/components/main-page';
 
 const cx = classNames.bind(styles);
 
-class ContentsSection extends Component {
+class MainPageSection extends Component {
 
   constructor(props) {
     super(props);
@@ -107,16 +107,16 @@ class ContentsSection extends Component {
                 linkTo={'/maker/' + maker.userid} />;
     });
 
-    const companyHighlights = main.companies.map(maker => {
-      let business = maker.features.filter(f => f.repr === 'business');
+    const companyHighlights = main.companies.map(company => {
+      let business = company.features.filter(f => f.repr === 'business');
       business = business[0]? business[0] : null;
       const businessName = business && business.content? business.content : '';
       return <MakerCard 
-                key={maker.link} 
-                picture={maker.companyPortfolios[0].images[0]}
-                title={maker.name} 
+                key={company.name} 
+                picture={company.companyPortfolios[0].images[0]}
+                title={company.name} 
                 subTitle={businessName} 
-                linkTo={'/company/' + maker.link_name} />;
+                linkTo={'/company/' + company.link_name} />;
     });
 
     return (
@@ -170,8 +170,8 @@ class ContentsSection extends Component {
           <div className={cx('rectangle')} onClick={this.showPortfolioPopup} role="button" id="AddPortfolioButton">
             포트폴리오 등록하기
           </div>
-          <Popup show={user.account.isAddingPortfolio} name="AddPortfolioPopup" roll={true} top={100}>
-            <AddPortfolio title="포트폴리오 수정하기" submit={portfoiloSubmit} cancel={portfoiloEditorCancel} />
+          <Popup show={user.attempt === 'edit:portfolio'} name="AddPortfolioPopup" roll={true} top={100}>
+            <AddPortfolio title="포트폴리오 추가하기" submit={portfoiloSubmit} cancel={portfoiloEditorCancel} />
           </Popup>
         </section>      
 
@@ -239,7 +239,7 @@ class ContentsSection extends Component {
           <Padding height="2.5rem" />
           <div className={cx('project-tiles')}>
             {
-              makerHighlights.slice(0,6).map(m => (<div className={cx('maker-card')}>
+              makerHighlights.slice(0,6).map((m,i) => (<div key={i} className={cx('maker-card')}>
                               { m }
                             </div>))
             }
@@ -253,8 +253,8 @@ class ContentsSection extends Component {
           <Padding height="2.5rem" />
           <div className={cx('project-tiles')}>
             {
-              companyHighlights.slice(0,6).map(m => (<div className={cx('maker-card')}>
-                              { m }
+              companyHighlights.slice(0,6).map((c,i) => (<div key={i} className={cx('maker-card')}>
+                              { c }
                             </div>))
             }
           </div>
@@ -265,7 +265,7 @@ class ContentsSection extends Component {
   }
 };
 
-ContentsSection.propTypes = {
+MainPageSection.propTypes = {
   main: PropTypes.object.isRequired
 };
 
@@ -277,4 +277,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, 
-  { portfoiloEditorStart, portfoiloEditorCancel, portfoiloSubmit, loginMenu, cancelLogin })(ContentsSection);
+  { portfoiloEditorStart, portfoiloEditorCancel, portfoiloSubmit, loginMenu, cancelLogin })(MainPageSection);

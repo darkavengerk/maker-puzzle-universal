@@ -13,11 +13,10 @@ import styles from '../css/components/business-card';
 
 const cx = classNames.bind(styles);
 
-const ContentsSection = ({picture, title, subTitle, linkTo, ...props}) => {  
+const MakerCardSection = ({picture, title, subTitle, linkTo, ...props}) => {  
   return (
     <Link className={cx('maker-tile')} to={linkTo} role="button">
-      <FlexibleImage className={cx('maker-tile-image')} x={213} y={213} src={picture} >
-      </FlexibleImage>
+      <FlexibleImage className={cx('maker-tile-image')} x={213} y={213} src={picture} />
       <div className={cx('header')}>
         <Padding height="1.8rem" />
         <div className={cx('title')}>
@@ -33,12 +32,11 @@ const ContentsSection = ({picture, title, subTitle, linkTo, ...props}) => {
   );
 };
 
-ContentsSection.propTypes = {
-  maker: PropTypes.object.isRequired
+MakerCardSection.propTypes = {
 };
 
 function mapStateToProps(state) {
   return {};
 }
 
-export default connect(mapStateToProps, {})(ContentsSection);
+export default connect(mapStateToProps, {})(MakerCardSection);

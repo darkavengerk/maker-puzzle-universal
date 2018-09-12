@@ -26,7 +26,7 @@ class ProjectContainer extends Component {
           thumbnailURL={project.profileImage? project.getProfileImage():null} 
         />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
-        <ContentsSection owner={project} contentsType={contentsType} isOwnPage={false} />
+        <ContentsSection user={user} owner={project} contentsType={contentsType} isOwnPage={false} />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
       </div>
     );
@@ -40,7 +40,7 @@ ProjectContainer.propTypes = {
 function mapStateToProps(state) {
   return {
     project: state.project.project,
-    user: state.user.account,
+    user: state.user,
     param: state.param
   };
 }

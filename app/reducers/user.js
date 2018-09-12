@@ -22,6 +22,16 @@ const attempt = (
       return 'login';
     case types.SIGNUP_MENU:
       return 'signup';
+    case types.PORTFOLIO_EDITOR_START:
+      return 'edit:portfolio'
+    case types.PRODUCT_EDITOR_START:
+      return 'edit:product'
+
+    case types.PORTFOLIO_EDITOR_CANCEL:
+    case types.PORTFOLIO_EDIT_SUCCESS:
+    case types.COMPANY_PORTFOLIO_EDITOR_CANCEL:
+    case types.COMPANY_PORTFOLIO_EDIT_SUCCESS:
+    case types.PRODUCT_EDITOR_CANCEL:
     case types.CANCEL_LOGIN:
     case types.LOGIN_SUCCESS_USER:
     case types.SIGNUP_SUCCESS_USER:
@@ -109,12 +119,6 @@ const account = (
       return {...state, features, about, picture, companyProfile}
     case types.FOLLOWERS_UPDATED:
       return {...state, followings: action.data.follower.followings}
-    case types.PORTFOLIO_EDITOR_START:
-      return {...state, isAddingPortfolio: true}
-    case types.COMPANY_PORTFOLIO_EDIT_SUCCESS:
-    case types.PORTFOLIO_EDITOR_CANCEL:
-    case types.PORTFOLIO_EDIT_SUCCESS:
-      return {...state, isAddingPortfolio: false}
     default:
       return state;
   }

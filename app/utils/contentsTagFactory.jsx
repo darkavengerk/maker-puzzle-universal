@@ -64,7 +64,7 @@ class ContentsTagFactory {
     return this.getSet(source.getType())[name];
   }
 
-  getMakerContent({source, param, isOwnPage, portfoiloSubmit, portfoiloEditorCancel}) {
+  getMakerContent({user, source, param, isOwnPage, portfoiloSubmit, portfoiloEditorCancel}) {
     if(param && param.pid) {
       return this.getMakerDetail(source, param, isOwnPage);
     }
@@ -88,13 +88,17 @@ class ContentsTagFactory {
               <div className={cx('portfolio-list')}>
                 {contents}
               </div>
-              <Popup show={source.isAddingPortfolio} name="AddPortfolioPopup">
-                <AddPortfolio title="포트폴리오 수정하기" submit={portfoiloSubmit} cancel={portfoiloEditorCancel} />
+              <Popup show={user.attempt === 'edit:portfolio'} name="AddPortfolioPopup" roll={true} top={100}>
+                <AddPortfolio 
+                  title="포트폴리오 추가하기" 
+                  submit={portfoiloSubmit} 
+                  cancel={portfoiloEditorCancel} 
+                />
               </Popup>
             </div>);
   }
 
-  getProjectContent({source, param, isOwnPage, portfoiloSubmit, portfoiloEditorCancel}) {
+  getProjectContent({user, source, param, isOwnPage, portfoiloSubmit, portfoiloEditorCancel}) {
     if(source.name && param && param.pid) {
       return this.getProjectDetail(source, param)
     }
@@ -125,13 +129,17 @@ class ContentsTagFactory {
                 {companyContents}
                 {makerContents}
               </div>
-              <Popup show={source.isAddingPortfolio} name="AddPortfolioPopup">
-                <AddPortfolio title="포트폴리오 수정하기" submit={portfoiloSubmit} cancel={portfoiloEditorCancel} />
+              <Popup show={user.attempt === 'edit:portfolio'} name="AddPortfolioPopup" roll={true} top={100}>
+                <AddPortfolio 
+                  title="포트폴리오 추가하기" 
+                  submit={portfoiloSubmit} 
+                  cancel={portfoiloEditorCancel} 
+                />
               </Popup>
             </div>);
   }
 
-  getCompanyContent({source, param, isOwnPage, companyPortfoiloSubmit, companyPortfoiloEditorCancel}) {
+  getCompanyContent({user, source, param, isOwnPage, companyPortfoiloSubmit, companyPortfoiloEditorCancel}) {
 
     if(param.pid) {
       return this.getCompanyDetail(source, param, isOwnPage);
@@ -144,6 +152,9 @@ class ContentsTagFactory {
 
     if(isOwnPage) {
       companyPortfolios.push(<PortfolioItemWide key={'__new__'} />);
+      if(companyPortfolios.length >=6) {
+        companyPortfolios = [<PortfolioItemWide key={'__new__front__'} />, ...companyPortfolios];
+      }
     }
 
     let products = source.products? source.products.map(product => {
@@ -152,6 +163,9 @@ class ContentsTagFactory {
 
     if(isOwnPage) {
       products.push(<ProductItem key={'__new__'} />);
+      if(products.length >=15) {
+        products = [<ProductItem key={'__new__front__'} />, ...products];
+      }
     }
 
     let portfolios = source.portfolios? source.portfolios.map(portfolio => {
@@ -179,7 +193,7 @@ class ContentsTagFactory {
                 {portfolios}
               </div>
               
-              <Popup show={source.isAddingPortfolio} name="AddPortfolioPopup">
+              <Popup show={user.attempt === 'edit:portfolio'} name="AddPortfolioPopup" roll={true} top={100}>
                 <AddPortfolio 
                   title="포트폴리오 추가하기" 
                   submit={companyPortfoiloSubmit} 
@@ -187,7 +201,7 @@ class ContentsTagFactory {
                   type={'company'}
                 />
               </Popup>
-              <Popup show={source.isAddingProduct} name="AddProductPopup">
+              <Popup show={user.attempt === 'edit:product'} name="AddProductPopup" roll={true} top={100}>
                 <AddProduct title="보유 제품 추가하기" company={source} />
               </Popup>
             </div>);

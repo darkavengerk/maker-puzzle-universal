@@ -16,18 +16,6 @@ const company = (
       if (action.data && action.data.company) return action.data.company;
       return state;
     
-    case types.PORTFOLIO_EDITOR_START:
-      return {...state, isAddingPortfolio: true}
-
-    case types.PRODUCT_EDITOR_START:
-      return {...state, isAddingProduct: true}
-
-    case types.COMPANY_PORTFOLIO_EDITOR_CANCEL:
-      return {...state, isAddingPortfolio: false}
-
-    case types.PRODUCT_EDITOR_CANCEL:
-      return {...state, isAddingProduct: false}
-
     case types.PORTFOLIO_DELETE_SUCCESS:
       const pidDeleted = action.data.pid;
       if(pidDeleted) {
@@ -51,11 +39,11 @@ const company = (
         else return p;
       });
       if(!replaced) newPortfolios.push(portfolio);
-      return {...state, companyPortfolios: newPortfolios, isAddingPortfolio: false};
+      return {...state, companyPortfolios: newPortfolios};
 
     case types.PRODUCT_EDIT_SUCCESS:
       const { product } = action.data;
-      return {...state, products: [...state.products, product], isAddingProduct: false};
+      return {...state, products: [...state.products, product]};
 
     default:
       return state;

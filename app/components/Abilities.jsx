@@ -72,13 +72,13 @@ const Component = ({ maker, editing, onChange }) => {
         />
         { fillOvals(ab) }
         {editing? 
-          <FlexibleImage 
-            src={"/site/images/ic_highlight_remove_black_48dp.png"} 
-            x={17} y={17} 
-            role="button"
-            onClick={removeEntry(ab.order)}
-            pureImage={true}
-          />: null}
+        <FlexibleImage 
+          src={"/site/images/ic_highlight_remove_black_48dp.png"} 
+          x={17} y={17} 
+          role="button"
+          onClick={removeEntry(ab.order)}
+          pureImage={true}
+        />: null}
       </div>);
   });
 

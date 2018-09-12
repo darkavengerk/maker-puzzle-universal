@@ -7,7 +7,7 @@ import styles from '../css/components/portfolio-item';
 
 const cx = classNames.bind(styles);
 
-const ContentsSection = ({ images }) => {
+const PortfolioImagesWindowSection = ({ images }) => {
 
   if(!images || images.length === 0) {
     return <Image src={''} x={437} y={214}/>
@@ -46,11 +46,11 @@ const ContentsSection = ({ images }) => {
             </div>
             <div className={cx('small-windows')}>
               { 
-                subs.map(img => <Image className={cx('small-window')} key={img._id} src={img} x={111} y={106}/>)              
+                subs.map(img => <Image className={cx('small-window')} key={img._id || img} src={img} x={111} y={106}/>)              
               }
               <div className={cx('extras')}>+{images.length - 4} photos</div>
             </div>
           </div>;
 };
 
-export default ContentsSection;
+export default PortfolioImagesWindowSection;

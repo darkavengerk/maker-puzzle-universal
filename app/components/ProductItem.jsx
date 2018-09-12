@@ -9,7 +9,7 @@ import { productEditorStart } from '../actions/companies';
 
 const cx = classNames.bind(styles);
 
-const ContentsSection = ({ product, company, productEditorStart }) => {
+const ProductItemSection = ({ product, company, productEditorStart }) => {
 
   if(product) {
     const companyLink = company.link_name || product.company.link_name;
@@ -47,7 +47,7 @@ const ContentsSection = ({ product, company, productEditorStart }) => {
     );
 };
 
-ContentsSection.propTypes = {
+ProductItemSection.propTypes = {
   product: PropTypes.object,
   company: PropTypes.object
 };
@@ -58,4 +58,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {productEditorStart})(ContentsSection);
+export default connect(mapStateToProps, {productEditorStart})(ProductItemSection);

@@ -25,12 +25,6 @@ const maker = (
       const {features, about, picture} = action.data;
       return {...state, features, about, picture}
     
-    case types.PORTFOLIO_EDITOR_START:
-      return {...state, isAddingPortfolio: true}
-
-    case types.PORTFOLIO_EDITOR_CANCEL:
-      return {...state, isAddingPortfolio: false}
-    
     case types.PORTFOLIO_DELETE_SUCCESS:
       const pidDeleted = action.data.pid;
       if(pidDeleted) {
@@ -54,12 +48,10 @@ const maker = (
           else return p;
         });
         if(!replaced) newPortfolios.push(portfolio);
-        return {...state, portfolios: newPortfolios, isAddingPortfolio: false};
+        return {...state, portfolios: newPortfolios};
       }
       return state;
 
-    case types.COMPANY_PORTFOLIO_EDIT_SUCCESS:
-      return {...state, isAddingPortfolio: false}
     case types.FOLLOWERS_UPDATED:
       return {...state, followers: action.data.following.followers}
 
@@ -76,8 +68,15 @@ const context = (
     case types.UPDATE_MAKER_CONTEXT:
       if (action.data) return update(state, action.data);
       return state;
-    default:
+    case types.CREATE_REQUEST:
+    case types.REQUEST_SUCCESS:
+    case types.PROFILE_EDIT_SUCCESS:
+    case types.PORTFOLIO_DELETE_SUCCESS:
+    case types.PORTFOLIO_EDIT_SUCCESS:
+    case types.FOLLOWERS_UPDATED:
       return update(state, maker(state, action));
+    default:
+      return state;
   }
 };
 

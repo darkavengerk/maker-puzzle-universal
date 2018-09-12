@@ -21,7 +21,7 @@ import styles from '../css/components/portfolio-detail';
 
 const cx = classNames.bind(styles);
 
-const ContentsSection = (
+const PortfolioDetainSection = (
   { portfolio, user, company, owner, edit=false, 
     portfoiloEditorStart, portfoiloEditorCancel, portfoiloSubmit, deletePortfoilo, 
     companyPortfoiloSubmit, deleteCompanyPortfoilo }
@@ -113,7 +113,7 @@ const ContentsSection = (
           {imgs}
         </div>
       </section>
-      <Popup show={user.account.isAddingPortfolio} name="AddPortfolioPopup" roll={true} top={100}>
+      <Popup show={user.attempt === 'edit:portfolio'} name="AddPortfolioPopup" roll={true} top={100}>
         <AddPortfolio
           portfolio={portfolio} 
           title="포트폴리오 수정하기" 
@@ -125,7 +125,7 @@ const ContentsSection = (
   );
 };
 
-ContentsSection.propTypes = {
+PortfolioDetainSection.propTypes = {
   portfolio: PropTypes.object.isRequired,
   user: PropTypes.object
 };
@@ -139,4 +139,4 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, 
   {portfoiloEditorStart, portfoiloEditorCancel, portfoiloSubmit, deletePortfoilo, 
-    companyPortfoiloSubmit, deleteCompanyPortfoilo})(ContentsSection);
+    companyPortfoiloSubmit, deleteCompanyPortfoilo})(PortfolioDetainSection);

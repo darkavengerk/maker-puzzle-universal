@@ -13,7 +13,7 @@ import styles from '../css/components/business-card';
 
 const cx = classNames.bind(styles);
 
-const ContentsSection = ({project, ...props}) => {
+const ProjectCardSection = ({project, ...props}) => {
 
   let location = project.features.filter(f => f.repr === 'location');
   location = location[0]? location[0] : null;
@@ -34,14 +34,13 @@ const ContentsSection = ({project, ...props}) => {
           +{project.portfolios.length} Portfolios
         </div>
       </div>
-      <FlexibleImage className={cx('project-tile-image')} x={390} y={320} src={project.portfolios[0].images[0]} >
-      </FlexibleImage>
+      <FlexibleImage className={cx('project-tile-image')} x={390} y={320} src={project.portfolios[0].images[0]} />
     </Link>
 
   );
 };
 
-ContentsSection.propTypes = {
+ProjectCardSection.propTypes = {
   project: PropTypes.object.isRequired
 };
 
@@ -49,4 +48,4 @@ function mapStateToProps(state) {
   return {};
 }
 
-export default connect(mapStateToProps, {})(ContentsSection);
+export default connect(mapStateToProps, {})(ProjectCardSection);
