@@ -8,10 +8,29 @@ import { loadImage } from '../actions/images';
 
 class ProfileImage extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {shouldLoad: false};
+
+    const { src } = this.props;
+
+    if(typeof(src) === 'string' && !src.includes('/')) {
+      this.state.shouldLoad = true;
+    }
+  }
+
+  componentWillMount() {
+    if(this.state.shouldLoad) {
+      const { src, loadImage } = this.props;
+      loadImage(src);
+    }
+  }
+
   render() {
-    const { src, x, y, children, image, loadImage, pureImage=false, ...props } = this.props;
+    const { src, x, y, children, loadImage, pureImage=false, ...props } = this.props;
 
     let url;
+
     if(typeof(src) === 'string') {
       if(src.includes('/')) {
         url = src;
@@ -22,7 +41,7 @@ class ProfileImage extends Component {
       }
     }
     else {
-      url = src? src.original : null;
+      url = src? src.original : '';
     }
 
     if(pureImage) {
