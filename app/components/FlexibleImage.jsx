@@ -44,8 +44,11 @@ class FlexibleImage extends Component {
       url = src? src.original : '';
     }
 
+    const { className, onClick, role } = this.props;
+    const renderProps = { className, onClick, role };
+
     if(pureImage) {
-      return (<PureImage src={url} x={x} y={y} {...props} />);
+      return (<PureImage src={url} x={x} y={y} {...renderProps} />);
     }
 
     const width = x || 40;
@@ -69,7 +72,7 @@ class FlexibleImage extends Component {
     }
 
     return (
-      <div className={this.props.className} style={imageStyle} >
+      <div {...renderProps} style={imageStyle} >
         {children}
       </div>
     );
