@@ -1,6 +1,7 @@
 export { default as App } from 'pages/App';
 export { default as Vote} from 'pages/Vote';
 export { default as Main} from 'pages/Main';
+export { default as Search} from 'pages/Search';
 export { default as Maker} from 'pages/Maker';
 export { default as Project} from 'pages/Project';
 export { default as Company} from 'pages/Company';

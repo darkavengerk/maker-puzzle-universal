@@ -7,6 +7,7 @@ import message from '../reducers/message';
 import people from '../reducers/people';
 import maker from '../reducers/maker';
 import main from '../reducers/main';
+import search from '../reducers/search';
 import company from '../reducers/company';
 import project from '../reducers/project';
 import param from '../reducers/param';
@@ -32,6 +33,7 @@ const rootReducer = combineReducers({
   topic,
   fileUpload,
   main,
+  search,
   user,
   // message,
   routing,

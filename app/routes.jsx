@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, IndexRoute, Switch } from 'react-router';
-import { fetchVoteData, fetchMainData, fetchMakerData, fetchProjectData, fetchCompanyData } from './fetch-data';
-import { App, Main, Vote, Dashboard, About, LoginOrRegister, Maker, Project, Company, Construction } from './pages';
+import { fetchVoteData, fetchMainData, fetchSearchData, fetchMakerData, fetchProjectData, fetchCompanyData } from './fetch-data';
+import { App, Search, Main, Vote, Dashboard, About, LoginOrRegister, Maker, Project, Company, Construction } from './pages';
 
 /*
  * @param {Redux Store}
@@ -36,6 +36,7 @@ export default (store) => {
       {/*<Route exact path="main" component={Main} fetchData={fetchMainData} />*/}
       <Route path="maker/:id/portfolio/:pid" component={Maker} fetchData={fetchMakerData} />
       <Route path="maker/:id" component={Maker} fetchData={fetchMakerData} />
+      <Route path="search/:keyword" component={Search} fetchData={fetchSearchData} />
       <Route path="project/:link_name/maker/:mid/:pid" component={Project} fetchData={fetchProjectData} />
       <Route path="project/:link_name/company/:cid/:pid" component={Project} fetchData={fetchProjectData} />
       <Route path="project/:link_name" component={Project} fetchData={fetchProjectData} />

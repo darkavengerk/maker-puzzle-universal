@@ -18,6 +18,7 @@ export default (app) => {
 
   if (usersController) {
     app.get('/api/main', mainController.main);
+    app.get('/api/search/:keyword', mainController.search);
   }
 
   // user routes

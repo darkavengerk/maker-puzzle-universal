@@ -33,6 +33,12 @@ export async function main(req, res) {
   return res.json({users, projects, companies});
 }
 
+export async function search(req, res) {
+  const result = await User.find().lean();
+  res.json({ result });
+}
+
 export default {
-  main
+  main,
+  search
 };

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
+import { browserHistory } from 'react-router';
+
 import { logOut, loginMenu, cancelLogin } from '../actions/users';
 import Img from '../components/FlexibleImage';
 import Login from '../components/Login';
@@ -25,6 +27,14 @@ const Navigation = ({ user, logOut, loginMenu, cancelLogin }) => {
             로그인하기
           </div>
 
+    function handleOnSubmit(event) {
+      event.preventDefault();
+      const keyword = document.getElementById('user-search-input').value;
+      if(keyword.trim().length > 0) {
+        browserHistory.push('/search/' + keyword);
+      }
+    }
+
     return (
       <nav className={cx('navigation')} role="navigation">
         <div className={cx('logo-area')}>
@@ -32,9 +42,9 @@ const Navigation = ({ user, logOut, loginMenu, cancelLogin }) => {
             <Img src="/site/images/header-logo-20180829.png" x={307} y={81.3}/>
           </Link>
         </div>
-        <div className={cx('search-area')}>
-          <input type="text" className={cx('search-input')} />
-        </div>
+        <form onSubmit={handleOnSubmit} className={cx('search-area')}>
+          <input type="text" id="user-search-input" className={cx('search-input')} />
+        </form>
 
         <div className={cx('option-area')}>
           {login}
