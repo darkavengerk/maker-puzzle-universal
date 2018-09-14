@@ -5,8 +5,9 @@ import Project, {autoComplete as projectAutoComplete} from './models/project';
 import Image from './models/image';
 import Metadata from './models/metadata';
 import Misc from './models/misc';
-import Product from './models/product';
 import User from './models/user';
+import Portfolio from './models/portfolio';
+import Product from './models/product';
 
 function pushOrReplacePortfolio(portfolioList, portfolio) {
   const shouldReplace = portfolioList.filter(p => p.pid === portfolio.pid).length > 0;
@@ -65,6 +66,7 @@ async function savePortfolio({ portfolio, project, company, user }) {
 
   saving.push(project.save());
   saving.push(company.save());
+  saving.push(Portfolio.updateOne({pid: portfolio.pid}, portfolio, {upsert: true}));
 
   await Promise.all(saving);
 

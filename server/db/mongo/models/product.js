@@ -3,18 +3,12 @@
  *
  */
 import mongoose from 'mongoose';
+import {default as Product} from './product_schema';
+
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
-const ProductSchema = new mongoose.Schema({
-  title: String,
-  category: String,
-  spec: String,
-  companyName: String,
-  company: {type: ObjectId, ref: 'Company'},
-  lastUpdated: {type:Date, default: Date.now},
-  images: [{type: ObjectId, ref: 'ImageFile'}],
-  pid: String,
-  isPrivate: Boolean
-});
+// const Schema = new mongoose.Schema(Product);
 
-export default ProductSchema;
+const PortfolioModel = mongoose.model('Product', Product);
+
+export default PortfolioModel;

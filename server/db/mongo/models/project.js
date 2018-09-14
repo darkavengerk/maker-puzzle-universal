@@ -3,7 +3,7 @@
  *
  */
 import mongoose from 'mongoose';
-import {default as Portfolio} from './portfolio';
+import {default as Portfolio} from './portfolio_schema';
 
 const {AutoComplete} = require('../utils/autocomplete')
 const ObjectId = mongoose.Schema.Types.ObjectId;

@@ -7,6 +7,7 @@ const {
   companyAutoComplete, 
   Project, 
   projectAutoComplete,
+  Portfolio,
   Metadata,
   Misc 
 } = models;
@@ -168,6 +169,8 @@ export async function deletePortfolio(req, res) {
       userFound.portfolios = userFound.portfolios.filter(p => p.pid !== pid);
       await userFound.save();
     }
+
+    await Portfolio.remove({ pid });
 
     res.json({ pid });
   }

@@ -44,16 +44,29 @@
   font-size: 1.5rem;
   font-weight: 500;
   line-height: 1.33;
+
+  overflow: hidden;
+  white-space: nowrap; /* Don't forget this one */
+  text-overflow: ellipsis;
 }
 
 .text p {
   font-size: 1.2rem;
   font-weight: 200;
   line-height: 1.67;
+
+  overflow: hidden;
+  white-space: nowrap; /* Don't forget this one */
+  text-overflow: ellipsis;
 }
 
 .type2 h1, .type2 p {
   text-align: left;
+  width: 15rem;
+}
+
+.type2.text-section-wide h1, .type2.text-section-wide p {
+  width: 35rem;
 }
 
 .profile-image {

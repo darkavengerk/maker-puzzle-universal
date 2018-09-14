@@ -16,7 +16,8 @@ const fileController = controllers && controllers.files;
 
 export default (app) => {
 
-  if (usersController) {
+  if (mainController) {
+    app.get('/api/main/commands/:command', mainController.command);
     app.get('/api/main', mainController.main);
     app.get('/api/search/:keyword', mainController.search);
   }

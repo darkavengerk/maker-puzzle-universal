@@ -5,7 +5,7 @@
 
 import bcrypt from 'bcrypt-nodejs';
 import mongoose from 'mongoose';
-import {default as Portfolio} from './portfolio';
+import {default as Portfolio} from './portfolio_schema';
 
 const ObjectId = mongoose.Schema.Types.ObjectId;
 const {AutoComplete} = require('../utils/autocomplete');

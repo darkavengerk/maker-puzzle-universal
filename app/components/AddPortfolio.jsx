@@ -185,7 +185,7 @@ class AddPortfolio extends Component {
                       update={this.autoComplete('location')}
                       text={this.state.location}
                       className={cx('text-field')}
-                      textLimit={20}
+                      textLimit={50}
                     />
                   </td>
                 </tr>
@@ -204,7 +204,7 @@ class AddPortfolio extends Component {
                     <Scatter text="제목" />
                   </td>
                   <td className={cx('entity')}>
-                    <input type="text" className={cx('text-field')} value={this.state.title} onChange={this.onTextChage('title', 20)} />
+                    <input type="text" className={cx('text-field')} value={this.state.title} onChange={this.onTextChage('title', 50)} />
                   </td>
                 </tr>
                 <tr>
@@ -229,7 +229,7 @@ class AddPortfolio extends Component {
                       update={this.autoComplete('companyName')}
                       text={this.state.companyName}
                       className={cx('text-field')}
-                      textLimit={20}
+                      textLimit={50}
                     />
                   </td>
                 </tr>
@@ -256,7 +256,7 @@ class AddPortfolio extends Component {
                   </td>
                   <td className={cx('entity', 'area')}>
                     <textarea rows="4" cols="50" className={cx('text-area')} 
-                      value={this.state.description} onChange={this.onTextChage('description', 1000)} />
+                      value={this.state.description} onChange={this.onTextChage('description', 2000)} />
                   </td>
                 </tr>
                 <tr>

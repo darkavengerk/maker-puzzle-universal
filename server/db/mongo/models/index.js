@@ -3,6 +3,10 @@ export default function loadModels() {
   require('./user');
   require('./company');
   require('./project');
+  require('./portfolio_schema');
+  require('./product_schema');
+  require('./portfolio');
+  require('./product');
   require('./metadata');
   require('./image');
 }

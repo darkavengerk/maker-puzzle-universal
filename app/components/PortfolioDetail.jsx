@@ -35,6 +35,7 @@ const PortfolioDetainSection = (
   if(!Array.isArray(owner)) {
     owner = [owner];
   }
+
   const ownerArea = owner.map(v => (
     <div className={cx('project-area')} key={v.getHomeLink()} >
       <Image src={v.getProfileImage()} x={33} y={33} />
@@ -44,7 +45,15 @@ const PortfolioDetainSection = (
     </div>
   ));
 
-  const tags = portfolio.tags.map(tag => (<label key={tag} className={cx('tag')}>{tag}</label>));
+  function tagClicked(tag) {
+    return evt => browserHistory.push('/search/' + tag);
+  }
+
+  const tags = portfolio.tags.map(tag => (
+    <label key={tag} className={cx('tag')} onClick={tagClicked(tag)} role="button">
+      {tag}
+    </label>
+  ));
 
   function submitPortfolio(portfolio) {
     if(portfolio.type === 'maker') {
