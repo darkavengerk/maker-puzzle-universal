@@ -85,9 +85,6 @@ class MainPageSection extends Component {
       return <PortfolioItemWide portfolio={portfolio} referrer={owner} owner={owner} key={portfolio.pid} external={true} />
     })
 
-    console.log('recent 6---------------------------');
-    recentCompanyPortfolios.map(a => console.log(a));
-
     let popularMakerPortfolios = userPortfolios.map(portfolio => {
         const owner = createObject('maker', portfolio.user);
         return (<PortfolioItem portfolio={portfolio} referrer={referrer} owner={owner} key={portfolio.pid} external={true} />);
