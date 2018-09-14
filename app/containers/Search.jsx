@@ -25,7 +25,7 @@ class Container extends Component {
 
   render() {
     const { user, search, param } = this.props;
-    const { projects, portfolios } = search.result;
+    const { projects, portfolios } = search.result || {projects:[], portfolios:[]};
     
     const companyPortfolios = portfolios.filter(p => p.type === 'company');
     const makerPortfolios = portfolios.filter(p => p.type === 'maker');
@@ -64,7 +64,7 @@ class Container extends Component {
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
         <div className={cx('projects-section')}>
           <div className={cx('title')}>
-            프로젝트 
+            포트폴리오 
             <div className={cx('small-title')}>
               ({companyPortfolioTags.length + makerPortfolioTags.length}개의 검색결과가 있습니다)
             </div>

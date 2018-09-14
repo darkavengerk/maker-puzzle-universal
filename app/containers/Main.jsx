@@ -53,7 +53,7 @@ class MainPageSection extends Component {
   render() {
     let { main, user, portfoiloEditorCancel, loginMenu, cancelLogin } = this.props;
 
-    if(!main.users || !main.companies || !main.projects) {
+    if(!main || !main.users || !main.companies || !main.projects) {
       main = {users:[], companies:[], projects:[] };
     }
 
