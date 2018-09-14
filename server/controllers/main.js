@@ -34,8 +34,12 @@ export async function main(req, res) {
 }
 
 export async function search(req, res) {
-  const result = await User.find().lean();
-  res.json({ result });
+  const keyword = req.params.keyword;
+  
+  const user = await User.find( { $text: { $search: keyword } } ).lean();
+  const company = await Company.find( { $text: { $search: keyword } } ).lean();
+  const project = await Project.find( { $text: { $search: keyword } } ).lean();
+  res.json({ result: { user, company, project } });
 }
 
 export default {
