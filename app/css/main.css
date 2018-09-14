@@ -80,6 +80,12 @@ a:link {
 
 [role="button"] {
   cursor: pointer;
+  text-decoration: none !important;
+}
+
+a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none !important;
 }
 
 /* Add your global styles below... */
