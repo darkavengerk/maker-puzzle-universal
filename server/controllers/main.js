@@ -56,8 +56,16 @@ export async function search(req, res) {
   
   const users = await User.find( { $text: { $search: keyword } } ).lean();
   const companies = await Company.find( { $text: { $search: keyword } } ).lean();
-  const portfolios = await Portfolio.find( { $text: { $search: keyword } } ).populate(['company', 'user']).lean();
-  const projects = await Project.find( { $text: { $search: keyword } } ).lean();
+  const portfolios = await Portfolio
+                            .find( { $text: { $search: keyword } }, {score: { $meta: "textScore" }} )
+                            .sort( { score: { $meta: "textScore" } } )
+                            .populate(['company', 'user'])
+                            .lean();
+  
+  // const projects = await Project
+  //                         .find( { $text: { $search: keyword } }, {score: { $meta: "textScore" }} )
+  //                         .sort( { score: { $meta: "textScore" } } )
+  //                         .lean();
   res.json({ result: { users, companies, projects, portfolios } });
 }
 

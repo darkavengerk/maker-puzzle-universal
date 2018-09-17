@@ -50,7 +50,7 @@ class Container extends Component {
           thumbnailURL={null} 
         />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
-        <div className={cx('projects-section')}>
+        {/*<div className={cx('projects-section')}>
           <div className={cx('title')}>
             프로젝트 
             <div className={cx('small-title')}>
@@ -61,7 +61,7 @@ class Container extends Component {
             {projects.map(p => <ProjectCard key={p.name} project={p} />)}
           </div>
         </div>
-        <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
+        <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />*/}
         <div className={cx('projects-section')}>
           <div className={cx('title')}>
             포트폴리오 

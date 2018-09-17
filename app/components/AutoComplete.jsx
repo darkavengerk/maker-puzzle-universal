@@ -14,14 +14,49 @@ class autoComplete extends Component {
     super(props);
 
     const { target, text='' } = this.props;
-    this.state = {showDropdown: false, text: text};
+    this.state = {showDropdown: false, text: text, selected: -1};
 
     this.hideDropdown = this.hideDropdown.bind(this);
     this.showList = this.showList.bind(this);
     this.autoComplete = this.autoComplete.bind(this);
     this.onTextChage = this.onTextChage.bind(this);
+    this.keyPressed = this.keyPressed.bind(this);
+    this.mouseOver = this.mouseOver.bind(this);
 
     document.body.addEventListener('mouseup', this.hideDropdown);
+  }
+
+  mouseOver(index) {
+    return evt => this.setState({selected: index});
+  }
+
+  keyPressed(evt) {
+    const e = evt || window.event;
+
+    if (e.keyCode == '38') {
+        // up arrow
+      if(this.state.selected >= 0)
+        this.setState({selected: this.state.selected - 1});
+      e.preventDefault();
+    }
+    else if (e.keyCode == '40') {
+        // down arrow
+      if(this.state.projectSuggestion && this.state.projectSuggestion.length - 1 > this.state.selected)
+        this.setState({selected: this.state.selected + 1});
+      e.preventDefault();
+    }
+    else if (e.keyCode == '13' || e.keyCode == '9') {
+      // Enter or Tab
+      if(this.state.selected >= 0) {
+        const word = this.state.projectSuggestion[this.state.selected];
+        this.setState({text: word, showDropdown: false, selected: -1});
+        e.preventDefault();
+      }
+    }
+    else if (e.keyCode == '27') {
+      // ESC
+      this.setState({showDropdown: false, selected: -1});
+    }
   }
 
   hideDropdown() {
@@ -44,7 +79,7 @@ class autoComplete extends Component {
 
   onTextChage(key, lengthLimit) {
     return (evt) => {
-      let newState = {};
+      let newState = {selected: -1};
       let length = 0;
       let text = '';
 
@@ -75,9 +110,7 @@ class autoComplete extends Component {
       if(updated) {
         const {data} = await request({keyword: text});
         const words = data.map(d => d.word);
-        if(words.length > 0) {
-          this.setState({showDropdown: true, projectSuggestion: words});
-        }
+        this.setState({showDropdown: true, projectSuggestion: words});
       }
     }
     else {
@@ -90,17 +123,24 @@ class autoComplete extends Component {
     const list = this.state.showDropdown ?
         <ul className={cx('auto-complete')}>
           {(this.state.projectSuggestion || []).map(
-            word => <li key={word} className={cx('auto-complete-word')} onMouseDown={this.autoComplete(word)}>{word}</li>)}
+            (word, i) =>  <li key={word} 
+                            className={cx('auto-complete-word', i === this.state.selected? 'selected':'')} 
+                            onMouseOver={this.mouseOver(i)}
+                            onMouseDown={this.autoComplete(word)}>
+                            {word}
+                          </li>)}
         </ul> : null;
 
     return (
       <div>
         <input 
           id={title}
-          type="text" className={className} 
+          type="text" 
+          className={className} 
           value={this.state.text} 
           onChange={this.showList} 
           onBlur={this.hideDropdown}
+          onKeyDown={this.keyPressed}
         />
         {list}  
       </div>                
