@@ -25,7 +25,7 @@ class Container extends Component {
 
   render() {
     const { user, search, param } = this.props;
-    const { projects, portfolios } = search.result || {projects:[], portfolios:[]};
+    const { portfolios } = search.result || { portfolios:[] };
     
     const companyPortfolios = portfolios.filter(p => p.type === 'company');
     const makerPortfolios = portfolios.filter(p => p.type === 'maker');

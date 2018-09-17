@@ -54,8 +54,8 @@ export async function command(req, res) {
 export async function search(req, res) {
   const keyword = req.params.keyword;
   
-  const users = await User.find( { $text: { $search: keyword } } ).lean();
-  const companies = await Company.find( { $text: { $search: keyword } } ).lean();
+  // const users = await User.find( { $text: { $search: keyword } } ).lean();
+  // const companies = await Company.find( { $text: { $search: keyword } } ).lean();
   const portfolios = await Portfolio
                             .find( { $text: { $search: keyword } }, {score: { $meta: "textScore" }} )
                             .sort( { score: { $meta: "textScore" } } )
@@ -66,7 +66,7 @@ export async function search(req, res) {
   //                         .find( { $text: { $search: keyword } }, {score: { $meta: "textScore" }} )
   //                         .sort( { score: { $meta: "textScore" } } )
   //                         .lean();
-  res.json({ result: { users, companies, projects, portfolios } });
+  res.json({ result: { portfolios } });
 }
 
 export default {
