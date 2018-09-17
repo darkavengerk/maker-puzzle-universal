@@ -32,6 +32,7 @@ const attempt = (
     case types.COMPANY_PORTFOLIO_EDITOR_CANCEL:
     case types.COMPANY_PORTFOLIO_EDIT_SUCCESS:
     case types.PRODUCT_EDITOR_CANCEL:
+    case types.PRODUCT_EDIT_SUCCESS:
     case types.CANCEL_LOGIN:
     case types.LOGIN_SUCCESS_USER:
     case types.SIGNUP_SUCCESS_USER:
