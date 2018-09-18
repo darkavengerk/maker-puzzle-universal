@@ -26,8 +26,6 @@ class MakerInfo extends Component {
     this.edited = this.edited.bind(this);
     this.cancelEdit = this.cancelEdit.bind(this);
     this.featureEdited = this.featureEdited.bind(this);
-    this.aboutEdited = this.aboutEdited.bind(this);
-    this.profileImageEdited = this.profileImageEdited.bind(this);
   }
 
   stateChanged(newState) {
@@ -65,18 +63,17 @@ class MakerInfo extends Component {
     this.stateChanged({ features });
   }
 
-  aboutEdited(evt) {
-    const about = evt.target.innerText;
-    this.stateChanged({ about });
-  }
-
-  profileImageEdited(err, img) {
-    this.stateChanged({picture : img});
-  };
-
   async submit() {
-    const { featureEditSave, owner: maker } = this.props;
-    const res = await featureEditSave({...this.props.context});
+    const { featureEditSave } = this.props;
+    const makerInfo = {...this.props.context};
+
+    // save the buggy about section now.
+    if(makerInfo.aboutEdited) {
+      makerInfo.about = makerInfo.aboutEdited;
+      this.stateChanged({ about: makerInfo.aboutEdited });
+    }
+    
+    const res = await featureEditSave(makerInfo);
     if (res.status === 200) {
       this.stateChanged({editing: false});
     }

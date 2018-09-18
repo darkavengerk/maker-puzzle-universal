@@ -43,7 +43,7 @@ class MakerProfile extends Component {
 
   aboutEdited(evt) {
     const about = evt.target.innerText;
-    this.props.onChange({ about });
+    this.props.onChange({ aboutEdited: about });
   }
 
   profileImageEdited(err, img) {
@@ -167,7 +167,7 @@ class MakerProfile extends Component {
 
           <ContentEditable 
             className={cx('about-maker', editing? 'editing':'')}
-            html={maker.about? maker.about.trim() : ''} 
+            html={maker.about? maker.about : ''} 
             tagName="pre"
             onKeyUp={this.aboutEdited}
             disabled={!editing}

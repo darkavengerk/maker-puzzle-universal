@@ -19,14 +19,18 @@ const Comp = ({ features, featureEdited, classNames, editing=false, ...props }) 
   }
 
   const preventEnter = evt => {
-    if (evt.key === 'Enter') {
-        evt.preventDefault();
+    if (evt.key === 'Enter' || evt.keyCode === 13) {
+      evt.preventDefault();
     }
   }
 
   const handleChange = title => {
     return evt => {
-        featureEdited(title, evt.target.innerText);
+      if (evt.key === 'Enter' || evt.keyCode === 13) {
+        evt.preventDefault();
+        return;
+      }
+      featureEdited(title, evt.target.innerText);
     }
   }
 
