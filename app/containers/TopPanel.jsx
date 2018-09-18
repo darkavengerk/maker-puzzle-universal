@@ -49,7 +49,7 @@ const Navigation = ({ user, logOut, loginMenu, cancelLogin }) => {
         <div className={cx('option-area')}>
           {login}
           {user.authenticated? 
-            <Img src="/site/images/header-social.png" x={36} y={36} onClick={logOut} /> :null}
+            <Img src="/site/images/header-social.png" x={38} y={36} onClick={logOut} /> :null}
           <Img src="/site/images/header-more.png" x={38.5} y={36} />
         </div>
         <Popup show={user.attempt === 'login'} name="LoginPopup" cancel={cancelLogin} roll={true} top={100}>
