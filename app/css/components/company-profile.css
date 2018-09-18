@@ -216,7 +216,7 @@
 .feature-title {
   height: 2rem;
   margin-right: 0.7rem;
-  font-weight: normal;
+  font-weight: bold;
 }
 
 [contenteditable=true]:empty:before {

@@ -6,7 +6,7 @@ const Scatter = ({ text, width, ...props }) => {
   let splitLetters = word => {
     if(!word) word = '';
     return word.split('').map((letter,i) => {
-      return (<span key={i}>{letter}</span>);
+      return (<a key={i}>{letter}</a>);
     })
   }
 
