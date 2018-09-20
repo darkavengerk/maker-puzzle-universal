@@ -26,7 +26,7 @@ const PortfolioItem = ({ portfolio, owner, referrer, portfoiloEditorStart, exter
               </p>
             </span>
           </div>
-          <Image src={portfolio.images[0]} x={214} y={214}/>
+          <Image src={portfolio.images[0]} x={214} y={214} version="medium" />
         </Link>        
       </div>
     );

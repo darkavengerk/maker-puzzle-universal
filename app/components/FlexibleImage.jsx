@@ -6,6 +6,9 @@ import classNames from 'classnames/bind';
 import PureImage from './PureImage';
 import { loadImage } from '../actions/images';
 
+const S3_URL = 'https://s3.ap-northeast-2.amazonaws.com/maker-puzzle-images';
+const IMAGE_PROCESSING_VERSION = 'v1.0'
+
 class FlexibleImage extends Component {
 
   constructor(props) {
@@ -27,7 +30,7 @@ class FlexibleImage extends Component {
   }
 
   render() {
-    const { src, x, y, children, loadImage, pureImage=false, ...props } = this.props;
+    const { src, x, y, children, loadImage, version='original', pureImage=false, ...props } = this.props;
 
     let url;
 
@@ -38,10 +41,16 @@ class FlexibleImage extends Component {
       else {
         const newImage = loadImage(src);
         url = newImage.original || '';
+        if(newImage.status === IMAGE_PROCESSING_VERSION) {
+          url = S3_URL + newImage.versions[version];
+        }
       }
     }
     else {
       url = src? src.original : '';
+      if(src && src.status === IMAGE_PROCESSING_VERSION) {
+        url = S3_URL + src.versions[version];
+      }
     }
 
     const { className, onClick, role } = this.props;

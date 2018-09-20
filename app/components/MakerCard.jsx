@@ -16,7 +16,7 @@ const cx = classNames.bind(styles);
 const MakerCardSection = ({picture, title, subTitle, linkTo, ...props}) => {  
   return (
     <Link className={cx('maker-tile')} to={linkTo} role="button">
-      <FlexibleImage className={cx('maker-tile-image')} x={213} y={213} src={picture} />
+      <FlexibleImage className={cx('maker-tile-image')} x={213} y={213} src={picture} version="medium" />
       <div className={cx('header')}>
         <Padding height="1.8rem" />
         <div className={cx('title')}>

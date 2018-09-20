@@ -34,7 +34,7 @@ const ProjectCardSection = ({project, ...props}) => {
           +{project.portfolios.length} Portfolios
         </div>
       </div>
-      <FlexibleImage className={cx('project-tile-image')} x={390} y={320} src={project.portfolios[0].images[0]} />
+      <FlexibleImage className={cx('project-tile-image')} x={390} y={320} src={project.portfolios[0].images[0]} version="large" />
     </Link>
 
   );

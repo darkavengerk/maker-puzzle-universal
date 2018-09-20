@@ -9,7 +9,8 @@ const {
   projectAutoComplete,
   Portfolio,
   Metadata,
-  Misc 
+  Misc,
+  Image
 } = models;
 
 
@@ -46,6 +47,12 @@ export async function command(req, res) {
     for(let portfolio of portfolios) {
       await Portfolio.update({ pid: portfolio.pid}, portfolio, {upsert: true});
     }
+  }
+
+  if(command === 'image-process-batch') {
+    const found = await Image.find({status: 'init'}).limit(100);
+    const images = found.map(img => img._id);
+    await common.imageProcess({ images });
   }
 
   return res.json({result: 'ok'});
