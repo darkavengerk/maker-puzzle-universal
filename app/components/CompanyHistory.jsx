@@ -31,6 +31,10 @@ const Component = ({ maker, editing, onChange, ...props }) => {
     onChange({companies: [...history, {order: history.length, name:'', period:'', position:'', newItem: true, }]}, 'makerProfile');
   }
 
+  const preventEnter = evt => {
+    if(evt.keyCode === 13) {evt.preventDefault();}
+  }
+
   const removeEntry = order => evt => {
     let newState = history.filter(info => info.order !== order);
     newState = newState.map( (s, i) => ({...s, order: i}));
@@ -48,6 +52,8 @@ const Component = ({ maker, editing, onChange, ...props }) => {
             tagName="td"
             placeholder="기업명을 입력 후 선택하세요"
             disabled={editing && info.newItem? false : true}
+            onKeyPress={preventEnter}
+            onKeyDown={preventEnter}
             onChange={featureChanged(info.order, 'name')}
           /> :
           <td className={cx('text-input', 'company-title', (info.current? "col-selected": ""))}>
@@ -61,6 +67,8 @@ const Component = ({ maker, editing, onChange, ...props }) => {
           placeholder="ex)1년2개월"
           disabled={!editing}
           onChange={featureChanged(info.order, 'period')}
+          onKeyPress={preventEnter}
+          onKeyDown={preventEnter}
         />
         <ContentEditable 
           className={cx('text-input', 'company-position', (info.current? "col-selected": ""), 'last-item')}
@@ -69,6 +77,8 @@ const Component = ({ maker, editing, onChange, ...props }) => {
           placeholder="ex)대리, 팀장"
           disabled={!editing}
           onChange={featureChanged(info.order, 'position')}
+          onKeyPress={preventEnter}
+          onKeyDown={preventEnter}
         />
         {editing? 
         <td className={cx('text-input', 'erase-buttons')} >

@@ -57,7 +57,7 @@ async function createPortfolio(link_name, portfolio) {
 
   let [ project, company ] = await Promise.all([
     Project.findOne({name: location}),
-    Company.findOne({name: link_name}),
+    Company.findOne({ link_name }),
   ]);
 
   if(!project) {
