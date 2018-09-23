@@ -42,12 +42,12 @@ const Comp = ({ features, featureEdited, classNames, editing=false, ...props }) 
         <Scatter text={feature.title} className={classNames.title} width={longest*1.3 + 'rem'} />
         <ContentEditable 
           tagName="span"
-          className={classNames.content}
+          className={classNames.content + (editing && !feature.blocked ? ' ' + classNames.editing : '')}
           html={ feature.content || '' }
           onKeyPress={preventEnter}
           onKeyUp={handleChange(feature.title)}
           placeholder={feature.placeholder}
-          disabled={!editing}
+          disabled={!editing || feature.blocked}
         />
         
       </div>

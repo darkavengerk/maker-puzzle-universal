@@ -53,6 +53,7 @@ export default (app) => {
   if(companyController) {
     app.get('/api/company/search/:keyword', companyController.search);
     app.get('/api/company/:link_name', companyController.one);
+    app.post('/api/company/:link_name/features', companyController.updateFeatures);
     app.get('/api/company', companyController.all);
     app.post('/api/company/:link_name/portfolio', companyController.addPortfolio);
     app.delete('/api/company/:link_name/portfolio/:pid', companyController.deletePortfolio);

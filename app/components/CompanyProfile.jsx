@@ -13,7 +13,7 @@ import ImageUploader from '../components/ImageUploader';
 import Features from '../components/Features';
 import styles from '../css/components/company-profile';
 
-import { featureEditSave } from '../actions/makers';
+import { featureEditSave } from '../actions/companies';
 import { logOut } from '../actions/users';
 
 import { Company } from '../utils/objects';
@@ -32,7 +32,6 @@ class CompanyProfile extends Component {
     this.startEdit = this.startEdit.bind(this);
     this.cancelEdit = this.cancelEdit.bind(this);
     this.featureEdited = this.featureEdited.bind(this);
-    this.aboutEdited = this.aboutEdited.bind(this);
     this.profileImageEdited = this.profileImageEdited.bind(this);
   }
 
@@ -58,19 +57,14 @@ class CompanyProfile extends Component {
     this.setState({ features });
   }
 
-  aboutEdited(evt) {
-    const about = evt.target.innerText;
-    this.setState({ about });
-  }
-
-  profileImageEdited(err, img) {
-    this.setState(_.merge({}, this.state, {profile: {picture : img}}));
+  profileImageEdited(err, profilePicture) {
+    this.setState({ profilePicture });
   };
 
   async submit() {
     const { featureEditSave } = this.props;
-    const { features, profile } = this.state;
-    const res = await featureEditSave({features, profile});
+    const { features, profilePicture } = this.state;
+    const res = await featureEditSave({features, profilePicture});
     if (res.status === 200) {
       this.setState({editing: false});
     }
@@ -130,13 +124,13 @@ class CompanyProfile extends Component {
       }
     }
 
-    const profileImage = this.state.editing? this.state.profilePicture : company.profilePicture;
-
+    const profileImage = this.state.editing && this.state.profilePicture? this.state.profilePicture : company.getProfileImage();
+    let c = cx('feature', this.state.editing? 'editing':'');
     return (
       <div className={cx('main-section')}>
         <span className={cx('flex-row')}>
           <span style={{position:'relative', height:'14.4rem'}}>
-            <FlexibleImage src={company.getProfileImage()} x={144} y={144} />
+            <FlexibleImage src={profileImage} x={144} y={144} />
             <span style={{position:'absolute', bottom:'0.3rem', right:'0.4rem', 'zIndex':1}}>
               {this.state.editing? 
                 <ImageUploader name="ImageUploader" callback={this.profileImageEdited} >
@@ -156,11 +150,12 @@ class CompanyProfile extends Component {
         </span>
         <div className={cx('feature-area')}>
           <Features 
-            features={[{title:'기업명', content: company.name}, ...(company.features || [])]}
+            features={[{title:'기업명', content: company.name, blocked: true}, ...(company.features || [])]}
             featureEdited={this.featureEdited}
             classNames={{
               title: cx('feature-title'),
-              content: cx('feature', this.state.editing? 'editing':''),
+              content: cx('feature'),
+              editing: cx('editing'),
               row: cx('feature-item')
             }}
             editing={this.state.editing}

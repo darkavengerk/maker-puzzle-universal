@@ -15,6 +15,10 @@ const company = (
     case types.REQUEST_SUCCESS:
       if (action.data && action.data.company) return action.data.company;
       return state;
+
+    case types.COMPANY_PROFILE_EDIT_SUCCESS:
+      const { features, profilePicture } = action.data;
+      return {...state, features, profilePicture}
     
     case types.PORTFOLIO_DELETE_SUCCESS:
       const pidDeleted = action.data.pid;

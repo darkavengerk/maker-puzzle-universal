@@ -1,5 +1,21 @@
 import * as types from '../types';
-import { Maker, Company } from '../services';
+import { Company } from '../services';
+
+export function featureEditSave(data) {
+  return async (dispatch, getState) => {
+    const { company } = getState();
+    const res = await Company().updateCompanyFeatures({link_name:company.company.link_name, data});
+    
+    if (res.status === 200) {
+      dispatch({type:types.COMPANY_PROFILE_EDIT_SUCCESS, data});
+    }
+    else {
+      dispatch({type:types.COMPANY_PROFILE_EDIT_FAILURE});
+    } 
+    return res;
+  };
+
+}
 
 export function companyPortfoiloEditorStart() {
   return {

@@ -51,6 +51,20 @@ export async function one(req, res) {
   return res.json(result);
 }
 
+export async function updateFeatures(req, res) {
+  const link_name = req.params.link_name;
+  let { features, profilePicture } = req.body;
+
+  try {
+    const result = await Company.update({ link_name }, {$set:{ features, profilePicture }});
+    res.json(result);
+  }
+  catch (err) {
+    console.log(err);
+    return res.status(500).send('Something went wrong getting the data');
+  }
+}
+
 async function createPortfolio(link_name, portfolio) {
 
   const location = portfolio.location;
@@ -196,6 +210,7 @@ export default {
   all,
   search,
   one,
+  updateFeatures,
   addPortfolio,
   deletePortfolio,
   addProduct,
