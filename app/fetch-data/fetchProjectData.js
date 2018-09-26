@@ -2,14 +2,10 @@ import { Project } from '../services';
 
 const fetchData = async (param) => {
 
-  try {
-    const result = await Project().getProject(param);
-    return { project : result.data, param };
+  if(param.link_name && param.link_name !== 'undefined') {
+    return {project : (await Project().getProject(param)).data, param};
   }
-  catch(e) {
-    console.log('error', e);
-    return { param };
-  }
+  return { param };
 
 };
 

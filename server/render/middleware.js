@@ -61,6 +61,9 @@ export default function render(req, res) {
       // This method waits for all render component
       // promises to resolve before returning to browser
       store.dispatch({ type: types.CREATE_REQUEST });
+      if(props.params) {
+        props.params.serverside = true;
+      }
       fetchDataForRoute(props)
         .then((data) => {
           store.dispatch({ type: types.REQUEST_SUCCESS, data });
