@@ -4,6 +4,7 @@
   padding: 3.7rem 4.1rem 2.5rem 3.0rem;
   display: flex;
   align-items: flex-end;
+  justify-content: space-between;
 }
 
 .logo-area {
@@ -26,7 +27,7 @@
 }
 
 .search-area {
-  flex:1;
+  width: 40rem;
   height: 36px;
   border-radius: 12px;
   box-shadow: 0 10px 55px 0 rgba(0, 0, 0, 0.07);
@@ -34,17 +35,23 @@
   border: solid 0.5px #979797;
   display: flex;
   align-items: center;
-  margin: 0 4.7rem 0 20rem;
+  text-align: center;
+  margin: 0 1rem;
+
 }
 
 .search-input {
+  width: 32.5rem;
+  height: 100%;
   display: inline-block;
   background: none;
-  color: #f16c1f;
   border: none;
   outline: none;
   margin: 0 2rem;
-  width: 100%;
+
+  font-family: NanumBarunGothic;
+  font-size: 15px;
+  color: #000000;
 }
 
 .option-area {

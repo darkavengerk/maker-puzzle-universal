@@ -29,33 +29,38 @@ const Navigation = ({ user, logOut, loginMenu, cancelLogin }) => {
 
     function handleOnSubmit(event) {
       event.preventDefault();
-      const keyword = document.getElementById('user-search-input').value;
+      const element = document.getElementById('user-search-input');
+      const keyword = element.value;
       if(keyword.trim().length > 0) {
+        element.value = '';
         browserHistory.push('/search/' + keyword);
       }
     }
 
     return (
-      <nav className={cx('navigation')} role="navigation">
-        <div className={cx('logo-area')}>
-          <Link to="/">
-            <Img src="/site/images/header-logo-20180829.png" x={307} y={81.3}/>
-          </Link>
-        </div>
-        <form onSubmit={handleOnSubmit} className={cx('search-area')}>
-          <input type="text" id="user-search-input" className={cx('search-input')} />
-        </form>
+      <div>
+        <nav className={cx('navigation')} role="navigation">
+          <div className={cx('logo-area')}>
+            <Link to="/">
+              <Img src="/site/images/header-logo-20180829.png" x={307} y={81.3}/>
+            </Link>
+          </div>
+          <form onSubmit={handleOnSubmit} className={cx('search-area')}>
+            <input type="text" id="user-search-input" className={cx('search-input')} />
+            <Img src="/site/images/search.png" x={21.8} y={21.8} role="button" onClick={handleOnSubmit} />
+          </form>
 
-        <div className={cx('option-area')}>
-          {login}
-          {user.authenticated? 
-            <Img src="/site/images/header-social.png" x={38} y={36} onClick={logOut} /> :null}
-          <Img src="/site/images/header-more.png" x={38.5} y={36} />
-        </div>
+          <div className={cx('option-area')}>
+            {login}
+            {user.authenticated? 
+              <Img src="/site/images/header-social.png" x={38} y={36} onClick={logOut} /> :null}
+            <Img src="/site/images/header-more.png" x={38.5} y={36} />
+          </div>
+        </nav>
         <Popup show={user.attempt === 'login'} name="LoginPopup" cancel={cancelLogin} roll={true} top={100}>
           <Login />
         </Popup>
-      </nav>
+      </div>
     );
 };
 
