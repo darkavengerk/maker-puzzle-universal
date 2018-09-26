@@ -1,6 +1,7 @@
 export default function loadModels() {
   require('./topics');
   require('./user');
+  require('./count');
   require('./company');
   require('./project');
   require('./portfolio_schema');

@@ -9,6 +9,7 @@ import Image from './models/image';
 import Metadata from './models/metadata';
 import Misc from './models/misc';
 import User from './models/user';
+import Count from './models/count';
 import Portfolio from './models/portfolio';
 import Product from './models/product';
 
@@ -21,6 +22,7 @@ const models = {
   Portfolio,
   Project,
   User,
+  Count,
   companyAutoComplete,
   projectAutoComplete
 }

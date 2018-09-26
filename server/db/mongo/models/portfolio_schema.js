@@ -7,6 +7,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const Schema = new mongoose.Schema({
   title: String,
+  count: { type: Number, default: 0 },
   description: String,
   location: String,
   companyName: String,
