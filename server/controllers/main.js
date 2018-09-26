@@ -13,9 +13,10 @@ const {
   Image
 } = models;
 
+let mainContents = null;
 
-export async function main(req, res) {
-
+export async function buildContents(req, res) {
+  console.log('build main contents...');
   const loadings = [
     User
       .find({'portfolios.0': {$exists:true}})
@@ -32,7 +33,18 @@ export async function main(req, res) {
   ];
   const [users, projects, companies] = await Promise.all(loadings);
 
-  return res.json({users, projects, companies});
+  mainContents = {users, projects, companies};
+  if(req && res) {
+    res.json({users, projects, companies});
+  }
+}
+
+export async function main(req, res) {
+
+  if(!mainContents) {
+    await buildContents();
+  }
+  return res.json(mainContents);
 }
 
 export async function command(req, res) {
@@ -53,6 +65,10 @@ export async function command(req, res) {
     const found = await Image.find({status: 'init'}).limit(100);
     const images = found.map(img => img._id);
     await common.imageProcess({ images });
+  }
+
+  if(command === 'build-image-contents') {
+    await buildContents();
   }
 
   return res.json({result: 'ok'});
