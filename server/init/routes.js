@@ -19,6 +19,7 @@ export default (app) => {
   if (mainController) {
     app.get('/api/main/commands/:command', mainController.command);
     app.get('/api/main', mainController.main);
+    app.post('/api/count', mainController.increaseCount);
     app.get('/api/search/:keyword', mainController.search);
   }
 

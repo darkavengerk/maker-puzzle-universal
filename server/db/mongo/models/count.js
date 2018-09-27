@@ -12,9 +12,14 @@ const CountSchema = new mongoose.Schema({
 });
 
 CountSchema.statics.inc = async function(content, identifier, userid) {
-  const updateQuery = {content, identifier, $inc: {total:1, ['detail.' + (userid | 'unknown')]:1}};
-  const { data } = await this.findOneAndUpdate({ content, identifier }, updateQuery, {new:true}).lean();
-  return data;
+  const updateQuery = {content, identifier, $inc: {total:1, ['detail.' + (userid || 'unknown')]:1}};
+  try {
+    const result = await this.findOneAndUpdate({ content, identifier }, updateQuery, {upsert:true}).lean();
+    return result;
+  }
+  catch(e) {
+    console.log('error when increasing count', content, identifier, userid, e);
+  }
 }
 
 export default mongoose.model('Count', CountSchema);

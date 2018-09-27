@@ -10,7 +10,8 @@ const {
   Portfolio,
   Metadata,
   Misc,
-  Image
+  Image,
+  Count
 } = models;
 
 let mainContents = null;
@@ -74,6 +75,13 @@ export async function command(req, res) {
   return res.json({result: 'ok'});
 }
 
+export async function increaseCount(req, res) {
+  const { content, identifier } = req.body;
+  const userid = req.user && req.user.userid? req.user.userid : 'unknown';
+  await Count.inc(content, identifier, userid);
+  return res.json({result: 'ok'});
+}
+
 export async function search(req, res) {
   const keyword = req.params.keyword;
   
@@ -95,5 +103,6 @@ export async function search(req, res) {
 export default {
   main,
   command,
-  search
+  search,
+  increaseCount
 };
