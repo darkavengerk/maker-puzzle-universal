@@ -27,11 +27,12 @@
   letter-spacing: normal;
   text-align: left;
   color: #000000;
+  vertical-align: top;
 }
 
 .ref-content {
   display: inline-block;
-  width: 13rem;
+  width: 17rem;
   height: 2rem;
   font-family: NanumBarunGothic;
   font-size: 1.2rem;
