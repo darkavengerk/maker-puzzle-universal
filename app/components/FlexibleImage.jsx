@@ -30,7 +30,7 @@ class FlexibleImage extends Component {
   }
 
   render() {
-    const { src, x, y, children, loadImage, version='original', pureImage=false, ...props } = this.props;
+    const { src, x, y, children, loadImage, version='original', contain=false, pureImage=false, ...props } = this.props;
 
     let url;
 
@@ -72,6 +72,10 @@ class FlexibleImage extends Component {
       height: height/10+'rem',
       width: width/10+'rem'
     };
+
+    if(contain) {
+      imageStyle.backgroundSize = 'contain';
+    }
 
     if(typeof(width) === 'string') {
       imageStyle.width = width;

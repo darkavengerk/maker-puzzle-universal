@@ -309,7 +309,7 @@ td[contenteditable=true]:empty:before {
 
 .feature {
   width: 100%;
-  height: 2rem;
+  min-height: 2rem;
   padding: 0 0.7rem;
 }
 

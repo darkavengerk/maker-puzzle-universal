@@ -130,7 +130,7 @@ class CompanyProfile extends Component {
       <div className={cx('main-section')}>
         <span className={cx('flex-row')}>
           <span style={{position:'relative', height:'14.4rem'}}>
-            <FlexibleImage src={profileImage} x={144} y={144} />
+            <FlexibleImage src={profileImage} x={144} y={144} contain={true} />
             <span style={{position:'absolute', bottom:'0.3rem', right:'0.4rem', 'zIndex':1}}>
               {this.state.editing? 
                 <ImageUploader name="ImageUploader" callback={this.profileImageEdited} >
