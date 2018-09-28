@@ -176,7 +176,8 @@ CompanyProfile.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    user: state.user.account
+    user: state.user.account,
+    company: state.company.company
   };
 }
 

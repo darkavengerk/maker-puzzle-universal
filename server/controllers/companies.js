@@ -56,8 +56,14 @@ export async function updateFeatures(req, res) {
   let { features, profilePicture } = req.body;
 
   try {
-    const result = await Company.update({ link_name }, {$set:{ features, profilePicture }});
-    res.json(result);
+    if(features.length > 0) {
+      const result = await Company.update({ link_name }, {$set:{ features, profilePicture }});
+      res.json(result);
+    }
+    else {
+      console.log('no features', req.body);
+      res.json({result: 'error'});
+    }
   }
   catch (err) {
     console.log(err);

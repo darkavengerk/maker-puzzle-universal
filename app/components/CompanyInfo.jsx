@@ -17,18 +17,16 @@ const CompanyInfo = ({ owner }) => {
 
   const users = <MakerListRoundy makers={company.users} />;
 
-  return company ? (
-    <div className={cx('main-section')}>
-      <GreyTitle title={'기업 정보'} bottom="13" />
-      <CompanyProfile company={company} />
+  return <div className={cx('main-section')}>
+          <GreyTitle title={'기업 정보'} bottom="13" />
+          {company && company.name ? <CompanyProfile /> : <div></div>}          
 
-      <GreyTitle title={'소속 메이커'} top="38" bottom="26" />
-      <div className={cx('maker-area')}>
-        {users}
-      </div>
+          <GreyTitle title={'소속 메이커'} top="38" bottom="26" />
+          <div className={cx('maker-area')}>
+            {users}
+          </div>
 
-    </div>
-  ) : <div></div>;
+        </div>;
 };
 
 CompanyInfo.propTypes = {
