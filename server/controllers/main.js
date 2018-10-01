@@ -70,6 +70,14 @@ export async function command(req, res) {
     await common.imageProcess({ images });
   }
 
+  if(command === 'portfolio-index-batch') {
+    const found = await Portfolio.find();
+    for(let p of found) {
+      p.keywords = common.makeIndexFromPortfolio(p);
+      await p.save();
+    }
+  }
+
   if(command === 'maker-name-batch') {
     const users = await User.find({'portfolios.0': {$exists: true}});
     for(let user of users) {
@@ -118,13 +126,14 @@ export async function increaseCount(req, res) {
 }
 
 export async function search(req, res) {
-  const keyword = req.params.keyword;
+  const keyword = common.cut(req.params.keyword).join(' ');
   
   // const users = await User.find( { $text: { $search: keyword } } ).lean();
   // const companies = await Company.find( { $text: { $search: keyword } } ).lean();
   const portfolios = await Portfolio
                             .find( { $text: { $search: keyword } }, {score: { $meta: "textScore" }} )
                             .sort( { score: { $meta: "textScore" } } )
+                            .limit(100)
                             .populate(['company', 'user'])
                             .lean();
   

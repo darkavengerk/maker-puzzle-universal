@@ -15,6 +15,70 @@ import Product from './models/product';
 const s3 = new aws.S3({ apiVersion: '2006-03-01' });
 const IMAGE_PROCESSING_VERSION = 'v1.0'
 
+function ngram(s, n) {
+  if(s.length <= n) return [];
+  let index = 0;
+  const ngrams = [];
+  while(index + n -1 < s.length) {
+    ngrams.push(s.substring(index, index + n));
+    index += 1;
+  }
+  return ngrams;
+}
+
+function bikilo(strings, n) {
+  if(strings.length <= n) return [];
+  let index = 0;
+  const ngrams = [];
+  while(index + n -1 < strings.length) {
+    ngrams.push(strings.slice(index, index + n).join(''));
+    index += 1;
+  }
+  return ngrams;
+}
+
+function getSeries(s) {
+  return ngram(s, 2).concat(ngram(s,3));
+}
+
+function cut(strings) {
+  strings = Array.isArray(strings)? strings : [strings];
+  let words = [];
+  for(let bigWord of strings) {
+    // words.push(bigWord);
+    // const refined = bigWord.replace(/\s/g, '');
+    // words.push(refined);
+    // words = words.concat(getSeries(refined));
+
+    const splited = bigWord.split(/\s/).filter(x => x);
+    words = words.concat(splited);
+    for(let s of splited) {
+      words = words.concat(getSeries(s));
+    }
+    // words = words.concat(bikilo(splited, 2));
+  }
+  return [...new Set(words)];
+}
+
+function makeIndex(sentences) {
+  let made = [];
+  for(let s of sentences) {
+    made = made.concat(cut(s));
+  }
+  return made;
+}
+
+function makeIndexFromPortfolio(portfolio) {
+  return makeIndex([
+      portfolio.title,
+      portfolio.description,
+      portfolio.location,
+      portfolio.companyName,
+      portfolio.tags,
+      portfolio.makerName || ''
+    ])
+}
+
 function pushOrReplacePortfolio(portfolioList, portfolio) {
   const shouldReplace = portfolioList.filter(p => p.pid === portfolio.pid).length > 0;
 
@@ -44,11 +108,14 @@ async function savePortfolio({ portfolio, project, company, user }) {
   company.projects.addToSet(project._id);  
   project.companies.addToSet(company._id);  
 
+  portfolio.makerName = (user && user.name) ? user.name : '';
+
+  portfolio.keywords = makeIndexFromPortfolio(portfolio);
+
   const saving = [];
 
   if(user && user._id) {
     portfolio.user = user._id;
-    portfolio.makerName = user.name;
     user.portfolios = pushOrReplacePortfolio(user.portfolios, portfolio);
 
     project.users.addToSet(user._id);
@@ -147,5 +214,8 @@ async function imageProcess({ images }) {
 
 export default {
   savePortfolio,
-  imageProcess
+  imageProcess,
+  makeIndex,
+  makeIndexFromPortfolio,
+  cut
 };

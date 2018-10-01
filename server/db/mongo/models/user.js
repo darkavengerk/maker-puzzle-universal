@@ -76,7 +76,7 @@ const UserSchema = new mongoose.Schema({
   birthYear: Number,
 
   resetPasswordToken: String,
-  resetPasswordExpires: Date,
+  resetPasswordExpires: Date
 });
 
 function encryptPassword(next) {
@@ -96,13 +96,6 @@ function encryptPassword(next) {
  * Password hash middleware.
  */
 UserSchema.pre('save', encryptPassword);
-
-UserSchema.pre('save', function(next) {
-  if(this.type === 'company') {
-    this.companyProfile.link_name = this.profile.name.replace(/\s/g, '_');
-  }
-  next();
-});
 
 /*
  Defining our own custom document instance method

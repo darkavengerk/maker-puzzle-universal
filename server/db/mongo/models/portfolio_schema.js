@@ -3,6 +3,7 @@
  *
  */
 import mongoose from 'mongoose';
+
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const Schema = new mongoose.Schema({
@@ -21,7 +22,8 @@ const Schema = new mongoose.Schema({
   images: [{type: ObjectId, ref: 'ImageFile'}],
   pid: String,
   isPrivate: Boolean,
-  type: {type:String, default:'maker'}
+  type: {type:String, default:'maker'},
+  keywords: [String]
 }, { _id: false });
 
 export default Schema;
