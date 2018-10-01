@@ -117,7 +117,7 @@ class MainPageSection extends Component {
                 picture={Assist.Company.getProfileImage(company)}
                 title={company.name} 
                 subTitle={businessName} 
-                imageFit={true}
+                isCompany={true}
                 linkTo={'/company/' + company.link_name} />;
     });
 

@@ -37,7 +37,7 @@
 
 .type2 {
   display: flex;
-  align-items: top;
+  align-items: flex-start;
 }
 
 .text h1 {

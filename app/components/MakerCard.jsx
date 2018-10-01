@@ -13,10 +13,15 @@ import styles from '../css/components/business-card';
 
 const cx = classNames.bind(styles);
 
-const MakerCardSection = ({picture, title, subTitle, linkTo, imageFit=false, ...props}) => {  
+const MakerCardSection = ({picture, title, subTitle, linkTo, isCompany=false, ...props}) => {  
   return (
     <Link className={cx('maker-tile')} to={linkTo} role="button">
-      <FlexibleImage className={cx('maker-tile-image')} x={213} y={213} src={picture} contain={imageFit} version="medium" />
+      {isCompany? 
+        <div className={cx('maker-tile-image-boundary')}>
+          <FlexibleImage className={cx('maker-tile-image')} x={180} y={180} src={picture} contain={true} version="medium" />
+        </div> : 
+      <FlexibleImage className={cx('maker-tile-image')} x={213} y={213} src={picture} contain={false} version="medium" />}
+      
       <div className={cx('header')}>
         <Padding height="1.8rem" />
         <div className={cx('title')}>
