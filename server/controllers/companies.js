@@ -118,7 +118,7 @@ export async function addPortfolio(req, res) {
 
   res.json(result);
   
-  companyAutoComplete.buildCache(err => {});
+  projectAutoComplete.buildCache(err => {});
 }
 
 export async function deletePortfolio(req, res) {
