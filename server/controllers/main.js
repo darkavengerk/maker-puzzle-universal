@@ -33,6 +33,8 @@ export async function buildContents(req, res) {
       .lean()
   ];
   const [users, projects, companies] = await Promise.all(loadings);
+  projects.sort((a,b) => b.portfolios.length - a.portfolios.length);
+  companies.sort((a,b) => b.companyPortfolios.length - a.companyPortfolios.length);
 
   mainContents = {users, projects, companies};
   if(req && res) {
