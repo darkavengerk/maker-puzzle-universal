@@ -32,7 +32,7 @@ class Container extends Component {
 
     const companyPortfolioTags = companyPortfolios.map(portfolio => {
       const owner = createObject('company', portfolio.company);
-      return <PortfolioItemWide portfolio={portfolio} referrer={owner} owner={owner} key={portfolio.pid} external={true} />
+      return <PortfolioItemWide portfolio={portfolio} referrer={owner} owner={owner} key={portfolio.pid} imageFit={true} external={true} />
     });
 
     const referrer = createObject('main');
