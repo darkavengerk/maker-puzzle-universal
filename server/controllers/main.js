@@ -70,6 +70,38 @@ export async function command(req, res) {
     await common.imageProcess({ images });
   }
 
+  if(command === 'maker-name-batch') {
+    const users = await User.find({'portfolios.0': {$exists: true}});
+    for(let user of users) {
+      for(let p of user.portfolios) {
+        p.makerName = user.name;
+      }
+      await user.save();
+    }
+    let plist = await Portfolio.find({user: {$exists:true}}).populate('user');
+    for(let p of plist) {
+      p.makerName = p.user.name;
+      await p.save();
+    }
+    
+    let companies = await Company.find({'portfolios.0': {$exists:true}}).populate('portfolios.user');
+    for(let c of companies) {
+      for(let p of c.portfolios) {
+        p.makerName = p.user.name;
+      }
+      await c.save();
+    }
+
+    let projects = await Project.find({'portfolios.0': {$exists:true}}).populate('portfolios.user');
+    for(let pr of projects) {
+      for(let p of pr.portfolios) {
+        if(p.user) 
+          p.makerName = p.user.name;
+      }
+      await pr.save();
+    }
+  }
+
   if(command === 'build-image-contents') {
     await buildContents();
   }
