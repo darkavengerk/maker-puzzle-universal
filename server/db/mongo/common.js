@@ -48,6 +48,7 @@ async function savePortfolio({ portfolio, project, company, user }) {
 
   if(user && user._id) {
     portfolio.user = user._id;
+    portfolio.makerName = user.name;
     user.portfolios = pushOrReplacePortfolio(user.portfolios, portfolio);
 
     project.users.addToSet(user._id);

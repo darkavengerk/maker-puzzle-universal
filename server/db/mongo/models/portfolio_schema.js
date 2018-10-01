@@ -11,6 +11,7 @@ const Schema = new mongoose.Schema({
   description: String,
   location: String,
   companyName: String,
+  makerName: String,
   project: {type: ObjectId, ref: 'Project'},
   user: {type: ObjectId, ref: 'User'},
   company: {type: ObjectId, ref: 'Company'},
