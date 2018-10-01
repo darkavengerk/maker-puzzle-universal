@@ -110,7 +110,7 @@ class ContentsTagFactory {
     let companyContents = companyPortfolios.map(portfolio => {
       const owner = createObject('company', portfolio.company);
       const Item = this.getItemTag(owner);
-      return (<Item portfolio={portfolio} referrer={source} owner={owner} key={portfolio.pid} external={true} />);
+      return (<Item portfolio={portfolio} referrer={source} owner={owner} key={portfolio.pid} imageFit={true} external={true} />);
     });
 
     let makerContents = makerPortfolios.map(portfolio => {
