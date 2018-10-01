@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
-import { Link } from 'react-router';
-
 import ContentEditable from 'react-contenteditable'
 
+import Link from '../components/Link';
 import Padding from '../components/Padding';
 import FlexibleImage from '../components/FlexibleImage';
 
@@ -57,7 +56,7 @@ const Component = ({ maker, editing, onChange, ...props }) => {
             onChange={featureChanged(info.order, 'name')}
           /> :
           <td className={cx('text-input', 'company-title', (info.current? "col-selected": ""))}>
-            <Link to={'/company/' + info.name.replace(' ', '_')}>{info.name}</Link>
+            <Link to={'/company/' + info.name.replace(' ', '_')} count="company">{info.name}</Link>
           </td>
         }
         <ContentEditable 

@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 
+import Link from '../components/Link';
 import FlexibleImage from '../components/FlexibleImage';
 import Padding from '../components/Padding';
 
@@ -19,7 +19,7 @@ const ProjectCardSection = ({project, ...props}) => {
   location = location[0]? location[0] : null;
   const locationName = location && location.content? location.content : '';
   return (
-    <Link className={cx('project-tile')} to={'/project/' + project.link_name} role="button">
+    <Link className={cx('project-tile')} to={'/project/' + project.link_name} role="button" count="project">
       <div className={cx('header')}>
         <Padding height="9rem" />
         <div className={cx('title')}>

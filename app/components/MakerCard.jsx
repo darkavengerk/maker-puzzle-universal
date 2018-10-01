@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 
+import Link from '../components/Link';
 import FlexibleImage from '../components/FlexibleImage';
 import Padding from '../components/Padding';
 
@@ -15,7 +15,7 @@ const cx = classNames.bind(styles);
 
 const MakerCardSection = ({picture, title, subTitle, linkTo, isCompany=false, ...props}) => {  
   return (
-    <Link className={cx('maker-tile')} to={linkTo} role="button">
+    <Link className={cx('maker-tile')} to={linkTo} role="button" count={isCompany? 'company' : 'maker'}>
       {isCompany? 
         <div className={cx('maker-tile-image-boundary')}>
           <FlexibleImage className={cx('maker-tile-image')} x={180} y={180} src={picture} contain={true} version="medium" />

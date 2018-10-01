@@ -9,16 +9,11 @@ export default () => {
       method: 'GET',
       url: '/api/main'
     }),
-    count: ({ content, param }) => {
-      if(param.pid && !param.serverside) {
-        return client.request({
-          method: 'POST',
-          url: '/api/count',
-          data: {content, identifier: param.pid }
-        });
-      }
-      return false;
-    },
+    count: ({ content, identifier }) => client.request({
+      method: 'POST',
+      url: '/api/count',
+      data: { content, identifier }
+    }),
     search: (keyword) => client.request({
       method: 'GET',
       url: '/api/search/' + escape(keyword)

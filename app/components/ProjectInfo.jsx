@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
 import classNames from 'classnames/bind';
+
+import Link from '../components/Link';
 import ProjectProfile from '../components/ProjectProfile';
 import CompanyHistory from '../components/CompanyHistory';
 import GreyTitle from '../components/GreyTitle';
@@ -26,7 +27,7 @@ const ProjectInfo = ({ owner }) => {
       <GreyTitle title={'참여 기업'} top="38" bottom="16" />
       {project.portfolios.map((p,i) => p.companyName && p.title?
         <div key={i}>
-          <Link to={'/company/' + p.companyName.replace(' ', '_')}>
+          <Link to={'/company/' + p.companyName.replace(' ', '_')} count="company">
             <div className={cx('ref-title')}>{p.companyName}</div>
           </Link>
           <div className={cx('ref-content')}>{p.title}</div>

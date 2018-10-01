@@ -112,6 +112,7 @@ export async function command(req, res) {
 export async function increaseCount(req, res) {
   const { content, identifier } = req.body;
   const userid = req.user && req.user.userid? req.user.userid : 'unknown';
+
   await Count.inc(content, identifier, userid);
   return res.json({result: 'ok'});
 }

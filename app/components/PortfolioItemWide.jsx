@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
+
+import Link from '../components/Link';
 import Image from '../components/FlexibleImage';
 import Window from '../components/PortfolioImagesWindow';
 import styles from '../css/components/portfolio-item';
@@ -16,7 +17,7 @@ const PortfolioItemWideSection = ({ portfolio, owner, referrer, portfoiloEditorS
     const link_name = company.link_name;
     return (
       <div className={cx('main-section', 'wide')}>
-        <Link to={referrer.createPortfolioLink(portfolio)}>
+        <Link to={referrer.createPortfolioLink(portfolio)} count="portfolio">
           <div className={cx('text', 'text-section-wide', external? 'type2' : null)}>
             {external? <Image src={owner.getProfileImage()} contain={imageFit} x={50} y={39} className={cx('company-image')} /> : null }
             <span>

@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import { browserHistory } from 'react-router';
-import { create as createObject } from '../utils/objects'
 
+import { create as createObject } from '../utils/objects'
+import Link from '../components/Link';
 import Image from '../components/FlexibleImage';
 import SingleLine from '../components/SingleLine';
 import Padding from '../components/Padding';
@@ -40,7 +40,7 @@ const PortfolioDetainSection = (
     <div className={cx('project-area')} key={v.getHomeLink()} >
       <Image src={v.getProfileImage()} x={33} y={33} />
       <span>
-        <Link className={cx('project-name')} to={v.getHomeLink()}>{v.getName()}</Link>
+        <Link className={cx('project-name')} to={v.getHomeLink()} count={v.getType()}>{v.getName()}</Link>
       </span>
     </div>
   ));
