@@ -10,7 +10,7 @@ import { portfoiloEditorStart } from '../actions/makers';
 
 const cx = classNames.bind(styles);
 
-const PortfolioItemWideSection = ({ portfolio, owner, referrer, portfoiloEditorStart, company, external }) => {
+const PortfolioItemWideSection = ({ portfolio, owner, referrer, portfoiloEditorStart, company, external, imageFit=false }) => {
 
   if(portfolio) {
     const link_name = company.link_name;
@@ -18,7 +18,7 @@ const PortfolioItemWideSection = ({ portfolio, owner, referrer, portfoiloEditorS
       <div className={cx('main-section', 'wide')}>
         <Link to={referrer.createPortfolioLink(portfolio)}>
           <div className={cx('text', 'text-section-wide', external? 'type2' : null)}>
-            {external? <Image src={owner.getProfileImage()} x={50} y={39} className={cx('company-image')} /> : null }
+            {external? <Image src={owner.getProfileImage()} contain={imageFit} x={50} y={39} className={cx('company-image')} /> : null }
             <span>
               <h1>
                 {referrer.createPortfolioTitle(portfolio)}

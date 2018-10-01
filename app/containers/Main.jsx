@@ -5,6 +5,7 @@ import classNames from 'classnames/bind';
 import { browserHistory } from 'react-router';
 
 import { Maker, Project, Company, create as createObject } from '../utils/objects'
+import Assist from '../utils/assist'
 import ProjectCard from '../components/ProjectCard';
 import MakerCard from '../components/MakerCard';
 import Padding from '../components/Padding';
@@ -77,12 +78,12 @@ class MainPageSection extends Component {
 
     const popularCompanyPortfolios = companyPortfolios.slice(0,9).map(portfolio => {
       const owner = createObject('company', portfolio.company);
-      return <PortfolioItemWide portfolio={portfolio} referrer={owner} owner={owner} key={portfolio.pid} external={true} />
+      return <PortfolioItemWide imageFit={true} portfolio={portfolio} referrer={owner} owner={owner} key={portfolio.pid} external={true} />
     })
 
     const recentCompanyPortfolios = companyPortfoliosSorted.slice(0,6).map(portfolio => {
       const owner = createObject('company', portfolio.company);
-      return <PortfolioItemWide portfolio={portfolio} referrer={owner} owner={owner} key={portfolio.pid} external={true} />
+      return <PortfolioItemWide imageFit={true} portfolio={portfolio} referrer={owner} owner={owner} key={portfolio.pid} external={true} />
     })
 
     let popularMakerPortfolios = userPortfolios.map(portfolio => {
@@ -111,11 +112,12 @@ class MainPageSection extends Component {
       let business = company.features.filter(f => f.repr === 'business');
       business = business[0]? business[0] : null;
       const businessName = business && business.content? business.content : '';
-      return <MakerCard 
+      return <MakerCard
                 key={company.name} 
-                picture={company.companyPortfolios[0].images[0]}
+                picture={Assist.Company.getProfileImage(company)}
                 title={company.name} 
                 subTitle={businessName} 
+                imageFit={true}
                 linkTo={'/company/' + company.link_name} />;
     });
 
