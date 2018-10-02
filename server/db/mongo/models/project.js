@@ -23,11 +23,14 @@ const Schema = new mongoose.Schema({
     placeholder: String,
     optional: Boolean // whether it is mandatory or not
   }],
-  portfolios : [Portfolio]
+  portfolios : [Portfolio],
+  score: {type: Number, default: 0},
+  count: {type: Number, default: 0},
 });
 
 Schema.pre('save', function(next) {
-  this.link_name = this.name.replace(/\s/g, '_');
+  if(this.name) 
+    this.link_name = this.name.replace(/\s/g, '_');
   next();
 });
 

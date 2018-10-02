@@ -27,11 +27,14 @@ const Schema = new mongoose.Schema({
   }],
   portfolios : [Portfolio],
   companyPortfolios : [Portfolio],
-  products : [Product]
+  products : [Product],
+  score: {type: Number, default: 0},
+  count: {type: Number, default: 0},
 });
 
 Schema.pre('save', function(next) {
-  this.link_name = this.name.replace(/\s/g, '_');
+  if(this.name)
+    this.link_name = this.name.replace(/\s/g, '_');
   next();
 });
 

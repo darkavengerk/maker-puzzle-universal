@@ -76,7 +76,10 @@ const UserSchema = new mongoose.Schema({
   birthYear: Number,
 
   resetPasswordToken: String,
-  resetPasswordExpires: Date
+  resetPasswordExpires: Date,
+  
+  score: {type: Number, default: 0},
+  count: {type: Number, default: 0},
 });
 
 function encryptPassword(next) {

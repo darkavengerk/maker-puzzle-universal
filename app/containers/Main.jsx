@@ -52,27 +52,16 @@ class MainPageSection extends Component {
   }
 
   render() {
-    let { main, user, portfoiloEditorCancel, loginMenu, cancelLogin } = this.props;
-
-    if(!main || !main.users || !main.companies || !main.projects) {
-      main = {users:[], companies:[], projects:[] };
-    }
-
-    let userPortfolios = [];
-    for(let user of main.users) {
-      userPortfolios = userPortfolios.concat(user.portfolios);
-    }
-
-    let makerPortfoliosSorted = [...userPortfolios];
-    makerPortfoliosSorted.sort( (a,b) => a.created < b.created? 1 : -1);
-
-    let companyPortfolios = [];
-    for(let company of main.companies) {
-      companyPortfolios = companyPortfolios.concat(company.companyPortfolios);
-    }
-
-    let companyPortfoliosSorted = [...companyPortfolios];
-    companyPortfoliosSorted.sort( (a,b) => a.created < b.created? 1 : -1);
+    let { main={}, user, portfoiloEditorCancel, loginMenu, cancelLogin } = this.props;
+    let { 
+      users=[], 
+      projects=[],
+      companies=[],
+      portfolios=[],
+      companyPortfolios=[],
+      portfoliosRecent=[],
+      companyPortfoliosRecent=[] 
+    } = main;
 
     const referrer = createObject('main');
 
@@ -81,22 +70,22 @@ class MainPageSection extends Component {
       return <PortfolioItemWide imageFit={true} portfolio={portfolio} referrer={owner} owner={owner} key={portfolio.pid} external={true} />
     })
 
-    const recentCompanyPortfolios = companyPortfoliosSorted.slice(0,6).map(portfolio => {
+    const recentCompanyPortfolios = companyPortfoliosRecent.slice(0,6).map(portfolio => {
       const owner = createObject('company', portfolio.company);
       return <PortfolioItemWide imageFit={true} portfolio={portfolio} referrer={owner} owner={owner} key={portfolio.pid} external={true} />
     })
 
-    let popularMakerPortfolios = userPortfolios.map(portfolio => {
+    let popularMakerPortfolios = portfolios.map(portfolio => {
         const owner = createObject('maker', portfolio.user);
         return (<PortfolioItem portfolio={portfolio} referrer={referrer} owner={owner} key={portfolio.pid} external={true} />);
       });
 
-    let recentMakerPortfolios = makerPortfoliosSorted.map(portfolio => {
+    let recentMakerPortfolios = portfoliosRecent.map(portfolio => {
         const owner = createObject('maker', portfolio.user);
         return (<PortfolioItem portfolio={portfolio} referrer={referrer} owner={owner} key={portfolio.pid} external={true} />);
       });
 
-    const makerHighlights = main.users.map(maker => {
+    const makerHighlights = users.map(maker => {
       let occupation = maker.features.filter(f => f.repr === 'occupation');
       occupation = occupation[0]? occupation[0] : null;
       const occupationName = occupation && occupation.content? occupation.content : '';
@@ -108,7 +97,7 @@ class MainPageSection extends Component {
                 linkTo={'/maker/' + maker.userid} />;
     });
 
-    const companyHighlights = main.companies.map(company => {
+    const companyHighlights = companies.map(company => {
       let business = company.features.filter(f => f.repr === 'business');
       business = business[0]? business[0] : null;
       const businessName = business && business.content? business.content : '';

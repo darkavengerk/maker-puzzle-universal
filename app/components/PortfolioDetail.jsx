@@ -38,7 +38,7 @@ const PortfolioDetainSection = (
 
   const ownerArea = owner.map(v => (
     <div className={cx('project-area')} key={v.getHomeLink()} >
-      <Image src={v.getProfileImage()} x={33} y={33} />
+      <Image src={v.getProfileImage()} x={33} y={33} contain={v.getType() === 'company'} />
       <span>
         <Link className={cx('project-name')} to={v.getHomeLink()} count={v.getType()}>{v.getName()}</Link>
       </span>

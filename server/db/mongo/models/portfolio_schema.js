@@ -23,7 +23,9 @@ const Schema = new mongoose.Schema({
   pid: String,
   isPrivate: Boolean,
   type: {type:String, default:'maker'},
-  keywords: [String]
+  keywords: [String],
+  score: {type: Number, default: 0},
+  count: {type: Number, default: 0},
 }, { _id: false });
 
 export default Schema;

@@ -16,20 +16,38 @@ const {
 
 let mainContents = null;
 
+async function updateCount(Model, content, identifier) {
+  const stats = await Count.aggregate([
+    { $match: { content } },
+    {
+      $group: {
+        _id:'$total',
+        [identifier]: {$push:'$identifier'}
+      }
+    }
+  ]);
+  for(let s of stats) {
+    const result = await Model.update({[identifier]: s[identifier], count: {$ne:s._id}}, {$set: {count: s._id}}, {multi:true});
+  }
+}
+
 export async function buildContents(req, res) {
   console.log('build main contents...');
   const loadings = [
     User
       .find({'portfolios.0': {$exists:true}})
       .populate(['portfolios.user', 'portfolios.project'])
+      .sort({score:-1})
       .lean(),
     Project
       .find({'portfolios.0': {$exists:true}})
       .populate(['portfolios.user', 'portfolios.company'])
+      .sort({score:-1})
       .lean(),
     Company
       .find({'companyPortfolios.0': {$exists:true}})
       .populate(['companyPortfolios.project', 'companyPortfolios.company'])
+      .sort({score:-1})
       .lean()
   ];
   const [users, projects, companies] = await Promise.all(loadings);
@@ -44,10 +62,52 @@ export async function buildContents(req, res) {
 
 export async function main(req, res) {
 
-  if(!mainContents) {
-    await buildContents();
-  }
-  return res.json(mainContents);
+  const loadings = [
+    User
+      .find({'portfolios.0': {$exists:true}})
+      // .populate(['portfolios.user', 'portfolios.project'])
+      .sort({score:-1})
+      .limit(10)
+      .lean(),
+    Project
+      .find({'portfolios.0': {$exists:true}})
+      // .populate(['portfolios.user', 'portfolios.company'])
+      .sort({score:-1})
+      .limit(10)
+      .lean(),
+    Company
+      .find({'companyPortfolios.0': {$exists:true}})
+      // .populate(['companyPortfolios.project', 'companyPortfolios.company'])
+      .sort({score:-1})
+      .limit(10)
+      .lean(),
+    Portfolio
+      .find({type:'maker'})
+      .populate('user')
+      .sort({score:-1})
+      .limit(20)
+      .lean(),
+    Portfolio
+      .find({type:'company'})
+      .populate('company')
+      .sort({score:-1})
+      .limit(20)
+      .lean(),
+    Portfolio
+      .find({type:'maker'})
+      .populate('user')
+      .sort({created:-1})
+      .limit(20)
+      .lean(),
+    Portfolio
+      .find({type:'company'})
+      .populate('company')
+      .sort({created:-1})
+      .limit(20)
+      .lean()
+  ];
+  const [users, projects, companies, portfolios, companyPortfolios, portfoliosRecent, companyPortfoliosRecent] = await Promise.all(loadings);
+  return res.json({users, projects, companies, portfolios, companyPortfolios, portfoliosRecent, companyPortfoliosRecent});
 }
 
 export async function command(req, res) {
@@ -76,6 +136,64 @@ export async function command(req, res) {
       p.keywords = common.makeIndexFromPortfolio(p);
       await p.save();
     }
+  }
+
+  if(command === 'update-count-batch' || command === 'update-score-batch') {
+    await updateCount(Portfolio, 'portfolio', 'pid');
+    await updateCount(Company, 'company', 'link_name');
+    await updateCount(Project, 'project', 'link_name');
+    await updateCount(User, 'maker', 'userid');
+  }
+
+  if(command === 'update-score-batch') {
+
+    const projects = await Project.find(
+      {}, 
+      {portfolios: 1, companies:1, count:1, score:1}
+    );
+    for(let p of projects) {
+      p.score = p.portfolios.length + p.companies.length + p.count;
+      await p.save();
+    }
+
+    const companyPortfolios = await Portfolio.find(
+      {type: 'company'}, 
+      {images: 1, description:1, count:1, score:1}
+    );
+    for(let p of companyPortfolios) {
+      p.score = (p.count * 2) + (p.images.length**2) + Math.sqrt(p.description.length);
+      await p.save();
+    }
+
+    const makerPortfolios = await Portfolio.find(
+      {type: 'maker'}, 
+      {images: 1, description:1, count:1, score:1}
+    );
+    for(let p of makerPortfolios) {
+      p.score = (p.count * 2) + (p.images.length**2) + Math.sqrt(p.description.length);
+      await p.save();
+    }
+
+    const makers = await User.find(
+      {}, 
+      {portfolios: 1, count:1, score:1}
+    );
+    for(let m of makers) {
+      m.score = (m.portfolios.length) + (m.portfolios.map(x => x.images.length ** 2).reduce((a,b) => a + b, 0)) + 
+                m.count + (m.portfolios.map(x => Math.sqrt(x.description.length)).reduce((a,b) => a + b, 0));
+      await m.save();
+    }
+
+    const companies = await Company.find(
+      {}, 
+      {companyPortfolios: 1, score:1}
+    );
+    for(let c of companies) {
+      c.score = (c.companyPortfolios.length) + (c.companyPortfolios.map(x => x.images.length ** 2).reduce((a,b) => a + b, 0)) + 
+                (c.companyPortfolios.map(x => Math.sqrt(x.description.length)).reduce((a,b) => a + b, 0));
+      await c.save();
+    }
+        
   }
 
   if(command === 'maker-name-batch') {
