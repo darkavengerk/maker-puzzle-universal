@@ -49,9 +49,8 @@ function cut(strings) {
     // const refined = bigWord.replace(/\s/g, '');
     // words.push(refined);
     // words = words.concat(getSeries(refined));
-
-    const splited = bigWord.split(/\s/).filter(x => x);
-    words = words.concat(splited);
+    words = words.concat(bigWord.split(/[^가-힣a-zA-Z]+/).filter(x => x && x.length > 1))
+    const splited = bigWord.split(/[^가-힣]+/).filter(x => x && x.length > 1);
     for(let s of splited) {
       words = words.concat(getSeries(s));
     }
@@ -65,7 +64,8 @@ function makeIndex(sentences) {
   for(let s of sentences) {
     made = made.concat(cut(s));
   }
-  return made;
+  return [...new Set(made)]; // only one layer
+  // return made; // for more layered search
 }
 
 function makeIndexFromPortfolio(portfolio) {

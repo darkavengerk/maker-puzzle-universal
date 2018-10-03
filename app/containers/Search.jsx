@@ -26,20 +26,19 @@ class Container extends Component {
   render() {
     const { user, search, param } = this.props;
     const { portfolios } = search.result || { portfolios:[] };
-    
-    const companyPortfolios = portfolios.filter(p => p.type === 'company');
-    const makerPortfolios = portfolios.filter(p => p.type === 'maker');
-
-    const companyPortfolioTags = companyPortfolios.map(portfolio => {
-      const owner = createObject('company', portfolio.company);
-      return <PortfolioItemWide portfolio={portfolio} referrer={owner} owner={owner} key={portfolio.pid} imageFit={true} external={true} />
-    });
 
     const referrer = createObject('main');
-    let makerPortfolioTags = makerPortfolios.map(portfolio => {
+
+    let portfolioTags = portfolios.map(portfolio => {
+      if(portfolio.type === 'company') {
+        const owner = createObject('company', portfolio.company);
+        return (<PortfolioItemWide portfolio={portfolio} referrer={owner} owner={owner} key={portfolio.pid} external={true} />);
+      }
+      else {
         const owner = createObject('maker', portfolio.user);
-        return (<PortfolioItem portfolio={portfolio} referrer={referrer} owner={owner} key={portfolio.pid} external={true} />);
-      });
+        return <PortfolioItem portfolio={portfolio} referrer={referrer} owner={owner} key={portfolio.pid} imageFit={true} external={true} />
+      }
+    });
 
     return (
       <div className={cx('main-section')}>
@@ -66,11 +65,11 @@ class Container extends Component {
           <div className={cx('title')}>
             포트폴리오 
             <div className={cx('small-title')}>
-              ({companyPortfolioTags.length + makerPortfolioTags.length}개의 검색결과가 있습니다)
+              ({portfolioTags.length}개의 검색결과가 있습니다)
             </div>
           </div>
           <div className={cx('project-tiles')}>
-            {companyPortfolioTags} {makerPortfolioTags}
+            {portfolioTags}
           </div>
         </div>
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />

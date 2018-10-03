@@ -136,6 +136,8 @@ export async function command(req, res) {
       p.keywords = common.makeIndexFromPortfolio(p);
       await p.save();
     }
+    await Portfolio.collection.dropIndex("keywords_text");
+    await Portfolio.collection.createIndex({keywords:"text"});
   }
 
   if(command === 'update-count-batch' || command === 'update-score-batch') {
