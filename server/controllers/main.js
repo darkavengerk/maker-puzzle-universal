@@ -36,35 +36,6 @@ export async function buildContents(req, res) {
   const loadings = [
     User
       .find({'portfolios.0': {$exists:true}})
-      .populate(['portfolios.user', 'portfolios.project'])
-      .sort({score:-1})
-      .lean(),
-    Project
-      .find({'portfolios.0': {$exists:true}})
-      .populate(['portfolios.user', 'portfolios.company'])
-      .sort({score:-1})
-      .lean(),
-    Company
-      .find({'companyPortfolios.0': {$exists:true}})
-      .populate(['companyPortfolios.project', 'companyPortfolios.company'])
-      .sort({score:-1})
-      .lean()
-  ];
-  const [users, projects, companies] = await Promise.all(loadings);
-  projects.sort((a,b) => b.portfolios.length - a.portfolios.length);
-  companies.sort((a,b) => b.companyPortfolios.length - a.companyPortfolios.length);
-
-  mainContents = {users, projects, companies};
-  if(req && res) {
-    res.json({users, projects, companies});
-  }
-}
-
-export async function main(req, res) {
-
-  const loadings = [
-    User
-      .find({'portfolios.0': {$exists:true}})
       // .populate(['portfolios.user', 'portfolios.project'])
       .sort({score:-1})
       .limit(10)
@@ -72,6 +43,7 @@ export async function main(req, res) {
     Project
       .find({'portfolios.0': {$exists:true}})
       // .populate(['portfolios.user', 'portfolios.company'])
+      .populate('portfolios.images')
       .sort({score:-1})
       .limit(10)
       .lean(),
@@ -79,35 +51,49 @@ export async function main(req, res) {
       .find({'companyPortfolios.0': {$exists:true}})
       // .populate(['companyPortfolios.project', 'companyPortfolios.company'])
       .sort({score:-1})
+      .populate('portfolios.images')
       .limit(10)
       .lean(),
     Portfolio
       .find({type:'maker'})
       .populate('user')
+      .populate('portfolios.images')
       .sort({score:-1})
       .limit(20)
       .lean(),
     Portfolio
       .find({type:'company'})
       .populate('company')
+      .populate('portfolios.images')
       .sort({score:-1})
       .limit(20)
       .lean(),
     Portfolio
       .find({type:'maker'})
       .populate('user')
+      .populate('portfolios.images')
       .sort({created:-1})
       .limit(20)
       .lean(),
     Portfolio
       .find({type:'company'})
       .populate('company')
+      .populate('portfolios.images')
       .sort({created:-1})
       .limit(20)
       .lean()
   ];
   const [users, projects, companies, portfolios, companyPortfolios, portfoliosRecent, companyPortfoliosRecent] = await Promise.all(loadings);
-  return res.json({users, projects, companies, portfolios, companyPortfolios, portfoliosRecent, companyPortfoliosRecent});
+  mainContents = { users, projects, companies, portfolios, companyPortfolios, portfoliosRecent, companyPortfoliosRecent };
+  if(req && res) {
+    res.json(mainContents);
+  }
+}
+
+export async function main(req, res) {
+  if(!mainContents)
+    await buildContents();
+  return res.json(mainContents);
 }
 
 export async function command(req, res) {

@@ -62,7 +62,6 @@ class MainPageSection extends Component {
       portfoliosRecent=[],
       companyPortfoliosRecent=[] 
     } = main;
-    console.log(main);
 
     const referrer = createObject('main');
 
