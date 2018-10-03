@@ -62,6 +62,7 @@ class MainPageSection extends Component {
       portfoliosRecent=[],
       companyPortfoliosRecent=[] 
     } = main;
+    console.log(main);
 
     const referrer = createObject('main');
 
@@ -140,7 +141,7 @@ class MainPageSection extends Component {
           </div>
           <Padding height="2.5rem" />
           <div className={cx('project-tiles')}>
-            {main.projects.slice(0,6).map(p => <ProjectCard key={p.name} project={p} />)}
+            {projects.slice(0,6).map(p => <ProjectCard key={p.name} project={p} />)}
           </div>
         </section>
 
