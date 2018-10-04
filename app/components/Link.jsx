@@ -23,7 +23,7 @@ const LinkComponent = ({to, children, user, count=null, ...props}) => {
     }
   }
   return (
-    <Link to={to} onClick={click} {...props}>
+    <Link to={to} onClick={click} role="button" {...props}>
       {children}
     </Link>
   );

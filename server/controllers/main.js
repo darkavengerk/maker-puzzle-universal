@@ -96,6 +96,53 @@ export async function main(req, res) {
   return res.json(mainContents);
 }
 
+export async function more(req, res) {
+  const params = req.params;
+  const topic = req.params.topic;
+
+  if(topic === 'project') {
+    const projects = await Project
+                            .find({'portfolios.0': {$exists:true}})
+                            .populate('portfolios.images')
+                            .sort({score:-1})
+                            .lean();
+    return res.json({ [topic]: projects, title:'프로젝트 들여다보기'});
+  }
+
+  if(topic === 'portfolio') {
+    const type = params.subtype;
+    const sort = params.sort;
+    const portfolios = await Portfolio
+                            .find({ type })
+                            .populate(['company', 'user'])
+                            .populate('portfolios.images')
+                            .sort({[params.sort === 'recent'? 'created' : 'score']:-1})
+                            .limit(20)
+                            .lean();
+    const prefix = (sort === 'popular')? '인기 ' : '새로 등록된 ';
+    return res.json({ [topic]: portfolios, title: prefix + ((type === 'company')? '수행실적' : '포트폴리오')});
+  }
+
+  if(topic === 'company') {
+    const companies = await Company
+                              .find({'companyPortfolios.0': {$exists:true}})
+                              .sort({score:-1})
+                              .populate('portfolios.images')
+                              .lean();
+    return res.json({ [topic]: companies, title:'주목할만한 기업들'});
+  }
+
+  if(topic === 'maker') {
+    const companies = await User
+                              .find({'portfolios.0': {$exists:true}})
+                              .sort({score:-1})
+                              .limit(10)
+                              .lean();
+    return res.json({ [topic]: companies, title:'주목할만한 메이커들'});
+  }
+  return res.json({});
+}
+
 export async function command(req, res) {
   const command = req.params.command;
 
@@ -252,6 +299,7 @@ export async function search(req, res) {
 
 export default {
   main,
+  more,
   command,
   search,
   increaseCount

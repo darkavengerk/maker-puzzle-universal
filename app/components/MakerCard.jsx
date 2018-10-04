@@ -13,9 +13,9 @@ import styles from '../css/components/business-card';
 
 const cx = classNames.bind(styles);
 
-const MakerCardSection = ({picture, title, subTitle, linkTo, isCompany=false, ...props}) => {  
+const MakerCardSection = ({picture, title, subTitle, linkTo, isCompany=false, autoMargin=false, ...props}) => {  
   return (
-    <Link className={cx('maker-tile')} to={linkTo} role="button" count={isCompany? 'company' : 'maker'}>
+    <Link className={cx(['maker-tile', autoMargin? 'maker-tile-margin':null])} to={linkTo} role="button" count={isCompany? 'company' : 'maker'}>
       {isCompany? 
         <div className={cx('maker-tile-image-boundary')}>
           <FlexibleImage className={cx('maker-tile-image')} x={180} y={180} src={picture} contain={true} version="medium" />

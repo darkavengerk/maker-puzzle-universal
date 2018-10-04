@@ -14,6 +14,7 @@ import PortfolioItem from '../components/PortfolioItem';
 import Popup from '../components/Popup';
 import AddPortfolio from '../components/AddPortfolio';
 import Login from '../components/Login';
+import Link from '../components/Link';
 
 import { portfoiloEditorStart, portfoiloEditorCancel, portfoiloSubmit } from '../actions/makers';
 import { loginMenu, cancelLogin } from '../actions/users';
@@ -136,7 +137,10 @@ class MainPageSection extends Component {
 
         <section className={cx('project-section')}>
           <div className={cx('title')}>
-            프로젝트 들여다보기 <span className={cx('more-detail')}>더 보기</span>
+            프로젝트 들여다보기 
+            <Link to="/more/project/p/popular">
+              <span className={cx('more-detail')}>더 보기</span>
+            </Link>
           </div>
           <Padding height="2.5rem" />
           <div className={cx('project-tiles')}>
@@ -168,7 +172,10 @@ class MainPageSection extends Component {
 
         <section className={cx('project-section')}>
           <div className={cx('title')}>
-            인기 수행실적 <span className={cx('more-detail')}>더 보기</span>
+            인기 수행실적 
+            <Link to="/more/portfolio/company/popular">
+              <span className={cx('more-detail')}>더 보기</span>
+            </Link>
           </div>
           <Padding height="2.5rem" />
           <div className={cx('project-tiles')}>
@@ -178,7 +185,10 @@ class MainPageSection extends Component {
 
         <section className={cx('project-section')}>
           <div className={cx('title')}>
-            인기 포트폴리오 <span className={cx('more-detail')}>더 보기</span>
+            인기 포트폴리오
+            <Link to="/more/portfolio/maker/popular">
+              <span className={cx('more-detail')}>더 보기</span>
+            </Link>
           </div>
           <Padding height="2.5rem" />
           <div className={cx('project-tiles')}>
@@ -188,7 +198,10 @@ class MainPageSection extends Component {
 
         <section className={cx('project-section')}>
           <div className={cx('title')}>
-            새로 등록된 수행실적 <span className={cx('more-detail')}>더 보기</span>
+            새로 등록된 수행실적
+            <Link to="/more/portfolio/company/recent">
+              <span className={cx('more-detail')}>더 보기</span>
+            </Link>
           </div>
           <Padding height="2.5rem" />
           <div className={cx('project-tiles')}>
@@ -198,7 +211,10 @@ class MainPageSection extends Component {
 
         <section className={cx('project-section')}>
           <div className={cx('title')}>
-            새로 등록된 포트폴리오 <span className={cx('more-detail')}>더 보기</span>
+            새로 등록된 포트폴리오
+            <Link to="/more/portfolio/maker/recent">
+              <span className={cx('more-detail')}>더 보기</span>
+            </Link>
           </div>
           <Padding height="2.5rem" />
           <div className={cx('project-tiles')}>
@@ -225,7 +241,10 @@ class MainPageSection extends Component {
 
         <section className={cx('project-section')}>
           <div className={cx('title')}>
-            주목할만한 메이커들 <span className={cx('more-detail')}>더 보기</span>
+            주목할만한 메이커들
+            <Link to="/more/maker/c/popular">
+              <span className={cx('more-detail')}>더 보기</span>
+            </Link>
           </div>
           <Padding height="2.5rem" />
           <div className={cx('project-tiles')}>
@@ -239,7 +258,10 @@ class MainPageSection extends Component {
 
         <section className={cx('project-section')}>
           <div className={cx('title')}>
-            주목할만한 기업들 <span className={cx('more-detail')}>더 보기</span>
+            주목할만한 기업들
+            <Link to="/more/company/c/popular">
+              <span className={cx('more-detail')}>더 보기</span>
+            </Link>
           </div>
           <Padding height="2.5rem" />
           <div className={cx('project-tiles')}>

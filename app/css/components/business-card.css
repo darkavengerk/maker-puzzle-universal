@@ -98,3 +98,8 @@
   line-height: 1.43;
   color: #777677;
 }
+
+.maker-tile-margin {
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
