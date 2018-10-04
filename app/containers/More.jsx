@@ -2,19 +2,18 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
+import InfiniteScroll from 'react-infinite-scroller';
 
-import ImageUploader from '../components/ImageUploader';
-import TopTitle from '../components/TopTitle';
-import ContentsSection from '../components/ContentsSection';
-import SingleLine from '../components/SingleLine';
-import Padding from '../components/Padding';
-import ProjectCard from '../components/ProjectCard';
 import PortfolioItemWide from '../components/PortfolioItemWide';
-import MakerCard from '../components/MakerCard';
 import PortfolioItem from '../components/PortfolioItem';
+import TopTitle from '../components/TopTitle';
+import SingleLine from '../components/SingleLine';
+import ProjectCard from '../components/ProjectCard';
+import MakerCard from '../components/MakerCard';
 import Assist from '../utils/assist'
 
 import { create as createObject } from '../utils/objects'
+import { loadMoreData } from '../actions/main';
 
 import styles from '../css/components/search';
 
@@ -27,7 +26,7 @@ class Container extends Component {
   }
 
   render() {
-    const { more, param } = this.props;
+    const { more, param, loadMoreData } = this.props;
 
     const topic = param.topic;
 
@@ -83,6 +82,10 @@ class Container extends Component {
       });
     }
 
+    function loadFunc(page) {
+      loadMoreData({...param, page});
+    }
+
     return (
       <div className={cx('main-section')}>
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
@@ -92,11 +95,18 @@ class Container extends Component {
           thumbnailURL={null} 
         />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
-        <div className={cx('projects-section')}>
-          <div className={cx('project-tiles')}>
-            {tags}
+        <InfiniteScroll
+            pageStart={0}
+            loadMore={loadFunc}
+            hasMore={more.hasMore}
+            useWindow={true}
+        >
+          <div className={cx('projects-section')}>
+            <div className={cx('project-tiles')}>
+                {tags}
+            </div>
           </div>
-        </div>
+        </InfiniteScroll>
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
       </div>
     );
@@ -114,4 +124,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {})(Container);
+export default connect(mapStateToProps, { loadMoreData })(Container);

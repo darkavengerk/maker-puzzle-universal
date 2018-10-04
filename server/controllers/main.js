@@ -98,15 +98,18 @@ export async function main(req, res) {
 
 export async function more(req, res) {
   const params = req.params;
+  const page = params.page || 0;
   const topic = req.params.topic;
 
   if(topic === 'project') {
     const projects = await Project
                             .find({'portfolios.0': {$exists:true}})
                             .populate('portfolios.images')
+                            .skip(page * 6)
+                            .limit(6)
                             .sort({score:-1})
                             .lean();
-    return res.json({ [topic]: projects, title:'프로젝트 들여다보기'});
+    return res.json({ [topic]: projects, title:'프로젝트 들여다보기', topic });
   }
 
   if(topic === 'portfolio') {
@@ -115,30 +118,34 @@ export async function more(req, res) {
     const portfolios = await Portfolio
                             .find({ type })
                             .populate(['company', 'user'])
+                            .skip(page * 20)
                             .populate('portfolios.images')
                             .sort({[params.sort === 'recent'? 'created' : 'score']:-1})
                             .limit(20)
                             .lean();
     const prefix = (sort === 'popular')? '인기 ' : '새로 등록된 ';
-    return res.json({ [topic]: portfolios, title: prefix + ((type === 'company')? '수행실적' : '포트폴리오')});
+    return res.json({ [topic]: portfolios, title: prefix + ((type === 'company')? '수행실적' : '포트폴리오'), topic });
   }
 
   if(topic === 'company') {
     const companies = await Company
                               .find({'companyPortfolios.0': {$exists:true}})
                               .sort({score:-1})
+                              .skip(page * 12)
+                              .limit(12)
                               .populate('portfolios.images')
                               .lean();
-    return res.json({ [topic]: companies, title:'주목할만한 기업들'});
+    return res.json({ [topic]: companies, title:'주목할만한 기업들', topic });
   }
 
   if(topic === 'maker') {
     const companies = await User
                               .find({'portfolios.0': {$exists:true}})
                               .sort({score:-1})
+                              .skip(page * 10)
                               .limit(10)
                               .lean();
-    return res.json({ [topic]: companies, title:'주목할만한 메이커들'});
+    return res.json({ [topic]: companies, title:'주목할만한 메이커들', topic });
   }
   return res.json({});
 }

@@ -13,6 +13,10 @@ export default () => {
       method: 'GET',
       url: `/api/more/${params.topic}/${params.subtype}/${params.sort}`
     }),
+    loadMore: (params) => client.request({
+      method: 'GET',
+      url: `/api/more/${params.topic}/${params.subtype}/${params.sort}/${params.page}`
+    }),
     count: ({ content, identifier }) => client.request({
       method: 'POST',
       url: '/api/count',
