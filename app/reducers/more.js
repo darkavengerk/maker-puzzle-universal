@@ -8,11 +8,21 @@ const more = (
 ) => {
   switch (action.type) {      
     case types.REQUEST_SUCCESS:
-      if (action.data && action.data.more) return {...action.data.more, hasMore: true};
+      if (action.data && action.data.more) {
+        const { more } = action.data;
+        if(state[more.topic] && state[more.topic][more.subtype] && state[more.topic][more.subtype].length >= 0) {
+          return state;
+        }
+        const subset = {...(state[more.topic] || {})};
+        subset[more.subtype] = more.result;
+        return {...state, [more.topic]: subset, hasMore: true, topic: more.topic, subtype: more.subtype, title: more.title};
+      }
       return state;
     case types.LOAD_MORE_DATA:
-      const topic = action.data.topic;
-      return {...state, [topic]: state[topic].concat(action.data[topic]), hasMore: action.data[topic].length > 0};
+      const { title, topic, subtype, result } = action.data;
+      const subset = {...(state[topic] || {})};
+      subset[subtype] = (subset[subtype] || []).concat(result);
+      return {...state, [topic]: subset, hasMore: result.length > 0, topic, subtype, title};
     default:
       return state;
   }

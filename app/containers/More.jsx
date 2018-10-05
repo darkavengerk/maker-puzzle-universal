@@ -23,14 +23,19 @@ class Container extends Component {
   
   constructor(props) {
     super(props);
+    this.state = {loading: true};
+  }
+
+  componentDidMount() {
+    this.setState({loading: false});
   }
 
   render() {
     const { more, param, loadMoreData } = this.props;
 
-    const topic = param.topic;
+    const { topic, subtype } = more;
 
-    const data = more[topic];
+    const data = (more[topic] || {})[subtype] || [];
     let tags = [];
 
     if(topic === 'project') {
@@ -83,7 +88,9 @@ class Container extends Component {
     }
 
     function loadFunc(page) {
-      loadMoreData({...param, page});
+      if(param.topic) {
+        loadMoreData({...param, current: data.length});
+      }
     }
 
     return (
@@ -98,7 +105,7 @@ class Container extends Component {
         <InfiniteScroll
             pageStart={0}
             loadMore={loadFunc}
-            hasMore={more.hasMore}
+            hasMore={ data && data.length > 0 && more.hasMore}
             useWindow={true}
         >
           <div className={cx('projects-section')}>

@@ -31,57 +31,47 @@ async function updateCount(Model, content, identifier) {
   }
 }
 
+function getContents(model, query, sort, limit, loaded, populate) {
+  const sorting = sort === 'popular'? {score:-1} : {created:-1};
+  return model
+      .find(query)
+      .populate(populate)
+      .sort(sorting)
+      .skip(loaded)
+      .limit(limit)
+      .lean();
+}
+
+function getUserContents({sort='popular', loaded=0, limit=6}) {
+  return getContents(User, {'portfolios.0': {$exists:true}}, sort, limit, loaded, []);
+}
+
+function getProjectContents({sort='popular', loaded=0, limit=6}) {
+  return getContents(Project, {'portfolios.0': {$exists:true}}, sort, limit, loaded, ['portfolios.images']);
+}
+
+function getCompanyContents({sort='popular', loaded=0, limit=6}) {
+  return getContents(Company, {'companyPortfolios.0': {$exists:true}}, sort, limit, loaded, []);
+}
+
+function getMakerPorfolioContents({sort='popular', loaded=0, limit=18}) {
+  return getContents(Portfolio, {type:'maker'}, sort, limit, loaded, ['user', 'company', 'portfolios.images']);
+}
+
+function getCompanyPorfolioContents({sort='popular', loaded=0, limit=9}) {
+  return getContents(Portfolio, {type:'company'}, sort, limit, loaded, ['user', 'company', 'portfolios.images']);
+}
+
 export async function buildContents(req, res) {
-  console.log('build main contents...');
+  console.log('build main contents...', new Date().toISOString());
   const loadings = [
-    User
-      .find({'portfolios.0': {$exists:true}})
-      // .populate(['portfolios.user', 'portfolios.project'])
-      .sort({score:-1})
-      .limit(10)
-      .lean(),
-    Project
-      .find({'portfolios.0': {$exists:true}})
-      // .populate(['portfolios.user', 'portfolios.company'])
-      .populate('portfolios.images')
-      .sort({score:-1})
-      .limit(10)
-      .lean(),
-    Company
-      .find({'companyPortfolios.0': {$exists:true}})
-      // .populate(['companyPortfolios.project', 'companyPortfolios.company'])
-      .sort({score:-1})
-      .populate('portfolios.images')
-      .limit(10)
-      .lean(),
-    Portfolio
-      .find({type:'maker'})
-      .populate('user')
-      .populate('portfolios.images')
-      .sort({score:-1})
-      .limit(20)
-      .lean(),
-    Portfolio
-      .find({type:'company'})
-      .populate('company')
-      .populate('portfolios.images')
-      .sort({score:-1})
-      .limit(20)
-      .lean(),
-    Portfolio
-      .find({type:'maker'})
-      .populate('user')
-      .populate('portfolios.images')
-      .sort({created:-1})
-      .limit(20)
-      .lean(),
-    Portfolio
-      .find({type:'company'})
-      .populate('company')
-      .populate('portfolios.images')
-      .sort({created:-1})
-      .limit(20)
-      .lean()
+    getUserContents({}),
+    getProjectContents({}),
+    getCompanyContents({}),
+    getMakerPorfolioContents({}),
+    getCompanyPorfolioContents({}),
+    getMakerPorfolioContents({sort:'recent', limit:12}),
+    getCompanyPorfolioContents({sort:'recent', limit:6})
   ];
   const [users, projects, companies, portfolios, companyPortfolios, portfoliosRecent, companyPortfoliosRecent] = await Promise.all(loadings);
   mainContents = { users, projects, companies, portfolios, companyPortfolios, portfoliosRecent, companyPortfoliosRecent };
@@ -98,54 +88,30 @@ export async function main(req, res) {
 
 export async function more(req, res) {
   const params = req.params;
-  const page = params.page || 0;
-  const topic = req.params.topic;
+  const loaded = Number.parseInt(params.loaded || 0);
+  const { topic, subtype } = params;
 
   if(topic === 'project') {
-    const projects = await Project
-                            .find({'portfolios.0': {$exists:true}})
-                            .populate('portfolios.images')
-                            .skip(page * 6)
-                            .limit(6)
-                            .sort({score:-1})
-                            .lean();
-    return res.json({ [topic]: projects, title:'프로젝트 들여다보기', topic });
+    const result = await getProjectContents({ loaded });
+    return res.json({ result, title:'프로젝트 들여다보기', topic, subtype });
   }
 
-  if(topic === 'portfolio') {
-    const type = params.subtype;
+  if(topic === 'portfolio') {    
     const sort = params.sort;
-    const portfolios = await Portfolio
-                            .find({ type })
-                            .populate(['company', 'user'])
-                            .skip(page * 20)
-                            .populate('portfolios.images')
-                            .sort({[params.sort === 'recent'? 'created' : 'score']:-1})
-                            .limit(20)
-                            .lean();
+    const loader = subtype.startsWith('company')? getCompanyPorfolioContents : getMakerPorfolioContents;
+    const result = await loader({ sort, limit:12, loaded });
     const prefix = (sort === 'popular')? '인기 ' : '새로 등록된 ';
-    return res.json({ [topic]: portfolios, title: prefix + ((type === 'company')? '수행실적' : '포트폴리오'), topic });
+    return res.json({ result, title: prefix + ((subtype === 'company')? '수행실적' : '포트폴리오'), topic, subtype: subtype + sort });
   }
 
   if(topic === 'company') {
-    const companies = await Company
-                              .find({'companyPortfolios.0': {$exists:true}})
-                              .sort({score:-1})
-                              .skip(page * 12)
-                              .limit(12)
-                              .populate('portfolios.images')
-                              .lean();
-    return res.json({ [topic]: companies, title:'주목할만한 기업들', topic });
+    const result = await getCompanyContents({ loaded });
+    return res.json({ result, title:'주목할만한 기업들', topic, subtype });
   }
 
   if(topic === 'maker') {
-    const companies = await User
-                              .find({'portfolios.0': {$exists:true}})
-                              .sort({score:-1})
-                              .skip(page * 10)
-                              .limit(10)
-                              .lean();
-    return res.json({ [topic]: companies, title:'주목할만한 메이커들', topic });
+    const result = await getUserContents({ loaded });
+    return res.json({ result, title:'주목할만한 메이커들', topic, subtype });
   }
   return res.json({});
 }
