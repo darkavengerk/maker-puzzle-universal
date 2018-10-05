@@ -33,6 +33,8 @@ class Container extends Component {
   render() {
     const { more, param, loadMoreData } = this.props;
 
+    if(!param.topic) return null;
+
     const { topic, subtype } = more;
 
     const data = (more[topic] || {})[subtype] || [];
@@ -49,7 +51,7 @@ class Container extends Component {
           const owner = createObject('company', portfolio.company);
           return (<PortfolioItemWide portfolio={portfolio} referrer={owner} owner={owner} key={portfolio.pid} imageFit={true} external={true} />);
         }
-        else {
+        if(param.subtype === 'maker') {
           const owner = createObject('maker', portfolio.user);
           return <PortfolioItem portfolio={portfolio} referrer={referrer} owner={owner} key={portfolio.pid} external={true} />
         }

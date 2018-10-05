@@ -11,7 +11,7 @@ const more = (
       if (action.data && action.data.more) {
         const { more } = action.data;
         if(state[more.topic] && state[more.topic][more.subtype] && state[more.topic][more.subtype].length >= 0) {
-          return state;
+          return {...state, topic: more.topic, subtype: more.subtype, title: more.title, hasMore: true};
         }
         const subset = {...(state[more.topic] || {})};
         subset[more.subtype] = more.result;
