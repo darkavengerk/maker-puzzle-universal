@@ -24,10 +24,12 @@
 .project-tile .header {
   width: 270px;
   height: 320px;
+  padding: 0 1rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  position: relative;
 }
 
 .project-tile .header .title{
@@ -36,13 +38,18 @@
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
-  line-height: 0.8;
+  line-height: 1.2;
   letter-spacing: normal;
   text-align: center;
   color: #4a4a4a;
 }
 
 .project-tile .header .sub-title {
+  width: 22rem;
+  overflow: hidden;
+  white-space: nowrap; /* Don't forget this one */
+  text-overflow: ellipsis;
+  
   font-family: NanumBarunGothic;
   font-size: 12px;
   font-weight: 300;
@@ -55,6 +62,8 @@
 }
 
 .project-tile .header .detail-button {
+  position: absolute;
+  bottom: 4.4rem;
   width: 153px;
   height: 50px;
   border-radius: 8px;

@@ -23,7 +23,7 @@ class ProjectContainer extends Component {
         <TopTitle 
           title={project.getName()}
           to={project.getHomeLink()}
-          thumbnailURL={project.profileImage? project.getProfileImage():null} 
+          thumbnailURL={project.profilePicture? project.getProfileImage():null} 
         />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
         <ContentsSection user={user} owner={project} contentsType={contentsType} isOwnPage={false} />

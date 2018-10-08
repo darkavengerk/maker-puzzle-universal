@@ -73,6 +73,26 @@ export function update(req, res) {
   });
 }
 
+export async function updateFeatures(req, res) {
+  const link_name = req.params.link_name;
+  let { features, profilePicture } = req.body;
+
+  try {
+    if(features.length > 0) {
+      const result = await Project.update({ link_name }, {$set:{ features, profilePicture }});
+      res.json(result);
+    }
+    else {
+      console.log('no features', req.body);
+      res.json({result: 'error'});
+    }
+  }
+  catch (err) {
+    console.log(err);
+    return res.status(500).send('Something went wrong getting the data');
+  }
+}
+
 /**
  * Remove a topic
  */
@@ -94,5 +114,6 @@ export default {
   one,
   add,
   update,
+  updateFeatures,
   remove
 };

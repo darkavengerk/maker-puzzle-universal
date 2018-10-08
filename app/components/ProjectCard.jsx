@@ -21,7 +21,7 @@ const ProjectCardSection = ({project, ...props}) => {
   return (
     <Link className={cx('project-tile')} to={'/project/' + project.link_name} role="button" count="project">
       <div className={cx('header')}>
-        <Padding height="9rem" />
+        <Padding height="8.5rem" />
         <div className={cx('title')}>
           {project.name}
         </div>
@@ -34,7 +34,12 @@ const ProjectCardSection = ({project, ...props}) => {
           +{project.portfolios.length} Portfolios
         </div>
       </div>
-      <FlexibleImage className={cx('project-tile-image')} x={390} y={320} src={project.portfolios[0].images[0]} version="large" />
+      <FlexibleImage 
+        className={cx('project-tile-image')} 
+        x={390} y={320} 
+        src={project.profilePicture || project.portfolios[0].images[0]} 
+        version="large"
+      />
     </Link>
 
   );

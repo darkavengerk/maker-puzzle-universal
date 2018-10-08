@@ -48,6 +48,7 @@ export default (app) => {
     app.get('/api/project/:link_name', projectController.one);
     app.post('/project', projectController.add);
     app.put('/project/:id', projectController.update);
+    app.post('/api/project/:link_name/features', projectController.updateFeatures);
     app.delete('/project/:id', projectController.remove);
   } else {
     console.warn(unsupportedMessage('project routes'));

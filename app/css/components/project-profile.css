@@ -56,3 +56,27 @@
 
   background-color: #e7e7e7;
 }
+
+.system-button-area {
+  text-align: center;
+}
+
+.system-button {
+  width: 8.7rem;
+  height: 2rem;
+  border-radius: 1px;
+  border: solid 1px #676767;
+
+  font-family: NanumBarunGothic;
+  font-size: 1.1rem;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+  text-align: center;
+  line-height: 2rem;
+  vertical-align: middle;
+  color: #000000;
+
+  margin: 0 0.35rem;
+}

@@ -12,7 +12,7 @@ import Image from '../components/FlexibleImage';
 
 import styles from '../css/components/project-profile';
 
-import { featureEditSave } from '../actions/makers';
+import { featureEditSave } from '../actions/projects';
 import { Project } from '../utils/objects';
 
 const cx = classNames.bind(styles);
@@ -36,8 +36,9 @@ class ProjectProfile extends Component {
   }
 
   cancelEdit() {
-    // const { project: { features }} = this.props;
-    // this.setState({ features, editing: false });
+    const { project } = this.props;
+    const { features, profile } = project;
+    this.setState({ features, profile, editing: false });
   }
 
   featureEdited(key, text) {
@@ -68,25 +69,43 @@ class ProjectProfile extends Component {
 
     const project = new Project(this.props.project);
 
+    const profileImage = this.state.editing && this.state.profilePicture? this.state.profilePicture : project.getProfileImage();
+
+
+    const adminButtons = this.state.editing? <div className={cx('system-button-area')} ><br/>
+      <label className={cx('system-button', 'important')} role="button" onClick={this.submit} role="button">변경내용 저장</label> 
+      <label className={cx('system-button')} role="button" onClick={this.cancelEdit} role="button">취소</label>
+    </div> : <div className={cx('system-button-area')} ><br/>
+      <label className={cx('system-button')} role="button" onClick={this.startEdit} role="button">정보 수정</label>
+    </div>;
+
     return (
       <div className={cx('main-section')}>
-        <Image src={project.getProfileImage()} x={349} y={248} />
+        <span style={{position:'relative', height:'14.4rem'}}>
+          <Image src={profileImage} x={349} y={248} />
+          <span style={{position:'absolute', bottom:'0.3rem', right:'0.4rem', 'zIndex':1}}>
+            {this.state.editing? 
+              <ImageUploader name="ImageUploader" callback={this.profileImageEdited} >
+                <FlexibleImage className={cx('image-upload-trigger')} src={"/images/site/camera-1.png"} x={34} y={34} />
+              </ImageUploader>
+              : ''}
+          </span>
+        </span>
         <div className={cx('feature-area')}>
           {project.features? 
-            <Features 
-              features={[{title:'프로젝트명', content: project.name}, ...project.features]}
-              featureEdited={this.featureEdited}
-              classNames={{
-                title: cx('feature-title'),
-                content: cx('feature', this.state.editing? 'editing':''),
-                row: cx('feature-item')
-              }}
-              editing={this.state.editing}
-            /> : null
+          <Features 
+            features={[{title:'프로젝트명', content: project.name}, ...project.features]}
+            featureEdited={this.featureEdited}
+            classNames={{
+              title: cx('feature-title'),
+              content: cx('feature', this.state.editing? 'editing':''),
+              row: cx('feature-item')
+            }}
+            editing={this.state.editing}
+          /> : null
           }
-          
-        </div>
-        
+          {user.account.type === 'admin'? adminButtons: null}
+        </div>        
       </div>
     );
   }

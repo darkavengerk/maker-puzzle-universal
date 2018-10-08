@@ -23,6 +23,11 @@ export default () => {
       url: `/api/project/${id}`,
       data
     }),
+    updateProjectFeatures: ({link_name, data}) => client.request({
+      method: 'POST',
+      url: `/api/project/${link_name}/features`,
+      data
+    }),
     createProject: ({ id, data }) => client.request({
       method: 'POST',
       url: `/api/project/${id}`,

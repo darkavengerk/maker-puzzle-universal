@@ -16,6 +16,10 @@ const project = (
       if (action.data && action.data.project) return action.data.project;
       return state;
 
+    case types.PROJECT_PROFILE_EDIT_SUCCESS:
+      const { features, profilePicture } = action.data;
+      return {...state, features, profilePicture}
+
     case types.PORTFOLIO_DELETE_SUCCESS:
       const pidDeleted = action.data.pid;
       if(pidDeleted) {
