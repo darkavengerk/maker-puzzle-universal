@@ -145,7 +145,7 @@ async function savePortfolio({ portfolio, project, company, user }) {
 
   await Promise.all(saving);
 
-  if(!isDebug) {
+  if(isProduction) {
     imageProcess({images: portfolio.images});
   }
 
