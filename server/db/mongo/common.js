@@ -3,6 +3,7 @@ import path from 'path';
 import sharp from 'sharp';
 import aws from 'aws-sdk';
 
+import { isDebug } from '../../../config/app';
 import Company, {autoComplete as companyAutoComplete} from './models/company';
 import Project, {autoComplete as projectAutoComplete} from './models/project';
 import Image from './models/image';
@@ -144,7 +145,9 @@ async function savePortfolio({ portfolio, project, company, user }) {
 
   await Promise.all(saving);
 
-  imageProcess({images: portfolio.images});
+  if(!isDebug) {
+    imageProcess({images: portfolio.images});
+  }
 
   return {user, project, company, portfolio};
 }
