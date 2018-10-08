@@ -3,7 +3,7 @@ import path from 'path';
 import sharp from 'sharp';
 import aws from 'aws-sdk';
 
-import { isDebug } from '../../../config/app';
+import { isProduction } from '../../../config/app';
 import Company, {autoComplete as companyAutoComplete} from './models/company';
 import Project, {autoComplete as projectAutoComplete} from './models/project';
 import Image from './models/image';

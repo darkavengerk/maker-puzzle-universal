@@ -94,11 +94,12 @@ class ProjectProfile extends Component {
         <div className={cx('feature-area')}>
           {project.features? 
           <Features 
-            features={[{title:'프로젝트명', content: project.name}, ...project.features]}
+            features={[{title:'프로젝트명', content: project.name, blocked: true}, ...project.features]}
             featureEdited={this.featureEdited}
             classNames={{
               title: cx('feature-title'),
-              content: cx('feature', this.state.editing? 'editing':''),
+              content: cx('feature'),
+              editing: cx('editing'),
               row: cx('feature-item')
             }}
             editing={this.state.editing}

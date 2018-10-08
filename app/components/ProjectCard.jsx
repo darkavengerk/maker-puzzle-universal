@@ -23,7 +23,7 @@ const ProjectCardSection = ({project, ...props}) => {
       <div className={cx('header')}>
         <Padding height="8.5rem" />
         <div className={cx('title')}>
-          {project.name}
+          {project.name.split(' ').map((word, i) => <label key={i}>{word}</label>)}
         </div>
         <Padding height="1rem" />
         <div className={cx('sub-title')}>
