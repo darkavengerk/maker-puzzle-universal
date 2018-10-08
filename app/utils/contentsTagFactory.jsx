@@ -179,12 +179,12 @@ class ContentsTagFactory {
                 {companyPortfolios}
               </div>
 
-              <Padding height={'3.5rem'} />
+{/*              <Padding height={'3.5rem'} />
               
               <p className={cx('main-panel-title')}>제품 목록</p>
               <div className={cx('portfolio-list')}>
                 {products}
-              </div>
+              </div>*/}
 
               <Padding height={'3.5rem'} />
               
