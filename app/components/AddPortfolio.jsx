@@ -222,7 +222,7 @@ class AddPortfolio extends Component {
                   <td className={cx('entity-title')}>
                     <Scatter text="소속 기업" />
                   </td>
-                  <td className={cx('entity', 'relative')}>
+                  <td className={cx('entity')}>
                     <AutoComplete 
                       request={Company().searchCompaniesByName}
                       title="company-name"

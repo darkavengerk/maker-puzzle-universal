@@ -248,6 +248,11 @@ td[contenteditable=true]:empty:before {
   vertical-align: middle;
 }
 
+.new-company-name {
+  width: 16rem;
+  border: none;
+}
+
 .add-entry {
   width: 28.9rem;
   height: 2.6rem;

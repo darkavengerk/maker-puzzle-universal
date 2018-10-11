@@ -40,10 +40,6 @@
   border:none;
 }
 
-.relative {
-  position: relative;
-}
-
 /* font */
 
 .entity-title, .entity, .entity-must, .entity-helper, .text-field, .tag-field {
@@ -104,24 +100,6 @@
 /* color */
 
 /* etc*/
-
-.auto-complete {
-  position: absolute;
-  background: white;
-  width: 32.7rem;
-  top: 2.7rem;
-  list-style-type: none;
-  padding: 0;
-  z-index: 9;
-}
-
-.auto-complete-word {
-  padding: 0.5rem;
-}
-
-.selected {
-  background: yellow;
-}
 
 .entity-title {
   width: 6.0rem;

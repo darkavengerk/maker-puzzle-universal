@@ -6,8 +6,11 @@ import ContentEditable from 'react-contenteditable'
 import Link from '../components/Link';
 import Padding from '../components/Padding';
 import FlexibleImage from '../components/FlexibleImage';
+import AutoComplete from '../components/AutoComplete';
 
 import styles from '../css/components/maker-profile';
+
+import { Company } from '../services';
 
 const cx = classNames.bind(styles);
 
@@ -21,6 +24,14 @@ const Component = ({ maker, editing, onChange, ...props }) => {
     const value = evt.target.value;
     const newState = history.map(info => {
       if(info.order === order) return {...info, [category]: value};
+      return info;
+    });
+    onChange({companies: newState}, 'makerProfile');
+  }
+
+  const companyNameChanged = order => name => {
+    const newState = history.map(info => {
+      if(info.order === order) return {...info, name};
       return info;
     });
     onChange({companies: newState}, 'makerProfile');
@@ -44,16 +55,18 @@ const Component = ({ maker, editing, onChange, ...props }) => {
     return (
       <tr key={info.order} draggable="true">
         <td className={cx('col-info', 'first-item')}>{info.order + 1}</td>
-        {editing? 
-          <ContentEditable 
-            className={cx('text-input', 'company-title', (info.current? "col-selected": ""))}
-            html={info.name} 
+        {editing && info.newItem?
+          <AutoComplete
+            request={Company().searchCompaniesByName}
+            title="new-company-name"
+            update={companyNameChanged(info.order)}
+            text={info.name}
+            className={cx('text-input', 'company-title', 'new-company-name')}
+            textLimit={50}
             tagName="td"
+            top="2.2rem"
+            width="16rem"
             placeholder="기업명을 입력 후 선택하세요"
-            disabled={editing && info.newItem? false : true}
-            onKeyPress={preventEnter}
-            onKeyDown={preventEnter}
-            onChange={featureChanged(info.order, 'name')}
           /> :
           <td className={cx('text-input', 'company-title', (info.current? "col-selected": ""))}>
             <Link to={'/company/' + info.name.replace(' ', '_')} count="company">{info.name}</Link>

@@ -1,0 +1,20 @@
+.auto-complete {
+  position: absolute;
+  background: white;
+  list-style-type: none;
+  padding: 0;
+  z-index: 9;
+  border: 1px solid;
+}
+
+.auto-complete-word {
+  padding: 0.5rem;
+}
+
+.selected {
+  background: yellow;
+}
+
+.relative {
+  position: relative;
+}

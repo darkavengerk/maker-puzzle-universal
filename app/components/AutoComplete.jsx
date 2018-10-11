@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import _ from 'lodash';
 
-import styles from '../css/components/add-portfolio';
+import styles from '../css/components/auto-complete';
 
 const cx = classNames.bind(styles);
 
@@ -119,9 +119,10 @@ class autoComplete extends Component {
   }
 
   render() {
-    const { title, id, className, update } = this.props;
-    const list = this.state.showDropdown ?
-        <ul className={cx('auto-complete')}>
+    const { title, id, className, update, tagName='div', placeholder, width='32.7rem', top='2.7rem' } = this.props;
+    const Tag = tagName;
+    const list = this.state.showDropdown && this.state.projectSuggestion && this.state.projectSuggestion.length > 0?
+        <ul className={cx('auto-complete')} style={{ width, top }}>
           {(this.state.projectSuggestion || []).map(
             (word, i) =>  <li key={word} 
                             className={cx('auto-complete-word', i === this.state.selected? 'selected':'')} 
@@ -132,7 +133,7 @@ class autoComplete extends Component {
         </ul> : null;
 
     return (
-      <div>
+      <Tag className={cx('relative')} >
         <input 
           id={title}
           type="text" 
@@ -141,9 +142,10 @@ class autoComplete extends Component {
           onChange={this.showList} 
           onBlur={this.hideDropdown}
           onKeyDown={this.keyPressed}
+          placeholder={placeholder}
         />
         {list}  
-      </div>                
+      </Tag>                
     );
   }
 }

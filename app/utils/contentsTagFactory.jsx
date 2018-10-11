@@ -121,6 +121,9 @@ class ContentsTagFactory {
 
     if(user.authenticated) {
       makerContents.push(<PortfolioItem key={'__new__'} />);
+      if(makerContents.length >=12) {
+        makerContents = [<PortfolioItem key={'__new__front_'} />, ...makerContents];
+      }
     }
 
     return (<div>
