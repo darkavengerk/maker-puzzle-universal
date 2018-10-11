@@ -20,6 +20,25 @@ const project = (
       const { features, profilePicture } = action.data;
       return {...state, features, profilePicture}
 
+    case types.PORTFOLIO_EDIT_SUCCESS:
+      const { user, company, project, portfolio } = action.data;
+      if(project._id === state._id) {
+        portfolio.user = user;
+        portfolio.project = project;
+        portfolio.company = company;
+        let replaced = false;
+        const newPortfolios = state.portfolios.map(p => {
+          if(p.pid === portfolio.pid) {
+            replaced = true;
+            return portfolio;
+          }
+          else return p;
+        });
+        if(!replaced) newPortfolios.push(portfolio);
+        return {...state, portfolios: newPortfolios};
+      }
+      return state;
+
     case types.PORTFOLIO_DELETE_SUCCESS:
       const pidDeleted = action.data.pid;
       if(pidDeleted) {

@@ -21,17 +21,19 @@ class AddPortfolio extends Component {
   constructor(props) {
     super(props);
 
-    const { portfolio={
-      tags: [],
-      images: [],
-      title: '',
-      description: '',
-      location: '',
-      companyName: '',
-      isPrivate: false,
-    } } = this.props;
+    const portfolio= {...{
+          tags: [],
+          images: [],
+          title: '',
+          description: '',
+          location: '',
+          companyName: '',
+          isPrivate: false,
+        }, ...this.props.portfolio};
+
     this.state = {...portfolio, projectSuggestion: [], showDropdown: false};
-    if(!this.state.companyName) {
+
+    if(!this.state.companyName && this.props.company) {
       this.state.companyName = this.props.company.name;
     }
 
@@ -148,7 +150,6 @@ class AddPortfolio extends Component {
 
   render() {
     const { title, user, portfolio, cancel, type } = this.props;
-
     return (
       <div className={cx('container')}>
         <div className={cx('main-section')}>
@@ -173,7 +174,6 @@ class AddPortfolio extends Component {
                   </td>
                 </tr>
                 <tr className={cx('entity-row')} />
-
                 <tr>
                   <td className={cx('entity-title')}>
                     <Scatter text="현장명" />
@@ -197,7 +197,7 @@ class AddPortfolio extends Component {
                     * 예시) 여의도국제금융센터, 롯데월드몰, 경회루 등
                   </td>
                 </tr>
-                <tr className={cx('entity-row')} />                
+                <tr className={cx('entity-row')} />
                 
                 <tr>
                   <td className={cx('entity-title')}>

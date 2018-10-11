@@ -119,9 +119,9 @@ class ContentsTagFactory {
       return (<Item portfolio={portfolio} referrer={source} owner={owner} key={portfolio.pid} external={true} />);
     });
 
-    // if(isOwnPage) {
-    //   companyContents.push(<Item key={'__new__'} />);
-    // }
+    if(user.authenticated) {
+      makerContents.push(<PortfolioItem key={'__new__'} />);
+    }
 
     return (<div>
               <p className={cx('main-panel-title')}>포트폴리오</p>
@@ -132,6 +132,7 @@ class ContentsTagFactory {
               <Popup show={user.attempt === 'edit:portfolio'} name="AddPortfolioPopup" roll={true} top={100}>
                 <AddPortfolio 
                   title="포트폴리오 추가하기" 
+                  portfolio={{location: source.name}}
                   submit={portfoiloSubmit} 
                   cancel={portfoiloEditorCancel} 
                 />
