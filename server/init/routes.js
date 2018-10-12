@@ -6,6 +6,8 @@ import unsupportedMessage from '../db/unsupportedMessage';
 import { passport as passportConfig } from '../db';
 import controllers from '../controllers';
 
+import { appVersion } from '../../config/app';
+
 const topicsController = controllers && controllers.topics;
 
 const mainController = controllers && controllers.main;
@@ -14,57 +16,85 @@ const projectController = controllers && controllers.projects;
 const companyController = controllers && controllers.companies;
 const fileController = controllers && controllers.files;
 
+
 export default (app) => {
 
+  function GET(addr, fn) {
+    httpRequest('get', addr, fn);
+  }
+
+  function POST(addr, fn) {
+    httpRequest('post', addr, fn);
+  }
+
+  function PUT(addr, fn) {
+    httpRequest('put', addr, fn);
+  }
+
+  function DELETE(addr, fn) {
+    httpRequest('delete', addr, fn);
+  }
+
+  function addrHook(addr) {
+    if(addr.startsWith('/api/')) {
+      return addr.replace('/api/', `/api/${appVersion}/`);
+    }
+    return addr;
+  }
+
+  function httpRequest(method, addr, handler) {
+    app[method](addrHook(addr), handler);
+  }
+
   if (mainController) {
-    app.get('/api/main/commands/:command', mainController.command);
-    app.get('/api/main', mainController.main);
-    app.get('/api/more/:topic/:subtype/:sort/:loaded', mainController.more);
-    app.get('/api/more/:topic/:subtype/:sort', mainController.more);
-    app.post('/api/count', mainController.increaseCount);
-    app.get('/api/search/:keyword', mainController.search);
+    GET('/api/main/commands/:command', mainController.command);
+    GET('/api/main', mainController.main);
+    GET('/api/more/:topic/:subtype/:sort/:loaded', mainController.more);
+    GET('/api/more/:topic/:subtype/:sort', mainController.more);
+    POST('/api/count', mainController.increaseCount);
+    GET('/api/search/:keyword', mainController.search);
   }
 
   // user routes
   if (usersController) {
-    app.get('/user/:id/:pid', usersController.single);
-    app.get('/user/:id', usersController.single);
-    app.get('/user', usersController.all);
-    app.post('/user/:id/features', usersController.updateFeatures);
-    app.post('/user/:id/portfolio', usersController.addPortfolio);
-    app.post('/user/:id/follow', usersController.follow);
-    app.post('/user/:id/unfollow', usersController.unfollow);
-    app.post('/sessions', usersController.login);
-    app.post('/users', usersController.signUp);
-    app.delete('/user/:id/portfolio/:pid', usersController.deletePortfolio);
-    app.delete('/sessions', usersController.logout);
+    GET('/api/user/:id/:pid', usersController.single);
+    GET('/api/user/:id', usersController.single);
+    GET('/api/user', usersController.all);
+    POST('/api/user/:id/features', usersController.updateFeatures);
+    POST('/api/user/:id/portfolio', usersController.addPortfolio);
+    POST('/api/user/:id/follow', usersController.follow);
+    POST('/api/user/:id/unfollow', usersController.unfollow);
+    POST('/sessions', usersController.login);
+    POST('/api/users', usersController.signUp);
+    DELETE('/api/user/:id/portfolio/:pid', usersController.deletePortfolio);
+    DELETE('/sessions', usersController.logout);
   } else {
     console.warn(unsupportedMessage('users routes'));
   }
 
   if(projectController) {
-    app.get('/api/project', projectController.all);
-    app.get('/api/project/search/:keyword', projectController.search);
-    app.get('/api/project/:link_name', projectController.one);
-    app.post('/project', projectController.add);
-    app.put('/project/:id', projectController.update);
-    app.post('/api/project/:link_name/features', projectController.updateFeatures);
-    app.delete('/project/:id', projectController.remove);
+    GET('/api/project', projectController.all);
+    GET('/api/project/search/:keyword', projectController.search);
+    GET('/api/project/:link_name', projectController.one);
+    POST('/project', projectController.add);
+    PUT('/project/:id', projectController.update);
+    POST('/api/project/:link_name/features', projectController.updateFeatures);
+    DELETE('/project/:id', projectController.remove);
   } else {
     console.warn(unsupportedMessage('project routes'));
   }
 
   if(companyController) {
-    app.get('/api/company/search/:keyword', companyController.search);
-    app.get('/api/company/:link_name', companyController.one);
-    app.post('/api/company/:link_name/features', companyController.updateFeatures);
-    app.get('/api/company', companyController.all);
-    app.post('/api/company/:link_name/portfolio', companyController.addPortfolio);
-    app.delete('/api/company/:link_name/portfolio/:pid', companyController.deletePortfolio);
-    app.post('/api/company/:link_name/product', companyController.addProduct);
-    app.post('/api/company', companyController.add);
-    app.put('/api/company/:id', companyController.update);
-    app.delete('/api/company/:id', companyController.remove);
+    GET('/api/company/search/:keyword', companyController.search);
+    GET('/api/company/:link_name', companyController.one);
+    POST('/api/company/:link_name/features', companyController.updateFeatures);
+    GET('/api/company', companyController.all);
+    POST('/api/company/:link_name/portfolio', companyController.addPortfolio);
+    DELETE('/api/company/:link_name/portfolio/:pid', companyController.deletePortfolio);
+    POST('/api/company/:link_name/product', companyController.addProduct);
+    POST('/api/company', companyController.add);
+    PUT('/api/company/:id', companyController.update);
+    DELETE('/api/company/:id', companyController.remove);
   } else {
     console.warn(unsupportedMessage('project routes'));
   }
@@ -76,7 +106,7 @@ export default (app) => {
     // /auth/google/return
     // Authentication with google requires an additional scope param, for more info go
     // here https://developers.google.com/identity/protocols/OpenIDConnect#scope-param
-    app.get('/auth/google', passport.authenticate('google', {
+    GET('/auth/google', passport.authenticate('google', {
       scope: [
         'https://www.googleapis.com/auth/userinfo.profile',
         'https://www.googleapis.com/auth/userinfo.email'
@@ -86,7 +116,7 @@ export default (app) => {
     // Google will redirect the user to this URL after authentication. Finish the
     // process by verifying the assertion. If valid, the user will be logged in.
     // Otherwise, the authentication has failed.
-    app.get('/auth/google/callback',
+    GET('/auth/google/callback',
       passport.authenticate('google', {
         successRedirect: '/',
         failureRedirect: '/login'
@@ -96,14 +126,16 @@ export default (app) => {
 
   // topic routes
   if (topicsController) {
-    app.get('/topic', topicsController.all);
-    app.post('/topic/:id', topicsController.add);
-    app.put('/topic/:id', topicsController.update);
-    app.delete('/topic/:id', topicsController.remove);
+    GET('/topic', topicsController.all);
+    POST('/topic/:id', topicsController.add);
+    PUT('/topic/:id', topicsController.update);
+    DELETE('/topic/:id', topicsController.remove);
   } else {
     console.warn(unsupportedMessage('topics routes'));
   }
 
-  app.post('/file', fileController.upload);
-  app.get('/file/image/:image', fileController.image);
+  POST('/file', fileController.upload);
+  GET('/file/image/:image', fileController.image);
+
+  GET('/api/*', mainController.refresh);
 };

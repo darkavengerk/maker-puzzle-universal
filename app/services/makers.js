@@ -6,39 +6,39 @@ export default () => {
   return {
     getMakers: () => client.request({
       method: 'GET',
-      url: '/user'
+      url: '/api/user'
     }),
     getMaker: ({id}) => client.request({
       method: 'GET',
-      url: `/user/${id}`
+      url: `/api/user/${id}`
     }),
     getMakerProfile: ({id, pid}) => client.request({
       method: 'GET',
-      url: `/user/${id}/${pid}`
+      url: `/api/user/${id}/${pid}`
     }),
     updateMakerFeatures: ({id, data}) => client.request({
       method: 'POST',
-      url: `/user/${id}/features`,
+      url: `/api/user/${id}/features`,
       data
     }),
     follow: ({id, data}) => client.request({
       method: 'POST',
-      url: `/user/${id}/follow`,
+      url: `/api/user/${id}/follow`,
       data
     }),
     unfollow: ({id, data}) => client.request({
       method: 'POST',
-      url: `/user/${id}/unfollow`,
+      url: `/api/user/${id}/unfollow`,
       data
     }),
     submitPortfolio: ({id, data}) => client.request({
       method: 'POST',
-      url: `/user/${id}/portfolio`,
+      url: `/api/user/${id}/portfolio`,
       data
     }),
     deletePortfolio: ({id, pid}) => client.request({
       method: 'DELETE',
-      url: `/user/${id}/portfolio/${pid}`
+      url: `/api/user/${id}/portfolio/${pid}`
     }),
   };
 };

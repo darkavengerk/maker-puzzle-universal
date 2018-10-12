@@ -135,10 +135,15 @@ export async function search(req, res) {
   res.json({ result: { portfolios } });
 }
 
+export async function refresh(req, res) {
+  return res.status(301).json({error: 'api version incompatible'});
+}
+
 export default {
   main,
   more,
   command,
   search,
-  increaseCount
+  increaseCount,
+  refresh
 };

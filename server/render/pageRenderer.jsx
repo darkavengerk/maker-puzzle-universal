@@ -6,6 +6,8 @@ import Helmet from 'react-helmet';
 import serialize from 'serialize-javascript';
 import staticAssets from './static-assets';
 
+import { appVersion } from '../../config/app';
+
 const createApp = (store, props) => renderToString(
   <Provider store={store}>
     <RouterContext {...props} />
@@ -23,7 +25,7 @@ const buildPage = ({ componentHTML, initialState, headAssets }) => {
     ${staticAssets.createStylesheets()}
   </head>
   <body>
-    <div id="app">${componentHTML}</div>
+    <div id="app" data-version=${appVersion}>${componentHTML}</div>
     <script>window.__INITIAL_STATE__ = ${serialize(initialState)}</script>
     ${staticAssets.createAppScript()}
   </body>
