@@ -222,7 +222,7 @@ class ContentsTagFactory {
             <PortfolioDetail 
               portfolio={portfolioFound} 
               edit={isOwnPage}
-              owner={new Project(portfolioFound.project)}
+              owner={[new Project(portfolioFound.project), new Company(portfolioFound.company)]}
             />
           </div>)
     }

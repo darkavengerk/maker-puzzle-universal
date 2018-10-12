@@ -27,6 +27,7 @@ export async function single(req, res) {
               .findOne({'userid':req.params.id})
               .populate('portfolios.user')
               .populate('portfolios.project')
+              .populate('portfolios.company')
               .populate(['followers', 'followings'])
               .lean();
 
