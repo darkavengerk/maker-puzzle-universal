@@ -14,7 +14,7 @@ export default () => {
     }),
     signUp: data => client.request({
       method: 'POST',
-      url: '/users',
+      url: '/api/users',
       data
     }),
     logOut: () => client.request({
