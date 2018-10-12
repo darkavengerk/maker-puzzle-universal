@@ -240,12 +240,9 @@ class ContentsTagFactory {
       }
     }
     if(portfolioFound) {
-      let owner = null;
+      let owner = [new Company(portfolioFound.company)];
       if(param.mid) {
-        owner = new Maker(portfolioFound.user);
-      }
-      else {
-        owner = new Company(portfolioFound.company);
+        owner.push(new Maker(portfolioFound.user));
       }
       return (
         <div>
