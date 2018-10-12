@@ -19,6 +19,7 @@ class RestApiClient {
     return new Promise(async (resolve, reject) => {
       try {
         const result = await this.client.request(options);
+        console.log(result, result.status === 301);
         if(result.status === 301) {
           alert('Old version detected. Will refresh the page.');
           window.location.reload();
