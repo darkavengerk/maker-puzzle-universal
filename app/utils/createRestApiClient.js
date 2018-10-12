@@ -16,20 +16,11 @@ class RestApiClient {
     if(url.startsWith('/api/')) {
       options.url = url.replace('/api/', `/api/${appVersion}/`);
     }
-    return new Promise(async (resolve, reject) => {
-      try {
-        const result = await this.client.request(options).catch(err => {
-          console.log(err);
-          if(err.response.status === 301) {
-            alert('Old version detected. Will refresh the page.');
-            window.location.reload();
-          }
-        });
-        resolve(result);
+    return this.client.request(options).catch(err => {
+      if(err.response.status === 301) {
+        window.location.reload();
       }
-      catch(e) {
-        reject(e);
-      }
+      else console.log(err);
     });
   }
 }
