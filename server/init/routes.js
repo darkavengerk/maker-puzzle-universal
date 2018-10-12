@@ -51,7 +51,7 @@ export default (app) => {
   }
 
   if (mainController) {
-    GET('/api/main/commands/:command', mainController.command);
+    GET('/batch/commands/:command', mainController.command);
     GET('/api/main', mainController.main);
     GET('/api/more/:topic/:subtype/:sort/:loaded', mainController.more);
     GET('/api/more/:topic/:subtype/:sort', mainController.more);
