@@ -39,6 +39,10 @@ export default (app) => {
     if(addr.startsWith('/api/')) {
       return addr.replace('/api/', `/api/${appVersion}/`);
     }
+    if(addr.startsWith('/*api*')) {
+      return `/api/*`;
+    }
+
     return addr;
   }
 
@@ -137,5 +141,5 @@ export default (app) => {
   POST('/file', fileController.upload);
   GET('/file/image/:image', fileController.image);
 
-  GET('/api/*', mainController.refresh);
+  GET('/*api*', mainController.refresh);
 };
