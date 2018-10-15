@@ -118,6 +118,7 @@ async function savePortfolio({ portfolio, project, company, user }) {
 
   if(user && user._id) {
     portfolio.user = user._id;
+    portfolio.type = 'maker';
     user.portfolios = pushOrReplacePortfolio(user.portfolios, portfolio);
 
     project.users.addToSet(user._id);
@@ -266,7 +267,8 @@ const functionMap = {
     await updateCount(User, 'maker', 'userid');
   },
 
-  'patch-portfolio-date': async function() {
+  'patch-portfolio-missing-data': async function() {
+    await Portfolio.update({type: null}, {$set: { type: 'maker' }}, {multi: true});
     const portfolios = await Portfolio.find({created:null}).lean();
     portfolios.map(async p => {
       const created = new Date(parseInt(('' + p._id).substring(0, 8), 16) * 1000);
