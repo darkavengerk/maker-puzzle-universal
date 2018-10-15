@@ -101,6 +101,7 @@ async function savePortfolio({ portfolio, project, company, user }) {
     portfolio.lastUpdated = Date.now();
   }
   else {
+    portfolio.created = Date.now();
     portfolio.pid = await Misc.createID('portfolio');
   }
   portfolio.project = project._id;
@@ -265,6 +266,15 @@ const functionMap = {
     await updateCount(User, 'maker', 'userid');
   },
 
+  'patch-portfolio-date': async function() {
+    const portfolios = await Portfolio.find({created:null}).lean();
+    portfolios.map(async p => {
+      const created = new Date(parseInt(('' + p._id).substring(0, 8), 16) * 1000);
+      console.log(p._id, created);
+      await Portfolio.update({_id: p._id}, {$set: { created }});
+    });
+  },
+
   'update-score-batch': async function() {
     const projects = await Project.find(
       {}, 
@@ -352,7 +362,7 @@ async function runCommand(command) {
   const fn = functionMap[command];
   if(fn) {
     console.log('running...', command);
-    await(fn);
+    await fn();
   }
 }
 
