@@ -283,7 +283,7 @@ const functionMap = {
       {portfolios: 1, companies:1, count:1, score:1}
     );
     for(let p of projects) {
-      p.score = p.portfolios.length + p.companies.length + p.count;
+      p.score = p.portfolios.length*2 + p.companies.length + p.count;
       await p.save();
     }
 
@@ -292,7 +292,7 @@ const functionMap = {
       {images: 1, description:1, count:1, score:1}
     );
     for(let p of companyPortfolios) {
-      p.score = (p.count * 2) + (p.images.length**2) + Math.sqrt(p.description.length);
+      p.score = (p.count * 2) + (p.images.length*2) + Math.sqrt(p.description.split(/\s/g).length);
       await p.save();
     }
 
@@ -301,7 +301,7 @@ const functionMap = {
       {images: 1, description:1, count:1, score:1}
     );
     for(let p of makerPortfolios) {
-      p.score = (p.count * 2) + (p.images.length**2) + Math.sqrt(p.description.length);
+      p.score = (p.count * 2) + (p.images.length*2) + Math.sqrt(p.description.split(/\s/g).length);
       await p.save();
     }
 
@@ -310,8 +310,8 @@ const functionMap = {
       {portfolios: 1, count:1, score:1}
     );
     for(let m of makers) {
-      m.score = (m.portfolios.length) + (m.portfolios.map(x => x.images.length ** 2).reduce((a,b) => a + b, 0)) + 
-                m.count + (m.portfolios.map(x => Math.sqrt(x.description.length)).reduce((a,b) => a + b, 0));
+      m.score = (m.portfolios.length) + Math.sqrt((m.portfolios.map(x => x.images.length).reduce((a,b) => a + b, 0))) + 
+                m.count + Math.sqrt((m.portfolios.map(x => x.description.split(/\s/g).length).reduce((a,b) => a + b, 0)));
       await m.save();
     }
 
@@ -320,8 +320,8 @@ const functionMap = {
       {companyPortfolios: 1, score:1}
     );
     for(let c of companies) {
-      c.score = (c.companyPortfolios.length) + (c.companyPortfolios.map(x => x.images.length ** 2).reduce((a,b) => a + b, 0)) + 
-                (c.companyPortfolios.map(x => Math.sqrt(x.description.length)).reduce((a,b) => a + b, 0));
+      c.score = (c.companyPortfolios.length) + Math.sqrt((c.companyPortfolios.map(x => x.images.length).reduce((a,b) => a + b, 0))) + 
+                Math.sqrt((c.companyPortfolios.map(x => x.description.length).split(/\s/g).reduce((a,b) => a + b, 0)));
       await c.save();
     }
   },
