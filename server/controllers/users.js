@@ -22,14 +22,19 @@ export function all(req, res) {
   });
 }
 
+async function getPopulatedUser(userid) {
+  return await User
+    .findOne({ userid })
+    .populate('portfolios.user')
+    .populate('companiesOwned')
+    .populate('portfolios.project')
+    .populate('portfolios.company')
+    .populate(['followers', 'followings'])
+    .lean()
+}
+
 export async function single(req, res) {
-  let user = await User
-              .findOne({'userid':req.params.id})
-              .populate('portfolios.user')
-              .populate('portfolios.project')
-              .populate('portfolios.company')
-              .populate(['followers', 'followings'])
-              .lean();
+  let user = await getPopulatedUser(req.params.id);
 
   if (!user) {
     // return res.status(500).send('Something went wrong getting the data');
@@ -55,6 +60,29 @@ export function login(req, res, next) {
       return res.json(user);
     });
   })(req, res, next);
+}
+
+export async function addCompany(req, res) {
+  const userid = req.params.id;
+  let name = req.body.name;
+
+  let companyFound = await Company.findOne({ name });
+
+  if(!companyFound) {
+    companyFound = new Company({ name });
+    companyFound = await Metadata.populateMetadata('Company', companyFound);
+    await companyFound.save();
+    companyAutoComplete.buildCache(err => {});
+  }
+
+  const user = await User.findOne({ userid });
+  if(!user.companiesOwned) user.companiesOwned = [];
+  user.companiesOwned.addToSet(companyFound._id);
+  await user.save();
+
+  await Company.update({ name }, {$addToSet : {owners: user._id}});
+
+  res.json(await getPopulatedUser(userid));
 }
 
 export async function updateFeatures(req, res) {
@@ -270,6 +298,7 @@ export default {
   logout,
   signUp,
   updateFeatures,
+  addCompany,
   addPortfolio,
   deletePortfolio,
   follow,

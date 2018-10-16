@@ -73,6 +73,16 @@ class Company extends User {
     return 'company';
   }
 
+  isOwnPage(user) {
+
+    if(!user || !user._id) return false;
+
+    const uid = user._id;
+    const filtered = (this.owners || []).filter(o => o === user._id);
+
+    return filtered.length === 1;
+  }
+
   getProfileImage() {
     return this.profilePicture || '/site/images/default_Company-01.jpg';
   }

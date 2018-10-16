@@ -22,8 +22,6 @@ class autoComplete extends Component {
     this.onTextChage = this.onTextChage.bind(this);
     this.keyPressed = this.keyPressed.bind(this);
     this.mouseOver = this.mouseOver.bind(this);
-
-    document.body.addEventListener('mouseup', this.hideDropdown);
   }
 
   mouseOver(index) {
@@ -73,8 +71,14 @@ class autoComplete extends Component {
     }
   }
 
+  componentWillMount() {
+    if(typeof variable !== 'undefined')
+      document.body.addEventListener('mouseup', this.hideDropdown);
+  }
+
   componentWillUnmount() {
-    document.body.removeEventListener('mouseup', this.hideDropdown);
+    if(typeof variable !== 'undefined')
+      document.body.removeEventListener('mouseup', this.hideDropdown);
   }
 
   onTextChage(key, lengthLimit) {

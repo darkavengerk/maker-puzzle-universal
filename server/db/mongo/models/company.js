@@ -14,7 +14,7 @@ const Schema = new mongoose.Schema({
   name: { type: String, unique: true},
   link_name: { type: String, unique: true },
   profilePicture: {type: ObjectId, ref: 'ImageFile'},
-  owner: {type: ObjectId, ref: 'User', default: null},
+  owners: [{type: ObjectId, ref: 'User'}],
   projects: [{type: ObjectId, ref: 'Project'}],
   users: [{type: ObjectId, ref: 'User'}],
   features: [{

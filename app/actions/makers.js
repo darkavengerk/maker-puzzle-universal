@@ -14,7 +14,21 @@ export function featureEditSave(data) {
     } 
     return res;
   };
+}
 
+export function addOwnCompany(userid, name) {
+  return async (dispatch, getState) => {
+    const { user } = getState();
+    const res = await Maker().addOwnCompany({id:userid, data: { name }});
+    
+    if (res.status === 200) {
+      dispatch({type:types.REQUEST_SUCCESS, data: {maker: res.data}});
+    }
+    else {
+      // dispatch({type:types.PROFILE_EDIT_FAILURE});
+    } 
+    return res;
+  };
 }
 
 export function portfoiloEditorStart() {

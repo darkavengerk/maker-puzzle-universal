@@ -7,10 +7,9 @@ import Link from '../components/Link';
 import Padding from '../components/Padding';
 import FlexibleImage from '../components/FlexibleImage';
 import AutoComplete from '../components/AutoComplete';
+import { Company } from '../services';
 
 import styles from '../css/components/maker-profile';
-
-import { Company } from '../services';
 
 const cx = classNames.bind(styles);
 

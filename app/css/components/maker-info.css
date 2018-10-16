@@ -6,3 +6,15 @@
   display: flex;
   flex-direction: column;
 }
+
+.add-company {
+  display: flex;
+  justify-content: flex-end;
+  height: 2.2rem;
+  align-items: flex-end;
+}
+
+.company-name-input {
+  margin-top: 2rem;
+  width: 20rem;
+}

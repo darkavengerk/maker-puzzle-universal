@@ -7,9 +7,13 @@ import MakerProfile from '../components/MakerProfile';
 import CompanyHistory from '../components/CompanyHistory';
 import GreyTitle from '../components/GreyTitle';
 import Abilities from '../components/Abilities';
+import CompanyCard from '../components/CompanyCard';
 import MakerListRoundy from '../components/MakerListRoundy';
 
-import { featureEditSave, updateContext } from '../actions/makers';
+import AutoComplete from '../components/AutoComplete';
+import { Company } from '../services';
+
+import { featureEditSave, updateContext, addOwnCompany } from '../actions/makers';
 import { logOut } from '../actions/users';
 
 import styles from '../css/components/maker-info';
@@ -19,6 +23,7 @@ const cx = classNames.bind(styles);
 class MakerInfo extends Component {
   constructor(props) {
     super(props);
+    this.state = {};
 
     this.stateChanged = this.stateChanged.bind(this);
     this.submit = this.submit.bind(this);
@@ -26,6 +31,8 @@ class MakerInfo extends Component {
     this.edited = this.edited.bind(this);
     this.cancelEdit = this.cancelEdit.bind(this);
     this.featureEdited = this.featureEdited.bind(this);
+    this.companyNameChanged = this.companyNameChanged.bind(this);
+    this.addCompany = this.addCompany.bind(this);
   }
 
   stateChanged(newState) {
@@ -84,8 +91,17 @@ class MakerInfo extends Component {
     updateContext({});
   }
 
+  companyNameChanged(name) {
+    this.setState({companyName: name});
+  }
+
+  addCompany(evt) {
+    const { context, addOwnCompany } = this.props;
+    addOwnCompany(context.userid, this.state.companyName);
+  }
+
   render() {
-    const { context } = this.props;
+    const { context, user } = this.props;
     return (context && context.makerProfile) ? (
       <div className={cx('main-section')}>
         <GreyTitle title={'메이커 프로필'} bottom="13" />
@@ -97,6 +113,34 @@ class MakerInfo extends Component {
           onChange={this.edited}
           onSubmit={this.submit}
         />
+
+        {(user.account.type === 'admin' || (context.companiesOwned && context.companiesOwned.length > 0))? 
+          <GreyTitle title={'소유한 기업페이지'} top="38" bottom="7" />
+          : null
+        }
+        {(context.companiesOwned && context.companiesOwned.length > 0)? 
+          context.companiesOwned.map(c => <CompanyCard company={c} key={c.link_name} />)
+          : null
+        }
+        { (user.account.type === 'admin')?
+          <div className={cx('add-company')}>
+            <AutoComplete
+              request={Company().searchCompaniesByName}
+              title="new-company-name"
+              update={this.companyNameChanged}
+              className={cx('company-name-input')}
+              textLimit={50}
+              OnKeyPress={this.companyNameChanged}
+              tagName="div"
+              top="4.2rem"
+              width="30rem"
+              placeholder="기업 이름 검색"
+            /> 
+            <input type="button" value="ADD" onClick={this.addCompany}/>
+          </div>
+          : null
+        }
+        
 
         <GreyTitle title={'소속 기업'} top="38" />
         <CompanyHistory 
@@ -134,5 +178,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps, 
-  {featureEditSave, logOut, updateContext}
+  {featureEditSave, logOut, updateContext, addOwnCompany}
 )(MakerInfo);

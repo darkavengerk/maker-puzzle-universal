@@ -65,13 +65,14 @@ export default (app) => {
     GET('/api/user/:id', usersController.single);
     GET('/api/user', usersController.all);
     POST('/api/user/:id/features', usersController.updateFeatures);
+    POST('/api/user/:id/company', usersController.addCompany);
     POST('/api/user/:id/portfolio', usersController.addPortfolio);
     POST('/api/user/:id/follow', usersController.follow);
     POST('/api/user/:id/unfollow', usersController.unfollow);
-    POST('/sessions', usersController.login);
     POST('/api/users', usersController.signUp);
-    DELETE('/api/user/:id/portfolio/:pid', usersController.deletePortfolio);
+    POST('/sessions', usersController.login);
     DELETE('/sessions', usersController.logout);
+    DELETE('/api/user/:id/portfolio/:pid', usersController.deletePortfolio);
   } else {
     console.warn(unsupportedMessage('users routes'));
   }
