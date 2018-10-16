@@ -30,8 +30,8 @@ const CompanyCardSection = ({company, ...props}) => {
         <div className={cx('company-card-text-section')}>
           {Assist.Company.getName(company)}
         </div>
-        <Link className={cx('company-card-button')} to={Assist.Company.getHomeLink(company)} role="button">
-          <label className={cx('company-card-button-text')}>
+        <Link className={cx('company-card-button')} to={Assist.Company.getHomeLink(company)}>
+          <label className={cx('company-card-button-text')} role="button">
             소유한 기업페이지로 가기
           </label>
         </Link>
