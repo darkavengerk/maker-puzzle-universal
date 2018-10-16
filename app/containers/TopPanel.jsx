@@ -46,7 +46,7 @@ const Navigation = ({ user, logOut, loginMenu, cancelLogin }) => {
             </Link>
           </div>
           <form onSubmit={handleOnSubmit} className={cx('search-area')}>
-            <input type="text" id="user-search-input" className={cx('search-input')} />
+            <input type="text" id="user-search-input" className={cx('search-input')} placeholder={'검색어를 입력하세요. (지역, 기업, 사람, 각종 키워드)'} />
             <Img src="/site/images/search.png" x={21.8} y={21.8} role="button" onClick={handleOnSubmit} />
           </form>
 
