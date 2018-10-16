@@ -310,7 +310,7 @@ const functionMap = {
       {portfolios: 1, count:1, score:1}
     );
     for(let m of makers) {
-      m.score = (m.portfolios.length) + Math.sqrt((m.portfolios.map(x => x.images.length).reduce((a,b) => a + b, 0))) + 
+      m.score = Math.sqrt(m.portfolios.length) + Math.sqrt((m.portfolios.map(x => x.images.length).reduce((a,b) => a + b, 0))) + 
                 m.count + Math.sqrt((m.portfolios.map(x => x.description.split(/\s/g).length).reduce((a,b) => a + b, 0)));
       await m.save();
     }
@@ -320,7 +320,7 @@ const functionMap = {
       {companyPortfolios: 1, score:1}
     );
     for(let c of companies) {
-      c.score = (c.companyPortfolios.length) + Math.sqrt((c.companyPortfolios.map(x => x.images.length).reduce((a,b) => a + b, 0))) + 
+      c.score = Math.sqrt(c.companyPortfolios.length) + Math.sqrt((c.companyPortfolios.map(x => x.images.length).reduce((a,b) => a + b, 0))) + 
                 Math.sqrt((c.companyPortfolios.map(x => x.description.split(/\s/g).length).reduce((a,b) => a + b, 0)));
       await c.save();
     }
