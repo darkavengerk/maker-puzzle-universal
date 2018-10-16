@@ -5,7 +5,6 @@ import classNames from 'classnames/bind';
 import _ from 'lodash';
 
 import FlexibleImage from '../components/FlexibleImage';
-import Border from '../components/SingleLine';
 import ImageUploader from '../components/ImageUploader';
 import Features from '../components/Features';
 import Image from '../components/FlexibleImage';

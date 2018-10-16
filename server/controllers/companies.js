@@ -212,6 +212,40 @@ export function remove(req, res) {
   });
 }
 
+export async function follow(req, res) {
+  const link_name = req.params.link_name;
+  let userid = req.body.userid;
+
+  const [company, user] = await Promise.all([
+    Company.findOne({ link_name }), 
+    User.findOne({ userid })
+  ]);
+
+  company.followers.addToSet(user._id);
+  user.companyFollowings.addToSet(company._id);
+
+  await Promise.all([company.save(), user.save()]);
+
+  return res.status(200).json({ company });
+}
+
+export async function unfollow(req, res) {
+  const link_name = req.params.link_name;
+  let userid = req.body.userid;
+
+  const [company, user] = await Promise.all([
+    Company.findOne({ link_name }), 
+    User.findOne({ userid })
+  ]);
+
+  company.followers.pull(user._id);
+  user.companyFollowings.pull(company._id);
+
+  await Promise.all([company.save(), user.save()]);
+
+  return res.status(200).json({ company });
+}
+
 export default {
   all,
   search,
@@ -222,5 +256,7 @@ export default {
   addProduct,
   add,
   update,
-  remove
+  remove,
+  follow,
+  unfollow
 };

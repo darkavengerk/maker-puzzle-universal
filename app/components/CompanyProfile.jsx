@@ -13,7 +13,7 @@ import ImageUploader from '../components/ImageUploader';
 import Features from '../components/Features';
 import styles from '../css/components/company-profile';
 
-import { featureEditSave } from '../actions/companies';
+import { featureEditSave, follow, unfollow } from '../actions/companies';
 import { logOut } from '../actions/users';
 
 import { Company } from '../utils/objects';
@@ -71,40 +71,46 @@ class CompanyProfile extends Component {
   }
 
   render() {
-    const { company: data, user, logOut } = this.props;
+    const { company: data, user, logOut, follow, unfollow } = this.props;
     const company = new Company(data);
     const isOwnPage = (user.type==='admin' || (user.userid && company.isOwnPage(user)));
+    const isFollowing = user.userid && ((company.followers || []).filter(u => u === user._id).length > 0);
 
     let stats = (
       <span className={cx('stats-area', 'flex-row')}>
         <span className={cx('maker-stats', 'flex-col')}>
           <span className={cx('figure')}>
-            {company.portfolios? company.portfolios.length : 0}
+            {company.portfolios? company.companyPortfolios.length : 0}
           </span>
           <span className={cx('keyword')}>
             Portfolio
           </span>
         </span>
+
         <span className={cx('maker-stats', 'flex-col')}>
           <span className={cx('figure')}>
-            421
+            {company.portfolios? company.portfolios.length : 0}
+          </span>
+          <span className={cx('keyword')}>
+            Maker’s Portfolio
+          </span>
+        </span>
+
+        <span className={cx('maker-stats', 'flex-col')}>
+          <span className={cx('figure')}>
+            {(company.followers || []).length}
           </span>
           <span className={cx('keyword')}>
             Follower
           </span>
-        </span>
-        <span className={cx('maker-stats', 'flex-col')}>
-          <span className={cx('figure')}>
-            421
-          </span>
-          <span className={cx('keyword')}>
-            Following
-          </span>
-        </span>
+        </span>        
       </span>);
 
-    let buttonArea = 
-      <span className={cx('follow-button')} role="button">
+    let buttonArea = isFollowing?
+      <span className={cx('following-button')} role="button" onClick={unfollow}>
+        Following
+      </span> :
+      <span className={cx('follow-button')} role="button" onClick={follow}>
         FOLLOW
       </span>;
 
@@ -112,14 +118,13 @@ class CompanyProfile extends Component {
       buttonArea = 
       <span className={cx('button-area')}>
         <label className={cx('system-button')} role="button" onClick={this.startEdit}>정보 수정</label>
-        <label className={cx('system-button')} role="button" onClick={logOut} >로그아웃</label>
       </span>;
 
       if(this.state.editing) {
         buttonArea = 
           <span className={cx('button-area')}>
-            <label className={cx('system-button', 'important')} role="button" onClick={this.submit}>변경내용 저장</label> 
-            <label className={cx('system-button')} role="button" onClick={this.cancelEdit}>취소</label>
+            <label className={cx('system-button-half', 'important')} role="button" onClick={this.submit}>변경내용 저장</label> 
+            <label className={cx('system-button-half')} role="button" onClick={this.cancelEdit}>취소</label>
           </span>;
       }
     }
@@ -143,7 +148,7 @@ class CompanyProfile extends Component {
             <span className={cx('name')}>
               {company.name}
             </span>
-            <Border width={181} thickness={2} color={'#dadada'} />
+            <Border width={181} thickness={1} color={'#dadada'} />
             {stats}
             {buttonArea}
           </span>
@@ -183,5 +188,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps, 
-  {featureEditSave, logOut}
+  {featureEditSave, logOut, follow, unfollow}
 )(CompanyProfile);

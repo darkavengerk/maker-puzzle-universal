@@ -82,3 +82,31 @@ export function productSubmit(product) {
     return res;
   };
 }
+
+export function follow(data) {
+  return async (dispatch, getState) => {
+    const { company, user } = getState();
+    const res = await Company().follow({link_name: company.company.link_name, data: user.account});
+    if (res.status === 200) {
+      dispatch({type:types.USER_FOLLOWERS_UPDATED, data: res.data});
+    }
+    else {
+      console.log(res);
+    } 
+    return res;
+  };
+}
+
+export function unfollow(data) {
+  return async (dispatch, getState) => {
+    const { company, user } = getState();
+    const res = await Company().unfollow({link_name: company.company.link_name, data: user.account});
+    if (res.status === 200) {
+      dispatch({type:types.USER_FOLLOWERS_UPDATED, data: res.data});
+    }
+    else {
+      console.log(res);
+    } 
+    return res;
+  };
+}

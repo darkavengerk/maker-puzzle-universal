@@ -148,7 +148,7 @@ class MakerProfile extends Component {
             <span className={cx('name')}>
               {maker.name}
             </span>
-            <Border width={181} thickness={2} color={'#dadada'} />
+            <Border width={181} thickness={1} color={'#dadada'} />
             {stats}
             {buttonArea}
           </span>

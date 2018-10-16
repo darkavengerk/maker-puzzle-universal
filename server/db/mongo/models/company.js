@@ -17,6 +17,7 @@ const Schema = new mongoose.Schema({
   owners: [{type: ObjectId, ref: 'User'}],
   projects: [{type: ObjectId, ref: 'Project'}],
   users: [{type: ObjectId, ref: 'User'}],
+  followers: [{type: ObjectId, ref: 'User'}],
   features: [{
     title: String,
     repr: String,

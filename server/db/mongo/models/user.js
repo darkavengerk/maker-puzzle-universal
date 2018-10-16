@@ -66,6 +66,7 @@ const UserSchema = new mongoose.Schema({
   portfolios : [Portfolio],
 
   followings: [{type: ObjectId, ref: 'User'}],
+  companyFollowings: [{type: ObjectId, ref: 'Company'}],
   followers: [{type: ObjectId, ref: 'User'}],
 
   marketingAgreed : { 

@@ -80,7 +80,7 @@
   font-weight: 300;
   font-style: normal;
   font-stretch: normal;
-  line-height: 2;
+  line-height: 1.2;
   letter-spacing: normal;
   text-align: center;
   color: #000000;
@@ -106,8 +106,25 @@
   color: #ffffff;
 }
 
-.system-button {
-  width: 8.7rem;
+.following-button {
+  width: 18.1rem;
+  height: 2rem;
+  border-radius: 1px;
+  border: solid 1px #676767;
+  font-family: NanumBarunGothic;
+  font-size: 1.2rem;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 2rem;
+  letter-spacing: normal;
+  text-align: center;
+  vertical-align: middle;
+  color: #000000;
+}
+
+.system-button, .system-button-half {
+  width: 18.1rem;
   height: 2rem;
   border-radius: 1px;
   border: solid 1px #676767;
@@ -124,6 +141,10 @@
   color: #000000;
 
   margin: 0 0.35rem;
+}
+
+.system-button-half {
+  width: 8.7rem;
 }
 
 .important {

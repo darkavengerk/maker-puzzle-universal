@@ -49,6 +49,9 @@ const company = (
       const { product } = action.data;
       return {...state, products: [...state.products, product]};
 
+    case types.USER_FOLLOWERS_UPDATED:
+      return {...state, followers: action.data.company.followers}
+
     default:
       return state;
   }

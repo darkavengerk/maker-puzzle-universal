@@ -56,6 +56,16 @@ export default () => {
       method: 'GET',
       url: `/api/company/search/${keyword}`
     }),
+    follow: ({link_name, data}) => client.request({
+      method: 'POST',
+      url: `/api/company/${link_name}/follow`,
+      data
+    }),
+    unfollow: ({link_name, data}) => client.request({
+      method: 'POST',
+      url: `/api/company/${link_name}/unfollow`,
+      data
+    }),
   };
 };
 

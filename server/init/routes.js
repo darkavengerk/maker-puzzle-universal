@@ -100,6 +100,8 @@ export default (app) => {
     POST('/api/company', companyController.add);
     PUT('/api/company/:id', companyController.update);
     DELETE('/api/company/:id', companyController.remove);
+    POST('/api/company/:link_name/follow', companyController.follow);
+    POST('/api/company/:link_name/unfollow', companyController.unfollow);
   } else {
     console.warn(unsupportedMessage('project routes'));
   }
