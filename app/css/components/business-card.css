@@ -158,7 +158,10 @@
   height: 2.67rem;
   border-radius: 8px;
   border: solid 1px #000000;
+}
 
+.company-card-button-text {
+  width: 100%;
   font-family: NanumBarunGothic;
   font-size: 1.1rem;
   font-weight: normal;
