@@ -8,6 +8,7 @@ import CompanyHistory from '../components/CompanyHistory';
 import GreyTitle from '../components/GreyTitle';
 import Abilities from '../components/Abilities';
 import CompanyCard from '../components/CompanyCard';
+import Padding from '../components/Padding';
 import MakerListRoundy from '../components/MakerListRoundy';
 
 import AutoComplete from '../components/AutoComplete';
@@ -159,9 +160,10 @@ class MakerInfo extends Component {
 
         <GreyTitle title={'관련된 메이커'} top="24" bottom="26" />
         <MakerListRoundy makers={context.followings} />
+        <Padding height="2rem" />
 
       </div>
-    ) : <div>Nothing</div>;
+    ) : <div></div>;
   }
 }
 
