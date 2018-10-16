@@ -28,12 +28,17 @@ html, body{
   padding: 0;
 }
 
-
-a:link {
+a:hover, a:focus, a:link {
+    font-style: inherit;
+    color: inherit;
+    background-color: transparent;
+    font-size: inherit;
     text-decoration: none;
+    font-variant: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    font-family: inherit;
 }
-
-
 
 .app {
   height: 100%;
