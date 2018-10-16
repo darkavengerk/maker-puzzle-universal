@@ -81,7 +81,7 @@ class Container extends Component {
         const occupationName = occupation && occupation.content? occupation.content : '';
         return <MakerCard 
                   key={maker.userid} 
-                  picture={maker.picture}
+                  picture={Assist.Maker.getProfileImage(maker)}
                   title={maker.name} 
                   subTitle={occupationName} 
                   autoMargin={true}
