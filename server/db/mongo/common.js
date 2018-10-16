@@ -321,7 +321,7 @@ const functionMap = {
     );
     for(let c of companies) {
       c.score = (c.companyPortfolios.length) + Math.sqrt((c.companyPortfolios.map(x => x.images.length).reduce((a,b) => a + b, 0))) + 
-                Math.sqrt((c.companyPortfolios.map(x => x.description.length).split(/\s/g).reduce((a,b) => a + b, 0)));
+                Math.sqrt((c.companyPortfolios.map(x => x.description.split(/\s/g).length).reduce((a,b) => a + b, 0)));
       await c.save();
     }
   },
