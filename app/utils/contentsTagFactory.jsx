@@ -85,7 +85,7 @@ class ContentsTagFactory {
 
     return (<div>
               <p className={cx('main-panel-title')}>포트폴리오</p>
-              <div className={cx('portfolio-list')}>
+              <div className={cx('portfolio-list')} id="portfolio-list">
                 {contents}
               </div>
               <Popup show={user.attempt === 'edit:portfolio'} name="AddPortfolioPopup" roll={true} top={100}>
@@ -128,7 +128,7 @@ class ContentsTagFactory {
 
     return (<div>
               <p className={cx('main-panel-title')}>포트폴리오</p>
-              <div className={cx('portfolio-list')}>
+              <div className={cx('portfolio-list')} id="portfolio-list">
                 {companyContents}
                 {makerContents}
               </div>
@@ -179,7 +179,7 @@ class ContentsTagFactory {
 
     return (<div>
               <p className={cx('main-panel-title')}>수행 프로젝트</p>
-              <div className={cx('portfolio-list')}>
+              <div className={cx('portfolio-list')} id="portfolio-list">
                 {companyPortfolios}
               </div>
 

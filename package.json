@@ -46,6 +46,7 @@
     "node": ">=6.x"
   },
   "dependencies": {
+    "@shopify/draggable": "^1.0.0-beta.8",
     "autoprefixer": "^6.7.7",
     "aws-sdk": "^2.316.0",
     "axios": "^0.16.0",

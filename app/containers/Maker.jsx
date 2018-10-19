@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
+
 import ImageUploader from '../components/ImageUploader';
 import TopTitle from '../components/TopTitle';
 import ContentsSection from '../components/ContentsSection';
@@ -14,10 +15,33 @@ import { Maker } from '../utils/objects';
 const cx = classNames.bind(styles);
 
 class Container extends Component {
+
+  isOwnPage() {
+    const { maker, user } = this.props;
+    return user.account && maker && (maker.userid === user.account.userid);
+  }
+
+  activateDrag() {
+    if(this.isOwnPage()) {
+      const draggable = require('@shopify/draggable');
+      const sortable = new draggable.Sortable(document.querySelectorAll('#portfolio-list'), {
+        draggable: '#portfolio-list > div.dragItem'
+      });
+      sortable.on('sortable:stop', (evt) => console.log(evt.data.oldIndex, evt.data.newIndex));
+    }
+  }
+
+  componentDidUpdate() {
+    this.activateDrag();
+  }
+
+  componentDidMount() {
+    this.activateDrag();
+  }
+
   render() {
     const { maker: data, user } = this.props;
     const maker = new Maker(data);
-    const isOwnPage = user.account && maker && (maker.userid === user.account.userid);
     return (
       <div className={cx('main-section')}>
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
@@ -29,7 +53,7 @@ class Container extends Component {
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
         {
           maker && maker.makerProfile? 
-          <ContentsSection user={user} owner={maker} contentsType="maker" isOwnPage={isOwnPage} /> : 
+          <ContentsSection user={user} owner={maker} contentsType="maker" isOwnPage={this.isOwnPage()} /> : 
           <Padding height="60rem"/>
         }
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
@@ -45,7 +69,8 @@ Container.propTypes = {
 function mapStateToProps(state) {
   return {
     maker: state.maker.maker,
-    user: state.user
+    user: state.user,
+    param: state.param
   };
 }
 

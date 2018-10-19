@@ -14,7 +14,7 @@ const PortfolioItem = ({ portfolio, owner, referrer, portfoiloEditorStart, exter
 
   if(portfolio) {
     return (
-      <div className={cx('main-section')}>
+      <div className={cx('main-section') + ' dragItem'}>
         <Link to={referrer.createPortfolioLink(portfolio)} count="portfolio">
           <div className={cx('text', 'text-section', external? 'type2' : '')}>
             { external? <Image src={owner.getProfileImage()} x={31} y={31} className={cx('profile-image')} /> : null }

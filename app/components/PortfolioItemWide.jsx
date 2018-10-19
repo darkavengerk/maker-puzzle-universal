@@ -16,7 +16,7 @@ const PortfolioItemWideSection = ({ portfolio, owner, referrer, portfoiloEditorS
   if(portfolio) {
     const link_name = company.link_name;
     return (
-      <div className={cx('main-section', 'wide')}>
+      <div className={cx('main-section', 'wide') + ' dragItem'}>
         <Link to={referrer.createPortfolioLink(portfolio)} count="portfolio">
           <div className={cx('text', 'text-section-wide', external? 'type2' : null)}>
             {external? <Image src={owner.getProfileImage()} contain={imageFit} x={50} y={39} className={cx('company-image')} /> : null }

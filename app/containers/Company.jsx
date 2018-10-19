@@ -15,10 +15,33 @@ const cx = classNames.bind(styles);
 
 class Container extends Component {
 
+  isOwnPage() {
+    const { company, user } = this.props;
+    return user.account && company && (user.account.type === 'admin' || (company.owner && company.owner.userid === user.account.userid));
+  }
+
+  activateDrag() {
+    const { maker, user } = this.props;
+
+    if(this.isOwnPage()) {
+      const draggable = require('@shopify/draggable');
+      const sortable = new draggable.Sortable(document.querySelectorAll('#portfolio-list'), {
+        draggable: '#portfolio-list > div.dragItem'
+      });
+    }
+  }
+
+  componentDidUpdate() {
+    this.activateDrag();
+  }
+
+  componentDidMount() {
+    this.activateDrag();
+  }
+
   render() {
     const { company: data, user } = this.props;
     const company = new Company(data);
-    const isOwnPage = user.account && company && (user.account.type === 'admin' || (company.owner && company.owner.userid === user.account.userid));
     return (
       <div className={cx('main-section')}>
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
@@ -28,7 +51,7 @@ class Container extends Component {
           thumbnailURL={company.profileImage? company.getProfileImage():null} 
         />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
-        <ContentsSection user={user} owner={company} contentsType="company" isOwnPage={isOwnPage} />
+        <ContentsSection user={user} owner={company} contentsType="company" isOwnPage={this.isOwnPage} />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
       </div>
     );
