@@ -50,10 +50,26 @@ const Component = ({ maker, editing, onChange, ...props }) => {
     onChange({companies: newState}, 'makerProfile');
   }
 
+  const swapEntries = (i, direction) => evt => {
+    if(i+direction < 0 || i+direction >= history.length) return;
+    const temp = history[i+direction];
+    history[i+direction] = {...history[i], order: temp.order};
+    history[i] = {...temp, order: history[i].order};
+    onChange({companies: [...history]}, 'makerProfile');
+  }
+
   let lines = history.map(info => {
     return (
       <tr key={info.order} draggable="true">
-        <td className={cx('col-info', 'first-item')}>{info.order + 1}</td>
+        {editing? 
+          <td className={cx('col-info', 'first-item')}>
+            <div className={cx('triangle-up')} onClick={swapEntries(info.order, -1)} role="button"></div>
+            <Padding height="0.5rem"/>
+            <div className={cx('triangle-down')} onClick={swapEntries(info.order, 1)} role="button"></div>
+          </td> : 
+          <td className={cx('col-info', 'first-item')}>{info.order + 1}</td>
+        }
+        
         {editing && info.newItem?
           <AutoComplete
             request={Company().searchCompaniesByName}

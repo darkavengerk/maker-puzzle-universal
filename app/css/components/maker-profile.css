@@ -409,3 +409,19 @@ td[contenteditable=true]:empty:before {
   box-shadow: 0 3px 10px 0 rgba(91, 91, 91, 0.5);
   border-radius: 50%;
 }
+
+.triangle-up {
+  width: 0;
+  height: 0;
+  border: solid 7px;
+  border-color: transparent transparent #808080 transparent;
+  margin: 0 0.2rem;
+}
+
+.triangle-down {
+  width: 0;
+  height: 0;
+  border: solid 7px;
+  border-color: #808080 transparent transparent transparent;
+  margin: 0 0.2rem;
+}
