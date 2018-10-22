@@ -3,5 +3,9 @@
 .main-section {
 }
 
+.draggable-source--is-dragging {
+  opacity: .2;
+}
+
 .description { @apply --normal; }
 .contribute { @apply --small; }

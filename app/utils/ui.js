@@ -1,6 +1,6 @@
 let sortable = null;
 
-function activateDrag(selector, children, cb) {
+function activateDrag(selector, children, cb, style) {
   if(sortable) {
     sortable.destroy();
   }
@@ -8,7 +8,10 @@ function activateDrag(selector, children, cb) {
   if(document.querySelectorAll(selector).length) {
     const draggable = require('@shopify/draggable');
     sortable = new draggable.Sortable(document.querySelectorAll(selector), {
-      draggable: children
+      draggable: children,
+      classes: {
+        'source:dragging': style
+      }
     });
     sortable.on('sortable:stop', function(evt) {
       if(evt.data && evt.data.oldIndex > -1 && evt.data.oldIndex !== evt.data.newIndex) {

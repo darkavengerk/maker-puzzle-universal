@@ -26,7 +26,7 @@ class Container extends Component {
   activateDrag() {
     if(this.isOwnPage()) {
       const { changePortfoiloOrder } = this.props;
-      UI.activateDrag('#portfolio-list', '#portfolio-list > div.dragItem', changePortfoiloOrder);
+      UI.activateDrag('#portfolio-list', '#portfolio-list > div.dragItem', changePortfoiloOrder, cx('draggable-source--is-dragging'));
     }
   }
 
