@@ -17,6 +17,18 @@ export function featureEditSave(data) {
 
 }
 
+export function changePortfoiloOrder(oldIndex, index) {
+  return async (dispatch, getState) => {
+    const { company } = getState();
+    const res = await Company().changePortfoiloOrder({link_name: company.company.link_name, data: { oldIndex, index }});
+    
+    if (res.status === 200) {
+      dispatch({type:types.REQUEST_SUCCESS, data: {company: res.data}});
+    }
+    return res;
+  };
+}
+
 export function companyPortfoiloEditorStart() {
   return {
     type: types.COMPANY_PORTFOLIO_EDITOR_START

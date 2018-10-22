@@ -67,6 +67,7 @@ export default (app) => {
     POST('/api/user/:id/features', usersController.updateFeatures);
     POST('/api/user/:id/company', usersController.addCompany);
     POST('/api/user/:id/portfolio', usersController.addPortfolio);
+    POST('/api/user/:id/portfolios/order', usersController.changePortfolioOrder);
     POST('/api/user/:id/follow', usersController.follow);
     POST('/api/user/:id/unfollow', usersController.unfollow);
     POST('/api/users', usersController.signUp);
@@ -95,6 +96,7 @@ export default (app) => {
     POST('/api/company/:link_name/features', companyController.updateFeatures);
     GET('/api/company', companyController.all);
     POST('/api/company/:link_name/portfolio', companyController.addPortfolio);
+    POST('/api/company/:link_name/portfolios/order', companyController.changePortfolioOrder);
     DELETE('/api/company/:link_name/portfolio/:pid', companyController.deletePortfolio);
     POST('/api/company/:link_name/product', companyController.addProduct);
     POST('/api/company', companyController.add);

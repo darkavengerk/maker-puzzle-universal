@@ -24,6 +24,18 @@ export function addOwnCompany(userid, name) {
     if (res.status === 200) {
       dispatch({type:types.REQUEST_SUCCESS, data: {maker: res.data}});
     }
+    return res;
+  };
+}
+
+export function changePortfoiloOrder(oldIndex, index) {
+  return async (dispatch, getState) => {
+    const { user } = getState();
+    const res = await Maker().changePortfoiloOrder({id: user.account.userid, data: { oldIndex, index }});
+    
+    if (res.status === 200) {
+      dispatch({type:types.REQUEST_SUCCESS, data: {maker: res.data}});
+    }
     else {
       // dispatch({type:types.PROFILE_EDIT_FAILURE});
     } 

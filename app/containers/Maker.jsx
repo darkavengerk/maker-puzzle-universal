@@ -11,6 +11,9 @@ import Padding from '../components/Padding';
 import styles from '../css/components/maker';
 
 import { Maker } from '../utils/objects';
+import { changePortfoiloOrder } from '../actions/makers';
+
+import UI from '../utils/ui'
 
 const cx = classNames.bind(styles);
 
@@ -22,12 +25,10 @@ class Container extends Component {
   }
 
   activateDrag() {
+
     if(this.isOwnPage()) {
-      const draggable = require('@shopify/draggable');
-      const sortable = new draggable.Sortable(document.querySelectorAll('#portfolio-list'), {
-        draggable: '#portfolio-list > div.dragItem'
-      });
-      sortable.on('sortable:stop', (evt) => console.log(evt.data.oldIndex, evt.data.newIndex));
+      const { changePortfoiloOrder } = this.props;
+      UI.activateDrag('#portfolio-list', '#portfolio-list > div.dragItem', changePortfoiloOrder);
     }
   }
 
@@ -74,4 +75,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {})(Container);
+export default connect(mapStateToProps, { changePortfoiloOrder })(Container);

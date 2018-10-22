@@ -12,6 +12,17 @@ const {
   Misc 
 } = models;
 
+async function getPopulatedCompany(link_name) {
+  return await Company
+                .findOne({ link_name })
+                .populate({path:'companyPortfolios.project'})
+                .populate({path:'portfolios.user'})
+                .populate({path:'portfolios.project'})
+                .populate('owner')
+                .populate({path:'users'})
+                .lean();
+}
+
 export function all(req, res) {
   User.find({}).exec((err, results) => {
     if (err) {
@@ -40,14 +51,7 @@ export function search(req, res) {
 
 export async function one(req, res) {
   const { link_name } = req.params;
-  const result = await Company
-                    .findOne({ link_name })
-                    .populate({path:'companyPortfolios.project'})
-                    .populate({path:'portfolios.user'})
-                    .populate({path:'portfolios.project'})
-                    .populate('owner')
-                    .populate({path:'users'})
-                    .lean();
+  const result = await getPopulatedCompany(link_name);
   return res.json(result);
 }
 
@@ -179,6 +183,23 @@ export function add(req, res) {
   });
 }
 
+export async function changePortfolioOrder(req, res) {
+  const link_name = req.params.link_name;
+  let { oldIndex, index } = req.body;
+
+  const company = await Company.findOne({ link_name });
+  const portfolios = company.companyPortfolios;
+  const filtered = portfolios.filter((p, i) => i !== oldIndex);
+  const prev = filtered.filter((p, i) => i < index);
+  const post = filtered.filter((p, i) => i >= index);
+  const sorted = prev.concat([portfolios[oldIndex]]).concat(post);
+
+  company.companyPortfolios = sorted;
+  await company.save();
+
+  res.json(await getPopulatedCompany(link_name));
+}
+
 /**
  * Update a topic
  */
@@ -254,6 +275,7 @@ export default {
   addPortfolio,
   deletePortfolio,
   addProduct,
+  changePortfolioOrder,
   add,
   update,
   remove,

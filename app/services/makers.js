@@ -26,6 +26,11 @@ export default () => {
       url: `/api/user/${id}/company`,
       data
     }),
+    changePortfoiloOrder: ({id, data}) => client.request({
+      method: 'POST',
+      url: `/api/user/${id}/portfolios/order`,
+      data
+    }),
     follow: ({id, data}) => client.request({
       method: 'POST',
       url: `/api/user/${id}/follow`,

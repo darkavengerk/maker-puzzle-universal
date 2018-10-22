@@ -19,6 +19,11 @@ export default () => {
       url: `/api/company/${link_name}/features`,
       data
     }),
+    changePortfoiloOrder: ({link_name, data}) => client.request({
+      method: 'POST',
+      url: `/api/company/${link_name}/portfolios/order`,
+      data
+    }),
     getPortfolio: ({ id, pid }) => client.request({
       method: 'GET',
       url: `/api/company/${id}/portfolio/${pid}`,

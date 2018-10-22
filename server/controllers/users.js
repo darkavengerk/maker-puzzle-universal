@@ -85,6 +85,27 @@ export async function addCompany(req, res) {
   res.json(await getPopulatedUser(userid));
 }
 
+function isSamePortfolios(p1, p2) {
+  return ( p1.pid ) === ( p2.pid );
+}
+
+export async function changePortfolioOrder(req, res) {
+  const userid = req.params.id;
+  let { oldIndex, index } = req.body;
+
+  const user = await User.findOne({ userid });
+  const portfolios = user.portfolios;
+  const filtered = portfolios.filter((p, i) => i !== oldIndex);
+  const prev = filtered.filter((p, i) => i < index);
+  const post = filtered.filter((p, i) => i >= index);
+  const sorted = prev.concat([portfolios[oldIndex]]).concat(post);
+
+  user.portfolios = sorted;
+  await user.save();
+
+  res.json(await getPopulatedUser(userid));
+}
+
 export async function updateFeatures(req, res) {
   const userid = req.params.id;
   let {features, about, picture, makerProfile} = req.body;
@@ -300,6 +321,7 @@ export default {
   updateFeatures,
   addCompany,
   addPortfolio,
+  changePortfolioOrder,
   deletePortfolio,
   follow,
   unfollow

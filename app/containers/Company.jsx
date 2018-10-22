@@ -10,6 +10,9 @@ import ContentsSection from '../components/ContentsSection';
 import SingleLine from '../components/SingleLine';
 import styles from '../css/components/maker';
 import { Company } from '../utils/objects';
+import { changePortfoiloOrder } from '../actions/companies';
+
+import UI from '../utils/ui'
 
 const cx = classNames.bind(styles);
 
@@ -21,13 +24,10 @@ class Container extends Component {
   }
 
   activateDrag() {
-    const { maker, user } = this.props;
 
     if(this.isOwnPage()) {
-      const draggable = require('@shopify/draggable');
-      const sortable = new draggable.Sortable(document.querySelectorAll('#portfolio-list'), {
-        draggable: '#portfolio-list > div.dragItem'
-      });
+      const { changePortfoiloOrder } = this.props;
+      UI.activateDrag('#portfolio-list', '#portfolio-list > div.dragItem', changePortfoiloOrder);
     }
   }
 
@@ -69,4 +69,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {})(Container);
+export default connect(mapStateToProps, { changePortfoiloOrder })(Container);
