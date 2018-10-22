@@ -6,7 +6,7 @@ function activateDrag(selector, children, cb, style) {
   }
 
   if(document.querySelectorAll(selector).length) {
-    const draggable = require('@shopify/draggable');
+    const draggable = require('@shopify/draggable/lib/es5/draggable.bundle');
     sortable = new draggable.Sortable(document.querySelectorAll(selector), {
       draggable: children,
       classes: {
