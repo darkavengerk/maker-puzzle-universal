@@ -71,6 +71,7 @@ const Component = ({ maker, editing, onChange, ...props }) => {
         }
         
         {editing && info.newItem?
+          <td>
           <AutoComplete
             request={Company().searchCompaniesByName}
             title="new-company-name"
@@ -82,7 +83,7 @@ const Component = ({ maker, editing, onChange, ...props }) => {
             top="2.2rem"
             width="16rem"
             placeholder="기업명을 입력 후 선택하세요"
-          /> :
+          /></td> :
           <td className={cx('text-input', 'company-title', (info.current? "col-selected": ""))}>
             <Link to={'/company/' + info.name.replace(' ', '_')} count="company">{info.name}</Link>
           </td>

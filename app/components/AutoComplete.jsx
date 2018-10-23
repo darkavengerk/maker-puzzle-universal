@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import _ from 'lodash';
 
+import AutoCompleteUI from '../components/AutoCompleteUI';
+import FloatingList from '../components/FloatingList';
 import styles from '../css/components/auto-complete';
 
 const cx = classNames.bind(styles);
@@ -13,62 +15,43 @@ class autoComplete extends Component {
   constructor(props) {
     super(props);
 
-    const { target, text='' } = this.props;
-    this.state = {showDropdown: false, text: text, selected: -1};
-
+    const { target } = this.props;
+    this.state = {showDropdown: false, selected: -1};
     this.hideDropdown = this.hideDropdown.bind(this);
     this.showList = this.showList.bind(this);
-    this.autoComplete = this.autoComplete.bind(this);
     this.onTextChage = this.onTextChage.bind(this);
     this.keyPressed = this.keyPressed.bind(this);
-    this.mouseOver = this.mouseOver.bind(this);
-  }
-
-  mouseOver(index) {
-    return evt => this.setState({selected: index});
+    this.onTextSelected = this.onTextSelected.bind(this);
   }
 
   keyPressed(evt) {
     const e = evt || window.event;
 
-    if (e.keyCode == '38') {
-        // up arrow
+    if (e.keyCode == '38') { // up arrow
       if(this.state.selected >= 0)
         this.setState({selected: this.state.selected - 1});
       e.preventDefault();
     }
-    else if (e.keyCode == '40') {
-        // down arrow
+    else if (e.keyCode == '40') { // down arrow
       if(this.state.projectSuggestion && this.state.projectSuggestion.length - 1 > this.state.selected)
         this.setState({selected: this.state.selected + 1});
       e.preventDefault();
     }
-    else if (e.keyCode == '13' || e.keyCode == '9') {
-      // Enter or Tab
+    else if (e.keyCode == '13' || e.keyCode == '9') { // Enter or Tab
       if(this.state.selected >= 0) {
         const word = this.state.projectSuggestion[this.state.selected];
-        this.setState({text: word, showDropdown: false, selected: -1});
+        this.setState({showDropdown: false, selected: -1});
+        this.props.update({text: word});
         e.preventDefault();
       }
     }
-    else if (e.keyCode == '27') {
-      // ESC
+    else if (e.keyCode == '27') { // ESC
       this.setState({showDropdown: false, selected: -1});
     }
   }
 
   hideDropdown() {
-    const { update } = this.props;
-    update(this.state.text);
     this.setState({showDropdown: false});
-  }
-
-  autoComplete(word) {
-    const { update } = this.props;
-    return evt => {
-      this.setState({text: word});
-      update(word);
-    }
   }
 
   componentWillMount() {
@@ -82,21 +65,22 @@ class autoComplete extends Component {
   }
 
   onTextChage(key, lengthLimit) {
-    return (evt) => {
+    const { update, request } = this.props;
+    return (textInput) => {
       let newState = {selected: -1};
       let length = 0;
       let text = '';
 
-      for(let ch of evt.target.value) {
+      for(let ch of textInput) {
         length += (escape(ch).length > 4? 2 : 1);
         text += ch;
 
         if(length >= lengthLimit) break;
       }
 
-      if(this.state[key] !== text) {
-        newState[key] = text;
-        this.setState(newState);
+      if(this.props.text !== text) {
+        update(text);
+        request({keyword: text}).then(res => this.showList(res.data));
         return true;
       }
       else {
@@ -106,60 +90,37 @@ class autoComplete extends Component {
     }
   }
 
-  async showList(evt) {
-    const { request, update, textLimit=10 } = this.props;
-    const updated = this.onTextChage('text', textLimit)(evt);
-    let text = evt.target.value;
-    if(text) {
-      if(updated) {
-        const {data} = await request({keyword: text});
-        const words = data.map(d => d.word);
-        this.setState({showDropdown: true, projectSuggestion: words});
-      }
+  onTextSelected(text) {
+    const { update } = this.props;
+    this.setState({ showDropdown: false});
+    update(text);
+  }
+
+  showList(info) {
+    if(!info) return;
+    const words = info.map(d => d.word);
+    if(words.length > 0) {
+      this.setState({showDropdown: true, projectSuggestion: words});
     }
     else {
-      this.setState({showDropdown: false});
+      this.setState({showDropdown: false, projectSuggestion: []});
     }
   }
 
   render() {
-    const { title, id, className, update, tagName='div', placeholder, width='32.7rem', top='2.7rem' } = this.props;
-    const Tag = tagName;
-    const list = this.state.showDropdown && this.state.projectSuggestion && this.state.projectSuggestion.length > 0?
-        <ul className={cx('auto-complete')} style={{ width, top }}>
-          {(this.state.projectSuggestion || []).map(
-            (word, i) =>  <li key={word} 
-                            className={cx('auto-complete-word', i === this.state.selected? 'selected':'')} 
-                            onMouseOver={this.mouseOver(i)}
-                            onMouseDown={this.autoComplete(word)}>
-                            {word}
-                          </li>)}
-        </ul> : null;
-
+    const { text } = this.props;
     return (
-      <Tag className={cx('relative')} >
-        <input 
-          id={title}
-          type="text" 
-          className={className} 
-          value={this.state.text} 
-          onChange={this.showList} 
-          onBlur={this.hideDropdown}
-          onKeyDown={this.keyPressed}
-          placeholder={placeholder}
-        />
-        {list}  
-      </Tag>                
+      <AutoCompleteUI           
+        textChanged={this.onTextChage('text', '30')} 
+        text={text}
+        keyHook={this.keyPressed}
+        onBlur={this.hideDropdown}
+        textSelected={this.onTextSelected} 
+        items={this.state.projectSuggestion}
+        showList={this.state.showDropdown}
+      />
     );
   }
 }
 
-autoComplete.propTypes = {
-};
-
-function mapStateToProps(state) {
-  return {
-  };
-}
-
-export default connect(mapStateToProps)(autoComplete);
+export default autoComplete;
