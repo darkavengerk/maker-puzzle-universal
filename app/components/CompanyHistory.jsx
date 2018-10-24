@@ -72,18 +72,18 @@ const Component = ({ maker, editing, onChange, ...props }) => {
         
         {editing && info.newItem?
           <td>
-          <AutoComplete
-            request={Company().searchCompaniesByName}
-            title="new-company-name"
-            update={companyNameChanged(info.order)}
-            text={info.name}
-            className={cx('text-input', 'company-title', 'new-company-name')}
-            textLimit={50}
-            tagName="td"
-            top="2.2rem"
-            width="16rem"
-            placeholder="기업명을 입력 후 선택하세요"
-          /></td> :
+            <AutoComplete
+              request={Company().searchCompaniesByName}
+              title="new-company-name"
+              update={companyNameChanged(info.order)}
+              text={info.name}
+              className={cx('text-input', 'company-title', 'new-company-name')}
+              textLimit={50}
+              top="2.2rem"
+              width="16rem"
+              placeholder="기업명을 입력 후 선택하세요"
+            />
+          </td> :
           <td className={cx('text-input', 'company-title', (info.current? "col-selected": ""))}>
             <Link to={'/company/' + info.name.replace(' ', '_')} count="company">{info.name}</Link>
           </td>

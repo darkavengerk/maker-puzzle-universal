@@ -1,14 +1,11 @@
-.auto-complete {
-  position: absolute;
-  background: white;
-  list-style-type: none;
-  padding: 0;
-  z-index: 9;
-  border: 1px solid;
+.fillXY {
+  width: 100%;
+  height: 100%;
 }
 
-.auto-complete-word {
-  padding: 0.5rem;
+.clear-border {
+  border-width:0px;
+  border:none;
 }
 
 .selected {

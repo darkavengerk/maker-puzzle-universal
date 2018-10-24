@@ -40,6 +40,14 @@ a:hover, a:focus, a:link {
     font-family: inherit;
 }
 
+textarea:focus, input:focus{
+    outline: none;
+}
+
+*:focus {
+    outline: none;
+}
+
 .app {
   height: 100%;
   font-weight: normal;

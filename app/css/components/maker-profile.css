@@ -249,8 +249,8 @@ td[contenteditable=true]:empty:before {
 }
 
 .new-company-name {
-  width: 16rem;
-  border: none;
+  width: 100%;
+  height: 100%;
 }
 
 .add-entry {

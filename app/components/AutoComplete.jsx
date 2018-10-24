@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import _ from 'lodash';
 
-import AutoCompleteUI from '../components/AutoCompleteUI';
+import ControllableTextInput from '../components/ControllableTextInput';
 import FloatingList from '../components/FloatingList';
+
 import styles from '../css/components/auto-complete';
 
 const cx = classNames.bind(styles);
@@ -16,12 +17,18 @@ class autoComplete extends Component {
     super(props);
 
     const { target } = this.props;
-    this.state = {showDropdown: false, selected: -1};
+    this.state = {showDropdown: false, selected: -1, height: 0, width: 0};
     this.hideDropdown = this.hideDropdown.bind(this);
     this.showList = this.showList.bind(this);
     this.onTextChage = this.onTextChage.bind(this);
     this.keyPressed = this.keyPressed.bind(this);
     this.onTextSelected = this.onTextSelected.bind(this);
+    this.itemSelected = this.itemSelected.bind(this);
+  }
+
+  componentDidMount() {
+    const { height, width } = this.input.getBoundingClientRect();
+    this.setState({ height, width });
   }
 
   keyPressed(evt) {
@@ -29,25 +36,31 @@ class autoComplete extends Component {
 
     if (e.keyCode == '38') { // up arrow
       if(this.state.selected >= 0)
-        this.setState({selected: this.state.selected - 1});
+        this.itemSelected(this.state.selected - 1);
       e.preventDefault();
     }
     else if (e.keyCode == '40') { // down arrow
       if(this.state.projectSuggestion && this.state.projectSuggestion.length - 1 > this.state.selected)
-        this.setState({selected: this.state.selected + 1});
+        this.itemSelected(this.state.selected + 1);
       e.preventDefault();
     }
     else if (e.keyCode == '13' || e.keyCode == '9') { // Enter or Tab
       if(this.state.selected >= 0) {
         const word = this.state.projectSuggestion[this.state.selected];
         this.setState({showDropdown: false, selected: -1});
-        this.props.update({text: word});
+        this.props.update(word);
         e.preventDefault();
       }
     }
     else if (e.keyCode == '27') { // ESC
       this.setState({showDropdown: false, selected: -1});
     }
+  }
+
+  itemSelected(i) {
+    const word = this.state.projectSuggestion[i];
+    this.props.update(word);
+    this.setState({selected: i});
   }
 
   hideDropdown() {
@@ -97,7 +110,7 @@ class autoComplete extends Component {
   }
 
   showList(info) {
-    if(!info) return;
+    if(!info) info=[];
     const words = info.map(d => d.word);
     if(words.length > 0) {
       this.setState({showDropdown: true, projectSuggestion: words});
@@ -108,17 +121,30 @@ class autoComplete extends Component {
   }
 
   render() {
-    const { text } = this.props;
+    const { text, className, top, width } = this.props;
     return (
-      <AutoCompleteUI           
-        textChanged={this.onTextChage('text', '30')} 
-        text={text}
-        keyHook={this.keyPressed}
-        onBlur={this.hideDropdown}
-        textSelected={this.onTextSelected} 
-        items={this.state.projectSuggestion}
-        showList={this.state.showDropdown}
-      />
+      <div className={className + ' ' + cx('relative')} >
+        <ControllableTextInput
+          className={cx('fillXY', 'clear-border')}
+          notify={this.onTextChage('text', '30')} 
+          text={text}
+          keyHook={this.keyPressed}
+          placeholder={'기업명을 입력 후 선택하세요'}
+          onBlur={this.hideDropdown}
+          onRef={ref => (this.input = ref)}
+        />
+        <FloatingList
+          width={this.state.width + 12}
+          top={this.state.height}
+          margin={2}
+          notify={this.onTextSelected} 
+          items={this.state.projectSuggestion}
+          itemClassName={cx('selected')}
+          show={this.state.showDropdown}
+          index={this.state.selected}
+          update={this.itemSelected}
+        />
+      </div>
     );
   }
 }

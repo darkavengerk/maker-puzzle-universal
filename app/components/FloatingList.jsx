@@ -1,34 +1,59 @@
-import React from 'react';
-import classNames from 'classnames/bind';
+import React, { Component } from 'react';
 
-import styles from '../css/components/auto-complete';
+class FloatingList extends Component {
+  constructor(props) {
+    super(props);
+    this.mouseOver = this.mouseOver.bind(this);
+  }
 
-const cx = classNames.bind(styles);
+  mouseOver(i) {
+    const { update } = this.props;
+    return evt => update(i);
+  }
 
-const Component = ({ 
-    notify,
-    items=[],
-    show=false,
-    className, 
-    width='32.7rem', 
-    top='2.7rem' 
-  }) => {  
+  render() {
+    const { 
+      notify,
+      items=[],
+      show=false,
+      className, 
+      itemClassName,
+      width, 
+      top,
+      margin,
+      index
+    } = this.props;
+    if(!show) return null;
+    const listItems = items.map((word, i) => (
+      <li 
+        className={i === index? itemClassName : ''} 
+        style={{padding: '0 0.5rem'}}
+        onMouseOver={this.mouseOver(i)}
+        key={word} 
+        onMouseDown={evt => notify(word)}>
+        {word}
+      </li>)
+    );
 
-  if(!show) return null;
-      // className={cx('auto-complete-word', i === this.state.selected? 'selected':'')} 
-      // onMouseOver={mouseOver(i)}
-  const listItems = items.map((word, i) => (
-    <li key={word} 
-      onMouseDown={evt => notify(word)}>
-      {word}
-    </li>)
-  );
+    const style= {
+      position: 'absolute',
+      left: 0,
+      top: top,
+      marginTop: margin,
+      width,
+      zIndex: 9,
+      background: 'white',
+      'listStyleType': 'none',
+      padding: 0,
+      border: '1px dashed',
+    }
 
-  return (
-    <ul className={className} style={{ width, top }}>
-      {listItems}
-    </ul>
-  );
+    return (
+      <ul className={className} style={style}>
+        {listItems}
+      </ul>
+    );
+  }
 }
 
-export default Component;
+export default FloatingList;
