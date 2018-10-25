@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 
+import LazyLoad from 'react-lazyload';
+
 const ProfileImage = ({ src, x='auto', y='auto', ...props }) => {
 
   let url = src? src : "/images/default.jpg";
@@ -23,8 +25,10 @@ const ProfileImage = ({ src, x='auto', y='auto', ...props }) => {
   }
 
   return (
-    <img {...props} src={url} style={imageStyle} >
-    </img>
+    <LazyLoad height={y} >
+      <img {...props} src={url} style={imageStyle} >
+      </img>
+    </LazyLoad>
   );
 };
 

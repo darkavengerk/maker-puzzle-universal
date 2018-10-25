@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 
+import LazyLoad from 'react-lazyload';
+
 import PureImage from './PureImage';
 import { loadImage } from '../actions/images';
 
@@ -85,9 +87,11 @@ class FlexibleImage extends Component {
     }
 
     return (
-      <div {...renderProps} style={imageStyle} >
-        {children}
-      </div>
+      <LazyLoad height={height}>
+        <div {...renderProps} style={imageStyle} >
+          {children}
+        </div>
+      </LazyLoad>
     );
   }
 }
