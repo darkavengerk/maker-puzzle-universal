@@ -10,7 +10,6 @@ import styles from '../css/components/contents-section';
 const cx = classNames.bind(styles);
 
 const ContentsSection = ({owner, ...props}) => {
-
   return (
     <div className={cx('main-section')}>
       <span className={cx('left-panel')} >

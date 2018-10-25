@@ -13,6 +13,7 @@ import { Company } from '../utils/objects';
 import { changePortfoiloOrder } from '../actions/companies';
 
 import UI from '../utils/ui'
+import Assist from '../utils/assist'
 
 const cx = classNames.bind(styles);
 
@@ -20,7 +21,7 @@ class Container extends Component {
 
   isOwnPage() {
     const { company, user } = this.props;
-    return user.account && company && (user.account.type === 'admin' || (company.owner && company.owner.userid === user.account.userid));
+    return Assist.Company.isOwnPage(company, user.account);
   }
 
   activateDrag() {
@@ -50,7 +51,7 @@ class Container extends Component {
           thumbnailURL={company.profileImage? company.getProfileImage():null} 
         />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
-        <ContentsSection user={user} owner={company} contentsType="company" isOwnPage={this.isOwnPage} />
+        <ContentsSection user={user} owner={company} contentsType="company" isOwnPage={this.isOwnPage()} />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
       </div>
     );
