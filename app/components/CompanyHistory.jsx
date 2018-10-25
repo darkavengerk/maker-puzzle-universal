@@ -60,7 +60,7 @@ const Component = ({ maker, editing, onChange, ...props }) => {
 
   let lines = history.map(info => {
     return (
-      <tr key={info.order} draggable="true">
+      <tr key={info.order}>
         {editing? 
           <td className={cx('col-info', 'first-item')}>
             <div className={cx('triangle-up')} onClick={swapEntries(info.order, -1)} role="button"></div>
