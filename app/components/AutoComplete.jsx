@@ -121,15 +121,15 @@ class autoComplete extends Component {
   }
 
   render() {
-    const { text, className, top, width } = this.props;
+    const { text, className, top, width, placeholder, textLimit=30 } = this.props;
     return (
       <div className={className + ' ' + cx('relative')} >
         <ControllableTextInput
           className={cx('fillXY', 'clear-border')}
-          notify={this.onTextChage('text', '30')} 
+          notify={this.onTextChage('text', textLimit)} 
           text={text}
           keyHook={this.keyPressed}
-          placeholder={'기업명을 입력 후 선택하세요'}
+          placeholder={placeholder}
           onBlur={this.hideDropdown}
           onRef={ref => (this.input = ref)}
         />

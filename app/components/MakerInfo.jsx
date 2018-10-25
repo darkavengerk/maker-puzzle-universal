@@ -131,8 +131,7 @@ class MakerInfo extends Component {
               update={this.companyNameChanged}
               className={cx('company-name-input')}
               textLimit={50}
-              OnKeyPress={this.companyNameChanged}
-              tagName="div"
+              text={this.state.companyName}
               top="4.2rem"
               width="30rem"
               placeholder="기업 이름 검색"
