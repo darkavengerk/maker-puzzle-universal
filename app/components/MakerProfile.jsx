@@ -8,7 +8,9 @@ import FlexibleImage from '../components/FlexibleImage';
 import Border from '../components/SingleLine';
 import ImageUploader from '../components/ImageUploader';
 import Features from '../components/Features';
-import styles from '../css/components/maker-profile';
+
+import Popup from '../components/Popup';
+import FollowList from '../components/FollowList';
 
 import { featureEditSave, follow, unfollow } from '../actions/makers';
 import { logOut } from '../actions/users';
@@ -16,18 +18,22 @@ import { logOut } from '../actions/users';
 import ContentEditable from 'react-contenteditable'
 import jsxToString from 'jsx-to-string';
 
+import styles from '../css/components/maker-profile';
 const cx = classNames.bind(styles);
 
 class MakerProfile extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {};
 
     this.featureEdited = this.featureEdited.bind(this);
     this.aboutEdited = this.aboutEdited.bind(this);
     this.profileImageEdited = this.profileImageEdited.bind(this);
     this.followClicked = this.followClicked.bind(this);
     this.unfollowClicked = this.unfollowClicked.bind(this);
+    this.showList = this.showList.bind(this);
+    this.hideList = this.hideList.bind(this);
   }
 
   featureEdited(key, text) {
@@ -60,6 +66,15 @@ class MakerProfile extends Component {
     unfollow({follower: user.account, following: maker});
   }
 
+  showList(route, title) {
+    const { maker } = this.props;
+    return evt => this.setState({showFollowList: true, followList: maker[route], followTitle: title});
+  }
+
+  hideList() {
+    return this.setState({showFollowList: false, followList: []});
+  }
+
   render() {
     const { 
       maker, 
@@ -77,7 +92,7 @@ class MakerProfile extends Component {
     const isFollowing = maker.followers.filter(u => u.userid === user.account.userid).length > 0;
 
     let stats = (
-      <span className={cx('stats-area', 'flex-row')}>
+      <span className={cx('stats-area', 'flex-row')} id="maker-stats-area">
         <span className={cx('maker-stats', 'flex-col')}>
           <span className={cx('figure')}>
             {maker.portfolios? maker.portfolios.length : 0}
@@ -86,7 +101,7 @@ class MakerProfile extends Component {
             Portfolio
           </span>
         </span>
-        <span className={cx('maker-stats', 'flex-col')}>
+        <span className={cx('maker-stats', 'flex-col')} onClick={this.showList('followers', '팔로워')} role="button">
           <span className={cx('figure')}>
             {maker.followers.length}
           </span>
@@ -94,7 +109,7 @@ class MakerProfile extends Component {
             Follower
           </span>
         </span>
-        <span className={cx('maker-stats', 'flex-col')}>
+        <span className={cx('maker-stats', 'flex-col')} onClick={this.showList('followings', '팔로잉')} role="button">
           <span className={cx('figure')}>
             {maker.followings.length}
           </span>
@@ -102,6 +117,15 @@ class MakerProfile extends Component {
             Following
           </span>
         </span>
+        <Popup 
+          show={this.state.showFollowList} 
+          name="followListPopup" 
+          target={'maker-stats-area'} 
+          top={50} 
+          left={-172}
+          cancel={this.hideList}>
+          <FollowList list={this.state.followList} title={this.state.followTitle} />
+        </Popup>
       </span>);
 
     let buttonArea;

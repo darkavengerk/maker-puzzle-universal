@@ -21,7 +21,6 @@ const Navigation = ({ user, logOut, loginMenu, cancelLogin }) => {
             user={user.account} 
             x={36} y={36} 
             showName={false}
-            defaultImage={'/site/images/header-account.png'}
           /> : 
           <div className={cx('login-button')} onClick={loginMenu} role="button">
             로그인하기

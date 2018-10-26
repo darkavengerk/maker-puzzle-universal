@@ -53,8 +53,11 @@ const maker = (
       return state;
 
     case types.FOLLOWERS_UPDATED:
-      return {...state, followers: action.data.following.followers}
-
+      if(action.data.following.userid === state.userid)
+        return {...state, followers: action.data.following.followers};
+      if(action.data.follower.userid === state.userid)
+        return {...state, followings: action.data.follower.followings};
+      return state;
     default:
       return state;
   }

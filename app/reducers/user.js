@@ -119,7 +119,11 @@ const account = (
       const {features, about, picture, companyProfile} = action.data;
       return {...state, features, about, picture, companyProfile}
     case types.FOLLOWERS_UPDATED:
-      return {...state, followings: action.data.follower.followings}
+      if(action.data.follower.userid === state.userid)
+        return {...state, followings: action.data.follower.followings};
+      if(action.data.following.userid === state.userid)
+        return {...state, followers: action.data.following.followers};
+      return state;
     default:
       return state;
   }

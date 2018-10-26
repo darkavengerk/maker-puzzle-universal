@@ -14,7 +14,6 @@ const MakerListRoundy = ({ makers=[] }) => {
       className={cx('maker-roundy')} 
       user={user} 
       key={user.userid}
-      defaultImage="/site/images/default_Maker-01.jpg"
     ></Roundy>
   );
 

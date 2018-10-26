@@ -46,6 +46,13 @@ class Maker extends User {
     return '/maker/' + data.userid;
   }
 
+  getOccupation(data) {
+    for(const feature of data.features) {
+      if(feature.repr === 'occupation') return feature.content;
+    }
+    return '';
+  }
+
   createPortfolioLink(data, portfolio) {
     return data.getHomeLink() + '/portfolio/' + portfolio.pid;
   }
@@ -60,6 +67,10 @@ class Maker extends User {
 
   getContent(data, props) {
     return factory.getMakerContent({source: data, ...props});
+  }
+
+  isFollowing(data, target) {
+    return data.followings.filter(p => (p._id || p) === (target._id || target)).length > 0;
   }
 }
 

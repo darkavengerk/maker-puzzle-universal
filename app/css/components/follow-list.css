@@ -1,0 +1,101 @@
+.main-section {
+  width: 373px;
+  height: 470px;
+  box-shadow: 0 3px 35px 0 rgba(0, 0, 0, 0.5);
+  background-color: #ffffff;
+}
+
+.list {
+  height: 435px;
+  overflow-y: auto;
+}
+
+.title {
+  height: 35px;
+  font-family: NanumBarunGothic;
+  font-size: 15px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 3.4rem;
+  letter-spacing: normal;
+  text-align: center;
+  vertical-align: middle;
+  color: #000000;
+}
+
+.item {
+  height: 4.65rem;
+  display: flex;
+  align-items: center;
+  padding: 0 2.2rem;
+}
+
+.text {
+  margin-left: 1rem;
+  height: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.buffer {
+  flex: 1;
+}
+
+.follow-button {
+  /*display: flex;
+  align-items: center;
+  justify-content: center;*/
+  margin: 0;
+
+  width: 74px;
+  height: 2rem;
+  border-radius: 1px;
+  border: solid 1px #303030;
+
+  font-family: NanumBarunGothic;
+  font-size: 1rem;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 2rem;
+  letter-spacing: normal;
+  text-align: center;
+  vertical-align: middle;
+  color: #222222;
+}
+
+.follow {
+  background-color: #f36d20;
+  color: #ffffff;
+  border: solid 1px #f36d20;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.name {
+  font-family: NanumBarunGothic;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #4a4a4a;
+}
+
+.occupation {
+  font-family: NanumBarunGothic;
+  font-size: 10px;
+  font-weight: 100;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #aaaaaa;
+}
