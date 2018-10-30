@@ -97,10 +97,9 @@ export function productSubmit(product) {
 
 export function follow(data) {
   return async (dispatch, getState) => {
-    const { company, user } = getState();
-    const res = await Company().follow({link_name: company.company.link_name, data: user.account});
+    const res = await Company().follow({link_name: data.following.link_name, data: data.follower});
     if (res.status === 200) {
-      dispatch({type:types.USER_FOLLOWERS_UPDATED, data: res.data});
+      dispatch({type:types.COMPANY_FOLLOWERS_UPDATED, data: res.data});
     }
     else {
       console.log(res);
@@ -111,10 +110,9 @@ export function follow(data) {
 
 export function unfollow(data) {
   return async (dispatch, getState) => {
-    const { company, user } = getState();
-    const res = await Company().unfollow({link_name: company.company.link_name, data: user.account});
+    const res = await Company().unfollow({link_name: data.following.link_name, data: data.follower});
     if (res.status === 200) {
-      dispatch({type:types.USER_FOLLOWERS_UPDATED, data: res.data});
+      dispatch({type:types.COMPANY_FOLLOWERS_UPDATED, data: res.data});
     }
     else {
       console.log(res);

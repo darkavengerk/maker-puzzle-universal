@@ -19,6 +19,7 @@ async function getPopulatedCompany(link_name) {
                 .populate({path:'portfolios.user'})
                 .populate({path:'portfolios.project'})
                 .populate('owner')
+                .populate('followers')
                 .populate({path:'users'})
                 .lean();
 }
@@ -238,16 +239,16 @@ export async function follow(req, res) {
   let userid = req.body.userid;
 
   const [company, user] = await Promise.all([
-    Company.findOne({ link_name }), 
-    User.findOne({ userid })
+    Company.findOne({ link_name }).populate('followers'), 
+    User.findOne({ userid }).populate('companyFollowings')
   ]);
 
-  company.followers.addToSet(user._id);
-  user.companyFollowings.addToSet(company._id);
+  company.followers.addToSet(user);
+  user.companyFollowings.addToSet(company);
 
   await Promise.all([company.save(), user.save()]);
 
-  return res.status(200).json({ company });
+  return res.status(200).json({ following: company, follower: user });
 }
 
 export async function unfollow(req, res) {
@@ -255,16 +256,16 @@ export async function unfollow(req, res) {
   let userid = req.body.userid;
 
   const [company, user] = await Promise.all([
-    Company.findOne({ link_name }), 
-    User.findOne({ userid })
+    Company.findOne({ link_name }).populate('followers'), 
+    User.findOne({ userid }).populate('companyFollowings')
   ]);
 
-  company.followers.pull(user._id);
-  user.companyFollowings.pull(company._id);
+  company.followers.pull(user);
+  user.companyFollowings.pull(company);
 
   await Promise.all([company.save(), user.save()]);
 
-  return res.status(200).json({ company });
+  return res.status(200).json({ following: company, follower: user });
 }
 
 export default {

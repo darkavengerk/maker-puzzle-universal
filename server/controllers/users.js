@@ -29,7 +29,7 @@ async function getPopulatedUser(userid) {
     .populate('companiesOwned')
     .populate('portfolios.project')
     .populate('portfolios.company')
-    .populate(['followers', 'followings'])
+    .populate(['followers', 'followings', 'companyFollowings'])
     .lean()
 }
 

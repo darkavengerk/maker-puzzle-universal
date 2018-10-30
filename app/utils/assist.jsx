@@ -70,7 +70,31 @@ class Maker extends User {
   }
 
   isFollowing(data, target) {
-    return data.followings.filter(p => (p._id || p) === (target._id || target)).length > 0;
+    const first = data.followings.filter(p => (p._id || p) === (target._id || target)).length > 0;
+    const second = data.companyFollowings.filter(p => (p._id || p) === (target._id || target)).length > 0;
+    return first || second;
+  }
+
+  getFollows(data, type) {
+    if(type === 'followings') {
+      return data.followings;
+    }
+    else {
+      return data.followers;
+    }
+  }
+
+  getCompanyFollowings(data, type) {
+    if(type === 'followings') {
+      return data.companyFollowings;
+    }
+    else {
+      return [];
+    }
+  }
+
+  getFollowSize(data, type) {
+    return this.getFollows(data, type).length + this.getCompanyFollowings(data, type).length;
   }
 }
 

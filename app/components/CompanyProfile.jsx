@@ -11,10 +11,14 @@ import FlexibleImage from '../components/FlexibleImage';
 import Border from '../components/SingleLine';
 import ImageUploader from '../components/ImageUploader';
 import Features from '../components/Features';
+
+import Popup from '../components/Popup';
+import FollowList from '../components/FollowList';
+
 import styles from '../css/components/company-profile';
 
 import { featureEditSave, follow, unfollow } from '../actions/companies';
-import { logOut } from '../actions/users';
+import { loginMenu, cancelLogin, logOut } from '../actions/users';
 
 import { Company } from '../utils/objects';
 
@@ -33,6 +37,10 @@ class CompanyProfile extends Component {
     this.cancelEdit = this.cancelEdit.bind(this);
     this.featureEdited = this.featureEdited.bind(this);
     this.profileImageEdited = this.profileImageEdited.bind(this);
+    this.followClicked = this.followClicked.bind(this);
+    this.unfollowClicked = this.unfollowClicked.bind(this);
+    this.showList = this.showList.bind(this);
+    this.hideList = this.hideList.bind(this);
   }
 
   startEdit() {
@@ -70,14 +78,36 @@ class CompanyProfile extends Component {
     }
   }
 
+  followClicked() {
+    const {follow, company, user, loginMenu} = this.props;
+    if(!user.userid) {
+      loginMenu();
+    }
+    else follow({follower: user, following: company});
+  }
+
+  unfollowClicked() {
+    const {unfollow, company, user} = this.props;
+    unfollow({follower: user, following: company});
+  }
+
+  showList(title) {
+    const { company } = this.props;
+    return evt => this.setState({showFollowList: true, followList: company.followers, followTitle: title});
+  }
+
+  hideList() {
+    return this.setState({showFollowList: false, followList: []});
+  }
+
   render() {
     const { company: data, user, logOut, follow, unfollow } = this.props;
     const company = new Company(data);
     const isOwnPage = (user.type==='admin' || (user.userid && company.isOwnPage(user)));
-    const isFollowing = user.userid && ((company.followers || []).filter(u => u === user._id).length > 0);
+    const isFollowing = user.userid && ((company.followers || []).filter(u => (u._id || u) === user._id).length > 0);
 
     let stats = (
-      <span className={cx('stats-area', 'flex-row')}>
+      <span className={cx('stats-area', 'flex-row')} id="company-stats-area">
         <span className={cx('maker-stats', 'flex-col')}>
           <span className={cx('figure')}>
             {company.portfolios? company.companyPortfolios.length : 0}
@@ -96,21 +126,30 @@ class CompanyProfile extends Component {
           </span>
         </span>
 
-        <span className={cx('maker-stats', 'flex-col')}>
+        <span className={cx('maker-stats', 'flex-col')} onClick={this.showList('팔로워')} role="button">
           <span className={cx('figure')}>
             {(company.followers || []).length}
           </span>
           <span className={cx('keyword')}>
             Follower
           </span>
-        </span>        
+        </span>       
+        <Popup 
+          show={this.state.showFollowList} 
+          name="followListPopup" 
+          target={'company-stats-area'} 
+          top={50} 
+          left={-172}
+          cancel={this.hideList}>
+          <FollowList list={this.state.followList} title={this.state.followTitle} />
+        </Popup> 
       </span>);
 
     let buttonArea = isFollowing?
-      <span className={cx('following-button')} role="button" onClick={unfollow}>
+      <span className={cx('following-button')} role="button" onClick={this.unfollowClicked}>
         Following
       </span> :
-      <span className={cx('follow-button')} role="button" onClick={follow}>
+      <span className={cx('follow-button')} role="button" onClick={this.followClicked}>
         FOLLOW
       </span>;
 
@@ -188,5 +227,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps, 
-  {featureEditSave, logOut, follow, unfollow}
+  {featureEditSave, logOut, follow, unfollow, loginMenu}
 )(CompanyProfile);

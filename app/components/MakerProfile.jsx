@@ -13,10 +13,11 @@ import Popup from '../components/Popup';
 import FollowList from '../components/FollowList';
 
 import { featureEditSave, follow, unfollow } from '../actions/makers';
-import { logOut } from '../actions/users';
+import { logOut, loginMenu } from '../actions/users';
 
 import ContentEditable from 'react-contenteditable'
 import jsxToString from 'jsx-to-string';
+import Assist from '../utils/assist';
 
 import styles from '../css/components/maker-profile';
 const cx = classNames.bind(styles);
@@ -57,18 +58,26 @@ class MakerProfile extends Component {
   };
 
   followClicked() {
-    const {follow, unfollow, maker, user} = this.props;
-    follow({follower: user.account, following: maker});
+    const {follow, maker, user, loginMenu} = this.props;
+    if(!user.userid) {
+      loginMenu();
+    }
+    else follow({follower: user.account, following: maker});
   }
 
   unfollowClicked() {
-    const {follow, unfollow, maker, user} = this.props;
+    const {unfollow, maker, user} = this.props;
     unfollow({follower: user.account, following: maker});
   }
 
   showList(route, title) {
     const { maker } = this.props;
-    return evt => this.setState({showFollowList: true, followList: maker[route], followTitle: title});
+    return evt => this.setState({
+      showFollowList: true, 
+      followList: Assist.Maker.getFollows(maker, route), 
+      companyFollowList: Assist.Maker.getCompanyFollowings(maker, route), 
+      followTitle: title
+    });
   }
 
   hideList() {
@@ -103,7 +112,7 @@ class MakerProfile extends Component {
         </span>
         <span className={cx('maker-stats', 'flex-col')} onClick={this.showList('followers', '팔로워')} role="button">
           <span className={cx('figure')}>
-            {maker.followers.length}
+            {Assist.Maker.getFollowSize(maker, 'followers')}
           </span>
           <span className={cx('keyword')}>
             Follower
@@ -111,7 +120,7 @@ class MakerProfile extends Component {
         </span>
         <span className={cx('maker-stats', 'flex-col')} onClick={this.showList('followings', '팔로잉')} role="button">
           <span className={cx('figure')}>
-            {maker.followings.length}
+            {Assist.Maker.getFollowSize(maker, 'followings')}
           </span>
           <span className={cx('keyword')}>
             Following
@@ -124,7 +133,7 @@ class MakerProfile extends Component {
           top={50} 
           left={-172}
           cancel={this.hideList}>
-          <FollowList list={this.state.followList} title={this.state.followTitle} />
+          <FollowList list={this.state.followList} companyList={this.state.companyFollowList} title={this.state.followTitle} />
         </Popup>
       </span>);
 
@@ -218,5 +227,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps, 
-  {featureEditSave, logOut, follow, unfollow}
+  {featureEditSave, loginMenu, logOut, follow, unfollow}
 )(MakerProfile);
