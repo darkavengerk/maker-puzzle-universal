@@ -71,7 +71,7 @@ class Maker extends User {
 
   isFollowing(data, target) {
     const first = data.followings.filter(p => (p._id || p) === (target._id || target)).length > 0;
-    const second = data.companyFollowings.filter(p => (p._id || p) === (target._id || target)).length > 0;
+    const second = this.getCompanyFollowings(data, 'followings').filter(p => (p._id || p) === (target._id || target)).length > 0;
     return first || second;
   }
 
@@ -86,7 +86,7 @@ class Maker extends User {
 
   getCompanyFollowings(data, type) {
     if(type === 'followings') {
-      return data.companyFollowings;
+      return data.companyFollowings || [];
     }
     else {
       return [];
