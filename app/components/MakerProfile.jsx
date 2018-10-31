@@ -59,7 +59,7 @@ class MakerProfile extends Component {
 
   followClicked() {
     const {follow, maker, user, loginMenu} = this.props;
-    if(!user.userid) {
+    if(!user.account.userid) {
       loginMenu();
     }
     else follow({follower: user.account, following: maker});
