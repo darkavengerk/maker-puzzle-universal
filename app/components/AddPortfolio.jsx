@@ -159,20 +159,25 @@ class AddPortfolio extends Component {
           <div className={cx('details')}>
             
             <table className={cx('detail-table')}>
-              <tbody>
-                
-                <tr className={cx('entity-row')}>
-                  <td className={cx('entity-title')}>
-                    <Scatter text="비밀설정" />
-                  </td>
-                  <td className={cx('entity')}>
-                    <Switch 
-                        onChange={this.switchChanged}
-                        checked={this.state.isPrivate}
-                        name="public-switch"
-                      />
-                  </td>
-                </tr>
+              <tbody>                
+                <tr className={cx('entity-row')} />
+                {type === 'company'? null : 
+                  <tr>
+                    <td className={cx('entity-title')}>
+                      <Scatter text="비밀설정" />
+                    </td>
+                    <td className={cx('entity')}>
+                      <div className={cx('flex-row')}>
+                        <Switch 
+                          onChange={this.switchChanged}
+                          checked={this.state.isPrivate}
+                          name="public-switch"
+                        />
+                        <label className={cx('switch-message')}>* 비공개로 설정시 해당 포트폴리오는 본인만 확인 가능합니다</label>
+                      </div>
+                    </td>
+                  </tr>
+                }
                 <tr className={cx('entity-row')} />
                 <tr>
                   <td className={cx('entity-title')}>

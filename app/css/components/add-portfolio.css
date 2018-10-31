@@ -105,6 +105,20 @@
   width: 6.0rem;
 }
 
+.switch-message {
+  width: 50rem;
+  font-family: NanumBarunGothic;
+  font-size: 10px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000000;
+  margin: 0 0 0 1rem;
+}
+
 .entity {
   width: 20.0rem;
   display: flex;
@@ -112,6 +126,13 @@
   justify-content: center;
   align-items: left;
   margin-left: 2.6rem;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 50rem;
 }
 
 .tags {

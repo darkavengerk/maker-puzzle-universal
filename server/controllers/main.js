@@ -40,7 +40,7 @@ function getCompanyContents({sort='popular', loaded=0, limit=6}) {
 }
 
 function getMakerPorfolioContents({sort='popular', loaded=0, limit=18}) {
-  return getContents(Portfolio, {type:'maker'}, sort, limit, loaded, ['user', 'company', 'portfolios.images']);
+  return getContents(Portfolio, {type:'maker', isPrivate:false}, sort, limit, loaded, ['user', 'company', 'portfolios.images']);
 }
 
 function getCompanyPorfolioContents({sort='popular', loaded=0, limit=9}) {
@@ -126,8 +126,8 @@ export async function search(req, res) {
   const keyword = common.cut(req.params.keyword).join(' ');
   
   const portfolios = await Portfolio
-                            .find( { $text: { $search: keyword } }, {score: { $meta: "textScore" }} )
-                            .sort( { score: { $meta: "textScore" } } )
+                            .find({ isPrivate:false, $text: { $search: keyword } }, {score: { $meta: "textScore" }})
+                            .sort({ score: { $meta: "textScore" } } )
                             .limit(100)
                             .populate(['company', 'user'])
                             .lean();

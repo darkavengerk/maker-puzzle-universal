@@ -23,7 +23,7 @@
 .title-area2 {
   display: flex;
   justify-content: flex-start;
-  align-items: baseline;
+  align-items: center;
 }
 
 .contents {
@@ -41,6 +41,10 @@
   vertical-align: middle;
   text-align: left;
   color: #555555;
+}
+
+.locked {
+  margin-right: 1rem;
 }
 
 .rectangle-1 {

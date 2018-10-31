@@ -63,8 +63,9 @@ export function updateContext(data) {
 
 export function portfoiloSubmit(portfolio) {
   return async (dispatch, getState) => {
-    const { user } = getState();
-    const res = await Maker().submitPortfolio({id:user.account.userid, data:portfolio});
+    const { user, maker } = getState();
+    const id = (portfolio.user && portfolio.user.userid)? portfolio.user.userid : user.account.userid;
+    const res = await Maker().submitPortfolio({id, data:portfolio});
     if (res.status === 200) {
       dispatch({type:types.PORTFOLIO_EDIT_SUCCESS, data: res.data});
     }

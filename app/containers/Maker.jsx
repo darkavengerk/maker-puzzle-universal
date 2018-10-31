@@ -11,6 +11,7 @@ import Padding from '../components/Padding';
 import styles from '../css/components/maker';
 
 import { Maker } from '../utils/objects';
+import { Assist } from '../utils/assist';
 import { changePortfoiloOrder } from '../actions/makers';
 
 import UI from '../utils/ui'
@@ -21,7 +22,7 @@ class Container extends Component {
 
   isOwnPage() {
     const { maker, user } = this.props;
-    return user.account && maker && (maker.userid === user.account.userid);
+    return user.account && maker && ((maker.userid === user.account.userid) || user.account.type === 'admin');
   }
 
   activateDrag() {

@@ -12,6 +12,9 @@
 .wide {
   width: 43.7rem;
 }
+.text {
+  position: relative;
+}
 
 .text h1, .text p {
   margin: 0rem;
@@ -162,4 +165,12 @@
   text-align: center;
   vertical-align: middle;
   color: #bdbdbd;
+}
+
+.locked {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  /*float: right;*/
+  /*margin-right: 1rem;*/
 }

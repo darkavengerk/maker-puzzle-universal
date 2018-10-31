@@ -96,6 +96,19 @@ class Maker extends User {
   getFollowSize(data, type) {
     return this.getFollows(data, type).length + this.getCompanyFollowings(data, type).length;
   }
+
+  getEligiblePortfolios(data, user) {
+    if(!data) return [];
+    user = user.account || user;
+    const portfolios = data.portfolios || [];
+    return portfolios.filter(p => {
+      if(user.type === 'admin') return true;
+      if(p.isPrivate) {
+        return user && (user._id === (p.user._id || p.user));
+      }
+      return true;
+    })
+  }
 }
 
 class Company extends User {
