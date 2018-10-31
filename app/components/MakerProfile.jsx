@@ -104,7 +104,7 @@ class MakerProfile extends Component {
       <span className={cx('stats-area', 'flex-row')} id="maker-stats-area">
         <span className={cx('maker-stats', 'flex-col')}>
           <span className={cx('figure')}>
-            {maker.portfolios? maker.portfolios.length : 0}
+            {maker.portfolios? Assist.Maker.getEligiblePortfolios(maker, user).length : 0}
           </span>
           <span className={cx('keyword')}>
             Portfolio
