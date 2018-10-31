@@ -70,13 +70,13 @@ class MakerProfile extends Component {
     unfollow({follower: user.account, following: maker});
   }
 
-  showList(route, title) {
+  showList(route) {
     const { maker } = this.props;
     return evt => this.setState({
       showFollowList: true, 
       followList: Assist.Maker.getFollows(maker, route), 
       companyFollowList: Assist.Maker.getCompanyFollowings(maker, route), 
-      followTitle: title
+      mode: route
     });
   }
 
@@ -110,7 +110,7 @@ class MakerProfile extends Component {
             Portfolio
           </span>
         </span>
-        <span className={cx('maker-stats', 'flex-col')} onClick={this.showList('followers', '팔로워')} role="button">
+        <span className={cx('maker-stats', 'flex-col')} onClick={this.showList('followers')} role="button">
           <span className={cx('figure')}>
             {Assist.Maker.getFollowSize(maker, 'followers')}
           </span>
@@ -118,7 +118,7 @@ class MakerProfile extends Component {
             Follower
           </span>
         </span>
-        <span className={cx('maker-stats', 'flex-col')} onClick={this.showList('followings', '팔로잉')} role="button">
+        <span className={cx('maker-stats', 'flex-col')} onClick={this.showList('followings')} role="button">
           <span className={cx('figure')}>
             {Assist.Maker.getFollowSize(maker, 'followings')}
           </span>
@@ -133,7 +133,7 @@ class MakerProfile extends Component {
           top={50} 
           left={-172}
           cancel={this.hideList}>
-          <FollowList list={this.state.followList} companyList={this.state.companyFollowList} title={this.state.followTitle} />
+          <FollowList list={this.state.followList} companyList={this.state.companyFollowList} mode={this.state.mode} />
         </Popup>
       </span>);
 

@@ -91,9 +91,9 @@ class CompanyProfile extends Component {
     unfollow({follower: user, following: company});
   }
 
-  showList(title) {
+  showList(mode) {
     const { company } = this.props;
-    return evt => this.setState({showFollowList: true, followList: company.followers, followTitle: title});
+    return evt => this.setState({showFollowList: true, followList: company.followers, mode});
   }
 
   hideList() {
@@ -126,7 +126,7 @@ class CompanyProfile extends Component {
           </span>
         </span>
 
-        <span className={cx('maker-stats', 'flex-col')} onClick={this.showList('팔로워')} role="button">
+        <span className={cx('maker-stats', 'flex-col')} onClick={this.showList('followers')} role="button">
           <span className={cx('figure')}>
             {(company.followers || []).length}
           </span>
@@ -141,7 +141,7 @@ class CompanyProfile extends Component {
           top={50} 
           left={-172}
           cancel={this.hideList}>
-          <FollowList list={this.state.followList} title={this.state.followTitle} />
+          <FollowList list={this.state.followList} mode={this.state.mode} />
         </Popup> 
       </span>);
 
