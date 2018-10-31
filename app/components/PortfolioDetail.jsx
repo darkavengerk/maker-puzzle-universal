@@ -94,14 +94,14 @@ const PortfolioDetainSection = (
           <Padding width={'1.5rem'} />
           {edit? 
             [
-              portfolio.isPrivate? <IconPortfolioLocked className={cx('locked')} x={20} y={25} />: null,
-              <span className={cx('rectangle-1')} role="button" onClick={portfoiloEditorStart}>
+              portfolio.isPrivate? <IconPortfolioLocked key={1} className={cx('locked')} x={20} y={25} />: null,
+              <span key={2} className={cx('rectangle-1')} role="button" onClick={portfoiloEditorStart}>
                 <Image src="/site/images/ic_pen.png" x={17} y={17} />
                 <Padding width="0.5rem" />
                 내용 수정
               </span>,
-              <Padding width={'1rem'} />,
-              <span className={cx('rectangle-1')} role="button" onClick={removePortfolioClicked}>
+              <Padding key={3} width={'1rem'} />,
+              <span key={4}  className={cx('rectangle-1')} role="button" onClick={removePortfolioClicked}>
                 <Image src="/site/images/ic_delete.png" x={17} y={17} />
                 <Padding width="0.5rem" />
                 게시물 삭제
