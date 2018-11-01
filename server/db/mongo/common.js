@@ -369,7 +369,7 @@ const functionMap = {
 }
 
 async function removeKeywords(title, Model, portfolios) {
-  let result = await Model.update({[portfolios + '.keywords.0']1: {$exists:true}}, {$set:{[portfolios + '.$.keywords']:[]}}, {multi:true});
+  let result = await Model.update({[portfolios + '.keywords.0']: {$exists:true}}, {$set:{[portfolios + '.$.keywords']:[]}}, {multi:true});
   if(result.nModified > 0) {
     console.log(title, result.nModified);
     return await removeKeywords(title, Model, portfolios);
