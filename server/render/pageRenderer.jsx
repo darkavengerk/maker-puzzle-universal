@@ -28,6 +28,7 @@ const buildPage = ({ componentHTML, initialState, headAssets }) => {
     <div id="app" data-version=${appVersion}>${componentHTML}</div>
     <script>window.__INITIAL_STATE__ = ${serialize(initialState)}</script>
     ${staticAssets.createAppScript()}
+    ${staticAssets.createTrackingScript()}
   </body>
 </html>`;
 };

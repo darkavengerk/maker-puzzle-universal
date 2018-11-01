@@ -9,7 +9,7 @@ export const isClient = typeof window !== 'undefined';
 
 export const apiEndpoint = isDebug ? 'http://localhost:3000' : 'http://www.maker-puzzle.com';
 // Replace with 'UA-########-#' or similar to enable tracking
-export const trackingID = null;
+export const trackingID = 'UA-128508172-1';
 
 
 export const db_uri = isProduction? db_uri_prod : db_uri_dev

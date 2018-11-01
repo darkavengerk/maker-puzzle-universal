@@ -5,7 +5,7 @@ const createAppScript = () =>
 `<script async type="text/javascript" charset="utf-8" src="/assets/${assets['app.js']}"></script>
 <script src="/site/js/image-loader.js"></script>`;
 
-// const createTrackingScript = () => GOOGLE_ANALYTICS_ID ? createAnalyticsSnippet(GOOGLE_ANALYTICS_ID) : '';
+const createTrackingScript = () => GOOGLE_ANALYTICS_ID ? createAnalyticsSnippet(GOOGLE_ANALYTICS_ID) : '';
 
 const createAnalyticsSnippet = id =>
   `<script>
@@ -21,5 +21,5 @@ const createStylesheets = () => `
 <link rel="stylesheet" href="/site/css/bootstrap.css">
 `;
 
-export { createAppScript, createStylesheets };
+export { createAppScript, createStylesheets, createTrackingScript };
 
