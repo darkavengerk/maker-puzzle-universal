@@ -14,6 +14,7 @@ import Features from '../components/Features';
 
 import Popup from '../components/Popup';
 import FollowList from '../components/FollowList';
+import Assist from '../utils/assist';
 
 import styles from '../css/components/company-profile';
 
@@ -91,9 +92,9 @@ class CompanyProfile extends Component {
     unfollow({follower: user, following: company});
   }
 
-  showList(title) {
+  showList(mode) {
     const { company } = this.props;
-    return evt => this.setState({showFollowList: true, followList: company.followers, followTitle: title});
+    return evt => this.setState({showFollowList: true, followList: company.followers, mode});
   }
 
   hideList() {
@@ -119,14 +120,14 @@ class CompanyProfile extends Component {
 
         <span className={cx('maker-stats', 'flex-col')}>
           <span className={cx('figure')}>
-            {company.portfolios? company.portfolios.length : 0}
+            {company.portfolios? Assist.Maker.getEligiblePortfolios(company, user).length : 0}
           </span>
           <span className={cx('keyword')}>
             Maker’s Portfolio
           </span>
         </span>
 
-        <span className={cx('maker-stats', 'flex-col')} onClick={this.showList('팔로워')} role="button">
+        <span className={cx('maker-stats', 'flex-col')} onClick={this.showList('followers')} role="button">
           <span className={cx('figure')}>
             {(company.followers || []).length}
           </span>
@@ -141,7 +142,7 @@ class CompanyProfile extends Component {
           top={50} 
           left={-172}
           cancel={this.hideList}>
-          <FollowList list={this.state.followList} title={this.state.followTitle} />
+          <FollowList list={this.state.followList} mode={this.state.mode} />
         </Popup> 
       </span>);
 

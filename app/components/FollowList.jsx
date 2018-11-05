@@ -17,7 +17,21 @@ import styles from '../css/components/follow-list';
 
 const cx = classNames.bind(styles);
 
-const FollowList = ({ title, list=[], companyList=[], user, follow, unfollow, followCompany, unfollowCompany }) => {
+const texts = {
+  followers: {
+    title: '팔로워',
+    message: '팔로워가 아직 없네요 :('
+  },
+  followings: {
+    title: '팔로잉',
+    message: '아직 아무도 팔로우하지 않으셨네요'
+  }
+}
+
+const FollowList = ({ mode, list=[], companyList=[], user, follow, unfollow, followCompany, unfollowCompany }) => {
+
+  const message = (list.length === 0 && companyList.length === 0)? 
+    <label className={cx('message')}>{texts[mode].message}</label> : null;
 
   function followClicked(person, type) {
     if(type === 'maker') {
@@ -80,9 +94,10 @@ const FollowList = ({ title, list=[], companyList=[], user, follow, unfollow, fo
 
   return (
     <section className={cx('main-section')}>
-      <div className={cx('title')}>{title}</div>
+      <div className={cx('title')}>{texts[mode].title}</div>
       <SingleLine width={'100%'} thickness={1} color={'#a1a1a1'} />
       <div className={cx('list')}>
+        {message}
         {companyItems}
         {items}
       </div>

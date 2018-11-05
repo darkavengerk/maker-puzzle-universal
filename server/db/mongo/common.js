@@ -112,7 +112,6 @@ async function savePortfolio({ portfolio, project, company, user }) {
 
   portfolio.makerName = (user && user.name) ? user.name : '';
 
-  portfolio.keywords = makeIndexFromPortfolio(portfolio);
 
   const saving = [];
 
@@ -143,6 +142,8 @@ async function savePortfolio({ portfolio, project, company, user }) {
 
   saving.push(project.save());
   saving.push(company.save());
+
+  portfolio.keywords = makeIndexFromPortfolio(portfolio);
   saving.push(Portfolio.updateOne({pid: portfolio.pid}, portfolio, {upsert: true}));
 
   await Promise.all(saving);
@@ -358,6 +359,21 @@ const functionMap = {
     }
   },
 
+  'remove-portfolio-keywords': async function() {
+    await removeKeywords('User', User, 'portfolios');
+    await removeKeywords('Company', Company, 'portfolios');
+    await removeKeywords('Company2', Company, 'companyPortfolios');
+    await removeKeywords('Project', Project, 'portfolios');
+  }
+
+}
+
+async function removeKeywords(title, Model, portfolios) {
+  let result = await Model.update({[portfolios + '.keywords.0']: {$exists:true}}, {$set:{[portfolios + '.$.keywords']:[]}}, {multi:true});
+  if(result.nModified > 0) {
+    console.log(title, result.nModified);
+    return await removeKeywords(title, Model, portfolios);
+  }
 }
 
 async function runCommand(command) {

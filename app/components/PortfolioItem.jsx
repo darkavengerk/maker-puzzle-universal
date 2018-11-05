@@ -5,6 +5,7 @@ import classNames from 'classnames/bind';
 
 import Image from '../components/FlexibleImage';
 import Link from '../components/Link';
+import IconPortfolioLocked from '../components/IconPortfolioLocked';
 import styles from '../css/components/portfolio-item';
 import { portfoiloEditorStart } from '../actions/makers';
 
@@ -18,14 +19,17 @@ const PortfolioItem = ({ portfolio, owner, referrer, portfoiloEditorStart, exter
         <Link to={referrer.createPortfolioLink(portfolio)} count="portfolio">
           <div className={cx('text', 'text-section', external? 'type2' : '')}>
             { external? <Image src={owner.getProfileImage()} x={31} y={31} className={cx('profile-image')} /> : null }
-            <span>
+            <div>
               <h1>
                 {referrer.createPortfolioTitle(portfolio)}
               </h1>
               <p>
                 {referrer.createPortfolioSubtitle(portfolio)}
               </p>
-            </span>
+                { portfolio.isPrivate? 
+                  <IconPortfolioLocked className={cx('locked')} /> : null
+                }
+            </div>
           </div>
           <Image src={portfolio.images[0]} x={214} y={214} version="medium" />
         </Link>        

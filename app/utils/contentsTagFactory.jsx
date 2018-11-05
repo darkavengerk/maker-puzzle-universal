@@ -10,6 +10,7 @@ import PortfolioDetail from '../components/PortfolioDetail';
 import Padding from '../components/Padding';
 import NULL from '../components/null';
 
+import Assist from '../utils/assist';
 import ProjectInfo from '../components/ProjectInfo';
 import AddPortfolio from '../components/AddPortfolio';
 import AddProduct from '../components/AddProduct';
@@ -71,10 +72,12 @@ class ContentsTagFactory {
 
     const Item = this.getItemTag(source);
 
-    let contents = source.portfolios? source.portfolios.map(portfolio => {
+    let contents = Assist.Maker.getEligiblePortfolios(source, user.account);
+
+    contents = contents.map(portfolio => {
       const owner = createObject('maker', portfolio.user);
       return (<Item portfolio={portfolio} owner={owner} referrer={source} key={portfolio.pid} external={false} />);
-    }) : [];
+    });
 
     if(isOwnPage) {
       contents.push(<Item key={'__new__'} />);
@@ -103,7 +106,8 @@ class ContentsTagFactory {
       return this.getProjectDetail(source, param)
     }
 
-    const portfolios = source.portfolios || [];
+    const portfolios = Assist.Maker.getEligiblePortfolios(source, user);
+
     const companyPortfolios = portfolios.filter(portfolio => portfolio.type === 'company');
     const makerPortfolios = portfolios.filter(portfolio => portfolio.type !== 'company');
 
@@ -172,10 +176,12 @@ class ContentsTagFactory {
       }
     }
 
-    let portfolios = source.portfolios? source.portfolios.map(portfolio => {
+    let portfolios = Assist.Maker.getEligiblePortfolios(source, user);
+
+    portfolios = portfolios.map(portfolio => {
       const maker = createObject('maker', portfolio.user);
       return (<PortfolioItem portfolio={portfolio} referrer={source} owner={maker} key={portfolio.pid} external={true} />);
-    }) : [];
+    });
 
     return (<div>
               <p className={cx('main-panel-title')}>수행 프로젝트</p>

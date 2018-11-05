@@ -12,6 +12,7 @@ import Padding from '../components/Padding';
 import DateFormat from '../components/DateFormat';
 import Popup from '../components/Popup';
 import AddPortfolio from '../components/AddPortfolio';
+import IconPortfolioLocked from '../components/IconPortfolioLocked';
 
 import { portfoiloEditorStart, portfoiloEditorCancel, portfoiloSubmit, deletePortfoilo } from '../actions/makers';
 import { companyPortfoiloSubmit, deleteCompanyPortfoilo } from '../actions/companies';
@@ -92,20 +93,20 @@ const PortfolioDetainSection = (
           </h1>
           <Padding width={'1.5rem'} />
           {edit? 
-            <span className={cx('rectangle-1')} role="button" onClick={portfoiloEditorStart}>
-              <Image src="/site/images/ic_pen.png" x={17} y={17} />
-              <Padding width="0.5rem" />
-              내용 수정
-            </span>:null}
-          
-          <Padding width={'1rem'} />
-
-          {edit? 
-            <span className={cx('rectangle-1')} role="button" onClick={removePortfolioClicked}>
-              <Image src="/site/images/ic_delete.png" x={17} y={17} />
-              <Padding width="0.5rem" />
-              게시물 삭제
-            </span>:null}
+            [
+              portfolio.isPrivate? <IconPortfolioLocked key={1} className={cx('locked')} x={20} y={25} />: null,
+              <span key={2} className={cx('rectangle-1')} role="button" onClick={portfoiloEditorStart}>
+                <Image src="/site/images/ic_pen.png" x={17} y={17} />
+                <Padding width="0.5rem" />
+                내용 수정
+              </span>,
+              <Padding key={3} width={'1rem'} />,
+              <span key={4}  className={cx('rectangle-1')} role="button" onClick={removePortfolioClicked}>
+                <Image src="/site/images/ic_delete.png" x={17} y={17} />
+                <Padding width="0.5rem" />
+                게시물 삭제
+              </span>
+            ]:null}
         </div>
         <div>
           <div className={cx('create-date')} >등록 일자</div>
