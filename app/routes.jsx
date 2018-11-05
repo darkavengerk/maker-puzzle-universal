@@ -12,9 +12,11 @@ import {
 } from './fetch-data';
 
 import { 
+  Root,
   App, 
   Search, 
   Main, 
+  Hello,
   Vote, 
   Dashboard, 
   About, 
@@ -53,24 +55,27 @@ export default (store) => {
     callback();
   };
   return (
-    <Route path="/" component={App}>
-      {/*<IndexRoute component={Construction} />*/}
-      <IndexRoute component={Main} fetchData={fetchMainData} />
-      {/*<Route exact path="main" component={Main} fetchData={fetchMainData} />*/}
-      <Route path="maker/:id/portfolio/:pid" component={Maker} fetchData={fetchMakerData} />
-      <Route path="maker/:id" component={Maker} fetchData={fetchMakerData} />
-      <Route path="search/:keyword" component={Search} fetchData={fetchSearchData} />
-      <Route path="more/:topic/:subtype/:sort" component={More} fetchData={fetchMoreData} />
-      <Route path="project/:link_name/maker/:mid/:pid" component={Project} fetchData={fetchProjectData} />
-      <Route path="project/:link_name/company/:cid/:pid" component={Project} fetchData={fetchProjectData} />
-      <Route path="project/:link_name" component={Project} fetchData={fetchProjectData} />
-      <Route path="company/:link_name/portfolio/:pid" component={Company} fetchData={fetchCompanyData} />
-      <Route path="company/:link_name/maker/:mid/:pid" component={Company} fetchData={fetchCompanyData} />
-      <Route path="company/:link_name/product/:pid" component={Company} fetchData={fetchCompanyData} />
-      <Route path="company/:link_name" component={Company} fetchData={fetchCompanyData} />
-      {/*<Route path="login" component={LoginOrRegister} onEnter={redirectAuth} />
-      <Route path="dashboard" component={Dashboard} onEnter={requireAuth} />
-      <Route path="about" component={About} />*/}
+    <Route path="/" component={Root}>
+      <Route path="/" component={App}>
+        {/*<IndexRoute component={Construction} />*/}
+        <IndexRoute component={Main} fetchData={fetchMainData} />
+        {/*<Route exact path="main" component={Main} fetchData={fetchMainData} />*/}
+        <Route path="maker/:id/portfolio/:pid" component={Maker} fetchData={fetchMakerData} />
+        <Route path="maker/:id" component={Maker} fetchData={fetchMakerData} />
+        <Route path="search/:keyword" component={Search} fetchData={fetchSearchData} />
+        <Route path="more/:topic/:subtype/:sort" component={More} fetchData={fetchMoreData} />
+        <Route path="project/:link_name/maker/:mid/:pid" component={Project} fetchData={fetchProjectData} />
+        <Route path="project/:link_name/company/:cid/:pid" component={Project} fetchData={fetchProjectData} />
+        <Route path="project/:link_name" component={Project} fetchData={fetchProjectData} />
+        <Route path="company/:link_name/portfolio/:pid" component={Company} fetchData={fetchCompanyData} />
+        <Route path="company/:link_name/maker/:mid/:pid" component={Company} fetchData={fetchCompanyData} />
+        <Route path="company/:link_name/product/:pid" component={Company} fetchData={fetchCompanyData} />
+        <Route path="company/:link_name" component={Company} fetchData={fetchCompanyData} />
+        {/*<Route path="login" component={LoginOrRegister} onEnter={redirectAuth} />
+        <Route path="dashboard" component={Dashboard} onEnter={requireAuth} />
+        <Route path="about" component={About} />*/}
+      </Route>
+      <Route exact path="hello" component={Hello} />
     </Route>
   );
 };

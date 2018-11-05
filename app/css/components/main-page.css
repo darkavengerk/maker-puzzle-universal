@@ -136,3 +136,54 @@
   display: inline-block;
   margin-right: 10px;
 }
+
+.page {
+  height: 100%;
+  width: 100%;
+}
+
+.one {
+  background: blue;
+}
+
+.title {
+  width: 629px;
+  height: 78px;
+  text-shadow: 0 2px 55px rgba(0, 0, 0, 0.5);
+  font-family: BMDoHyeon-OTF;
+  font-size: 65px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+}
+
+.description {
+  width: 473px;
+  height: 77px;
+  text-shadow: 0 2px 55px rgba(0, 0, 0, 0.5);
+  font-family: BMDoHyeon-OTF;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+}
+
+.two {
+  background: purple;
+}
+
+.three {
+  background: red;
+}
+
+.four {
+  background: orange;
+}
