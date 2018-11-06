@@ -56,10 +56,11 @@ export default (store) => {
   };
   return (
     <Route path="/" component={Root}>
+      <IndexRoute component={Hello} />
       <Route path="/" component={App}>
         {/*<IndexRoute component={Construction} />*/}
-        <IndexRoute component={Main} fetchData={fetchMainData} />
         {/*<Route exact path="main" component={Main} fetchData={fetchMainData} />*/}
+        <Route exact path="/main" component={Main} fetchData={fetchMainData} />
         <Route path="maker/:id/portfolio/:pid" component={Maker} fetchData={fetchMakerData} />
         <Route path="maker/:id" component={Maker} fetchData={fetchMakerData} />
         <Route path="search/:keyword" component={Search} fetchData={fetchSearchData} />
@@ -75,7 +76,6 @@ export default (store) => {
         <Route path="dashboard" component={Dashboard} onEnter={requireAuth} />
         <Route path="about" component={About} />*/}
       </Route>
-      <Route exact path="hello" component={Hello} />
     </Route>
   );
 };
