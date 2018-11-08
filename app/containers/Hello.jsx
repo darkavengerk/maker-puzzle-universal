@@ -81,9 +81,11 @@ class HelloPageSection extends Component {
               <FlexibleImage src="/site/images/search.png" className={cx('search-icon')} x={21.8} y={21.8} role="button" onClick={this.handleOnSubmit} />
             </form>
             <Padding height={21} />
-            <div className={cx('button-main')} role="button">
-               메인페이지 구경하기
-            </div>
+            <Link to="/main">
+              <div className={cx('button-main')} role="button">
+                 메인페이지 구경하기
+              </div>
+            </Link>
             <Padding height={200} />
           </section>
           <section className={cx("page", "two")}>

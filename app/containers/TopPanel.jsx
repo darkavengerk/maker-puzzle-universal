@@ -40,7 +40,7 @@ const Navigation = ({ user, logOut, loginMenu, cancelLogin }) => {
       <div>
         <nav className={cx('navigation')} role="navigation">
           <div className={cx('logo-area')}>
-            <Link to="/">
+            <Link to="/main">
               <Img src="/site/images/header-logo-20180829.png" x={307} y={81.3}/>
             </Link>
           </div>
