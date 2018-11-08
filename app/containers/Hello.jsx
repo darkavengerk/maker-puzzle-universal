@@ -4,10 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import { browserHistory } from 'react-router';
 
-import Assist from '../utils/assist'
-import ProjectCard from '../components/ProjectCard';
 import Padding from '../components/Padding';
-import AddPortfolio from '../components/AddPortfolio';
 import Login from '../components/Login';
 import Link from '../components/Link';
 import FullPage from '../components/FullPage';
@@ -16,12 +13,11 @@ import Roundy from '../components/Roundy';
 import Popup from '../components/Popup';
 import Border from '../components/SingleLine';
 
-import styles from '../css/components/main-page';
-import NavStyles from '../css/components/navigation';
-const cx = classNames.bind(styles);
-const nav = classNames.bind(NavStyles);
-
 import { loginMenu, cancelLogin } from '../actions/users';
+
+import styles from '../css/components/main-page';
+
+const cx = classNames.bind(styles);
 
 class HelloPageSection extends Component {
 
