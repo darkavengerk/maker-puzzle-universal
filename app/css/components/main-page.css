@@ -269,10 +269,142 @@
   background-image: url("/site/images/landing-2.jpg");
 }
 
+.blue-text {
+  text-shadow: 0 2px 35px rgba(0, 0, 0, 0.5);
+  font-family: BMDoHyeon-OTF;
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #54dcff;
+}
+
+.blue-circle-area {
+  width: 86rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.blue-circle {
+  width: 196px;
+  height: 196px;
+  box-shadow: 0 5px 35px 0 rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  background-image: url("/site/images/landing-circle.png");
+  background-position: center; 
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.blue-circle-top {
+  margin-top: 5.5rem;
+  height: 4.4rem;
+  vertical-align: middle;
+  text-shadow: 0 2px 35px rgba(0, 0, 0, 0.5);
+  font-family: BMDoHyeon-OTF;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 2.5rem;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+}
+
+.blue-circle-bottom {
+  margin-top: 1.3rem;
+  text-shadow: 0 2px 35px rgba(0, 0, 0, 0.5);
+  font-family: BMDoHyeon-OTF;
+  font-size: 25px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+}
+
+.page2-middle {
+  max-height: 19rem;
+  flex: 1;
+}
+
+.page3-middle {
+  max-height: 50rem;
+  flex: 1;
+}
+
 .three {
   background-image: url("/site/images/landing-3.jpg");
 }
 
+.last-page {
+  height: 100%;
+  width: 100%;
+  padding-left: 36.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  background-position: center; 
+  background-size: cover;
+}
+
 .four {
-  background: orange;
+  background-color: #ffffff;
+}
+
+.title-last {
+  font-family: BMDoHyeon-OTF;
+  font-size: 38px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #383838;
+  margin-bottom: 3.3rem;
+}
+
+.description-last {
+  font-family: BMDoHyeon-OTF;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 3rem;
+  letter-spacing: normal;
+  color: #383838;
+}
+
+.grey-text {
+  font-family: NanumBarunGothic;
+  font-size: 14px;
+  color: #949494;
+}
+
+.we-are {
+  font-family: NanumBarunGothic;
+  font-size: 15px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 2.7rem;
+  letter-spacing: normal;
+  color: #383838;
+}
+
+.page4-top {
+  max-height: 15rem;
+  flex: 0.3;
+}
+
+.page4-middle {
+  max-height: 45rem;
+  flex: 0.7;
 }

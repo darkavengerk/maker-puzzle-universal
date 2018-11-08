@@ -14,6 +14,7 @@ import FullPage from '../components/FullPage';
 import FlexibleImage from '../components/FlexibleImage';
 import Roundy from '../components/Roundy';
 import Popup from '../components/Popup';
+import Border from '../components/SingleLine';
 
 import styles from '../css/components/main-page';
 import NavStyles from '../css/components/navigation';
@@ -26,7 +27,7 @@ class HelloPageSection extends Component {
 
   constructor(props) {
     super(props);
-    this.defaultKeyword = '여의도 한강공원 조명';
+    this.defaultKeyword = '여의도 한강공원';
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
   }
 
@@ -94,6 +95,51 @@ class HelloPageSection extends Component {
               메이커퍼즐로 경력을 관리하고 새로운 기회를 잡아보세요.<br/>
               모든 기능들은 “무료”입니다!
             </div>
+            <div className={cx("page2-middle")}/>
+            <div className={cx("blue-text")}>
+              누구에게 필요할까?
+            </div>
+            <Padding height={22} />
+            <Border width={194} thickness={3} color={'#54dbff'} />
+            <Padding height={25} />
+            <div className={cx('blue-circle-area')}>
+              <div className={cx('blue-circle')}>
+                <div className={cx('blue-circle-top')}>
+                  홈페이지가 없거나<br/>
+                  업데이트가 어려운
+                </div>
+                <div className={cx('blue-circle-bottom')}>
+                  중, 소기업
+                </div>
+              </div>
+              <div className={cx('blue-circle')}>
+                <div className={cx('blue-circle-top')}>
+                  신규 프로젝트 진행시<br/>
+                  각 분야 전문업체를 찾는
+                </div>
+                <div className={cx('blue-circle-bottom')}>
+                  실무자
+                </div>
+              </div>
+              <div className={cx('blue-circle')}>
+                <div className={cx('blue-circle-top')}>
+                  영업 기회 확장이<br/>
+                  필요한
+                </div>
+                <div className={cx('blue-circle-bottom')}>
+                  프리랜서
+                </div>
+              </div>
+              <div className={cx('blue-circle')}>
+                <div className={cx('blue-circle-top')}>
+                  <Padding height={13} />
+                  실력있는 경력자를 찾는
+                </div>
+                <div className={cx('blue-circle-bottom')}>
+                  채용담당자
+                </div>
+              </div>
+            </div>
           </section>
           <section className={cx("page", "three")}>
             <div className={cx("title")}>
@@ -104,18 +150,32 @@ class HelloPageSection extends Component {
               전세계 도시들의 엔딩크레딧에<br/>
               당신의 이름도 새겨보세요.
             </div>
+            <div className={cx("page3-middle")}/>
           </section>
-          <section className={cx("page", "four")}>
-            <div className={cx("title")}>
+          <section className={cx("last-page", "four")}>
+            <div className={cx("page4-top")}/>
+            <div className={cx("title-last")}>
               Who we are
             </div>
-            <div className={cx("description")}>
+            <div className={cx("description-last")}>
               (주)메이커퍼즐은 건축 시장의 불편을 해소하기 위해 뭉친 스타트업 입니다.<br/>
               매일매일 새로운 기능들과 더많은 메이커들의 작품이 업데이트 됩니다.<br/>
               <br/>
-              PC로 접속 가능한 Web서비스만 현재 가능하며, (추천 브라우저 : 크롬, 파이어폭스, MS 엣지) <br/>
+              PC로 접속 가능한 Web서비스만 현재 가능하며, <span className={cx('grey-text')} >(추천 브라우저 : 크롬, 파이어폭스, MS 엣지)</span> <br/>
               모바일 App은 열심히 개발중! 곧 만날 수 있습니다.
             </div>
+            <Padding height={33} />
+            <Border width={515} thickness={2} color={'#fe5c01'} />
+            <Padding height={33} />
+            <div className={cx("we-are")}>
+              (주)메이커퍼즐<br/>
+              서울특별시 강서구 마곡중앙6로 42, 1002호 (마곡동, 사이언스타)<br/>
+              <br/>
+              사업자번호 : 403-88-01021<br/>
+              문의메일 : help@maker-puzzle.com<br/>
+              대표전화 : 02-2668-9505
+            </div>
+            <div className={cx("page4-middle")}/>
           </section>
         </FullPage>
       </div>
