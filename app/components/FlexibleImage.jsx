@@ -16,7 +16,12 @@ class FlexibleImage extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { url: this.deriveURL(props.src) };
+    this.state = {url: ''};
+  }
+
+  componentWillMount() {
+    const { src } = this.props;
+    this.setState({ url: this.deriveURL(src) });
   }
 
   componentDidMount() {
