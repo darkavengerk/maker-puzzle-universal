@@ -7,6 +7,10 @@ function beginLogin() {
   return { type: types.MANUAL_LOGIN_USER };
 }
 
+export function showingPopup(data) {
+  return { type: types.SHOWING_POPUP, data };
+}
+
 function loginSuccess(message, data) {
   return {
     type: types.LOGIN_SUCCESS_USER,

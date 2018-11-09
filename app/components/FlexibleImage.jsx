@@ -65,7 +65,7 @@ class FlexibleImage extends Component {
   render() {
     const { src, x, y, children, loadImage, image, version='original', contain=false, pureImage=false, ...props } = this.props;
 
-    let url = this.deriveURL(src);
+    let url = this.state.url;
 
     const { className, onClick, role } = this.props;
     const renderProps = { className, onClick, role };

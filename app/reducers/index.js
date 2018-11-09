@@ -13,6 +13,7 @@ import company from '../reducers/company';
 import project from '../reducers/project';
 import param from '../reducers/param';
 import image from '../reducers/image';
+import screen from '../reducers/screen';
 import * as types from '../types';
 
 const isFetching = (state = false, action) => {
@@ -44,7 +45,8 @@ const rootReducer = combineReducers({
   project,
   company,
   param,
-  image
+  image,
+  screen
 });
 
 export default rootReducer;

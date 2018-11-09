@@ -8,14 +8,12 @@ import ImageUploader from '../components/ImageUploader';
 import TopTitle from '../components/TopTitle';
 import ContentsSection from '../components/ContentsSection';
 import SingleLine from '../components/SingleLine';
-import styles from '../css/components/maker';
+import CompanyClaim from '../components/CompanyClaim';
 import { Company } from '../utils/objects';
 import { changePortfoiloOrder } from '../actions/companies';
 
 import UI from '../utils/ui'
 import Assist from '../utils/assist'
-
-const cx = classNames.bind(styles);
 
 class Container extends Component {
 
@@ -43,13 +41,15 @@ class Container extends Component {
     const { company: data, user } = this.props;
     const company = new Company(data);
     return (
-      <div className={cx('main-section')}>
+      <div>
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
         <TopTitle 
           title={company.getName()}
           to={company.getHomeLink()}
           thumbnailURL={company.profileImage? company.getProfileImage():null} 
-        />
+        >
+          <CompanyClaim />
+        </TopTitle>
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
         <ContentsSection user={user} owner={company} contentsType="company" isOwnPage={this.isOwnPage()} />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
