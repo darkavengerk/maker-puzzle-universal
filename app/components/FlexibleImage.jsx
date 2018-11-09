@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 
 import LazyLoad from 'react-lazyload';
+import { forceCheck } from 'react-lazyload';
 
 import PureImage from './PureImage';
 import { loadImage } from '../actions/images';
@@ -15,37 +16,31 @@ class FlexibleImage extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {shouldLoad: false};
-
-    const { src } = this.props;
-
-    if(typeof(src) === 'string' && !src.includes('/')) {
-      this.state.shouldLoad = true;
-    }
+    this.state = { url: this.deriveURL(props.src) };
   }
 
-  componentWillMount() {
-    if(this.state.shouldLoad) {
-      const { src, loadImage } = this.props;
+  componentDidMount() {
+    const { src, loadImage } = this.props;
+    if(typeof(src) === 'string' && !src.includes('/')) {
       loadImage(src);
     }
   }
 
-  render() {
-    const { src, x, y, children, loadImage, version='original', contain=false, pureImage=false, ...props } = this.props;
-
+  deriveURL(src) {
+    const { loadImage, image, version='original' } = this.props;
     let url;
 
     if(typeof(src) === 'string') {
       if(src.includes('/')) {
-        url = src;
+        return src;
       }
       else {
-        const newImage = loadImage(src);
+        const newImage = loadImage(src) || '';
         url = newImage.original || '';
         if(newImage.status === IMAGE_PROCESSING_VERSION) {
           url = S3_URL + newImage.versions[version];
         }
+        return url;
       }
     }
     else {
@@ -53,7 +48,24 @@ class FlexibleImage extends Component {
       if(src && src.status === IMAGE_PROCESSING_VERSION) {
         url = S3_URL + src.versions[version];
       }
+      return url;
     }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const next = this.deriveURL(nextProps.src);
+    if(next !== this.state.url) {
+      this.setState({url: next});
+      forceCheck();
+      return true;
+    }
+    return false;
+  }
+
+  render() {
+    const { src, x, y, children, loadImage, image, version='original', contain=false, pureImage=false, ...props } = this.props;
+
+    let url = this.deriveURL(src);
 
     const { className, onClick, role } = this.props;
     const renderProps = { className, onClick, role };
