@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Page from '../pages/Page';
 import ProjectContainer from '../containers/Project';
 
@@ -12,7 +13,8 @@ class Project extends Component {
   }
 
   pageTitle = () => {
-    return 'Project | MakerPuzzle';
+    const { project } = this.props;
+    return project.name? project.name + ' | MakerPuzzle' : 'MakerPuzzle';
   };
 
   pageMeta = () => {
@@ -34,5 +36,11 @@ class Project extends Component {
   }
 }
 
-export default Project;
+function mapStateToProps(state) {
+  return {
+    project: state.project.project,
+    user: state.user
+  };
+}
 
+export default connect(mapStateToProps, {})(Project);
