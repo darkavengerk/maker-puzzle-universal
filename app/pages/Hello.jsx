@@ -12,7 +12,7 @@ class Hello extends Component {
   }
 
   pageTitle = () => {
-    return 'Hello | MakerPuzzle';
+    return 'MakerPuzzle';
   };
 
   pageMeta = () => {
