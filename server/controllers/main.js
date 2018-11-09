@@ -40,11 +40,11 @@ function getCompanyContents({sort='popular', loaded=0, limit=6}) {
 }
 
 function getMakerPorfolioContents({sort='popular', loaded=0, limit=18}) {
-  return getContents(Portfolio, {type:'maker', isPrivate:false}, sort, limit, loaded, ['user', 'company', 'portfolios.images']);
+  return getContents(Portfolio, {type:'maker', isPrivate:false}, sort, limit, loaded, ['user', 'company', 'images']);
 }
 
 function getCompanyPorfolioContents({sort='popular', loaded=0, limit=9}) {
-  return getContents(Portfolio, {type:'company'}, sort, limit, loaded, ['user', 'company', 'portfolios.images']);
+  return getContents(Portfolio, {type:'company'}, sort, limit, loaded, ['user', 'company', 'images']);
 }
 
 export async function buildContents(req, res) {
