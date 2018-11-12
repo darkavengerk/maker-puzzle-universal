@@ -16,10 +16,16 @@ const CompanyInfo = ({ owner }) => {
   const company = owner;
 
   const users = <MakerListRoundy makers={company.users} />;
+  const owners = (company.owners && company.owners.length> 0) ? <MakerListRoundy makers={company.owners} /> : null;
 
   return <div className={cx('main-section')}>
           <GreyTitle title={'기업 정보'} bottom="13" />
           {company && company.name ? <CompanyProfile /> : <div></div>}          
+
+          {owners? <GreyTitle title={'이 페이지 소유자'} top="38" bottom="26" /> : null}
+          <div className={cx('maker-area')}>
+            {owners}
+          </div>
 
           <GreyTitle title={'소속 메이커'} top="38" bottom="26" />
           <div className={cx('maker-area')}>

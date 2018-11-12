@@ -18,7 +18,7 @@ async function getPopulatedCompany(link_name) {
                 .populate({path:'companyPortfolios.project'})
                 .populate({path:'portfolios.user'})
                 .populate({path:'portfolios.project'})
-                .populate('owner')
+                .populate('owners')
                 .populate('followers')
                 .populate({path:'users'})
                 .lean();
