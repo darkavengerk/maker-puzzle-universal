@@ -21,6 +21,10 @@ const maker = (
       if (action.data && action.data.maker) return action.data.maker;
       return state;
 
+    case types.OWNER_ADDED_COMPANY:
+      if (action.data && action.data.maker) return action.data.maker;
+      return state;
+
     case types.PROFILE_EDIT_SUCCESS:
       const {features, about, picture} = action.data;
       return {...state, features, about, picture}

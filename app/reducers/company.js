@@ -28,6 +28,12 @@ const company = (
         return {...state, portfolios: portfolios, companyPortfolios: cPortfolios};
       }
       else return state;
+
+    case types.OWNER_ADDED_COMPANY:
+      if (action.data && action.data.company && action.data.company.name === state.name) {
+        return {...state, owners: [...(state.owners || []), action.data.maker]};
+      }
+      return state;
     
     case types.COMPANY_PORTFOLIO_EDIT_SUCCESS:
       const { company, project, portfolio } = action.data;

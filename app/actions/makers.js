@@ -16,13 +16,14 @@ export function featureEditSave(data) {
   };
 }
 
-export function addOwnCompany(userid, name) {
+export function addOwnCompany(userid, name, cb) {
   return async (dispatch, getState) => {
     const { user } = getState();
     const res = await Maker().addOwnCompany({id:userid, data: { name }});
     
     if (res.status === 200) {
-      dispatch({type:types.REQUEST_SUCCESS, data: {maker: res.data}});
+      dispatch({type:types.OWNER_ADDED_COMPANY, data: res.data});
+      if(cb) cb();
     }
     return res;
   };

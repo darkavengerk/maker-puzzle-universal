@@ -11,9 +11,12 @@ import SingleLine from '../components/SingleLine';
 import CompanyClaim from '../components/CompanyClaim';
 import { Company } from '../utils/objects';
 import { changePortfoiloOrder } from '../actions/companies';
+import styles from '../css/components/maker';
 
 import UI from '../utils/ui'
 import Assist from '../utils/assist'
+
+const cx = classNames.bind(styles);
 
 class Container extends Component {
 

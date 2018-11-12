@@ -24,13 +24,18 @@
 }
 
 .popup-area {
+  cursor: default;
   position: absolute;
   left: -280px;
   top: 45px;
   width: 691px;
-  height: 774px;
+  /*height: 774px;*/
   box-shadow: 0 5px 55px 0 rgba(111, 110, 110, 0.5);
   background-color: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .popup-title {
@@ -46,4 +51,156 @@
   text-align: center;
   vertical-align: middle;
   color: #000000;
+}
+
+.popup-message {
+  width: 407px;
+  height: 68px;
+  font-family: BMDoHyeon-OTF;
+  font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 4rem;
+  letter-spacing: normal;
+  text-align: center;
+  color: #33a1d6;
+}
+
+.box {
+  width: 592px;
+  height: 118px;
+  border: solid 2px #31afd0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: NanumBarunGothic;
+  font-size: 15px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 2.5rem;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
+}
+
+.box-title {
+  position: relative;
+  top: -1.3rem;
+  width: 179px;
+  height: 24px;
+  background-color: #f3f3f3;
+  font-family: NanumBarunGothic;
+  font-size: 18px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #34a5dc;
+}
+
+.main-title {
+
+  width: 162px;
+  height: 21px;
+  font-family: BMDoHyeon-OTF;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #5d5d5d;
+}
+
+.circles {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 54rem;
+}
+
+.blue-circle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 124px;
+  height: 124px;
+  box-shadow: 0 5px 35px 0 rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  background-image: url("/site/images/landing-circle.png");
+  background-position: center; 
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  text-shadow: 0 2px 35px rgba(0, 0, 0, 0.5);
+  font-family: BMDoHyeon-OTF;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 2.5rem;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+}
+
+.details {
+  width: 100%;
+  padding-left: 4.8rem;
+
+  font-family: NanumBarunGothic;
+  font-size: 14px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 2.5rem;
+  letter-spacing: normal;
+  color: #000000;
+}
+
+.point-text {
+  color: #f06d20;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  height: 7.4rem;
+  padding: 0 5rem;
+}
+
+.submit-button {
+  width: 146px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: #fe7422;
+
+  text-shadow: 0 2px 25px rgba(0, 0, 0, 0.5);
+  font-family: NanumBarunGothic;
+  font-size: 16px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 4rem;
+  letter-spacing: normal;
+  text-align: center;
+  vertical-align: middle;
+  color: #ffffff;
+  margin: 0;
+}
+
+.cancel {
+  width: 68px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: #8a8a8a;
+  margin: 0 1rem;
 }

@@ -16,6 +16,7 @@ class Popup extends Component {
   }
 
   onClick(evt) {
+    // evt.preventDefault();
     let { cancel, showingPopup, name } = this.props;
     if(cancel && evt.target.id === name) {
       cancel(evt);
@@ -45,7 +46,7 @@ class Popup extends Component {
           <div>
             <div className={cx('main-section', 'background')} id={name} onClick={this.onClick} >
             </div>
-            <div className={cx('main-section')} id={name} onClick={this.onClick} 
+            <div className={cx('main-section')} id={name} 
               style={{padding: paddingTop + 'px 0 0 ' + paddingLeft +'px'}} >
               {children}
             </div>

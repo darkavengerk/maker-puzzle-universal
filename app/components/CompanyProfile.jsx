@@ -104,7 +104,7 @@ class CompanyProfile extends Component {
   render() {
     const { company: data, user, logOut, follow, unfollow } = this.props;
     const company = new Company(data);
-    const isOwnPage = (user.type==='admin' || (user.userid && company.isOwnPage(user)));
+    const isOwnPage = Assist.Company.isOwnPage(data, user);
     const isFollowing = user.userid && ((company.followers || []).filter(u => (u._id || u) === user._id).length > 0);
 
     let stats = (

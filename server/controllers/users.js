@@ -82,7 +82,7 @@ export async function addCompany(req, res) {
 
   await Company.update({ name }, {$addToSet : {owners: user._id}});
 
-  res.json(await getPopulatedUser(userid));
+  res.json({maker: await getPopulatedUser(userid), company: companyFound});
 }
 
 function isSamePortfolios(p1, p2) {
