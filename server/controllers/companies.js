@@ -17,6 +17,8 @@ async function getPopulatedCompany(link_name) {
                 .findOne({ link_name })
                 .populate({path:'companyPortfolios.project'})
                 .populate({path:'portfolios.user'})
+                .populate({path:'portfolios.images'})
+                .populate({path:'companyPortfolios.images'})
                 .populate({path:'portfolios.project'})
                 .populate('owners')
                 .populate('followers')

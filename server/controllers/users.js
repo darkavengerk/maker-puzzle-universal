@@ -25,8 +25,10 @@ export function all(req, res) {
 async function getPopulatedUser(userid) {
   return await User
     .findOne({ userid })
-    .populate('portfolios.user')
     .populate('companiesOwned')
+    .populate('picture')
+    .populate('portfolios.user')
+    .populate('portfolios.images')
     .populate('portfolios.project')
     .populate('portfolios.company')
     .populate(['followers', 'followings', 'companyFollowings'])
