@@ -41,19 +41,19 @@ const Navigation = ({ user, logOut, loginMenu, cancelLogin }) => {
         <nav className={cx('navigation')} role="navigation">
           <div className={cx('logo-area')}>
             <Link to="/main">
-              <Img src="/site/images/header-logo-20180829.png" x={307} y={81.3}/>
+              <Img source="/site/images/header-logo-20180829.png" x={307} y={81.3}/>
             </Link>
           </div>
           <form onSubmit={handleOnSubmit} className={cx('search-area')}>
             <input type="text" id="user-search-input" className={cx('search-input')} placeholder={'검색어를 입력하세요. (지역, 기업, 사람, 각종 키워드)'} />
-            <Img src="/site/images/search.png" x={21.8} y={21.8} role="button" onClick={handleOnSubmit} />
+            <Img source="/site/images/search.png" x={21.8} y={21.8} role="button" onClick={handleOnSubmit} />
           </form>
 
           <div className={cx('option-area')}>
             {login}
             {user.authenticated? 
-              <Img src="/site/images/header-social.png" x={38} y={36} /> :null}
-            <Img src="/site/images/header-more.png" x={38.5} y={36} />
+              <Img source="/site/images/header-social.png" x={38} y={36} /> :null}
+            <Img source="/site/images/header-more.png" x={38.5} y={36} />
           </div>
         </nav>
         <Popup show={user.attempt === 'login'} name="LoginPopup" cancel={cancelLogin} roll={true} top={100}>

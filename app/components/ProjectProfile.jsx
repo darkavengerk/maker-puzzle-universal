@@ -81,11 +81,11 @@ class ProjectProfile extends Component {
     return (
       <div className={cx('main-section')}>
         <span style={{position:'relative', height:'14.4rem'}}>
-          <Image src={profileImage} x={349} y={248} />
+          <Image source={profileImage} x={349} y={248} />
           <span style={{position:'absolute', bottom:'0.3rem', right:'0.4rem', 'zIndex':1}}>
             {this.state.editing? 
               <ImageUploader name="ImageUploader" callback={this.profileImageEdited} >
-                <FlexibleImage className={cx('image-upload-trigger')} src={"/images/site/camera-1.png"} x={34} y={34} />
+                <FlexibleImage className={cx('image-upload-trigger')} source={"/images/site/camera-1.png"} x={34} y={34} />
               </ImageUploader>
               : ''}
           </span>

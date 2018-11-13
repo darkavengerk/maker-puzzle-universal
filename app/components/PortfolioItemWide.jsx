@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 
 import Link from '../components/Link';
-import Image from '../components/FlexibleImage';
+import Image from '../components/FlexibleImageLazy';
 import Window from '../components/PortfolioImagesWindow';
 import styles from '../css/components/portfolio-item';
 import { portfoiloEditorStart } from '../actions/makers';
@@ -19,7 +19,7 @@ const PortfolioItemWideSection = ({ portfolio, owner, referrer, portfoiloEditorS
       <div className={cx('main-section', 'wide') + ' dragItem'}>
         <Link to={referrer.createPortfolioLink(portfolio)} count="portfolio">
           <div className={cx('text', 'text-section-wide', external? 'type2' : null)}>
-            {external? <Image src={owner.getProfileImage()} contain={imageFit} x={50} y={39} className={cx('company-image')} /> : null }
+            {external? <Image source={owner.getProfileImage()} contain={imageFit} x={50} y={39} className={cx('company-image')} /> : null }
             <span>
               <h1>
                 {referrer.createPortfolioTitle(portfolio)}
@@ -42,7 +42,7 @@ const PortfolioItemWideSection = ({ portfolio, owner, referrer, portfoiloEditorS
             포트폴리오 추가하기
           </div>
           <div className={cx('add-portfolio-icon')} role="button" onClick={portfoiloEditorStart}>
-            <Image src={"/site/images/add-button-1.png"} x={73} y={73} />
+            <Image source={"/site/images/add-button-1.png"} x={73} y={73} />
           </div>
         </div>
       </div>

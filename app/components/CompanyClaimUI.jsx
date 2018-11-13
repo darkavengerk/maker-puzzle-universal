@@ -58,13 +58,13 @@ const Component = ({ cancel, submit, isOwned }) => {
           회원가입<br/>
           로그인
         </div>
-        <FlexibleImage src={'/site/images/main-arrow.png'} x={53} y={53} />
+        <FlexibleImage source={'/site/images/main-arrow.png'} x={53} y={53} />
         <div className={cx('blue-circle')}>
           생성된<br/>
           기업페이지<br/>
           방문
         </div>
-        <FlexibleImage src={'/site/images/main-arrow.png'} x={53} y={53} />
+        <FlexibleImage source={'/site/images/main-arrow.png'} x={53} y={53} />
         <div className={cx('blue-circle')}>
           ‘이 페이지<br/>
           소유하기’<br/>

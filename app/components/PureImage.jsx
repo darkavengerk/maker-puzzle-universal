@@ -4,11 +4,11 @@ import classNames from 'classnames/bind';
 
 import LazyLoad from 'react-lazyload';
 
-const ProfileImage = ({ src, x='auto', y='auto', ...props }) => {
+const ProfileImage = ({ source, x='auto', y='auto', ...props }) => {
 
-  let url = src? src : "/images/default.jpg";
-  if(typeof(src) === 'object' && src.original) {
-    url = src.original;
+  let url = source? source : "/images/default.jpg";
+  if(typeof(source) === 'object' && source.original) {
+    url = source.original;
   }
 
   var imageStyle = {
@@ -25,10 +25,8 @@ const ProfileImage = ({ src, x='auto', y='auto', ...props }) => {
   }
 
   return (
-    <LazyLoad height={y} >
-      <img {...props} src={url} style={imageStyle} >
-      </img>
-    </LazyLoad>
+    <img {...props} src={url} style={imageStyle} >
+    </img>
   );
 };
 

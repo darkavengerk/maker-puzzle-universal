@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 
 import Link from '../components/Link';
-import FlexibleImage from '../components/FlexibleImage';
+import FlexibleImage from '../components/FlexibleImageLazy';
 import Padding from '../components/Padding';
 
 // import { portfoiloEditorCancel, portfoiloSubmit } from '../actions/makers';
@@ -37,7 +37,7 @@ const ProjectCardSection = ({project, ...props}) => {
       <FlexibleImage 
         className={cx('project-tile-image')} 
         x={390} y={320} 
-        src={project.profilePicture || project.portfolios[0].images[0]} 
+        source={project.profilePicture || project.portfolios[0].images[0]} 
         version="large"
       />
     </Link>

@@ -6,7 +6,7 @@ import { browserHistory } from 'react-router';
 
 import { create as createObject } from '../utils/objects'
 import Link from '../components/Link';
-import Image from '../components/FlexibleImage';
+import Image from '../components/FlexibleImageLazy';
 import SingleLine from '../components/SingleLine';
 import Padding from '../components/Padding';
 import DateFormat from '../components/DateFormat';
@@ -29,7 +29,7 @@ const PortfolioDetainSection = (
 ) => {
   const imgs = portfolio.images.map(img => (
     <div key={img._id || img} className={cx('image')} >
-      <Image src={img} x={'100%'} pureImage={true}/>
+      <Image source={img} x={'100%'} pureImage={true}/>
     </div>)
   );
 
@@ -40,7 +40,7 @@ const PortfolioDetainSection = (
   const ownerArea = owner.map(v => (
     <div className={cx('project-area')} key={v.getHomeLink()} >
       <Link to={v.getHomeLink()} count={v.getType()}>
-        <Image src={v.getProfileImage()} x={33} y={33} contain={v.getType() === 'company'} />
+        <Image source={v.getProfileImage()} x={33} y={33} contain={v.getType() === 'company'} />
       </Link>
       <Link to={v.getHomeLink()} count={v.getType()}>
         <label className={cx('project-name')} role="button">
@@ -96,13 +96,13 @@ const PortfolioDetainSection = (
             [
               portfolio.isPrivate? <IconPortfolioLocked key={1} className={cx('locked')} x={20} y={25} />: null,
               <span key={2} className={cx('rectangle-1')} role="button" onClick={portfoiloEditorStart}>
-                <Image src="/site/images/ic_pen.png" x={17} y={17} />
+                <Image source="/site/images/ic_pen.png" x={17} y={17} />
                 <Padding width="0.5rem" />
                 내용 수정
               </span>,
               <Padding key={3} width={'1rem'} />,
               <span key={4}  className={cx('rectangle-1')} role="button" onClick={removePortfolioClicked}>
-                <Image src="/site/images/ic_delete.png" x={17} y={17} />
+                <Image source="/site/images/ic_delete.png" x={17} y={17} />
                 <Padding width="0.5rem" />
                 게시물 삭제
               </span>

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 
 import Link from '../components/Link';
-import Image from '../components/FlexibleImage';
+import Image from '../components/FlexibleImageLazy';
 import styles from '../css/components/product-item';
 import { productEditorStart } from '../actions/companies';
 
@@ -25,7 +25,7 @@ const ProductItemSection = ({ product, company, productEditorStart }) => {
               {product.category}
             </p>
           </div>
-          <Image src={product.images[0]} x={160} y={160}/>
+          <Image source={product.images[0]} x={160} y={160}/>
         {/*</Link>        */}
       </div>
     );
@@ -41,7 +41,7 @@ const ProductItemSection = ({ product, company, productEditorStart }) => {
             추가하기
           </div>
           <div className={cx('add-product-icon')} role="button" onClick={productEditorStart}>
-            <Image src={"/site/images/add-button-1.png"} x={73} y={73} />
+            <Image source={"/site/images/add-button-1.png"} x={73} y={73} />
           </div>
         </div>
       </div>

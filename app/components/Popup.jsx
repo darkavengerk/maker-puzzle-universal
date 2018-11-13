@@ -46,7 +46,7 @@ class Popup extends Component {
           <div>
             <div className={cx('main-section', 'background')} id={name} onClick={this.onClick} >
             </div>
-            <div className={cx('main-section')} id={name} 
+            <div className={cx('main-section')} id={name} onClick={this.onClick}
               style={{padding: paddingTop + 'px 0 0 ' + paddingLeft +'px'}} >
               {children}
             </div>

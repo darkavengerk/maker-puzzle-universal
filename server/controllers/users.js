@@ -26,9 +26,9 @@ async function getPopulatedUser(userid) {
   return await User
     .findOne({ userid })
     .populate('companiesOwned')
-    .populate('picture')
+    // .populate('picture')
     .populate('portfolios.user')
-    .populate('portfolios.images')
+    // .populate('portfolios.images')
     .populate('portfolios.project')
     .populate('portfolios.company')
     .populate(['followers', 'followings', 'companyFollowings'])

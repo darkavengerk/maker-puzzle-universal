@@ -80,7 +80,7 @@ const FollowList = ({ mode, list=[], companyList=[], user, follow, unfollow, fol
 
   const companyItems = companyList.map(p => [
     <div className={cx('item')} >
-      <FlexibleImage src={Assist.Company.getProfileImage(p)} x={30} y={30} contain={true} />
+      <FlexibleImage source={Assist.Company.getProfileImage(p)} x={30} y={30} contain={true} />
       <div className={cx('text')}>
         <Link to={Assist.Company.getHomeLink(p)}>
           <div className={cx('name')}>{p.name}</div>

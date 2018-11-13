@@ -111,7 +111,7 @@ const Component = ({ maker, editing, onChange, ...props }) => {
         {editing? 
         <td className={cx('text-input', 'erase-buttons')} >
           <FlexibleImage 
-            src={"/site/images/ic_highlight_remove_black_48dp.png"} 
+            source={"/site/images/ic_highlight_remove_black_48dp.png"} 
             x={17} y={17} 
             role="button"
             onClick={removeEntry(info.order)}

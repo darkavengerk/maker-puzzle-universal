@@ -55,7 +55,7 @@ class HelloPageSection extends Component {
         </Popup>
         <div className={cx('landing-top')}>
           <Link to="/main">
-            <FlexibleImage src="/site/images/landing-logo.png" x={276} y={118} contain={true} className={cx('landing-logo')}/>
+            <FlexibleImage source="/site/images/landing-logo.png" x={276} y={118} contain={true} className={cx('landing-logo')}/>
           </Link>
           <div className={cx('login-area')} >
             {login}
@@ -74,7 +74,7 @@ class HelloPageSection extends Component {
             <Padding height={20} />
             <form onSubmit={this.handleOnSubmit} className={cx('search-bar')}>
               <input type="text" id="user-search-input" className={cx('search-input')} placeholder={this.defaultKeyword} />
-              <FlexibleImage src="/site/images/search.png" className={cx('search-icon')} x={21.8} y={21.8} role="button" onClick={this.handleOnSubmit} />
+              <FlexibleImage source="/site/images/search.png" className={cx('search-icon')} x={21.8} y={21.8} role="button" onClick={this.handleOnSubmit} />
             </form>
             <Padding height={21} />
             <Link to="/main">

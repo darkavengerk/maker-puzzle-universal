@@ -168,11 +168,11 @@ class MakerProfile extends Component {
       <div className={cx('main-section')}>
         <span className={cx('flex-row')}>
           <span style={{position:'relative', height:'14.4rem'}}>
-            <FlexibleImage src={maker.getProfileImage? maker.getProfileImage():''} x={144} y={144} />
+            <FlexibleImage source={Assist.Maker.getProfileImage(maker)} x={144} y={144} />
             <span style={{position:'absolute', bottom:'0.3rem', right:'0.4rem', 'zIndex':1}}>
               {editing? 
                 <ImageUploader name="ImageUploader" callback={this.profileImageEdited} >
-                  <FlexibleImage className={cx('image-upload-trigger')} src={"/site/images/camera-1.png"} x={34} y={34} />
+                  <FlexibleImage className={cx('image-upload-trigger')} source={"/site/images/camera-1.png"} x={34} y={34} />
                 </ImageUploader>
                 : ''}
             </span>

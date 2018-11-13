@@ -38,3 +38,9 @@ export function loadImage(imageid) {
     return {_id: imageid};
   };
 }
+
+export function imageLoaded(image) {
+  return (dispatch, getState) => {
+    dispatch({type:types.UPDATE_IMAGE_URLS, data: image });
+  };
+}

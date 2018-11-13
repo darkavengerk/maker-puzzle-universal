@@ -20,7 +20,7 @@ const CompanyCardSection = ({company, ...props}) => {
       <FlexibleImage 
         className={cx('company-tile-image')} 
         x={60} y={60} 
-        src={Assist.Company.getProfileImage(company)} 
+        source={Assist.Company.getProfileImage(company)} 
         contain={true} 
         version="medium"
       />

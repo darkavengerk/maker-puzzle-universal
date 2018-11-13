@@ -208,14 +208,14 @@ class AddProduct extends Component {
                             key={i} >
 
                             <FlexibleImage 
-                              src={img} pureImage={true} y={'9.1rem'} key={i} 
+                              source={img} pureImage={true} y={'9.1rem'} key={i} 
                               className={cx('image-item', i === this.state.imageHoverIndex ? 'image-hover':'')}/>
                             {(i === this.state.imageHoverIndex ? 
                             <FlexibleImage 
                               x={24.7} y={24.7}
                               onClick={this.removeImage(i)} 
                               className={cx('image-remove-button')}
-                              src={'/images/site/ic_clear_white_48dp.png'} 
+                              source={'/images/site/ic_clear_white_48dp.png'} 
                               role="button"
                               key={i+'remove'} /> : null)}
                           </div>
@@ -223,7 +223,7 @@ class AddProduct extends Component {
                       }
                       <ImageUploader name="productImageUploader" callback={this.imageSelected} >
                         <span className={cx('image-upload-button')}>
-                          <FlexibleImage src={'/site/images/upload-button.jpg'} x={117} y={92} />
+                          <FlexibleImage source={'/site/images/upload-button.jpg'} x={117} y={92} />
                         </span>
                       </ImageUploader>
                     </div>

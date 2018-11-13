@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 
 import LazyLoad from 'react-lazyload';
-import { forceCheck } from 'react-lazyload';
 
 import PureImage from './PureImage';
 import { loadImage } from '../actions/images';
@@ -16,67 +15,51 @@ class FlexibleImage extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {url: ''};
-  }
+    this.state = {shouldLoad: false};
 
-  componentWillMount() {
-    const { src } = this.props;
-    this.setState({ url: this.deriveURL(src) });
-  }
+    const { source } = this.props;
 
-  componentDidMount() {
-    const { src, loadImage } = this.props;
-    if(typeof(src) === 'string' && !src.includes('/')) {
-      loadImage(src);
+    if(typeof(source) === 'string' && !source.includes('/')) {
+      this.state.shouldLoad = true;
     }
   }
 
-  deriveURL(src) {
-    const { loadImage, image, version='original' } = this.props;
+  componentWillMount() {
+    if(this.state.shouldLoad) {
+      const { source, loadImage } = this.props;
+      loadImage(source);
+    }
+  }
+
+  render() {
+    const { source, x, y, children, loadImage, version='original', contain=false, pureImage=false, ...props } = this.props;
+
     let url;
 
-    if(typeof(src) === 'string') {
-      if(src.includes('/')) {
-        return src;
+    if(typeof(source) === 'string') {
+      if(source.includes('/')) {
+        url = source;
       }
       else {
-        const newImage = loadImage(src) || '';
+        const newImage = loadImage(source);
         url = newImage.original || '';
         if(newImage.status === IMAGE_PROCESSING_VERSION) {
           url = S3_URL + newImage.versions[version];
         }
-        return url;
       }
     }
     else {
-      url = src? src.original : '';
-      if(src && src.status === IMAGE_PROCESSING_VERSION) {
-        url = S3_URL + src.versions[version];
+      url = source? source.original : '';
+      if(source && source.status === IMAGE_PROCESSING_VERSION) {
+        url = S3_URL + source.versions[version];
       }
-      return url;
     }
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    const next = this.deriveURL(nextProps.src);
-    if(next !== this.state.url) {
-      this.setState({url: next});
-      forceCheck();
-      return true;
-    }
-    return false;
-  }
-
-  render() {
-    const { src, x, y, children, loadImage, image, version='original', contain=false, pureImage=false, ...props } = this.props;
-
-    let url = this.state.url;
 
     const { className, onClick, role } = this.props;
     const renderProps = { className, onClick, role };
 
     if(pureImage) {
-      return (<PureImage src={url} x={x} y={y} {...renderProps} />);
+      return (<PureImage source={url} x={x} y={y} {...renderProps} />);
     }
 
     const width = x || 40;
@@ -104,11 +87,9 @@ class FlexibleImage extends Component {
     }
 
     return (
-      <LazyLoad height={height}>
-        <div {...renderProps} style={imageStyle} >
-          {children}
-        </div>
-      </LazyLoad>
+      <div {...renderProps} style={imageStyle} >
+        {children}
+      </div>
     );
   }
 }

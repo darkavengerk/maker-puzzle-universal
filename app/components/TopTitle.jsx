@@ -33,7 +33,7 @@ class TitleSection extends Component {
     const { title, thumbnailURL, to, children, screen, props} = this.props
 
     const profileImage = thumbnailURL? 
-          <ProfileImage src={thumbnailURL} className={cx('profile-image')} x={30} y={30}/>
+          <ProfileImage source={thumbnailURL} className={cx('profile-image')} x={30} y={30}/>
            : null;
 
     const showFloat = this.state.scrollY > 150 && screen === 'normal';

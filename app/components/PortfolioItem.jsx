@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 
-import Image from '../components/FlexibleImage';
+import Image from '../components/FlexibleImageLazy';
 import Link from '../components/Link';
 import IconPortfolioLocked from '../components/IconPortfolioLocked';
 import styles from '../css/components/portfolio-item';
@@ -18,7 +18,7 @@ const PortfolioItem = ({ portfolio, owner, referrer, portfoiloEditorStart, exter
       <div className={cx('main-section') + ' dragItem'}>
         <Link to={referrer.createPortfolioLink(portfolio)} count="portfolio">
           <div className={cx('text', 'text-section', external? 'type2' : '')}>
-            { external? <Image src={owner.getProfileImage()} x={31} y={31} className={cx('profile-image')} /> : null }
+            { external? <Image source={owner.getProfileImage()} x={31} y={31} className={cx('profile-image')} /> : null }
             <div>
               <h1>
                 {referrer.createPortfolioTitle(portfolio)}
@@ -31,7 +31,7 @@ const PortfolioItem = ({ portfolio, owner, referrer, portfoiloEditorStart, exter
                 }
             </div>
           </div>
-          <Image src={portfolio.images[0]} x={214} y={214} version="medium" />
+          <Image source={portfolio.images[0]} x={214} y={214} version="medium" />
         </Link>        
       </div>
     );
@@ -47,7 +47,7 @@ const PortfolioItem = ({ portfolio, owner, referrer, portfoiloEditorStart, exter
             추가하기        
           </div>
           <div className={cx('add-portfolio-icon')} role="button" onClick={portfoiloEditorStart}>
-            <Image src={"/site/images/add-button-1.png"} x={73} y={73} />
+            <Image source={"/site/images/add-button-1.png"} x={73} y={73} />
           </div>
         </div>
       </div>
