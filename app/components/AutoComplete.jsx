@@ -51,6 +51,9 @@ class autoComplete extends Component {
         this.props.update(word);
         e.preventDefault();
       }
+      else if(e.keyCode == '13') {
+        e.preventDefault();
+      }
     }
     else if (e.keyCode == '27') { // ESC
       this.setState({showDropdown: false, selected: -1});
