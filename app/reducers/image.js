@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { forceCheck } from 'react-lazyload';
 import * as types from '../types';
 
 const images = (

@@ -36,7 +36,7 @@ class TitleSection extends Component {
           <ProfileImage source={thumbnailURL} className={cx('profile-image')} x={30} y={30}/>
            : null;
 
-    const showFloat = this.state.scrollY > 150 && screen === 'normal';
+    const showFloat = this.state.scrollY > 150 && screen.showing === 'normal';
 
     const titleBar = (
       <Link to={to} className={cx('main-section')}>
