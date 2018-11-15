@@ -34,8 +34,10 @@ const Component = ({ cancel, submit, isOwned }) => {
       <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
       <Padding height={'2.3rem'} />
       <div className={cx('popup-message')}>
-        대표님은 프로젝트에만 집중하세요.<br/>
-        홍보, 영업은 메이커퍼즐이 도와드려요!
+        대표님! 온라인 홍보에 시간 뺏기지 마세요.
+        <div className={cx('popup-message-sub')}>
+          프로젝트에만 집중하시도록 메이커퍼즐이 도와드립니다.
+        </div>
       </div>
       <Padding height={'3.5rem'} />
       <div className={cx('box')}>

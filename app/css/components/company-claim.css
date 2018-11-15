@@ -62,7 +62,7 @@
 }
 
 .popup-message {
-  width: 407px;
+  /*width: 407px;*/
   height: 68px;
   font-family: BMDoHyeon-OTF;
   font-size: 24px;
@@ -73,6 +73,10 @@
   letter-spacing: normal;
   text-align: center;
   color: #33a1d6;
+}
+
+.popup-message-sub {
+  font-size: 16px;
 }
 
 .box {
