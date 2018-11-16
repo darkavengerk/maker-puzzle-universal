@@ -13,6 +13,7 @@ import PortfolioItemWide from '../components/PortfolioItemWide';
 import PortfolioItem from '../components/PortfolioItem';
 import Popup from '../components/Popup';
 import AddPortfolio from '../components/AddPortfolio';
+import CompanyClaimUI from '../components/CompanyClaimUI';
 import Login from '../components/Login';
 import Link from '../components/Link';
 
@@ -27,9 +28,19 @@ class MainPageSection extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {isAddingPortfolio:false};
+    this.state = {isAddingPortfolio:false, showClaim:false};
     this.showPortfolioPopup = this.showPortfolioPopup.bind(this);
     this.showMakerPage = this.showMakerPage.bind(this);
+    this.cancelShow = this.cancelShow.bind(this);
+    this.showClaim = this.showClaim.bind(this);
+  }
+
+  cancelShow() {
+    this.setState({showClaim: false});
+  }
+
+  showClaim() {
+    this.setState({showClaim: true});
   }
 
   showPortfolioPopup(evt) {
@@ -166,11 +177,11 @@ class MainPageSection extends Component {
             모든 기능들은 ‘무료’입니다!
           </div>
           <Padding height="4.2rem" />
-          <div className={cx('rectangle')} onClick={this.showPortfolioPopup} role="button" id="AddPortfolioButton">
+          <div className={cx('rectangle')} onClick={this.showClaim} role="button" id="AddPortfolioButton">
             무료 기업페이지 이용방법
           </div>
-          <Popup show={user.attempt === 'edit:portfolio'} name="AddPortfolioPopup" roll={true} top={100}>
-            <AddPortfolio title="포트폴리오 추가하기" submit={portfoiloSubmit} cancel={portfoiloEditorCancel} />
+          <Popup show={this.state.showClaim} name="ClaimPopup" cancel={this.cancelShow} roll={true} top={100}>
+            <CompanyClaimUI isMain={true} />
           </Popup>
         </section>      
 
@@ -228,6 +239,9 @@ class MainPageSection extends Component {
           <div className={cx('rectangle')} onClick={this.showPortfolioPopup} role="button">
             포트폴리오 등록하기
           </div>
+          <Popup show={user.attempt === 'edit:portfolio'} name="AddPortfolioPopup" roll={true} top={100}>
+            <AddPortfolio title="포트폴리오 추가하기" submit={portfoiloSubmit} cancel={portfoiloEditorCancel} />
+          </Popup>
         </section>
 
         <section className={cx('project-section')}>
