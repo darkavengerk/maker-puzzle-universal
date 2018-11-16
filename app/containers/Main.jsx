@@ -247,7 +247,7 @@ class MainPageSection extends Component {
         <section className={cx('project-section')}>
           <div className={cx('title')}>
             Maker
-            <Link to="/more/portfolio/maker/popular">
+            <Link to="/more/portfolio/maker/recent">
               <span className={cx('more-detail')}>더 보기</span>
             </Link>
           </div>

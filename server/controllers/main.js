@@ -41,7 +41,7 @@ function getCompanyContents({sort='popular', loaded=0, limit=12}) {
   return getContents(Company, {'companyPortfolios.0': {$exists:true}}, sort, limit, loaded, []);
 }
 
-function getMakerPorfolioContents({sort='popular', loaded=0, limit=18}) {
+function getMakerPorfolioContents({sort='recent', loaded=0, limit=18}) {
   return getContents(Portfolio, {type:'maker', isPrivate:false}, sort, limit, loaded, ['user', 'company', 'images']);
 }
 
