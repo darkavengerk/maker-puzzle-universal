@@ -22,7 +22,7 @@ export function all(req, res) {
   });
 }
 
-async function getPopulatedUser(userid) {
+export async function getPopulatedUser(userid) {
   return await User
     .findOne({ userid })
     .populate('companiesOwned')
@@ -57,9 +57,9 @@ export function login(req, res, next) {
     }
     // Passport exposes a login() function on req (also aliased as
     // logIn()) that can be used to establish a login session
-    return req.logIn(user, (loginErr) => {
+    return req.logIn(user, async (loginErr) => {
       if (loginErr) return res.sendStatus(401);
-      return res.json(user);
+      return res.json(await getPopulatedUser(user.userid));
     });
   })(req, res, next);
 }
