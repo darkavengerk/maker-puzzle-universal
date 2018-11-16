@@ -68,8 +68,8 @@ const Component = ({ cancel, submit, isOwned }) => {
         </div>
         <FlexibleImage source={'/site/images/main-arrow.png'} x={53} y={53} />
         <div className={cx('blue-circle')}>
-          ‘이 페이지<br/>
-          소유하기’<br/>
+          ‘무료 기업<br/>
+          페이지소유하기’<br/>
           신청
         </div>
       </div>
