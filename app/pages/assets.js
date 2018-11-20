@@ -19,7 +19,8 @@ const metaAssets = () => {
     // - include initial-scale=1 to establish 1:1 relationship between css pixels
     // and device-independent pixels
     // - ensure your page is accessible by not disabling user scaling.
-    { name: 'viewport', content: 'width=1440' },
+    // { name: 'viewport', content: 'width=1440' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0' },
     // Disable tap highlight on IE
     { name: 'msapplication-tap-highlight', content: 'no' },
     // Add to homescreen for Chrome on Android
