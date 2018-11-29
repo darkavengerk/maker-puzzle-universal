@@ -39,7 +39,7 @@ const Navigation = ({ user, logOut, loginMenu, cancelLogin }) => {
     return (
       <div>
         <nav className={cx('navigation')} role="navigation">
-          <div className={cx('logo-area')}>
+          {/*<div className={cx('logo-area')}>
             <Link to="/main">
               <Img source="/site/images/header-logo-20180829.png" x={307} y={81.3}/>
             </Link>
@@ -54,7 +54,7 @@ const Navigation = ({ user, logOut, loginMenu, cancelLogin }) => {
             {user.authenticated? 
               <Img source="/site/images/header-social.png" x={38} y={36} /> :null}
             <Img source="/site/images/header-more.png" x={38.5} y={36} />
-          </div>
+          </div>*/}
         </nav>
         <Popup show={user.attempt === 'login'} name="LoginPopup" cancel={cancelLogin} roll={true} top={100}>
           <Login />

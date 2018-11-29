@@ -165,7 +165,7 @@ class MainPageSection extends Component {
           </div>
         </section>
 
-        <section className={cx('title-section', 'background2')}>
+        {/*<section className={cx('title-section', 'background2')}>
           <Padding height="4.5rem" />
           <div className={cx('main-title')}>
             건축인들을 위한 플랫폼서비스
@@ -254,7 +254,7 @@ class MainPageSection extends Component {
           <div className={cx('project-tiles')}>
             {popularMakerPortfolios}
           </div>
-        </section>
+        </section>*/}
 
       </div>
 

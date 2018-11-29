@@ -1,9 +1,23 @@
-@import '../common/typography';
-
-.header {
-  @apply --heading;
-  text-align: center;
+.top {
+  background-color: white;
 }
 
-.description { @apply --normal; }
-.contribute { @apply --small; }
+.part1 {
+  background-color: blue;
+}
+
+.part2 {
+  background-color: red;
+}
+
+.part4 {
+  background-color: green;
+}
+
+.left {
+  background-color: yellow;
+}
+
+.right {
+  background-color: brown;
+}

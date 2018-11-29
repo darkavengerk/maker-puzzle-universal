@@ -11,12 +11,12 @@
 }
 
 .title-section {
-  height: 300px;
+  height: 30.0rem;
   display: flex;
   flex-direction: column;
   /*justify-content: center;*/
   align-items: center;
-  width: 100%;
+  width: 100vw;
   background-image: url('/site/images/main-11-15-1.jpg');
   background-repeat: no-repeat;
   background-position: center;
@@ -33,7 +33,7 @@
 
 .main-title {
   font-family: BMDoHyeon-OTF;
-  font-size: 40px;
+  font-size: 4rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -41,15 +41,15 @@
   letter-spacing: normal;
   text-align: center;
   color: #ffffff;
-  text-shadow: 0 2px 55px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 .2rem 5.5rem rgba(0, 0, 0, 0.5);
 }
 
 .main-desc {
-  width: 414px;
-  height: 71px;
-  text-shadow: 0 2px 55px rgba(0, 0, 0, 0.5);
+  width: 41.4rem;
+  height: 7.1rem;
+  text-shadow: 0 .2rem 5.5rem rgba(0, 0, 0, 0.5);
   font-family: BMDoHyeon-OTF;
-  font-size: 14px;
+  font-size: 1.4rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -61,7 +61,7 @@
 
 .main-desc .text-style-1 {
   font-family: NanumBarunGothic;
-  font-size: 14px;
+  font-size: 1.4rem;
 }
 
 .main-desc .text-style-2 {
@@ -69,16 +69,16 @@
 }
 
 .rectangle {
-  height: 46px;
+  height: 4.6rem;
   min-width: 28.4rem;
   padding: 0 4.5rem;
-  border-radius: 8px;
-  box-shadow: 0 5px 55px 0 rgba(0, 0, 0, 0.5);
+  border-radius: .8rem;
+  box-shadow: 0 .5rem 5.5rem 0 rgba(0, 0, 0, 0.5);
   background-color: rgba(0, 0, 0, 0.6);
-  border: solid 3px #ffffff;
+  border: solid .3rem #ffffff;
 
   font-family: BMDoHyeon-OTF;
-  font-size: 16px;
+  font-size: 1.6rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -86,11 +86,11 @@
   letter-spacing: normal;
   text-align: center;
   color: #ffffff;
-  text-shadow: 0 2px 55px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 .2rem 5.5rem rgba(0, 0, 0, 0.5);
 }
 
 .project-section {
-  width: 1455px;
+  width: 145.5rem;
   padding: 0 5.5rem;
 }
 
@@ -98,7 +98,7 @@
   width: 100%;
   text-align: left;
   font-family: BMDoHyeon-OTF;
-  font-size: 28px;
+  font-size: 2.8rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -109,10 +109,10 @@
 }
 
 .more-detail {
-  width: 38px;
-  height: 15px;
+  width: 3.8rem;
+  height: 1.5rem;
   font-family: NanumBarunGothic;
-  font-size: 13px;
+  font-size: 1.3rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
@@ -133,7 +133,7 @@
 
 .maker-card {
   display: inline-block;
-  margin-right: 10px;
+  margin-right: 1.0rem;
 }
 
 .landing-top {
@@ -154,13 +154,13 @@
 }
   
 .login-button {
-  width: 109px;
-  height: 36px;
-  border-radius: 12px;
-  border: solid 0.5px #979797;
+  width: 10.9rem;
+  height: 3.6rem;
+  border-radius: 1.2rem;
+  border: solid 0..5rem #979797;
   background-color: #ffffff;
   font-family: NanumBarunGothic;
-  font-size: 12px;
+  font-size: 1.2rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -187,7 +187,7 @@
 
 .title {
   font-family: BMDoHyeon-OTF;
-  font-size: 65px;
+  font-size: 6.5rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -199,10 +199,10 @@
 }
 
 .description {
-  width: 473px;
-  text-shadow: 0 2px 55px rgba(0, 0, 0, 0.5);
+  width: 47.3rem;
+  text-shadow: 0 .2rem 5.5rem rgba(0, 0, 0, 0.5);
   font-family: BMDoHyeon-OTF;
-  font-size: 16px;
+  font-size: 1.6rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -213,11 +213,11 @@
 }
 
 .search-bar {
-  width: 391px;
-  height: 35px;
-  border-radius: 8px;
-  box-shadow: 0 5px 55px 0 rgba(0, 0, 0, 0.5), 0 5px 55px 0 rgba(0, 0, 0, 0.5);
-  border: solid 1px #ffffff;
+  width: 39.1rem;
+  height: 3.5rem;
+  border-radius: .8rem;
+  box-shadow: 0 .5rem 5.5rem 0 rgba(0, 0, 0, 0.5), 0 .5rem 5.5rem 0 rgba(0, 0, 0, 0.5);
+  border: solid .1rem #ffffff;
   background-color: #ffffff;
   position: relative;
 }
@@ -229,7 +229,7 @@
   background-color: rgba( 255, 255, 255, 0 );
   padding: 0 2rem;
   font-family: NanumBarunGothic;
-  font-size: 14px;
+  font-size: 1.4rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
@@ -245,14 +245,14 @@
 }
 
 .button-main {
-  width: 180px;
-  height: 35px;
-  border-radius: 8px;
-  box-shadow: 0 5px 55px 0 rgba(0, 0, 0, 0.5), 0 5px 55px 0 rgba(0, 0, 0, 0.5);
-  border: solid 1px #ffffff;
+  width: 18.0rem;
+  height: 3.5rem;
+  border-radius: .8rem;
+  box-shadow: 0 .5rem 5.5rem 0 rgba(0, 0, 0, 0.5), 0 .5rem 5.5rem 0 rgba(0, 0, 0, 0.5);
+  border: solid .1rem #ffffff;
   background-color: #fc7f37;
   font-family: NanumBarunGothic;
-  font-size: 14px;
+  font-size: 1.4rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
@@ -268,9 +268,9 @@
 }
 
 .blue-text {
-  text-shadow: 0 2px 35px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 .2rem 3.5rem rgba(0, 0, 0, 0.5);
   font-family: BMDoHyeon-OTF;
-  font-size: 30px;
+  font-size: 3.0rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -287,9 +287,9 @@
 }
 
 .blue-circle {
-  width: 196px;
-  height: 196px;
-  box-shadow: 0 5px 35px 0 rgba(0, 0, 0, 0.5);
+  width: 19.6rem;
+  height: 19.6rem;
+  box-shadow: 0 .5rem 3.5rem 0 rgba(0, 0, 0, 0.5);
   border-radius: 50%;
   background-image: url("/site/images/landing-circle.png");
   background-position: center; 
@@ -301,9 +301,9 @@
   margin-top: 5.5rem;
   height: 4.4rem;
   vertical-align: middle;
-  text-shadow: 0 2px 35px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 .2rem 3.5rem rgba(0, 0, 0, 0.5);
   font-family: BMDoHyeon-OTF;
-  font-size: 14px;
+  font-size: 1.4rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -315,9 +315,9 @@
 
 .blue-circle-bottom {
   margin-top: 1.3rem;
-  text-shadow: 0 2px 35px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 .2rem 3.5rem rgba(0, 0, 0, 0.5);
   font-family: BMDoHyeon-OTF;
-  font-size: 25px;
+  font-size: 2.5rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -359,7 +359,7 @@
 
 .title-last {
   font-family: BMDoHyeon-OTF;
-  font-size: 38px;
+  font-size: 3.8rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -371,7 +371,7 @@
 
 .description-last {
   font-family: BMDoHyeon-OTF;
-  font-size: 16px;
+  font-size: 1.6rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -382,13 +382,13 @@
 
 .grey-text {
   font-family: NanumBarunGothic;
-  font-size: 14px;
+  font-size: 1.4rem;
   color: #949494;
 }
 
 .we-are {
   font-family: NanumBarunGothic;
-  font-size: 15px;
+  font-size: 1.5rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -408,9 +408,9 @@
 }
 
 .feed-empty {
-  height: 44px;
+  height: 4.4rem;
   font-family: NanumBarunGothic;
-  font-size: 15px;
+  font-size: 1.5rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;

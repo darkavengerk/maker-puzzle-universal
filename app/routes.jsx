@@ -57,6 +57,7 @@ export default (store) => {
   return (
     <Route path="/" component={Root}>
       <IndexRoute component={Hello} />
+      <Route path="about" component={About} />
       <Route path="/" component={App}>
         {/*<IndexRoute component={Construction} />*/}
         {/*<Route exact path="main" component={Main} fetchData={fetchMainData} />*/}
@@ -72,9 +73,8 @@ export default (store) => {
         <Route path="company/:link_name/maker/:mid/:pid" component={Company} fetchData={fetchCompanyData} />
         <Route path="company/:link_name/product/:pid" component={Company} fetchData={fetchCompanyData} />
         <Route path="company/:link_name" component={Company} fetchData={fetchCompanyData} />
-        {/*<Route path="login" component={LoginOrRegister} onEnter={redirectAuth} />
-        <Route path="dashboard" component={Dashboard} onEnter={requireAuth} />
-        <Route path="about" component={About} />*/}
+        {/*<Route path="login" component={LoginOrRegister} onEnter={redirectAuth} />*/}
+        {/*<Route path="dashboard" component={Dashboard} onEnter={requireAuth} />*/}
       </Route>
     </Route>
   );
