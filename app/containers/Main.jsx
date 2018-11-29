@@ -6,13 +6,14 @@ import { browserHistory } from 'react-router';
 
 import { Maker, Project, Company, create as createObject } from '../utils/objects'
 import Assist from '../utils/assist'
-import ProjectCard from '../components/ProjectCard';
+import ProjectCard from '../components/ProjectCardMedium';
 import MakerCard from '../components/MakerCard';
 import Padding from '../components/Padding';
 import PortfolioItemWide from '../components/PortfolioItemWide';
 import PortfolioItem from '../components/PortfolioItem';
 import Popup from '../components/Popup';
 import AddPortfolio from '../components/AddPortfolio';
+import CompanyClaimUI from '../components/CompanyClaimUI';
 import Login from '../components/Login';
 import Link from '../components/Link';
 
@@ -27,9 +28,19 @@ class MainPageSection extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {isAddingPortfolio:false};
+    this.state = {isAddingPortfolio:false, showClaim:false};
     this.showPortfolioPopup = this.showPortfolioPopup.bind(this);
     this.showMakerPage = this.showMakerPage.bind(this);
+    this.cancelShow = this.cancelShow.bind(this);
+    this.showClaim = this.showClaim.bind(this);
+  }
+
+  cancelShow() {
+    this.setState({showClaim: false});
+  }
+
+  showClaim() {
+    this.setState({showClaim: true});
   }
 
   showPortfolioPopup(evt) {
@@ -61,17 +72,35 @@ class MainPageSection extends Component {
       portfolios=[],
       companyPortfolios=[],
       portfoliosRecent=[],
-      companyPortfoliosRecent=[] 
+      companyPortfoliosRecent=[],
+      feed=[]
     } = main;
 
     const referrer = createObject('main');
 
-    const popularCompanyPortfolios = companyPortfolios.slice(0,9).map(portfolio => {
+    let feedCount = 0;
+
+    const portfolioFeeds = feed.map(portfolio => {
+      if(portfolio.type === 'company') {
+        if(feedCount + 2 > 18) return null;
+        feedCount += 2;
+        const owner = createObject('company', portfolio.company);
+        return <PortfolioItemWide imageFit={true} portfolio={portfolio} referrer={owner} owner={owner} key={portfolio.pid} external={true} />  
+      }
+      else {
+        if(feedCount + 1 > 18) return null;
+        feedCount += 1;
+        const owner = createObject('maker', portfolio.user);
+        return (<PortfolioItem portfolio={portfolio} referrer={referrer} owner={owner} key={portfolio.pid} external={true} />);
+      }
+    })
+
+    const popularCompanyPortfolios = companyPortfolios.map(portfolio => {
       const owner = createObject('company', portfolio.company);
       return <PortfolioItemWide imageFit={true} portfolio={portfolio} referrer={owner} owner={owner} key={portfolio.pid} external={true} />
     })
 
-    const recentCompanyPortfolios = companyPortfoliosRecent.slice(0,6).map(portfolio => {
+    const recentCompanyPortfolios = companyPortfoliosRecent.map(portfolio => {
       const owner = createObject('company', portfolio.company);
       return <PortfolioItemWide imageFit={true} portfolio={portfolio} referrer={owner} owner={owner} key={portfolio.pid} external={true} />
     })
@@ -80,23 +109,6 @@ class MainPageSection extends Component {
         const owner = createObject('maker', portfolio.user);
         return (<PortfolioItem portfolio={portfolio} referrer={referrer} owner={owner} key={portfolio.pid} external={true} />);
       });
-
-    let recentMakerPortfolios = portfoliosRecent.map(portfolio => {
-        const owner = createObject('maker', portfolio.user);
-        return (<PortfolioItem portfolio={portfolio} referrer={referrer} owner={owner} key={portfolio.pid} external={true} />);
-      });
-
-    const makerHighlights = users.map(maker => {
-      let occupation = maker.features.filter(f => f.repr === 'occupation');
-      occupation = occupation[0]? occupation[0] : null;
-      const occupationName = occupation && occupation.content? occupation.content : '';
-      return <MakerCard 
-                key={maker.userid} 
-                picture={Assist.Maker.getProfileImage(maker)}
-                title={maker.name} 
-                subTitle={occupationName} 
-                linkTo={'/maker/' + maker.userid} />;
-    });
 
     const companyHighlights = companies.map(company => {
       let business = company.features.filter(f => f.repr === 'business');
@@ -115,95 +127,71 @@ class MainPageSection extends Component {
       <div className={cx('main-section')}>
 
         <section className={cx('title-section')}>
-          <Padding height="5.8rem" />
+          <Padding height="4.2rem" />
           <div className={cx('main-title')}>
             “여긴 누가 지었을까?”
           </div>
-          <Padding height="4rem" />
+          <Padding height="4.2rem" />
           <div className={cx('main-desc')}>
-            건축 공간은 완성된 순간부터 다양한 가치
-            <span className={cx('text-style-1')}>(핫플레이스, 부동산, 일터, 숙박, 문화 등)</span>
-            를 담는 상징적 그릇이 됩니다<br/>
-            그리고, ‘하나의 건축 공간이 완성’되기 위해서는 ‘수많은 분야 전문가들의 협업이 필요’합니다<br/>
-            MAKER PUZZLE에는 각 프로젝트에 
-            <span className={cx('text-style-2')}>실제로 참여한 모든 전문가들</span>
-            과 <span className={cx('text-style-2')}>그들의 작품들</span>이 모여 있습니다
-          </div>
-          <Padding height="7.6rem" />
-          <div className={cx('rectangle')}>
-            누가 만들었는지 궁금했던 건축 프로젝트를 검색해보세요
+            설계, 시공, 조경, 전기, 환경, 구조, 색채, 인테리어, 가구, 조명, 영상…<br/>
+            수많은 전문 분야 메이커들의 협력이 필요한 건축.<br/>
+            프로젝트에 ‘실제로 참여한’ 메이커들과 그 작품들을 검색해보세요
           </div>
         </section>
 
+        {user.authenticated? <section className={cx('project-section')}>
+          <div className={cx('title')}>
+            Following
+          </div>
+          {portfolioFeeds.length > 0? <div className={cx('project-tiles')}>
+            { portfolioFeeds }
+            </div>: <div className={cx('feed-empty')}>
+              아직 아무도 팔로우하지 않으셨네요.<br/>
+              관심있는 기업이나 메이커를 팔로우 해보세요.
+          </div>
+          }
+          
+        </section> :null}        
+
         <section className={cx('project-section')}>
           <div className={cx('title')}>
-            프로젝트 들여다보기 
+            Puzzles
             <Link to="/more/project/p/popular">
               <span className={cx('more-detail')}>더 보기</span>
             </Link>
           </div>
-          <Padding height="2.5rem" />
           <div className={cx('project-tiles')}>
-            {projects.slice(0,6).map(p => <ProjectCard key={p.name} project={p} />)}
+            {projects.map(p => <ProjectCard key={p.name} project={p} />)}
           </div>
         </section>
 
         <section className={cx('title-section', 'background2')}>
-          <Padding height="5.8rem" />
+          <Padding height="4.5rem" />
           <div className={cx('main-title')}>
-            포트폴리오를 뽐내 새로운 기회를 잡으세요
+            건축인들을 위한 플랫폼서비스
           </div>
-          <Padding height="4rem" />
+          <Padding height="2.2rem" />
           <div className={cx('main-desc')}>
-            프로젝트를 수행한 경력은 다양한 ‘기회의 확대’로 이어집니다<br/>
-            포트폴리오들은 검색 결과 및 여러 채널
-            <span className={cx('text-style-1')}>(해당 프로젝트, 기업 및 메이커 채널)</span>
-            에서 노출됩니다<br/>
-            또한, 본인만 볼 수 있는 ‘비밀’ 기능을 통해 포트폴리오 저장고로 활용하실 수도 있습니다.
+            제일 효과적인 영업 무기는 ‘프로젝트 수행 실적’<br/>
+            기업페이지를 소유해 영업망을 확장해 보세요.<br/>
+            모든 기능들은 ‘무료’입니다!
           </div>
-          <Padding height="7.6rem" />
-          <div className={cx('rectangle')} onClick={this.showPortfolioPopup} role="button" id="AddPortfolioButton">
-            포트폴리오 등록하기
+          <Padding height="4.2rem" />
+          <div className={cx('rectangle')} onClick={this.showClaim} role="button" id="AddPortfolioButton">
+            무료 기업페이지 이용방법
           </div>
-          <Popup show={user.attempt === 'edit:portfolio'} name="AddPortfolioPopup" roll={true} top={100}>
-            <AddPortfolio title="포트폴리오 추가하기" submit={portfoiloSubmit} cancel={portfoiloEditorCancel} />
+          <Popup show={this.state.showClaim} name="ClaimPopup" cancel={this.cancelShow} roll={true} top={100}>
+            <CompanyClaimUI isMain={true} />
           </Popup>
         </section>      
 
         <section className={cx('project-section')}>
           <div className={cx('title')}>
-            인기 수행실적 
-            <Link to="/more/portfolio/company/popular">
-              <span className={cx('more-detail')}>더 보기</span>
-            </Link>
-          </div>
-          <Padding height="2.5rem" />
-          <div className={cx('project-tiles')}>
-            {popularCompanyPortfolios}
-          </div>
-        </section>
-
-        <section className={cx('project-section')}>
-          <div className={cx('title')}>
-            인기 포트폴리오
-            <Link to="/more/portfolio/maker/popular">
-              <span className={cx('more-detail')}>더 보기</span>
-            </Link>
-          </div>
-          <Padding height="2.5rem" />
-          <div className={cx('project-tiles')}>
-            {popularMakerPortfolios.slice(0, 18)}
-          </div>
-        </section>
-
-        <section className={cx('project-section')}>
-          <div className={cx('title')}>
-            새로 등록된 수행실적
+            New
             <Link to="/more/portfolio/company/recent">
               <span className={cx('more-detail')}>더 보기</span>
             </Link>
           </div>
-          <Padding height="2.5rem" />
           <div className={cx('project-tiles')}>
             {recentCompanyPortfolios}
           </div>
@@ -211,67 +199,63 @@ class MainPageSection extends Component {
 
         <section className={cx('project-section')}>
           <div className={cx('title')}>
-            새로 등록된 포트폴리오
-            <Link to="/more/portfolio/maker/recent">
+            Popular
+            <Link to="/more/portfolio/company/popular">
               <span className={cx('more-detail')}>더 보기</span>
             </Link>
           </div>
-          <Padding height="2.5rem" />
           <div className={cx('project-tiles')}>
-            {recentMakerPortfolios.slice(0, 12)}
-          </div>
-        </section>
-
-        <section className={cx('title-section', 'background3')}>
-          <Padding height="5.8rem" />
-          <div className={cx('main-title')}>
-            당신은 MAKER입니까?
-          </div>
-          <Padding height="4rem" />
-          <div className={cx('main-desc')}>
-            설계, 시공, 조경, 전기, 환경, 구조, 색채, 인테리어, 가구, 조명, 통신, 영상…<br/>
-            건축 프로젝트에 실제로 참여한 모든 분야 전문가들을 우리는 “MAKER”라 부릅니다<br/>
-            간단한 가입절차 후 메이커로 활동하며 경력을 관리해보세요
-          </div>
-          <Padding height="7.6rem" />
-          <div className={cx('rectangle')} onClick={this.showMakerPage} role="button">
-            메이커로 활동하기
+            {popularCompanyPortfolios}
           </div>
         </section>
 
         <section className={cx('project-section')}>
           <div className={cx('title')}>
-            주목할만한 메이커들
-            <Link to="/more/maker/c/popular">
-              <span className={cx('more-detail')}>더 보기</span>
-            </Link>
-          </div>
-          <Padding height="2.5rem" />
-          <div className={cx('project-tiles')}>
-            {
-              makerHighlights.slice(0,6).map((m,i) => (<div key={i} className={cx('maker-card')}>
-                              { m }
-                            </div>))
-            }
-          </div>
-        </section>
-
-        <section className={cx('project-section')}>
-          <div className={cx('title')}>
-            주목할만한 기업들
+            Company
             <Link to="/more/company/c/popular">
               <span className={cx('more-detail')}>더 보기</span>
             </Link>
           </div>
-          <Padding height="2.5rem" />
           <div className={cx('project-tiles')}>
             {
-              companyHighlights.slice(0,6).map((c,i) => (<div key={i} className={cx('maker-card')}>
+              companyHighlights.map((c,i) => (<div key={i} className={cx('maker-card')}>
                               { c }
                             </div>))
             }
           </div>
         </section>
+
+        <section className={cx('title-section', 'background3')}>
+          <Padding height="4.5rem" />
+          <div className={cx('main-title')}>
+            메이커들이 채워가는 엔딩크레딧
+          </div>
+          <Padding height="2.2rem" />
+          <div className={cx('main-desc')}>
+            전세계 도시들의 엔딩크레딧에 당신의 이름도 새겨보세요.<br/>
+            ‘비밀’ 설정으로 포트폴리오 저장고로 쓸 수도 있어요.
+          </div>
+          <Padding height="4.2rem" />
+          <div className={cx('rectangle')} onClick={this.showPortfolioPopup} role="button">
+            포트폴리오 등록하기
+          </div>
+          <Popup show={user.attempt === 'edit:portfolio'} name="AddPortfolioPopup" roll={true} top={100}>
+            <AddPortfolio title="포트폴리오 추가하기" submit={portfoiloSubmit} cancel={portfoiloEditorCancel} />
+          </Popup>
+        </section>
+
+        <section className={cx('project-section')}>
+          <div className={cx('title')}>
+            Maker
+            <Link to="/more/portfolio/maker/recent">
+              <span className={cx('more-detail')}>더 보기</span>
+            </Link>
+          </div>
+          <div className={cx('project-tiles')}>
+            {popularMakerPortfolios}
+          </div>
+        </section>
+
       </div>
 
     );

@@ -30,10 +30,12 @@ class CompanyClaim extends Component {
   submit() {
     const { user, company, addOwnCompany } = this.props;
     if(user.userid) {
-      addOwnCompany(user.userid, company.name, () => {
-        alert('완료');
-        this.setState({showPopup: false});
-      });
+      const answer = confirm('‘확인’을 누르면 이 기업페이지를 소유하게 됩니다. ');
+      if(answer) {
+        addOwnCompany(user.userid, company.name, () => {
+          this.setState({showPopup: false});
+        });
+      }
     }
     else {
       alert('로그인이 필요합니다');

@@ -8,7 +8,7 @@ import PortfolioItemWide from '../components/PortfolioItemWide';
 import PortfolioItem from '../components/PortfolioItem';
 import TopTitle from '../components/TopTitle';
 import SingleLine from '../components/SingleLine';
-import ProjectCard from '../components/ProjectCard';
+import ProjectCard from '../components/ProjectCardMedium';
 import MakerCard from '../components/MakerCard';
 import Assist from '../utils/assist'
 

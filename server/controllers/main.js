@@ -1,4 +1,6 @@
 import passport from 'passport';
+
+import { getPopulatedUser } from '../controllers/users';
 import  { models, common } from '../db';
 
 const { 
@@ -31,15 +33,15 @@ function getUserContents({sort='popular', loaded=0, limit=6}) {
   return getContents(User, {'portfolios.0': {$exists:true}}, sort, limit, loaded, []);
 }
 
-function getProjectContents({sort='popular', loaded=0, limit=6}) {
+function getProjectContents({sort='popular', loaded=0, limit=9}) {
   return getContents(Project, {'portfolios.0': {$exists:true}}, sort, limit, loaded, ['portfolios.images']);
 }
 
-function getCompanyContents({sort='popular', loaded=0, limit=6}) {
+function getCompanyContents({sort='popular', loaded=0, limit=12}) {
   return getContents(Company, {'companyPortfolios.0': {$exists:true}}, sort, limit, loaded, []);
 }
 
-function getMakerPorfolioContents({sort='popular', loaded=0, limit=18}) {
+function getMakerPorfolioContents({sort='recent', loaded=0, limit=18}) {
   return getContents(Portfolio, {type:'maker', isPrivate:false}, sort, limit, loaded, ['user', 'company', 'images']);
 }
 
@@ -50,24 +52,47 @@ function getCompanyPorfolioContents({sort='popular', loaded=0, limit=9}) {
 export async function buildContents(req, res) {
   console.log('build main contents...', new Date().toISOString());
   const loadings = [
-    getUserContents({}),
     getProjectContents({}),
     getCompanyContents({}),
     getMakerPorfolioContents({}),
     getCompanyPorfolioContents({}),
-    getMakerPorfolioContents({sort:'recent', limit:12}),
-    getCompanyPorfolioContents({sort:'recent', limit:6})
+    getCompanyPorfolioContents({sort:'recent'})
   ];
-  const [users, projects, companies, portfolios, companyPortfolios, portfoliosRecent, companyPortfoliosRecent] = await Promise.all(loadings);
-  mainContents = { users, projects, companies, portfolios, companyPortfolios, portfoliosRecent, companyPortfoliosRecent };
+  const [projects, companies, portfolios, companyPortfolios, companyPortfoliosRecent] = await Promise.all(loadings);
+  mainContents = { projects, companies, portfolios, companyPortfolios, companyPortfoliosRecent };
   if(req && res) {
     res.json(mainContents);
   }
 }
 
+function buildFeed(user) {
+  let portfolios = [];
+  for(let p of user.followings) {
+    portfolios = portfolios.concat(p.portfolios);
+  }
+  for(let p of user.companyFollowings) {
+    portfolios = portfolios.concat(p.companyPortfolios);
+  }
+  portfolios = portfolios.filter(p => !p.isPrivate);
+  return portfolios.sort((a,b) => b.created - a.created);
+}
+
+async function populatePortfoilios(portfolios) {
+  var opts = [
+      { path: 'company' }
+    , { path: 'project' }
+    , { path: 'user' }
+  ];
+  return await Portfolio.populate(portfolios, opts);
+}
+
 export async function main(req, res) {
   if(!mainContents)
     await buildContents();
+  if(req.user && req.user.userid) {
+    const user = await getPopulatedUser(req.user.userid);
+    mainContents.feed = await populatePortfoilios(buildFeed(user).slice(0,18));
+  }
   return res.json(mainContents);
 }
 

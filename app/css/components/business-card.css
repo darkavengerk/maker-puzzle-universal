@@ -17,6 +17,11 @@
   margin-bottom: 1rem;
 }
 
+.medium-tile {
+  width: 437px;
+  height: 212px;
+}
+
 .project-tile .header {
   font-family: NanumBarunGothic;
 }
@@ -32,6 +37,11 @@
   position: relative;
 }
 
+.project-tile .header-medium {
+  width: 225px;
+  height: 212px;
+}
+
 .project-tile .header .title{
   font-family: NanumBarunGothic;
   font-size: 25px;
@@ -42,6 +52,10 @@
   letter-spacing: normal;
   text-align: center;
   color: #4a4a4a;
+}
+
+.project-tile .header .title-medium {
+  font-size: 20px;
 }
 
 .project-tile .header .sub-title {
@@ -78,6 +92,14 @@
   letter-spacing: normal;
   text-align: center;
   color: #000000;
+}
+
+.project-tile .header .detail-button-medium {
+  bottom: 2.9rem;
+  width: 131.2px;
+  height: 33.1px;
+  line-height: 3.3rem;
+  font-size: 14px;
 }
 
 .maker-tile {

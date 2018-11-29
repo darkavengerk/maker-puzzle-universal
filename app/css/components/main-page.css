@@ -7,34 +7,33 @@
 }
 
 .main-section section {
-  margin-bottom: 5.2rem
+  margin-bottom: 6.5rem
 }
 
 .title-section {
-  height: 426px;
+  height: 300px;
   display: flex;
   flex-direction: column;
   /*justify-content: center;*/
   align-items: center;
   width: 100%;
-  background-image: url('/site/images/main_1.jpg');
+  background-image: url('/site/images/main-11-15-1.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size:cover;
 }
 
 .background2 {
-  background-image: url('/site/images/main_2.jpg') !important;
+  background-image: url('/site/images/main-11-15-2.jpg') !important;
 }
 
 .background3 {
-  background-image: url('/site/images/main_3.jpg') !important;
+  background-image: url('/site/images/main-11-15-3.jpg') !important;
 }
 
 .main-title {
-  height: 54px;
   font-family: BMDoHyeon-OTF;
-  font-size: 45px;
+  font-size: 40px;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -46,18 +45,18 @@
 }
 
 .main-desc {
-  width: 876px;
-  height: 92px;
+  width: 414px;
+  height: 71px;
+  text-shadow: 0 2px 55px rgba(0, 0, 0, 0.5);
   font-family: BMDoHyeon-OTF;
-  font-size: 20px;
+  font-size: 14px;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
-  line-height: 3.5rem;
+  line-height: 2.7rem;
   letter-spacing: normal;
   text-align: center;
   color: #ffffff;
-  text-shadow: 0 2px 55px rgba(0, 0, 0, 0.5);
 }
 
 .main-desc .text-style-1 {
@@ -70,8 +69,8 @@
 }
 
 .rectangle {
-  height: 52px;
-  min-width: 35.8rem;
+  height: 46px;
+  min-width: 28.4rem;
   padding: 0 4.5rem;
   border-radius: 8px;
   box-shadow: 0 5px 55px 0 rgba(0, 0, 0, 0.5);
@@ -79,7 +78,7 @@
   border: solid 3px #ffffff;
 
   font-family: BMDoHyeon-OTF;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -187,7 +186,6 @@
 }
 
 .title {
-  text-shadow: 0 2px 55px rgba(0, 0, 0, 0.5);
   font-family: BMDoHyeon-OTF;
   font-size: 65px;
   font-weight: normal;
@@ -197,7 +195,7 @@
   letter-spacing: normal;
   text-align: center;
   color: #ffffff;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2.2rem;
 }
 
 .description {
@@ -407,4 +405,17 @@
 .page4-middle {
   max-height: 45rem;
   flex: 0.7;
+}
+
+.feed-empty {
+  height: 44px;
+  font-family: NanumBarunGothic;
+  font-size: 15px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 2.5rem;
+  letter-spacing: normal;
+  text-align: center;
+  color: #555555;
 }

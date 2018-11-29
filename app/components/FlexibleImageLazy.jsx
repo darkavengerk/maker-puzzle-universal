@@ -14,25 +14,35 @@ class LazyFlexibleImage extends Component {
     super(props);
   }
 
-  ComponentDidMount() {
+  componentDidMount() {
     forceCheck();
   }
 
   render() {
-    const { y, children, ...props } = this.props;
+    const { y, children, screen, ...props } = this.props;
 
     const height = y || 40;
 
-
-
+    if(screen.loadingCount > 1)
+      return (
+        <LazyLoad height={height}>
+          <FlexibleImage y={y} {...props} >
+            {children}
+          </FlexibleImage>
+        </LazyLoad>
+      );
     return (
-      <LazyLoad height={height} throttle={200}>
-        <FlexibleImage y={y} {...props} >
-          {children}
-        </FlexibleImage>
-      </LazyLoad>
+      <FlexibleImage y={y} {...props} >
+        {children}
+      </FlexibleImage>
     );
   }
 }
 
-export default LazyFlexibleImage;
+function mapStateToProps(state) {
+  return {
+    screen: state.screen
+  };
+}
+
+export default connect(mapStateToProps, {})(LazyFlexibleImage);
