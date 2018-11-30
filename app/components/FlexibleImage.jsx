@@ -71,8 +71,8 @@ class FlexibleImage extends Component {
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
       backgroundSize:'cover',
-      height: height/10+'rem',
-      width: width/10+'rem'
+      height: height/100+'rem',
+      width: width/100+'rem'
     };
 
     if(contain) {

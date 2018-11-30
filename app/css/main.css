@@ -56,39 +56,22 @@ textarea:focus, input:focus{
   flex-direction: column;
 }
 
-@media all and (orientation:portrait) and (max-width:400px) {
-  html {
-    font-size: 7px;
-
-  }
-
-  img {
-    width: 70%;
-    background: #000;
-  }
+html{
+    font-size: 60px;
 }
 
-@media all and (orientation:portrait) and (min-width:400px) {
-  html {
-    font-size: 10px;
-  }
+/* 768px 이상 화면 크기에 적용될 미디어쿼리 */
+@media only screen and (min-width: 65em) {
+    html{
+        font-size: 75px;
+    }
 }
 
-@media all and (orientation:landscape) and (max-height:400px) {
-  html {
-    font-size: 7px;
-  }
-
-  img {
-    width: 70%;
-    background: #000;
-  }
-}
-
-@media all and (orientation:landscape) and (min-height:400px) {
-  html {
-    font-size: 10px;
-  }
+/* 1440px 이상 화면 크기에 적용될 미디어쿼리 */
+@media only screen and (min-width: 85em) {
+    html{
+        font-size: 100px;
+    }
 }
 
 [role="button"] {

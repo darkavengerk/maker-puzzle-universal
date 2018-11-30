@@ -1,25 +1,27 @@
+/* processed-version: 1.0 */
+
 .maker-tile-image-boundary {
-  width: 21.3rem;
-  height: 21.3rem;
+  width: 2.13rem;
+  height: 2.13rem;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .project-tile {
-  width: 660px;
-  height: 320px;
+  width: 6.6rem;
+  height: 3.2rem;
   background-color: #ffffff;
-  box-shadow: 0 5px 35px 0 rgba(163, 163, 163, 0.5);
+  box-shadow: 0 0.05rem 0.35rem 0 rgba(163, 163, 163, 0.5);
   display: flex;
   justify-content: flex-start;
-  margin-right: 1rem;
-  margin-bottom: 1rem;
+  margin-right: 0.1rem;
+  margin-bottom: 0.1rem;
 }
 
 .medium-tile {
-  width: 437px;
-  height: 212px;
+  width: 4.37rem;
+  height: 2.12rem;
 }
 
 .project-tile .header {
@@ -27,9 +29,9 @@
 }
 
 .project-tile .header {
-  width: 270px;
-  height: 320px;
-  padding: 0 1rem;
+  width: 2.7rem;
+  height: 3.2rem;
+  padding: 0 0.1rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -38,13 +40,13 @@
 }
 
 .project-tile .header-medium {
-  width: 225px;
-  height: 212px;
+  width: 2.25rem;
+  height: 2.12rem;
 }
 
 .project-tile .header .title{
   font-family: NanumBarunGothic;
-  font-size: 25px;
+  font-size: 0.25rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
@@ -55,17 +57,17 @@
 }
 
 .project-tile .header .title-medium {
-  font-size: 20px;
+  font-size: 0.2rem;
 }
 
 .project-tile .header .sub-title {
-  width: 22rem;
+  width: 2.2rem;
   overflow: hidden;
   white-space: nowrap; /* Don't forget this one */
   text-overflow: ellipsis;
   
   font-family: NanumBarunGothic;
-  font-size: 12px;
+  font-size: 0.12rem;
   font-weight: 300;
   font-style: normal;
   font-stretch: normal;
@@ -77,39 +79,39 @@
 
 .project-tile .header .detail-button {
   position: absolute;
-  bottom: 4.4rem;
-  width: 153px;
-  height: 50px;
-  border-radius: 8px;
-  border: solid 2px #000000;
+  bottom: 0.44rem;
+  width: 1.53rem;
+  height: 0.5rem;
+  border-radius: 0.08rem;
+  border: solid 0.02rem #000000;
 
   font-family: NanumBarunGothic;
-  font-size: 18px;
+  font-size: 0.18rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
-  line-height: 5rem;
+  line-height: 0.5rem;
   letter-spacing: normal;
   text-align: center;
   color: #000000;
 }
 
 .project-tile .header .detail-button-medium {
-  bottom: 2.9rem;
-  width: 131.2px;
-  height: 33.1px;
-  line-height: 3.3rem;
-  font-size: 14px;
+  bottom: 0.29rem;
+  width: 1.312rem;
+  height: 0.331rem;
+  line-height: 0.33rem;
+  font-size: 0.14rem;
 }
 
 .maker-tile {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: 214px;
-  height: 291px;
+  width: 2.14rem;
+  height: 2.91rem;
   background-color: #ffffff;
-  box-shadow: 0 5px 35px 0 rgba(163, 163, 163, 0.5);
+  box-shadow: 0 0.05rem 0.35rem 0 rgba(163, 163, 163, 0.5);
 
   font-family: AppleSDGothicNeo;
   font-style: normal;
@@ -121,7 +123,7 @@
 
 .maker-tile .title {
   font-family: AppleSDGothicNeo;
-  font-size: 17px;
+  font-size: 0.17rem;
   font-weight: 800;
   font-style: normal;
   font-stretch: normal;
@@ -133,26 +135,26 @@
 
 .maker-tile .header .sub-title {
   font-family: AppleSDGothicNeo;
-  font-size: 14px;
+  font-size: 0.14rem;
   font-weight: 500;
   line-height: 1.43;
   color: #777677;
 }
 
 .maker-tile-margin {
-  margin-right: 1rem;
-  margin-bottom: 1rem;
+  margin-right: 0.1rem;
+  margin-bottom: 0.1rem;
 }
 
 .company-card-section {
   display: flex;
   align-items: center;
-  height: 7.3rem;
-  width: 34.9rem;
-  padding: 0 0.7rem;
-  margin-bottom: 0.7rem;
+  height: 0.73rem;
+  width: 3.49rem;
+  padding: 0 0.07rem;
+  margin-bottom: 0.07rem;
 
-  box-shadow: 0 5px 35px 0 rgba(163, 163, 163, 0.5);
+  box-shadow: 0 0.05rem 0.35rem 0 rgba(163, 163, 163, 0.5);
   background-color: #ffffff;
 }
 
@@ -160,13 +162,13 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 6rem;
+  height: 0.6rem;
 }
 
 .company-card-text-section {
-  padding-top: 0.3rem;
+  padding-top: 0.03rem;
   font-family: NanumBarunGothic;
-  font-size: 1.5rem;
+  font-size: 0.15rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
@@ -176,20 +178,20 @@
 }
 
 .company-card-button {
-  width: 12.8rem;
-  height: 2.67rem;
-  border-radius: 8px;
-  border: solid 1px #000000;
+  width: 1.28rem;
+  height: 0.267rem;
+  border-radius: 0.08rem;
+  border: solid 0.01rem #000000;
 }
 
 .company-card-button-text {
   width: 100%;
   font-family: NanumBarunGothic;
-  font-size: 1.1rem;
+  font-size: 0.11rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
-  line-height: 2.67rem;
+  line-height: 0.267rem;
   letter-spacing: normal;
   text-align: center;
   color: #000000;

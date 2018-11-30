@@ -1,3 +1,5 @@
+/* processed-version: 1.0 */
+
 .main-section {
   display: flex;
   flex-direction: column;
@@ -7,11 +9,11 @@
 }
 
 .main-section section {
-  margin-bottom: 6.5rem
+  margin-bottom: 0.65rem
 }
 
 .title-section {
-  height: 300px;
+  height: 3.0rem;
   display: flex;
   flex-direction: column;
   /*justify-content: center;*/
@@ -33,7 +35,7 @@
 
 .main-title {
   font-family: BMDoHyeon-OTF;
-  font-size: 40px;
+  font-size: 0.4rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -41,19 +43,19 @@
   letter-spacing: normal;
   text-align: center;
   color: #ffffff;
-  text-shadow: 0 2px 55px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 0.02rem 0.55rem rgba(0, 0, 0, 0.5);
 }
 
 .main-desc {
-  width: 414px;
-  height: 71px;
-  text-shadow: 0 2px 55px rgba(0, 0, 0, 0.5);
+  width: 4.14rem;
+  height: 0.71rem;
+  text-shadow: 0 0.02rem 0.55rem rgba(0, 0, 0, 0.5);
   font-family: BMDoHyeon-OTF;
-  font-size: 14px;
+  font-size: 0.14rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
-  line-height: 2.7rem;
+  line-height: 0.27rem;
   letter-spacing: normal;
   text-align: center;
   color: #ffffff;
@@ -61,7 +63,7 @@
 
 .main-desc .text-style-1 {
   font-family: NanumBarunGothic;
-  font-size: 14px;
+  font-size: 0.14rem;
 }
 
 .main-desc .text-style-2 {
@@ -69,36 +71,36 @@
 }
 
 .rectangle {
-  height: 46px;
-  min-width: 28.4rem;
-  padding: 0 4.5rem;
-  border-radius: 8px;
-  box-shadow: 0 5px 55px 0 rgba(0, 0, 0, 0.5);
+  height: 0.46rem;
+  min-width: 2.84rem;
+  padding: 0 0.45rem;
+  border-radius: 0.08rem;
+  box-shadow: 0 0.05rem 0.55rem 0 rgba(0, 0, 0, 0.5);
   background-color: rgba(0, 0, 0, 0.6);
-  border: solid 3px #ffffff;
+  border: solid 0.03rem #ffffff;
 
   font-family: BMDoHyeon-OTF;
-  font-size: 16px;
+  font-size: 0.16rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
-  line-height: 4.6rem;
+  line-height: 0.46rem;
   letter-spacing: normal;
   text-align: center;
   color: #ffffff;
-  text-shadow: 0 2px 55px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 0.02rem 0.55rem rgba(0, 0, 0, 0.5);
 }
 
 .project-section {
-  width: 1455px;
-  padding: 0 5.5rem;
+  width: 14.55rem;
+  padding: 0 0.55rem;
 }
 
 .project-section .title {
   width: 100%;
   text-align: left;
   font-family: BMDoHyeon-OTF;
-  font-size: 28px;
+  font-size: 0.28rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -109,10 +111,10 @@
 }
 
 .more-detail {
-  width: 38px;
-  height: 15px;
+  width: 0.38rem;
+  height: 0.15rem;
   font-family: NanumBarunGothic;
-  font-size: 13px;
+  font-size: 0.13rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
@@ -120,7 +122,7 @@
   letter-spacing: normal;
   text-align: left;
   color: #f66f20;
-  margin-left: 1.5rem;
+  margin-left: 0.15rem;
 
   content: attr(role="button");
 }
@@ -133,7 +135,7 @@
 
 .maker-card {
   display: inline-block;
-  margin-right: 10px;
+  margin-right: 0.1rem;
 }
 
 .landing-top {
@@ -144,27 +146,27 @@
 }
 
 .landing-logo {
-  margin-left: 3rem;
+  margin-left: 0.3rem;
 }
 
 .login-area {
   position: absolute;
-  right: 4.7rem;
-  top:4.7rem;
+  right: 0.47rem;
+  top: 0.47rem;
 }
   
 .login-button {
-  width: 109px;
-  height: 36px;
-  border-radius: 12px;
-  border: solid 0.5px #979797;
+  width: 1.09rem;
+  height: 0.36rem;
+  border-radius: 0.12rem;
+  border: solid 0.005rem #979797;
   background-color: #ffffff;
   font-family: NanumBarunGothic;
-  font-size: 12px;
+  font-size: 0.12rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
-  line-height: 3.6rem;
+  line-height: 0.36rem;
   letter-spacing: normal;
   text-align: center;
   color: #979797;
@@ -187,7 +189,7 @@
 
 .title {
   font-family: BMDoHyeon-OTF;
-  font-size: 65px;
+  font-size: 0.65rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -195,41 +197,41 @@
   letter-spacing: normal;
   text-align: center;
   color: #ffffff;
-  margin-bottom: 2.2rem;
+  margin-bottom: 0.22rem;
 }
 
 .description {
-  width: 473px;
-  text-shadow: 0 2px 55px rgba(0, 0, 0, 0.5);
+  width: 4.73rem;
+  text-shadow: 0 0.02rem 0.55rem rgba(0, 0, 0, 0.5);
   font-family: BMDoHyeon-OTF;
-  font-size: 16px;
+  font-size: 0.16rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
-  line-height: 2.8rem;
+  line-height: 0.28rem;
   letter-spacing: normal;
   text-align: center;
   color: #ffffff;
 }
 
 .search-bar {
-  width: 391px;
-  height: 35px;
-  border-radius: 8px;
-  box-shadow: 0 5px 55px 0 rgba(0, 0, 0, 0.5), 0 5px 55px 0 rgba(0, 0, 0, 0.5);
-  border: solid 1px #ffffff;
+  width: 3.91rem;
+  height: 0.35rem;
+  border-radius: 0.08rem;
+  box-shadow: 0 0.05rem 0.55rem 0 rgba(0, 0, 0, 0.5), 0 0.05rem 0.55rem 0 rgba(0, 0, 0, 0.5);
+  border: solid 0.01rem #ffffff;
   background-color: #ffffff;
   position: relative;
 }
 
 .search-input {
   border: none;
-  width: 35rem;
+  width: 3.5rem;
   height: 100%;
   background-color: rgba( 255, 255, 255, 0 );
-  padding: 0 2rem;
+  padding: 0 0.2rem;
   font-family: NanumBarunGothic;
-  font-size: 14px;
+  font-size: 0.14rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
@@ -240,23 +242,23 @@
 
 .search-icon {
   position: absolute;
-  right: 0.5rem;
-  top: 0.5rem;
+  right: 0.05rem;
+  top: 0.05rem;
 }
 
 .button-main {
-  width: 180px;
-  height: 35px;
-  border-radius: 8px;
-  box-shadow: 0 5px 55px 0 rgba(0, 0, 0, 0.5), 0 5px 55px 0 rgba(0, 0, 0, 0.5);
-  border: solid 1px #ffffff;
+  width: 1.8rem;
+  height: 0.35rem;
+  border-radius: 0.08rem;
+  box-shadow: 0 0.05rem 0.55rem 0 rgba(0, 0, 0, 0.5), 0 0.05rem 0.55rem 0 rgba(0, 0, 0, 0.5);
+  border: solid 0.01rem #ffffff;
   background-color: #fc7f37;
   font-family: NanumBarunGothic;
-  font-size: 14px;
+  font-size: 0.14rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
-  line-height: 3.5rem;
+  line-height: 0.35rem;
   letter-spacing: normal;
   text-align: center;
   vertical-align: middle;
@@ -268,9 +270,9 @@
 }
 
 .blue-text {
-  text-shadow: 0 2px 35px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 0.02rem 0.35rem rgba(0, 0, 0, 0.5);
   font-family: BMDoHyeon-OTF;
-  font-size: 30px;
+  font-size: 0.3rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -281,15 +283,15 @@
 }
 
 .blue-circle-area {
-  width: 86rem;
+  width: 8.6rem;
   display: flex;
   justify-content: space-between;
 }
 
 .blue-circle {
-  width: 196px;
-  height: 196px;
-  box-shadow: 0 5px 35px 0 rgba(0, 0, 0, 0.5);
+  width: 1.96rem;
+  height: 1.96rem;
+  box-shadow: 0 0.05rem 0.35rem 0 rgba(0, 0, 0, 0.5);
   border-radius: 50%;
   background-image: url("/site/images/landing-circle.png");
   background-position: center; 
@@ -298,26 +300,26 @@
 }
 
 .blue-circle-top {
-  margin-top: 5.5rem;
-  height: 4.4rem;
+  margin-top: 0.55rem;
+  height: 0.44rem;
   vertical-align: middle;
-  text-shadow: 0 2px 35px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 0.02rem 0.35rem rgba(0, 0, 0, 0.5);
   font-family: BMDoHyeon-OTF;
-  font-size: 14px;
+  font-size: 0.14rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
-  line-height: 2.5rem;
+  line-height: 0.25rem;
   letter-spacing: normal;
   text-align: center;
   color: #ffffff;
 }
 
 .blue-circle-bottom {
-  margin-top: 1.3rem;
-  text-shadow: 0 2px 35px rgba(0, 0, 0, 0.5);
+  margin-top: 0.13rem;
+  text-shadow: 0 0.02rem 0.35rem rgba(0, 0, 0, 0.5);
   font-family: BMDoHyeon-OTF;
-  font-size: 25px;
+  font-size: 0.25rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -328,12 +330,12 @@
 }
 
 .page2-middle {
-  max-height: 19rem;
+  max-height: 1.9rem;
   flex: 1;
 }
 
 .page3-middle {
-  max-height: 50rem;
+  max-height: 5.0rem;
   flex: 1;
 }
 
@@ -344,7 +346,7 @@
 .last-page {
   height: 100%;
   width: 100%;
-  padding-left: 36.4rem;
+  padding-left: 3.64rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -359,62 +361,62 @@
 
 .title-last {
   font-family: BMDoHyeon-OTF;
-  font-size: 38px;
+  font-size: 0.38rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
   color: #383838;
-  margin-bottom: 3.3rem;
+  margin-bottom: 0.33rem;
 }
 
 .description-last {
   font-family: BMDoHyeon-OTF;
-  font-size: 16px;
+  font-size: 0.16rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
-  line-height: 3rem;
+  line-height: 0.3rem;
   letter-spacing: normal;
   color: #383838;
 }
 
 .grey-text {
   font-family: NanumBarunGothic;
-  font-size: 14px;
+  font-size: 0.14rem;
   color: #949494;
 }
 
 .we-are {
   font-family: NanumBarunGothic;
-  font-size: 15px;
+  font-size: 0.15rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
-  line-height: 2.7rem;
+  line-height: 0.27rem;
   letter-spacing: normal;
   color: #383838;
 }
 
 .page4-top {
-  max-height: 15rem;
+  max-height: 1.5rem;
   flex: 0.3;
 }
 
 .page4-middle {
-  max-height: 45rem;
+  max-height: 4.5rem;
   flex: 0.7;
 }
 
 .feed-empty {
-  height: 44px;
+  height: 0.44rem;
   font-family: NanumBarunGothic;
-  font-size: 15px;
+  font-size: 0.15rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
-  line-height: 2.5rem;
+  line-height: 0.25rem;
   letter-spacing: normal;
   text-align: center;
   color: #555555;

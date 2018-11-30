@@ -1,6 +1,5 @@
 export { default as Root } from 'pages/Root';
 export { default as App } from 'pages/App';
-export { default as Vote} from 'pages/Vote';
 export { default as Main} from 'pages/Main';
 export { default as Hello} from 'pages/Hello';
 export { default as More} from 'pages/More';

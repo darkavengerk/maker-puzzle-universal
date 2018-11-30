@@ -127,11 +127,11 @@ class MainPageSection extends Component {
       <div className={cx('main-section')}>
 
         <section className={cx('title-section')}>
-          <Padding height="4.2rem" />
+          <Padding height=".42rem" />
           <div className={cx('main-title')}>
             “여긴 누가 지었을까?”
           </div>
-          <Padding height="4.2rem" />
+          <Padding height=".42rem" />
           <div className={cx('main-desc')}>
             설계, 시공, 조경, 전기, 환경, 구조, 색채, 인테리어, 가구, 조명, 영상…<br/>
             수많은 전문 분야 메이커들의 협력이 필요한 건축.<br/>
@@ -166,17 +166,17 @@ class MainPageSection extends Component {
         </section>
 
         <section className={cx('title-section', 'background2')}>
-          <Padding height="4.5rem" />
+          <Padding height=".45rem" />
           <div className={cx('main-title')}>
             건축인들을 위한 플랫폼서비스
           </div>
-          <Padding height="2.2rem" />
+          <Padding height=".22rem" />
           <div className={cx('main-desc')}>
             제일 효과적인 영업 무기는 ‘프로젝트 수행 실적’<br/>
             기업페이지를 소유해 영업망을 확장해 보세요.<br/>
             모든 기능들은 ‘무료’입니다!
           </div>
-          <Padding height="4.2rem" />
+          <Padding height=".42rem" />
           <div className={cx('rectangle')} onClick={this.showClaim} role="button" id="AddPortfolioButton">
             무료 기업페이지 이용방법
           </div>
@@ -226,16 +226,16 @@ class MainPageSection extends Component {
         </section>
 
         <section className={cx('title-section', 'background3')}>
-          <Padding height="4.5rem" />
+          <Padding height=".45rem" />
           <div className={cx('main-title')}>
             메이커들이 채워가는 엔딩크레딧
           </div>
-          <Padding height="2.2rem" />
+          <Padding height=".22rem" />
           <div className={cx('main-desc')}>
             전세계 도시들의 엔딩크레딧에 당신의 이름도 새겨보세요.<br/>
             ‘비밀’ 설정으로 포트폴리오 저장고로 쓸 수도 있어요.
           </div>
-          <Padding height="4.2rem" />
+          <Padding height=".42rem" />
           <div className={cx('rectangle')} onClick={this.showPortfolioPopup} role="button">
             포트폴리오 등록하기
           </div>
