@@ -1,35 +1,36 @@
+/* processed-version: 1.0 */
 
 :root {
 
   --fontMontserrat:           'Montserrat', Helvetica, Arial, sans-serif;
 
-  --fontSmall:                12px;
-  --fontMedium:               16px;
-  --fontLarge:                21px;
-  --fontHuge:                 28px;
+  --fontSmall:                0.12rem;
+  --fontMedium:               0.16rem;
+  --fontLarge:                0.21rem;
+  --fontHuge:                 0.28rem;
 
   --heading {
-    font-size: 28px;
+    font-size: 0.28rem;
     font-weight: 700;
-    line-height: 48px;
+    line-height: 0.48rem;
   }
 
   --subHeading {
-    font-size: 21px;
+    font-size: 0.21rem;
     font-weight: 700;
-    line-height: 24px;
+    line-height: 0.24rem;
   }
 
   --normal {
-    font-size: 16px;
+    font-size: 0.16rem;
     font-weight: 400;
-    line-height: 24px;
+    line-height: 0.24rem;
   }
 
   --small {
-    font-size: 12px;
+    font-size: 0.12rem;
     font-weight: 400;
-    line-height: 24px;
+    line-height: 0.24rem;
   }
 
 }

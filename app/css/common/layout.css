@@ -1,10 +1,11 @@
+/* processed-version: 1.0 */
 :root {
 
   --box {
-    padding: 8px 24px;
+    padding: 0.08rem 0.24rem;
   }
 
   --flexNotMoreThan200 {
-    flex: 0 1 200px;
+    flex: 0 1 2.0rem;
   }
 }

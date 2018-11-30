@@ -1,22 +1,23 @@
+/* processed-version: 1.0 */
 .main-section {
   position: absolute;
-  left: calc(50vw + 10rem);
-  width: 123px;
-  height: 27px;
+  left: calc(50vw + 1.0rem);
+  width: 1.23rem;
+  height: 0.27rem;
 }
 
 .main-button {
-  width: 123px;
-  height: 27px;
-  box-shadow: 0 5px 10px 0 rgba(179, 179, 179, 0.5);
-  border: solid 0.5px #5c5c5c;
+  width: 1.23rem;
+  height: 0.27rem;
+  box-shadow: 0 0.05rem 0.1rem 0 rgba(179, 179, 179, 0.5);
+  border: solid 0.005rem #5c5c5c;
   background-color: #ffffff;
   font-family: NanumBarunGothic;
-  font-size: 10px;
+  font-size: 0.1rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
-  line-height: 2.7rem;
+  line-height: 0.27rem;
   letter-spacing: normal;
   text-align: center;
   vertical-align: middle;
@@ -26,11 +27,11 @@
 .popup-area {
   cursor: auto;
   position: absolute;
-  left: -280px;
-  top: 45px;
-  width: 691px;
-  /*height: 774px;*/
-  box-shadow: 0 5px 55px 0 rgba(111, 110, 110, 0.5);
+  left: -2.8rem;
+  top: 0.45rem;
+  width: 6.91rem;
+  /*height: 7.74rem;*/
+  box-shadow: 0 0.05rem 0.55rem 0 rgba(111, 110, 110, 0.5);
   background-color: #f4f4f4;
   display: flex;
   flex-direction: column;
@@ -39,9 +40,9 @@
 }
 
 .main-area {
-  width: 691px;
-  /*height: 774px;*/
-  box-shadow: 0 5px 55px 0 rgba(111, 110, 110, 0.5);
+  width: 6.91rem;
+  /*height: 7.74rem;*/
+  box-shadow: 0 0.05rem 0.55rem 0 rgba(111, 110, 110, 0.5);
   background-color: #f4f4f4;
   display: flex;
   flex-direction: column;
@@ -50,22 +51,22 @@
 }
 
 .popup-area-owned {
-  left: -180px;
+  left: -1.8rem;
 }
 
 .small-area {
-  width: 48.5rem;
+  width: 4.85rem;
 }
 
 .popup-title {
   width: 100%;
-  height: 55px;
+  height: 0.55rem;
   font-family: NanumBarunGothic;
-  font-size: 15px;
+  font-size: 0.15rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
-  line-height: 5.5rem;
+  line-height: 0.55rem;
   letter-spacing: normal;
   text-align: center;
   vertical-align: middle;
@@ -73,36 +74,36 @@
 }
 
 .popup-message {
-  /*width: 407px;*/
-  height: 68px;
+  /*width: 4.07rem;*/
+  height: 0.68rem;
   font-family: BMDoHyeon-OTF;
-  font-size: 24px;
+  font-size: 0.24rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
-  line-height: 4rem;
+  line-height: 0.4rem;
   letter-spacing: normal;
   text-align: center;
   color: #33a1d6;
 }
 
 .popup-message-sub {
-  font-size: 16px;
+  font-size: 0.16rem;
 }
 
 .box {
-  width: 592px;
-  height: 118px;
-  border: solid 2px #31afd0;
+  width: 5.92rem;
+  height: 1.18rem;
+  border: solid 0.02rem #31afd0;
   display: flex;
   flex-direction: column;
   align-items: center;
   font-family: NanumBarunGothic;
-  font-size: 15px;
+  font-size: 0.15rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
-  line-height: 2.5rem;
+  line-height: 0.25rem;
   letter-spacing: normal;
   text-align: center;
   color: #000000;
@@ -110,12 +111,12 @@
 
 .box-title {
   position: relative;
-  top: -1.3rem;
-  width: 179px;
-  height: 24px;
+  top: -0.13rem;
+  width: 1.79rem;
+  height: 0.24rem;
   background-color: #f3f3f3;
   font-family: NanumBarunGothic;
-  font-size: 18px;
+  font-size: 0.18rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
@@ -127,10 +128,10 @@
 
 .main-title {
 
-  width: 162px;
-  height: 21px;
+  width: 1.62rem;
+  height: 0.21rem;
   font-family: BMDoHyeon-OTF;
-  font-size: 18px;
+  font-size: 0.18rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -144,7 +145,7 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 54rem;
+  width: 5.4rem;
 }
 
 .circles-big {
@@ -157,22 +158,22 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 124px;
-  height: 124px;
-  box-shadow: 0 5px 35px 0 rgba(0, 0, 0, 0.5);
+  width: 1.24rem;
+  height: 1.24rem;
+  box-shadow: 0 0.05rem 0.35rem 0 rgba(0, 0, 0, 0.5);
   border-radius: 50%;
   background-image: url("/site/images/landing-circle.png");
   background-position: center; 
   background-repeat: no-repeat;
   background-size: cover;
 
-  text-shadow: 0 2px 35px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 0.02rem 0.35rem rgba(0, 0, 0, 0.5);
   font-family: BMDoHyeon-OTF;
-  font-size: 14px;
+  font-size: 0.14rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
-  line-height: 2.5rem;
+  line-height: 0.25rem;
   letter-spacing: normal;
   text-align: center;
   color: #ffffff;
@@ -180,14 +181,14 @@
 
 .details {
   width: 100%;
-  padding-left: 4.8rem;
+  padding-left: 0.48rem;
 
   font-family: NanumBarunGothic;
-  font-size: 14px;
+  font-size: 0.14rem;
   font-weight: 300;
   font-style: normal;
   font-stretch: normal;
-  line-height: 2.5rem;
+  line-height: 0.25rem;
   letter-spacing: normal;
   color: #000000;
 }
@@ -201,23 +202,23 @@
   justify-content: flex-end;
   align-items: center;
   width: 100%;
-  height: 7.4rem;
-  padding: 0 5rem;
+  height: 0.74rem;
+  padding: 0 0.5rem;
 }
 
 .submit-button {
-  width: 146px;
-  height: 40px;
-  border-radius: 8px;
+  width: 1.46rem;
+  height: 0.4rem;
+  border-radius: 0.08rem;
   background-color: #fe7422;
 
-  text-shadow: 0 2px 25px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 0.02rem 0.25rem rgba(0, 0, 0, 0.5);
   font-family: NanumBarunGothic;
-  font-size: 16px;
+  font-size: 0.16rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
-  line-height: 4rem;
+  line-height: 0.4rem;
   letter-spacing: normal;
   text-align: center;
   vertical-align: middle;
@@ -226,21 +227,21 @@
 }
 
 .cancel {
-  width: 68px;
-  height: 40px;
-  border-radius: 8px;
+  width: 0.68rem;
+  height: 0.4rem;
+  border-radius: 0.08rem;
   background-color: #8a8a8a;
-  margin: 0 1rem;
+  margin: 0 0.1rem;
 }
 
 .details-owned {
-  width: 396px;
+  width: 3.96rem;
   font-family: NanumBarunGothic;
-  font-size: 12px;
+  font-size: 0.12rem;
   font-weight: 300;
   font-style: normal;
   font-stretch: normal;
-  line-height: 2.5rem;
+  line-height: 0.25rem;
   letter-spacing: normal;
   color: #000000;
 }

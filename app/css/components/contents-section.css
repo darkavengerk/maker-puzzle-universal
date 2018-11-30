@@ -1,3 +1,4 @@
+/* processed-version: 1.0 */
 .main-section {
   display: flex;
   justify-content: center;
@@ -7,16 +8,16 @@
 }
 
 .left-panel {
-  width: 37.4rem;
-  min-height: 80rem;
+  width: 3.74rem;
+  min-height: 8.0rem;
   height: 100%;
 }
 
 .main-panel {
-  padding: 2rem 2.5rem;
-  width: 98.1rem;
-  border-left: solid 2px #dddddd;
-  margin-left: -1px;
+  padding: 0.2rem 0.25rem;
+  width: 9.81rem;
+  border-left: solid 0.02rem #dddddd;
+  margin-left: -0.01rem;
 }
 
 .portfolio-list {
@@ -27,7 +28,7 @@
 
 .main-panel-title {
   font-family: NanumBarunGothic;
-  font-size: 2rem;
+  font-size: 0.2rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
@@ -35,6 +36,6 @@
   letter-spacing: normal;
   text-align: left;
   color: #555555;
-  margin-bottom: 2.5rem;
+  margin-bottom: 0.25rem;
 }
 

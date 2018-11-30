@@ -1,9 +1,10 @@
+/* processed-version: 1.0 */
 .main-section {
   display: flex;
   flex-wrap: wrap;
 }
 
 .maker-roundy {
-  margin-right: 0.9rem;
+  margin-right: 0.09rem;
   text-align: center;
 }

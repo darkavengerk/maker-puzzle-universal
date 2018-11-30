@@ -1,8 +1,9 @@
+/* processed-version: 1.0 */
 .main-section {
-  width: 37.5rem;
+  width: 3.75rem;
   height: 100%;
-  padding-top: 1.6rem;
-  border-right: solid 2px #dddddd;
+  padding-top: 0.16rem;
+  border-right: solid 0.02rem #dddddd;
   display: flex;
   flex-direction: column;
 }
@@ -13,6 +14,6 @@
 }
 
 .maker-roundy {
-  margin-right: 0.9rem;
+  margin-right: 0.09rem;
   text-align: center;
 }

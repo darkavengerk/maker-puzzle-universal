@@ -1,3 +1,4 @@
+/* processed-version: 1.0 */
 @import '../settings';
 @import '../common/typography';
 @import '../common/card';
@@ -17,6 +18,6 @@
 
 .list {
   list-style: none;
-  padding: 16px;
+  padding: 0.16rem;
 }
 

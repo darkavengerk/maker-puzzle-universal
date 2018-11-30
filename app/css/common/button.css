@@ -1,3 +1,4 @@
+/* processed-version: 1.0 */
 @import 'typography';
 @import 'colors';
 
@@ -6,13 +7,13 @@
   --button {
     display: block;
     width: 100%;
-    padding: 0.75rem 1.25rem;
+    padding: 0.075rem 0.125rem;
     @apply --small;
     text-decoration: none;
     text-align: center;
-    border-radius: 4px;
+    border-radius: 0.04rem;
     border-style: solid;
-    border-width: 2px;
+    border-width: 0.02rem;
     cursor: pointer;
     transition: 0.1s background-color ease;
   }

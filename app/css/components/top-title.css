@@ -1,6 +1,7 @@
+/* processed-version: 1.0 */
 
 .main-section {
-  height: 6rem;
+  height: 0.6rem;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -19,14 +20,14 @@
 
 .title {
   font-family: NanumBarunGothic;
-  font-size: 1.8rem;
+  font-size: 0.18rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
-  line-height: 5.5rem;
+  line-height: 0.55rem;
   letter-spacing: normal;
   color: #000000;
-  margin-left: 2.3rem;
+  margin-left: 0.23rem;
 }
 
 .hide {

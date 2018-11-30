@@ -1,3 +1,4 @@
+/* processed-version: 1.0 */
 .flex-row {
   display: flex;
   flex-direction: row;
@@ -17,19 +18,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 14.4rem;
-  height: 14.4rem;
+  width: 1.44rem;
+  height: 1.44rem;
 }
 
 .title {
   
-  height: 2.7rem;
+  height: 0.27rem;
   background-color: #dfdfdf;
 
   font-family: NanumBarunGothic;
-  font-size: 1.6rem;
+  font-size: 0.16rem;
   
-  line-height: 2.7rem;
+  line-height: 0.27rem;
   color: #5f5f5f;
 }
 
@@ -38,14 +39,14 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 22.8rem;
-  height: 14.4rem;
-  padding-top: 1.5rem;
+  width: 2.28rem;
+  height: 1.44rem;
+  padding-top: 0.15rem;
 }
 
 .name {
   font-family: NanumBarunGothic;
-  font-size: 2rem;
+  font-size: 0.2rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
@@ -59,12 +60,12 @@
 }
 
 .maker-stats {
-  width: 6rem;
+  width: 0.6rem;
 }
 
 .figure {
   font-family: NanumBarunGothic;
-  font-size: 1.2rem;
+  font-size: 0.12rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -76,7 +77,7 @@
 
 .keyword {
   font-family: NanumBarunGothic;
-  font-size: 10px;
+  font-size: 0.1rem;
   font-weight: 300;
   font-style: normal;
   font-stretch: normal;
@@ -90,16 +91,16 @@
 }
 
 .follow-button {
-  width: 18.1rem;
-  height: 2rem;
-  border-radius: 1px;
+  width: 1.81rem;
+  height: 0.2rem;
+  border-radius: 0.01rem;
   background-color: #f36d20;
   font-family: NanumBarunGothic;
-  font-size: 1.2rem;
+  font-size: 0.12rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
-  line-height: 2rem;
+  line-height: 0.2rem;
   letter-spacing: normal;
   text-align: center;
   vertical-align: middle;
@@ -107,16 +108,16 @@
 }
 
 .following-button {
-  width: 18.1rem;
-  height: 2rem;
-  border-radius: 1px;
-  border: solid 1px #676767;
+  width: 1.81rem;
+  height: 0.2rem;
+  border-radius: 0.01rem;
+  border: solid 0.01rem #676767;
   font-family: NanumBarunGothic;
-  font-size: 1.2rem;
+  font-size: 0.12rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
-  line-height: 2rem;
+  line-height: 0.2rem;
   letter-spacing: normal;
   text-align: center;
   vertical-align: middle;
@@ -124,27 +125,27 @@
 }
 
 .system-button, .system-button-half {
-  width: 18.1rem;
-  height: 2rem;
-  border-radius: 1px;
-  border: solid 1px #676767;
+  width: 1.81rem;
+  height: 0.2rem;
+  border-radius: 0.01rem;
+  border: solid 0.01rem #676767;
 
   font-family: NanumBarunGothic;
-  font-size: 1.1rem;
+  font-size: 0.11rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
   letter-spacing: normal;
   text-align: center;
-  line-height: 2rem;
+  line-height: 0.2rem;
   vertical-align: middle;
   color: #000000;
 
-  margin: 0 0.35rem;
+  margin: 0 0.035rem;
 }
 
 .system-button-half {
-  width: 8.7rem;
+  width: 0.87rem;
 }
 
 .important {
@@ -154,9 +155,9 @@
 }
 
 .col-name {
-  height: 20px;
+  height: 0.2rem;
   font-family: NanumBarunGothic;
-  font-size: 11px;
+  font-size: 0.11rem;
   font-weight: 300;
   font-style: normal;
   font-stretch: normal;
@@ -164,13 +165,13 @@
   letter-spacing: normal;
   text-align: left;
   color: #000000;
-  padding-left: 1.1rem;
+  padding-left: 0.11rem;
 }
 
 .col-info  {
-  height: 20px;
+  height: 0.2rem;
   font-family: NanumBarunGothic;
-  font-size: 11px;
+  font-size: 0.11rem;
   font-weight: 300;
   font-style: normal;
   font-stretch: normal;
@@ -190,9 +191,9 @@
 }
 
 .history th {
-  height: 20px;
+  height: 0.2rem;
   font-family: NanumBarunGothic;
-  font-size: 11px;
+  font-size: 0.11rem;
   font-weight: 300;
   font-style: normal;
   font-stretch: normal;
@@ -203,40 +204,40 @@
 }
 
 .history th, .history td {
-  border: solid 1px #dcdcdc;
-  height: 2rem;
+  border: solid 0.01rem #dcdcdc;
+  height: 0.2rem;
   vertical-align: middle;
 }
 
 .first-item {
-  border-left: solid 0px;
+  border-left: solid 0.0rem;
 }
 
 .last-item {
-  border-right: solid 0px;
+  border-right: solid 0.0rem;
 }
 
 .feature-area {
-  margin: 0.9rem 2.1rem 0 0;
+  margin: 0.09rem 0.21rem 0 0;
 }
 
 .feature-item {
   font-family: NanumBarunGothic;
-  font-size: 1.2rem;
+  font-size: 0.12rem;
   font-style: normal;
   font-stretch: normal;
   line-height: 1.67;
-  font-weight: 30rem;
+  font-weight: 3.0rem;
   letter-spacing: normal;
   text-align: left;
   color: #000000;
   display: flex;
-  margin-top: 0.3rem;
+  margin-top: 0.03rem;
 }
 
 .feature-title {
-  height: 2rem;
-  margin-right: 0.7rem;
+  height: 0.2rem;
+  margin-right: 0.07rem;
   font-weight: bold;
 }
 
@@ -245,7 +246,7 @@
   display: block; /* For Firefox */
 
   font-family: NanumBarunGothic;
-  font-size: 12px;
+  font-size: 0.12rem;
   font-weight: 300;
   font-style: normal;
   font-stretch: normal;
@@ -259,8 +260,8 @@
 
 .feature {
   width: 100%;
-  min-height: 2rem;
-  padding: 0 0.7rem;
+  min-height: 0.2rem;
+  padding: 0 0.07rem;
 }
 
 .editing {
@@ -268,7 +269,7 @@
   display: block; /* For Firefox */
 
   font-family: NanumBarunGothic;
-  font-size: 1.2rem;
+  font-size: 0.12rem;
   font-weight: 300;
   font-style: normal;
   font-stretch: normal;
@@ -280,23 +281,23 @@
 }
 
 .ovalEmpty {
-  width: 1.8rem;
-  height: 1.8rem;
-  border: solid 1px #676767;
+  width: 0.18rem;
+  height: 0.18rem;
+  border: solid 0.01rem #676767;
   border-radius: 50%;
-  margin-top: 0.8rem;
+  margin-top: 0.08rem;
 }
 
 .ovalFill {
-  width: 1.8rem;
-  height: 1.8rem;
+  width: 0.18rem;
+  height: 0.18rem;
   background-color: #676767;
-  border: solid 1px #676767;
+  border: solid 0.01rem #676767;
   border-radius: 50%;
-  margin-top: 0.8rem;
+  margin-top: 0.08rem;
 }
 
 .image-upload-trigger {
-  box-shadow: 0 3px 10px 0 rgba(91, 91, 91, 0.5);
+  box-shadow: 0 0.03rem 0.1rem 0 rgba(91, 91, 91, 0.5);
   border-radius: 50%;
 }

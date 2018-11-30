@@ -1,10 +1,11 @@
+/* processed-version: 1.0 */
 @import '../settings';
 @import '../common/colors';
 @import '../common/typography';
 
 .message {
   display: none;
-  padding: 12px 0;
+  padding: 0.12rem 0;
   border-radius: var(--globalRadius);
   color: var(--colorBlack);
   font-size: var(--fontMedium);

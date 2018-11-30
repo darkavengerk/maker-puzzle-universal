@@ -1,8 +1,9 @@
+/* processed-version: 1.0 */
 .main-section {
-  width: 37.5rem;
+  width: 3.75rem;
   height: 100%;
-  padding-top: 1.6rem;
-  border-right: solid 2px #dddddd;
+  padding-top: 0.16rem;
+  border-right: solid 0.02rem #dddddd;
   display: flex;
   flex-direction: column;
 }
@@ -10,11 +11,11 @@
 .add-company {
   display: flex;
   justify-content: flex-end;
-  height: 2.2rem;
+  height: 0.22rem;
   align-items: flex-end;
 }
 
 .company-name-input {
-  margin-top: 2rem;
-  width: 20rem;
+  margin-top: 0.2rem;
+  width: 2.0rem;
 }

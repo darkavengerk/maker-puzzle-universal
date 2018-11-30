@@ -1,3 +1,4 @@
+/* processed-version: 1.0 */
 .main-section {
   display: flex;
   flex-direction: column;
@@ -7,17 +8,17 @@
 }
 
 .main-section section {
-  margin-bottom: 5.2rem
+  margin-bottom: 0.52rem
 }
 
 .projects-section {
-  width: 1455px;
-  padding: 2.5rem 5.5rem 6.5rem;
+  width: 14.55rem;
+  padding: 0.25rem 0.55rem 0.65rem;
 }
 
 .projects-section .title {
   font-family: NanumBarunGothic;
-  font-size: 20px;
+  font-size: 0.2rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
@@ -25,12 +26,12 @@
   letter-spacing: normal;
   text-align: left;
   color: #a2a2a2;
-  margin-bottom: 2rem;
+  margin-bottom: 0.2rem;
 }
 .projects-section .small-title {
   display: inline-block;
   font-family: NanumBarunGothic;
-  font-size: 12px;
+  font-size: 0.12rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -38,7 +39,7 @@
   letter-spacing: normal;
   text-align: left;
   color: #a2a2a2;
-  margin-left: 1rem;
+  margin-left: 0.1rem;
 }
 
 .project-tiles {
@@ -49,5 +50,5 @@
 
 .maker-card {
   display: inline-block;
-  margin-right: 10px;
+  margin-right: 0.1rem;
 }

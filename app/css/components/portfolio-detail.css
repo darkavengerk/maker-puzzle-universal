@@ -1,3 +1,4 @@
+/* processed-version: 1.0 */
 @import '../settings';
 @import '../common/typography';
 @import '../common/card';
@@ -5,16 +6,16 @@
 .main-section {
   display: inline-flex;
   flex-direction: column;
-  width: 88.4rem;
+  width: 8.84rem;
   background-color: #ffffff;
-  box-shadow: 0 0.5rem 3.5rem 0 rgba(163, 163, 163, 0.5);
+  box-shadow: 0 0.05rem 0.35rem 0 rgba(163, 163, 163, 0.5);
   
-  margin: 0 0.9rem 0.9rem 0;
+  margin: 0 0.09rem 0.09rem 0;
 }
 
 .title-area {
-  padding: 0 2rem 1rem 2rem;
-  height: 5.6rem;
+  padding: 0 0.2rem 0.1rem 0.2rem;
+  height: 0.56rem;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -27,16 +28,16 @@
 }
 
 .contents {
-  padding: 1rem 2.2rem 2rem;
+  padding: 0.1rem 0.22rem 0.2rem;
 }
 
 .portfolio-title {
   font-family: NanumBarunGothic;
-  font-size: 2.5rem;
+  font-size: 0.25rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
-  line-height: 6rem;
+  line-height: 0.6rem;
   letter-spacing: normal;
   vertical-align: middle;
   text-align: left;
@@ -44,22 +45,22 @@
 }
 
 .locked {
-  margin-right: 1rem;
+  margin-right: 0.1rem;
 }
 
 .rectangle-1 {
-  min-width: 87px;
-  height: 24px;
-  padding: 0 0.3rem;
-  border-radius: 5px;
-  border: solid 1px #000000;
+  min-width: 0.87rem;
+  height: 0.24rem;
+  padding: 0 0.03rem;
+  border-radius: 0.05rem;
+  border: solid 0.01rem #000000;
 
   font-family: NanumBarunGothic;
-  font-size: 12px;
+  font-size: 0.12rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
-  line-height: 2.2rem;
+  line-height: 0.22rem;
   letter-spacing: normal;
   text-align: center;
   color: #000000;
@@ -72,7 +73,7 @@
 .create-date {
   display: inline-block;
   font-family: NanumBarunGothic;
-  font-size: 1rem;
+  font-size: 0.1rem;
   font-weight: 300;
   font-style: normal;
   font-stretch: normal;
@@ -83,15 +84,15 @@
 }
 
 .text-section {
-  width: 21.4rem;
-  height: 5.4rem;
-  padding-top: 0.9rem;
+  width: 2.14rem;
+  height: 0.54rem;
+  padding-top: 0.09rem;
 }
 
 .text-section h1 {
-  margin: 0rem;
+  margin: 0.0rem;
   font-family: AppleSDGothicNeo;
-  font-size: 1.5rem;
+  font-size: 0.15rem;
   font-weight: 500;
   font-style: normal;
   font-stretch: normal;
@@ -102,9 +103,9 @@
 }
 
 .text-section p {
-  margin: 0rem;
+  margin: 0.0rem;
   font-family: AppleSDGothicNeo;
-  font-size: 1.2rem;
+  font-size: 0.12rem;
   font-weight: 200;
   font-style: normal;
   font-stretch: normal;
@@ -116,7 +117,7 @@
 
 .description {
   font-family: NanumBarunGothic;
-  font-size: 1.3rem;
+  font-size: 0.13rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -124,21 +125,21 @@
   letter-spacing: normal;
   text-align: left;
   color: #555555;
-  margin-top : 3.8rem;
+  margin-top : 0.38rem;
   white-space:pre-wrap;
 }
 
 .project-area {
-  margin-top: 1.3rem;
+  margin-top: 0.13rem;
   display: flex;
   align-items: center;
 }
 
 .project-name {
   color: inherit; 
-  margin-left: 1.2rem;
+  margin-left: 0.12rem;
   font-family: NanumBarunGothic;
-  font-size: 1.5rem;
+  font-size: 0.15rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
@@ -149,20 +150,20 @@
 }
 
 .tag-area {
-  margin-top: 2.7rem;
+  margin-top: 0.27rem;
 }
 
 .image-area {
-  margin-top: 3.2rem;
+  margin-top: 0.32rem;
 }
 
 .image {
-  margin-bottom: 0.84rem;
+  margin-bottom: 0.084rem;
 }
 
 .tag {
   font-family: NanumBarunGothic;
-  font-size: 1.1rem;
+  font-size: 0.11rem;
   font-weight: 300;
   font-style: normal;
   font-stretch: normal;
@@ -170,8 +171,8 @@
   letter-spacing: normal;
   text-align: center;
   color: #000000;
-  height: 2.1rem;
-  border: solid 0.5px #000000;
-  margin-right: 0.3rem;
-  padding: 0 0.9rem;
+  height: 0.21rem;
+  border: solid 0.005rem #000000;
+  margin-right: 0.03rem;
+  padding: 0 0.09rem;
 }

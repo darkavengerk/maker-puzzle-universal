@@ -1,9 +1,10 @@
+/* processed-version: 1.0 */
 @import '../common/typography';
 @import '../common/input';
 
 .entrybox {
   width: 100%;
-  margin-bottom: 72px;
+  margin-bottom: 0.72rem;
 }
 
 .header {

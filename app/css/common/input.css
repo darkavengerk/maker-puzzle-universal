@@ -1,3 +1,4 @@
+/* processed-version: 1.0 */
 @import 'typography';
 @import 'colors';
 
@@ -5,13 +6,13 @@
 
   --input {
     @apply --normal;
-    padding: 0.75rem 1rem;
-    border: 2px solid var(--colorLoblolly);
-    border-radius: 4px;
+    padding: 0.075rem 0.1rem;
+    border: 0.02rem solid var(--colorLoblolly);
+    border-radius: 0.04rem;
     width: 100%;
 
     background-color: var(--colorWhite);
     color: var(--colorLimedSpruce);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.075rem;
   }
 }

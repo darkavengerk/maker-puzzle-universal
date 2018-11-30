@@ -1,3 +1,4 @@
+/* processed-version: 1.0 */
 @import '../common/typography';
 @import '../common/layout';
 @import '../common/card';
@@ -15,7 +16,7 @@
 }
 
 .list {
-  padding: 16px;
+  padding: 0.16rem;
   list-style: none;
 }
 

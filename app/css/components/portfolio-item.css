@@ -1,23 +1,24 @@
+/* processed-version: 1.0 */
 
 .main-section {
   display: inline-block;
-  width: 21.4rem;
-  height: 26.7rem;
-  margin: 0 0.9rem 0.9rem 0;
+  width: 2.14rem;
+  height: 2.67rem;
+  margin: 0 0.09rem 0.09rem 0;
 
   background-color: #ffffff;
-  box-shadow: 0 5px 35px 0 rgba(163, 163, 163, 0.5);
+  box-shadow: 0 0.05rem 0.35rem 0 rgba(163, 163, 163, 0.5);
 }
 
 .wide {
-  width: 43.7rem;
+  width: 4.37rem;
 }
 .text {
   position: relative;
 }
 
 .text h1, .text p {
-  margin: 0rem;
+  margin: 0.0rem;
   font-family: NanumBarunGothic;
   font-style: normal;
   font-stretch: normal;
@@ -27,15 +28,15 @@
 }
 
 .text-section {
-  width: 21.4rem;
-  height: 5.4rem;
-  padding-top: 0.9rem;
+  width: 2.14rem;
+  height: 0.54rem;
+  padding-top: 0.09rem;
 }
 
 .text-section-wide {
-  width: 43.7rem;
-  height: 5.4rem;
-  padding-top: 0.9rem;
+  width: 4.37rem;
+  height: 0.54rem;
+  padding-top: 0.09rem;
 }
 
 .type2 {
@@ -44,7 +45,7 @@
 }
 
 .text h1 {
-  font-size: 1.5rem;
+  font-size: 0.15rem;
   font-weight: bold;
   line-height: 1.33;
 
@@ -54,7 +55,7 @@
 }
 
 .text p {
-  font-size: 1.2rem;
+  font-size: 0.12rem;
   font-weight: 200;
   line-height: 1.67;
 
@@ -65,20 +66,20 @@
 
 .type2 h1, .type2 p {
   text-align: left;
-  width: 15rem;
+  width: 1.5rem;
 }
 
 .type2.text-section-wide h1, .type2.text-section-wide p {
-  width: 35rem;
+  width: 3.5rem;
 }
 
 .profile-image {
-  margin: 0 1rem;
+  margin: 0 0.1rem;
   border-radius: 50%;
 }
 
 .company-image {
-  margin: 0 1.8rem 0 1.2rem;
+  margin: 0 0.18rem 0 0.12rem;
 }
 
 .add-portfolio {
@@ -86,13 +87,13 @@
   flex-direction: column;
   /*justify-content: center;*/
   align-items: center;
-  margin: 6.2rem 0;
+  margin: 0.62rem 0;
 }
 
 .add-portfolio-title {
-  margin-bottom: 1rem;
+  margin-bottom: 0.1rem;
   font-family: NanumBarunGothic;
-  font-size: 2rem;
+  font-size: 0.2rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
@@ -104,25 +105,25 @@
 
 .add-portfolio-icon {
   user-select: none;
-  margin-top: 1.1rem;
+  margin-top: 0.11rem;
 }
 
 .horizontal {
-  width: 5.3rem;
-  height: 0.4rem;
+  width: 0.53rem;
+  height: 0.04rem;
   background: #ffffff;
   position: relative;
-  left : 0.1rem;
-  top: 3.5rem;
+  left : 0.01rem;
+  top: 0.35rem;
 }
 
 .vertical {
-  height: 5.3rem;
-  width: 0.4rem;
+  height: 0.53rem;
+  width: 0.04rem;
   background: #ffffff;
   position: relative;
-  left : 1.5rem;
-  top : 0rem;
+  left : 0.15rem;
+  top : 0.0rem;
 }
 
 .windows {
@@ -131,17 +132,17 @@
 }
 
 .big-window {
-  width: 32.4rem;
-  height: 21.3rem;
+  width: 3.24rem;
+  height: 2.13rem;
 }
 
 .middle-window {
-  width: 21.4rem;
-  height: 21.3rem;
+  width: 2.14rem;
+  height: 2.13rem;
 }
 
 .small-windows {
-  height: 21.3rem;
+  height: 2.13rem;
   display: inline-flex;
   justify-content: right;
   flex-wrap: wrap;
@@ -149,18 +150,18 @@
 }
 
 .small-window {
-  margin-left: 0.1rem
+  margin-left: 0.01rem
 }
 
 .extras {
-  width: 11.1rem;
-  height: 10.6rem;
+  width: 1.11rem;
+  height: 1.06rem;
   font-family: NanumBarunGothic;
-  font-size: 1.5rem;
+  font-size: 0.15rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
-  line-height: 10.6rem;
+  line-height: 1.06rem;
   letter-spacing: normal;
   text-align: center;
   vertical-align: middle;
@@ -169,8 +170,8 @@
 
 .locked {
   position: absolute;
-  right: 0.5rem;
-  top: 0.5rem;
+  right: 0.05rem;
+  top: 0.05rem;
   /*float: right;*/
-  /*margin-right: 1rem;*/
+  /*margin-right: 0.1rem;*/
 }

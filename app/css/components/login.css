@@ -1,47 +1,48 @@
+/* processed-version: 1.0 */
 .main-section {
-  width: 42.7rem;
+  width: 4.27rem;
   background-color: #f7f7f7;
-  box-shadow: 0 .3rem 3.5rem 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0.03rem 0.35rem 0 rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .title {
-  height: 4.3rem;
+  height: 0.43rem;
   font-family: NanumBarunGothic;
-  font-size: 2.6rem;
+  font-size: 0.26rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
   line-height: 1.65;
-  letter-spacing: -0.06rem;
+  letter-spacing: -0.006rem;
   color: #000000;
-  margin: 2.5rem 0 0 0;
+  margin: 0.25rem 0 0 0;
   /*text-align: center;*/
 }
 
 .form-area {
-  width: 31.0rem;
+  width: 3.1rem;
 }
 
 .input {
-  width: 31.0rem;
-  height: 3.6rem;
-  border-radius: .5rem;
+  width: 3.1rem;
+  height: 0.36rem;
+  border-radius: 0.05rem;
   background-color: #ffffff;
-  border: solid .1rem #4e4e4e;
-  margin-bottom: .9rem;
+  border: solid 0.01rem #4e4e4e;
+  margin-bottom: 0.09rem;
 
   font-family: NanumBarunGothic;
-  font-size: 1.3rem;
+  font-size: 0.13rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
-  letter-spacing: -0.03rem;
+  letter-spacing: -0.003rem;
   text-align: left;
-  padding-left: 1.0rem;
+  padding-left: 0.1rem;
 }
 
 .input::placeholder {
@@ -51,17 +52,17 @@
 }
 
 .login-button {
-  width: 31.0rem;
-  height: 3.3rem;
-  border-radius: .5rem;
+  width: 3.1rem;
+  height: 0.33rem;
+  border-radius: 0.05rem;
   background-color: #f46e1f;
 
   font-family: NanumBarunGothic;
-  font-size: 1.5rem;
+  font-size: 0.15rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
-  line-height: 3.3rem;
+  line-height: 0.33rem;
   letter-spacing: normal;
   text-align: center;
   color: #ffffff;
@@ -73,66 +74,66 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 1.3rem 0 1.3rem;
-  width: 31rem;
-  height: 3.3rem;
+  margin: 0.13rem 0 0.13rem;
+  width: 3.1rem;
+  height: 0.33rem;
 }
 
 .alternative-message {
-  padding-left: 4rem;
+  padding-left: 0.4rem;
   font-family: NanumBarunGothic;
-  font-size: 1.3rem;
+  font-size: 0.13rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
   line-height: 1.54;
-  letter-spacing: -0.03rem;
+  letter-spacing: -0.003rem;
   text-align: center;
   color: #141414;
 }
 
 .alternative-link {
-  width: 13.2rem;
-  height: 3.3rem;
-  border-radius: .5rem;
+  width: 1.32rem;
+  height: 0.33rem;
+  border-radius: 0.05rem;
   background-color: #444444;
   font-family: NanumBarunGothic;
-  font-size: 1.5rem;
+  font-size: 0.15rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
-  line-height: 3.3rem;
+  line-height: 0.33rem;
   letter-spacing: normal;
   text-align: center;
   color: #ffffff;
 }
 
 .text-link {
-  height: 2.0rem;
+  height: 0.2rem;
   font-family: NanumBarunGothic;
-  font-size: 1.3rem;
+  font-size: 0.13rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
   line-height: 1.54;
-  letter-spacing: -0.03rem;
+  letter-spacing: -0.003rem;
   text-align: left;
   color: #f46e1f;
   background-color: none;
-  padding-right: 4.5rem;
+  padding-right: 0.45rem;
 }
 
 .helper {
-  width: 29.4rem;
-  padding: 0 .6rem;
+  width: 2.94rem;
+  padding: 0 0.06rem;
   font-family: NanumBarunGothic;
-  font-size: 1.1rem;
+  font-size: 0.11rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
-  letter-spacing: -0.03rem;
-  line-height: 1.2rem;
+  letter-spacing: -0.003rem;
+  line-height: 0.12rem;
   text-align: left;
   color: #a3a3a3;
 }
@@ -142,8 +143,8 @@
 }
 
 .middle-size {
-  width: 22.1rem;
-  height: 4.4rem;
+  width: 2.21rem;
+  height: 0.44rem;
 }
 
 .space-between {
@@ -154,25 +155,25 @@
 
 .label {
   font-family: NanumBarunGothic;
-  font-size: 1.8rem;
+  font-size: 0.18rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
-  line-height: 1.8rem;
-  letter-spacing: -0.04rem;
+  line-height: 0.18rem;
+  letter-spacing: -0.004rem;
   text-align: left;
   color: #000000;
 }
 
 .second-title {
-  height: 4.3rem;
+  height: 0.43rem;
   font-family: NanumBarunGothic;
-  font-size: 2.0rem;
+  font-size: 0.2rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
   line-height: 2.15;
-  letter-spacing: -0.05rem;
+  letter-spacing: -0.005rem;
   text-align: left;
   color: #000000;
 }
@@ -184,29 +185,29 @@
 
 .gender {
   display: inline-block;
-  width: 22.1rem;
+  width: 2.21rem;
   font-family: NanumBarunGothic;
-  font-size: 1.3rem;
+  font-size: 0.13rem;
   font-weight: 300;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
-  letter-spacing: -0.03rem;
+  letter-spacing: -0.003rem;
   text-align: left;
   color: #000000;
 }
 
 .year-select {
-  width: 22.1rem;
-  height: 3.6rem;
+  width: 2.21rem;
+  height: 0.36rem;
 
   font-family: NanumBarunGothic;
-  font-size: 1.3rem;
+  font-size: 0.13rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
-  letter-spacing: -0.03rem;
+  letter-spacing: -0.003rem;
   text-align: center;
   color: #a3a3a3;
 }
@@ -215,18 +216,18 @@
   display: flex;
   align-items: center;
   /*justify-content: left;*/
-  width: 31.0rem;
-  height: 1.5rem;
+  width: 3.1rem;
+  height: 0.15rem;
   font-family: NanumBarunGothic;
-  font-size: 1.3rem;
+  font-size: 0.13rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
-  line-height: 1.5rem;
-  letter-spacing: -0.03rem;
+  line-height: 0.15rem;
+  letter-spacing: -0.003rem;
   text-align: left;
   color: #000000;
-  padding-left:  1.3rem;
+  padding-left:  0.13rem;
 }
 
 .important {

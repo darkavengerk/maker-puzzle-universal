@@ -1,3 +1,4 @@
+/* processed-version: 1.0 */
 .main-section {
     position:fixed;
     padding:0;
@@ -22,61 +23,61 @@
   position: fixed;
   left:0;
   top:0;
-  margin: 40px 0 0 40px;
+  margin: 0.4rem 0 0 0.4rem;
 }
 
 .COMING-SOON {
-  height: 43px;
+  height: 0.43rem;
   font-family: NanumBarunGothic;
-  font-size: 60px;
+  font-size: 0.6rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
   line-height: 0.72;
-  letter-spacing: -1.5px;
+  letter-spacing: -0.015rem;
   text-align: center;
   color: #ffb700;
-  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+  text-shadow: 0 0.02rem 0.04rem rgba(255, 255, 255, 0.5);
 }
 
 .WHODIDTHIS {
-  height: 45px;
+  height: 0.45rem;
   font-family: NanumBarunGothic;
-  font-size: 45px;
+  font-size: 0.45rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
   line-height: 1;
-  letter-spacing: -1.5px;
+  letter-spacing: -0.015rem;
   text-align: center;
   color: #ffffff;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  margin-bottom: 31px;
+  text-shadow: 0 0.02rem 0.04rem rgba(0, 0, 0, 0.5);
+  margin-bottom: 0.31rem;
 }
 
 .DESC {
-  height: 38px;
+  height: 0.38rem;
   font-family: NanumBarunGothic;
-  font-size: 20px;
+  font-size: 0.2rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
   line-height: 1.45;
-  letter-spacing: -0.7px;
+  letter-spacing: -0.007rem;
   text-align: center;
   color: #ffb700;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  margin: 0  0 -10px;
+  text-shadow: 0 0.02rem 0.04rem rgba(0, 0, 0, 0.5);
+  margin: 0  0 -0.1rem;
 }
 
 .line {
-  width: 174px;
-  height: 3px;
-  border: solid 2px #ffb700;
-  margin: 38px 0;
+  width: 1.74rem;
+  height: 0.03rem;
+  border: solid 0.02rem #ffb700;
+  margin: 0.38rem 0;
 }
 
 .bottom {
-  width: 1px;
-  height: 235px;
+  width: 0.01rem;
+  height: 2.35rem;
 }
