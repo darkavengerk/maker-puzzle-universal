@@ -21,7 +21,9 @@ const ProjectCardSection = ({project, ...props}) => {
   return (
     <Link className={cx('project-tile')} to={'/project/' + project.link_name} role="button" count="project">
       <div className={cx('header')}>
+        <Padding height="85" />
         <div className={cx('title')}>
+          {project.name.split(' ').map((word, i) => <label key={i}>{word}</label>)}
         </div>
         <Padding height="10" />
         <div className={cx('sub-title')}>
