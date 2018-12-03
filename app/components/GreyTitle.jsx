@@ -16,8 +16,8 @@ const GreyTitle = ({ className='title', title, top=0, bottom=0 }) => {
     'letterSpacing': 'normal',
     'textAlign': 'left',
     'verticalAlign': 'middle',
-    'marginTop': `${top/10}rem`,
-    'marginBottom': `${bottom/10}rem`,
+    'marginTop': `${top/100}rem`,
+    'marginBottom': `${bottom/100}rem`,
     'paddingLeft': '0.7rem'
   };
 

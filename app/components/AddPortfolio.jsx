@@ -348,7 +348,7 @@ class AddPortfolio extends Component {
                             key={i} >
 
                             <FlexibleImage 
-                              source={img} pureImage={true} y={'9.1rem'} key={i} 
+                              source={img} pureImage={true} y={91} key={i} 
                               className={cx('image-item', i === this.state.imageHoverIndex ? 'image-hover':'')}/>
                             {(i === this.state.imageHoverIndex ? 
                             <FlexibleImage 

@@ -91,26 +91,26 @@ const PortfolioDetainSection = (
           <h1 className={cx('portfolio-title')}>
             {portfolio.title}
           </h1>
-          <Padding width={'1.5rem'} />
+          <Padding width={'15'} />
           {edit? 
             [
               portfolio.isPrivate? <IconPortfolioLocked key={1} className={cx('locked')} x={20} y={25} />: null,
               <span key={2} className={cx('rectangle-1')} role="button" onClick={portfoiloEditorStart}>
                 <Image source="/site/images/ic_pen.png" x={17} y={17} />
-                <Padding width="0.5rem" />
+                <Padding width="5" />
                 내용 수정
               </span>,
-              <Padding key={3} width={'1rem'} />,
+              <Padding key={3} width={'10'} />,
               <span key={4}  className={cx('rectangle-1')} role="button" onClick={removePortfolioClicked}>
                 <Image source="/site/images/ic_delete.png" x={17} y={17} />
-                <Padding width="0.5rem" />
+                <Padding width="5" />
                 게시물 삭제
               </span>
             ]:null}
         </div>
         <div>
           <div className={cx('create-date')} >등록 일자</div>
-          <Padding width={'0.8rem'} inline={true} />
+          <Padding width={'8'} inline={true} />
           <DateFormat className={cx('create-date')} datestring={portfolio.created || portfolio.lastUpdated} />
         </div>
       </div>

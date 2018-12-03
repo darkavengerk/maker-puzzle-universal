@@ -6,7 +6,6 @@ import ImageUploader from '../components/ImageUploader';
 import TopTitle from '../components/TopTitle';
 import ContentsSection from '../components/ContentsSection';
 import SingleLine from '../components/SingleLine';
-import Padding from '../components/Padding';
 import ProjectCard from '../components/ProjectCard';
 import PortfolioItemWide from '../components/PortfolioItemWide';
 import PortfolioItem from '../components/PortfolioItem';

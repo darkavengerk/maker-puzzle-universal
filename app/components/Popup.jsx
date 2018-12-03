@@ -32,7 +32,7 @@ class Popup extends Component {
   }
 
   render() {
-    let { show, name, children, cancel, top='15rem', left=0, roll=false, target, showingPopup } = this.props;
+    let { show, name, children, cancel, top=150, left=0, roll=false, target, showingPopup } = this.props;
 
     if(show) {      
       if(target) {
@@ -47,7 +47,7 @@ class Popup extends Component {
             <div className={cx('main-section', 'background')} id={name} onClick={this.onClick} >
             </div>
             <div className={cx('main-section')} id={name} onClick={this.onClick}
-              style={{padding: paddingTop + 'px 0 0 ' + paddingLeft +'px'}} >
+              style={{padding: paddingTop/100 + 'rem 0 0 ' + paddingLeft/100 +'rem'}} >
               {children}
             </div>
           </div>
@@ -55,7 +55,7 @@ class Popup extends Component {
       }
 
       if(roll) {
-        top = window.scrollY + top + 'px';
+        top = window.scrollY + top;
       }
       else {
         window.scrollTo(0, 0);

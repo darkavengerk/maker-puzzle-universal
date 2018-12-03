@@ -174,9 +174,9 @@ class CompanyProfile extends Component {
     return (
       <div className={cx('main-section')}>
         <span className={cx('flex-row')}>
-          <span style={{position:'relative', height:'14.4rem'}}>
+          <span style={{position:'relative', height:'144'}}>
             <FlexibleImage source={profileImage} x={144} y={144} contain={true} />
-            <span style={{position:'absolute', bottom:'0.3rem', right:'0.4rem', 'zIndex':1}}>
+            <span style={{position:'absolute', bottom:'0.03rem', right:'0.04rem', 'zIndex':1}}>
               {this.state.editing? 
                 <ImageUploader name="ImageUploader" callback={this.profileImageEdited} >
                   <FlexibleImage className={cx('image-upload-trigger')} source={"/images/site/camera-1.png"} x={34} y={34} />

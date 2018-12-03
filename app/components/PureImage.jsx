@@ -17,11 +17,11 @@ const ProfileImage = ({ source, x='auto', y='auto', ...props }) => {
   };
 
   if(typeof(x) === 'number') {
-    imageStyle.width = x/10+'rem';
+    imageStyle.width = x/100+'rem';
   }
 
   if(typeof(y) === 'number') {
-    imageStyle.height = y/10+'rem';
+    imageStyle.height = y/100+'rem';
   }
 
   return (

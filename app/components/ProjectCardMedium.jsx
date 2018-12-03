@@ -21,15 +21,15 @@ const ProjectCardSection = ({project, ...props}) => {
   return (
     <Link className={cx('project-tile', 'medium-tile')} to={'/project/' + project.link_name} role="button" count="project">
       <div className={cx('header', 'header-medium')}>
-        <Padding height="5.7rem" />
+        <Padding height="57" />
         <div className={cx('title', 'title-medium')}>
           {project.name.split(' ').map((word, i) => <label key={i}>{word}</label>)}
         </div>
-        <Padding height="1rem" />
+        <Padding height="10" />
         <div className={cx('sub-title')}>
           {locationName}
         </div>
-        <Padding height="4.4rem" />
+        <Padding height="44" />
         <div className={cx('detail-button-medium', 'detail-button')} role="button">
           +{project.portfolios.length} Portfolios
         </div>

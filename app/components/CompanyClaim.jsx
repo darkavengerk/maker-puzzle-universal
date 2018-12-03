@@ -6,7 +6,6 @@ import classNames from 'classnames/bind';
 import CompanyClaimUI from '../components/CompanyClaimUI';
 import SingleLine from '../components/SingleLine';
 import Popup from '../components/Popup';
-import Padding from '../components/Padding';
 import FlexibleImage from '../components/FlexibleImage';
 import Assist from '../utils/assist'
 

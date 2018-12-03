@@ -24,7 +24,7 @@ const CompanyCardSection = ({company, ...props}) => {
         contain={true} 
         version="medium"
       />
-      <Padding width="15px" />
+      <Padding width="15" />
       
       <div className={cx('text-section')}>
         <div className={cx('company-card-text-section')}>

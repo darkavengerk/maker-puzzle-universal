@@ -16,12 +16,12 @@ const Component = ({ cancel, submit, isOwned, isMain=false }) => {
           이미 소유된 페이지입니다.
         </div>
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
-        <Padding height={'1.6rem'} />
+        <Padding height={'16'} />
         <div className={cx('details-owned')}>
           * 실수로 신청한 소유권 철회나, 선점된 페이지에 대한 이의를 제기하실 수 있습니다.<br/>
           &nbsp;&nbsp;[문의 메일 : help@maker-puzzle.com]
         </div>
-        <Padding height={'1.8rem'} />
+        <Padding height={'18'} />
       </div>
     );
   }
@@ -32,14 +32,14 @@ const Component = ({ cancel, submit, isOwned, isMain=false }) => {
         무료 기업페이지 이용방법
       </div>
       <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
-      <Padding height={'2.3rem'} />
+      <Padding height={'23'} />
       <div className={cx('popup-message')}>
         대표님! 온라인 홍보에 시간 뺏기지 마세요.
         <div className={cx('popup-message-sub')}>
           프로젝트에만 집중하시도록 메이커퍼즐이 도와드립니다.
         </div>
       </div>
-      <Padding height={'3.5rem'} />
+      <Padding height={'35'} />
       <div className={cx('box')}>
         <div className={cx('box-title')}>
           누구에게 필요할까? 
@@ -48,13 +48,13 @@ const Component = ({ cancel, submit, isOwned, isMain=false }) => {
         홈페이지가 있지만 업데이트가 불편하고, 매년 리뉴얼 비용을 지불하는 기업<br/>
         온라인마케팅 채널(포털광고,블로그,SNS)을 운영하지만 효과가 낮은 기업
       </div>
-      <Padding height={'2rem'} />
+      <Padding height={'20'} />
       <div className={cx('main-title')}>
         기업페이지 소유하기
       </div>
-      <Padding height={'1.5rem'} />
-      <SingleLine width={'12.2rem'} color={'#5d5d5d'} thickness={3} />
-      <Padding height={'2.2rem'} />
+      <Padding height={'15'} />
+      <SingleLine width={'122'} color={'#5d5d5d'} thickness={3} />
+      <Padding height={'22'} />
       <div className={cx(isMain? ['circles', 'circles-big'] : 'circles')}>
         <div className={cx('blue-circle')}>
           회원가입<br/>
@@ -81,7 +81,7 @@ const Component = ({ cancel, submit, isOwned, isMain=false }) => {
           신청
         </div>
       </div>
-      <Padding height={'4rem'} />
+      <Padding height={'40'} />
 
       {isMain? null: [
       <div className={cx('details')}>
@@ -91,7 +91,7 @@ const Component = ({ cancel, submit, isOwned, isMain=false }) => {
         * 실수로 신청한 소유권 철회나, 선점된 페이지에 대한 이의를 제기하실 수 있습니다.<br/>
         &nbsp;&nbsp;[문의 메일 : help@maker-puzzle.com]
       </div>,            
-      <Padding height={'3rem'} />,
+      <Padding height={'30'} />,
       <SingleLine width={'100%'} color={'#e5e5e5'} thickness={1} />,
       <div className={cx('buttons')}>
         <label className={cx('submit-button', 'cancel')} onClick={cancel} role="button">

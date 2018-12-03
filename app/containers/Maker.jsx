@@ -55,7 +55,7 @@ class Container extends Component {
         {
           maker && maker.makerProfile? 
           <ContentsSection user={user} owner={maker} contentsType="maker" isOwnPage={this.isOwnPage()} /> : 
-          <Padding height="60rem"/>
+          <Padding height="600"/>
         }
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
       </div>

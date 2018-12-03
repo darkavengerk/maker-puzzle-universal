@@ -23,11 +23,11 @@ const MakerCardSection = ({picture, title, subTitle, linkTo, isCompany=false, au
       <FlexibleImage className={cx('maker-tile-image')} x={213} y={213} source={picture} contain={false} version="medium" />}
       
       <div className={cx('header')}>
-        <Padding height="1.8rem" />
+        <Padding height="18" />
         <div className={cx('title')}>
           {title}
         </div>
-        <Padding height="0.6rem" />
+        <Padding height="6" />
         <div className={cx('sub-title')}>
           {subTitle}
         </div>

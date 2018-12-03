@@ -7,7 +7,6 @@ import { follow, unfollow } from '../actions/makers';
 import { follow as followCompany, unfollow as unfollowCompany } from '../actions/companies';
 
 import FlexibleImage from '../components/FlexibleImage';
-import Padding from '../components/Padding';
 import Link from '../components/Link';
 import Roundy from '../components/Roundy';
 import SingleLine from '../components/SingleLine';

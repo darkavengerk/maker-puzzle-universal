@@ -38,7 +38,7 @@ const Comp = ({ features, featureEdited, classNames, editing=false, ...props }) 
   let featureElements = features.map(feature => {
     return (
       <div className={classNames.row} key={feature.title}>
-        <Scatter text={feature.title} className={classNames.title} width={longest*1.3 + 'rem'} />
+        <Scatter text={feature.title} className={classNames.title} width={longest*0.13 + 'rem'} />
         <ContentEditable 
           tagName="span"
           className={classNames.content + (editing && !feature.blocked ? ' ' + classNames.editing : '')}

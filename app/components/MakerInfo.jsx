@@ -159,7 +159,7 @@ class MakerInfo extends Component {
 
         <GreyTitle title={'관련된 메이커'} top="24" bottom="26" />
         <MakerListRoundy makers={context.followings} />
-        <Padding height="2rem" />
+        <Padding height="20" />
 
       </div>
     ) : <div></div>;

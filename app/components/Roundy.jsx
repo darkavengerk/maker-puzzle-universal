@@ -4,7 +4,6 @@ import classNames from 'classnames/bind';
 
 import Link from '../components/Link';
 import Image from '../components/FlexibleImageLazy';
-import Padding from '../components/Padding';
 import Assist from '../utils/assist';
 
 import styles from '../css/common/images';

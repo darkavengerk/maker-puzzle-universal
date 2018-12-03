@@ -4,9 +4,9 @@ import classNames from 'classnames/bind';
 
 const SingleLine = ({width, color, thickness}) => {
   let style = {
-    height : thickness + 'px',
-    width : width + 'px',
-    borderTop: `solid ${thickness}px ${color}`
+    height : thickness/100 + 'rem',
+    width : width/100 + 'rem',
+    borderTop: `solid ${thickness/100}rem ${color}`
   };
 
   if(typeof(width) === 'string') {

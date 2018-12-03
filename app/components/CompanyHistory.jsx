@@ -64,7 +64,7 @@ const Component = ({ maker, editing, onChange, ...props }) => {
         {editing? 
           <td className={cx('col-info', 'first-item')}>
             <div className={cx('triangle-up')} onClick={swapEntries(info.order, -1)} role="button"></div>
-            <Padding height="0.5rem"/>
+            <Padding height="5"/>
             <div className={cx('triangle-down')} onClick={swapEntries(info.order, 1)} role="button"></div>
           </td> : 
           <td className={cx('col-info', 'first-item')}>{info.order + 1}</td>
@@ -134,7 +134,7 @@ const Component = ({ maker, editing, onChange, ...props }) => {
           {lines}
         </tbody>
       </table>
-      <Padding height="1.5rem" />
+      <Padding height="15" />
       {editing? <div className={cx('add-entry')} role="button" onClick={addEntry} >+ 항목 추가하기</div> : null}
       
     </div>
