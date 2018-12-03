@@ -14,11 +14,11 @@
 }
 
 .title-area {
-  padding: 0 0.2rem 0.1rem 0.2rem;
+  padding: 0 0.2rem;
   height: 0.56rem;
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
 }
 
 .title-area2 {
@@ -171,8 +171,8 @@
   letter-spacing: normal;
   text-align: center;
   color: #000000;
-  height: 0.21rem;
+  height: auto;
   border: solid 0.005rem #000000;
   margin-right: 0.03rem;
-  padding: 0 0.09rem;
+  padding: 0.05rem 0.09rem;
 }

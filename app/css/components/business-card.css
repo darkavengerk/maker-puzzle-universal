@@ -178,10 +178,13 @@
 }
 
 .company-card-button {
-  width: 1.28rem;
+  /*width: 1.28rem;*/
+  width: 12.8em;
   height: 0.267rem;
   border-radius: 0.08rem;
   border: solid 0.01rem #000000;
+  text-align: center;
+  font-size: 0.11rem;
 }
 
 .company-card-button-text {

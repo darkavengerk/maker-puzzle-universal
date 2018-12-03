@@ -18,7 +18,7 @@ const GreyTitle = ({ className='title', title, top=0, bottom=0 }) => {
     'verticalAlign': 'middle',
     'marginTop': `${top/100}rem`,
     'marginBottom': `${bottom/100}rem`,
-    'paddingLeft': '0.7rem'
+    'paddingLeft': '0.07rem'
   };
 
   return (
