@@ -80,7 +80,7 @@ class ProjectProfile extends Component {
 
     return (
       <div className={cx('main-section')}>
-        <span style={{position:'relative', height:'14.4rem'}}>
+        <span style={{position:'relative', height:'1.44rem'}}>
           <Image source={profileImage} x={349} y={248} />
           <span style={{position:'absolute', bottom:'0.03rem', right:'0.04rem', 'zIndex':1}}>
             {this.state.editing? 

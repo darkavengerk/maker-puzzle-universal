@@ -28,6 +28,10 @@ html, body{
   padding: 0;
 }
 
+span {
+  display: inline-block;
+}
+
 a:hover, a:focus, a:link {
     font-style: inherit;
     color: inherit;

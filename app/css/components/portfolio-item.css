@@ -37,6 +37,8 @@
   width: 4.37rem;
   height: 0.54rem;
   padding-top: 0.09rem;
+  display: flex;
+  justify-content: center;
 }
 
 .type2 {

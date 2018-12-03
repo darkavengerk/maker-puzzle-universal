@@ -88,6 +88,9 @@
 }
 
 .button-area {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .follow-button {

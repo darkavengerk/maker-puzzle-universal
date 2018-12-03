@@ -60,9 +60,11 @@
 
 .system-button-area {
   text-align: center;
+  width: 100%;
 }
 
 .system-button {
+  display: inline-block;
   width: 0.87rem;
   height: 0.2rem;
   border-radius: 0.01rem;
