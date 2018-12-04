@@ -51,7 +51,7 @@ const maker = (
           }
           else return p;
         });
-        if(!replaced) newPortfolios.push(portfolio);
+        if(!replaced) newPortfolios.unshift(portfolio);
         return {...state, portfolios: newPortfolios};
       }
       return state;

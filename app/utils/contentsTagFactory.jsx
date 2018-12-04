@@ -80,10 +80,7 @@ class ContentsTagFactory {
     });
 
     if(isOwnPage) {
-      contents.push(<Item key={'__new__'} />);
-      if(contents.length >=12) {
-        contents = [<Item key={'__new__front_'} />, ...contents];
-      }
+      contents.unshift(<Item key={'__new__'} />);
     }
 
     return (<div>
@@ -124,10 +121,7 @@ class ContentsTagFactory {
     });
 
     if(user.authenticated) {
-      makerContents.push(<PortfolioItem key={'__new__'} />);
-      if(makerContents.length >=12) {
-        makerContents = [<PortfolioItem key={'__new__front_'} />, ...makerContents];
-      }
+      makerContents.unshift(<PortfolioItem key={'__new__'} />);
     }
 
     return (<div>
@@ -159,10 +153,7 @@ class ContentsTagFactory {
     }) : [];
 
     if(isOwnPage) {
-      companyPortfolios.push(<PortfolioItemWide key={'__new__'} />);
-      if(companyPortfolios.length >=6) {
-        companyPortfolios = [<PortfolioItemWide key={'__new__front__'} />, ...companyPortfolios];
-      }
+      companyPortfolios.unshift(<PortfolioItemWide key={'__new__'} />);
     }
 
     let products = source.products? source.products.map(product => {
@@ -170,10 +161,7 @@ class ContentsTagFactory {
     }) : [];
 
     if(isOwnPage) {
-      products.push(<ProductItem key={'__new__'} />);
-      if(products.length >=15) {
-        products = [<ProductItem key={'__new__front__'} />, ...products];
-      }
+      products.unshift(<ProductItem key={'__new__'} />);
     }
 
     let portfolios = Assist.Maker.getEligiblePortfolios(source, user);

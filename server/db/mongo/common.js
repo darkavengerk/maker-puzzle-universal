@@ -90,7 +90,7 @@ function pushOrReplacePortfolio(portfolioList, portfolio) {
     });
   }
   else {
-    portfolioList.push(portfolio);
+    portfolioList.unshift(portfolio);
     return portfolioList;
   }
 }

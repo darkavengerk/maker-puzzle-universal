@@ -48,7 +48,7 @@ const company = (
         }
         else return p;
       });
-      if(!replaced) newPortfolios.push(portfolio);
+      if(!replaced) newPortfolios.unshift(portfolio);
       return {...state, companyPortfolios: newPortfolios};
 
     case types.PRODUCT_EDIT_SUCCESS:

@@ -174,7 +174,7 @@ class CompanyProfile extends Component {
     return (
       <div className={cx('main-section')}>
         <span className={cx('flex-row')}>
-          <span style={{position:'relative', height:'144'}}>
+          <span style={{position:'relative', height:'1.44rem'}}>
             <FlexibleImage source={profileImage} x={144} y={144} contain={true} />
             <span style={{position:'absolute', bottom:'0.03rem', right:'0.04rem', 'zIndex':1}}>
               {this.state.editing? 
