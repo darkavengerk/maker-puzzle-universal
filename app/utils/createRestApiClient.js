@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { polyfill } from 'es6-promise';
 
-import { appVersion } from '../../config/app';
+import { appVersion, isProduction } from '../../config/app';
 
 polyfill();
 
@@ -17,7 +17,7 @@ class RestApiClient {
       options.url = url.replace('/api/', `/api/${appVersion}/`);
     }
     return this.client.request(options).catch(err => {
-      if(err.response.status === 301) {
+      if(isProduction && err.response.status === 301) {
         window.location.reload();
       }
       else console.log(err);
