@@ -33,7 +33,7 @@
   border-radius: 0.12rem;
   box-shadow: 0 0.1rem 0.55rem 0 rgba(0, 0, 0, 0.07);
   background-color: #ffffff;
-  border: solid 0.005rem #979797;
+  border: solid 0.01rem #979797;
   display: flex;
   align-items: center;
   text-align: center;
@@ -79,7 +79,7 @@
   width: 1.09rem;
   height: 0.36rem;
   border-radius: 0.12rem;
-  border: solid 0.005rem #979797;
+  border: solid 0.01rem #979797;
 }
 
 .item {
