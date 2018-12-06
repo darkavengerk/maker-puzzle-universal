@@ -29,6 +29,18 @@ function getContents(model, query, sort, limit, loaded, populate) {
       .lean();
 }
 
+function searchContents(keyword, query, limit, loaded, populate, shouldSplitKeyword) {
+  keyword = shouldSplitKeyword? common.cut(keyword).join(' ') : keyword;  
+  loaded = loaded? loaded : 0;
+  return Portfolio
+      .find({ ...query, $text: { $search: keyword } }, {score: { $meta: "textScore" }})
+      .sort({ score: { $meta: "textScore" } } )
+      .skip(loaded)
+      .limit(limit)
+      .populate(populate)
+      .lean();
+}
+
 function getUserContents({sort='popular', loaded=0, limit=6}) {
   return getContents(User, {'portfolios.0': {$exists:true}}, sort, limit, loaded, []);
 }
@@ -49,6 +61,19 @@ function getCompanyPorfolioContents({sort='popular', loaded=0, limit=9}) {
   return getContents(Portfolio, {type:'company'}, sort, limit, loaded, ['user', 'company', 'images']);
 }
 
+async function getSubContents() {
+  const contentsInfo = await Misc.findOne({title: 'sub-contents'}).lean();
+  const contents = contentsInfo.data.map(async info => {
+    const portfolios = await searchContents(
+      info.keywords.join(' '), 
+      {isPrivate:false, type:'company'}, 
+      3, 0, ['user', 'company', 'images'], false);
+    info.portfolios = portfolios;
+    return info;
+  })
+  return await Promise.all(contents);
+}
+
 export async function buildContents(req, res) {
   console.log('build main contents...', new Date().toISOString());
   const loadings = [
@@ -59,7 +84,7 @@ export async function buildContents(req, res) {
     getCompanyPorfolioContents({sort:'recent'})
   ];
   const [projects, companies, portfolios, companyPortfolios, companyPortfoliosRecent] = await Promise.all(loadings);
-  mainContents = { projects, companies, portfolios, companyPortfolios, companyPortfoliosRecent };
+  mainContents = { projects, companies, portfolios, companyPortfolios, companyPortfoliosRecent, subContents: await getSubContents() };
   if(req && res) {
     res.json(mainContents);
   }

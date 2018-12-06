@@ -63,6 +63,22 @@ class MainPageSection extends Component {
     }
   }
 
+  createSection(title, link, children) {
+    return (
+      <section className={cx('project-section')}>
+        <div className={cx('title')}>
+          {title}
+          <Link to={link}>
+            <span className={cx('more-detail')}>더 보기</span>
+          </Link>
+        </div>
+        <div className={cx('project-tiles')}>
+          {children}
+        </div>
+      </section>
+    )
+  }
+
   render() {
     let { main={}, user, portfoiloEditorCancel, loginMenu, cancelLogin } = this.props;
     let { 
@@ -123,6 +139,13 @@ class MainPageSection extends Component {
                 linkTo={'/company/' + company.link_name} />;
     });
 
+    const portfoliosByCategory = main.subContents.map(content => {
+      return this.createSection(content.category, '/more/category/' + content.category, content.portfolios.map(portfolio => {
+        const owner = createObject('company', portfolio.company);
+        return <PortfolioItemWide imageFit={true} portfolio={portfolio} referrer={owner} owner={owner} key={portfolio.pid} external={true} />
+      }))
+    });
+
     return (
       <div className={cx('main-section')}>
 
@@ -153,17 +176,8 @@ class MainPageSection extends Component {
           
         </section> :null}        
 
-        <section className={cx('project-section')}>
-          <div className={cx('title')}>
-            Puzzles
-            <Link to="/more/project/p/popular">
-              <span className={cx('more-detail')}>더 보기</span>
-            </Link>
-          </div>
-          <div className={cx('project-tiles')}>
-            {projects.map(p => <ProjectCard key={p.name} project={p} />)}
-          </div>
-        </section>
+        {this.createSection('Puzzles', '/more/project/p/popular', projects.map(p => <ProjectCard key={p.name} project={p} />))}
+        
 
         <section className={cx('title-section', 'background2')}>
           <Padding height="45" />
@@ -185,45 +199,14 @@ class MainPageSection extends Component {
           </Popup>
         </section>      
 
-        <section className={cx('project-section')}>
-          <div className={cx('title')}>
-            New
-            <Link to="/more/portfolio/company/recent">
-              <span className={cx('more-detail')}>더 보기</span>
-            </Link>
-          </div>
-          <div className={cx('project-tiles')}>
-            {recentCompanyPortfolios}
-          </div>
-        </section>
+        {this.createSection('New', '/more/portfolio/company/recent', recentCompanyPortfolios)}
 
-        <section className={cx('project-section')}>
-          <div className={cx('title')}>
-            Popular
-            <Link to="/more/portfolio/company/popular">
-              <span className={cx('more-detail')}>더 보기</span>
-            </Link>
-          </div>
-          <div className={cx('project-tiles')}>
-            {popularCompanyPortfolios}
-          </div>
-        </section>
+        { portfoliosByCategory }
 
-        <section className={cx('project-section')}>
-          <div className={cx('title')}>
-            Company
-            <Link to="/more/company/c/popular">
-              <span className={cx('more-detail')}>더 보기</span>
-            </Link>
-          </div>
-          <div className={cx('project-tiles')}>
-            {
-              companyHighlights.map((c,i) => (<div key={i} className={cx('maker-card')}>
+        {this.createSection('Company', '/more/company/c/popular', companyHighlights.map((c,i) => (
+                            <div key={i} className={cx('maker-card')}>
                               { c }
-                            </div>))
-            }
-          </div>
-        </section>
+                            </div>)))}
 
         <section className={cx('title-section', 'background3')}>
           <Padding height="45" />
@@ -244,17 +227,7 @@ class MainPageSection extends Component {
           </Popup>
         </section>
 
-        <section className={cx('project-section')}>
-          <div className={cx('title')}>
-            Maker
-            <Link to="/more/portfolio/maker/recent">
-              <span className={cx('more-detail')}>더 보기</span>
-            </Link>
-          </div>
-          <div className={cx('project-tiles')}>
-            {popularMakerPortfolios}
-          </div>
-        </section>
+        {this.createSection('Maker', '/more/portfolio/maker/recent', popularMakerPortfolios)}
 
       </div>
 
