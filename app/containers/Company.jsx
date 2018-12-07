@@ -51,7 +51,7 @@ class Container extends Component {
           to={company.getHomeLink()}
           thumbnailURL={company.profileImage? company.getProfileImage():null} 
         >
-          <CompanyClaim />
+          { company.getName() && <CompanyClaim />}
         </TopTitle>
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
         <ContentsSection user={user} owner={company} contentsType="company" isOwnPage={this.isOwnPage()} />

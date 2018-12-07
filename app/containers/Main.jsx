@@ -140,7 +140,7 @@ class MainPageSection extends Component {
                 linkTo={'/company/' + company.link_name} />;
     });
 
-    const portfoliosByCategory = main.subContents.map(content => {
+    const portfoliosByCategory = (main.subContents || []).map(content => {
       return <SectionItem key={content.category} title={content.category} link={'/more/category/' + content.category + '/p'}>
                 {
                   content.portfolios.map(portfolio => {

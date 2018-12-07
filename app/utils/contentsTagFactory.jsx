@@ -186,7 +186,7 @@ class ContentsTagFactory {
 
               <Padding height={'35'} />
               
-              <p className={cx('main-panel-title')}>메이커의 포트폴리오</p>
+              { portfolios.length > 0 && <p className={cx('main-panel-title')}>메이커의 포트폴리오</p>}
               <div className={cx('portfolio-list')}>
                 {portfolios}
               </div>
