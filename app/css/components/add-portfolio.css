@@ -82,7 +82,7 @@
 }
 
 .tag-field, .add-tag {
-  height: auto;
+  height: 0.26rem;
 }
 
 .entity-must, .entity-helper {
@@ -96,7 +96,7 @@
 }
 
 .tag-field, .add-tag {
-  width: 1.3rem;
+  width: 10em;
 }
 
 /* color */
@@ -139,8 +139,11 @@
 
 .tags {
   width: 5.95rem;
+  font-size: 0.10rem;
   padding-left: 0.26rem;
-  vertical-align: top;
+  /*vertical-align: top;*/
+  display: flex;
+  align-items: center;
   flex-wrap: wrap;
 }
 
@@ -186,11 +189,11 @@
 .add-tag {
   border: dashed 0.01rem #c2c2c2;
   font-family: NanumBarunGothic;
-  font-size: 0.11rem;
+  font-size: 0.13rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
-  line-height: 0.21rem;
+  line-height: 0.15rem;
   letter-spacing: normal;
   text-align: center;
   color: #c2c2c2;
@@ -204,7 +207,7 @@
 .tag-delete {
   position: absolute;
   right: 0.12rem;
-  bottom: -0.02rem;
+  top: 0.04rem;
 }
 
 .image-area {

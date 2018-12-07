@@ -27,7 +27,7 @@ class FloatingList extends Component {
     const listItems = items.map((word, i) => (
       <li 
         className={i === index? itemClassName : ''} 
-        style={{padding: '0 0.5rem'}}
+        style={{padding: '0 0.05rem'}}
         onMouseOver={this.mouseOver(i)}
         key={word} 
         onMouseDown={evt => notify(word)}>
