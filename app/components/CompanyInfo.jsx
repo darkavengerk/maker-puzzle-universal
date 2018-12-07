@@ -15,7 +15,8 @@ const CompanyInfo = ({ owner }) => {
 
   const company = owner;
 
-  const users = <MakerListRoundy makers={company.users} />;
+  // const users = <MakerListRoundy makers={company.users} />;
+  const users = null;
   const owners = (company.owners && company.owners.length> 0) ? <MakerListRoundy makers={company.owners} /> : null;
 
   return <div className={cx('main-section')}>

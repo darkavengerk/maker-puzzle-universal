@@ -40,12 +40,12 @@ const Component = ({ maker, editing, onChange }) => {
     var made = [];
     for(let i=1; i<=5; i++) {
       made.push( 
-        <a 
+        <span 
           key={i} 
           className={cx(ab.ability < i ? 'ovalEmpty' : 'ovalFill')} 
           onClick={editing? abilityClicked(ab, i) : null}
           role={editing? 'button' : ''}
-        ></a>
+        ></span>
       );
     }
     return made;
@@ -70,15 +70,17 @@ const Component = ({ maker, editing, onChange }) => {
           onChange={titleChanged(ab.order)}
           disabled={!editing}
         />
+        
         { fillOvals(ab) }
-        {editing? 
+
+        { editing && 
         <FlexibleImage 
           source={"/site/images/ic_highlight_remove_black_48dp.png"} 
           x={17} y={17} 
           role="button"
           onClick={removeEntry(ab.order)}
           pureImage={true}
-        />: null}
+        />}
       </div>);
   });
 

@@ -396,7 +396,13 @@ td[contenteditable=true]:empty:before {
   width: 1.32rem;
   height: 0.31rem;
   border: solid 0.01rem #676767;
+}
 
+.ability-title:empty:before {
+  line-height: 0.31rem !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  background-color: inherit !important;
 }
 
 .ability-item {
