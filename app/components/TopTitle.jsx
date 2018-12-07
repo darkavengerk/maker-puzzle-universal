@@ -44,7 +44,7 @@ class TitleSection extends Component {
         <span className={cx('title')}>
           {title}
         </span>
-        {children? children : null}
+        { children }
       </Link>);
 
     const padding = <div className={cx('main-section')} />
