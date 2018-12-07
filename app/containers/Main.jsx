@@ -14,6 +14,7 @@ import PortfolioItem from '../components/PortfolioItem';
 import Popup from '../components/Popup';
 import AddPortfolio from '../components/AddPortfolio';
 import CompanyClaimUI from '../components/CompanyClaimUI';
+import SectionItem from '../components/SectionItem';
 import Login from '../components/Login';
 import Link from '../components/Link';
 
@@ -140,10 +141,14 @@ class MainPageSection extends Component {
     });
 
     const portfoliosByCategory = main.subContents.map(content => {
-      return this.createSection(content.category, '/more/category/' + content.category, content.portfolios.map(portfolio => {
-        const owner = createObject('company', portfolio.company);
-        return <PortfolioItemWide imageFit={true} portfolio={portfolio} referrer={owner} owner={owner} key={portfolio.pid} external={true} />
-      }))
+      return <SectionItem key={content.category} title={content.category} link={'/more/category/' + content.category + '/p'}>
+                {
+                  content.portfolios.map(portfolio => {
+                    const owner = createObject('company', portfolio.company);
+                    return <PortfolioItemWide imageFit={true} portfolio={portfolio} referrer={owner} owner={owner} key={portfolio.pid} external={true} />
+                  })
+                }
+              </SectionItem>
     });
 
     return (
@@ -162,19 +167,22 @@ class MainPageSection extends Component {
           </div>
         </section>
 
-        {user.authenticated? <section className={cx('project-section')}>
+        {user.authenticated && 
+        <section className={cx('project-section')}>
           <div className={cx('title')}>
             Following
           </div>
-          {portfolioFeeds.length > 0? <div className={cx('project-tiles')}>
+          
+          {portfolioFeeds.length > 0? 
+          <div className={cx('project-tiles')}>
             { portfolioFeeds }
-            </div>: <div className={cx('feed-empty')}>
+          </div> : 
+          <div className={cx('feed-empty')}>
               아직 아무도 팔로우하지 않으셨네요.<br/>
               관심있는 기업이나 메이커를 팔로우 해보세요.
-          </div>
-          }
+          </div>}
           
-        </section> :null}        
+        </section>}        
 
         {this.createSection('Puzzles', '/more/project/p/popular', projects.map(p => <ProjectCard key={p.name} project={p} />))}
         
@@ -199,14 +207,21 @@ class MainPageSection extends Component {
           </Popup>
         </section>      
 
-        {this.createSection('New', '/more/portfolio/company/recent', recentCompanyPortfolios)}
+        <SectionItem title="New" link='/more/portfolio/company/recent'>
+          {recentCompanyPortfolios}
+        </SectionItem>
 
         { portfoliosByCategory }
 
-        {this.createSection('Company', '/more/company/c/popular', companyHighlights.map((c,i) => (
-                            <div key={i} className={cx('maker-card')}>
-                              { c }
-                            </div>)))}
+        <SectionItem title="Company" link="/more/company/c/popular">
+          {
+            companyHighlights.map((c,i) => (
+              <div key={i} className={cx('maker-card')}>
+                { c }
+              </div>)
+            )
+          }
+        </SectionItem>
 
         <section className={cx('title-section', 'background3')}>
           <Padding height="45" />
@@ -227,7 +242,9 @@ class MainPageSection extends Component {
           </Popup>
         </section>
 
-        {this.createSection('Maker', '/more/portfolio/maker/recent', popularMakerPortfolios)}
+        <SectionItem title="Maker" link="/more/portfolio/maker/recent">
+          {popularMakerPortfolios}
+        </SectionItem>
 
       </div>
 

@@ -39,15 +39,16 @@ class Container extends Component {
 
     const data = (more[topic] || {})[subtype] || [];
     let tags = [];
+    let link = `/more/${param.topic}/${param.subtype}/${param.sort}`;
 
     if(topic === 'project') {
       tags = data.map(p => <ProjectCard key={p.name} project={p} />)
     }
 
-    if(topic === 'portfolio') {
+    if(topic === 'portfolio' || topic === 'category') {
       const referrer = createObject('main');
       tags = data.map(portfolio => {
-        if(param.subtype === 'company') {
+        if(param.subtype === 'company' || topic === 'category') {
           const owner = createObject('company', portfolio.company);
           return (<PortfolioItemWide portfolio={portfolio} referrer={owner} owner={owner} key={portfolio.pid} imageFit={true} external={true} />);
         }
@@ -64,13 +65,13 @@ class Container extends Component {
         business = business[0]? business[0] : null;
         const businessName = business && business.content? business.content : '';
         return <MakerCard
-                  key={company.name} 
-                  picture={Assist.Company.getProfileImage(company)}
-                  title={company.name} 
-                  subTitle={businessName} 
-                  isCompany={true}
-                  autoMargin={true}
-                  linkTo={'/company/' + company.link_name} />;
+                key={company.name}
+                picture={Assist.Company.getProfileImage(company)}
+                title={company.name}
+                subTitle={businessName}
+                isCompany={true}
+                autoMargin={true}
+                linkTo={'/company/' + company.link_name} />;
       });
     }
 
@@ -100,7 +101,7 @@ class Container extends Component {
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
         <TopTitle 
           title={more.title}
-          to={'/'}
+          to={link}
           thumbnailURL={null} 
         />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />

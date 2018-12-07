@@ -41,6 +41,13 @@ function searchContents(keyword, query, limit, loaded, populate, shouldSplitKeyw
       .lean();
 }
 
+function searchCategories({keywords, limit=3, loaded=0}) {
+  return searchContents(
+    keywords.join(' '), 
+    {isPrivate:false, type:'company'}, 
+    limit, loaded, ['user', 'company', 'images'], false);    
+}
+
 function getUserContents({sort='popular', loaded=0, limit=6}) {
   return getContents(User, {'portfolios.0': {$exists:true}}, sort, limit, loaded, []);
 }
@@ -61,13 +68,13 @@ function getCompanyPorfolioContents({sort='popular', loaded=0, limit=9}) {
   return getContents(Portfolio, {type:'company'}, sort, limit, loaded, ['user', 'company', 'images']);
 }
 
+let portfolioCategories = []
+
 async function getSubContents() {
   const contentsInfo = await Misc.findOne({title: 'sub-contents'}).lean();
-  const contents = contentsInfo.data.map(async info => {
-    const portfolios = await searchContents(
-      info.keywords.join(' '), 
-      {isPrivate:false, type:'company'}, 
-      3, 0, ['user', 'company', 'images'], false);
+  portfolioCategories = contentsInfo.data;
+  const contents = portfolioCategories.map(async info => {
+    const portfolios = await searchCategories({ keywords: info.keywords });
     info.portfolios = portfolios;
     return info;
   })
@@ -147,6 +154,16 @@ export async function more(req, res) {
   if(topic === 'maker') {
     const result = await getUserContents({ loaded });
     return res.json({ result, title:'주목할만한 메이커들', topic, subtype });
+  }
+
+  if(topic === 'category') {
+    let selected = portfolioCategories.filter(c => c.category === subtype);
+    if(selected && selected.length === 1) {
+      selected = selected[0];
+      const query = { keywords: selected.keywords, limit: 9, loaded: loaded};
+      const result = await searchCategories(query);
+      return res.json({ result, title: selected.title, topic, subtype });
+    }
   }
   return res.json({});
 }
