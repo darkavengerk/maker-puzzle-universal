@@ -75,8 +75,6 @@ const context = (
     case types.UPDATE_MAKER_CONTEXT:
       if (action.data) return update(state, action.data);
       return state;
-    case types.CREATE_REQUEST:
-      return {};
     case types.REQUEST_SUCCESS:
     case types.PROFILE_EDIT_SUCCESS:
     case types.PORTFOLIO_DELETE_SUCCESS:
