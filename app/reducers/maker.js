@@ -12,8 +12,8 @@ const maker = (
   action
 ) => {
   switch (action.type) {
-    case types.CREATE_REQUEST:
-        return {portfolios:[], picture: null};
+    // case types.CREATE_REQUEST:
+    //     return {portfolios:[], picture: null};
       // if(action.pathname && !action.pathname.startsWith('/maker/'))
       // return state;
       
