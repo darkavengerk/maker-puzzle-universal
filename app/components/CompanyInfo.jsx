@@ -28,7 +28,7 @@ const CompanyInfo = ({ owner }) => {
             {owners}
           </div>
 
-          { (company.users || []).length > 0 && <GreyTitle title={'소속 메이커'} top="38" bottom="26" />}
+          { (users || []).length > 0 && <GreyTitle title={'소속 메이커'} top="38" bottom="26" />}
           <div className={cx('maker-area')}>
             {users}
           </div>
