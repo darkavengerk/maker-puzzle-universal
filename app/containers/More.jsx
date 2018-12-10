@@ -23,7 +23,7 @@ class Container extends Component {
   
   constructor(props) {
     super(props);
-    this.state = {loading: true};
+    this.state = {loading: true, loaded: -1};
   }
 
   componentDidMount() {
@@ -87,8 +87,9 @@ class Container extends Component {
       });
     }
 
-    function loadFunc(page) {
-      if(param.topic) {
+    const loadFunc = (page) => {
+      if(param.topic && this.state.loaded < data.length) {
+        this.setState({loaded: data.length});
         loadMoreData({...param, current: data.length});
       }
     }
