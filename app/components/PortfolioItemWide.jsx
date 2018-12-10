@@ -11,8 +11,9 @@ import { portfoiloEditorStart } from '../actions/makers';
 
 const cx = classNames.bind(styles);
 
-const PortfolioItemWideSection = ({ portfolio, owner, referrer, portfoiloEditorStart, company, external, imageFit=false }) => {
+const PortfolioItemWideSection = ({ portfolio, owner, referrer, portfoiloEditorStart, company, external, screen, imageFit=false }) => {
 
+  if(screen.showing === 'loading') return <div className={cx('main-section', 'wide')}></div>
   if(portfolio) {
     const link_name = company.link_name;
     return (
@@ -56,7 +57,8 @@ PortfolioItemWideSection.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    company: state.company.company
+    company: state.company.company,
+    screen: state.screen
   };
 }
 

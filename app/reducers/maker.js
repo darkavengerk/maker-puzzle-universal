@@ -12,10 +12,6 @@ const maker = (
   action
 ) => {
   switch (action.type) {
-    // case types.CREATE_REQUEST:
-    //     return {portfolios:[], picture: null};
-      // if(action.pathname && !action.pathname.startsWith('/maker/'))
-      // return state;
       
     case types.REQUEST_SUCCESS:
       if (action.data && action.data.maker) return action.data.maker;
@@ -76,6 +72,7 @@ const context = (
       if (action.data) return update(state, action.data);
       return state;
     case types.REQUEST_SUCCESS:
+      return {...maker(state, action)};
     case types.PROFILE_EDIT_SUCCESS:
     case types.PORTFOLIO_DELETE_SUCCESS:
     case types.PORTFOLIO_EDIT_SUCCESS:

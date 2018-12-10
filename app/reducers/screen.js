@@ -3,12 +3,14 @@ import * as types from '../types';
 
 
 const screen = (
-  state = {showing: 'normal', loadingCount: 0},
+  state = {showing: 'normal', prev: 'normal', loadingCount: 0},
   action
 ) => {
   switch (action.type) {      
+    case types.CREATE_REQUEST:
+      return {...state, showing: 'loading', prev: state.showing, loadingCount: 0};
     case types.REQUEST_SUCCESS:
-      return {...state, loadingCount: state.loadingCount + 1}
+      return {...state, showing: state.prev, loadingCount: state.loadingCount + 1}
     case types.SHOWING_POPUP:
       if (action.data) {
         return {...state, showing: 'popup'};

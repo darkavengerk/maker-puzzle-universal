@@ -13,7 +13,8 @@ import styles from '../css/components/business-card';
 
 const cx = classNames.bind(styles);
 
-const MakerCardSection = ({picture, title, subTitle, linkTo, isCompany=false, autoMargin=false, ...props}) => {  
+const MakerCardSection = ({picture, title, subTitle, linkTo, screen, isCompany=false, autoMargin=false, ...props}) => {  
+  if(screen.showing === 'loading') return <Link className={cx(['maker-tile', autoMargin? 'maker-tile-margin':null])}></Link>
   return (
     <Link className={cx(['maker-tile', autoMargin? 'maker-tile-margin':null])} to={linkTo} role="button" count={isCompany? 'company' : 'maker'}>
       {isCompany? 
@@ -41,7 +42,9 @@ MakerCardSection.propTypes = {
 };
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    screen: state.screen
+  };
 }
 
 export default connect(mapStateToProps, {})(MakerCardSection);

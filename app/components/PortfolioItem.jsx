@@ -11,8 +11,10 @@ import { portfoiloEditorStart } from '../actions/makers';
 
 const cx = classNames.bind(styles);
 
-const PortfolioItem = ({ portfolio, owner, referrer, portfoiloEditorStart, external }) => {
+const PortfolioItem = ({ portfolio, owner, referrer, portfoiloEditorStart, external, screen }) => {
 
+  if(screen.showing === 'loading') return <div className={cx('main-section')}></div>
+    
   if(portfolio) {
     return (
       <div className={cx('main-section') + ' dragItem'}>
@@ -61,7 +63,8 @@ PortfolioItem.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    maker: state.maker.maker
+    maker: state.maker.maker,
+    screen: state.screen
   };
 }
 

@@ -13,11 +13,14 @@ import styles from '../css/components/business-card';
 
 const cx = classNames.bind(styles);
 
-const ProjectCardSection = ({project, ...props}) => {
+const ProjectCardSection = ({project, screen, ...props}) => {
 
   let location = project.features.filter(f => f.repr === 'location');
   location = location[0]? location[0] : null;
   const locationName = location && location.content? location.content : '';
+  if(screen.showing === 'loading') {
+    return <Link className={cx('project-tile', 'medium-tile')} to={'/project/' + project.link_name} role="button" count="project"></Link>
+  }
   return (
     <Link className={cx('project-tile', 'medium-tile')} to={'/project/' + project.link_name} role="button" count="project">
       <div className={cx('header', 'header-medium')}>
@@ -50,7 +53,9 @@ ProjectCardSection.propTypes = {
 };
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    screen: state.screen
+  };
 }
 
 export default connect(mapStateToProps, {})(ProjectCardSection);
