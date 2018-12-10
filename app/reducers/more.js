@@ -7,15 +7,21 @@ const more = (
   action
 ) => {
   switch (action.type) {      
+    case types.CREATE_REQUEST:
+      return {...state, loading: true};
     case types.REQUEST_SUCCESS:
       if (action.data && action.data.more) {
         const { more } = action.data;
+        const newState = {...state, loading: false, topic: more.topic, subtype: more.subtype, title: more.title, hasMore: true};
+
         if(state[more.topic] && state[more.topic][more.subtype] && state[more.topic][more.subtype].length >= 0) {
-          return {...state, topic: more.topic, subtype: more.subtype, title: more.title, hasMore: true};
+          return newState;
         }
+
         const subset = {...(state[more.topic] || {})};
         subset[more.subtype] = more.result;
-        return {...state, [more.topic]: subset, hasMore: true, topic: more.topic, subtype: more.subtype, title: more.title};
+        newState[more.topic] = subset;
+        return newState;
       }
       return state;
     case types.LOAD_MORE_DATA:

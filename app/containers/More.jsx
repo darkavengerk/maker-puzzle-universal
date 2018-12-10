@@ -88,7 +88,7 @@ class Container extends Component {
     }
 
     const loadFunc = (page) => {
-      if(param.topic && this.state.loaded < data.length) {
+      if(!more.loading && param.topic && this.state.loaded < data.length) {
         this.setState({loaded: data.length});
         loadMoreData({...param, current: data.length});
       }

@@ -3,7 +3,6 @@ import { Main } from '../services';
 
 export function loadMoreData(data) {
   return async (dispatch, getState) => {
-    console.log(data);
     const res = await Main().loadMore(data);
     
     if (res.status === 200) {
