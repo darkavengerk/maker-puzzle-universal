@@ -7,7 +7,7 @@ export default () => {
   return {
     getMain: () => client.request({
       method: 'GET',
-      url: '/api/main/'
+      url: '/api/main'
     }),
     getMore: (params) => client.request({
       method: 'GET',
