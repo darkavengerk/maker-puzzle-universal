@@ -33,13 +33,10 @@ class Container extends Component {
   render() {
     const { more, param, loadMoreData } = this.props;
 
-    if(!param.topic) return null;
-
     const { topic, subtype } = more;
 
     const data = (more[topic] || {})[subtype] || [];
     let tags = [];
-    let link = `/more/${param.topic}/${param.subtype}/${param.sort}`;
 
     if(topic === 'project') {
       tags = data.map(p => <ProjectCard key={p.name} project={p} />)
@@ -48,11 +45,11 @@ class Container extends Component {
     if(topic === 'portfolio' || topic === 'category') {
       const referrer = createObject('main');
       tags = data.map(portfolio => {
-        if(param.subtype === 'company' || topic === 'category') {
+        if(subtype.startsWith('company') || topic === 'category') {
           const owner = createObject('company', portfolio.company);
           return (<PortfolioItemWide portfolio={portfolio} referrer={owner} owner={owner} key={portfolio.pid} imageFit={true} external={true} />);
         }
-        if(param.subtype === 'maker') {
+        if(subtype.startsWith('maker')) {
           const owner = createObject('maker', portfolio.user);
           return <PortfolioItem portfolio={portfolio} referrer={referrer} owner={owner} key={portfolio.pid} external={true} />
         }
@@ -101,7 +98,7 @@ class Container extends Component {
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
         <TopTitle 
           title={more.title}
-          to={link}
+          to={`/more/${param.topic}/${param.subtype}/${param.sort}`}
           thumbnailURL={null} 
         />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />

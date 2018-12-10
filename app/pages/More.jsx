@@ -12,12 +12,12 @@ class More extends Component {
   }
 
   pageTitle = () => {
-    return 'Main | MakerPuzzle';
+    return 'MakerPuzzle';
   };
 
   pageMeta = () => {
     return [
-      { name: 'description', content: 'Main page' }
+      { name: 'description', content: 'More' }
     ];
   };
 
