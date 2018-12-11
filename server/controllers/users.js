@@ -112,6 +112,10 @@ export async function updateFeatures(req, res) {
   const userid = req.params.id;
   let {features, about, picture, makerProfile} = req.body;
 
+  if(makerProfile.companies) {
+    makerProfile.companies = makerProfile.companies.map(company => ({...company, name: common.refineCompanyName(company.name)}));
+  }
+
   try {
     const result = await User.update({userid:userid}, {$set:{features, about, picture, makerProfile}});
     res.json(result);
@@ -232,8 +236,8 @@ export async function deletePortfolio(req, res) {
 }
 
 async function createPortfolio(userid, portfolio) {
-  const location = portfolio.location;
-  const companyName = portfolio.companyName;
+  const location = portfolio.location.trim();
+  const companyName = common.refineCompanyName(portfolio.companyName);
 
   let [ user, project, company ] = await Promise.all([
     User.findOne({userid}),

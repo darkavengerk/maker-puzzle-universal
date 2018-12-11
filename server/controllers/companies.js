@@ -40,9 +40,9 @@ export function all(req, res) {
 
 export function search(req, res) {
   const {keyword} = req.params;
-
-  if(keyword) {
-    companyAutoComplete.getResults(keyword, (err, results) => {
+  const refined = common.refineCompanyName(keyword);
+  if(refined) {
+    companyAutoComplete.getResults(refined, (err, results) => {
       if (err) {
         return res.json([]);
       }
@@ -80,7 +80,7 @@ export async function updateFeatures(req, res) {
 
 async function createPortfolio(link_name, portfolio) {
 
-  const location = portfolio.location;
+  const location = portfolio.location.trim();
 
   let [ project, company ] = await Promise.all([
     Project.findOne({name: location}),

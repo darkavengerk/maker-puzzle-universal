@@ -126,6 +126,14 @@ class AddPortfolio extends Component {
     const { submit, portfolio, editing } = this.props;
     const submitData = {...this.state, editing};
 
+    const checklist = ['companyName', 'location', 'title'];
+    for(let check of checklist) {
+      if(!submitData[check]) {
+        alert('필수 항목을 입력해주세요');
+        return;
+      }
+    }
+
     submitData.tags = submitData.tags.filter(t => t && t.trim().length > 0);
     
     if(editing) {

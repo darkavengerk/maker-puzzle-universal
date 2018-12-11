@@ -123,7 +123,6 @@ async function savePortfolio({ portfolio, project, company, user }) {
     project.users.addToSet(user._id);
     company.users.addToSet(user._id);
 
-    const companyName = company.name;
     const alreadyRegisterd = user.makerProfile.companies.filter(c => c.name === company.name);
     
     if(alreadyRegisterd.length === 0) {
@@ -384,11 +383,16 @@ async function runCommand(command) {
   }
 }
 
+function refineCompanyName(keyword) {
+  return keyword.replace('(주)', '').replace('주식회사', '').trim();
+}
+
 export default {
   savePortfolio,
   imageProcess,
   makeIndex,
   makeIndexFromPortfolio,
   runCommand,
-  cut
+  cut,
+  refineCompanyName
 };
