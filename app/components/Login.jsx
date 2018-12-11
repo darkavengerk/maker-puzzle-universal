@@ -39,7 +39,8 @@ class LoginOrRegister extends Component {
     this.setState({gender: event.target.value});
   }
 
-  toggleLoginMode() {
+  toggleLoginMode(event) {
+    event.preventDefault();
     this.setState({loginMode: !this.state.loginMode});
   }
 
@@ -231,9 +232,14 @@ class LoginOrRegister extends Component {
             <div className={cx('check')}>
               <input type="checkbox" name="agreed" onClick={this.handleInputChange} />
               <Padding width="15" inline={true} />
-              <b className={cx('important')}>이용약관</b>
+              <span onClick={ e => window.open('/policy/service')} role="button">
+                <b className={cx('important')}>이용약관</b>
+              </span>
               <Padding width="2" inline={true} />및<Padding width="2" inline={true} />
-              <b className={cx('important')}>개인정보 처리방침</b>에 동의합니다.
+              <span onClick={ e=> window.open('/policy/privacy')} role="button">
+                <b className={cx('important')}>개인정보 처리방침</b>
+              </span>
+              에 동의합니다.
             </div>
             <Padding height="12"/>
             <div className={cx('check')}>

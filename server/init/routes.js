@@ -53,6 +53,7 @@ export default (app) => {
   if (mainController) {
     GET('/batch/commands/:command', mainController.command);
     GET('/api/main', mainController.main);
+    GET('/api/policy', mainController.policy);
     GET('/api/more/:topic/:subtype/:sort/:loaded', mainController.more);
     GET('/api/more/:topic/:subtype/:sort', mainController.more);
     POST('/api/count', mainController.increaseCount);

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
+import Link from '../components/Link';
 import classNames from 'classnames/bind';
 import Img from '../components/FlexibleImage';
 import styles from '../css/components/navigation';
@@ -12,10 +12,10 @@ const components = ({}) => {
         <div className={cx('footer-area')}>
           <div className={cx('menu-items')}>
             <Link className={cx('menu-item')} to="/">서비스 소개</Link>
-            <Link className={cx('menu-item')} to="/">이용약관</Link>
-            <Link className={cx('menu-item')} to="/">개인정보처리방침</Link>
-            <Link className={cx('menu-item')} to="/">의견게시판</Link>
-            <Link className={cx('menu-item')} to="/">메이커퍼즐 뉴스</Link>
+            <Link className={cx('menu-item')} to="/policy/service">이용약관</Link>
+            <Link className={cx('menu-item')} to="/policy/privacy">개인정보처리방침</Link>
+            <Link className={cx('menu-item')} onClick={e => alert('준비중')}>의견게시판</Link>
+            <Link className={cx('menu-item')} onClick={e => alert('준비중')}>메이커퍼즐 뉴스</Link>
           </div>
           <div className={cx('company-info')}>
             <label>주식회사 메이커퍼즐</label>|

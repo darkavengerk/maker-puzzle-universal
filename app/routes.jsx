@@ -8,13 +8,15 @@ import {
   fetchMakerData,
   fetchProjectData,
   fetchCompanyData,
-  fetchMoreData
+  fetchMoreData,
+  fetchPolicyData
 } from './fetch-data';
 
 import { 
   Root,
   App, 
   Search, 
+  Policy,
   Main, 
   Hello,
   Vote, 
@@ -64,6 +66,7 @@ export default (store) => {
         <Route path="maker/:id/portfolio/:pid" component={Maker} fetchData={fetchMakerData} />
         <Route path="maker/:id" component={Maker} fetchData={fetchMakerData} />
         <Route path="search/:keyword" component={Search} fetchData={fetchSearchData} />
+        <Route path="policy/:section" component={Policy} fetchData={fetchPolicyData} />
         <Route path="more/:topic/:subtype/:sort" component={More} fetchData={fetchMoreData} />
         <Route path="project/:link_name/maker/:mid/:pid" component={Project} fetchData={fetchProjectData} />
         <Route path="project/:link_name/company/:cid/:pid" component={Project} fetchData={fetchProjectData} />

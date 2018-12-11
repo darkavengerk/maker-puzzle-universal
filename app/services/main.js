@@ -9,6 +9,10 @@ export default () => {
       method: 'GET',
       url: '/api/main'
     }),
+    getPolicy: () => client.request({
+      method: 'GET',
+      url: '/api/policy/'
+    }),
     getMore: (params) => client.request({
       method: 'GET',
       url: `/api/more/${params.topic}/${params.subtype}/${params.sort}`

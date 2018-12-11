@@ -206,11 +206,17 @@ export async function refresh(req, res) {
   return res.status(301).json({error: 'api version incompatible'});
 }
 
+export async function policy(req, res) {
+  const policy = await Misc.findOne({title: 'policy'});
+  return res.json(policy.data);
+}
+
 export default {
   main,
   more,
   command,
   search,
   increaseCount,
-  refresh
+  refresh,
+  policy
 };

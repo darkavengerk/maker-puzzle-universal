@@ -1,0 +1,63 @@
+/* processed-version: 1.0 */
+.main-section {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 0.53rem;
+}
+
+.menu {
+  width: 2rem;
+}
+
+.menu-item {
+  font-family: NanumBarunGothic;
+  font-size: 18px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #909090;
+  display: block;
+  margin-bottom: 0.14rem;
+}
+
+.selected {
+  color: #000000;
+}
+
+.text-area {
+  width: 7rem;
+}
+
+.first-title {
+  font-family: NanumBarunGothic;
+  font-size: 30px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000000;
+}
+
+.text {
+  font-family: NanumBarunGothic;
+  font-size: 0.11rem;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000000;
+  margin: 0.12rem 0;
+}
+
+.title {
+  font-weight: 600;
+  margin: 0.15rem 0;
+}

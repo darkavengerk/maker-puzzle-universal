@@ -34,14 +34,8 @@ span {
 
 a:hover, a:focus, a:link {
     font-style: inherit;
-    color: inherit;
     background-color: transparent;
-    font-size: inherit;
     text-decoration: none;
-    font-variant: inherit;
-    font-weight: inherit;
-    line-height: inherit;
-    font-family: inherit;
 }
 
 textarea:focus, input:focus{
