@@ -26,7 +26,7 @@ class MakerProfile extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {showFollowList: false};
 
     this.featureEdited = this.featureEdited.bind(this);
     this.aboutEdited = this.aboutEdited.bind(this);
@@ -82,6 +82,10 @@ class MakerProfile extends Component {
 
   hideList() {
     return this.setState({showFollowList: false, followList: []});
+  }
+
+  componentWillReceiveProps() {
+    this.setState({showFollowList: false});
   }
 
   render() {

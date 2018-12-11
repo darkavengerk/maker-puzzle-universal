@@ -15,7 +15,7 @@ const screen = (
       if (action.data) {
         return {...state, showing: 'popup'};
       }
-      return {...state, showing: 'normal'};;
+      return {...state, showing: 'normal'};
     default:
       return state;
   }
