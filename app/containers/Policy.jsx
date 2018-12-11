@@ -62,7 +62,7 @@ class Container extends Component {
         <div className={cx('main-section')}>
           <section className={cx('menu')}>
             <Link onClick={this.clickService} to={'/policy/service'} className={cx('menu-item', section === 'service' && 'selected')}>이용약관</Link>
-            <Link onClick={this.clickPrivacy} to={'/policy/privacy'} className={cx('menu-item', section === 'privacy' && 'selected')}>개인정보취급방침</Link>
+            <Link onClick={this.clickPrivacy} to={'/policy/privacy'} className={cx('menu-item', section === 'privacy' && 'selected')}>개인정보처리방침</Link>
           </section>
           <section className={cx('text-area')}>
             <div className={cx('first-title')}>
