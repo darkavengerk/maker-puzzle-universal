@@ -122,6 +122,7 @@ class LoginOrRegister extends Component {
               <div
                 className={cx('text-link')}
                 role="button" 
+                onClick={e => alert('비밀번호 찾기 기능 준비 중: 관리자에게 문의하세요')}
               >비밀번호 찾기</div>
             </div>
 

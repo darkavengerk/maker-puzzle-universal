@@ -20,7 +20,7 @@ class RestApiClient {
       if(isProduction && err.response.status === 301) {
         window.location.reload();
       }
-      else console.log(err);
+      else throw err;
     });
   }
 }

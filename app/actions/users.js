@@ -78,7 +78,7 @@ export function manualLogin(data) {
       // dispatch(push(`/${user.type}/${user.userid}`));
     }
     catch(err) {
-      alert('Oops! Invalid username or password');
+      alert('잘못된 로그인 정보입니다');
       dispatch(loginError(''));
     }
   };
@@ -90,12 +90,12 @@ export function signUp(data) {
   return async dispatch => {
     for(let check of checklist) {
       if(!data[check]) {
-        alert('Fill up all the required information.');
+        alert('모든 항목을 채워주세요');
         return;
       }
     }
     if(data.password !== data.passwordCheck) {
-      alert('Password incorrect.');
+      alert('패스워드가 일치하지 않습니다.');
       return;
     }
 
@@ -104,12 +104,15 @@ export function signUp(data) {
     dispatch(beginSignUp());
     try {
       const {data: newUser} = await authService().signUp(data);
-      alert('You have successfully registered an account!');
+      alert('회원가입 완료!');
       dispatch(signUpSuccess('', newUser));
       // dispatch(push('/'));
     }
     catch(err) {
-      alert('Oops! Something went wrong when signing up');
+      if(err.response.status === 409) {
+        alert(data.email + ' : 이미 가입된 이메일입니다.');
+      }
+      else alert('내부 서버 에러: 관리자에게 문의하세요.');
       dispatch(signUpError(''));
     }
   };
