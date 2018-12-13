@@ -159,7 +159,8 @@ function uploadToS3(key, body) {
     s3.putObject({
       Bucket: 'maker-puzzle-images',
       Key: key,
-      Body: body
+      Body: body,
+      ContentType: 'image/jpg'
     }, 
     err => {
       if(err) return reject(err);
