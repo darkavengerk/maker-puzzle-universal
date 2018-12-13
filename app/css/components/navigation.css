@@ -63,7 +63,64 @@
   align-items: flex-start;
 }
 
+.option-area-loggedin {
+  width: 1.176rem;
+}
 
+.user-menu-base {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.arrow {
+  position: absolute;
+  top: 0;
+  right: 0.25rem;
+  width: 0.15rem;
+  height: 0.15rem;
+  background-color: #ffffff;
+  transform: rotate(45deg);
+}
+
+.arrow-cover {
+  z-index: 11;
+}
+
+.user-menu-area {
+  width: 144px;
+  margin-top: 8px;
+  background-color: #ffffff;
+  z-index: 9;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+}
+
+.user-menu-shadow {
+  box-shadow: 0 0.05rem 0.25rem 0 rgba(173, 173, 173, 0.5);
+}
+
+.user-menu-item {
+  width: 100%;
+  height: 0.3rem;
+  padding-left: 0.36rem;
+  vertical-align: middle;
+
+  font-family: NanumBarunGothic;
+  font-size: 0.12rem;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0.3rem;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000000;
+  cursor: pointer;
+}
+
+.user-menu-item:hover {
+  background-color: grey;
+}
 
 .login-button {
   font-family: NanumBarunGothic;
