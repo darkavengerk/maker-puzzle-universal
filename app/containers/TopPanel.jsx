@@ -42,7 +42,7 @@ class Navigation extends Component {
     this.setState((prevState) => this.setState({showDropdown: !prevState.showDropdown}));
   }
 
-  hideDropDown(event) {
+  hideDropDown() {
     this.setState({showDropdown: false});
   }
 
@@ -85,8 +85,10 @@ class Navigation extends Component {
             {login}
             {/*{user.authenticated && 
             <Img source="/site/images/header-social.png" x={38} y={36} />}*/}
-            <div style={{position:'relative'}} onMouseOver={this.showDropDown} onClick={this.toggleDropDown}>
-              <Img source="/site/images/header-more.png" x={38.5} y={36}/>
+            <div style={{position:'relative'}}>
+              <div onMouseOver={this.showDropDown} onClick={this.toggleDropDown}>
+                <Img source="/site/images/header-more.png" x={38.5} y={36}/>
+              </div>
               <Floater 
                 width={'1.44rem'}
                 top={'0.35rem'}
