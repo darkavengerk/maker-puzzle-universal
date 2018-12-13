@@ -25,6 +25,7 @@ class Navigation extends Component {
     this.showDropDown = this.showDropDown.bind(this);
     this.hideDropDown = this.hideDropDown.bind(this);
     this.logoutClicked = this.logoutClicked.bind(this);
+    this.toggleDropDown = this.toggleDropDown.bind(this);
   }
 
   logoutClicked() {
@@ -35,6 +36,10 @@ class Navigation extends Component {
 
   showDropDown() {
     this.setState({showDropdown: true});
+  }
+
+  toggleDropDown() {
+    this.setState((prevState) => this.setState({showDropdown: !prevState.showDropdown}));
   }
 
   hideDropDown(event) {
@@ -80,7 +85,7 @@ class Navigation extends Component {
             {login}
             {/*{user.authenticated && 
             <Img source="/site/images/header-social.png" x={38} y={36} />}*/}
-            <div style={{position:'relative'}} onMouseOver={this.showDropDown}>
+            <div style={{position:'relative'}} onMouseOver={this.showDropDown} onClick={this.toggleDropDown}>
               <Img source="/site/images/header-more.png" x={38.5} y={36}/>
               <Floater 
                 width={'1.44rem'}

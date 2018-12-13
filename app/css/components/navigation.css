@@ -88,8 +88,8 @@
 }
 
 .user-menu-area {
-  width: 144px;
-  margin-top: 8px;
+  width: 1.44rem;
+  margin-top: 0.08rem;
   background-color: #ffffff;
   z-index: 9;
   padding-top: 0.1rem;
