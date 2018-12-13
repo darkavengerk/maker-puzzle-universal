@@ -26,7 +26,7 @@ class MakerProfile extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {showFollowList: false};
+    this.state = {showFollowList: false, ownerid: null};
 
     this.featureEdited = this.featureEdited.bind(this);
     this.aboutEdited = this.aboutEdited.bind(this);
@@ -73,6 +73,7 @@ class MakerProfile extends Component {
   showList(route) {
     const { maker } = this.props;
     return evt => this.setState({
+      ownerid : maker.userid,
       showFollowList: true, 
       followList: Assist.Maker.getFollows(maker, route), 
       companyFollowList: Assist.Maker.getCompanyFollowings(maker, route), 
@@ -82,10 +83,6 @@ class MakerProfile extends Component {
 
   hideList() {
     return this.setState({showFollowList: false, followList: []});
-  }
-
-  componentWillReceiveProps() {
-    this.setState({showFollowList: false});
   }
 
   render() {
@@ -131,7 +128,7 @@ class MakerProfile extends Component {
           </span>
         </span>
         <Popup 
-          show={this.state.showFollowList} 
+          show={this.state.showFollowList && this.state.ownerid === maker.userid} 
           name="followListPopup" 
           target={'maker-stats-area'} 
           top={50} 
