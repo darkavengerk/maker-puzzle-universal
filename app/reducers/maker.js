@@ -58,6 +58,9 @@ const maker = (
       if(action.data.follower.userid === state.userid)
         return {...state, followings: action.data.follower.followings};
       return state;
+    case types.COMPANY_FOLLOWERS_UPDATED:
+      if(action.data.follower.userid === state.userid)
+        return {...state, companyFollowings: action.data.follower.companyFollowings};
     default:
       return state;
   }
@@ -71,8 +74,8 @@ const context = (
     case types.UPDATE_MAKER_CONTEXT:
       if (action.data) return update(state, action.data);
       return state;
+    case types.COMPANY_FOLLOWERS_UPDATED:
     case types.REQUEST_SUCCESS:
-      return new Maker({...maker(state, action)});
     case types.PROFILE_EDIT_SUCCESS:
     case types.PORTFOLIO_DELETE_SUCCESS:
     case types.PORTFOLIO_EDIT_SUCCESS:

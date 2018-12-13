@@ -21,6 +21,8 @@ class FloatingList extends Component {
       width, 
       top,
       margin,
+      left=0,
+      mouseOut,
       index
     } = this.props;
     if(!show) return null;
@@ -37,7 +39,7 @@ class FloatingList extends Component {
 
     const style= {
       position: 'absolute',
-      left: 0,
+      left: left,
       top: top,
       marginTop: margin,
       width,
@@ -49,7 +51,7 @@ class FloatingList extends Component {
     }
 
     return (
-      <ul className={className} style={style}>
+      <ul className={className} style={style} onMouseOut={mouseOut}>
         {listItems}
       </ul>
     );
