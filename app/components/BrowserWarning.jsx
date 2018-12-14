@@ -33,7 +33,6 @@ class BrowserWarning extends Component {
     case 'chrome':
     case 'firefox':
     case 'safari':
-      this.showWarningPopup();
       break;
     default:
       this.showWarningPopup();
