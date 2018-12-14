@@ -1,6 +1,6 @@
 .main-section {
   width: 6.20rem;
-  height: 4.35rem;
+  height: 4.25rem;
   box-shadow: 0 0.05rem 0.55rem 0 rgba(111, 110, 110, 0.5);
   background-color: #f4f4f4;
   display: flex;
@@ -24,6 +24,10 @@
 
 .title1-small {
   font-size: 0.16rem;
+}
+
+.underline {
+  text-decoration: underline;
 }
 
 .title2 {
@@ -58,6 +62,8 @@
 
 .align-left {
   text-align: left;
+  font-family: NanumBarunGothic;
+  height: 0.20rem;
 }
 
 .text-style-1 {

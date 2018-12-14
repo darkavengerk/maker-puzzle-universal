@@ -33,6 +33,7 @@ class BrowserWarning extends Component {
     case 'chrome':
     case 'firefox':
     case 'safari':
+      this.showWarningPopup();
       break;
     default:
       this.showWarningPopup();
@@ -62,7 +63,7 @@ class BrowserWarning extends Component {
           </div>
           <div className={cx('title1', 'title1-small')}>
             <FlexibleImage source="/site/images/icon-explorer.png" x={25} y={25} pureImage={true} />
-            &nbsp; 인터넷 익스플로러에서는 잘 작동하지 않을 수도 있어요.
+            &nbsp; 인터넷 익스플로러에서는 <span className={cx('underline')}>잘 작동하지 않을 수도 있어요</span>.
           </div>
           <Padding height="15" />
           
@@ -81,14 +82,15 @@ class BrowserWarning extends Component {
             Chrome은 최신 웹에 최적화된 빠르고 안전한 무료 웹브라우저입니다
           </div>
           <div className={cx('text')}>
-            <b className={cx('text-style-1')}>‘전세계 64.7% 이상’</b>이 이미 Chrome을 사용중이에요
+            <span className={cx('text-style-1')}>‘전세계 64.7% 이상’</span>이 이미 Chrome을 사용중이에요
           </div>
+          <Padding height="12" />
           <div className={cx('text-box')}>
             <div className={cx('text', 'align-left')}>
               [방법 A] : 포털 검색창에 ‘크롬’ 검색 > 검색결과 선택 > 설치 (기본 브라우저로 설정)
             </div>
             <div className={cx('text', 'align-left')}>
-              [방법 B] : <b className={cx('text-style-2')} role="button" onClick={e => window.open('https://www.google.com/intl/ko_ALL/chrome/')}>{address}</b>
+              [방법 B] : <span className={cx('text-style-2')} role="button" onClick={e => window.open(address)}>{address}</span>
               &nbsp; 링크로 직접 이동 > 설치 (기본 브라우저로 설정)
             </div>
           </div>
