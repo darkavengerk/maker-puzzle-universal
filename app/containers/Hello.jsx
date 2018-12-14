@@ -23,7 +23,9 @@ class HelloPageSection extends Component {
 
   constructor(props) {
     super(props);
-    this.defaultKeyword = '여의도 한강공원';
+    const defaultKeywords = ['아모레퍼시픽 사옥', '롯데월드 타워', '디타워', '광명동굴', '서울식물원'];
+    const i = Math.floor((Math.random() * defaultKeywords.length));
+    this.defaultKeyword = defaultKeywords[i];
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
   }
 
