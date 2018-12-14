@@ -1,0 +1,73 @@
+.main-section {
+  width: 6.20rem;
+  height: 4.35rem;
+  box-shadow: 0 0.05rem 0.55rem 0 rgba(111, 110, 110, 0.5);
+  background-color: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title1 {
+  height: 0.38rem;
+  font-family: BMDoHyeon-OTF;
+  font-size: 0.24rem;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0.38rem;
+  letter-spacing: normal;
+  text-align: center;
+  vertical-align: baseline;
+  color: #33a1d6;
+}
+
+.title1-small {
+  font-size: 0.16rem;
+}
+
+.title2 {
+  font-family: BMDoHyeon-OTF;
+  font-size: 0.18rem;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #5d5d5d;
+}
+
+.text {
+  height: 0.25rem;
+  font-family: BMDoHyeon-OTF;
+  font-size: 0.12rem;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #5d5d5d;
+}
+
+.text-box {
+  width: 100%;
+  padding-left: 0.43rem;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.text-style-1 {
+  color: #f58444;
+}
+
+.text-style-2 {
+  color: #33a1d6;
+}
+
+.text-style-3 {
+  color: #000000;
+}

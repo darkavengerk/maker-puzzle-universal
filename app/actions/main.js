@@ -14,3 +14,9 @@ export function loadMoreData(data) {
   };
 }
 
+export function notifyBrowser(data) {
+  return async (dispatch, getState) => {
+    dispatch({type:types.NOTIFY_BROWSER, data});
+  };
+}
+

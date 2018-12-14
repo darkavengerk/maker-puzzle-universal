@@ -1,12 +1,16 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
+
+import Popup from '../components/Popup';
 import TopPanel from '../containers/TopPanel';
 import Footer from '../containers/Footer';
 import Message from '../containers/Message';
 import styles from '../css/main';
 
 const cx = classNames.bind(styles);
+
 
 
 /*
@@ -18,19 +22,32 @@ const cx = classNames.bind(styles);
  * A better explanation of react-router is available here:
  * https://github.com/rackt/react-router/blob/latest/docs/Introduction.md
  */
-const App = ({ children }) => {
-  return (
-    <div className={cx('app')}>
-      <TopPanel />
-      <Message />
-      {children}
-      <Footer />
-    </div>
-  );
-};
+class App extends Component {
+  constructor(props) {
+    super(props);
+    
+  }
+
+  render() {
+    const { children, screen } = this.props;
+    return (
+      <div className={cx('app')}>
+        <TopPanel />
+        <Message />
+        {children}
+        <Footer />
+      </div>
+    );
+  }
+}
 
 App.propTypes = {
   children: PropTypes.object
 };
 
-export default App;
+function mapStateToProps(state) {
+  return {
+  };
+}
+
+export default connect(mapStateToProps, {})(App);
