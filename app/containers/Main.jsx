@@ -64,22 +64,6 @@ class MainPageSection extends Component {
     }
   }
 
-  createSection(title, link, children) {
-    return (
-      <section className={cx('project-section')}>
-        <div className={cx('title')}>
-          {title}
-          <Link to={link}>
-            <span className={cx('more-detail')}>더 보기</span>
-          </Link>
-        </div>
-        <div className={cx('project-tiles')}>
-          {children}
-        </div>
-      </section>
-    )
-  }
-
   render() {
     let { main={}, user, portfoiloEditorCancel, loginMenu, cancelLogin } = this.props;
     let { 
@@ -180,12 +164,12 @@ class MainPageSection extends Component {
           <div className={cx('feed-empty')}>
               아직 아무도 팔로우하지 않으셨네요.<br/>
               관심있는 기업이나 메이커를 팔로우 해보세요.
-          </div>}
-          
+          </div>}          
         </section>}        
 
-        {this.createSection('Puzzles', '/more/project/p/popular', projects.map(p => <ProjectCard key={p.name} project={p} />))}
-        
+        <SectionItem title="Puzzles" link='/more/project/p/popular'>
+          {projects.map(p => <ProjectCard key={p.name} project={p} />)}
+        </SectionItem>
 
         <section className={cx('title-section', 'background2')}>
           <Padding height="45" />

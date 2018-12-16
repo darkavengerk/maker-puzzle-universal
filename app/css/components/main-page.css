@@ -48,7 +48,7 @@
 
 .main-desc {
   /*width: 4.14rem;*/
-  width: 30.875em;
+  /*width: 30.875em;*/
   height: 0.71rem;
   text-shadow: 0 0.02rem 0.55rem rgba(0, 0, 0, 0.5);
   font-family: BMDoHyeon-OTF;
@@ -114,7 +114,7 @@
 .more-detail {
   /* parent 13px */
   /*width: 0.38rem;*/
-  width: 3em;
+  /*width: 3em;*/
   height: 0.15rem;
   font-family: NanumBarunGothic;
   font-size: 0.13rem;
