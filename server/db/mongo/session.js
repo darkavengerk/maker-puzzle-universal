@@ -8,6 +8,7 @@ export default () =>
   new MongoStore(
     {
       url: db,
-      autoReconnect: true
+      autoReconnect: true,
+      ttl: 30 * 24 * 60 * 60 // = 30 days
     }
   );
