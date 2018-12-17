@@ -32,7 +32,7 @@ class Popup extends Component {
   }
 
   render() {
-    let { show, name, children, cancel, top=150, left=0, roll=false, target, showingPopup } = this.props;
+    let { show, name, children, cancel, top=150, left=0, roll=false, target, showingPopup, screen } = this.props;
 
     if(show) {      
       if(target) {
@@ -55,7 +55,12 @@ class Popup extends Component {
       }
 
       if(roll) {
-        top = window.scrollY + top;
+        if(screen.browser.name === 'ie') {
+          top = window.pageYOffset + top;  
+        }
+        else {
+          top = window.scrollY + top;
+        }
       }
       else {
         window.scrollTo(0, 0);
@@ -85,7 +90,7 @@ Popup.propTypes = {
 function mapStateToProps(state) {
   return {
     user: state.user,
-    maker: state.maker.maker
+    screen: state.screen
   };
 }
 
