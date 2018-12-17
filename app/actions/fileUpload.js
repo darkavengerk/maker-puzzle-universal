@@ -60,10 +60,11 @@ export function uploadImage(userid, file, cb) {
       }
 
       //https://github.com/blueimp/JavaScript-Load-Image
+      const ftype = _.last(file.name.split('.'));
       const loadingImage = loadImage( 
         file,
         async canvas => {
-          var base64data = canvas.toDataURL('image/jpeg');
+          var base64data = canvas.toDataURL('image/' + ftype);
           const res = await File().upload({ data : {file:base64data, name:file.name, userid:userid}});
 
           if (res.status === 200) {

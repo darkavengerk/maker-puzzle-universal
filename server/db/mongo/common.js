@@ -201,7 +201,7 @@ async function imageProcess({ images }) {
         const resized = await imgObj
                                 .resize(x, y)
                                 .min()
-                                .jpeg({ quality: 95 })
+                                // .jpeg({ quality: 95 })
                                 .withoutEnlargement()
                                 .toBuffer();
         const fNameProcessed = fileNameProcess(image.original, '-' + name);

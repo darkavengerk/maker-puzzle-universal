@@ -100,8 +100,11 @@ class Navigation extends Component {
                 <div className={cx('arrow', 'arrow-cover')}>
                 </div>
                 <div className={cx('user-menu-area', 'user-menu-shadow')} onMouseLeave={this.hideDropDown}>
-                  <div className={cx('user-menu-item')} onClick={e => window.open('/site/doc/manual.pdf')}>
+                  <div className={cx('user-menu-item')} onClick={e => window.open('/site/doc/intro.pdf')}>
                     서비스 소개
+                  </div>
+                  <div className={cx('user-menu-item')} onClick={e => window.open('/site/doc/manual.pdf')}>
+                    서비스 이용방법
                   </div>
                   {/*<div className={cx('user-menu-item')}>
                     의견게시판
