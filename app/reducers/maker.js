@@ -71,6 +71,8 @@ const context = (
   action
 ) => {
   switch (action.type) {
+    case types.LOGOUT_SUCCESS_USER:
+      return update(state, {editing: false});
     case types.UPDATE_MAKER_CONTEXT:
       if (action.data) return update(state, action.data);
       return state;
