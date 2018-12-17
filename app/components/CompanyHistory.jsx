@@ -88,26 +88,30 @@ const Component = ({ maker, editing, onChange, ...props }) => {
             <Link to={'/company/' + info.name.replace(' ', '_')} count="company">{info.name}</Link>
           </td>
         }
-        <ContentEditable 
-          className={cx('text-input', 'compnay-period', (info.current? "col-selected": ""))}
-          html={info.period} 
-          tagName="td"
-          placeholder="ex)1년2개월"
-          disabled={!editing}
-          onChange={featureChanged(info.order, 'period')}
-          onKeyPress={preventEnter}
-          onKeyDown={preventEnter}
-        />
-        <ContentEditable 
-          className={cx('text-input', 'company-position', (info.current? "col-selected": ""), 'last-item')}
-          html={info.position} 
-          tagName="td"
-          placeholder="ex)대리, 팀장"
-          disabled={!editing}
-          onChange={featureChanged(info.order, 'position')}
-          onKeyPress={preventEnter}
-          onKeyDown={preventEnter}
-        />
+        <td>
+          <ContentEditable 
+            className={cx('text-input', 'compnay-period', (info.current? "col-selected": ""))}
+            html={info.period} 
+            tagName="span"
+            placeholder="ex)1년2개월"
+            disabled={!editing}
+            onChange={featureChanged(info.order, 'period')}
+            onKeyPress={preventEnter}
+            onKeyDown={preventEnter}
+          />
+        </td>
+        <td className={cx('last-item')}>
+          <ContentEditable 
+            className={cx('text-input', 'company-position', (info.current? "col-selected": ""), 'last-item')}
+            html={info.position} 
+            tagName="span"
+            placeholder="&nbsp;ex)대리, 팀장"
+            disabled={!editing}
+            onChange={featureChanged(info.order, 'position')}
+            onKeyPress={preventEnter}
+            onKeyDown={preventEnter}
+          />
+        </td>
         {editing? 
         <td className={cx('text-input', 'erase-buttons')} >
           <FlexibleImage 

@@ -173,7 +173,7 @@
   text-align: center;
 }
 
-td[contenteditable=true]:empty:before {
+.text-input[contenteditable=true]:empty:before {
   font-family: NanumBarunGothic;
   font-size: 0.1rem;
   font-weight: 300;
