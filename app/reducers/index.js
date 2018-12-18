@@ -28,25 +28,37 @@ const isFetching = (state = false, action) => {
   }
 };
 
-// Combine reducers with routeReducer which keeps track of
-// router state
-const rootReducer = combineReducers({
-  isFetching,
-  topic,
-  fileUpload,
-  main,
-  more,
-  search,
-  user,
-  // message,
-  routing,
-  people,
-  maker,
-  project,
-  company,
-  param,
-  image,
-  screen
-});
+const rootReducer = (state = {}, action) => {
+  // const languageCodes = state.languages.map(language => language.code);
+  const oldState = {...state};
+  const makerState = oldState.maker;
+  const userState = oldState.user;
+  const account = {authenticated: userState.authenticated, userid: userState.authenticated? userState.account.userid : null};
+  delete oldState.maker;
+
+  const newState = combineReducers({
+    isFetching,
+    topic,
+    fileUpload,
+    main,
+    more,
+    search,
+    user,
+    // message,
+    routing,
+    people,
+    // maker,
+    project,
+    company,
+    param,
+    image,
+    screen
+  })(oldState, action);
+
+  return {
+    ...newState, 
+    maker: maker(makerState, {...action, account })
+  };
+};
 
 export default rootReducer;

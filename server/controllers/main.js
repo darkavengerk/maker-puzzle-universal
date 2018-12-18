@@ -18,27 +18,36 @@ const {
 
 let mainContents = null;
 
+function cleanPopulate(obj, items) {
+  for(let p of items) {
+    obj = obj.populate(p, '-email -password -keywords -meta -portfolios -companyPortfolios');
+  }
+  return obj;
+}
+
 function getContents(model, query, sort, limit, loaded, populate) {
   const sorting = sort === 'popular'? {score:-1} : {created:-1};
-  return model
-      .find(query)
-      .populate(populate)
+  model =  model
+      .find(query, {meta:0, keywords:0})
+      // .populate(populate, '-email -_id -password -tags')
       .sort(sorting)
       .skip(loaded)
       .limit(limit)
       .lean();
+  return cleanPopulate(model, populate);
 }
 
 function searchContents(keyword, query, limit, loaded, populate, shouldSplitKeyword) {
   keyword = shouldSplitKeyword? common.cut(keyword).join(' ') : keyword;  
   loaded = loaded? loaded : 0;
-  return Portfolio
-      .find({ ...query, $text: { $search: keyword } }, {score: { $meta: "textScore" }})
+  const portfolio = Portfolio
+      .find({ ...query, $text: { $search: keyword } }, {score: { $meta: "textScore" }, meta:0, keywords:0})
       .sort({ score: { $meta: "textScore" } } )
       .skip(loaded)
       .limit(limit)
-      .populate(populate)
+      // .populate(populate)
       .lean();
+  return cleanPopulate(portfolio, populate);
 }
 
 function searchCategories({keywords, limit=3, loaded=0}) {
