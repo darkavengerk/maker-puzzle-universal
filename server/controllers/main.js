@@ -19,8 +19,18 @@ const {
 let mainContents = null;
 
 function cleanPopulate(obj, items) {
+  const companyFeatures = 'name link_name profilePicture type _id';
+  const userFeatures = 'userid type name picture _id';
   for(let p of items) {
-    obj = obj.populate(p, '-email -password -keywords -meta -portfolios -companyPortfolios');
+    if(p === 'user') {
+      obj = obj.populate(p, userFeatures);
+    }
+    else if(p === 'company' || p === 'project') {
+      obj = obj.populate(p, companyFeatures);
+    }
+    else {
+      obj = obj.populate(p);
+    }
   }
   return obj;
 }
