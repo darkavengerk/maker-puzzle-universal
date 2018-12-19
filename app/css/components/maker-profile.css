@@ -157,9 +157,12 @@
   color: #000000;
 }
 
-.compnay-period {  
+.company-period {  
   width: 0.76rem;
   text-align: left;
+}
+
+.company-period-padding {
   padding-left: 0.11rem;
 }
 
