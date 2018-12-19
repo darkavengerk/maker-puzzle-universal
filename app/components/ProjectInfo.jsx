@@ -9,6 +9,8 @@ import GreyTitle from '../components/GreyTitle';
 import Abilities from '../components/Abilities';
 import MakerListRoundy from '../components/MakerListRoundy';
 import Image from '../components/FlexibleImage';
+import { refineCompanyName } from '../utils/functions';
+
 import styles from '../css/components/project-info';
 
 const cx = classNames.bind(styles);
@@ -27,7 +29,7 @@ const ProjectInfo = ({ owner }) => {
       <GreyTitle title={'참여 기업'} top="38" bottom="16" />
       {project.portfolios.map((p,i) => p.companyName && p.title?
         <div key={i}>
-          <Link to={'/company/' + p.companyName.replace(' ', '_')} count="company">
+          <Link to={'/company/' + refineCompanyName(p.companyName).replace(' ', '_')} count="company">
             <div className={cx('ref-title')}>{p.companyName}</div>
           </Link>
           <div className={cx('ref-content')}>{p.title}</div>

@@ -4,6 +4,7 @@ import sharp from 'sharp';
 import aws from 'aws-sdk';
 
 import { isProduction } from '../../../config/app';
+import { refineCompanyName as refineName } from '../../../app/utils/functions';
 import Company, {autoComplete as companyAutoComplete} from './models/company';
 import Project, {autoComplete as projectAutoComplete} from './models/project';
 import Image from './models/image';
@@ -385,7 +386,7 @@ async function runCommand(command) {
 }
 
 function refineCompanyName(keyword) {
-  return keyword.replace('(주)', '').replace('주식회사', '').trim();
+  return refineName(keyword);
 }
 
 export default {
