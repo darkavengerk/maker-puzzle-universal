@@ -106,7 +106,7 @@ export function signUp(data) {
       const {data: newUser} = await authService().signUp(data);
       alert('회원가입 완료!');
       dispatch(signUpSuccess('', newUser));
-      // dispatch(push('/'));
+      dispatch(push('/maker/' + newUser.userid));
     }
     catch(err) {
       if(err.response.status === 409) {

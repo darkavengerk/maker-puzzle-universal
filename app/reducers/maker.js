@@ -76,8 +76,9 @@ const context = (
     case types.UPDATE_MAKER_CONTEXT:
       if (action.data) return update(state, action.data);
       return state;
-    case types.COMPANY_FOLLOWERS_UPDATED:
     case types.REQUEST_SUCCESS:
+      if (action.data && action.data.maker) return update({picture: ''}, maker(state, action));
+    case types.COMPANY_FOLLOWERS_UPDATED:
     case types.PROFILE_EDIT_SUCCESS:
     case types.PORTFOLIO_DELETE_SUCCESS:
     case types.PORTFOLIO_EDIT_SUCCESS:
