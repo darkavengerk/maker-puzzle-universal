@@ -23,15 +23,17 @@ export function all(req, res) {
 }
 
 export async function getPopulatedUser(userid) {
+  const companyFeatures = 'name link_name profilePicture type _id';
+  const userFeatures = 'userid type name picture _id';
   return await User
-    .findOne({ userid })
-    .populate('companiesOwned')
-    // .populate('picture')
-    .populate('portfolios.user')
-    // .populate('portfolios.images')
-    .populate('portfolios.project')
-    .populate('portfolios.company')
-    .populate(['followers', 'followings', 'companyFollowings'])
+    .findOne({ userid }, {email:0, password:0})
+    .populate('companiesOwned', companyFeatures)
+    .populate('portfolios.user', userFeatures)
+    .populate('portfolios.project', companyFeatures)
+    .populate('portfolios.company', companyFeatures)
+    .populate('followers', userFeatures)
+    .populate('followings', userFeatures)
+    .populate('companyFollowings', companyFeatures)
     .lean()
 }
 
