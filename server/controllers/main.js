@@ -18,23 +18,6 @@ const {
 
 let mainContents = null;
 
-function cleanPopulate(obj, items) {
-  const companyFeatures = 'name link_name profilePicture type _id';
-  const userFeatures = 'userid type name picture _id';
-  for(let p of items) {
-    if(p === 'user') {
-      obj = obj.populate(p, userFeatures);
-    }
-    else if(p === 'company' || p === 'project') {
-      obj = obj.populate(p, companyFeatures);
-    }
-    else {
-      obj = obj.populate(p);
-    }
-  }
-  return obj;
-}
-
 function getContents(model, query, sort, limit, loaded, populate) {
   const sorting = sort === 'popular'? {score:-1} : {created:-1};
   model =  model
@@ -50,14 +33,7 @@ function getContents(model, query, sort, limit, loaded, populate) {
 function searchContents(keyword, query, limit, loaded, populate, shouldSplitKeyword) {
   keyword = shouldSplitKeyword? common.cut(keyword).join(' ') : keyword;  
   loaded = loaded? loaded : 0;
-  const portfolio = Portfolio
-      .find({ ...query, $text: { $search: keyword } }, {score: { $meta: "textScore" }, meta:0, keywords:0})
-      .sort({ score: { $meta: "textScore" } } )
-      .skip(loaded)
-      .limit(limit)
-      // .populate(populate)
-      .lean();
-  return cleanPopulate(portfolio, populate);
+  return searchPortfolios(keyword, query, limit, loaded, populate);
 }
 
 function searchCategories({keywords, limit=3, loaded=0}) {
@@ -80,7 +56,7 @@ function getCompanyContents({sort='popular', loaded=0, limit=12}) {
 }
 
 function getMakerPorfolioContents({sort='recent', loaded=0, limit=18}) {
-  return getContents(Portfolio, {type:'maker', isPrivate:false}, sort, limit, loaded, ['user', 'company', 'images']);
+  return getContents(Portfolio, {type:'maker', isPrivate:false, 'images.0': {$exists:true}}, sort, limit, loaded, ['user', 'company', 'images']);
 }
 
 function getCompanyPorfolioContents({sort='popular', loaded=0, limit=9}) {
@@ -208,15 +184,35 @@ export async function increaseCount(req, res) {
   return res.json({result: 'ok'});
 }
 
+function cleanPopulate(obj, items) {
+  for(let p of items) {
+    if(p === 'user') {
+      obj = obj.populate(p, common.populateFieldsForPortfolio.userFeatures);
+    }
+    else if(p === 'company' || p === 'project') {
+      obj = obj.populate(p, common.populateFieldsForPortfolio.companyFeatures);
+    }
+    else {
+      obj = obj.populate(p);
+    }
+  }
+  return obj;
+}
+
+function searchPortfolios(keyword, query, limit, loaded, populate) {
+  const portfolio = Portfolio
+      .find({ ...query, $text: { $search: keyword } }, {score: { $meta: "textScore" }, meta:0, keywords:0})
+      .sort({ score: { $meta: "textScore" } } )
+      .skip(loaded)
+      .limit(limit)
+      .lean();
+  return cleanPopulate(portfolio, populate);
+}
+
 export async function search(req, res) {
   const keyword = common.cut(req.params.keyword).join(' ');
-  
-  const portfolios = await Portfolio
-                            .find({ isPrivate:false, $text: { $search: keyword } }, {score: { $meta: "textScore" }})
-                            .sort({ score: { $meta: "textScore" } } )
-                            .limit(100)
-                            .populate(['company', 'user'])
-                            .lean();
+
+  const portfolios = await searchPortfolios(keyword, { isPrivate:false }, 100, 0, ['company', 'user']);
   
   res.json({ result: { portfolios } });
 }

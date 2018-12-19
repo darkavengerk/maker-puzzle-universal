@@ -23,8 +23,8 @@ export function all(req, res) {
 }
 
 export async function getPopulatedUser(userid) {
-  const companyFeatures = 'name link_name profilePicture type _id';
-  const userFeatures = 'userid type name picture _id';
+  const companyFeatures = common.populateFieldsForPortfolio.companyFeatures;
+  const userFeatures = common.populateFieldsForPortfolio.userFeatures;
   return await User
     .findOne({ userid }, {email:0, password:0})
     .populate('companiesOwned', companyFeatures)

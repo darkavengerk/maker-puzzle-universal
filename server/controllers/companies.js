@@ -13,8 +13,8 @@ const {
 } = models;
 
 async function getPopulatedCompany(link_name) {
-  const companyFeatures = 'name link_name profilePicture type _id';
-  const userFeatures = 'userid type name picture _id';
+  const companyFeatures = common.populateFieldsForPortfolio.companyFeatures;
+  const userFeatures = common.populateFieldsForPortfolio.userFeatures;
   return await Company
                 .findOne({ link_name })
                 .populate('companyPortfolios.project', companyFeatures)

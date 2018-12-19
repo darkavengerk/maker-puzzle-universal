@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import  { models } from '../db';
+import  { models, common } from '../db';
 
 const { 
   Project, 
@@ -34,8 +34,8 @@ export function search(req, res) {
 
 export async function one(req, res) {
   const { link_name } = req.params;
-  const companyFeatures = 'name link_name profilePicture type _id';
-  const userFeatures = 'userid type name picture _id';
+  const companyFeatures = common.populateFieldsForPortfolio.companyFeatures;
+  const userFeatures = common.populateFieldsForPortfolio.userFeatures;
   const result = await Project
                     .findOne({ link_name })
                     .populate('portfolios.user', userFeatures) 

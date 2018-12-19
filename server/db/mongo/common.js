@@ -389,6 +389,11 @@ function refineCompanyName(keyword) {
   return refineName(keyword);
 }
 
+const populateFieldsForPortfolio = {
+  companyFeatures : 'name link_name profilePicture type _id features',
+  userFeatures : 'userid type name picture _id features',
+}
+
 export default {
   savePortfolio,
   imageProcess,
@@ -396,5 +401,6 @@ export default {
   makeIndexFromPortfolio,
   runCommand,
   cut,
-  refineCompanyName
+  refineCompanyName,
+  populateFieldsForPortfolio
 };

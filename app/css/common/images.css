@@ -17,3 +17,8 @@
 .maker-round-image {
   border-radius: 50%;
 }
+
+.round-border {
+  border: 1px solid;
+  border-color: #dfdfdf;
+}
