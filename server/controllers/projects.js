@@ -34,13 +34,14 @@ export function search(req, res) {
 
 export async function one(req, res) {
   const { link_name } = req.params;
+  const companyFeatures = 'name link_name profilePicture type _id';
+  const userFeatures = 'userid type name picture _id';
   const result = await Project
                     .findOne({ link_name })
-                    .populate({path:'portfolios.user'}) 
-                    .populate({path:'portfolios.company'}) 
-                    .populate({path:'portfolios.images'}) 
-                    .populate({path:'users'}) 
-                    .populate({path:'companies'}) 
+                    .populate('portfolios.user', userFeatures) 
+                    .populate('portfolios.company', companyFeatures) 
+                    .populate('users', userFeatures) 
+                    .populate('companies', companyFeatures) 
                     .lean();
   return res.json(result);
 }
