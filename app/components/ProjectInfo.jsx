@@ -30,7 +30,7 @@ const ProjectInfo = ({ owner }) => {
       {project.portfolios.map((p,i) => p.companyName && p.title?
         <div key={i}>
           <Link to={'/company/' + refineCompanyName(p.companyName).replace(' ', '_')} count="company">
-            <div className={cx('ref-title')}>{p.companyName}</div>
+            <div className={cx('ref-title')}>{refineCompanyName(p.companyName)}</div>
           </Link>
           <div className={cx('ref-content')}>{p.title}</div>
         </div> : null)

@@ -240,6 +240,7 @@ export async function deletePortfolio(req, res) {
 async function createPortfolio(userid, portfolio) {
   const location = portfolio.location.trim();
   const companyName = common.refineCompanyName(portfolio.companyName);
+  portfolio.companyName = companyName;
 
   let [ user, project, company ] = await Promise.all([
     User.findOne({userid}),
