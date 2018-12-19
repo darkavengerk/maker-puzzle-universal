@@ -13,16 +13,16 @@ const {
 } = models;
 
 async function getPopulatedCompany(link_name) {
+  const companyFeatures = 'name link_name profilePicture type _id';
+  const userFeatures = 'userid type name picture _id';
   return await Company
                 .findOne({ link_name })
-                .populate({path:'companyPortfolios.project'})
-                .populate({path:'portfolios.user'})
-                .populate({path:'portfolios.images'})
-                .populate({path:'companyPortfolios.images'})
-                .populate({path:'portfolios.project'})
-                .populate('owners')
-                .populate('followers')
-                .populate({path:'users'})
+                .populate('companyPortfolios.project', companyFeatures)
+                .populate('portfolios.user', userFeatures)
+                .populate('portfolios.project', companyFeatures)
+                .populate('owners', userFeatures)
+                .populate('followers', userFeatures)
+                .populate('users', userFeatures)
                 .lean();
 }
 
