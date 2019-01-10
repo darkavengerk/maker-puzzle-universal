@@ -7,6 +7,8 @@ import initExpress from './init/express';
 import initRoutes from './init/routes';
 import renderMiddleware from './render/middleware';
 
+// process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
+
 const app = express();
 
 /*
