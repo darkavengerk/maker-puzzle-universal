@@ -17,6 +17,7 @@ import { session as dbSession } from '../db';
 
 export default (app) => {
   app.set('port', (process.env.PORT || 3000));
+  app.enable('trust proxy');
 
   if (ENV === 'production') {
     app.use(gzip());
@@ -76,7 +77,7 @@ export default (app) => {
     // If secure is set, and you access your site over HTTP, the cookie will not be set
     cookie: {
       httpOnly: true,
-      secure: false,
+      secure: ENV === 'production'? true : false,
     },
     store: sessionStore
   };
