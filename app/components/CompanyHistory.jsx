@@ -90,7 +90,7 @@ const Component = ({ maker, editing, onChange, ...props }) => {
         }
         <td>
           <ContentEditable 
-            className={cx('text-input', 'compnay-period', (info.current? "col-selected": ""))}
+            className={cx('text-input', 'company-period', (info.current? "col-selected": ""))}
             html={info.period} 
             tagName="span"
             placeholder="ex)1년2개월"

@@ -67,7 +67,7 @@ class CompanyClaim extends Component {
     return (
       <div className={cx('main-section')} onClick={this.ignore}>
         <div className={cx('main-button')} onClick={this.clicked}>
-          {this.isOwned() ? '소유된 페이지' : '무료 기업페이지 소유하기'}
+          {this.isOwned() ? '소유된 페이지' : '이 기업의 대표님이신가요?'}
         </div>
         <Popup show={this.state.showPopup} name="ClaimPopup" cancel={this.cancel} roll={false} top={100}>
           <CompanyClaimUI cancel={this.cancel} submit={this.submit} isOwned={this.isOwned()} />

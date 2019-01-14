@@ -160,14 +160,11 @@
 .company-period {  
   width: 0.76rem;
   text-align: left;
-}
-
-.company-period-padding {
   padding-left: 0.11rem;
 }
 
 .company-position {  
-  width: 1.0rem;
+  width: 100%;
   text-align: center;
 }
 
