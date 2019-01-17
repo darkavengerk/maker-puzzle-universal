@@ -213,15 +213,25 @@ function searchPortfolios(keyword, query, limit, loaded, populate) {
   return cleanPopulate(portfolio, populate);
 }
 
+function searchPortfoliosCount(keyword, query) {
+  return Portfolio.count({ ...query, $text: { $search: keyword } });
+}
+
 export async function search(req, res) {
   const keyword = common.cut(req.params.keyword).join(' ');
+  const skip =  parseInt(req.params.current || 0);
+  let total = 0;
 
-  const portfolios = await searchPortfolios(keyword, { isPrivate:false }, 100, 0, ['company', 'user']);
+  if(skip === 0) {
+    total = await searchPortfoliosCount(keyword, { isPrivate:false }); 
+  }
+  const portfolios = await searchPortfolios(keyword, { isPrivate:false }, 12, skip, ['company', 'user']);
   
-  res.json({ result: { portfolios } });
+  res.json({ result: { portfolios, total } });
 }
 
 export async function refresh(req, res) {
+  console.log('version not compatable');
   return res.status(301).json({error: 'api version incompatible'});
 }
 

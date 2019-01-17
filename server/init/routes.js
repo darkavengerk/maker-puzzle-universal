@@ -57,6 +57,7 @@ export default (app) => {
     GET('/api/more/:topic/:subtype/:sort/:loaded', mainController.more);
     GET('/api/more/:topic/:subtype/:sort', mainController.more);
     POST('/api/count', mainController.increaseCount);
+    GET('/api/search/:keyword/:current', mainController.search);
     GET('/api/search/:keyword', mainController.search);
   }
 

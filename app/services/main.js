@@ -29,7 +29,11 @@ export default () => {
     search: (keyword) => client.request({
       method: 'GET',
       url: '/api/search/' + escape(keyword)
-    })
+    }),
+    loadSearch: (params) => client.request({
+      method: 'GET',
+      url: `/api/search/${escape(params.keyword)}/${params.current}`
+    }),
   };
 };
 

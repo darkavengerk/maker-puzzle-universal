@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
+import InfiniteScroll from 'react-infinite-scroller';
+
 import ImageUploader from '../components/ImageUploader';
 import TopTitle from '../components/TopTitle';
 import ContentsSection from '../components/ContentsSection';
@@ -11,6 +13,7 @@ import PortfolioItemWide from '../components/PortfolioItemWide';
 import PortfolioItem from '../components/PortfolioItem';
 
 import { create as createObject } from '../utils/objects'
+import { loadSearchData } from '../actions/main';
 
 import styles from '../css/components/search';
 
@@ -20,10 +23,15 @@ class Container extends Component {
   
   constructor(props) {
     super(props);
+    this.state = {loading: true, hasMore: true};
+  }
+
+  componentDidMount() {
+    this.setState({loading: false});
   }
 
   render() {
-    const { user, search, param } = this.props;
+    const { user, search, param, loadSearchData } = this.props;
     const { portfolios } = search.result || { portfolios:[] };
 
     const referrer = createObject('main');
@@ -38,6 +46,16 @@ class Container extends Component {
         return <PortfolioItem portfolio={portfolio} referrer={referrer} owner={owner} key={portfolio.pid} external={true} />
       }
     });
+
+    const loadFunc = (page) => {
+      if(!this.state.loading && !search.loading && portfolios.length < search.result.total) {
+        this.setState({loading: true});
+        loadSearchData(
+          {keyword: param.keyword, current: portfolios.length}, 
+          res => this.setState({loading: false})
+        );
+      }
+    }
 
     return (
       <div className={cx('main-section')}>
@@ -64,12 +82,18 @@ class Container extends Component {
           <div className={cx('title')}>
             포트폴리오 
             <div className={cx('small-title')}>
-              ({portfolioTags.length}개의 검색결과가 있습니다)
+              ({search.result.total}개의 검색결과가 있습니다)
             </div>
           </div>
-          <div className={cx('project-tiles')}>
-            {portfolioTags}
-          </div>
+          <InfiniteScroll
+            pageStart={0}
+            loadMore={loadFunc}
+            hasMore={ search.hasMore }
+          >
+            <div className={cx('project-tiles')}>
+              {portfolioTags}
+            </div>
+          </InfiniteScroll>
         </div>
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
       </div>
@@ -88,4 +112,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {})(Container);
+export default connect(mapStateToProps, { loadSearchData })(Container);
