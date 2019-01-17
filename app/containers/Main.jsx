@@ -74,11 +74,11 @@ class MainPageSection extends Component {
       companyPortfolios=[],
       portfoliosRecent=[],
       companyPortfoliosRecent=[],
-      feed=[]
     } = main;
 
     const referrer = createObject('main');
 
+    let feed = user.account.feed || [];
     let feedCount = 0;
 
     const portfolioFeeds = feed.map(portfolio => {

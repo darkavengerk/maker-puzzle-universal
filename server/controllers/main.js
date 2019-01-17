@@ -92,22 +92,6 @@ export async function buildContents(req, res) {
   }
 }
 
-async function buildFeed(user) {
-  user = await User
-          .findOne({userid: user.userid})
-          .populate('followings', 'portfolios')
-          .populate('companyFollowings', 'companyPortfolios');
-  let portfolios = [];
-  for(let p of user.followings) {
-    portfolios = portfolios.concat(p.portfolios);
-  }
-  for(let p of user.companyFollowings) {
-    portfolios = portfolios.concat(p.companyPortfolios);
-  }
-  portfolios = portfolios.filter(p => p&&!p.isPrivate);
-  return portfolios.sort((a,b) => b.created - a.created);
-}
-
 async function populatePortfoilios(portfolios) {
   var opts = [
       { path: 'company' }
@@ -122,7 +106,7 @@ export async function main(req, res) {
     await buildContents();
   if(req.user && req.user.userid) {
     const user = await getPopulatedUser(req.user.userid);
-    mainContents.feed = await populatePortfoilios((await buildFeed(user)).slice(0,18));
+    // mainContents.feed = await populatePortfoilios((await buildFeed(user)).slice(0,18));
   }
   return res.json(mainContents);
 }
