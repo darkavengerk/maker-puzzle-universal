@@ -24,10 +24,24 @@ class Container extends Component {
   constructor(props) {
     super(props);
     this.state = {loading: true, hasMore: true};
+    this.loadFunc = this.loadFunc.bind(this);
   }
 
   componentDidMount() {
     this.setState({loading: false});
+  }
+
+  loadFunc(page) {
+    const { search, param, loadSearchData } = this.props;
+    const { portfolios } = search.result || { portfolios:[] };
+
+    if(!this.state.loading && !search.loading && portfolios.length < search.result.total) {
+      this.setState({loading: true});
+      loadSearchData(
+        {keyword: param.keyword, current: portfolios.length}, 
+        res => this.setState({loading: false})
+      );
+    }
   }
 
   render() {
@@ -46,16 +60,6 @@ class Container extends Component {
         return <PortfolioItem portfolio={portfolio} referrer={referrer} owner={owner} key={portfolio.pid} external={true} />
       }
     });
-
-    const loadFunc = (page) => {
-      if(!this.state.loading && !search.loading && portfolios.length < search.result.total) {
-        this.setState({loading: true});
-        loadSearchData(
-          {keyword: param.keyword, current: portfolios.length}, 
-          res => this.setState({loading: false})
-        );
-      }
-    }
 
     return (
       <div className={cx('main-section')}>
@@ -87,8 +91,9 @@ class Container extends Component {
           </div>
           <InfiniteScroll
             pageStart={0}
-            loadMore={loadFunc}
+            loadMore={this.loadFunc}
             hasMore={ search.hasMore }
+            useWindow={true}
           >
             <div className={cx('project-tiles')}>
               {portfolioTags}
