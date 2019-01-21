@@ -37,22 +37,6 @@ export async function getPopulatedUser(userid) {
     .lean()
 }
 
-async function buildFeed(user) {
-  user = await User
-          .findOne({userid: user.userid})
-          .populate('followings', 'portfolios')
-          .populate('companyFollowings', 'companyPortfolios');
-  let portfolios = [];
-  for(let p of user.followings) {
-    portfolios = portfolios.concat(p.portfolios);
-  }
-  for(let p of user.companyFollowings) {
-    portfolios = portfolios.concat(p.companyPortfolios);
-  }
-  portfolios = portfolios.filter(p => p&&!p.isPrivate);
-  return portfolios.sort((a,b) => b.created - a.created);
-}
-
 export async function single(req, res) {
   let user = await getPopulatedUser(req.params.id);
 
@@ -78,7 +62,7 @@ export function login(req, res, next) {
     return req.logIn(user, async (loginErr) => {
       if (loginErr) return res.sendStatus(401);
       const populated = await getPopulatedUser(user.userid);
-      populated.feed = await buildFeed(populated);
+      populated.feed = await common.buildFeed(populated);
       return res.json(populated);
     });
   })(req, res, next);

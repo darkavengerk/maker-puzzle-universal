@@ -6,18 +6,21 @@ import * as types from '../../app/types';
 import pageRenderer from './pageRenderer';
 import fetchDataForRoute from '../../app/utils/fetchDataForRoute';
 import { sessionId } from '../../config/secrets';
-
+import  { common } from '../db';
 /*
  * Export render function to be used in server/config/routes.js
  * We grab the state passed in from the server and the req object from Express/Koa
  * and pass it into the Router.run function.
  */
-export default function render(req, res) {
+export default async function render(req, res) {
   const authenticated = req.isAuthenticated();
   const history = createMemoryHistory();
+
+  const user = req.user? req.user.toObject() : {};
+  user.feed = await common.buildFeed(user);
   const store = configureStore({
     user: {
-      account: req.user,
+      account: user,
       authenticated,
       isWaiting: false,
       message: '',

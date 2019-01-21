@@ -219,6 +219,24 @@ async function imageProcess({ images }) {
   });
 }
 
+async function buildFeed(user) {
+  const userid = user.userid;
+  if(!userid) return [];
+  user = await User
+          .findOne({ userid })
+          .populate('followings', 'portfolios')
+          .populate('companyFollowings', 'companyPortfolios');
+  let portfolios = [];
+  for(let p of user.followings) {
+    portfolios = portfolios.concat(p.portfolios);
+  }
+  for(let p of user.companyFollowings) {
+    portfolios = portfolios.concat(p.companyPortfolios);
+  }
+  portfolios = portfolios.filter(p => p&&!p.isPrivate);
+  return portfolios.sort((a,b) => b.created - a.created);
+}
+
 async function updateCount(Model, content, identifier) {
   const stats = await Count.aggregate([
     { $match: { content } },
@@ -402,5 +420,6 @@ export default {
   runCommand,
   cut,
   refineCompanyName,
-  populateFieldsForPortfolio
+  populateFieldsForPortfolio,
+  buildFeed
 };
