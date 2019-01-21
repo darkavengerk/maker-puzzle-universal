@@ -224,13 +224,16 @@ async function buildFeed(user) {
   if(!userid) return [];
   user = await User
           .findOne({ userid })
-          .populate('followings', 'portfolios')
-          .populate('companyFollowings', 'companyPortfolios');
+          .populate('followings')
+          .populate('companyFollowings')
+          .lean();
   let portfolios = [];
   for(let p of user.followings) {
+    p.portfolios.map(x => x.user = {userid: p.userid, name: p.name, picture: p.picture});
     portfolios = portfolios.concat(p.portfolios);
   }
   for(let p of user.companyFollowings) {
+    p.companyPortfolios.map(x => x.company = {name: p.name, link_name: p.link_name, profilePicture: p.profilePicture});
     portfolios = portfolios.concat(p.companyPortfolios);
   }
   portfolios = portfolios.filter(p => p&&!p.isPrivate);
