@@ -10,6 +10,8 @@ import ImageUploader from '../components/ImageUploader';
 import Scatter from '../components/Scatter';
 import SingleLine from '../components/SingleLine';
 import AutoComplete from '../components/AutoComplete';
+import ImagePicker from '../components/ImagePicker';
+
 import styles from '../css/components/add-portfolio';
 
 import { Project, Company } from '../services';
@@ -37,17 +39,19 @@ class AddPortfolio extends Component {
       this.state.companyName = this.props.company.name;
     }
 
+    this.images = portfolio.images;
+
     this.switchChanged = this.switchChanged.bind(this);
     this.addTagEntry = this.addTagEntry.bind(this);
     this.tagChanged = this.tagChanged.bind(this);
     this.removeTag = this.removeTag.bind(this);
     this.detectEnter = this.detectEnter.bind(this);
     this.imageSelected = this.imageSelected.bind(this);
-    this.showCloseButton = this.showCloseButton.bind(this);
     this.removeImage = this.removeImage.bind(this);
     this.onTextChage = this.onTextChage.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.autoComplete = this.autoComplete.bind(this);
+    this.imageListRequest = this.imageListRequest.bind(this);
   }
 
   switchChanged(isPrivate) {
@@ -82,18 +86,19 @@ class AddPortfolio extends Component {
   }
 
   imageSelected(err, img) {
-    this.setState({images: [...this.state.images, img]});
+    const images = [...this.state.images, img];
+    this.setState({ images });
   }
 
-  showCloseButton(i) {
-    return () => this.setState({imageHoverIndex: i})
+  imageListRequest(fn) {
+    this.imageListRequestFn = fn;
   }
 
   removeImage(i) {
     return () => {
       let images = [...this.state.images];
       images.splice(i, 1)
-      this.setState({images: images});
+      this.setState({ images });
     }
   }
 
@@ -124,7 +129,8 @@ class AddPortfolio extends Component {
 
   onSubmit(evt) {
     const { submit, portfolio, editing } = this.props;
-    const submitData = {...this.state, editing};
+    const images = this.imageListRequestFn? this.imageListRequestFn() : this.state.images;
+    const submitData = {...this.state, images, editing};
 
     const checklist = ['companyName', 'location', 'title'];
     for(let check of checklist) {
@@ -347,34 +353,7 @@ class AddPortfolio extends Component {
                     </span>
                   </td>
                   <td>
-                    <div className={cx('image-area')}>
-                      {
-                        this.state.images.map((img, i) => (
-                          <div className={cx('image-container')} 
-                            onMouseEnter={this.showCloseButton(i)}
-                            onMouseLeave={this.showCloseButton(-1)}
-                            key={i} >
-
-                            <FlexibleImage 
-                              source={img} pureImage={true} y={91} key={i} 
-                              className={cx('image-item', i === this.state.imageHoverIndex ? 'image-hover':'')}/>
-                            {(i === this.state.imageHoverIndex ? 
-                            <FlexibleImage 
-                              x={24.7} y={24.7}
-                              onClick={this.removeImage(i)} 
-                              className={cx('image-remove-button')}
-                              source={'/images/site/ic_clear_white_48dp.png'} 
-                              role="button"
-                              key={i+'remove'} /> : null)}
-                          </div>
-                        ))
-                      }
-                      <ImageUploader name="PortfolioImageUploader" callback={this.imageSelected} >
-                        <span className={cx('image-upload-button')}>
-                          <FlexibleImage source={'/site/images/upload-button.jpg'} x={117} y={92} />
-                        </span>
-                      </ImageUploader>
-                    </div>
+                    <ImagePicker images={this.state.images} imageSelected={this.imageSelected} imageListRequest={this.imageListRequest}/>
                   </td>
                 </tr>
                 

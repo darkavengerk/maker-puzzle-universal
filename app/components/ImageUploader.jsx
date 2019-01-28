@@ -26,8 +26,9 @@ class ImageUploader extends React.Component {
   onFileSelected = function (e) {
     e.preventDefault();
     let target = document.getElementById(this.props.name);
-    let file = target.files[0];
-    this.props.uploadImage(this.props.user.userid, file, this.props.callback);
+    for(let file of target.files) {
+      this.props.uploadImage(this.props.user.userid, file, this.props.callback);
+    }
   }
 
   render() {
@@ -37,7 +38,7 @@ class ImageUploader extends React.Component {
       <div >
         {<div role="button" onClick={this.onLoad}>{this.props.children}</div>}
         <form style={{display:'none'}}>
-          <input type="file" className={cx('file-input')} id={this.props.name} onChange={this.onFileSelected} />
+          <input type="file" className={cx('file-input')} id={this.props.name} onChange={this.onFileSelected} multiple="multiple" />
           <input type="button" value="value" />
         </form>
       </div>

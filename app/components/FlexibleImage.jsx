@@ -55,8 +55,8 @@ class FlexibleImage extends Component {
       }
     }
 
-    const { className, onClick, role } = this.props;
-    const renderProps = { className, onClick, role };
+    const { className, onClick, onMouseDown, onMouseUp, role } = this.props;
+    const renderProps = { className, onClick, onMouseDown, onMouseUp, role };
 
     if(pureImage) {
       return (<PureImage source={url} x={x} y={y} {...renderProps} />);
