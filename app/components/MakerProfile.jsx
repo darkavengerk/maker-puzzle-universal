@@ -18,9 +18,11 @@ import { logOut, loginMenu } from '../actions/users';
 import ContentEditable from 'react-contenteditable'
 import jsxToString from 'jsx-to-string';
 import Assist from '../utils/assist';
+import { createTextLinks } from '../utils/functions';
 
 import styles from '../css/components/maker-profile';
 const cx = classNames.bind(styles);
+
 
 class MakerProfile extends Component {
 
@@ -198,10 +200,9 @@ class MakerProfile extends Component {
             }}
             editing={editing}
           />
-
           <ContentEditable 
             className={cx('about-maker', editing? 'editing':'')}
-            html={maker.about? maker.about : ''} 
+            html={maker.about? createTextLinks(maker.about) : ''} 
             tagName="pre"
             onKeyUp={this.aboutEdited}
             disabled={!editing}

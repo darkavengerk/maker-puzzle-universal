@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 import ContentEditable from 'react-contenteditable'
 
 import Scatter from '../components/Scatter';
-
+import { createTextLinks } from '../utils/functions';
 
 const Comp = ({ features, featureEdited, classNames, editing=false, ...props }) => {
 
@@ -42,7 +42,7 @@ const Comp = ({ features, featureEdited, classNames, editing=false, ...props }) 
         <ContentEditable 
           tagName="span"
           className={classNames.content + (editing && !feature.blocked ? ' ' + classNames.editing : '')}
-          html={ feature.content || '' }
+          html={ createTextLinks(feature.content) || '' }
           onKeyPress={preventEnter}
           onKeyUp={handleChange(feature.title)}
           placeholder={feature.placeholder}
