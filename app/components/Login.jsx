@@ -7,11 +7,12 @@ import Select from 'react-select';
 
 import { manualLogin, signUp } from '../actions/users';
 import { dismissMessage } from '../actions/messages';
-import styles from '../css/components/login';
 import SingleLine from '../components/SingleLine';
 import Padding from '../components/Padding';
-import hourGlassSvg from '../images/hourglass.svg';
+import FlexibleImage from '../components/FlexibleImage';
+// import hourGlassSvg from '../images/hourglass.svg';
 
+import styles from '../css/components/login';
 const cx = classNames.bind(styles);
 
 const now = new Date().getFullYear();
@@ -23,9 +24,10 @@ for(let y = now-14; y > now-100; y--) {
 class LoginOrRegister extends Component {
   constructor(props) {
     super(props);
-    this.state = {loginMode: true};
+    this.state = {loginMode: 'main'};
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
     this.toggleLoginMode = this.toggleLoginMode.bind(this);
+    this.emailLoginClicked = this.emailLoginClicked.bind(this);
     this.genderSelected = this.genderSelected.bind(this);
     this.yearSelected = this.yearSelected.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -41,7 +43,14 @@ class LoginOrRegister extends Component {
 
   toggleLoginMode(event) {
     event.preventDefault();
-    this.setState({loginMode: !this.state.loginMode});
+    if(this.state.loginMode === 'signup') {
+      this.setState({loginMode: 'main'});
+    }
+    else this.setState({loginMode: 'signup'});
+  }
+
+  emailLoginClicked(event) {
+    this.setState({loginMode: 'login'});
   }
 
   handleOnSubmit(event) {
@@ -49,7 +58,7 @@ class LoginOrRegister extends Component {
 
     const { manualLogin, signUp } = this.props;
 
-    if (this.state.loginMode) {
+    if (this.state.loginMode === 'login' || this.state.loginMode === 'main') {
       manualLogin(this.state);
     } else {
       signUp(this.state);
@@ -69,7 +78,44 @@ class LoginOrRegister extends Component {
   render() {
     const { user: { isWaiting, message, isLogin } } = this.props;
 
-    if(this.state.loginMode) {
+    if(this.state.loginMode === 'main') {
+      return (
+        <div
+          className={cx('login', {
+            waiting: isWaiting
+          })}
+        >
+          <div className={cx('main-section')}>
+            <h1 className={cx('title')}>메이커퍼즐 시작하기</h1>
+            <Padding height="5" />
+            <div className={cx('main-section-desc')}>
+              전세계 도시의 엔딩크레딧에<br/>
+              당신의 이름도 새겨보세요
+            </div>
+            <Padding height="30" />
+            <div className={cx('menu-button', 'button-fb')} role="button" >
+              <FlexibleImage source="/site/images/FB-icon.jpg" x={18} y={18} pureImage={true} />
+              <Padding width="13" />
+              페이스북으로 계속하기
+            </div>
+            <Padding height="9" />
+            <div className={cx('menu-button')} role="button" >
+              <FlexibleImage source="/site/images/G-icon.jpg" x={21} y={21} pureImage={true} />
+              <Padding width="11" />
+              구글 계정으로 계속하기
+            </div>
+            <Padding height="9" />
+            <div className={cx('menu-button')} role="button" onClick={this.emailLoginClicked} >
+              <FlexibleImage source="/site/images/ic_drafts_grey600_48dp.png" x={21} y={21} pureImage={true} />
+              <Padding width="5" />
+              이메일 계정으로 계속하기
+            </div>
+            <Padding height="40" />
+          </div>
+        </div>
+      )
+    }
+    else if(this.state.loginMode === 'login') {
       return (
         <div
           className={cx('login', {
