@@ -46,12 +46,18 @@ class FlexibleImage extends Component {
         if(newImage.status === IMAGE_PROCESSING_VERSION) {
           url = S3_URL + newImage.versions[version];
         }
+        else if(newImage.status === 'google') {
+          url = url.replace('50', ''+ (x>y? x:y));
+        }
       }
     }
     else {
       url = source? source.original : '';
       if(source && source.status === IMAGE_PROCESSING_VERSION) {
         url = S3_URL + source.versions[version];
+      }
+      else if(source && source.status === 'google') {
+        url = url.replace('50', ''+ (x>y? x:y));
       }
     }
 

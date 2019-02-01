@@ -292,35 +292,53 @@ export function logout(req, res) {
   res.sendStatus(200);
 }
 
+// export async function signUp(req, res, next) {
+//   let userInfo = {...req.body};
+//   let userid = req.body.email.split('@')[0];
+//   let existingUser = await User.findOne({ userid });
+//   let idCount = 0;
+//   while(existingUser) {
+//     idCount += 1;
+//     userid += idCount;
+//     existingUser = await User.findOne({ userid });
+//   }
+//   userInfo['userid'] = userid;
+
+//   existingUser = await User.findOne({ email: userInfo.email });
+//   if (existingUser) {
+//     return res.sendStatus(409);
+//   }
+
+//   userInfo = await Metadata.populateMetadata('User', userInfo);
+
+//   const user = await User.create(userInfo);
+  
+//   return req.logIn(user, (loginErr) => {
+//     if (loginErr) return res.sendStatus(401);
+//     return res.json(user);
+//   });
+// }
+
 /**
  * POST /signup
  * Create a new local account
  */
 export async function signUp(req, res, next) {
-  let userInfo = {...req.body};
   let userid = req.body.email.split('@')[0];
-  let existingUser = await User.findOne({ userid });
-  let idCount = 0;
-  while(existingUser) {
-    idCount += 1;
-    userid += idCount;
-    existingUser = await User.findOne({ userid });
+  let userInfo = {...req.body, userid };
+
+  try {
+    const user = await User.signUp(userInfo);
+    return req.logIn(user, (loginErr) => {
+      if (loginErr) return res.sendStatus(401);
+      return res.json(user);
+    });
   }
-  userInfo['userid'] = userid;
-
-  existingUser = await User.findOne({ email: userInfo.email });
-  if (existingUser) {
-    return res.sendStatus(409);
+  catch(e) {
+    res.sendStatus(e);
+    return;
   }
 
-  userInfo = await Metadata.populateMetadata('User', userInfo);
-
-  const user = await User.create(userInfo);
-  
-  return req.logIn(user, (loginErr) => {
-    if (loginErr) return res.sendStatus(401);
-    return res.json(user);
-  });
 }
 
 export default {

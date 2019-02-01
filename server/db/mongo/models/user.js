@@ -6,6 +6,7 @@
 import bcrypt from 'bcrypt-nodejs';
 import mongoose from 'mongoose';
 import {default as Portfolio} from './portfolio_schema';
+import  { models } from '../../../db';
 
 const ObjectId = mongoose.Schema.Types.ObjectId;
 const {AutoComplete} = require('../utils/autocomplete');
@@ -81,6 +82,8 @@ const UserSchema = new mongoose.Schema({
   
   score: {type: Number, default: 0},
   count: {type: Number, default: 0},
+
+  google: String,
 });
 
 function encryptPassword(next) {
@@ -113,10 +116,37 @@ UserSchema.methods = {
   }
 };
 
+UserSchema.statics.signUp = async function signUp(userInfo) {
+  let userid = userInfo.userid;
+  let existingUser = await this.findOne({ userid });
+  let idCount = 0;
+  while(existingUser) {
+    idCount += 1;
+    userid += idCount;
+    existingUser = await this.findOne({ userid });
+  }
+  userInfo.userid = userid;
+
+  return new Promise(async (resolve, reject) => {
+    existingUser = await this.findOne({ email: userInfo.email });
+    if (existingUser) {
+      reject(409);
+      return 409;
+    }
+
+    userInfo = await models.Metadata.populateMetadata('User', userInfo);
+
+    const user = await this.create(userInfo);
+    resolve(user);
+    return user;
+  });
+};
+
+
 /**
  * Statics
  */
 
-UserSchema.statics = {};
+// UserSchema.statics = {};
 
 export default mongoose.model('User' , UserSchema);

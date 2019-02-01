@@ -99,7 +99,7 @@ class LoginOrRegister extends Component {
               페이스북으로 계속하기
             </div>
             <Padding height="9" />
-            <div className={cx('menu-button')} role="button" >
+            <div className={cx('menu-button')} role="button" onClick={e => window.location.href = '/auth/google'}>
               <FlexibleImage source="/site/images/G-icon.jpg" x={21} y={21} pureImage={true} />
               <Padding width="11" />
               구글 계정으로 계속하기
