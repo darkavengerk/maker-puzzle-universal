@@ -8,6 +8,14 @@
   align-items: center;
 }
 
+.top-button-area {
+  width: 100%;
+  height: 0.26rem;
+  margin-left: 0.08rem;
+  margin-top: 0.07rem;
+  margin-bottom: -0.33rem;
+}
+
 .title {
   height: 0.43rem;
   font-family: NanumBarunGothic;

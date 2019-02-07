@@ -50,7 +50,11 @@ class LoginOrRegister extends Component {
   }
 
   emailLoginClicked(event) {
-    this.setState({loginMode: 'login'});
+    event.preventDefault();
+    if(this.state.loginMode === 'login') {
+      this.setState({loginMode: 'main'});
+    }
+    else this.setState({loginMode: 'login'});
   }
 
   handleOnSubmit(event) {
@@ -123,8 +127,18 @@ class LoginOrRegister extends Component {
           })}
         >
           <div className={cx('main-section')}>
-            <h1 className={cx('title')}>더 보려면 로그인하세요</h1>
-            <Padding height="25" />
+            <div className={cx('top-button-area')}>
+              <FlexibleImage 
+                source="/site/images/ic_reply_grey600_48dp.png" 
+                className={cx('button-back')}
+                role="button"
+                onClick={this.emailLoginClicked}
+                x={39} y={39}
+              />
+            </div>
+
+            <h1 className={cx('title')}>이메일로 로그인</h1>
+            <Padding height="35" />
 
             <form onSubmit={this.handleOnSubmit} className={cx('form-area')}>
               <input
