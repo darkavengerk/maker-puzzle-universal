@@ -266,7 +266,7 @@ class LoginOrRegister extends Component {
                   <Padding width="12" inline={true} />
                   남자
                   <Padding width="22" inline={true} />
-                  <input className="gender" type="radio" value="W" name="gender" onChange={this.handleInputChange} />
+                  <input className="gender" type="radio" value="F" name="gender" onChange={this.handleInputChange} />
                   <Padding width="12" inline={true} />
                   여자
                 </div>

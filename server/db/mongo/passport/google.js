@@ -18,23 +18,23 @@ import Image from '../models/image';
   userid: 'bbb' }
 */
 export default (req, accessToken, refreshToken, profile, done) => {
-  if (req.user) {
-    return User.findOne({ google: profile.id }, (findOneErr, existingUser) => {
-      if (existingUser) {
-        return done(null, false, { message: 'There is already a Google account that belongs to you. Sign in with that account or delete it, then link it with your current account.' });
-      }
-      return User.findById(req.user.id, (findByIdErr, user) => {
-        user.google = profile.id;
-        user.tokens.push({ kind: 'google', accessToken });
-        user.name = user.profile.name || profile.displayName;
-        user.gender = user.profile.gender || profile._json.gender;
-        user.picture = user.profile.picture || profile._json.picture;
-        user.save((err) => {
-          done(err, user, { message: 'Google account has been linked.' });
-        });
-      });
-    });
-  }
+  // if (req.user) {
+  //   return User.findOne({ google: profile.id }, (findOneErr, existingUser) => {
+  //     if (existingUser) {
+  //       return done(null, false, { message: 'There is already a Google account that belongs to you. Sign in with that account or delete it, then link it with your current account.' });
+  //     }
+  //     return User.findById(req.user.id, (findByIdErr, user) => {
+  //       user.google = profile.id;
+  //       user.tokens.push({ kind: 'google', accessToken });
+  //       user.name = user.profile.name || profile.displayName;
+  //       user.gender = user.profile.gender || profile._json.gender;
+  //       user.picture = user.profile.picture || profile._json.picture;
+  //       user.save((err) => {
+  //         done(err, user, { message: 'Google account has been linked.' });
+  //       });
+  //     });
+  //   });
+  // }
   return User.findOne({ google: profile.id }, (findByGoogleIdErr, existingUser) => {
     if (existingUser) {
       return done(null, existingUser);
@@ -49,8 +49,10 @@ export default (req, accessToken, refreshToken, profile, done) => {
       user.google = profile.id;
       user.tokens = [{ kind: 'google', accessToken }];
       user.name = profile.displayName;
-      user.gender = profile._json.gender;
       user.picture = await Image.create({original: profile._json.image.url, status:'google'});
+      if(profile._json.gender) {
+        user.gender = profile._json.gender.toUpperCase()[0];
+      }
       if(profile._json.birthday) {
         user.birthYear = profile._json.birthday.split('-')[0];
       }

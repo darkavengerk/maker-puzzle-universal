@@ -1,7 +1,7 @@
 import { ENV } from './env';
 import { db_uri_prod, db_uri_dev } from './secrets';
 
-export const appVersion = 'v.0.5.9';
+export const appVersion = 'v.0.6.0';
 
 export const isProduction = ENV === 'production';
 export const isDebug = ENV === 'development';

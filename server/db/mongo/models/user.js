@@ -32,7 +32,6 @@ const UserSchema = new mongoose.Schema({
   companiesOwned: [{type: ObjectId, ref: 'Company'}],
 
   makerProfile: {
-    gender: { type: String, default: '' },
     companiesInfo: [{type: ObjectId, ref: 'Company'}],
     companies: [{
       name: String,
