@@ -97,7 +97,7 @@ class LoginOrRegister extends Component {
               당신의 이름도 새겨보세요
             </div>
             <Padding height="30" />
-            <div className={cx('menu-button', 'button-fb')} role="button" >
+            <div className={cx('menu-button', 'button-fb')} role="button" onClick={e => window.location.href = '/auth/facebook'}>
               <FlexibleImage source="/site/images/FB-icon.jpg" x={18} y={18} pureImage={true} />
               <Padding width="13" />
               페이스북으로 계속하기

@@ -41,7 +41,8 @@ export default (req, accessToken, refreshToken, profile, done) => {
     }
     return User.findOne({ email: profile._json.emails[0].value }, async (findByEmailErr, existingEmailUser) => {
       if (existingEmailUser) {
-        return done(null, false, { message: 'There is already an account using this email address. Sign in to that account and link it with Google manually from Account Settings.' });
+        await User.update({_id: existingEmailUser._id}, {$set:{google: profile.id}});
+        return done(null, existingEmailUser);
       }
       const user = {};
       user.email = profile._json.emails[0].value;

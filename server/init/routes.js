@@ -131,7 +131,20 @@ export default (app) => {
     GET('/auth/google/callback',
       passport.authenticate('google', {
         successRedirect: '/',
-        failureRedirect: '/login'
+        failureRedirect: '/main'
+      })
+    );
+  }
+
+  if (passportConfig && passportConfig.facebook) {
+    GET('/auth/facebook', passport.authenticate('facebook', {
+      scope: ['public_profile', 'email']
+    }));
+
+    GET('/auth/facebook/callback',
+      passport.authenticate('facebook', {
+        successRedirect: '/',
+        failureRedirect: '/main'
       })
     );
   }

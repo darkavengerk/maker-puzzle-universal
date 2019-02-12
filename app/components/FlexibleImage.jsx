@@ -22,6 +22,7 @@ class FlexibleImage extends Component {
     if(typeof(source) === 'string' && !source.includes('/')) {
       this.state.shouldLoad = true;
     }
+    this.postProcess = this.postProcess.bind(this);
   }
 
   componentWillMount() {
@@ -29,6 +30,22 @@ class FlexibleImage extends Component {
       const { source, loadImage } = this.props;
       loadImage(source);
     }
+  }
+
+  postProcess(source) {
+    const { x, y, version='original' } = this.props;
+    let url = source? source.original : '';
+    if(source && source.status === IMAGE_PROCESSING_VERSION) {
+        return S3_URL + source.versions[version];
+    }
+    else if(source && source.status === 'google') {
+      return url.replace('50', ''+ (x>y? x:y));
+    }
+    else if(source && source.status === 'facebook') {
+      const facebookID = url.match(/asid=(\d+)/)[1];
+      return `https://graph.facebook.com/${facebookID}/picture?height=${y}&width=${x}`
+    }
+    else return url;
   }
 
   render() {
@@ -42,23 +59,11 @@ class FlexibleImage extends Component {
       }
       else {
         const newImage = loadImage(source);
-        url = newImage.original || '';
-        if(newImage.status === IMAGE_PROCESSING_VERSION) {
-          url = S3_URL + newImage.versions[version];
-        }
-        else if(newImage.status === 'google') {
-          url = url.replace('50', ''+ (x>y? x:y));
-        }
+        url = this.postProcess(newImage);
       }
     }
     else {
-      url = source? source.original : '';
-      if(source && source.status === IMAGE_PROCESSING_VERSION) {
-        url = S3_URL + source.versions[version];
-      }
-      else if(source && source.status === 'google') {
-        url = url.replace('50', ''+ (x>y? x:y));
-      }
+      url = this.postProcess(source);
     }
 
     const { className, onClick, onMouseDown, onMouseUp, role } = this.props;
