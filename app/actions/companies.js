@@ -55,7 +55,10 @@ export function productEditorCancel() {
 
 export function companyPortfoiloSubmit(portfolio) {
   return async (dispatch, getState) => {
-    const { company: { company: { link_name }} } = getState();
+    let { company: { company: { link_name }} } = getState();
+    if(!link_name) {
+      link_name = portfolio.company.link_name;
+    }
     const res = await Company().submitPortfolio({ link_name, data:portfolio });
     if (res.status === 200) {
       dispatch({type:types.COMPANY_PORTFOLIO_EDIT_SUCCESS, data: res.data});

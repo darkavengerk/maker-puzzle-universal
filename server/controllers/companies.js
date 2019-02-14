@@ -79,7 +79,6 @@ export async function updateFeatures(req, res) {
 }
 
 async function createPortfolio(link_name, portfolio) {
-
   const location = portfolio.location.trim();
 
   let [ project, company ] = await Promise.all([

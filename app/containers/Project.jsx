@@ -9,10 +9,17 @@ import SingleLine from '../components/SingleLine';
 import { Project } from '../utils/objects';
 
 import styles from '../css/components/maker';
+import Assist from '../utils/assist'
 
 const cx = classNames.bind(styles);
 
 class ProjectContainer extends Component {
+  
+  isOwnPage() {
+    const { project, user } = this.props;
+    return Assist.Project.isOwnPage(project, user.account);
+  }
+
   render() {
     const { project: data, user, param } = this.props;
     const project = new Project(data);
@@ -26,7 +33,7 @@ class ProjectContainer extends Component {
           thumbnailURL={project.profilePicture? project.getProfileImage():null} 
         />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
-        <ContentsSection user={user} owner={project} contentsType={contentsType} isOwnPage={false} />
+        <ContentsSection user={user} owner={project} contentsType={contentsType} isOwnPage={this.isOwnPage()} />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
       </div>
     );

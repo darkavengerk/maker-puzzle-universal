@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
+import { replace } from 'react-router-redux';
 import _ from 'lodash';
 
 import Switch from "../components/Switch";
@@ -127,7 +128,7 @@ class AddPortfolio extends Component {
     }
   }
 
-  onSubmit(evt) {
+  async onSubmit(evt) {
     const { submit, portfolio, editing } = this.props;
     const images = this.imageListRequestFn? this.imageListRequestFn() : this.state.images;
     const submitData = {...this.state, images, editing};
@@ -146,7 +147,15 @@ class AddPortfolio extends Component {
       submitData.companyChanged = submitData.companyName !== portfolio.companyName;
       submitData.locationChanged = submitData.location !== portfolio.location;
     }
-    submit(submitData);
+    await submit(submitData);
+
+    if(submitData.locationChanged) {
+      const paths = this.props.pathname.split('/');
+      if(paths.length > 1 && paths[1] === 'project') {
+        const redirect = `/project/${submitData.location.replace(/ /g, '_')}/company/${submitData.companyName.replace(/ /g, '_')}/${submitData.pid}`;
+        this.props.dispatch(replace(redirect));
+      }
+    }
   }
 
   autoComplete(key) {
@@ -380,7 +389,8 @@ AddPortfolio.propTypes = {
 function mapStateToProps(state) {
   return {
     user: state.user,
-    company: state.company.company
+    company: state.company.company,
+    pathname: state.routing.locationBeforeTransitions.pathname
   };
 }
 

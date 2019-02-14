@@ -100,7 +100,7 @@ class ContentsTagFactory {
 
   getProjectContent({user, source, param, isOwnPage, portfoiloSubmit, portfoiloEditorCancel}) {
     if(source.name && param && param.pid) {
-      return this.getProjectDetail(source, param)
+      return this.getProjectDetail(source, param, isOwnPage)
     }
 
     const portfolios = Assist.Maker.getEligiblePortfolios(source, user);
@@ -216,6 +216,7 @@ class ContentsTagFactory {
             <PortfolioDetail 
               portfolio={portfolioFound} 
               edit={isOwnPage}
+              type={'maker'}
               owner={[new Project(portfolioFound.project), new Company(portfolioFound.company)]}
             />
           </div>)
@@ -223,7 +224,7 @@ class ContentsTagFactory {
     else return null;
   }
 
-  getProjectDetail(source, param) {
+  getProjectDetail(source, param, isOwnPage) {
     let portfolios = source.portfolios;
     let portfolioFound = null;
 
@@ -241,7 +242,11 @@ class ContentsTagFactory {
       return (
         <div>
           <p className={cx('main-panel-title')}>포트폴리오</p>
-          <PortfolioDetail portfolio={portfolioFound} owner={owner} />
+          <PortfolioDetail 
+            portfolio={portfolioFound} 
+            edit={isOwnPage}
+            type={'project'}
+            owner={owner} />
         </div>
       )
     }

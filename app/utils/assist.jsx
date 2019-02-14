@@ -171,6 +171,14 @@ class Project extends User {
     return 'project';
   }
 
+  isOwnPage(data, user) {
+    if(!user) return false;
+
+    if(user.type === 'admin') return true;
+
+    return false;
+  }
+
   getProfileImage(data) {
     return data.profilePicture || '/site/images/default_project-01.jpg';
   }
