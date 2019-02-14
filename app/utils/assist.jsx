@@ -171,10 +171,23 @@ class Project extends User {
     return 'project';
   }
 
-  isOwnPage(data, user) {
+  isOwnPage(project, user, param) {
     if(!user) return false;
 
     if(user.type === 'admin') return true;
+
+    if(param.mid) {
+      return param.mid === user.userid;
+    }
+
+    if(param.cid && project.companies && user.companiesOwned) {
+      const founds = project.companies.filter(c => c.link_name === param.cid);
+      if(founds.length >0) {
+        const target = founds[0]._id;
+        const ownedCompany = user.companiesOwned.filter(c => (c._id || c) === target);
+        return ownedCompany.length > 0;
+      }
+    }
 
     return false;
   }

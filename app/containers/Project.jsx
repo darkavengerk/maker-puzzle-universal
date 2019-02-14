@@ -16,8 +16,8 @@ const cx = classNames.bind(styles);
 class ProjectContainer extends Component {
   
   isOwnPage() {
-    const { project, user } = this.props;
-    return Assist.Project.isOwnPage(project, user.account);
+    const { project, param, user } = this.props;
+    return Assist.Project.isOwnPage(project, user.account, param);
   }
 
   render() {

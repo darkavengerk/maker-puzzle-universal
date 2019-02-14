@@ -60,12 +60,12 @@ const PortfolioDetainSection = (
     </label>
   ));
 
-  function submitPortfolio(portfolio) {
+  async function submitPortfolio(portfolio) {
     if(portfolio.type === 'maker') {
-      portfoiloSubmit(portfolio);
+      return await portfoiloSubmit(portfolio);
     }
     if(portfolio.type === 'company') {
-      companyPortfoiloSubmit(portfolio);
+      return await companyPortfoiloSubmit(portfolio);
     }
   }
 
