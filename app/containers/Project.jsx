@@ -6,7 +6,6 @@ import ImageUploader from '../components/ImageUploader';
 import TopTitle from '../components/TopTitle';
 import ContentsSection from '../components/ContentsSection';
 import SingleLine from '../components/SingleLine';
-import { Project } from '../utils/objects';
 
 import styles from '../css/components/maker';
 import Assist from '../utils/assist'
@@ -21,19 +20,19 @@ class ProjectContainer extends Component {
   }
 
   render() {
-    const { project: data, user, param } = this.props;
-    const project = new Project(data);
+    const { project, user, param } = this.props;
+    const assist = Assist.Project;
     const contentsType = (param.mid && param.pid) ? 'project_maker' : 'project';
     return (
       <div className={cx('main-section')}>
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
         <TopTitle 
-          title={project.getName()}
-          to={project.getHomeLink()}
-          thumbnailURL={project.profilePicture? project.getProfileImage():null} 
+          title={assist.getName(project)}
+          to={assist.getHomeLink(project)}
+          thumbnailURL={project.profilePicture? assist.getProfileImage(project):null} 
         />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
-        <ContentsSection user={user} owner={project} contentsType={contentsType} isOwnPage={this.isOwnPage()} />
+        <ContentsSection user={user} provider={assist} data={project} contentsType={contentsType} isOwnPage={this.isOwnPage()} />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
       </div>
     );

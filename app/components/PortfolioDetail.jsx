@@ -17,12 +17,14 @@ import IconPortfolioLocked from '../components/IconPortfolioLocked';
 import { portfoiloEditorStart, portfoiloEditorCancel, portfoiloSubmit, deletePortfoilo } from '../actions/makers';
 import { companyPortfoiloSubmit, deleteCompanyPortfoilo } from '../actions/companies';
 
+import Assist from '../utils/assist';
+
 import styles from '../css/components/portfolio-detail';
 
 
 const cx = classNames.bind(styles);
 
-const PortfolioDetainSection = (
+const PortfolioDetailSection = (
   { portfolio, user, company, owner, edit=false, 
     portfoiloEditorStart, portfoiloEditorCancel, portfoiloSubmit, deletePortfoilo, 
     companyPortfoiloSubmit, deleteCompanyPortfoilo }
@@ -37,18 +39,20 @@ const PortfolioDetainSection = (
     owner = [owner];
   }
 
-  const ownerArea = owner.map(v => (
-    <div className={cx('project-area')} key={v.getHomeLink()} >
-      <Link to={v.getHomeLink()} count={v.getType()}>
-        <Image source={v.getProfileImage()} x={33} y={33} contain={v.getType() === 'company'} />
-      </Link>
-      <Link to={v.getHomeLink()} count={v.getType()}>
-        <label className={cx('project-name')} role="button">
-          {v.getName()}
-        </label>
-      </Link>
-    </div>
-  ));
+  const ownerArea = owner.map(v => {
+    const data = v.getDataFromPortfolio(portfolio);
+    return (
+      <div className={cx('project-area')} key={v.getHomeLink(data)} >
+        <Link to={v.getHomeLink(data)} count={v.getType()}>
+          <Image source={v.getProfileImage(data)} x={33} y={33} contain={v.getType(data) === 'company'} />
+        </Link>
+        <Link to={v.getHomeLink(data)} count={v.getType()}>
+          <label className={cx('project-name')} role="button">
+            {v.getName(data)}
+          </label>
+        </Link>
+      </div>);
+  });
 
   function tagClicked(tag) {
     return evt => browserHistory.push('/search/' + tag);
@@ -139,7 +143,7 @@ const PortfolioDetainSection = (
   );
 };
 
-PortfolioDetainSection.propTypes = {
+PortfolioDetailSection.propTypes = {
   portfolio: PropTypes.object.isRequired,
   user: PropTypes.object
 };
@@ -153,4 +157,4 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, 
   {portfoiloEditorStart, portfoiloEditorCancel, portfoiloSubmit, deletePortfoilo, 
-    companyPortfoiloSubmit, deleteCompanyPortfoilo})(PortfolioDetainSection);
+    companyPortfoiloSubmit, deleteCompanyPortfoilo})(PortfolioDetailSection);

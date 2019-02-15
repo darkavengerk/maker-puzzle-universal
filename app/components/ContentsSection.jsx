@@ -5,25 +5,27 @@ import classNames from 'classnames/bind';
 
 import { portfoiloEditorCancel, portfoiloSubmit } from '../actions/makers';
 import { companyPortfoiloEditorCancel, companyPortfoiloSubmit } from '../actions/companies';
+
 import styles from '../css/components/contents-section';
 
 const cx = classNames.bind(styles);
 
-const ContentsSection = ({owner, ...props}) => {
+const ContentsSection = ({provider, data, ...props}) => {
   return (
     <div className={cx('main-section')}>
       <span className={cx('left-panel')} >
-        {owner.getInfo(props)}
+        {provider.getInfo(data, props)}
       </span>
       <span className={cx('main-panel')} >
-        {owner.getContent(props)}
+        {provider.getContent(data, props)}
       </span>
     </div>
   );
 };
 
 ContentsSection.propTypes = {
-  owner: PropTypes.object.isRequired
+  provider: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {

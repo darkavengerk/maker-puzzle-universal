@@ -10,8 +10,8 @@ import SingleLine from '../components/SingleLine';
 import Padding from '../components/Padding';
 import styles from '../css/components/maker';
 
-import { Maker } from '../utils/objects';
-import { Assist } from '../utils/assist';
+// import { Maker } from '../utils/objects';
+import Assist from '../utils/assist';
 import { changePortfoiloOrder } from '../actions/makers';
 
 import UI from '../utils/ui'
@@ -19,6 +19,10 @@ import UI from '../utils/ui'
 const cx = classNames.bind(styles);
 
 class Container extends Component {
+
+  constructor(props) {
+    super(props);
+  }
 
   isOwnPage() {
     const { maker, user } = this.props;
@@ -41,20 +45,20 @@ class Container extends Component {
   }
 
   render() {
-    const { maker: data, user } = this.props;
-    const maker = new Maker(data);
+    const { maker, user } = this.props;
+    const assist = Assist.Maker;
     return (
       <div className={cx('main-section')}>
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
         <TopTitle 
-          title={maker.getName()}
-          to={maker.getHomeLink()}
-          thumbnailURL={maker.picture? maker.getProfileImage():null} 
+          title={assist.getName(maker)}
+          to={assist.getHomeLink(maker)}
+          thumbnailURL={maker.picture? assist.getProfileImage(maker):null} 
         />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
         {
           maker && maker.makerProfile? 
-          <ContentsSection user={user} owner={maker} contentsType="maker" isOwnPage={this.isOwnPage()} /> : 
+          <ContentsSection user={user} provider={assist} data={maker} contentsType="maker" isOwnPage={this.isOwnPage()} /> : 
           <Padding height="600"/>
         }
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />

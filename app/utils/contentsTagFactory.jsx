@@ -16,14 +16,14 @@ import AddPortfolio from '../components/AddPortfolio';
 import AddProduct from '../components/AddProduct';
 import Popup from '../components/Popup';
 
-import { Maker, Project, Company, create as createObject } from '../utils/objects'
+// import { Maker, Project, Company, create as createObject } from '../utils/objects'
 
 import styles from '../css/components/contents-section';
 const cx = classNames.bind(styles);
 
 class ContentsTagFactory {
 
-  constructor(source, type) {
+  constructor(source) {
     // source = source || {};
     // this.getSetups(source.getType());
   }
@@ -53,16 +53,16 @@ class ContentsTagFactory {
     }
   }
 
-  getInfoTag(source) {
-    return this.getTag(source, 'info');
+  getInfoTag(contentsType) {
+    return this.getTag('info', contentsType);
   }
 
-  getItemTag(source) {
-    return this.getTag(source, 'item');
+  getItemTag(contentsType) {
+    return this.getTag('item', contentsType);
   }
 
-  getTag(source, name) {
-    return this.getSet(source.getType())[name];
+  getTag(name, contentsType) {
+    return this.getSet(contentsType)[name];
   }
 
   getMakerContent({user, source, param, isOwnPage, portfoiloSubmit, portfoiloEditorCancel}) {
@@ -70,13 +70,13 @@ class ContentsTagFactory {
       return this.getMakerDetail(source, param, isOwnPage);
     }
 
-    const Item = this.getItemTag(source);
+    const Item = this.getItemTag('maker');
 
     let contents = Assist.Maker.getEligiblePortfolios(source, user.account);
 
     contents = contents.map(portfolio => {
-      const owner = createObject('maker', portfolio.user);
-      return (<Item portfolio={portfolio} owner={owner} referrer={source} key={portfolio.pid} external={false} />);
+      // const owner = createObject('maker', portfolio.user);
+      return (<Item portfolio={portfolio} owner={Assist.Maker} referrer={Assist.Maker} key={portfolio.pid} external={false} />);
     });
 
     if(isOwnPage) {
@@ -109,15 +109,15 @@ class ContentsTagFactory {
     const makerPortfolios = portfolios.filter(portfolio => portfolio.type !== 'company');
 
     let companyContents = companyPortfolios.map(portfolio => {
-      const owner = createObject('company', portfolio.company);
-      const Item = this.getItemTag(owner);
-      return (<Item portfolio={portfolio} referrer={source} owner={owner} key={portfolio.pid} imageFit={true} external={true} />);
+      // portfolio.project = source;
+      const Item = this.getItemTag('company');
+      return (<Item portfolio={portfolio} referrer={Assist.Project} owner={Assist.Company} key={portfolio.pid} imageFit={true} external={true} />);
     });
 
     let makerContents = makerPortfolios.map(portfolio => {
-      const owner = createObject('maker', portfolio.user);
-      const Item = this.getItemTag(owner);
-      return (<Item portfolio={portfolio} referrer={source} owner={owner} key={portfolio.pid} external={true} />);
+      // portfolio.project = source;
+      const Item = this.getItemTag('maker');
+      return (<Item portfolio={portfolio} referrer={Assist.Project} owner={Assist.Maker} key={portfolio.pid} external={true} />);
     });
 
     if(user.authenticated) {
@@ -148,8 +148,9 @@ class ContentsTagFactory {
     }
 
     let companyPortfolios = source.companyPortfolios? source.companyPortfolios.map(portfolio => {
-      const owner = createObject('project', portfolio.project);
-      return (<PortfolioItemWide portfolio={portfolio} referrer={source} owner={owner} key={portfolio.pid} external={false} />);
+      // const owner = createObject('project', portfolio.project);
+      // portfolio.company = source;
+      return (<PortfolioItemWide portfolio={portfolio} referrer={Assist.Company} owner={Assist.Project} key={portfolio.pid} external={false} />);
     }) : [];
 
     if(isOwnPage) {
@@ -167,8 +168,9 @@ class ContentsTagFactory {
     let portfolios = Assist.Maker.getEligiblePortfolios(source, user);
 
     portfolios = portfolios.map(portfolio => {
-      const maker = createObject('maker', portfolio.user);
-      return (<PortfolioItem portfolio={portfolio} referrer={source} owner={maker} key={portfolio.pid} external={true} />);
+      // const maker = createObject('maker', portfolio.user);
+      // portfolio.company = source;
+      return (<PortfolioItem portfolio={portfolio} referrer={Assist.Company} owner={Assist.Maker} key={portfolio.pid} external={true} />);
     });
 
     return (<div>
@@ -217,7 +219,8 @@ class ContentsTagFactory {
               portfolio={portfolioFound} 
               edit={isOwnPage}
               type={'maker'}
-              owner={[new Project(portfolioFound.project), new Company(portfolioFound.company)]}
+              // owner={[new Project(portfolioFound.project), new Company(portfolioFound.company)]}
+              owner={[Assist.Project, Assist.Company]}
             />
           </div>)
     }
@@ -235,9 +238,9 @@ class ContentsTagFactory {
       }
     }
     if(portfolioFound) {
-      let owner = [new Company(portfolioFound.company)];
+      let owner = [Assist.Company];
       if(param.mid) {
-        owner.push(new Maker(portfolioFound.user));
+        owner.push(Assist.Maker);
       }
       return (
         <div>
@@ -264,9 +267,9 @@ class ContentsTagFactory {
       }
     }
     if(portfolioFound) {
-      let owner = [new Project(portfolioFound.project)];
+      let owner = [Assist.Project];
       if(param.mid) {
-        owner.push(new Maker(portfolioFound.user));
+        owner.push(Assist.Maker);
       }
       return (
         <div>

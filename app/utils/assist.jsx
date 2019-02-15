@@ -13,13 +13,17 @@ class User {
     //   factory = new Factory(this);
   }
 
-  getInfo(props) {
-    const Info = factory.getInfoTag(this);
-    return <Info owner={this} />;
+  getInfo(data, props) {
+    const Info = factory.getInfoTag(this.getType());
+    return <Info owner={data} />;
   }
 
   getContent(props) {
     return null;
+  }
+
+  getDataFromPortfolio(portfolio) {
+    return portfolio[this.getType()];
   }
 
 }
@@ -32,6 +36,10 @@ class Maker extends User {
 
   getType() {
     return 'maker';
+  }
+
+  getDataFromPortfolio(portfolio) {
+    return portfolio.user;
   }
 
   getProfileImage(data) {
@@ -53,8 +61,8 @@ class Maker extends User {
     return '';
   }
 
-  createPortfolioLink(data, portfolio) {
-    return data.getHomeLink() + '/portfolio/' + portfolio.pid;
+  createPortfolioLink(portfolio) {
+    return this.getHomeLink(this.getDataFromPortfolio(portfolio)) + '/portfolio/' + portfolio.pid;
   }
 
   createPortfolioTitle(portfolio) {
@@ -142,10 +150,12 @@ class Company extends User {
     return '/company/' + data.link_name;
   }
 
-  createPortfolioLink(data, portfolio) {
+  createPortfolioLink(portfolio) {
+    const data = this.getDataFromPortfolio(portfolio);
+    const base = this.getHomeLink({ link_name: portfolio.companyName}).replace(/ /g, '_');
     if(portfolio.type === 'company')
-      return data.getHomeLink() + '/portfolio/' + portfolio.pid;
-    return data.getHomeLink() + '/maker/' + (portfolio.user? portfolio.user.userid : 'unknown')  + '/' + portfolio.pid;
+      return base + '/portfolio/' + portfolio.pid;
+    return base + '/maker/' + (portfolio.user? portfolio.user.userid : 'unknown')  + '/' + portfolio.pid;
   }
 
   createPortfolioTitle(portfolio) {
@@ -217,9 +227,11 @@ class Project extends User {
   }
 
   createPortfolioLink(portfolio) {
+    // const data = this.getDataFromPortfolio(portfolio);
+    const base = this.getHomeLink({ link_name: portfolio.location}).replace(/ /g, '_');
     if(portfolio.type === 'company')
-      return this.getHomeLink() + '/company/' + portfolio.company.link_name  + '/' + portfolio.pid;
-    return this.getHomeLink() + '/maker/' + portfolio.user.userid  + '/' + portfolio.pid;
+      return base + '/company/' + portfolio.company.link_name  + '/' + portfolio.pid;
+    return base + '/maker/' + portfolio.user.userid  + '/' + portfolio.pid;
   }
 
   getContent(data, props) {
@@ -279,6 +291,7 @@ class Null extends User {
 const nullObject = new Null();
 
 export default {
+  Main : new Main(),
   Maker : new Maker(),
   Project : new Project(),
   Company : new Company()

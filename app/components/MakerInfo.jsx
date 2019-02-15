@@ -42,7 +42,6 @@ class MakerInfo extends Component {
   }
 
   startEdit() {
-    const maker = this.props.owner;
     this.stateChanged({editing:true});
   }
 

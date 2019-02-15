@@ -41,20 +41,20 @@ class Container extends Component {
   }
 
   render() {
-    const { company: data, user } = this.props;
-    const company = new Company(data);
+    const { company, user } = this.props;
+    const assist = Assist.Company;
     return (
       <div>
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
         <TopTitle 
-          title={company.getName()}
-          to={company.getHomeLink()}
-          thumbnailURL={company.profileImage? company.getProfileImage():null} 
+          title={assist.getName(company)}
+          to={assist.getHomeLink(company)}
+          thumbnailURL={company.profileImage? assist.getProfileImage(company) : null} 
         >
-          { company.getName() && <CompanyClaim />}
+          { assist.getName(company) && <CompanyClaim /> }
         </TopTitle>
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
-        <ContentsSection user={user} owner={company} contentsType="company" isOwnPage={this.isOwnPage()} />
+        <ContentsSection user={user} provider={assist} data={company} contentsType="company" isOwnPage={this.isOwnPage()} />
         <SingleLine width={'100%'} color={'#dddddd'} thickness={2} />
       </div>
     );

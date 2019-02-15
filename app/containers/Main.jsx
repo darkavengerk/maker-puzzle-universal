@@ -76,7 +76,7 @@ class MainPageSection extends Component {
       companyPortfoliosRecent=[],
     } = main;
 
-    const referrer = createObject('main');
+    // const referrer = createObject('main');
 
     let feed = user.account.feed || [];
     let feedCount = 0;
@@ -85,30 +85,58 @@ class MainPageSection extends Component {
       if(portfolio.type === 'company') {
         if(feedCount + 2 > 18) return null;
         feedCount += 2;
-        const owner = createObject('company', portfolio.company);
-        return <PortfolioItemWide imageFit={true} portfolio={portfolio} referrer={owner} owner={owner} key={portfolio.pid} external={true} />  
+        // const owner = createObject('company', portfolio.company);
+        return <PortfolioItemWide 
+                  imageFit={true} 
+                  portfolio={portfolio} 
+                  referrer={Assist.Main} 
+                  owner={Assist.COmpany} 
+                  key={portfolio.pid} 
+                  external={true} />  
       }
       else {
         if(feedCount + 1 > 18) return null;
         feedCount += 1;
         const owner = createObject('maker', portfolio.user);
-        return (<PortfolioItem portfolio={portfolio} referrer={referrer} owner={owner} key={portfolio.pid} external={true} />);
+        return (<PortfolioItem 
+                  portfolio={portfolio} 
+                  referrer={Assist.Main} 
+                  owner={Assist.Maker} 
+                  key={portfolio.pid} 
+                  external={true} />);
       }
     })
 
     const popularCompanyPortfolios = companyPortfolios.map(portfolio => {
-      const owner = createObject('company', portfolio.company);
-      return <PortfolioItemWide imageFit={true} portfolio={portfolio} referrer={owner} owner={owner} key={portfolio.pid} external={true} />
+      // const owner = createObject('company', portfolio.company);
+      return <PortfolioItemWide 
+                imageFit={true} 
+                portfolio={portfolio} 
+                referrer={Assist.Company} 
+                owner={Assist.Company} 
+                key={portfolio.pid} 
+                external={true} />
     })
 
     const recentCompanyPortfolios = companyPortfoliosRecent.map(portfolio => {
-      const owner = createObject('company', portfolio.company);
-      return <PortfolioItemWide imageFit={true} portfolio={portfolio} referrer={owner} owner={owner} key={portfolio.pid} external={true} />
+      // const owner = createObject('company', portfolio.company);
+      return <PortfolioItemWide 
+                imageFit={true} 
+                portfolio={portfolio} 
+                referrer={Assist.Company} 
+                owner={Assist.Company} 
+                key={portfolio.pid} 
+                external={true} />
     })
 
     let popularMakerPortfolios = portfolios.map(portfolio => {
-        const owner = createObject('maker', portfolio.user);
-        return (<PortfolioItem portfolio={portfolio} referrer={referrer} owner={owner} key={portfolio.pid} external={true} />);
+        // const owner = createObject('maker', portfolio.user);
+        return (<PortfolioItem 
+                    portfolio={portfolio} 
+                    referrer={Assist.Main} 
+                    owner={Assist.Maker} 
+                    key={portfolio.pid} 
+                    external={true} />);
       });
 
     const companyHighlights = companies.map(company => {
@@ -129,7 +157,13 @@ class MainPageSection extends Component {
                 {
                   content.portfolios.map(portfolio => {
                     const owner = createObject('company', portfolio.company);
-                    return <PortfolioItemWide imageFit={true} portfolio={portfolio} referrer={owner} owner={owner} key={portfolio.pid} external={true} />
+                    return <PortfolioItemWide 
+                              imageFit={true} 
+                              portfolio={portfolio} 
+                              referrer={Assist.Company} 
+                              owner={Assist.Company} 
+                              key={portfolio.pid} 
+                              external={true} />
                   })
                 }
               </SectionItem>
