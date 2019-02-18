@@ -12,6 +12,7 @@ import Popup from '../components/Popup';
 import Roundy from '../components/Roundy';
 import FloatingList from '../components/FloatingList';
 import Floater from '../components/Floater';
+import Padding from '../components/Padding';
 
 import styles from '../css/components/navigation';
 
@@ -91,15 +92,20 @@ class Navigation extends Component {
               </div>
               <Floater 
                 width={'1.44rem'}
-                top={'0.35rem'}
+                top={'-0.1rem'}
                 right={'-0.1rem'}
                 show={this.state.showDropdown}
+                onMouseLeave={this.hideDropDown}
                 className={cx('user-menu-base')}>
+                <div className={cx('top-space')}>
+                  <div className={cx('outside')} onMouseEnter={this.hideDropDown}>
+                  </div>
+                </div>
                 <div className={cx('arrow', 'user-menu-shadow')}>
                 </div>
                 <div className={cx('arrow', 'arrow-cover')}>
                 </div>
-                <div className={cx('user-menu-area', 'user-menu-shadow')} onMouseLeave={this.hideDropDown}>
+                <div className={cx('user-menu-area', 'user-menu-shadow')}>
                   <div className={cx('user-menu-item')} onClick={e => window.open('/site/doc/intro.pdf')}>
                     서비스 소개
                   </div>

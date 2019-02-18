@@ -73,9 +73,20 @@
   align-items: center;
 }
 
+.top-space {
+  height: 0.5rem;
+  width: 100%;
+}
+
+.outside {
+  display: inline-block;
+  width: 50%;
+  height: 100%;
+}
+
 .arrow {
   position: absolute;
-  top: 0;
+  top: 0.5rem;
   right: 0.25rem;
   width: 0.15rem;
   height: 0.15rem;
