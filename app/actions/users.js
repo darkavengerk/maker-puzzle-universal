@@ -69,6 +69,10 @@ export function loginMenu() {
   return { type: types.LOGIN_MENU };
 }
 
+export function accountEdit(isActive) {
+  return { type: isActive? types.ACCOUNT_EDITOR_START : types.ACCOUNT_EDITOR_END };
+}
+
 export function manualLogin(data) {
   return async (dispatch) => {
     dispatch(beginLogin());

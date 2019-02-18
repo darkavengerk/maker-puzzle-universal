@@ -15,7 +15,7 @@ import AutoComplete from '../components/AutoComplete';
 import { Company } from '../services';
 
 import { featureEditSave, updateContext, addOwnCompany } from '../actions/makers';
-import { logOut } from '../actions/users';
+import { logOut, accountEdit } from '../actions/users';
 
 import styles from '../css/components/maker-info';
 
@@ -42,7 +42,9 @@ class MakerInfo extends Component {
   }
 
   startEdit() {
-    this.stateChanged({editing:true});
+    // this.stateChanged({editing:true});
+    const { accountEdit } = this.props;
+    accountEdit(true);
   }
 
   edited(states, entry) {
@@ -101,7 +103,7 @@ class MakerInfo extends Component {
   }
 
   render() {
-    const { context, user } = this.props;
+    const { context, user, accountEdit } = this.props;
     return (context && context.makerProfile) ? (
       <div className={cx('main-section')}>
         <GreyTitle title={'메이커 프로필'} bottom="13" />
@@ -178,5 +180,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps, 
-  {featureEditSave, logOut, updateContext, addOwnCompany}
+  {featureEditSave, logOut, updateContext, addOwnCompany, accountEdit}
 )(MakerInfo);
