@@ -12,7 +12,6 @@ import ProjectCard from '../components/ProjectCardMedium';
 import MakerCard from '../components/MakerCard';
 import Assist from '../utils/assist'
 
-import { create as createObject } from '../utils/objects'
 import { loadMoreData } from '../actions/main';
 
 import styles from '../css/components/search';
@@ -43,15 +42,12 @@ class Container extends Component {
     }
 
     if(topic === 'portfolio' || topic === 'category') {
-      const referrer = createObject('main');
       tags = data.map(portfolio => {
         if(subtype.startsWith('company') || topic === 'category') {
-          const owner = createObject('company', portfolio.company);
-          return (<PortfolioItemWide portfolio={portfolio} referrer={owner} owner={owner} key={portfolio.pid} imageFit={true} external={true} />);
+          return (<PortfolioItemWide portfolio={portfolio} referrer={Assist.Company} owner={Assist.Company} key={portfolio.pid} imageFit={true} external={true} />);
         }
         if(subtype.startsWith('maker')) {
-          const owner = createObject('maker', portfolio.user);
-          return <PortfolioItem portfolio={portfolio} referrer={referrer} owner={owner} key={portfolio.pid} external={true} />
+          return <PortfolioItem portfolio={portfolio} referrer={Assist.Main} owner={Assist.Maker} key={portfolio.pid} external={true} />
         }
       });
     }

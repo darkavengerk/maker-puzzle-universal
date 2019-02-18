@@ -16,8 +16,6 @@ import AddPortfolio from '../components/AddPortfolio';
 import AddProduct from '../components/AddProduct';
 import Popup from '../components/Popup';
 
-// import { Maker, Project, Company, create as createObject } from '../utils/objects'
-
 import styles from '../css/components/contents-section';
 const cx = classNames.bind(styles);
 
@@ -75,7 +73,6 @@ class ContentsTagFactory {
     let contents = Assist.Maker.getEligiblePortfolios(source, user.account);
 
     contents = contents.map(portfolio => {
-      // const owner = createObject('maker', portfolio.user);
       return (<Item portfolio={portfolio} owner={Assist.Maker} referrer={Assist.Maker} key={portfolio.pid} external={false} />);
     });
 
@@ -109,13 +106,11 @@ class ContentsTagFactory {
     const makerPortfolios = portfolios.filter(portfolio => portfolio.type !== 'company');
 
     let companyContents = companyPortfolios.map(portfolio => {
-      // portfolio.project = source;
       const Item = this.getItemTag('company');
       return (<Item portfolio={portfolio} referrer={Assist.Project} owner={Assist.Company} key={portfolio.pid} imageFit={true} external={true} />);
     });
 
     let makerContents = makerPortfolios.map(portfolio => {
-      // portfolio.project = source;
       const Item = this.getItemTag('maker');
       return (<Item portfolio={portfolio} referrer={Assist.Project} owner={Assist.Maker} key={portfolio.pid} external={true} />);
     });
@@ -148,8 +143,6 @@ class ContentsTagFactory {
     }
 
     let companyPortfolios = source.companyPortfolios? source.companyPortfolios.map(portfolio => {
-      // const owner = createObject('project', portfolio.project);
-      // portfolio.company = source;
       return (<PortfolioItemWide portfolio={portfolio} referrer={Assist.Company} owner={Assist.Project} key={portfolio.pid} external={false} />);
     }) : [];
 
@@ -168,8 +161,6 @@ class ContentsTagFactory {
     let portfolios = Assist.Maker.getEligiblePortfolios(source, user);
 
     portfolios = portfolios.map(portfolio => {
-      // const maker = createObject('maker', portfolio.user);
-      // portfolio.company = source;
       return (<PortfolioItem portfolio={portfolio} referrer={Assist.Company} owner={Assist.Maker} key={portfolio.pid} external={true} />);
     });
 

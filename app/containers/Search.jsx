@@ -12,8 +12,8 @@ import ProjectCard from '../components/ProjectCard';
 import PortfolioItemWide from '../components/PortfolioItemWide';
 import PortfolioItem from '../components/PortfolioItem';
 
-import { create as createObject } from '../utils/objects'
 import { loadSearchData } from '../actions/main';
+import Assist from '../utils/assist';
 
 import styles from '../css/components/search';
 
@@ -48,16 +48,12 @@ class Container extends Component {
     const { user, search, param, loadSearchData } = this.props;
     const { portfolios } = search.result || { portfolios:[] };
 
-    const referrer = createObject('main');
-
     let portfolioTags = portfolios.map(portfolio => {
       if(portfolio.type === 'company') {
-        const owner = createObject('company', portfolio.company);
-        return (<PortfolioItemWide portfolio={portfolio} referrer={owner} owner={owner} key={portfolio.pid} imageFit={true} external={true} />);
+        return (<PortfolioItemWide portfolio={portfolio} referrer={Assist.Company} owner={Assist.Company} key={portfolio.pid} imageFit={true} external={true} />);
       }
       else {
-        const owner = createObject('maker', portfolio.user);
-        return <PortfolioItem portfolio={portfolio} referrer={referrer} owner={owner} key={portfolio.pid} external={true} />
+        return <PortfolioItem portfolio={portfolio} referrer={Assist.Main} owner={Assist.Maker} key={portfolio.pid} external={true} />
       }
     });
 
