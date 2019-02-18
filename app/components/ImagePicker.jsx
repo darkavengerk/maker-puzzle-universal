@@ -91,6 +91,7 @@ class ImagePicker extends Component {
               className={cx('image-container') + ' draggable'} 
               onMouseEnter={this.showCloseButton(i)}
               onMouseLeave={this.showCloseButton(-1)}
+              role="button"
               key={i}>
 
               <FlexibleImage                 
