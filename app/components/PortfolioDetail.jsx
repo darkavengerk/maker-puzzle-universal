@@ -75,7 +75,7 @@ const PortfolioDetailSection = (
 
   function removePortfolioClicked() {
 
-    if(!confirm('Really?')) return;
+    if(!confirm(portfolio.title + '을(를) 삭제하시겠습니까?')) return;
 
     if(portfolio.type === 'maker') {
       deletePortfoilo(portfolio);
