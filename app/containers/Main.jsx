@@ -90,7 +90,7 @@ class MainPageSection extends Component {
                   imageFit={true} 
                   portfolio={portfolio} 
                   referrer={Assist.Main} 
-                  owner={Assist.COmpany} 
+                  owner={Assist.Company} 
                   key={portfolio.pid} 
                   external={true} />  
       }
