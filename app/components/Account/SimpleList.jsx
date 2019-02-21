@@ -2,20 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 
-const Component = ({ items, selected, onClick, cx, cxPrefix='' }) => {
+const Component = ({ items, selected, onClick, cx }) => {
 
   const menu = items.map((item, i) => (
     <div 
       key={i} 
       onClick={e => onClick(i)}
-      className={cx(cxPrefix + (i === selected? 'item-selected' : 'item'))}
+      className={cx('list-' + (i === selected? 'item-selected' : 'item'))}
+      role="button"
     >
       {item}
     </div>
   ));
 
   return (
-    <div className={cx(cxPrefix + 'main')}>
+    <div className={cx('list-main')}>
       {menu}
     </div>
   );

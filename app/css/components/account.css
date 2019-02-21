@@ -1,13 +1,16 @@
-.account-main {
+.layout-main {
   margin-top: 0.22rem;
   display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 0.53rem;
 }
 
-.menu-main {
+.list-main {
   width: 2.1rem;
 }
 
-.menu-item-selected {
+.list-item-selected {
   width: 101px;
   height: 20px;
   font-family: NanumBarunGothic;
@@ -20,7 +23,7 @@
   color: #2c2c2c;
 }
 
-.menu-item {
+.list-item {
   width: 101px;
   height: 20px;
   font-family: NanumBarunGothic;
@@ -31,4 +34,8 @@
   line-height: normal;
   letter-spacing: normal;
   color: #b4b4b4;
+}
+
+.feature-area, .info-main {
+  width: 6rem;
 }
