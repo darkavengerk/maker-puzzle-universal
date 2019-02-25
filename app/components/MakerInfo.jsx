@@ -43,8 +43,9 @@ class MakerInfo extends Component {
 
   startEdit() {
     // this.stateChanged({editing:true});
-    const { accountEdit } = this.props;
-    accountEdit(true);
+    // const { accountEdit } = this.props;
+    // accountEdit(true);
+    window.open('/account/info');
   }
 
   edited(states, entry) {

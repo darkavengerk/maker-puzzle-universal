@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 
 import SingleLine from '../../components/SingleLine';
 
-const Component = ({ left, middle, bottom, cx}) => {
+const Component = ({ left, middle, bottom, leftWidth='auto', middleWidth='auto', cx}) => {
 
   return (
     <div>
@@ -13,8 +13,12 @@ const Component = ({ left, middle, bottom, cx}) => {
         className={cx('layout-main')}
         style={{display: 'flex', flexDirection: 'column', width: '100%'}}>
         <div style={{width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'flex-start'}}>
+          <div style={{width: leftWidth}}>
           { left }
+          </div>
+          <div style={{width: middleWidth}}>
           { middle }
+          </div>
         </div>
         { bottom }
       </div>

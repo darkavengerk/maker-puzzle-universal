@@ -8,7 +8,7 @@ const Component = ({ items, selected, onClick, cx }) => {
     <div 
       key={i} 
       onClick={e => onClick(i)}
-      className={cx('list-' + (i === selected? 'item-selected' : 'item'))}
+      className={cx('list-item', (i === selected? 'list-item-selected' : ''))}
       role="button"
     >
       {item}

@@ -8,7 +8,9 @@ import Layout from '../components/Account/Layout';
 import SimpleList from '../components/Account/SimpleList';
 import AccountInfo from '../components/Account/AccountInfo';
 import Profile from '../components/Account/Profile';
+import Career from '../components/Account/Career';
 import Company from '../components/Account/Company';
+import Ability from '../components/Account/Ability';
 import Padding from '../components/Padding';
 
 import Assist from '../utils/assist';
@@ -23,14 +25,20 @@ const styler = function() {
   return cx.apply(null, args);
 }
 
-const links = ['info', 'profile', 'company', 'ability', 'quit'];
-const linkNames = ['계정 기본정보', '메이커 프로필', '소속 기업', '능력치', '탈퇴하기'];
+let links = ['info', 'profile', 'career', 'ability', 'quit'];
+let linkNames = ['계정 기본정보', '메이커 프로필', '소속 기업', '능력치', '탈퇴하기'];
 
 class Container extends Component {
 
   constructor(props) {
     super(props);
     const { user, category } = this.props;
+    
+    if(user.companiesOwned && user.companiesOwned.length > 0) {
+      links = ['info', 'profile', 'career', 'company', 'ability', 'quit'];
+      linkNames = ['계정 기본정보', '메이커 프로필', '소속 기업', '소유한 기업페이지', '능력치', '탈퇴하기'];
+    }
+
     this.state = { 
       selectedMenu: links.indexOf(category),
       user: {...user},
@@ -99,11 +107,9 @@ class Container extends Component {
     }
   }
 
-  addCompanyEntry() {
-    return evt => {
-      const history = this.history();
-      this.makerProfileChanged({companies: [...history, {order: history.length, name:'', period:'', position:'', newItem: true, }]});
-    }
+  addCompanyEntry(evt) {
+    const history = this.history();
+    this.makerProfileChanged({companies: [...history, {order: history.length, name:'', period:'', position:'', newItem: true, }]});
   }
 
   removeCompanyEntry(order) {
@@ -143,8 +149,8 @@ class Container extends Component {
           aboutEdited={this.aboutEdited}
         />;
 
-      case 'company':
-        return <Company
+      case 'career':
+        return <Career
           cx={cx}
           history={this.history()}
           featureChanged={this.companyFeatureChanged}
@@ -152,6 +158,18 @@ class Container extends Component {
           addEntry={this.addCompanyEntry}
           removeEntry={this.removeCompanyEntry}
           swapEntries={this.swapCompanyEntries}
+        />
+      case 'company':
+        return <Company
+          cx={cx}
+          companies={this.state.user.companiesOwned}
+        />
+
+      case 'ability':
+        return <Ability
+          cx={cx}
+          abilities={this.state.user.makerProfile.abilities}
+          onChange={() => {}}
         />
 
       default:
@@ -172,7 +190,9 @@ class Container extends Component {
       <Layout
         cx={cx}
         left={menu}
+        leftWidth={'2.1rem'}
         middle={this.getContent()}
+        middleWidth={'6rem'}
       />
     );
   }
