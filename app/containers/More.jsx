@@ -8,7 +8,7 @@ import PortfolioItemWide from '../components/PortfolioItemWide';
 import PortfolioItem from '../components/PortfolioItem';
 import TopTitle from '../components/TopTitle';
 import SingleLine from '../components/SingleLine';
-import ProjectCard from '../components/ProjectCardMedium';
+import ProjectCard from '../components/common/ProjectCard';
 import MakerCard from '../components/MakerCard';
 import Assist from '../utils/assist'
 
@@ -38,7 +38,7 @@ class Container extends Component {
     let tags = [];
 
     if(topic === 'project') {
-      tags = data.map(p => <ProjectCard key={p.name} project={p} />)
+      tags = data.map((p, i) => <ProjectCard key={p.name} project={p} direction={i % 2 === 0? 'right' : 'left'} />)
     }
 
     if(topic === 'portfolio' || topic === 'category') {
