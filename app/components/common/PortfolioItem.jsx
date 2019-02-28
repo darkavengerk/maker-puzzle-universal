@@ -18,11 +18,27 @@ const PortfolioItem = ({ portfolio, owner, referrer, portfoiloEditorStart, exter
     
   if(portfolio) {
     const data = owner.getDataFromPortfolio(portfolio);
+    let profileImage = null;
+    if(external && owner.getType() === 'maker') {
+      profileImage = <Image 
+        source={owner.getProfileImage(data)} 
+        x={35} y={35} 
+        className={cx('profile-image' )} 
+      />
+    }
+    if(external && owner.getType() === 'company') {
+      profileImage = <Image 
+        source={owner.getProfileImage(data)} 
+        x={50} y={35} 
+        className={cx('company-image' )}
+        contain={true}
+      />
+    }
     return (
       <div className={cx('main-section') + ' dragItem'}>
         <Link to={referrer.createPortfolioLink(portfolio)} count="portfolio">
           <div className={cx('text', 'text-section', external? 'type2' : '')}>
-            { external && <Image source={owner.getProfileImage(data)} x={31} y={31} className={cx('profile-image')} /> }
+            { profileImage }
             <div>
               <h1>
                 {referrer.createPortfolioTitle(portfolio)}

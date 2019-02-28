@@ -75,12 +75,12 @@
 }
 
 .profile-image {
-  margin: 0 0.1rem;
+  margin: 0 0.24rem 0 0.17rem;
   border-radius: 50%;
 }
 
 .company-image {
-  margin: 0 0.18rem 0 0.12rem;
+  margin: 0 0.17rem 0 0.08rem;
 }
 
 .add-portfolio {
