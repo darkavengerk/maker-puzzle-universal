@@ -31,12 +31,14 @@ const ProjectCardSection = ({project, screen, direction, ...props}) => {
           {locationName}
         </div>
       </div>
-      <FlexibleImage 
-        className={cx('project-tile-image')} 
-        x={'100%'} y={356} 
-        source={project.profilePicture || project.portfolios[0].images[0]} 
-        version="large"
-      />
+      <div className={cx('project-tile-image-area')}>
+        <FlexibleImage 
+          className={cx('project-tile-image')} 
+          x={'100%'} y={'100%'} 
+          source={project.profilePicture || project.portfolios[0].images[0]} 
+          version="large"
+        />
+      </div>
       <div className={cx('project-info-text', 'project-info-text-'+direction )}>
         { `+${project.portfolios.length} Portfolios`}
       </div>

@@ -52,9 +52,32 @@
   font-weight: 300;
 }
 
+.project-tile-image-area {
+  overflow:hidden;
+  height: 3.56rem;
+  width: 100%;
+}
+
+.project-tile-image {
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transition: all 0.2s ease-in-out;
+}
+
+.project-tile-image:hover {
+  transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -o-transform: scale(1.2);
+}
+
 .project-info-text {
   position: relative;
-  bottom: 0.64rem;
+  bottom: 0.60rem;
   width: 100%;
   padding: 0 0.2rem;
 
