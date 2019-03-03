@@ -8,6 +8,23 @@
   width: 100%;
 }
 
+.project-focus {
+  width: 14.40rem;
+  height: 6.94rem;
+  background-color: black;
+}
+
+.project-focus-main {
+  width: 8.75rem;
+  height: 100%;
+  background-image: url(https://s3.ap-northeast-2.amazonaws.com/maker-puzzle-images/original/images/dknahm/626.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  -webkit-clip-path: polygon(0 0, 85% 0%, 100% 100%, 0% 100%);
+  clip-path: polygon(0 0, 85% 0%, 100% 100%, 0% 100%);
+}
+
 .main-section section {
   margin-bottom: 0.65rem
 }
