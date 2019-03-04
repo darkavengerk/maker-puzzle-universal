@@ -15,14 +15,21 @@
   background-color: #ffffff;
   box-shadow: 0 0.05rem 0.35rem 0 rgba(163, 163, 163, 0.5);
   font-family: NanumBarunGothic;
+  color: #2e2e2e;
+  margin-right: 0.1rem;
   margin-bottom: 0.1rem;
+  transition: all 0.2s linear;
+}
+
+.project-tile-hover {
+  background-color: #f4621f;
+  color: #ffffff;
 }
 
 .project-tile .header {
   width: 100%;
   height: 0.79rem;
 
-  color: #2e2e2e;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
@@ -56,6 +63,7 @@
   overflow:hidden;
   height: 3.56rem;
   width: 100%;
+  position: relative;
 }
 
 .project-tile-image {
@@ -67,7 +75,7 @@
   transition: all 0.2s ease-in-out;
 }
 
-.project-tile-image:hover {
+.project-tile-image-hover {
   transform: scale(1.2);
   -webkit-transform: scale(1.2);
   -moz-transform: scale(1.2);
@@ -75,28 +83,88 @@
   -o-transform: scale(1.2);
 }
 
+.project-tile-image-filter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /*box-shadow: 0 0.03rem 0.25rem 0 rgba(176, 176, 176, 0.5);*/
+  background-color: rgba(52, 52, 52, 0.5);
+  z-index: 1;
+
+}
+
+.project-tile-image-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1rem;
+  font-family: NanumBarunGothic;
+  font-size: 0.14rem;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0.23rem;
+  letter-spacing: normal;
+  color: #ffffff;
+  margin-top: 1.2rem;
+}
+
+.project-tile-image-text-item {
+  width: 2rem;
+}
+
+.right {
+  text-align: right;
+}
+
+.left {
+  text-align: left;
+}
+
+.project-tile-seperator {
+  margin: 0 0.09rem;
+  width: 0.02rem;
+  height: 0.84rem;
+  border: solid 0.01rem #ffffff;
+}
+
 .project-info-text {
   position: relative;
   bottom: 0.60rem;
   width: 100%;
-  padding: 0 0.2rem;
+  padding: 0.27rem 0.2rem 0;
 
   height: 0.6rem;
   background-color: rgba(255, 255, 255, 0.7);
   
   font-size: 0.15rem;
   text-align: right;
-  line-height: 0.6rem;
-  vertical-align: middle;
+  /*line-height: 0.6rem;*/
+  vertical-align: top;
   color: #5f5f5f;
+
+  transition: all 0.2s linear;
+  z-index: 2;
+}
+
+.project-info-text-hover {
+  color: #ffffff;
+  background-color: #f4621f;
+
 }
 
 .project-info-text-left {
   text-align: left;
+  -webkit-clip-path: polygon(0 0, 100% 85%, 100% 100%, 0% 100%);
+  clip-path: polygon(0 0, 100% 85%, 100% 100%, 0% 100%);
 }
 
 .project-info-text-right {
   text-align: right;
+  -webkit-clip-path: polygon(0 85%, 100% 0, 100% 100%, 0% 100%);
+  clip-path: polygon(0 85%, 100% 0, 100% 100%, 0% 100%);
 }
 
 .project-tile .header .detail-button {

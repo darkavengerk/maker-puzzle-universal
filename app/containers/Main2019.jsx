@@ -6,22 +6,23 @@ import { browserHistory } from 'react-router';
 
 import { Maker, Project, Company, create as createObject } from '../utils/objects'
 import Assist from '../utils/assist'
-import ProjectCard from '../components/ProjectCardMedium';
+import ProjectCard from '../components/common/ProjectCard';
+import Title from '../components/main/Title';
 import MakerCard from '../components/MakerCard';
 import Padding from '../components/Padding';
-import PortfolioItemWide from '../components/PortfolioItemWide';
-import PortfolioItem from '../components/PortfolioItem';
+import PortfolioItemWide from '../components/common/PortfolioItem';
+import PortfolioItem from '../components/common/PortfolioItem';
 import Popup from '../components/Popup';
 import AddPortfolio from '../components/AddPortfolio';
 import CompanyClaimUI from '../components/CompanyClaimUI';
-import SectionItem from '../components/SectionItem';
+import SectionItem from '../components/main/SectionItem';
 import Login from '../components/Login';
 import Link from '../components/Link';
 
 import { portfoiloEditorStart, portfoiloEditorCancel, portfoiloSubmit } from '../actions/makers';
 import { loginMenu, cancelLogin } from '../actions/users';
 
-import styles from '../css/components/main-page';
+import styles from '../css/components/main-page-v2';
 
 const cx = classNames.bind(styles);
 
@@ -176,29 +177,28 @@ class MainPageSection extends Component {
           </div>
         </div>
 
+        <Title text="메이커들이 채워가는 건축의 엔딩크레딧">
+          <div className={cx('sub-title-text')}>
+            직접 수행한 프로젝트의 엔딩크레딧에 당신의 이름도 새겨보세요
+          </div>
+        </Title>
+
         <SectionItem title="Puzzles" link='/more/project/p/popular'>
-          {projects.map(p => <ProjectCard key={p.name} project={p} />)}
+          {projects.map((p,i) => <ProjectCard key={p.name} project={p} direction={i % 2 === 0? 'right' : 'left'} />)}
         </SectionItem>     
+
+        <Title text="분야별 메이커들의 포트폴리오">
+          <div className={cx('sub-title-text')}>
+            제일 효과적인 영업무기는 ‘프로젝트 수행실적’<br/>
+            포트폴리오를 공유해 새로운 기회를 잡아보세요
+          </div>
+        </Title>
 
         <SectionItem title="New" link='/more/portfolio/company/recent'>
           {recentCompanyPortfolios}
         </SectionItem>
 
         { portfoliosByCategory }
-
-        <SectionItem title="Company" link="/more/company/c/popular">
-          {
-            companyHighlights.map((c,i) => (
-              <div key={i} className={cx('maker-card')}>
-                { c }
-              </div>)
-            )
-          }
-        </SectionItem>
-
-        <SectionItem title="Maker" link="/more/portfolio/maker/recent">
-          {popularMakerPortfolios}
-        </SectionItem>
 
       </div>
 
