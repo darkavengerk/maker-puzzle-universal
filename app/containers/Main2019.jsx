@@ -116,19 +116,6 @@ class MainPageSection extends Component {
                 external={true} />
     })
 
-    const companyHighlights = companies.map(company => {
-      let business = company.features.filter(f => f.repr === 'business');
-      business = business[0]? business[0] : null;
-      const businessName = business && business.content? business.content : '';
-      return <MakerCard
-                key={company.name} 
-                picture={Assist.Company.getProfileImage(company)}
-                title={company.name} 
-                subTitle={businessName} 
-                isCompany={true}
-                linkTo={'/company/' + company.link_name} />;
-    });
-
     const portfoliosByCategory = (main.subContents || []).map(content => {
       return <SectionItem key={content.category} title={content.category} link={'/more/category/' + content.category + '/p'}>
                 {

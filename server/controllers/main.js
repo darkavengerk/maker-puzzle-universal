@@ -80,7 +80,7 @@ export async function buildContents(req, res) {
   console.log('build main contents...', new Date().toISOString());
   const loadings = [
     getProjectContents({}),
-    getProjectContents({sort:'recent'})
+    getProjectContents({sort:'recent'}),
     // getCompanyContents({}),
     // getMakerPorfolioContents({}),
     // getCompanyPorfolioContents({}),

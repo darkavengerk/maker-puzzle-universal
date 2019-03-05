@@ -58,30 +58,32 @@ class ProjectFocus extends Component {
     const { project } = this.props;
     const boxRows = this.extractImages(project);
     return (
-      <div className={cx('project-focus')}>
+      <div className={cx('project-focus')} onMouseOver={this.mouseover}>
         <div className={cx('project-focus-boxes')}>
           <div className={cx('project-focus-box-row')}>
-            {boxRows[0].map(img => <FlexibleImage className={cx('project-focus-box')} x={226} y={229} source={img} />)}
+            {boxRows[0].map((img, i) => <FlexibleImage key={i} className={cx('project-focus-box')} x={226} y={229} source={img} />)}
           </div>
           <Padding height={3} />
           <div className={cx('project-focus-box-row')}>
-          {boxRows[1].map(img => <FlexibleImage className={cx('project-focus-box')} x={226} y={229} source={img} />)}
+          {boxRows[1].map((img, i) => <FlexibleImage key={i} className={cx('project-focus-box')} x={226} y={229} source={img} />)}
           </div>
           <Padding height={3} />
           <div className={cx('project-focus-box-row')}>
-          {boxRows[2].map(img => <FlexibleImage className={cx('project-focus-box')} x={226} y={229} source={img} />)}
+          {boxRows[2].map((img, i) => <FlexibleImage key={i} className={cx('project-focus-box')} x={226} y={229} source={img} />)}
           </div>
         </div>
         <div
           className={cx('project-focus-main-space')}
           role="button"
         />
-        <FlexibleImage 
-          source={project.profilePicture} x={'60%'} y={'100%'}
-          className={cx('project-focus-main', {'project-focus-main-hover': this.state.mouseover})}
-          zIndex="2"
-        />
-        <div className={cx('project-focus-filter')} role="button">
+        <div className={cx('hide-overflow')}>
+          <FlexibleImage 
+            source={project.profilePicture} x={'100%'} y={'100%'}
+            className={cx('project-focus-main', {'project-focus-main-hover': this.state.mouseover})}
+            zIndex="2"
+          />
+        </div>
+        <div className={cx('project-focus-filter')} onMouseLeave={this.mouseout} role="button">
           <div className={cx('project-focus-filter-title-area')}>
             <div className={cx('project-focus-filter-title')}>
               { project.name }
