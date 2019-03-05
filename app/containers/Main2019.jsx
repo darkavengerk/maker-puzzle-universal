@@ -8,6 +8,7 @@ import { Maker, Project, Company, create as createObject } from '../utils/object
 import Assist from '../utils/assist'
 import ProjectCard from '../components/common/ProjectCard';
 import Title from '../components/main/Title';
+import ProjectFocus from '../components/main/ProjectFocus';
 import MakerCard from '../components/MakerCard';
 import Padding from '../components/Padding';
 import PortfolioItemWide from '../components/common/PortfolioItem';
@@ -172,10 +173,7 @@ class MainPageSection extends Component {
 
     return (
       <div className={cx('main-section')}>
-        <div className={cx('project-focus')}>
-          <div className={cx('project-focus-main')}>
-          </div>
-        </div>
+        <ProjectFocus project={projects[1]} />
 
         <Title text="메이커들이 채워가는 건축의 엔딩크레딧">
           <div className={cx('sub-title-text')}>
