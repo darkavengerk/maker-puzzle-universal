@@ -6,6 +6,7 @@ import classNames from 'classnames/bind';
 import Link from '../../components/Link';
 import FlexibleImage from '../../components/FlexibleImageLazy';
 import Padding from '../../components/Padding';
+import Arrow from '../../components/common/Arrow';
 
 // import { portfoiloEditorCancel, portfoiloSubmit } from '../actions/makers';
 // import { companyPortfoiloEditorCancel, companyPortfoiloSubmit } from '../actions/companies';
@@ -16,16 +17,37 @@ const cx = classNames.bind(styles);
 class ProjectFocus extends Component {
   constructor(props) {
     super(props);
-    this.state = { mouseover: false };
+    this.state = { mouseover: false, projectIndex: 0 };
     this.mouseover = this.mouseover.bind(this);
     this.mouseout = this.mouseout.bind(this);
+    this.clickLeft = this.clickLeft.bind(this);
+    this.clickRight = this.clickRight.bind(this);
   }
 
-  extractProjectSummary(key) {
-    const { project } = this.props;
+  clickLeft(evt) {
+    evt.preventDefault();
+    this.setState(prev => {
+      let nextIndex = prev.projectIndex - 1;
+      if(nextIndex >= 0)
+        return {projectIndex: nextIndex};
+      else return {projectIndex: this.props.projects.length-1};
+    });
+  }
+
+  clickRight(evt) {
+    evt.preventDefault();
+    this.setState(prev => {
+      let nextIndex = prev.projectIndex + 1;
+      if(nextIndex < this.props.projects.length)
+        return {projectIndex: nextIndex};
+      else return {projectIndex: 0};
+    });
+  }
+
+  extractProjectSummary(project, key) {
     const result = [];
-    for(let i=0; i<4; i++) {
-      result.push(project.portfolios[i]? project.portfolios[i][key] : '');
+    for(let i=0; i<8; i++) {
+      result.push(project.portfolios[i]? project.portfolios[i][key] : '-');
     }
     return result;
   }
@@ -55,10 +77,12 @@ class ProjectFocus extends Component {
   }
 
   render() {
-    const { project } = this.props;
+    const { projects } = this.props;
+    if(!projects || !projects.length) return <div></div>;
+    const project = projects[this.state.projectIndex];
     const boxRows = this.extractImages(project);
     return (
-      <div className={cx('project-focus')} onMouseOver={this.mouseover}>
+      <Link to={'/project/' + project.link_name} className={cx('project-focus')} onMouseOver={this.mouseover}>
         <div className={cx('project-focus-boxes')}>
           <div className={cx('project-focus-box-row')}>
             {boxRows[0].map((img, i) => <FlexibleImage key={i} className={cx('project-focus-box')} x={226} y={229} source={img} />)}
@@ -92,29 +116,45 @@ class ProjectFocus extends Component {
               누가 지었을까?
             </div>
           </div>
+          <Padding height={50} />
           <div className={cx('project-focus-filter-makers')}>
             <div className={cx('project-focus-filter-makers-button', {'filter-makers-button': this.state.mouseover})}>
               엔딩크레딧 보러가기
             </div>
+            <Padding height={10} />
             <div className={cx('project-focus-filter-makers-text')}>
               <div className={cx('project-tile-image-text-item', 'right')}>
-                {this.extractProjectSummary('companyName').map((name, i) => <div key={i}>{name}</div>)}
+                {this.extractProjectSummary(project, 'companyName').map((name, i) => <div key={i}>{name}</div>)}
               </div>
-              <div className={cx('project-tile-seperator')}></div>
+              <div className={cx('project-tile-seperator')}>
+                <div className={cx('project-tile-seperator-main')}>
+                </div>
+                <div className={cx('project-tile-seperator-dot')}>
+                </div>
+                <div className={cx('project-tile-seperator-dot')}>
+                </div>
+                <div className={cx('project-tile-seperator-dot')}>
+                </div>
+              </div>
               <div className={cx('project-tile-image-text-item', 'left')}>
-                {this.extractProjectSummary('title').map((title, i) => <div key={i}>{title}</div>)}
+                {this.extractProjectSummary(project, 'title').map((title, i) => <div key={i}>{title}</div>)}
               </div>
             </div>
           </div>
         </div>
-      </div>
+        <div className={cx('arrow-area', 'arrow-area-left')} onClick={this.clickLeft} >
+          <Arrow direction="left" color="white" height={'0.48rem'} width={'0.3rem'} />
+        </div>
+        <div className={cx('arrow-area', 'arrow-area-right')} onClick={this.clickRight} >
+          <Arrow direction="right" color="white" height={'0.48rem'} width={'0.3rem'} />
+        </div>
+      </Link>
     );
   }
 }
 
 
 ProjectFocus.propTypes = {
-  project: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {

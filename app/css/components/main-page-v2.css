@@ -74,6 +74,7 @@
   position: absolute;
   right: 0;
   z-index: 0;
+  background-color: black;
 }
 
 .project-focus-box-row { 
@@ -129,20 +130,71 @@
 
 .project-focus-filter-makers-text {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   width: 3rem;
 }
 
 .project-tile-image-text-item {
-  width: 3rem;
+  line-height: 0.23rem;
+}
+
+.project-tile-seperator {
+  width: 0.01rem;
+  height: 2rem;
+  margin: 0 0.08rem;
+}
+
+.project-tile-seperator-main {
+  width: 0.01rem;
+  height: 1.81rem;
+  border-right: solid 0.01rem #ffffff;
+}
+
+.project-tile-seperator-dot {
+  width: 0.02rem;
+  height: 0.02rem;
+  background-color: #ffffff;
+  margin-top: 0.05rem;
+}
+
+.right {
+  text-align: right;
+}
+
+.left {
+  text-align: left;
 }
 
 .project-focus-filter-makers-button {
-
+  width: 1.71rem;
+  height: 0.36rem;
+  border-radius: 0.08rem;
+  border: solid 0.02rem #ffffff;
+  line-height: 0.36rem;
+  vertical-align: middle;
+  text-align: center;
 }
 
 .filter-makers-button {
+  background-color: #f46e1f;
+}
 
+.arrow-area {
+  position: absolute;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 8
+}
+
+.arrow-area-left {
+  left: 0;
+  margin-left: 0.1rem;
+}
+
+.arrow-area-right {
+  right: 0;
+  margin-right: 0.1rem;
 }
 
 .main-section section {

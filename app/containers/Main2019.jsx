@@ -135,7 +135,7 @@ class MainPageSection extends Component {
 
     return (
       <div className={cx('main-section')}>
-        <ProjectFocus project={projects[1]} />
+        <ProjectFocus projects={projects.filter(p => p.portfolios.length >= 8)} />
 
         <Title text="메이커들이 채워가는 건축의 엔딩크레딧">
           <div className={cx('sub-title-text')}>
