@@ -25,7 +25,7 @@ class ProjectCardSection extends Component {
     const { project } = this.props;
     const result = [];
     for(let i=0; i<4; i++) {
-      result.push(project.portfolios[i][key]);
+      result.push(project.portfolios[i]? project.portfolios[i][key] : '');
     }
     return result;
   }
@@ -80,11 +80,11 @@ class ProjectCardSection extends Component {
             >
               <div className={cx('project-tile-image-text')}>
               { this.state.mouseover && <div className={cx('project-tile-image-text-item', 'right')}>
-                {this.extractProjectSummary('companyName').map(name => <div>{name}</div>)}
+                {this.extractProjectSummary('companyName').map((name, i) => <div key={i}>{name}</div>)}
                 </div> }
               { this.state.mouseover && <div className={cx('project-tile-seperator')}></div> }
               { this.state.mouseover && <div className={cx('project-tile-image-text-item', 'left')}>
-                {this.extractProjectSummary('title').map(name => <div>{name}</div>)}
+                {this.extractProjectSummary('title').map((title, i) => <div key={i}>{title}</div>)}
                 </div> }
               </div>
             </div>

@@ -11,8 +11,6 @@ const cx = classNames.bind(styles);
 const ProjectCardSection = ({ text, children }) => {
   return (
     <section className={cx('title-section')} >
-      <div className={cx('title-line')} >
-      </div>
       <div className={cx('title-text')} >
         { text }
       </div>
