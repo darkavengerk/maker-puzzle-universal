@@ -78,7 +78,7 @@ class ProjectFocus extends Component {
         />
         <FlexibleImage 
           source={project.profilePicture} x={'60%'} y={'100%'}
-          className={cx('project-focus-main')}
+          className={cx('project-focus-main', {'project-focus-main-hover': this.state.mouseover})}
           zIndex="2"
         />
         <div className={cx('project-focus-filter')} role="button">
@@ -91,7 +91,7 @@ class ProjectFocus extends Component {
             </div>
           </div>
           <div className={cx('project-focus-filter-makers')}>
-            <div className={cx('project-focus-filter-makers-button')}>
+            <div className={cx('project-focus-filter-makers-button', {'filter-makers-button': this.state.mouseover})}>
               엔딩크레딧 보러가기
             </div>
             <div className={cx('project-focus-filter-makers-text')}>

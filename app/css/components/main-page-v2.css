@@ -26,6 +26,21 @@
   background-size: cover;
   -webkit-clip-path: polygon(0 0, 88% 0%, 100% 100%, 0% 100%);
   clip-path: polygon(0 0, 88% 0%, 100% 100%, 0% 100%);
+  
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transition: all 0.2s ease-in-out;
+}
+
+.project-focus-main-hover {
+  transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -o-transform: scale(1.2);
 }
 
 .project-focus-main-space {
@@ -110,6 +125,14 @@
 
 .project-tile-image-text-item {
   width: 3rem;
+}
+
+.project-focus-filter-makers-button {
+
+}
+
+.filter-makers-button {
+
 }
 
 .main-section section {
