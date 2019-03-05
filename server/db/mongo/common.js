@@ -306,7 +306,7 @@ const functionMap = {
       {portfolios: 1, companies:1, count:1, score:1}
     );
     for(let p of projects) {
-      p.score = p.portfolios.length*2 + p.companies.length + p.count;
+      p.score = p.portfolios.length;
       await p.save();
     }
 

@@ -71,6 +71,7 @@ class MainPageSection extends Component {
     let { 
       users=[], 
       projects=[],
+      projectsNew=[],
       companies=[],
       portfolios=[],
       companyPortfolios=[],
@@ -182,8 +183,12 @@ class MainPageSection extends Component {
         </Title>
 
         <SectionItem title="Puzzles" link='/more/project/p/popular'>
-          {projects.map((p,i) => <ProjectCard key={p.name} project={p} direction={i % 2 === 0? 'right' : 'left'} />)}
-        </SectionItem>     
+          {projects.slice(0,6).map((p,i) => <ProjectCard key={p.name} project={p} direction={i % 2 === 0? 'right' : 'left'} />)}
+        </SectionItem>
+
+        <SectionItem title="Puzzles New" link='/more/project/p/recent'>
+          {projectsNew.slice(0,6).map((p,i) => <ProjectCard key={p.name} project={p} direction={i % 2 === 0? 'right' : 'left'} />)}
+        </SectionItem>
 
         <Title text="분야별 메이커들의 포트폴리오">
           <div className={cx('sub-title-text')}>

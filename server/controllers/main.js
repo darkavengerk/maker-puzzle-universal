@@ -47,8 +47,8 @@ function getUserContents({sort='popular', loaded=0, limit=6}) {
   return getContents(User, {'portfolios.0': {$exists:true}}, sort, limit, loaded, []);
 }
 
-function getProjectContents({sort='popular', loaded=0, limit=9}) {
-  return getContents(Project, {'portfolios.0': {$exists:true}}, sort, limit, loaded, ['portfolios.images']);
+function getProjectContents({sort='popular', loaded=0, limit=24}) {
+  return getContents(Project, {'portfolios.3': {$exists:true}}, sort, limit, loaded, ['portfolios.images']);
 }
 
 function getCompanyContents({sort='popular', loaded=0, limit=12}) {
@@ -80,13 +80,14 @@ export async function buildContents(req, res) {
   console.log('build main contents...', new Date().toISOString());
   const loadings = [
     getProjectContents({}),
+    getProjectContents({sort:'recent'})
     getCompanyContents({}),
     getMakerPorfolioContents({}),
     getCompanyPorfolioContents({}),
     getCompanyPorfolioContents({sort:'recent'})
   ];
-  const [projects, companies, portfolios, companyPortfolios, companyPortfoliosRecent] = await Promise.all(loadings);
-  mainContents = { projects, companies, portfolios, companyPortfolios, companyPortfoliosRecent, subContents: await getSubContents() };
+  const [projects, projectsNew, companies, portfolios, companyPortfolios, companyPortfoliosRecent] = await Promise.all(loadings);
+  mainContents = { projects, projectsNew, companies, portfolios, companyPortfolios, companyPortfoliosRecent, subContents: await getSubContents() };
   if(req && res) {
     res.json(mainContents);
   }
@@ -117,7 +118,8 @@ export async function more(req, res) {
   const { topic, subtype } = params;
 
   if(topic === 'project') {
-    const result = await getProjectContents({ loaded });
+    const sort = params.sort;
+    const result = await getProjectContents({ sort, loaded });
     return res.json({ result, title:'프로젝트 들여다보기', topic, subtype });
   }
 
