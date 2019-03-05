@@ -69,13 +69,8 @@ class MainPageSection extends Component {
   render() {
     let { main={}, user, portfoiloEditorCancel, loginMenu, cancelLogin } = this.props;
     let { 
-      users=[], 
       projects=[],
       projectsNew=[],
-      companies=[],
-      portfolios=[],
-      companyPortfolios=[],
-      portfoliosRecent=[],
       companyPortfoliosRecent=[],
     } = main;
 
@@ -110,17 +105,6 @@ class MainPageSection extends Component {
       }
     })
 
-    const popularCompanyPortfolios = companyPortfolios.map(portfolio => {
-      // const owner = createObject('company', portfolio.company);
-      return <PortfolioItemWide 
-                imageFit={true} 
-                portfolio={portfolio} 
-                referrer={Assist.Company} 
-                owner={Assist.Company} 
-                key={portfolio.pid} 
-                external={true} />
-    })
-
     const recentCompanyPortfolios = companyPortfoliosRecent.map(portfolio => {
       // const owner = createObject('company', portfolio.company);
       return <PortfolioItemWide 
@@ -131,16 +115,6 @@ class MainPageSection extends Component {
                 key={portfolio.pid} 
                 external={true} />
     })
-
-    let popularMakerPortfolios = portfolios.map(portfolio => {
-        // const owner = createObject('maker', portfolio.user);
-        return (<PortfolioItem 
-                    portfolio={portfolio} 
-                    referrer={Assist.Main} 
-                    owner={Assist.Maker} 
-                    key={portfolio.pid} 
-                    external={true} />);
-      });
 
     const companyHighlights = companies.map(company => {
       let business = company.features.filter(f => f.repr === 'business');

@@ -36,7 +36,7 @@ function searchContents(keyword, query, limit, loaded, populate, shouldSplitKeyw
   return searchPortfolios(keyword, query, limit, loaded, populate);
 }
 
-function searchCategories({keywords, limit=3, loaded=0}) {
+function searchCategories({keywords, limit=12, loaded=0}) {
   return searchContents(
     keywords.join(' '), 
     {isPrivate:false, type:'company'}, 
@@ -81,13 +81,15 @@ export async function buildContents(req, res) {
   const loadings = [
     getProjectContents({}),
     getProjectContents({sort:'recent'})
-    getCompanyContents({}),
-    getMakerPorfolioContents({}),
-    getCompanyPorfolioContents({}),
+    // getCompanyContents({}),
+    // getMakerPorfolioContents({}),
+    // getCompanyPorfolioContents({}),
     getCompanyPorfolioContents({sort:'recent'})
   ];
-  const [projects, projectsNew, companies, portfolios, companyPortfolios, companyPortfoliosRecent] = await Promise.all(loadings);
-  mainContents = { projects, projectsNew, companies, portfolios, companyPortfolios, companyPortfoliosRecent, subContents: await getSubContents() };
+  // const [projects, projectsNew, companies, portfolios, companyPortfolios, companyPortfoliosRecent] = await Promise.all(loadings);
+  // mainContents = { projects, projectsNew, companies, portfolios, companyPortfolios, companyPortfoliosRecent, subContents: await getSubContents() };
+  const [projects, projectsNew, companyPortfoliosRecent] = await Promise.all(loadings);
+  mainContents = { projects, projectsNew, companyPortfoliosRecent, subContents: await getSubContents() };
   if(req && res) {
     res.json(mainContents);
   }
