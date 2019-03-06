@@ -19,7 +19,7 @@ const {
 let mainContents = null;
 
 function getContents(model, query, sort, limit, loaded, populate) {
-  const sorting = sort === 'popular'? {score:-1} : {created:-1};
+  const sorting = sort === 'popular'? {score:-1} : {_id:-1};
   model =  model
       .find(query, {meta:0, keywords:0})
       // .populate(populate, '-email -_id -password -tags')
