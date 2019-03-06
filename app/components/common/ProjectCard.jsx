@@ -75,8 +75,9 @@ class ProjectCardSection extends Component {
 
     if(this.state.mouseover) {
       const imageList = this.extractImages(project, population);
-      images = imageList.map(img => <FlexibleImage 
+      images = imageList.map((img,i) => <FlexibleImage 
         x={(200 / population) + '%'} y={'50%'} 
+        key={i}
         source={img} 
         version="medium"
       />)

@@ -132,11 +132,10 @@ class MainPageSection extends Component {
                 }
               </SectionItem>
     });
-    const hotProjects = projects.filter(p => p.portfolios.length >= 8)
 
     return (
       <div className={cx('main-section')}>
-        <ProjectFocus projects={hotProjects.slice(0, 4)} />
+        <ProjectFocus projects={projects.slice(0, 4)} />
 
         <Title text="메이커들이 채워가는 건축의 엔딩크레딧">
           <div className={cx('sub-title-text')}>
@@ -149,7 +148,7 @@ class MainPageSection extends Component {
         </SectionItem>
 
         <SectionItem title="Hot Puzzles" link='/more/project/p/popular'>
-          {hotProjects.slice(4,10).map((p,i) => <ProjectCard key={p.name} project={p} direction={i % 2 === 0? 'right' : 'left'} population={6} />)}
+          {projects.slice(4,10).map((p,i) => <ProjectCard key={p.name} project={p} direction={i % 2 === 0? 'right' : 'left'} population={6} />)}
         </SectionItem>
 
         <Title text="분야별 메이커들의 포트폴리오">
