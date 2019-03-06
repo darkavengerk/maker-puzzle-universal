@@ -197,6 +197,31 @@
   margin-right: 0.1rem;
 }
 
+.page-area {
+  margin-bottom: 0.34rem;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  height: 0.1rem;
+  width: 100%;
+  z-index: 9;
+}
+
+.pager {
+  margin: 0 0.05rem;
+  width: 0.1rem;
+  height: 0.1rem;
+  border-radius: 50%;
+  background-color: #c5c5c5;
+}
+
+.pager-active {
+  width: 0.4rem;
+  border-radius: 0.08rem;
+  background-color: #ffffff;
+}
+
 .main-section section {
   margin-top: 0.6rem
 }

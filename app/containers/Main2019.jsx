@@ -119,7 +119,7 @@ class MainPageSection extends Component {
     const portfoliosByCategory = (main.subContents || []).map(content => {
       return <SectionItem key={content.category} title={content.category} link={'/more/category/' + content.category + '/p'}>
                 {
-                  content.portfolios.map(portfolio => {
+                  content.portfolios.slice(0, 4).map(portfolio => {
                     const owner = createObject('company', portfolio.company);
                     return <PortfolioItemWide 
                               imageFit={true} 
@@ -132,10 +132,11 @@ class MainPageSection extends Component {
                 }
               </SectionItem>
     });
+    const hotProjects = projects.filter(p => p.portfolios.length >= 8)
 
     return (
       <div className={cx('main-section')}>
-        <ProjectFocus projects={projects.filter(p => p.portfolios.length >= 8)} />
+        <ProjectFocus projects={hotProjects.slice(0, 4)} />
 
         <Title text="메이커들이 채워가는 건축의 엔딩크레딧">
           <div className={cx('sub-title-text')}>
@@ -143,12 +144,12 @@ class MainPageSection extends Component {
           </div>
         </Title>
 
-        <SectionItem title="Puzzles" link='/more/project/p/popular'>
-          {projects.slice(0,6).map((p,i) => <ProjectCard key={p.name} project={p} direction={i % 2 === 0? 'right' : 'left'} />)}
+        <SectionItem title="New Puzzles" link='/more/project/p/recent'>
+          {projectsNew.slice(0,6).map((p,i) => <ProjectCard key={p.name} project={p} direction={i % 2 === 0? 'right' : 'left'} population={4}/>)}
         </SectionItem>
 
-        <SectionItem title="Puzzles New" link='/more/project/p/recent'>
-          {projectsNew.slice(0,6).map((p,i) => <ProjectCard key={p.name} project={p} direction={i % 2 === 0? 'right' : 'left'} />)}
+        <SectionItem title="Hot Puzzles" link='/more/project/p/popular'>
+          {hotProjects.slice(4,10).map((p,i) => <ProjectCard key={p.name} project={p} direction={i % 2 === 0? 'right' : 'left'} population={6} />)}
         </SectionItem>
 
         <Title text="분야별 메이커들의 포트폴리오">
@@ -159,7 +160,7 @@ class MainPageSection extends Component {
         </Title>
 
         <SectionItem title="New" link='/more/portfolio/company/recent'>
-          {recentCompanyPortfolios}
+          {recentCompanyPortfolios.slice(0, 8)}
         </SectionItem>
 
         { portfoliosByCategory }

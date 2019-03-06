@@ -21,13 +21,30 @@ class ProjectCardSection extends Component {
     this.mouseout = this.mouseout.bind(this);
   }
 
-  extractProjectSummary(key) {
+  extractProjectSummary(key, count) {
     const { project } = this.props;
     const result = [];
-    for(let i=0; i<4; i++) {
+    for(let i=0; i < count; i++) {
       result.push(project.portfolios[i]? project.portfolios[i][key] : '');
     }
     return result;
+  }
+
+  extractImages(project, count) {
+    let cycle = 0;
+    let found = false;
+    const images = [];
+    while(images.length < count) {
+      project.portfolios.map(p => {
+        if(images.length < count && p.images[cycle]) {
+          found = true;
+          images.push(p.images[cycle]);
+        }
+      });
+      if(!found) break;
+      cycle += 1;
+    }
+    return images;
   }
 
   mouseover(evt) {
@@ -41,13 +58,30 @@ class ProjectCardSection extends Component {
   }
 
   render() {
-    const { project, screen, direction } = this.props;
+    const { project, screen, direction, population=4 } = this.props;
     let location = project.features.filter(f => f.repr === 'location');
     location = location[0]? location[0] : null;
     const locationName = location && location.content? location.content : '';
+
     if(screen.showing === 'loading') {
       return <Link className={cx('project-tile')} to={'/project/' + project.link_name} role="button" count="project"></Link>
     }
+
+    let images = <FlexibleImage 
+      x={'100%'} y={'100%'} 
+      source={project.profilePicture || project.portfolios[0].images[0]} 
+      version="large"
+    />
+
+    if(this.state.mouseover) {
+      const imageList = this.extractImages(project, population);
+      images = imageList.map(img => <FlexibleImage 
+        x={(200 / population) + '%'} y={'50%'} 
+        source={img} 
+        version="medium"
+      />)
+    }
+
     return (
       <Link 
         to={'/project/' + project.link_name}
@@ -68,23 +102,18 @@ class ProjectCardSection extends Component {
             </div>
           </div>
           <div className={cx('project-tile-image-area')}>
-            <FlexibleImage 
-              className={cx('project-tile-image', { 'project-tile-image-hover': this.state.mouseover })} 
-              x={'100%'} y={'100%'} 
-              source={project.profilePicture || project.portfolios[0].images[0]} 
-              version="large"
-            />
+            {images}
             <div 
               className={cx({'project-tile-image-filter':this.state.mouseover})}
               onMouseLeave={this.mouseout}
             >
               <div className={cx('project-tile-image-text')}>
               { this.state.mouseover && <div className={cx('project-tile-image-text-item', 'right')}>
-                {this.extractProjectSummary('companyName').map((name, i) => <div key={i}>{name}</div>)}
+                {this.extractProjectSummary('companyName', population).map((name, i) => <div key={i}>{name}</div>)}
                 </div> }
-              { this.state.mouseover && <div className={cx('project-tile-seperator')}></div> }
+              { this.state.mouseover && <div className={cx('project-tile-seperator', {'seperator-long':population === 6})}></div> }
               { this.state.mouseover && <div className={cx('project-tile-image-text-item', 'left')}>
-                {this.extractProjectSummary('title').map((title, i) => <div key={i}>{title}</div>)}
+                {this.extractProjectSummary('title', population).map((title, i) => <div key={i}>{title}</div>)}
                 </div> }
               </div>
             </div>

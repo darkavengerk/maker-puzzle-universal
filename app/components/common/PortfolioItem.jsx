@@ -54,12 +54,12 @@ class PortfolioItem extends Component {
       }
       return (
         <div 
-          className={cx('main-section', {'main-section-hover':this.state.mouseover}) + ' dragItem'}
+          className={cx('main-section') + ' dragItem'}
           onMouseOver={this.mouseover}
           onMouseLeave={this.mouseout}
         >
           <Link to={referrer.createPortfolioLink(portfolio)} count="portfolio">
-            <div className={cx('text', 'text-section', external? 'type2' : '')}>
+            <div className={cx('text', 'text-section', {'main-section-hover':this.state.mouseover}, external? 'type2' : '')}>
               { profileImage }
               <div>
                 <h1 className={cx({'text-hover':this.state.mouseover})} >
@@ -73,7 +73,10 @@ class PortfolioItem extends Component {
                   }
               </div>
             </div>
-            <Window images={portfolio.images} hover={this.state.mouseover} />
+            <div className={cx({'main-body-hover':this.state.mouseover})}>
+              <Window images={portfolio.images} hover={this.state.mouseover} />
+              { this.state.mouseover && <div className={cx('main-body-filter')}></div>}
+            </div>
           </Link>        
         </div>
       );

@@ -15,7 +15,7 @@ const PortfolioImagesWindowSection = ({ images, hover }) => {
   }
 
   if(images.length === 1) {
-    return <Image source={images[0]} x={330} y={285} version="large" />;
+    return <div className={cx('windows')}><Image source={images[0]} x={330} y={285} version="large" /></div>;
   }
 
   if(images.length === 2) {
