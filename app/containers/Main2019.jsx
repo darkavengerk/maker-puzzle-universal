@@ -7,6 +7,7 @@ import { browserHistory } from 'react-router';
 import { Maker, Project, Company, create as createObject } from '../utils/objects'
 import Assist from '../utils/assist'
 import ProjectCard from '../components/common/ProjectCard';
+import SlidingWindow from '../components/common/SlidingWindow';
 import Title from '../components/main/Title';
 import ProjectFocus from '../components/main/ProjectFocus';
 import MakerCard from '../components/MakerCard';
@@ -118,25 +119,30 @@ class MainPageSection extends Component {
 
     const portfoliosByCategory = (main.subContents || []).map(content => {
       return <SectionItem key={content.category} title={content.category} link={'/more/category/' + content.category + '/p'}>
-                {
-                  content.portfolios.slice(0, 4).map(portfolio => {
-                    const owner = createObject('company', portfolio.company);
-                    return <PortfolioItemWide 
-                              imageFit={true} 
-                              portfolio={portfolio} 
-                              referrer={Assist.Company} 
-                              owner={Assist.Company} 
-                              key={portfolio.pid} 
-                              external={true} />
-                  })
-                }
+                <SlidingWindow width="100%" groupSize={4} className={cx('project-tiles')}>
+                  {
+                    content.portfolios.map(portfolio => {
+                      const owner = createObject('company', portfolio.company);
+                      return <PortfolioItemWide 
+                                imageFit={true} 
+                                portfolio={portfolio} 
+                                referrer={Assist.Company} 
+                                owner={Assist.Company} 
+                                key={portfolio.pid} 
+                                external={true} />
+                    })
+                  }
+                </SlidingWindow>
               </SectionItem>
     });
 
     return (
       <div className={cx('main-section')}>
-        <ProjectFocus projects={projects.slice(0, 4)} />
-
+        <SlidingWindow width="100%">
+          {
+            projects.slice(0, 3).map(p => <ProjectFocus project={p} />)
+          }
+        </SlidingWindow>
         <Title text="메이커들이 채워가는 건축의 엔딩크레딧">
           <div className={cx('sub-title-text')}>
             직접 수행한 프로젝트의 엔딩크레딧에 당신의 이름도 새겨보세요
@@ -144,11 +150,19 @@ class MainPageSection extends Component {
         </Title>
 
         <SectionItem title="New Puzzles" link='/more/project/p/recent'>
-          {projectsNew.slice(0,6).map((p,i) => <ProjectCard key={p.name} project={p} direction={i % 2 === 0? 'right' : 'left'} population={4}/>)}
+          <SlidingWindow width="100%" height="8.94rem" groupSize={6} className={cx('project-tiles')}>
+            {
+              projectsNew.map((p,i) => 
+                <ProjectCard key={p.name} project={p} direction={i % 2 === 0? 'right' : 'left'} population={4}/>
+              )
+            }          
+          </SlidingWindow>
         </SectionItem>
 
         <SectionItem title="Hot Puzzles" link='/more/project/p/popular'>
-          {projects.slice(4,10).map((p,i) => <ProjectCard key={p.name} project={p} direction={i % 2 === 0? 'right' : 'left'} population={6} />)}
+          <SlidingWindow width="100%" groupSize={6} className={cx('project-tiles')}>
+            {projects.slice(4).map((p,i) => <ProjectCard key={p.name} project={p} direction={i % 2 === 0? 'right' : 'left'} population={6} />)}
+          </SlidingWindow>
         </SectionItem>
 
         <Title text="분야별 메이커들의 포트폴리오">
@@ -159,7 +173,9 @@ class MainPageSection extends Component {
         </Title>
 
         <SectionItem title="New" link='/more/portfolio/company/recent'>
-          {recentCompanyPortfolios.slice(0, 8)}
+          <SlidingWindow width="100%" groupSize={8} className={cx('project-tiles')}>
+            {recentCompanyPortfolios}
+          </SlidingWindow>
         </SectionItem>
 
         { portfoliosByCategory }

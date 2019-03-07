@@ -89,9 +89,9 @@ class ProjectFocus extends Component {
   }
 
   render() {
-    const { projects } = this.props;
-    if(!projects || !projects.length) return <div></div>;
-    const project = projects[this.state.projectIndex];
+    const { projects, project } = this.props;
+    // if(!projects || !projects.length) return <div></div>;
+    // const project = projects[this.state.projectIndex];
     const boxRows = this.extractImages(project);
     return (
       <Link to={'/project/' + project.link_name} className={cx('project-focus')} onMouseOver={this.mouseover}>
@@ -160,9 +160,7 @@ class ProjectFocus extends Component {
         <div className={cx('arrow-area', 'arrow-area-right')} onClick={this.clickRight} >
           <Arrow direction="right" color="white" height={'0.48rem'} width={'0.3rem'} />
         </div>
-        <div className={cx('page-area')}>
-          {this.pager()}
-        </div>
+        
       </Link>
     );
   }
