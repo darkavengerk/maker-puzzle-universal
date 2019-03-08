@@ -60,11 +60,12 @@
 }
 
 .project-tile-image-area {
-  overflow:hidden;
   height: 3.56rem;
   width: 100%;
   position: relative;
   line-height: 0;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .project-tile-image-filter {

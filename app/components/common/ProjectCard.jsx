@@ -53,8 +53,8 @@ class ProjectCardSection extends Component {
   }
 
   mouseout(evt) {
-    // if(this.state.mouseover)
-    //   this.setState({ mouseover: false });
+    if(this.state.mouseover)
+      this.setState({ mouseover: false });
   }
 
   render() {
