@@ -6,7 +6,6 @@ import classNames from 'classnames/bind';
 import Link from '../../components/Link';
 import FlexibleImage from '../../components/FlexibleImageLazy';
 import Padding from '../../components/Padding';
-import Arrow from '../../components/common/Arrow';
 
 // import { portfoiloEditorCancel, portfoiloSubmit } from '../actions/makers';
 // import { companyPortfoiloEditorCancel, companyPortfoiloSubmit } from '../actions/companies';
@@ -154,12 +153,7 @@ class ProjectFocus extends Component {
             </div>
           </div>
         </div>
-        <div className={cx('arrow-area', 'arrow-area-left')} onClick={this.clickLeft} >
-          <Arrow direction="left" color="white" height={'0.48rem'} width={'0.3rem'} />
-        </div>
-        <div className={cx('arrow-area', 'arrow-area-right')} onClick={this.clickRight} >
-          <Arrow direction="right" color="white" height={'0.48rem'} width={'0.3rem'} />
-        </div>
+        
         
       </Link>
     );

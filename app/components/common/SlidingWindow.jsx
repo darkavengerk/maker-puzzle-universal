@@ -20,28 +20,45 @@ class SlidingWindow extends Component {
   }
 
   mouseout(evt) {
-    this.setState(prev => this.setState({slideIndex: prev.slideIndex + 1}));
     if(this.state.mouseover)
       this.setState({ mouseover: false });
   }
 
   getItemStyle() {
-    const { children, width, height='auto', groupSize=1, ...props } = this.props;
-    const index = this.state.slideIndex % Math.ceil(children.length / groupSize);
+    const { children, header, width, height='auto', groupSize=1, index=0, ...props } = this.props;
+    const slideIndex = index % Math.ceil(this.getChildren().length / groupSize);
+
     return {
       display: 'inline-block',
       position: 'relative',
       width, height,
-      transform: `translateX(calc(-100% * ${index}))`,
-    　WebkitTransform: `translateX(calc(-100% * ${index}))`,
+      transform: `translateX(calc(-100% * ${slideIndex}))`,
+    　WebkitTransform: `translateX(calc(-100% * ${slideIndex}))`,
       transition: '0.5s ease-in-out',
       WebkitTransition: '0.5s ease-in-out',
     };
   }
 
-  groupedChildren() {
-    const { children, groupSize=1 } = this.props;
+  getLayer() {
+    let { children, header=false } = this.props;
+    if(header) {
+      return children[0].props.children;
+    }
+    return null;
+  }
+
+  getChildren() {
+    let { children, header=false } = this.props;
     if(!children) return [];
+    if(header) {
+      return children[1];
+    }
+    return children;
+  }
+
+  groupedChildren() {
+    let { groupSize=1 } = this.props;
+    const children = this.getChildren();
     let index = 0;
     const made = [children.slice(index, groupSize)];
     while(index + groupSize < children.length) {
@@ -52,14 +69,23 @@ class SlidingWindow extends Component {
   }
 
   render() {
-    const { children, className, width, height, leftSlide, rightSlide, groupSize=1,  ...props } = this.props;
+    const { children, header=false, index, className, width, height, leftSlide, rightSlide, groupSize=1,  ...props } = this.props;
     const style ={
       width,
       height,
       whiteSpace: 'nowrap',
       overflow: 'hidden',
+      position: 'relative',
+    };
+    const headerStyle = {
+      position: 'absolute',
+      left: 0,
+      top: 0,
+      width, height: '100%',
+      pointerEvents: 'none',
     };
     const rows = this.groupedChildren();
+    const layer = this.getLayer();
     return (
       <div 
         style={style}
@@ -75,6 +101,13 @@ class SlidingWindow extends Component {
               </div>
             </div>)
         }
+        <div style={headerStyle}>
+          {
+            this.state.mouseover && layer && layer.map((l, i) => 
+              <div key={i} style={{pointerEvents:'all'}}>{l}</div>
+            )
+          }
+        </div>
       </div>
     );
   }

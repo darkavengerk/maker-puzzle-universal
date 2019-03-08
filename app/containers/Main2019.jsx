@@ -7,7 +7,8 @@ import { browserHistory } from 'react-router';
 import { Maker, Project, Company, create as createObject } from '../utils/objects'
 import Assist from '../utils/assist'
 import ProjectCard from '../components/common/ProjectCard';
-import SlidingWindow from '../components/common/SlidingWindow';
+import Slider from '../components/main/Slider';
+import Arrow from '../components/common/Arrow';
 import Title from '../components/main/Title';
 import ProjectFocus from '../components/main/ProjectFocus';
 import MakerCard from '../components/MakerCard';
@@ -32,50 +33,15 @@ class MainPageSection extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {isAddingPortfolio:false, showClaim:false};
-    this.showPortfolioPopup = this.showPortfolioPopup.bind(this);
-    this.showMakerPage = this.showMakerPage.bind(this);
-    this.cancelShow = this.cancelShow.bind(this);
-    this.showClaim = this.showClaim.bind(this);
-  }
-
-  cancelShow() {
-    this.setState({showClaim: false});
-  }
-
-  showClaim() {
-    this.setState({showClaim: true});
-  }
-
-  showPortfolioPopup(evt) {
-    const { user, portfoiloEditorStart, loginMenu } = this.props;
-    if(user.authenticated) {
-      portfoiloEditorStart();
-    }
-    else {
-      loginMenu();
-    }
-  }
-
-  showMakerPage(evt) {
-    const { user, portfoiloEditorStart, loginMenu } = this.props;
-    if(user.authenticated) {
-      browserHistory.push('/maker/' + user.account.userid);
-    }
-    else {
-      loginMenu();
-    }
   }
 
   render() {
-    let { main={}, user, portfoiloEditorCancel, loginMenu, cancelLogin } = this.props;
+    let { main={}, user } = this.props;
     let { 
       projects=[],
       projectsNew=[],
       companyPortfoliosRecent=[],
     } = main;
-
-    // const referrer = createObject('main');
 
     let feed = user.account.feed || [];
     let feedCount = 0;
@@ -84,7 +50,6 @@ class MainPageSection extends Component {
       if(portfolio.type === 'company') {
         if(feedCount + 2 > 18) return null;
         feedCount += 2;
-        // const owner = createObject('company', portfolio.company);
         return <PortfolioItemWide 
                   imageFit={true} 
                   portfolio={portfolio} 
@@ -107,7 +72,6 @@ class MainPageSection extends Component {
     })
 
     const recentCompanyPortfolios = companyPortfoliosRecent.map(portfolio => {
-      // const owner = createObject('company', portfolio.company);
       return <PortfolioItemWide 
                 imageFit={true} 
                 portfolio={portfolio} 
@@ -119,7 +83,7 @@ class MainPageSection extends Component {
 
     const portfoliosByCategory = (main.subContents || []).map(content => {
       return <SectionItem key={content.category} title={content.category} link={'/more/category/' + content.category + '/p'}>
-                <SlidingWindow width="100%" groupSize={4} className={cx('project-tiles')}>
+                 <Slider groupSize={4}>
                   {
                     content.portfolios.map(portfolio => {
                       const owner = createObject('company', portfolio.company);
@@ -132,17 +96,18 @@ class MainPageSection extends Component {
                                 external={true} />
                     })
                   }
-                </SlidingWindow>
+                </Slider>
               </SectionItem>
     });
 
     return (
       <div className={cx('main-section')}>
-        <SlidingWindow width="100%">
+        <Slider>
           {
-            projects.slice(0, 3).map(p => <ProjectFocus project={p} />)
+            projects.slice(0, 3).map(p => <ProjectFocus key={p.name} project={p} />)
           }
-        </SlidingWindow>
+        </Slider>
+
         <Title text="메이커들이 채워가는 건축의 엔딩크레딧">
           <div className={cx('sub-title-text')}>
             직접 수행한 프로젝트의 엔딩크레딧에 당신의 이름도 새겨보세요
@@ -150,19 +115,19 @@ class MainPageSection extends Component {
         </Title>
 
         <SectionItem title="New Puzzles" link='/more/project/p/recent'>
-          <SlidingWindow width="100%" height="8.94rem" groupSize={6} className={cx('project-tiles')}>
+          <Slider groupSize={6} >
             {
               projectsNew.map((p,i) => 
                 <ProjectCard key={p.name} project={p} direction={i % 2 === 0? 'right' : 'left'} population={4}/>
               )
             }          
-          </SlidingWindow>
+          </Slider>
         </SectionItem>
 
         <SectionItem title="Hot Puzzles" link='/more/project/p/popular'>
-          <SlidingWindow width="100%" groupSize={6} className={cx('project-tiles')}>
+          <Slider groupSize={6} >
             {projects.slice(4).map((p,i) => <ProjectCard key={p.name} project={p} direction={i % 2 === 0? 'right' : 'left'} population={6} />)}
-          </SlidingWindow>
+          </Slider>
         </SectionItem>
 
         <Title text="분야별 메이커들의 포트폴리오">
@@ -173,9 +138,9 @@ class MainPageSection extends Component {
         </Title>
 
         <SectionItem title="New" link='/more/portfolio/company/recent'>
-          <SlidingWindow width="100%" groupSize={8} className={cx('project-tiles')}>
+           <Slider groupSize={8} >
             {recentCompanyPortfolios}
-          </SlidingWindow>
+          </Slider>
         </SectionItem>
 
         { portfoliosByCategory }
