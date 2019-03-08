@@ -209,6 +209,16 @@
   z-index: 9;
 }
 
+.pager-area {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin-bottom: 0.34rem;
+  display: flex;
+  justify-content: center;
+  z-index: 8
+}
+
 .pager {
   margin: 0 0.05rem;
   width: 0.1rem;

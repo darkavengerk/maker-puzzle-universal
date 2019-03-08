@@ -18,6 +18,7 @@ class Slider extends Component {
     this.state = {index: 0};
     this.clickLeft = this.clickLeft.bind(this);
     this.clickRight = this.clickRight.bind(this);
+    this.pager = this.pager.bind(this);
   }
 
   clickLeft(evt) {
@@ -34,8 +35,21 @@ class Slider extends Component {
     });
   }
 
-  render() {
+  pager() {
     const { children, groupSize=1 } = this.props;
+    const pages = [];
+    const nGroups = Math.ceil(children.length / groupSize);
+    for(let i=0; i < nGroups; i++) {
+      if(i === (this.state.index % nGroups)) {
+        pages.push(<div key={i} className={cx('pager', 'pager-active')}></div>);  
+      }
+      else pages.push(<div key={i} className={cx('pager')}></div>);
+    }
+    return pages;
+  }
+
+  render() {
+    const { children, groupSize=1, showPages=false } = this.props;
     return (
         <SlidingWindow 
           width="100%" 
@@ -50,6 +64,9 @@ class Slider extends Component {
             </div>
             <div className={cx('arrow-area', 'arrow-area-right')} onClick={this.clickRight} >
               <Arrow direction="right" color="white" height={'0.48rem'} width={'0.3rem'} />
+            </div>
+            <div className={cx('pager-area')}>
+              { showPages && this.pager() }
             </div>
           </div>
           { children }

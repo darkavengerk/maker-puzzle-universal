@@ -21,7 +21,6 @@ class ProjectFocus extends Component {
     this.mouseout = this.mouseout.bind(this);
     this.clickLeft = this.clickLeft.bind(this);
     this.clickRight = this.clickRight.bind(this);
-    this.pager = this.pager.bind(this);
   }
 
   clickLeft(evt) {
@@ -64,18 +63,7 @@ class ProjectFocus extends Component {
       cycle += 1;
     }
     return [images.slice(0, 4), images.slice(4, 8), images.slice(8, 12)];
-  }
-
-  pager() {
-    const pages = [];
-    for(let i=0; i < this.props.projects.length; i++) {
-      if(i === this.state.projectIndex) {
-        pages.push(<div key={i} className={cx('pager', 'pager-active')}></div>);  
-      }
-      else pages.push(<div key={i} className={cx('pager')}></div>);
-    }
-    return pages;
-  }
+  }  
 
   mouseover(evt) {
     if(!this.state.mouseover)
