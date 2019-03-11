@@ -35,7 +35,7 @@ class Slider extends Component {
   }
 
   render() {
-    const { children, groupSize=1} = this.props;
+    const { children, groupSize=1, type='portfolio'} = this.props;
     return (
         <SlidingWindow 
           width="100%" 
@@ -45,10 +45,10 @@ class Slider extends Component {
           className={cx('project-tiles')}
         >
           <div>
-            <div className={cx('arrow-area', 'arrow-area-left')} onClick={this.clickLeft} >
+            <div className={cx('arrow-area', 'arrow-area-left')} onClick={this.clickLeft} role="button">
               <Arrow direction="left" color="white" height={'0.48rem'} width={'0.3rem'} />
             </div>
-            <div className={cx('arrow-area', 'arrow-area-right')} onClick={this.clickRight} >
+            <div className={cx('arrow-area', type==='project'? 'arrow-area-right-project':'arrow-area-right')} onClick={this.clickRight} role="button">
               <Arrow direction="right" color="white" height={'0.48rem'} width={'0.3rem'} />
             </div>
           </div>

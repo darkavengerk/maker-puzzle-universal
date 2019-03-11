@@ -64,10 +64,10 @@ class SliderMain extends Component {
           className={cx('project-tiles')}
         >
           <div>
-            <div className={cx('arrow-area', 'arrow-area-left')} onClick={this.clickLeft} >
+            <div className={cx('arrow-area-main', 'arrow-area-left')} onClick={this.clickLeft} role="button">
               <Arrow direction="left" color="white" height={'0.48rem'} width={'0.3rem'} />
             </div>
-            <div className={cx('arrow-area', 'arrow-area-right')} onClick={this.clickRight} >
+            <div className={cx('arrow-area-main', 'arrow-area-right-main')} onClick={this.clickRight} role="button">
               <Arrow direction="right" color="white" height={'0.48rem'} width={'0.3rem'} />
             </div>
             <div className={cx('pager-area')}>

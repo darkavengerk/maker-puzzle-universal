@@ -196,9 +196,20 @@
   background-color: #f46e1f;
 }
 
+.arrow-area-main {
+  position: absolute;
+  top: 0;
+  height: calc(100% - 0.09rem);
+  width: 0.5rem;
+  display: flex;
+  align-items: center;
+  z-index: 8;
+}
+
 .arrow-area {
   position: absolute;
-  height: 100%;
+  top: 0;
+  height: calc(100% - 0.09rem);
   width: 0.5rem;
   display: flex;
   align-items: center;
@@ -213,7 +224,19 @@
 
 .arrow-area-right {
   right: 0;
-  padding-right: 0.1rem;
+  padding-left: 0.1rem;
+  margin-right: 0.13rem;
+}
+
+.arrow-area-right-project {
+  right: 0;
+  padding-left: 0.1rem;
+  margin-right: 0.11rem;
+}
+
+.arrow-area-right-main {
+  right: 0;
+  padding-left: 0.1rem;
 }
 
 .page-area {
@@ -292,8 +315,9 @@
 }
 
 .project-section {
-  width: 14.8rem;
-  padding: 0 0.55rem;
+  width: 13.7rem;
+  padding-left: 0.1rem;
+  overflow: hidden;
 }
 
 .project-section .title {

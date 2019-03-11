@@ -116,7 +116,7 @@ class MainPageSection extends Component {
         </Title>
 
         <SectionItem title="New Puzzles" link='/more/project/p/recent'>
-          <Slider groupSize={6} >
+          <Slider groupSize={6} type="project">
             {
               projectsNew.map((p,i) => 
                 <ProjectCard key={p.name} project={p} direction={i % 2 === 0? 'right' : 'left'} population={4}/>
@@ -126,7 +126,7 @@ class MainPageSection extends Component {
         </SectionItem>
 
         <SectionItem title="Hot Puzzles" link='/more/project/p/popular'>
-          <Slider groupSize={6} >
+          <Slider groupSize={6} type="project" >
             {projects.slice(4).map((p,i) => <ProjectCard key={p.name} project={p} direction={i % 2 === 0? 'right' : 'left'} population={6} />)}
           </Slider>
         </SectionItem>

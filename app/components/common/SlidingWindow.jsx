@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 
 import Image from '../../components/FlexibleImageLazy';
+import Padding from '../../components/Padding';
 
 class SlidingWindow extends Component {
   constructor(props) {
@@ -30,10 +31,11 @@ class SlidingWindow extends Component {
 
     return {
       display: 'inline-block',
+      marginRight: '0.1rem',
       position: 'relative',
       width, height,
-      transform: `translateX(calc(-100% * ${slideIndex}))`,
-    　WebkitTransform: `translateX(calc(-100% * ${slideIndex}))`,
+      transform: `translateX(calc(-1*(100% + 0.1rem) * ${slideIndex}))`,
+    　WebkitTransform: `translateX(calc(-1*(100% + 0.1rem) * ${slideIndex}))`,
       transition: '0.5s ease-in-out',
       WebkitTransition: '0.5s ease-in-out',
     };
@@ -74,7 +76,7 @@ class SlidingWindow extends Component {
       width,
       height,
       whiteSpace: 'nowrap',
-      overflow: 'hidden',
+      // overflow: 'hidden',
       position: 'relative',
     };
     const headerStyle = {
