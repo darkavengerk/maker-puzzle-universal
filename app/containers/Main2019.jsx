@@ -8,6 +8,7 @@ import { Maker, Project, Company, create as createObject } from '../utils/object
 import Assist from '../utils/assist'
 import ProjectCard from '../components/common/ProjectCard';
 import Slider from '../components/main/Slider';
+import SliderMain from '../components/main/SliderMain';
 import Arrow from '../components/common/Arrow';
 import Title from '../components/main/Title';
 import ProjectFocus from '../components/main/ProjectFocus';
@@ -102,11 +103,11 @@ class MainPageSection extends Component {
 
     return (
       <div className={cx('main-section')}>
-        <Slider showPages={true}>
+        <SliderMain>
           {
             projects.slice(0, 3).map(p => <ProjectFocus key={p.name} project={p} />)
           }
-        </Slider>
+        </SliderMain>
 
         <Title text="메이커들이 채워가는 건축의 엔딩크레딧">
           <div className={cx('sub-title-text')}>

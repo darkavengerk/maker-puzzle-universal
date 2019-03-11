@@ -103,6 +103,22 @@
   color: #ffffff;
 }
 
+.main-focus-text {
+  position: absolute;
+  top: 3rem;
+  left: 1rem;
+  text-shadow: 0 0.04rem 0.4rem rgba(0, 0, 0, 0.5);
+  font-family: BMDoHyeon-OTF;
+  font-size: 0.32rem;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
+  z-index: 9;
+}
+
 .project-focus-filter-title {
   display: inline-block;
   margin-top: 2.17rem;

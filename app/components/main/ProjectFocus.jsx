@@ -112,10 +112,9 @@ class ProjectFocus extends Component {
               { project.name }
             </div>
             <div className={cx('project-focus-filter-title2')}>
-              누가 지었을까?
             </div>
           </div>
-          <Padding height={50} />
+          <Padding height={100} />
           <div className={cx('project-focus-filter-makers')}>
             <div className={cx('project-focus-filter-makers-button', {'filter-makers-button': this.state.mouseover})}>
               엔딩크레딧 보러가기
