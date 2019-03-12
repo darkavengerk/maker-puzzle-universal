@@ -25,9 +25,17 @@ class SlidingWindow extends Component {
       this.setState({ mouseover: false });
   }
 
+  unitsize() {
+    const { children, groupSize=1 } = this.props;
+    return Math.ceil(this.getChildren().length / groupSize);
+  }
+
   getItemStyle() {
-    const { children, header, width, height='auto', groupSize=1, index=0, ...props } = this.props;
-    const slideIndex = index % Math.ceil(this.getChildren().length / groupSize);
+    const { width, height='auto', index=0 } = this.props;
+    let slideIndex = index % this.unitsize();
+    if(slideIndex < 0) {
+      slideIndex = this.unitsize() + slideIndex;
+    }
 
     return {
       display: 'inline-block',
