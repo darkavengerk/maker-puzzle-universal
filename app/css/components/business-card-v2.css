@@ -100,6 +100,12 @@
   width: 2rem;
 }
 
+.text-strict {
+  overflow: hidden;
+  white-space: nowrap; /* Don't forget this one */
+  text-overflow: ellipsis;
+}
+
 .right {
   text-align: right;
 }

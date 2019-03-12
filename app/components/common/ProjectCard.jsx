@@ -110,11 +110,13 @@ class ProjectCardSection extends Component {
             >
               <div className={cx('project-tile-image-text')}>
               { this.state.mouseover && <div className={cx('project-tile-image-text-item', 'right')}>
-                {this.extractProjectSummary('companyName', population).map((name, i) => <div key={i}>{name}</div>)}
+                {this.extractProjectSummary('companyName', population).map((name, i) => 
+                  <div className={cx('text-strict')} key={i}>{name}</div>)}
                 </div> }
               { this.state.mouseover && <div className={cx('project-tile-seperator', {'seperator-long':population === 6})}></div> }
               { this.state.mouseover && <div className={cx('project-tile-image-text-item', 'left')}>
-                {this.extractProjectSummary('title', population).map((title, i) => <div key={i}>{title}</div>)}
+                {this.extractProjectSummary('title', population).map((title, i) => 
+                  <div className={cx('text-strict')} key={i}>{title}</div>)}
                 </div> }
               </div>
             </div>
