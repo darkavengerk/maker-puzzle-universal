@@ -10,6 +10,7 @@
 
 .project-focus {
   display: inline-block;
+  overflow: hidden;
   width: 100%;
   height: 6.94rem;
   position: relative;

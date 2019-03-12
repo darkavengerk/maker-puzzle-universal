@@ -105,7 +105,7 @@ class MainPageSection extends Component {
       <div className={cx('main-section')}>
         <SliderMain>
           {
-            projects.slice(0, 3).map(p => <ProjectFocus key={p.name} project={p} />)
+            projects.slice(0, 4).map(p => <ProjectFocus key={p.name} project={p} />)
           }
         </SliderMain>
 

@@ -54,7 +54,7 @@ class ProjectFocus extends Component {
   extractImages(project) {
     let cycle = 0;
     const images = [];
-    while(images.length < 12) {
+    while(images.length < 12 && cycle < 12) {
       project.portfolios.map(p => {
         if(images.length < 12 && p.images[cycle]) {
           images.push(p.images[cycle]);
