@@ -113,7 +113,17 @@ class ProjectCardSection extends Component {
                 {this.extractProjectSummary('companyName', population).map((name, i) => 
                   <div className={cx('text-strict')} key={i}>{name}</div>)}
                 </div> }
-              { this.state.mouseover && <div className={cx('project-tile-seperator', {'seperator-long':population === 6})}></div> }
+              { this.state.mouseover && 
+                <div className={cx('project-tile-seperator', {'seperator-long':population === 6})}>
+                  {project.portfolios.length > population &&
+                    <div className={cx('project-tile-seperator-dots')}>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                    </div>
+                  }
+                </div>
+              }
               { this.state.mouseover && <div className={cx('project-tile-image-text-item', 'left')}>
                 {this.extractProjectSummary('title', population).map((title, i) => 
                   <div className={cx('text-strict')} key={i}>{title}</div>)}

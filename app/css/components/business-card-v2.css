@@ -115,10 +115,29 @@
 }
 
 .project-tile-seperator {
+  position: relative;
   margin: 0 0.09rem;
   width: 0.02rem;
   height: 0.84rem;
   border: solid 0.01rem #ffffff;
+}
+
+.project-tile-seperator-dots {
+  position: absolute;
+  left: -0.01rem;
+  display: flex;
+  flex-direction: column;
+  bottom: -0.18rem;
+  width: 0.03rem;
+  height: 0.1rem;
+  /*border: solid 0.01rem #ffffff;*/
+}
+
+.project-tile-seperator-dots div {
+  width: 0.02rem;
+  height: 0.02rem;
+  border: solid 0.01rem #ffffff;
+  margin-bottom: 0.05rem;
 }
 
 .seperator-long {
