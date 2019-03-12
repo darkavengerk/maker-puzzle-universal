@@ -19,11 +19,13 @@ const {
 let mainContents = null;
 
 function getContents(model, query, sort, limit, loaded, populate) {
-  const sorting = sort === 'popular'? {score:-1} : {_id:-1};
+  if(typeof(sort) === 'string') {
+    sort = (sort === 'popular')? {score:-1} : {_id:-1};
+  }
   model =  model
       .find(query, {meta:0, keywords:0})
       // .populate(populate, '-email -_id -password -tags')
-      .sort(sorting)
+      .sort(sort)
       .skip(loaded)
       .limit(limit)
       .lean();
@@ -80,7 +82,7 @@ export async function buildContents(req, res) {
   console.log('build main contents...', new Date().toISOString());
   const loadings = [
     getProjectContents({}),
-    getProjectContents({sort:'recent'}),
+    getProjectContents({sort:{lastUpdated:-1}}),
     // getCompanyContents({}),
     // getMakerPorfolioContents({}),
     // getCompanyPorfolioContents({}),

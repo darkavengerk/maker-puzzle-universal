@@ -97,12 +97,12 @@ function pushOrReplacePortfolio(portfolioList, portfolio) {
 }
 
 async function savePortfolio({ portfolio, project, company, user }) {
-
   if(portfolio.pid) {
     portfolio.lastUpdated = Date.now();
   }
   else {
     portfolio.created = Date.now();
+    project.lastUpdated = Date.now();
     portfolio.pid = await Misc.createID('portfolio');
   }
   portfolio.project = project._id;
@@ -298,6 +298,17 @@ const functionMap = {
       console.log(p._id, created);
       await Portfolio.update({_id: p._id}, {$set: { created }});
     });
+  },
+
+  'patch-project-dates': async function() {
+    const projects = await Project.find();
+    projects.map(async project => {
+      const portfolios = project.portfolios;
+      if(portfolios && portfolios.length > 0) {
+        const lastOne = portfolios[portfolios.length -1];
+        await Project.update({_id: project._id}, {$set:{lastUpdated: lastOne.lastUpdated}});
+      }
+    })
   },
 
   'update-score-batch': async function() {
