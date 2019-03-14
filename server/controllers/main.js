@@ -50,6 +50,9 @@ function getUserContents({sort='popular', loaded=0, limit=6}) {
 }
 
 function getProjectContents({sort='popular', loaded=0, limit=24}) {
+  if(sort === 'recent') {
+    sort = {lastUpdated: -1};
+  }
   return getContents(Project, {'portfolios.3': {$exists:true}}, sort, limit, loaded, ['portfolios.images']);
 }
 
@@ -81,8 +84,8 @@ async function getSubContents() {
 export async function buildContents(req, res) {
   console.log('build main contents...', new Date().toISOString());
   const loadings = [
-    getProjectContents({}),
-    getProjectContents({sort:{lastUpdated:-1}}),
+    getProjectContents({limit: 28}),
+    getProjectContents({sort: 'recent'}),
     // getCompanyContents({}),
     // getMakerPorfolioContents({}),
     // getCompanyPorfolioContents({}),
@@ -122,7 +125,7 @@ export async function more(req, res) {
   const { topic, subtype } = params;
 
   if(topic === 'project') {
-    const sort = params.sort;
+    const { sort } = params;
     const result = await getProjectContents({ sort, loaded });
     return res.json({ result, title:'프로젝트 들여다보기', topic, subtype });
   }

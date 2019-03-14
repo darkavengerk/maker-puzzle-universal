@@ -38,7 +38,9 @@ class Container extends Component {
     let tags = [];
 
     if(topic === 'project') {
-      tags = data.map((p, i) => <ProjectCard key={p.name} project={p} direction={i % 2 === 0? 'right' : 'left'} />)
+      tags = data.map((p, i) => 
+        <ProjectCard key={p.name} project={p} population={subtype === 'r'? 4:6} direction={i % 2 === 0? 'right' : 'left'} />
+      )
     }
 
     if(topic === 'portfolio' || topic === 'category') {

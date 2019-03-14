@@ -115,7 +115,7 @@ class MainPageSection extends Component {
           </div>
         </Title>
 
-        <SectionItem title="New Puzzles" link='/more/project/p/recent'>
+        <SectionItem title="New Puzzles" link='/more/project/r/recent'>
           <Slider groupSize={6} type="project">
             {
               projectsNew.map((p,i) => 
