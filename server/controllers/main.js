@@ -89,7 +89,7 @@ export async function buildContents(req, res) {
     // getCompanyContents({}),
     // getMakerPorfolioContents({}),
     // getCompanyPorfolioContents({}),
-    getCompanyPorfolioContents({sort:'recent'})
+    getCompanyPorfolioContents({sort:'recent', limit: 24})
   ];
   // const [projects, projectsNew, companies, portfolios, companyPortfolios, companyPortfoliosRecent] = await Promise.all(loadings);
   // mainContents = { projects, projectsNew, companies, portfolios, companyPortfolios, companyPortfoliosRecent, subContents: await getSubContents() };
