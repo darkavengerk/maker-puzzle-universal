@@ -3,17 +3,17 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  margin-top: 0.53rem;
+  /*margin-top: 0.53rem;*/
 }
 
 .list-main {
 }
 
 .list-item {
-  width: 234px;
-  height: 20px;
+  width: 2.34rem;
+  height: 0.20rem;
   font-family: NanumBarunGothic;
-  font-size: 18px;
+  font-size: 0.18rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
@@ -29,7 +29,7 @@
 
 .account-section-title {
   font-family: NanumBarunGothic;
-  font-size: 30px;
+  font-size: 0.30rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
@@ -40,7 +40,7 @@
 
 .account-section-form-area {
   font-family: NanumBarunGothic;
-  font-size: 15px;
+  font-size: 0.15rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -48,3 +48,27 @@
   letter-spacing: normal;
   color: #2c2c2c;
 }
+
+.account-section-form-area > div {
+  margin-top: 0.2rem;
+}
+
+.password-button {
+  font-size: 0.13rem;
+  color: #ffffff;
+  background-color: #b1b1b1;
+}
+
+.auth-button-fb {
+  font-size: 0.13rem;
+  color: #ffffff;
+  background-color: #485b97;
+  padding: 0;
+}
+
+.auth-button-google {
+  font-size: 0.13rem;
+  color: #2c2c2c;
+}
+
+
