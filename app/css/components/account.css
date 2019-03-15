@@ -71,4 +71,14 @@
   color: #2c2c2c;
 }
 
+.info-form-agree {
+  display: flex;
+  align-items: center;
+  font-size: 0.13rem;
+  color: #2c2c2c;
+}
 
+.year-select {
+  width: 2.3rem;
+  height: 0.3rem;
+}

@@ -4,10 +4,18 @@ import classNames from 'classnames/bind';
 
 import FlexibleImage from '../../components/FlexibleImage';
 import Padding from '../../components/Padding';
+
+import SelectYear from '../../components/Account/SelectYear';
 import FormItem from '../../components/web/FormItem';
 import FormItemMedium from '../../components/web/FormItemMedium';
 import TextInputRound from '../../components/web/TextInputRound';
 import ButtonRound from '../../components/web/ButtonRound';
+
+const years = [];
+const now = new Date().getFullYear();
+for(let y = now-14; y > now-100; y--) {
+  years.push({value:y, label:y});
+}
 
 const Component = ({ user, items, selected, onClick, cx }) => {
 
@@ -41,7 +49,12 @@ const Component = ({ user, items, selected, onClick, cx }) => {
         </FormItem>
 
         <FormItem label="출생연도">
-          <TextInputRound type="list" value={user.birthYear} />
+          <SelectYear 
+            onChange={null}
+            height={'0.3rem'}
+            width={'2.3rem'}
+            placeholder="선택해 주세요" 
+          />
         </FormItem>
 
         <FormItemMedium label={['로그인', '계정', '연결']} height="0.62rem" labelWidth={'1rem'} padding="0.23rem" >
@@ -64,15 +77,15 @@ const Component = ({ user, items, selected, onClick, cx }) => {
             </div>
           </div>
         </FormItemMedium>
-
       </section>
-      <div className={cx('info-form-1')}>
+      <Padding height={25} />
+      <div className={cx('info-form-agree')}>
         <input type="checkbox" />
+        <Padding width={10} />
         <label className={cx('info-title')}>
           메이커퍼즐에서 진행하는 이벤트, 프로모션에 대한 광고를 수신하겠습니다.
         </label>
       </div>
-      
     </div>
   );
 };
