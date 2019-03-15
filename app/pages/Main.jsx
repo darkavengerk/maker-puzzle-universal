@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Page from '../pages/Page';
-import MainContainer from '../containers/Main';
+import MainContainer from '../containers/Main2019';
 
 class Main extends Component {
   getMetaData() {

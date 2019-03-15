@@ -5,10 +5,10 @@ import classNames from 'classnames/bind';
 import InfiniteScroll from 'react-infinite-scroller';
 
 import PortfolioItemWide from '../components/PortfolioItemWide';
-import PortfolioItem from '../components/PortfolioItem';
+import PortfolioItem from '../components/common/PortfolioItem';
 import TopTitle from '../components/TopTitle';
 import SingleLine from '../components/SingleLine';
-import ProjectCard from '../components/ProjectCardMedium';
+import ProjectCard from '../components/common/ProjectCard';
 import MakerCard from '../components/MakerCard';
 import Assist from '../utils/assist'
 
@@ -38,13 +38,15 @@ class Container extends Component {
     let tags = [];
 
     if(topic === 'project') {
-      tags = data.map(p => <ProjectCard key={p.name} project={p} />)
+      tags = data.map((p, i) => 
+        <ProjectCard key={p.name} project={p} population={subtype === 'r'? 4:6} direction={i % 2 === 0? 'right' : 'left'} />
+      )
     }
 
     if(topic === 'portfolio' || topic === 'category') {
       tags = data.map(portfolio => {
         if(subtype.startsWith('company') || topic === 'category') {
-          return (<PortfolioItemWide portfolio={portfolio} referrer={Assist.Company} owner={Assist.Company} key={portfolio.pid} imageFit={true} external={true} />);
+          return (<PortfolioItem portfolio={portfolio} referrer={Assist.Company} owner={Assist.Company} key={portfolio.pid} imageFit={true} external={true} />);
         }
         if(subtype.startsWith('maker')) {
           return <PortfolioItem portfolio={portfolio} referrer={Assist.Main} owner={Assist.Maker} key={portfolio.pid} external={true} />

@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 
 import MakerInfo from '../components/MakerInfo';
 import CompanyInfo from '../components/CompanyInfo';
-import PortfolioItem from '../components/PortfolioItem';
+import PortfolioItem from '../components/common/PortfolioItem';
 import ProductItem from '../components/ProductItem';
 import PortfolioItemWide from '../components/PortfolioItemWide';
 import PortfolioDetail from '../components/PortfolioDetail';
@@ -41,7 +41,7 @@ class ContentsTagFactory {
       case 'company':
         return {
           info: CompanyInfo,
-          item: PortfolioItemWide,
+          item: PortfolioItem,
         };
       default:
         return {
@@ -143,11 +143,11 @@ class ContentsTagFactory {
     }
 
     let companyPortfolios = source.companyPortfolios? source.companyPortfolios.map(portfolio => {
-      return (<PortfolioItemWide portfolio={portfolio} referrer={Assist.Company} owner={Assist.Project} key={portfolio.pid} external={false} />);
+      return (<PortfolioItem portfolio={portfolio} referrer={Assist.Company} owner={Assist.Project} key={portfolio.pid} external={false} />);
     }) : [];
 
     if(isOwnPage) {
-      companyPortfolios.unshift(<PortfolioItemWide key={'__new__'} />);
+      companyPortfolios.unshift(<PortfolioItem key={'__new__'} />);
     }
 
     let products = source.products? source.products.map(product => {

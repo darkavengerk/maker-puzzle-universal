@@ -26,6 +26,7 @@ const Schema = new mongoose.Schema({
   portfolios : [Portfolio],
   score: {type: Number, default: 0},
   count: {type: Number, default: 0},
+  lastUpdated: {type:Date, default: Date.now},
 });
 
 Schema.pre('save', function(next) {

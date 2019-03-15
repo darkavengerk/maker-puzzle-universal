@@ -9,8 +9,7 @@ import TopTitle from '../components/TopTitle';
 import ContentsSection from '../components/ContentsSection';
 import SingleLine from '../components/SingleLine';
 import ProjectCard from '../components/ProjectCard';
-import PortfolioItemWide from '../components/PortfolioItemWide';
-import PortfolioItem from '../components/PortfolioItem';
+import PortfolioItem from '../components/common/PortfolioItem';
 
 import { loadSearchData } from '../actions/main';
 import Assist from '../utils/assist';
@@ -50,7 +49,7 @@ class Container extends Component {
 
     let portfolioTags = portfolios.map(portfolio => {
       if(portfolio.type === 'company') {
-        return (<PortfolioItemWide portfolio={portfolio} referrer={Assist.Company} owner={Assist.Company} key={portfolio.pid} imageFit={true} external={true} />);
+        return (<PortfolioItem portfolio={portfolio} referrer={Assist.Company} owner={Assist.Company} key={portfolio.pid} imageFit={true} external={true} />);
       }
       else {
         return <PortfolioItem portfolio={portfolio} referrer={Assist.Main} owner={Assist.Maker} key={portfolio.pid} external={true} />

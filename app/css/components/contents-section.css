@@ -14,8 +14,8 @@
 }
 
 .main-panel {
-  padding: 0 0.25rem;
-  width: 9.81rem;
+  padding: 0 0 0 0.25rem;
+  width: 11rem;
   border-left: solid 0.02rem #dddddd;
   margin-left: -0.01rem;
 }
