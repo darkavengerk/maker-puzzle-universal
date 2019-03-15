@@ -33,7 +33,8 @@ ContentsSection.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    attempt: state.user.attempt
+    attempt: state.user.attempt,
+    param: state.param
   };
 }
 
