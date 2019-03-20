@@ -20,7 +20,7 @@ const SelectComponent = ({ height='100%', width='100%', placeholder, value, opti
     })
   }
   return <Select 
-            value={value}
+            value={{value, label:value}}
             styles={customStyles}
             onChange={eventHandler}
             options={options}

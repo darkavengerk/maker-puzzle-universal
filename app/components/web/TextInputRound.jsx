@@ -7,11 +7,14 @@ const TextInput = ({ height='100%', width='100%', placeholder, value, onChange, 
     borderRadius: '0.1rem',
     padding: '0 0.1rem  '
   }
+  const handler = event => {
+    onChange(event.target.value);
+  }
   return <input 
             type="text" 
             style={style} 
             value={value} 
-            onChange={onChange} 
+            onChange={handler} 
             {...props} />
 };
 

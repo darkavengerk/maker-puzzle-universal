@@ -43,6 +43,7 @@ class Container extends Component {
       selectedMenu: links.indexOf(category),
       user: {...user},
     };
+    this.updateState = this.updateState.bind(this);
     this.onClick = this.onClick.bind(this);
     this.featureEdited = this.featureEdited.bind(this);
     this.aboutEdited = this.aboutEdited.bind(this);
@@ -53,6 +54,13 @@ class Container extends Component {
     this.removeCompanyEntry = this.removeCompanyEntry.bind(this);
     this.swapCompanyEntries = this.swapCompanyEntries.bind(this);
     this.history = this.history.bind(this);
+  }
+
+  updateState() {
+    return name => value => {
+      const user = {...this.state.user, [name]: value};
+      this.setState({ user });
+    };
   }
 
   history() {
@@ -139,6 +147,7 @@ class Container extends Component {
         return <AccountInfo 
           cx={cx}
           user={user}
+          handler={this.updateState()}
         />;
 
       case 'profile': 

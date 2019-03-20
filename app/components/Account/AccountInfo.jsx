@@ -17,7 +17,7 @@ for(let y = now-14; y > now-100; y--) {
   years.push({value:y, label:y});
 }
 
-const Component = ({ user, items, selected, onClick, cx }) => {
+const Component = ({ user, items, handler, selected, onClick, cx }) => {
 
   return (
     <div className={cx('info-main')}>
@@ -27,11 +27,15 @@ const Component = ({ user, items, selected, onClick, cx }) => {
 
       <section className={cx('account-section-form-area')}>
         <FormItem label="이메일주소">
-          <TextInputRound value={user.email} width="4.58rem" />
+          <TextInputRound 
+            value={user.email} 
+            width="4.58rem" 
+            onChange={handler('email')} 
+          />
         </FormItem>
 
         <FormItem label="이름">
-          <TextInputRound value={user.name} width="4.58rem" />
+          <TextInputRound value={user.name} width="4.58rem" onChange={handler('name')} />
         </FormItem>
 
         <FormItem label="비밀번호">
@@ -39,21 +43,34 @@ const Component = ({ user, items, selected, onClick, cx }) => {
         </FormItem>
 
         <FormItem label="성별">
-          <input type="radio" /> 
+          <input
+            type="radio"
+            value="M"
+            name="gender"
+            onChange={handler('gender')}
+            checked={user.gender === 'M'}
+          /> 
           <Padding width={9} />
           남자 
           <Padding width={20} />
-          <input type="radio" /> 
+          <input
+            type="radio"
+            value="F"
+            name="gender"
+            onChange={handler('gender')}
+            checked={user.gender === 'F'}
+          /> 
           <Padding width={9} />
           여자
         </FormItem>
 
         <FormItem label="출생연도">
           <SelectYear 
-            onChange={null}
+            onChange={handler('birthYear')} 
             height={'0.3rem'}
             width={'2.3rem'}
             placeholder="선택해 주세요" 
+            value={user.birthYear}
           />
         </FormItem>
 

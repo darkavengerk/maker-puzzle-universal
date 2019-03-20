@@ -9,7 +9,6 @@ for(let y = now-14; y > now-100; y--) {
 }
 
 const SelectComponent = ({ height='100%', width='100%', placeholder, value, eventHandler, ...props }) => {
-
   return <Select 
             height={height}
             width={width}
