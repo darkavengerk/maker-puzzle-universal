@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TextInput = ({ height='100%', width='100%', placeholder, value, onChange, ...props }) => {
+const TextInput = ({ height='100%', width='100%', placeholder, data, ...props }) => {
   const style = {
     width, height,
     border: 'solid 1px #979797',
@@ -8,12 +8,12 @@ const TextInput = ({ height='100%', width='100%', placeholder, value, onChange, 
     padding: '0 0.1rem  '
   }
   const handler = event => {
-    onChange(event.target.value);
+    data.setData(event.target.value);
   }
   return <input 
             type="text" 
             style={style} 
-            value={value} 
+            value={data.getData()} 
             onChange={handler} 
             {...props} />
 };

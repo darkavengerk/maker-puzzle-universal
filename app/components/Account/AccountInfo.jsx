@@ -17,7 +17,7 @@ for(let y = now-14; y > now-100; y--) {
   years.push({value:y, label:y});
 }
 
-const Component = ({ user, items, handler, selected, onClick, cx }) => {
+const Component = ({ user, items, handler, selected, onClick, data, cx }) => {
 
   return (
     <div className={cx('info-main')}>
@@ -28,14 +28,16 @@ const Component = ({ user, items, handler, selected, onClick, cx }) => {
       <section className={cx('account-section-form-area')}>
         <FormItem label="이메일주소">
           <TextInputRound 
-            value={user.email} 
             width="4.58rem" 
-            onChange={handler('email')} 
+            data={data.attach('email')}
           />
         </FormItem>
 
         <FormItem label="이름">
-          <TextInputRound value={user.name} width="4.58rem" onChange={handler('name')} />
+          <TextInputRound
+            width="4.58rem"
+            data={data.attach('name')}
+          />
         </FormItem>
 
         <FormItem label="비밀번호">

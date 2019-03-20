@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import { browserHistory } from 'react-router';
+import autoBind from 'react-autobind';
 
 import Layout from '../components/Account/Layout';
 import SimpleList from '../components/Account/SimpleList';
@@ -14,6 +15,7 @@ import Ability from '../components/Account/Ability';
 import Padding from '../components/Padding';
 
 import Assist from '../utils/assist';
+import { DataBinder } from '../utils/DataBinder';
 import { changePortfoiloOrder } from '../actions/makers';
 
 import styles from '../css/components/account';
@@ -43,17 +45,15 @@ class Container extends Component {
       selectedMenu: links.indexOf(category),
       user: {...user},
     };
-    this.updateState = this.updateState.bind(this);
-    this.onClick = this.onClick.bind(this);
-    this.featureEdited = this.featureEdited.bind(this);
-    this.aboutEdited = this.aboutEdited.bind(this);
-    this.getContent = this.getContent.bind(this);
-    this.companyFeatureChanged = this.companyFeatureChanged.bind(this);
-    this.companyNameChanged = this.companyNameChanged.bind(this);
-    this.addCompanyEntry = this.addCompanyEntry.bind(this);
-    this.removeCompanyEntry = this.removeCompanyEntry.bind(this);
-    this.swapCompanyEntries = this.swapCompanyEntries.bind(this);
-    this.history = this.history.bind(this);
+
+    autoBind(this);
+
+    this.binder = new DataBinder('account', this.state);
+
+    this.binder.listen('user', user => {
+      this.setState({ user });
+      this.binder.flush();
+    })
   }
 
   updateState() {
@@ -148,6 +148,7 @@ class Container extends Component {
           cx={cx}
           user={user}
           handler={this.updateState()}
+          data={this.binder.child('user')}
         />;
 
       case 'profile': 
