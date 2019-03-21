@@ -8,12 +8,12 @@ for(let y = now-14; y > now-100; y--) {
   years.push({value:y, label:y});
 }
 
-const SelectComponent = ({ height='100%', width='100%', placeholder, value, eventHandler, ...props }) => {
+const SelectComponent = ({ height='100%', width='100%', placeholder, data, ...props }) => {
   return <Select 
             height={height}
             width={width}
-            value={value}
-            onChange={eventHandler}
+            value={data.get()}
+            onChange={data.attach('direct')}
             options={years}
             placeholder={placeholder}
             {...props}

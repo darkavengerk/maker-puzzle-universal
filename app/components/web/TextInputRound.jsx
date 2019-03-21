@@ -7,14 +7,11 @@ const TextInput = ({ height='100%', width='100%', placeholder, data, ...props })
     borderRadius: '0.1rem',
     padding: '0 0.1rem  '
   }
-  const handler = event => {
-    data.setData(event.target.value);
-  }
   return <input 
             type="text" 
             style={style} 
-            value={data.getData()} 
-            onChange={handler} 
+            value={data.get()} 
+            onChange={data.attach()} 
             {...props} />
 };
 

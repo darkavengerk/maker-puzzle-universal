@@ -1,7 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
 
-const SelectComponent = ({ height='100%', width='100%', placeholder, value, options, eventHandler, ...props }) => {
+const SelectComponent = ({ height='100%', width='100%', placeholder, value, options, onChange, ...props }) => {
   const customStyles = {
     option: (provided, state) => ({
       ...provided,
@@ -19,10 +19,13 @@ const SelectComponent = ({ height='100%', width='100%', placeholder, value, opti
       '&:hover': { borderColor: '#f46e1f' }
     })
   }
+  const handler = pair => {
+    onChange(pair.value);
+  }
   return <Select 
             value={{value, label:value}}
             styles={customStyles}
-            onChange={eventHandler}
+            onChange={handler}
             options={options}
             placeholder={placeholder}
             {...props}

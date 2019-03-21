@@ -16,7 +16,7 @@ import Padding from '../components/Padding';
 
 import Assist from '../utils/assist';
 import { DataBinder } from '../utils/DataBinder';
-import { changePortfoiloOrder } from '../actions/makers';
+import { userEditSave } from '../actions/users';
 
 import styles from '../css/components/account';
 
@@ -35,6 +35,8 @@ class Container extends Component {
   constructor(props) {
     super(props);
     const { user, category } = this.props;
+    this.lastEdited = -1;
+    this.interval = null;
     
     if(user.companiesOwned && user.companiesOwned.length > 0) {
       links = ['info', 'profile', 'career', 'company', 'ability', 'quit'];
@@ -48,12 +50,28 @@ class Container extends Component {
 
     autoBind(this);
 
-    this.binder = new DataBinder('account', this.state);
+    this.dataBound = new DataBinder(this);
+    this.dataBound.listen('user');
+    this.dataBound.listen('user', v => {
+      if(this.lastEdited < 0) {
+        this.lastEdited = new Date();
+        this.interval = setInterval(this.submitCheck, 1000);
+      }
+      else {
+        this.lastEdited = new Date();
+      }
+    });
+  }
 
-    this.binder.listen('user', user => {
-      this.setState({ user });
-      this.binder.flush();
-    })
+  async submitCheck() {
+    const { userEditSave } = this.props;
+    const now = new Date();
+    if(now - this.lastEdited >= 3000) {
+      clearInterval(this.interval);
+      this.interval = null;
+      this.lastEdited = -1;
+      await userEditSave(this.dataBound.access('user').get());
+    }
   }
 
   updateState() {
@@ -147,8 +165,7 @@ class Container extends Component {
         return <AccountInfo 
           cx={cx}
           user={user}
-          handler={this.updateState()}
-          data={this.binder.child('user')}
+          data={this.dataBound.access('user')}
         />;
 
       case 'profile': 
@@ -218,4 +235,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {})(Container);
+export default connect(mapStateToProps, { userEditSave })(Container);

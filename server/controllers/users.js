@@ -112,6 +112,14 @@ export async function changePortfolioOrder(req, res) {
   res.json(await getPopulatedUser(userid));
 }
 
+export async function updateUser(req, res) {
+  const userid = req.params.id;
+  let user = req.body;
+
+  const result = await User.update({userid:userid}, user);
+  await updateFeatures(req, res);
+}
+
 export async function updateFeatures(req, res) {
   const userid = req.params.id;
   let {features, about, picture, makerProfile} = req.body;
@@ -347,6 +355,7 @@ export default {
   login,
   logout,
   signUp,
+  updateUser,
   updateFeatures,
   addCompany,
   addPortfolio,

@@ -17,8 +17,9 @@ for(let y = now-14; y > now-100; y--) {
   years.push({value:y, label:y});
 }
 
-const Component = ({ user, items, handler, selected, onClick, data, cx }) => {
+const Component = ({ user, items, selected, onClick, data, cx }) => {
 
+  const marketingAgreed = data.access('marketingAgreed');
   return (
     <div className={cx('info-main')}>
       <div className={cx('account-section-title')}>
@@ -29,14 +30,14 @@ const Component = ({ user, items, handler, selected, onClick, data, cx }) => {
         <FormItem label="이메일주소">
           <TextInputRound 
             width="4.58rem" 
-            data={data.attach('email')}
+            data={data.access('email')}
           />
         </FormItem>
 
         <FormItem label="이름">
           <TextInputRound
             width="4.58rem"
-            data={data.attach('name')}
+            data={data.access('name')}
           />
         </FormItem>
 
@@ -49,8 +50,8 @@ const Component = ({ user, items, handler, selected, onClick, data, cx }) => {
             type="radio"
             value="M"
             name="gender"
-            onChange={handler('gender')}
-            checked={user.gender === 'M'}
+            onChange={data.access('gender').attach()}
+            checked={data.access('gender').get() === 'M'}
           /> 
           <Padding width={9} />
           남자 
@@ -59,8 +60,8 @@ const Component = ({ user, items, handler, selected, onClick, data, cx }) => {
             type="radio"
             value="F"
             name="gender"
-            onChange={handler('gender')}
-            checked={user.gender === 'F'}
+            onChange={data.access('gender').attach()}
+            checked={data.access('gender').get() === 'F'}
           /> 
           <Padding width={9} />
           여자
@@ -68,11 +69,10 @@ const Component = ({ user, items, handler, selected, onClick, data, cx }) => {
 
         <FormItem label="출생연도">
           <SelectYear 
-            onChange={handler('birthYear')} 
             height={'0.3rem'}
             width={'2.3rem'}
             placeholder="선택해 주세요" 
-            value={user.birthYear}
+            data={data.access('birthYear')}
           />
         </FormItem>
 
@@ -99,7 +99,11 @@ const Component = ({ user, items, handler, selected, onClick, data, cx }) => {
       </section>
       <Padding height={25} />
       <div className={cx('info-form-agree')}>
-        <input type="checkbox" />
+        <input
+          type="checkbox"
+          checked={marketingAgreed.get()}
+          onChange={marketingAgreed.attach('checkbox')}
+        />
         <Padding width={10} />
         <label className={cx('info-title')}>
           메이커퍼즐에서 진행하는 이벤트, 프로모션에 대한 광고를 수신하겠습니다.

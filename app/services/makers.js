@@ -21,6 +21,11 @@ export default () => {
       url: `/api/user/${id}/features`,
       data
     }),
+    updateUser: ({id, data}) => client.request({
+      method: 'POST',
+      url: `/api/user/${id}`,
+      data
+    }),
     addOwnCompany: ({id, data}) => client.request({
       method: 'POST',
       url: `/api/user/${id}/company`,
