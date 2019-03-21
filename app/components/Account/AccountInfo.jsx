@@ -51,7 +51,7 @@ const Component = ({ user, items, selected, onClick, data, cx }) => {
             value="M"
             name="gender"
             onChange={data.access('gender').attach()}
-            checked={data.access('gender').get() === 'M'}
+            checked={data.get('gender') === 'M'}
           /> 
           <Padding width={9} />
           남자 
@@ -61,7 +61,7 @@ const Component = ({ user, items, selected, onClick, data, cx }) => {
             value="F"
             name="gender"
             onChange={data.access('gender').attach()}
-            checked={data.access('gender').get() === 'F'}
+            checked={data.get('gender') === 'F'}
           /> 
           <Padding width={9} />
           여자

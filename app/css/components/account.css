@@ -82,3 +82,16 @@
   width: 2.3rem;
   height: 0.3rem;
 }
+
+.account-section-profile-image {
+  border: 1px solid #979797;
+  position: relative;
+  height: 100%;
+}
+
+.image-upload-trigger {
+  width: 33px;
+  height: 33px;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+}

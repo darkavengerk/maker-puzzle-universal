@@ -171,6 +171,7 @@ class Container extends Component {
       case 'profile': 
         return <Profile 
           cx={cx}
+          data={this.dataBound.access('user')}
           user={user} 
           featureEdited={this.featureEdited}
           aboutEdited={this.aboutEdited}

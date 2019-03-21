@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import passport from 'passport';
 import  { models, common } from '../db';
 
@@ -114,9 +115,10 @@ export async function changePortfolioOrder(req, res) {
 
 export async function updateUser(req, res) {
   const userid = req.params.id;
-  let user = req.body;
+  const excludes = ['_id', 'type', 'uploadCount', 'tokens', '__v', 'score', 'count'];
+  let user = _.omit(req.body, excludes);
 
-  const result = await User.update({userid:userid}, user);
+  await User.update({userid:userid}, {$set: user});
   await updateFeatures(req, res);
 }
 

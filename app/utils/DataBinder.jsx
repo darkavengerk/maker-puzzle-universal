@@ -22,7 +22,10 @@ class DataBinderNode {
     return this.children[name];
   }
 
-  get() {
+  get(route) {
+    if(route) {
+      return this.access(route).get();
+    }
     for(const key in this.children) {
       const child = this.children[key];
       if(child.isModified()) {
@@ -124,5 +127,11 @@ class EventHandler {
 
   checkbox(event) {
     return this.controler.set(event.target.checked);
+  }
+
+  callback(err, data) {
+    if(!err) {
+      return this.controler.set(data);
+    }
   }
 }
