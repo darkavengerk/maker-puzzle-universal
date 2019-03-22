@@ -22,6 +22,13 @@ class DataBinderNode {
     return this.children[name];
   }
 
+  map(fn=x=>x) {
+    if(this.data.length > 0) {
+      return this.data.map((item, i) => fn(this.access(i), i));
+    }
+    return [];
+  }
+
   get(route) {
     if(route) {
       return this.access(route).get();
@@ -133,5 +140,14 @@ class EventHandler {
     if(!err) {
       return this.controler.set(data);
     }
+  }
+
+  innerText(event) {
+    return this.controler.set(event.target.innerText);
+  }
+
+  testInput(a, b) {
+    console.log(a, b);
+    // return this.controler.set(data);
   }
 }

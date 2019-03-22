@@ -11,26 +11,23 @@ import Assist from '../../utils/assist';
 
 import FormItem from '../../components/web/FormItem';
 import FormItemMedium from '../../components/web/FormItemMedium';
+import TextInputRound from '../../components/web/TextInputRound';
 
 import { createTextLinks } from '../../utils/functions';
 
 const Component = ({ featureEdited, aboutEdited, data, cx }) => {
   const user = data.get();
-  // const features = data.accessArray('features');
-  // const featuresMade = features.map(feature => {
-  //   return <FormItemMedium height={'1.44rem'} label={feature.get('title')}>
-  //     <Features 
-  //       features={user.features || []}
-  //       featureEdited={feature.access('title').attach()}
-  //       classNames={{
-  //         title: cx('feature-title'),
-  //         content: cx('feature', 'editing'),
-  //         row: cx('feature-item')
-  //       }}
-  //       editing={true}
-  //     />
-  //   </FormItemMedium>
-  // });
+  const features = data.access('features');
+  const about = data.access('about');
+  const featuresMade = features.map((feature, i) => {
+    return <FormItem key={i} label={feature.get('title')}>
+      <TextInputRound 
+        width="4.58rem"
+        placeholder={feature.get('placeholder')} 
+        data={feature.access('content')}
+      />
+    </FormItem>
+  });
   return (
     <div className={cx('info-main')}>
       <div className={cx('account-section-title')}>
@@ -47,26 +44,17 @@ const Component = ({ featureEdited, aboutEdited, data, cx }) => {
             </div>
           </div>
         </FormItemMedium>
-        <div className={cx('feature-area')}>
-          <Features 
-            features={user.features || []}
-            featureEdited={featureEdited}
-            classNames={{
-              title: cx('feature-title'),
-              content: cx('feature', 'editing'),
-              row: cx('feature-item')
-            }}
-            editing={true}
-          />
+        { featuresMade }
+        <FormItemMedium height={'1.44rem'} label="자기소개">
           <ContentEditable 
             className={cx('about-maker', 'editing')}
-            html={user.about? createTextLinks(user.about) : ''} 
+            html={about.get()? createTextLinks(about.get()) : ''} 
             tagName="pre"
-            onKeyUp={aboutEdited}
+            onKeyUp={about.attach('innerText')}
             disabled={false}
             placeholder="간단한 자기 소개를 입력해주세요."
           />          
-        </div>
+        </FormItemMedium>
       </section>
     </div>
   );

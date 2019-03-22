@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TextInput = ({ height='100%', width='100%', placeholder, data, ...props }) => {
+const TextInput = ({ height='100%', width='100%', data, ...props }) => {
   const style = {
     width, height,
     border: 'solid 1px #979797',
