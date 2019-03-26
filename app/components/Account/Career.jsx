@@ -10,93 +10,99 @@ import Padding from '../../components/Padding';
 import FlexibleImage from '../../components/FlexibleImage';
 import Link from '../../components/Link';
 
+import TextInputRound from '../../components/web/TextInputRound';
+import SelectCareer from '../../components/Account/SelectCareer';
+
 import { Company } from '../../services';
 import { createTextLinks } from '../../utils/functions';
 
-const Component = ({ history, swapEntries, companyNameChanged, featureChanged, addEntry, removeEntry, cx }) => {
+const years = [{value:-1, label:'재직중'}, {value:0, label:'1년 이하'}];
+for(let x=1; x<10; x++) {
+  years.push({value:x, label:x+'년'});
+}
+
+const Component = ({ data, history, cx }) => {
 
   const preventEnter = evt => {
     if(evt.keyCode === 13) {evt.preventDefault();}
   }
 
-  let lines = history.map(info => {
-    return (
-      <tr key={info.order}>
-        <td className={cx('col-info', 'first-item')}>
-          <div className={cx('triangle-up')} onClick={swapEntries(info.order, -1)} role="button"></div>
-          <Padding height="5"/>
-          <div className={cx('triangle-down')} onClick={swapEntries(info.order, 1)} role="button"></div>
-        </td>
-        
-        {info.newItem?
-          <td>
-            <AutoComplete
-              request={Company().searchCompaniesByName}
-              title="new-company-name"
-              update={companyNameChanged(info.order)}
-              text={info.name}
-              className={cx('text-input', 'company-title', 'new-company-name')}
-              textLimit={50}
-              top="2.2rem"
-              width="16rem"
-              placeholder="기업명을 입력 후 선택하세요"
-            />
-          </td> :
-          <td className={cx('text-input', 'company-title', (info.current? "col-selected": ""))}>
-            <Link to={'/company/' + info.name.replace(' ', '_')} count="company">{info.name}</Link>
-          </td>
-        }
-        <td>
-          <ContentEditable 
-            className={cx('text-input', 'company-period', (info.current? "col-selected": ""))}
-            html={info.period} 
-            tagName="span"
-            placeholder="ex)1년2개월"
-            onChange={featureChanged(info.order, 'period')}
-            onKeyPress={preventEnter}
-            onKeyDown={preventEnter}
-          />
-        </td>
-        <td className={cx('last-item')}>
-          <ContentEditable 
-            className={cx('text-input', 'company-position', (info.current? "col-selected": ""), 'last-item')}
-            html={info.position} 
-            tagName="span"
-            placeholder="&nbsp;ex)대리, 팀장"
-            onChange={featureChanged(info.order, 'position')}
-            onKeyPress={preventEnter}
-            onKeyDown={preventEnter}
-          />
-        </td>
-        <td className={cx('text-input', 'erase-buttons')} >
-          <FlexibleImage 
-            source={"/site/images/ic_highlight_remove_black_48dp.png"} 
-            x={17} y={17} 
-            role="button"
-            onClick={removeEntry(info.order)}
-            pureImage={true}
-          />
-        </td>
-      </tr>)
-  });
+  const addEntry = evt => data.push({name:'', period: '', position:'', newItem: 'true'});
+  const removeEntry = node => evt => data.removeRow(node);  
+  const swapEntries = (node, direction) => evt => data.swapRows(node.name, node.name + direction);  
 
   return (
-    <div className={cx('comapny-history-area')}>
-      <table className={cx('history')} >
-        <tbody>
-          <tr>
-            {history.length? <th className={cx('first-item')}></th>: null}
-            <th>기업명</th>
-            <th>재직여부</th>
-            <th className={cx('last-item')}>최종 직급</th>
-            <th className={cx('erase-buttons')}></th>
-          </tr>
-          {lines}
-        </tbody>
-      </table>
-      <Padding height="15" />
-      <div className={cx('add-entry')} role="button" onClick={addEntry} >+ 항목 추가하기</div>
-      
+     <div className={cx('info-main')}>
+      <div className={cx('account-section-title')}>
+        소속 기업
+      </div>
+      <Padding height={17} />
+      <div className={cx('comapny-history-area')}>
+        <Padding width={40} />
+        <Padding width={215}>기업명</Padding>
+        <Padding width={16} />
+        <Padding width={130}>재직여부</Padding>
+        <Padding width={16} />
+        <Padding width={130}>최종 직급</Padding>
+        <Padding height={10} />
+        {
+          data.map(info => [<div className={cx('career-item')}>
+            <div className={cx('col-info', 'first-item')}>
+              <div className={cx('triangle-up')} onClick={swapEntries(info, -1)} role="button"></div>
+              <Padding height="5"/>
+              <div className={cx('triangle-down')} onClick={swapEntries(info, 1)} role="button"></div>
+            </div>
+            <Padding width={24} />
+            <span
+              className={cx('career-item-company')}
+            >
+              {info.get('newItem')? 
+                <TextInputRound width={215} height={38}>
+                  <AutoComplete
+                    request={Company().searchCompaniesByName}
+                    title="new-company-name"
+                    update={info.access('name').attach('direct')}
+                    text={info.get('name')}
+                    className={cx('text-input', 'company-title', 'new-company-name')}
+                    textLimit={50}
+                    top="2.2rem"
+                    width="16rem"
+                    placeholder="기업명을 입력 후 선택하세요"
+                  />
+                </TextInputRound> : info.get('name')
+              }
+            </span>
+            <Padding width={16} />
+            <SelectCareer
+              className={cx('career-item-period')}
+              width={130}
+              height={29}
+              data={info.access('period')}
+              placeholder={'선택해 주세요'}
+            />
+            <Padding width={16} />
+            <TextInputRound 
+              width={130}
+              height={38}
+              placeholder="ex) 대리, 팀장" 
+              data={info.access('position')}
+            />
+            <Padding width={7} />
+            <FlexibleImage 
+              source={"/site/images/ic_highlight_remove_black_48dp.png"} 
+              x={17} y={17} 
+              role="button"
+              onClick={removeEntry(info)}
+              pureImage={true}
+            />
+          </div>, <div className={cx('ability-item-separator')}/>])
+        }
+        <Padding height="15" />
+        <Padding width="100%">
+          <div className={cx('add-entry')} role="button" onClick={addEntry} >+ 항목 추가하기</div>
+        </Padding>
+        
+      </div>
     </div>
   );
 };

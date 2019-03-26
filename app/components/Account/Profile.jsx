@@ -15,7 +15,7 @@ import TextInputRound from '../../components/web/TextInputRound';
 
 import { createTextLinks } from '../../utils/functions';
 
-const Component = ({ featureEdited, aboutEdited, data, cx }) => {
+const Component = ({ data, cx }) => {
   const user = data.get();
   const features = data.access('features');
   const about = data.access('about');

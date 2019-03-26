@@ -4,28 +4,13 @@ import classNames from 'classnames/bind';
 import ContentEditable from 'react-contenteditable'
 
 import FlexibleImage from '../../components/FlexibleImage';
+import Padding from '../../components/Padding';
+import TextInputRound from '../../components/web/TextInputRound';
 
-const Component = ({ abilities, onChange, cx }) => {
-
-  const featureEdited = abilities => {
-    onChange({ abilities }, 'makerProfile');
-  }
-
-  const titleChanged = order => evt => {
-    const value = evt.target.value;
-    const newState = abilities.map(ab => {
-      if(ab.order === order) return {...ab, title: value};
-      return ab;
-    });
-    featureEdited(newState);
-  }
+const Component = ({ abilities, data, cx }) => {
 
   const abilityClicked = (clicked, index) => evt => {
-    const newState = abilities.map(ab => {
-      if(ab.order === clicked.order) return {...ab, ability: index};
-      else return ab;
-    })
-    featureEdited(newState);
+    clicked.set(index);
   }
 
   const fillOvals = ab => {
@@ -34,8 +19,8 @@ const Component = ({ abilities, onChange, cx }) => {
       made.push( 
         <span 
           key={i} 
-          className={cx(ab.ability < i ? 'ovalEmpty' : 'ovalFill')} 
-          onClick={abilityClicked(ab, i)}
+          className={cx(ab.get('ability') < i ? 'ovalEmpty' : 'ovalFill')} 
+          onClick={abilityClicked(ab.access('ability'), i)}
           role={'button'}
         ></span>
       );
@@ -43,44 +28,58 @@ const Component = ({ abilities, onChange, cx }) => {
     return made;
   }
 
-  const removeEntry = order => evt => {
-    let  newState = abilities.filter(ab => ab.order !== order);
-    newState = newState.map( (s, i) => ({...s, order: i}));
-    featureEdited(newState);
+  const removeEntry = index => evt => {
+    data.removeRow(index);
   }
 
-  const addEntry = evt => featureEdited([...abilities, {order: abilities.length, title:'', ability:0 }]);
-
-  let abilitiesHTML = abilities.map(ab => {
-    return (
-      <div key={ab.order} className={cx('ability-item')}>
-        <ContentEditable 
-          className={cx('ability-title')}
-          html={ab.title} 
-          tagName="span"
-          placeholder="입력해주세요."
-          onChange={titleChanged(ab.order)}
-          disabled={false}
-        />
-        
-        { fillOvals(ab) }
-        
-        <FlexibleImage 
-          source={"/site/images/ic_highlight_remove_black_48dp.png"} 
-          x={17} y={17} 
-          role="button"
-          onClick={removeEntry(ab.order)}
-          pureImage={true}
-        />
-      </div>);
-  });
+  const addEntry = evt => {
+    data.push({title:'', ability:0});
+  };
 
   return (
-    <div className={cx('ability-section', 'ability-section-editing')}>
-      <div className={cx('ability-entries')} >
-        {abilitiesHTML}
+    <div className={cx('info-main')}>
+      <div className={cx('account-section-title')}>
+        능력치
       </div>
-      <div className={cx('add-entry')} role="button" onClick={addEntry} >+ 항목 추가하기</div>
+      <section className={cx('account-section-form-area')}>
+        <div className={cx('ability-section')}>
+          <div className={cx('ability-section-colums')}>
+            <Padding width="2.87rem">
+              스킬명
+            </Padding>
+            <Padding width="0.38rem" />
+            <Padding width="1.85rem">
+              숙련도
+            </Padding>
+          </div>
+          <div className={cx('ability-entries')} > {
+            data.map((ab, i) => [
+                <div key={i} className={cx('ability-item')}>
+                  <TextInputRound 
+                    width="2.87rem"
+                    height="0.29rem"
+                    placeholder="스킬명을 입력하세요" 
+                    data={ab.access('title')}
+                  />
+                  <Padding width="0.38rem" />                  
+                
+                  { fillOvals(ab) }
+
+                  <FlexibleImage 
+                    source={"/site/images/ic_highlight_remove_black_48dp.png"} 
+                    x={17} y={17} 
+                    role="button"
+                    onClick={removeEntry(i)}
+                    pureImage={true}
+                  />
+                </div>, <div className={cx('ability-item-separator')}/>]
+            )
+          }</div>
+          <Padding width="100%" height="0.27rem">
+            <div className={cx('add-entry')} role="button" onClick={addEntry} >+ 항목 추가하기</div>
+          </Padding>
+        </div>
+      </section>
     </div>
   );
 };

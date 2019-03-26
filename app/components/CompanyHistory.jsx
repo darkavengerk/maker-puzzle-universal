@@ -58,16 +58,16 @@ const Component = ({ maker, editing, onChange, ...props }) => {
     onChange({companies: [...history]}, 'makerProfile');
   }
 
-  let lines = history.map(info => {
+  let lines = history.map((info, i) => {
     return (
-      <tr key={info.order}>
+      <tr key={i}>
         {editing? 
           <td className={cx('col-info', 'first-item')}>
             <div className={cx('triangle-up')} onClick={swapEntries(info.order, -1)} role="button"></div>
             <Padding height="5"/>
             <div className={cx('triangle-down')} onClick={swapEntries(info.order, 1)} role="button"></div>
           </td> : 
-          <td className={cx('col-info', 'first-item')}>{info.order + 1}</td>
+          <td className={cx('col-info', 'first-item')}>{i + 1}</td>
         }
         
         {editing && info.newItem?

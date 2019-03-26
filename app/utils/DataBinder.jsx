@@ -50,6 +50,40 @@ class DataBinderNode {
     }
   }
 
+  push(data) {
+    if(this.data.length !== undefined) {
+      const raw = [...this.get(), data];
+      this.set(raw);
+    }
+  }
+
+  remove(name) {
+    const updated = {};
+    for(const c in this.children) {
+      if(c !== name) {
+        updated[c] = this.children[c];
+      }
+    }
+    this.children = updated;
+  }
+
+  removeRow(index) {
+    const raw = [...this.get()];
+    index = index.name || index; // in case index is the node object itself
+    raw.splice(index, 1);
+    this.children= {}; // remove all children and render again. Can save them if performance is issue
+    this.set(raw);
+  }
+
+  swapRows(index1, index2) {
+    const raw = [...this.get()];
+    if(index1 < 0 || index2 < 0 || index1 >= raw.length || index2 >= raw.length) return;
+    raw[index1] = this.get()[index2];
+    raw[index2] = this.get()[index1];
+    this.children= {}; // remove all children and render again. Can save them if performance is issue
+    this.set(raw);
+  }
+
   isModified() {
     for(const key in this.children) {
       if(this.children[key].isModified()) return true;

@@ -74,118 +74,31 @@ class Container extends Component {
     }
   }
 
-  updateState() {
-    return name => value => {
-      const user = {...this.state.user, [name]: value};
-      this.setState({ user });
-    };
-  }
-
-  history() {
-    return [...this.state.user.makerProfile.companies];
-  }
-
   onClick(index) {
     browserHistory.push('/account/' + links[index]);
     this.setState({selectedMenu : index});
   }
 
-  featureEdited(key, text) {
-    const target = this.state.user;    
-    const features = target.features.map(feature => {
-      if(feature.title === key) {
-        return {...feature, content:text}
-      }
-      return feature;
-    });
-    this.setState({ user: {...this.state.user, features} });
-  }
-
-  aboutEdited(evt) {
-    const about = evt.target.innerText;
-    this.setState({ about });
-  }
-
-  makerProfileChanged(states) {
-    const { user } = this.state;
-    const makerProfile = {...user.makerProfile, ...states};
-    this.setState({user: {...this.state.user, makerProfile}});
-  }
-
-  companyFeatureChanged(order, category) {
-    return evt => {
-      const value = evt.target.value;
-      const newState = this.history().map(info => {
-        if(info.order === order) return {...info, [category]: value};
-        return info;
-      });
-      this.makerProfileChanged({companies: newState});
-    }
-  }
-
-  companyNameChanged(order) {
-    return name => {
-      const newState = this.history().map(info => {
-        if(info.order === order) return {...info, name};
-        return info;
-      });
-      this.makerProfileChanged({companies: newState});
-    }
-  }
-
-  addCompanyEntry(evt) {
-    const history = this.history();
-    this.makerProfileChanged({companies: [...history, {order: history.length, name:'', period:'', position:'', newItem: true, }]});
-  }
-
-  removeCompanyEntry(order) {
-    return evt => {
-      let newState = this.history().filter(info => info.order !== order);
-      newState = newState.map( (s, i) => ({...s, order: i}));
-      this.makerProfileChanged({companies: newState});
-    }
-  }
-
-  swapCompanyEntries(i, direction) {
-    return evt => {
-      const history = this.history();
-      if(i+direction < 0 || i+direction >= history.length) return;
-      const temp = history[i+direction];
-      history[i+direction] = {...history[i], order: temp.order};
-      history[i] = {...temp, order: history[i].order};
-      this.makerProfileChanged({companies: [...history]});
-    }
-  }
-
   getContent() {
-    const { user } = this.state;
+    const user = this.dataBound.access('user');
     const { category} = this.props;
     switch(category) {
       case 'info': 
         return <AccountInfo 
           cx={cx}
-          user={user}
-          data={this.dataBound.access('user')}
+          data={user}
         />;
 
       case 'profile': 
         return <Profile 
           cx={cx}
-          data={this.dataBound.access('user')}
-          user={user} 
-          featureEdited={this.featureEdited}
-          aboutEdited={this.aboutEdited}
+          data={user}
         />;
 
       case 'career':
         return <Career
           cx={cx}
-          history={this.history()}
-          featureChanged={this.companyFeatureChanged}
-          companyNameChanged={this.companyNameChanged}
-          addEntry={this.addCompanyEntry}
-          removeEntry={this.removeCompanyEntry}
-          swapEntries={this.swapCompanyEntries}
+          data={user.access('makerProfile').access('companies')}
         />
       case 'company':
         return <Company
@@ -196,7 +109,7 @@ class Container extends Component {
       case 'ability':
         return <Ability
           cx={cx}
-          abilities={this.state.user.makerProfile.abilities}
+          data={user.access('makerProfile').access('abilities')}
           onChange={() => {}}
         />
 

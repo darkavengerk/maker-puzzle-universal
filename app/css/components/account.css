@@ -101,7 +101,9 @@
   border-radius: 0.1rem;
   width: 4.58rem;
   height: 1.44rem;
-  padding: 0.1rem;
+  padding: 0.02rem 0.1rem;
+  position: relative;
+  top: -0.08rem;
 }
 
 .about-maker:empty:before {
@@ -118,4 +120,154 @@
 
   background-color: white;
   cursor: text;
+}
+
+.ability-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.ability-section-colums {
+  width: 100%;
+  font-family: NanumBarunGothic;
+  font-size: 0.15rem;
+  color: #2c2c2c;
+  margin-bottom: 0.1rem;
+}
+
+.ovalEmpty {
+  width: 0.18rem;
+  height: 0.18rem;
+  border: solid 0.01rem #676767;
+  border-radius: 50%;
+  /*margin-top: 0.08rem;*/
+}
+
+.ovalFill {
+  width: 0.18rem;
+  height: 0.18rem;
+  background-color: #676767;
+  border: solid 0.01rem #676767;
+  border-radius: 50%;
+  /*margin-top: 0.08rem;*/
+}
+
+.ability-item {
+  display: flex;
+  align-items: center;
+}
+
+.ability-item > span {
+  margin-right: 0.25rem;
+}
+
+.ability-item-separator {
+  width: 5.45rem;
+  height: 0.02rem;
+  margin: 0.16rem 0;
+  border: solid 0.01rem #d8d8d8;
+}
+
+.add-entry {
+  width: 2.89rem;
+  height: 0.26rem;
+  border: dashed 0.01rem #c2c2c2;
+
+  font-family: NanumBarunGothic;
+  font-size: 0.12rem;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0.26rem;
+  letter-spacing: normal;
+  text-align: center;
+  vertical-align: middle;
+  color: #c2c2c2;
+}
+
+.comapny-history-area {
+  width: 100%;
+  font-family: NanumBarunGothic;
+  font-size: 0.15rem;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #2c2c2c;
+}
+
+.career-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.career-item-company {
+  width: 2.15rem;
+}
+
+.career-item-period {
+  width: 1.3rem;
+}
+
+.history {
+  width: 100%;
+}
+
+.history th {
+  height: 0.2rem;
+  font-family: NanumBarunGothic;
+  font-size: 0.11rem;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.82;
+  letter-spacing: normal;
+  text-align: center;
+  color: #777777;
+}
+
+.history th, .history td {
+  border: solid 0.01rem #dcdcdc;
+  border-top: solid 0.0rem;
+  height: 0.2rem;
+  vertical-align: middle;
+}
+
+.first-item {
+  border-left: solid 0.0rem  !important;
+}
+
+.last-item {
+  border-right: solid 0.0rem !important;
+}
+
+.erase-buttons {
+  border: solid 0.0rem !important;
+  height: 0.2rem;
+  width: 0.17rem;
+  text-align: right;
+  vertical-align: middle;
+}
+
+.new-company-name {
+  width: 100%;
+  height: 100%;
+}
+
+.triangle-up {
+  width: 0;
+  height: 0;
+  border: solid 0.1rem;
+  border-color: transparent transparent #808080 transparent;
+  margin: 0 0.02rem;
+}
+
+.triangle-down {
+  width: 0;
+  height: 0;
+  border: solid 0.1rem;
+  border-color: #808080 transparent transparent transparent;
+  margin: 0 0.02rem;
 }

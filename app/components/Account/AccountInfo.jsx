@@ -114,7 +114,7 @@ const Component = ({ user, items, selected, onClick, data, cx }) => {
 };
 
 Component.propTypes = {
-  user: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
 };
 
 export default Component;
