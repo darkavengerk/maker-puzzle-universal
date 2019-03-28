@@ -9,7 +9,7 @@ import SelectYear from '../../components/Account/SelectYear';
 import FormItem from '../../components/web/FormItem';
 import FormItemMedium from '../../components/web/FormItemMedium';
 import TextInputRound from '../../components/web/TextInputRound';
-import ButtonRound from '../../components/web/ButtonRound';
+import FlexibleButton from '../../components/web/FlexibleButton';
 
 const years = [];
 const now = new Date().getFullYear();
@@ -42,7 +42,12 @@ const Component = ({ user, items, selected, onClick, data, cx }) => {
         </FormItem>
 
         <FormItem label="비밀번호">
-          <ButtonRound value="비밀번호 변경" width="1rem" height="0.3rem" className={cx('password-button')} />
+          <FlexibleButton
+            value="비밀번호 변경"
+            width="1rem"
+            height="0.3rem"
+            backgroundColor="#b1b1b1"
+            className={cx('password-button')} />
         </FormItem>
 
         <FormItem label="성별">
@@ -79,20 +84,25 @@ const Component = ({ user, items, selected, onClick, data, cx }) => {
         <FormItemMedium label={['로그인', '계정', '연결']} height="0.62rem" labelWidth={'1rem'} padding="0.23rem" >
           <div>
             <div>
-              <ButtonRound width="1.96rem" height="0.24rem" padding="0" className={cx('auth-button-fb')}>
+              <FlexibleButton
+                width="1.96rem"
+                height="0.24rem"
+                padding="0"
+                backgroundColor="#485b97"
+                className={cx('auth-button-fb')}>
                 <FlexibleImage source="/site/images/FB-icon.jpg" x={16} y={16} />
                 <Padding width={8} />
                 로그인에 Facebook 계정 사용
-              </ButtonRound>
+              </FlexibleButton>
             </div>
             <Padding height={13} />
             <div>
-              <ButtonRound width="1.96rem" height="0.24rem" className={cx('auth-button-google')}>
+              <FlexibleButton width="1.96rem" height="0.24rem" className={cx('auth-button-google')}>
                 <FlexibleImage source="/site/images/G-icon.jpg" x={13} y={13} />
                 <Padding width={7} />
                 로그인에 Google 계정 사용
                 <Padding width={10} />
-              </ButtonRound>
+              </FlexibleButton>
             </div>
           </div>
         </FormItemMedium>

@@ -4,7 +4,6 @@ import classNames from 'classnames/bind';
 
 import ContentEditable from 'react-contenteditable'
 
-import Features from '../../components/Features';
 import FlexibleImage from '../../components/FlexibleImage';
 import ImageUploader from '../../components/ImageUploader';
 import Assist from '../../utils/assist';
@@ -19,15 +18,6 @@ const Component = ({ data, cx }) => {
   const user = data.get();
   const features = data.access('features');
   const about = data.access('about');
-  const featuresMade = features.map((feature, i) => {
-    return <FormItem key={i} label={feature.get('title')}>
-      <TextInputRound 
-        width="4.58rem"
-        placeholder={feature.get('placeholder')} 
-        data={feature.access('content')}
-      />
-    </FormItem>
-  });
   return (
     <div className={cx('info-main')}>
       <div className={cx('account-section-title')}>
@@ -44,7 +34,17 @@ const Component = ({ data, cx }) => {
             </div>
           </div>
         </FormItemMedium>
-        { featuresMade }
+        { 
+          features.map((feature, i) => 
+            <FormItem key={i} label={feature.get('title')}>
+              <TextInputRound 
+                width="4.58rem"
+                placeholder={feature.get('placeholder')} 
+                data={feature.access('content')}
+              />
+            </FormItem>
+          )
+        }
         <FormItemMedium height={'1.44rem'} label="자기소개">
           <ContentEditable 
             className={cx('about-maker', 'editing')}

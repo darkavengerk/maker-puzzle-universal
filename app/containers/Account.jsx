@@ -103,14 +103,13 @@ class Container extends Component {
       case 'company':
         return <Company
           cx={cx}
-          companies={this.state.user.companiesOwned}
+          data={user.access('companiesOwned')}
         />
 
       case 'ability':
         return <Ability
           cx={cx}
           data={user.access('makerProfile').access('abilities')}
-          onChange={() => {}}
         />
 
       default:
