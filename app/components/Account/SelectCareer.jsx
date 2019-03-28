@@ -2,12 +2,11 @@ import React from 'react';
 
 import Select from '../../components/web/Select';
 
-const years = ['재직중', '1년 이하'];
+const years = ['재직중', '1년 미만'];
 const now = new Date().getFullYear();
-for(let y = 1; y < 10; y++) {
-  years.push(y + '년');
+for(let y = 1; y <= 6; y++) {
+  years.push(y + '년 이상');
 }
-years.push('10년 이상');
 
 const SelectComponent = ({ height='100%', width='100%', placeholder, data, ...props }) => {
   return <Select 
