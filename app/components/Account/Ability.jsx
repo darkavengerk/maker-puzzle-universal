@@ -7,10 +7,10 @@ import FlexibleImage from '../../components/FlexibleImage';
 import Padding from '../../components/Padding';
 import TextInputRound from '../../components/web/TextInputRound';
 
-const Component = ({ abilities, data, cx }) => {
+const Component = ({ data, cx }) => {
 
   const abilityClicked = (clicked, index) => evt => {
-    clicked.set(index);
+    clicked.dataChanged(index);
   }
 
   const fillOvals = ab => {

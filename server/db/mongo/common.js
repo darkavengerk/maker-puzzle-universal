@@ -219,11 +219,11 @@ async function imageProcess({ images }) {
   });
 }
 
-async function getPopulatedUser(userid) {
+async function getPopulatedUser(userid, removeFields={email:0, password:0}) {
   const companyFeatures = populateFieldsForPortfolio.companyFeatures;
   const userFeatures = populateFieldsForPortfolio.userFeatures;
   return await User
-    .findOne({ userid }, {email:0, password:0})
+    .findOne({ userid }, removeFields)
     .populate('companiesOwned', companyFeatures)
     .populate('portfolios.user', userFeatures)
     .populate('portfolios.project', companyFeatures)

@@ -78,6 +78,20 @@ export async function updateFeatures(req, res) {
   }
 }
 
+export async function updateCompany(req, res) {
+  const link_name = req.params.link_name;
+  const company = req.body;
+
+  try {
+    const result = await Company.update({ link_name }, {$set: company});
+    res.json(result);
+  }
+  catch (err) {
+    console.log(err);
+    return res.status(500).send('Something went wrong getting the data');
+  }
+}
+
 async function createPortfolio(link_name, portfolio) {
   const location = portfolio.location.trim();
 
@@ -202,39 +216,6 @@ export async function changePortfolioOrder(req, res) {
   res.json(await getPopulatedCompany(link_name));
 }
 
-/**
- * Update a topic
- */
-export function update(req, res) {
-  const query = { id: req.params.id };
-  const omitKeys = ['id', '_id', '_v'];
-  const data = _.omit(req.body, omitKeys);
-
-  User.findOneAndUpdate(query, data, (err) => {
-  if (err) {
-    console.log('Error on save!');
-    return res.status(500).send('We failed to save for some reason');
-  }
-
-  return res.status(200).send('Updated successfully');
-  });
-}
-
-/**
- * Remove a topic
- */
-export function remove(req, res) {
-  const query = { _id: req.params.id };
-  User.findOneAndRemove(query, (err) => {
-    if (err) {
-      console.log('Error on delete');
-      return res.status(500).send('We failed to delete for some reason');
-    }
-
-    return res.status(200).send('Removed Successfully');
-  });
-}
-
 export async function follow(req, res) {
   const link_name = req.params.link_name;
   let userid = req.body.userid;
@@ -273,14 +254,13 @@ export default {
   all,
   search,
   one,
+  updateCompany,
   updateFeatures,
   addPortfolio,
   deletePortfolio,
   addProduct,
   changePortfolioOrder,
   add,
-  update,
-  remove,
   follow,
   unfollow
 };

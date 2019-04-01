@@ -17,7 +17,7 @@ for(let y = now-14; y > now-100; y--) {
   years.push({value:y, label:y});
 }
 
-const Component = ({ user, items, selected, onClick, data, cx }) => {
+const Component = ({ data, cx }) => {
 
   const marketingAgreed = data.access('marketingAgreed');
   return (

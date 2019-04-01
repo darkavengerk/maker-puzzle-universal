@@ -97,14 +97,13 @@ export default (app) => {
     GET('/api/company/search/:keyword', companyController.search);
     GET('/api/company/:link_name', companyController.one);
     POST('/api/company/:link_name/features', companyController.updateFeatures);
+    POST('/api/company/:link_name', companyController.updateCompany);
     GET('/api/company', companyController.all);
     POST('/api/company/:link_name/portfolio', companyController.addPortfolio);
     POST('/api/company/:link_name/portfolios/order', companyController.changePortfolioOrder);
     DELETE('/api/company/:link_name/portfolio/:pid', companyController.deletePortfolio);
     POST('/api/company/:link_name/product', companyController.addProduct);
     POST('/api/company', companyController.add);
-    PUT('/api/company/:id', companyController.update);
-    DELETE('/api/company/:id', companyController.remove);
     POST('/api/company/:link_name/follow', companyController.follow);
     POST('/api/company/:link_name/unfollow', companyController.unfollow);
   } else {

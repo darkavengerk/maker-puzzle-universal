@@ -29,7 +29,7 @@ const Component = ({ data, history, cx }) => {
 
   const addEntry = evt => data.push({name:'', period: '', position:'', newItem: 'true'});
   const removeEntry = node => evt => data.removeRow(node);  
-  const swapEntries = (node, direction) => evt => data.swapRows(node.name, node.name + direction);  
+  const swapEntries = (node, direction) => evt => data.swapRows(node.key, node.key + direction);  
 
   return (
      <div className={cx('info-main')}>

@@ -23,7 +23,7 @@ const TextInput = ({ height='100%', width='100%', data, children, ...props }) =>
   return <input 
             type="text" 
             style={style} 
-            value={data.get()} 
+            value={data.get() || ''} 
             onChange={data.attach()} 
             {...props} />
 };

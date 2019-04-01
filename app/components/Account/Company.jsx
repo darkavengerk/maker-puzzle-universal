@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
+
+import autoBind from 'react-autobind';
 
 import FlexibleImage from '../../components/FlexibleImage';
 import Padding from '../../components/Padding';
@@ -12,18 +15,45 @@ import FlexibleButton from '../../components/web/FlexibleButton';
 
 import ImageUploader from '../../components/ImageUploader';
 import Assist from '../../utils/assist';
+import { DataBinder, DataTapper } from '../../utils/DataBinder';
 
+import { companyEditSave } from '../../actions/companies';
 
 class Companies extends Component {
 
   constructor(props) {
     super(props);
+    const { data } = this.props;
     this.state = {selected: 0};
+    autoBind(this);
+
+    data.listen('COMPANY_UPDATE', (protocol, next) => {
+      console.log(protocol);
+      const raw = data.get();
+      raw[this.state.selected] = protocol.data;
+      next(protocol);
+    });
+
+    this.dataTapper = new DataTapper({
+      bind: data,
+      title: 'COMPANY_UPDATE',
+      callback: this.submit,
+      timeLength: 3000,
+    });
+  }
+
+  async submit(protocol) {
+    const { data, userEditSave } = this.props;
+    await companyEditSave(data.get()[this.state.selected]);
+  }
+
+  switchCompany(index) {
+    return event => this.setState({selected: index});
   }
 
   render() {
     const { data, cx } = this.props;
-    const companySelected = data.access(this.state.selected);
+    const companySelected = data.access(this.state.selected, 'COMPANY_UPDATE');
     const features = companySelected.access('features');
     return (
       <div className={cx('info-main')}>
@@ -32,7 +62,7 @@ class Companies extends Component {
         </div>
         <section className={cx('account-section-form-area')}>
           { 
-            data.map(company => {
+            data.map((company, i) => {
               const isSelected = companySelected === company;
               return  [<FlexibleButton
                             width={127}
@@ -41,6 +71,7 @@ class Companies extends Component {
                             shadow={isSelected? 0.5: 0}
                             thickness={isSelected? '0.01rem' : 0}
                             radius={0}
+                            onClick={this.switchCompany(i)}
                           >
                             {company.get('name')}
                           </FlexibleButton>, <Padding width={15}/>]
@@ -59,8 +90,7 @@ class Companies extends Component {
           <FormItem label="기업명">
             <TextInputRound 
               width="4.58rem"
-              placeholder={companySelected.get('name')} 
-              data={companySelected.access('content')}
+              data={companySelected.access('name')}
             />
           </FormItem>
           { 
@@ -83,6 +113,10 @@ class Companies extends Component {
 Companies.propTypes = {
 };
 
-export default Companies;
+function mapStateToProps(state) {
+  return {
+  };
+}
 
+export default connect(mapStateToProps, { companyEditSave })(Companies);
 

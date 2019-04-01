@@ -18,7 +18,7 @@ export default async function render(req, res) {
 
   let user = {};
   if(req.user && req.user.userid) {
-    user = await common.getPopulatedUser(req.user.userid);
+    user = await common.getPopulatedUser(req.user.userid, {password:0});
     user.feed = await common.buildFeed(user);
   }
   const store = configureStore({

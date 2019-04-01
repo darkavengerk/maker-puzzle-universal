@@ -15,7 +15,7 @@ import Ability from '../components/Account/Ability';
 import Padding from '../components/Padding';
 
 import Assist from '../utils/assist';
-import { DataBinder } from '../utils/DataBinder';
+import { DataBinder, DataTapper } from '../utils/DataBinder';
 import { userEditSave } from '../actions/users';
 
 import styles from '../css/components/account';
@@ -50,28 +50,23 @@ class Container extends Component {
 
     autoBind(this);
 
-    this.dataBound = new DataBinder(this);
-    this.dataBound.listen('user');
-    this.dataBound.listen('user', v => {
-      if(this.lastEdited < 0) {
-        this.lastEdited = new Date();
-        this.interval = setInterval(this.submitCheck, 1000);
-      }
-      else {
-        this.lastEdited = new Date();
-      }
+    this.dataBound = new DataBinder(this.state);
+    this.dataBound.listen('USER_UPDATE', protocol => {
+      this.dataBound.set(protocol.data, 'user');
+      this.setState({user: {...this.dataBound.get('user')}});
+    });
+
+    this.dataTapper = new DataTapper({
+      bind: this.dataBound,
+      title: 'USER_UPDATE',
+      callback: this.submitCheck,
+      timeLength: 3000,
     });
   }
 
   async submitCheck() {
     const { userEditSave } = this.props;
-    const now = new Date();
-    if(now - this.lastEdited >= 3000) {
-      clearInterval(this.interval);
-      this.interval = null;
-      this.lastEdited = -1;
-      await userEditSave(this.dataBound.access('user').get());
-    }
+    await userEditSave(this.dataBound.get('user'));
   }
 
   onClick(index) {
@@ -80,7 +75,7 @@ class Container extends Component {
   }
 
   getContent() {
-    const user = this.dataBound.access('user');
+    const user = this.dataBound.access('user', 'USER_UPDATE');
     const { category} = this.props;
     switch(category) {
       case 'info': 

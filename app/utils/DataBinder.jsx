@@ -1,25 +1,62 @@
+import autoBind from 'react-autobind';
 
-class DataBinderNode {
-  constructor(name='root', data, parent) {
-    this.name = name;
+class EventHandler {
+  constructor() {
+  }
+
+  get(accessType, cb) {
+    return this[accessType](cb);
+  }
+
+  normal(cb) {
+    return event => cb(event.target.value);
+  }
+
+  direct(cb) {
+    return event => cb(event);
+  }
+
+  checkbox(cb) {
+    return event => cb(event.target.checked);
+  }
+
+  callback(cb) {
+    return (err, data) => err || cb(data);
+  }
+
+  innerText(cb) {
+    return event => cb(event.target.innerText);
+  }
+}
+
+const handler = new EventHandler(this);
+
+export class DataBinder {
+  constructor(data, parent=null, title='', key) {
     this.data = data;
     this.parent = parent;
+    this.title = title;
+    this.key = key;
     this.modified = false;
     this.children = {};
     this.listeners = {};
-    this.handler = new EventHandler(this);
+
+    autoBind(this);
   }
 
-  listen(key, fn) {
-    this.listeners[key] = fn;
-  }
-
-  access(name, key) {
-    if(!key) key = name;
-    if(!this.children[name]) {
-      this.children[name] = new DataBinderNode(name, this.data[key], this);
+  listen(title, fn) {
+    if(this.listeners[title]) {
+      this.listeners[title].push(fn);
     }
-    return this.children[name];
+    else this.listeners[title] = [fn];
+  }
+
+  access(key, title) {
+    title = title || this.title;
+    if(!this.children[key]) {
+      this.children[key] = new DataBinder(this.data[key], this, title, key);
+    }
+    return this.children[key];
   }
 
   map(fn=x=>x) {
@@ -33,46 +70,31 @@ class DataBinderNode {
     if(route) {
       return this.access(route).get();
     }
-    for(const key in this.children) {
-      const child = this.children[key];
-      if(child.isModified()) {
-        this.data[key] = child.get();
-      }
-    }
     return this.data;
   }
 
-  set(data) {
-    if(this.data !== data) {
-      this.data = data;
-      this.modified = true;
-      this.parent.update(this);
+  set(data, route) {
+    if(route) return this.access(route).set(data);
+    this.data = data;
+    for(const key in this.children) {
+      const child = this.children[key];
+      child.set(data[key]);
     }
   }
 
   push(data) {
     if(this.data.length !== undefined) {
       const raw = [...this.get(), data];
-      this.set(raw);
+      this.dataChanged(raw);
     }
-  }
-
-  remove(name) {
-    const updated = {};
-    for(const c in this.children) {
-      if(c !== name) {
-        updated[c] = this.children[c];
-      }
-    }
-    this.children = updated;
   }
 
   removeRow(index) {
     const raw = [...this.get()];
-    index = index.name || index; // in case index is the node object itself
+    index = index.key || index; // in case index is the node object itself
     raw.splice(index, 1);
     this.children= {}; // remove all children and render again. Can save them if performance is issue
-    this.set(raw);
+    this.dataChanged(raw);
   }
 
   swapRows(index1, index2) {
@@ -80,108 +102,86 @@ class DataBinderNode {
     if(index1 < 0 || index2 < 0 || index1 >= raw.length || index2 >= raw.length) return;
     raw[index1] = this.get()[index2];
     raw[index2] = this.get()[index1];
-    this.children= {}; // remove all children and render again. Can save them if performance is issue
-    this.set(raw);
+    this.dataChanged(raw);
   }
 
-  isModified() {
+  attach(option) {
+    option = option || 'normal';
+    if(typeof(option) === 'string') {
+      option = {
+        accessType: option
+      }
+    }
+    return handler.get(option.accessType, data => {
+      data = (option.pre && option.pre(data)) || data;
+      this.dataChanged(data);
+      option.after && option.after(data);
+    });
+  }
+
+  dataChanged(data) {
+    this.parent && this.parent.update({data, title: this.title, child: this});
+  }
+
+  update(protocol) {
+    if(this.listeners[protocol.title]) {
+      console.log('launch', protocol.title);
+      this.listeners[protocol.title].map(fn => fn(protocol, this.updateCollection));
+    }
+    else this.updateCollection(protocol);
+  }
+
+  updateCollection(protocol) {
     for(const key in this.children) {
-      if(this.children[key].isModified()) return true;
+      const child = this.children[key];
+      if(child === protocol.child) {
+        this.data[key] = protocol.data;
+      }
     }
-    return this.modified;
-  }
-
-  attach(accessType='normal') {
-    return this.handler.get(accessType);
-  }
-
-  update(node) {
-    if(this.listeners[node.name]) {
-      this.listeners[node.name](this.get());
-    }
-    this.parent.update(this);
-  }
-
-  flush() {
-    for(const child in this.children) {
-      this.children[child].flush();
-    }
-    this.modified = false;
+    protocol.data = this.data;
+    protocol.child = this;
+    this.parent && this.parent.update(protocol);
   }
 }
 
-export class DataBinder extends DataBinderNode {
-  constructor(component, route='state') {
-    super('root', component[route]);
-    this.component = component;
-    this.data = component[route];
-    this.modified = false;
-    this.children = {};
-    this.listeners = {};
-    this.handler = new EventHandler(this);
+export class DataTapper {
+  constructor(option) {
+    this.lastEdited = -1;
+    this.option = Object.assign({
+      timeLength: 5000,
+      frequency: 1000,
+      callback: x => x,
+    }, option);
+
+    if(option.title && option.bind) {
+      option.bind.listen(option.title, protocol => {
+        this.tap(protocol);
+      });
+    }
+
+    this.submitCheck = this.submitCheck.bind(this);
   }
 
-  listen(key, fn) {
-    if(!this.listeners[key]) this.listeners[key] = [];
-    if(fn) {
-      this.listeners[key].push(fn);      
+  tap(protocol) {
+    this.data = protocol;
+    if(this.lastEdited < 0) {
+      this.lastEdited = new Date();
+      this.interval = setInterval(this.submitCheck, this.option.frequency);
     }
     else {
-      this.listeners[key].push(this.defaultListener(key).bind(this));
+      this.lastEdited = new Date();
     }
   }
 
-  defaultListener(key) {
-    return data => {
-      this.component.setState({ [ key ] : data });
-      this.flush();
+  async submitCheck() {
+    console.log('check');
+    const now = new Date();
+    if(now - this.lastEdited >= this.option.timeLength) {
+      console.log('check in');
+      clearInterval(this.interval);
+      this.interval = null;
+      this.lastEdited = -1;
+      this.option.callback && this.option.callback(this.data);
     }
-  }
-
-  update(node) {
-    if(this.listeners[node.name]) {
-      this.listeners[node.name].map(fn => fn(this.get()));
-    }
-  }
-}
-
-class EventHandler {
-  constructor(controler) {
-    this.controler = controler;
-    this.handlers = {};
-  }
-
-  get(accessType) {
-    if(!this.handlers[accessType]) {
-      this.handlers[accessType] = this[accessType].bind(this);
-    }
-    return this.handlers[accessType];
-  }
-
-  normal(event) {
-    return this.controler.set(event.target.value);
-  }
-
-  direct(value) {
-    return this.controler.set(value);
-  }
-
-  checkbox(event) {
-    return this.controler.set(event.target.checked);
-  }
-
-  callback(err, data) {
-    if(!err) {
-      return this.controler.set(data);
-    }
-  }
-
-  innerText(event) {
-    return this.controler.set(event.target.innerText);
-  }
-
-  testInput(a, b) {
-    console.log(a, b);
-    // return this.controler.set(data);
   }
 }
