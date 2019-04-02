@@ -1,5 +1,12 @@
 import React from 'react';
 
+function convertToFloat(input) {
+  if(input && !isNaN(input)) {
+    return parseFloat(input)/100 + 'rem';
+  }
+  return input;
+}
+
 const ButtonInput = ({ 
   children,
   height='100%',
@@ -15,13 +22,15 @@ const ButtonInput = ({
   onClick,
   ...props
 }) => {
+  width = convertToFloat(width);
+  height = convertToFloat(height);
   const style = {
     width, height,
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
-    radius: radius,
-    padding: '0 ' + padding,
+    borderRadius: convertToFloat(radius),
+    padding: '0 ' + convertToFloat(padding),
     backgroundColor,
     border: borderType + ' ' + thickness + ' ' + borderColor,
     boxShadow: `0 3px 15px 0 rgba(141, 141, 141, ${shadow})`

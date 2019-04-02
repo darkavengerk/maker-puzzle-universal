@@ -12,6 +12,7 @@ import Profile from '../components/Account/Profile';
 import Career from '../components/Account/Career';
 import Company from '../components/Account/Company';
 import Ability from '../components/Account/Ability';
+import Quit from '../components/Account/Quit';
 import Padding from '../components/Padding';
 
 import Assist from '../utils/assist';
@@ -103,6 +104,12 @@ class Container extends Component {
 
       case 'ability':
         return <Ability
+          cx={cx}
+          data={user.access('makerProfile').access('abilities')}
+        />
+
+      case 'quit':
+        return <Quit
           cx={cx}
           data={user.access('makerProfile').access('abilities')}
         />
