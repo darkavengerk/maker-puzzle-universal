@@ -6,7 +6,7 @@ import { browserHistory } from 'react-router';
 import autoBind from 'react-autobind';
 
 import Layout from '../components/Account/Layout';
-import SimpleList from '../components/Account/SimpleList';
+import SimpleList from '../components/web/SimpleList';
 import AccountInfo from '../components/Account/AccountInfo';
 import Profile from '../components/Account/Profile';
 import Career from '../components/Account/Career';
