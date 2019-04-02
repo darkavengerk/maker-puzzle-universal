@@ -24,14 +24,12 @@ class Companies extends Component {
   constructor(props) {
     super(props);
     const { data } = this.props;
-    this.state = {selected: 0};
+    data.component = this;
+    this.state = {selected: 0, count: 0};
+    this.shoudlUpdate = false;
     autoBind(this);
 
-    data.listen('COMPANY_UPDATE', (protocol, next) => {
-      console.log(protocol);
-      const raw = data.get();
-      raw[this.state.selected] = protocol.data;
-      next(protocol);
+    data.listen('COMPANY_UPDATE', protocol => {
     });
 
     this.dataTapper = new DataTapper({
@@ -43,8 +41,8 @@ class Companies extends Component {
   }
 
   async submit(protocol) {
-    const { data, userEditSave } = this.props;
-    await companyEditSave(data.get()[this.state.selected]);
+    const { companyEditSave, data } = this.props;
+    await companyEditSave(data.get(this.state.selected));
   }
 
   switchCompany(index) {
@@ -52,7 +50,7 @@ class Companies extends Component {
   }
 
   render() {
-    const { data, cx } = this.props;
+    const { cx, data } = this.props;
     const companySelected = data.access(this.state.selected, 'COMPANY_UPDATE');
     const features = companySelected.access('features');
     return (
@@ -79,19 +77,18 @@ class Companies extends Component {
           }
           <FormItemMedium height={'1.44rem'} label="프로필 사진">
             <div className={cx('account-section-profile-image')}>
-              <FlexibleImage source={Assist.Company.getProfileImage(companySelected.get())} x={144} y={144} />
+              <FlexibleImage source={Assist.Company.getProfileImage(companySelected.get())} x={144} y={144} contain={true} />
               <div style={{position:'absolute', bottom:'0.03rem', right:'0.04rem', 'zIndex':1}}>
-                <ImageUploader name="ImageUploader" callback={data.access('picture').attach('callback')} >
+                <ImageUploader name="ImageUploader" callback={companySelected.access('profilePicture', 'COMPANY_UPDATE').attach('callback')} >
                   <FlexibleImage className={cx('image-upload-trigger')} source={"/site/images/camera-1.png"} x={34} y={34} />
                 </ImageUploader>
               </div>
             </div>
           </FormItemMedium>
           <FormItem label="기업명">
-            <TextInputRound 
-              width="4.58rem"
-              data={companySelected.access('name')}
-            />
+            <span>
+              {companySelected.get('name')}
+            </span>
           </FormItem>
           { 
             features.map((feature, i) => 

@@ -48,15 +48,6 @@ export default () => {
       data
     }),
 
-    deleteCompany: ({ id }) => client.request({
-      method: 'DELETE',
-      url: `/api/company/${id}`
-    }),
-    updateCompany: ({ id, data }) => client.request({
-      method: 'PUT',
-      url: `/api/company/${id}`,
-      data
-    }),
     createCompany: ({ id, data }) => client.request({
       method: 'POST',
       url: `/api/company/${id}`,

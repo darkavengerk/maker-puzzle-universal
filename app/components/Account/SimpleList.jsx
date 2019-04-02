@@ -6,12 +6,15 @@ const Component = ({ items, selected, onClick, cx }) => {
 
   const menu = items.map((item, i) => (
     <div 
-      key={i} 
-      onClick={e => onClick(i)}
-      className={cx('list-item', (i === selected? 'list-item-selected' : ''))}
-      role="button"
+      key={i}
     >
+      <span
+        onClick={e => onClick(i)}
+        className={cx('list-item', (i === selected? 'list-item-selected' : ''))}
+        role="button"
+      >
       {item}
+      </span>
     </div>
   ));
 

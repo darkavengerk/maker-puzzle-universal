@@ -18,10 +18,10 @@ export function featureEditSave(data) {
 
 export function companyEditSave(company) {
   return async (dispatch, getState) => {
-    const res = await Company().updateCompany({link_name:company.company.link_name, company});
+    const res = await Company().updateCompany({link_name: company.link_name, data: company});
     
     if (res.status === 200) {
-      dispatch({type:types.COMPANY_PROFILE_EDIT_SUCCESS, data});
+      dispatch({type:types.COMPANY_PROFILE_EDIT_SUCCESS, data: company});
     }
     else {
       dispatch({type:types.COMPANY_PROFILE_EDIT_FAILURE});

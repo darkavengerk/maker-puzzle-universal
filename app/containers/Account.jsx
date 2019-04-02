@@ -50,11 +50,11 @@ class Container extends Component {
 
     autoBind(this);
 
-    this.dataBound = new DataBinder(this.state);
-    this.dataBound.listen('USER_UPDATE', protocol => {
-      this.dataBound.set(protocol.data, 'user');
-      this.setState({user: {...this.dataBound.get('user')}});
-    });
+    this.dataBound = new DataBinder(this.state, {component: this});
+    // this.dataBound.listen('USER_UPDATE', protocol => {
+    //   this.dataBound.set(protocol.data, 'user');
+    //   this.setState({user: {...this.dataBound.get('user')}});
+    // });
 
     this.dataTapper = new DataTapper({
       bind: this.dataBound,
@@ -98,7 +98,7 @@ class Container extends Component {
       case 'company':
         return <Company
           cx={cx}
-          data={user.access('companiesOwned')}
+          data={user.access('companiesOwned', 'COMPANY_UPDATE')}
         />
 
       case 'ability':
@@ -113,7 +113,6 @@ class Container extends Component {
   }
 
   render() {
-    const { user } = this.state;
     const menu = <SimpleList 
       items={linkNames} 
       cx={cx}

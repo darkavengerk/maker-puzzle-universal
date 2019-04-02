@@ -32,11 +32,13 @@ class EventHandler {
 const handler = new EventHandler(this);
 
 export class DataBinder {
-  constructor(data, parent=null, title='', key) {
+  constructor(data, option) {
+    option = Object.assign({parent:null, title:''}, option);
     this.data = data;
-    this.parent = parent;
-    this.title = title;
-    this.key = key;
+    this.component = option.component;
+    this.parent = option.parent;
+    this.title = option.title;
+    this.key = option.key;
     this.modified = false;
     this.children = {};
     this.listeners = {};
@@ -54,7 +56,7 @@ export class DataBinder {
   access(key, title) {
     title = title || this.title;
     if(!this.children[key]) {
-      this.children[key] = new DataBinder(this.data[key], this, title, key);
+      this.children[key] = new DataBinder(this.data[key], {parent: this, title, key});
     }
     return this.children[key];
   }
@@ -67,14 +69,14 @@ export class DataBinder {
   }
 
   get(route) {
-    if(route) {
+    if(route !== undefined) {
       return this.access(route).get();
     }
     return this.data;
   }
 
   set(data, route) {
-    if(route) return this.access(route).set(data);
+    if(route !== undefined) return this.access(route).set(data);
     this.data = data;
     for(const key in this.children) {
       const child = this.children[key];
@@ -124,14 +126,6 @@ export class DataBinder {
   }
 
   update(protocol) {
-    if(this.listeners[protocol.title]) {
-      console.log('launch', protocol.title);
-      this.listeners[protocol.title].map(fn => fn(protocol, this.updateCollection));
-    }
-    else this.updateCollection(protocol);
-  }
-
-  updateCollection(protocol) {
     for(const key in this.children) {
       const child = this.children[key];
       if(child === protocol.child) {
@@ -139,8 +133,24 @@ export class DataBinder {
       }
     }
     protocol.data = this.data;
-    protocol.child = this;
-    this.parent && this.parent.update(protocol);
+    if(this.parent && this.parent.update) {
+      protocol.child = this;
+      this.parent.update(protocol);
+    }
+    else {
+      this.flush(protocol);
+    }
+  }
+
+  flush(protocol) {
+    this.data = protocol.data;
+    this.component && this.component.setState(this.data);
+    if(this.listeners[protocol.title]) {
+      this.listeners[protocol.title].map(fn => fn(protocol));
+    }
+    for(const key in this.children) {
+      this.children[key].flush({...protocol, data: this.data[key]});
+    }
   }
 }
 
@@ -174,10 +184,8 @@ export class DataTapper {
   }
 
   async submitCheck() {
-    console.log('check');
     const now = new Date();
     if(now - this.lastEdited >= this.option.timeLength) {
-      console.log('check in');
       clearInterval(this.interval);
       this.interval = null;
       this.lastEdited = -1;
