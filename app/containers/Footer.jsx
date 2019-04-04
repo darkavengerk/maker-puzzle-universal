@@ -11,7 +11,7 @@ const components = ({}) => {
     return (
         <div className={cx('footer-area')}>
           <div className={cx('menu-items')}>
-            <Link className={cx('menu-item')} to="/">서비스 소개</Link>
+            <Link className={cx('menu-item')} to="/hello">서비스 소개</Link>
             <Link className={cx('menu-item')} to="/policy/service">이용약관</Link>
             <Link className={cx('menu-item')} to="/policy/privacy">개인정보처리방침</Link>
             <Link className={cx('menu-item')} onClick={e => alert('준비중')}>의견게시판</Link>
