@@ -56,7 +56,7 @@ class HelloPageSection extends Component {
           <Login />
         </Popup>
         <div className={cx('landing-top')}>
-          <Link to="/main">
+          <Link to="/">
             <FlexibleImage source="/site/images/landing-logo.png" x={276} y={118} contain={true} className={cx('landing-logo')}/>
           </Link>
           <div className={cx('login-area')} >
