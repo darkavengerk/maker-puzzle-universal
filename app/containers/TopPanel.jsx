@@ -73,7 +73,7 @@ class Navigation extends Component {
       <div>
         <nav className={cx('navigation')} role="navigation">
           <div className={cx('logo-area')}>
-            <Link to="/main">
+            <Link to="/">
               <Img source="/site/images/header-logo-20180829.png" x={307} y={81.3}/>
             </Link>
           </div>
