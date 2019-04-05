@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Page from '../pages/Page';
 import HelloContainer from '../containers/Hello';
+import BrowserWarning from '../components/BrowserWarning';
 
 class Hello extends Component {
   getMetaData() {
@@ -28,6 +29,7 @@ class Hello extends Component {
   render() {
     return (
       <Page {...this.getMetaData()}>
+        <BrowserWarning />
         <HelloContainer {...this.props} />
       </Page>
     );
