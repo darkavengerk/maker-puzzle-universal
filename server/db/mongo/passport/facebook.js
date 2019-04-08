@@ -31,37 +31,26 @@ ash=AeRqKX7A8Jtzp8ox","width":50}}}',
      picture: { data: [Object] } } }
 */
 export default (req, accessToken, refreshToken, profile, done) => {
-  // return done(null, profile);
-  // if (req.user) {
-  //   return User.findOne({ google: profile.id }, (findOneErr, existingUser) => {
-  //     if (existingUser) {
-  //       return done(null, false, { message: 'There is already a Google account that belongs to you. Sign in with that account or delete it, then link it with your current account.' });
-  //     }
-  //     return User.findById(req.user.id, (findByIdErr, user) => {
-  //       user.google = profile.id;
-  //       user.tokens.push({ kind: 'google', accessToken });
-  //       user.name = user.profile.name || profile.displayName;
-  //       user.gender = user.profile.gender || profile._json.gender;
-  //       user.picture = user.profile.picture || profile._json.picture;
-  //       user.save((err) => {
-  //         done(err, user, { message: 'Google account has been linked.' });
-  //       });
-  //     });
-  //   });
-  // }
+
   return User.findOne({ facebook: profile.id }, (findByGoogleIdErr, existingUser) => {
+    const raw = {...profile._json, accessToken};
+    ['email'].map(key => delete raw[key]);
     if (existingUser) {
       return done(null, existingUser);
     }
     return User.findOne({ email: profile._json.email }, async (findByEmailErr, existingEmailUser) => {
       if (existingEmailUser) {
-        await User.update({_id: existingEmailUser._id}, {$set:{facebook: profile.id}});
+        await User.update(
+          {_id: existingEmailUser._id}, 
+          {$set:{facebook: profile.id, 'makerProfile.facebook': raw}}
+        );
         return done(null, existingEmailUser);
       }
       const user = {};
       user.email = profile._json.email;
       user.userid = user.email.split('@')[0];
       user.facebook = profile.id;
+      user.makerProfile = {facebook: raw};
       user.tokens = [{ kind: 'facebook', accessToken }];
       user.name = profile._json.name;
       user.picture = await Image.create({original: profile.photos[0].value, status:'facebook'});

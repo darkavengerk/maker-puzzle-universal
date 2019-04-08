@@ -18,7 +18,8 @@ for(let y = now-14; y > now-100; y--) {
 }
 
 const Component = ({ data, cx }) => {
-
+  const facebook = data.access('makerProfile').access('facebook');
+  const google = data.access('makerProfile').access('google');
   const marketingAgreed = data.access('marketingAgreed');
   return (
     <div className={cx('info-main')}>
@@ -92,7 +93,7 @@ const Component = ({ data, cx }) => {
                 className={cx('auth-button-fb')}>
                 <FlexibleImage source="/site/images/FB-icon.jpg" x={16} y={16} />
                 <Padding width={8} />
-                로그인에 Facebook 계정 사용
+                {data.get('facebook')? facebook.get('name') : '로그인에 Facebook 계정 사용'}
               </FlexibleButton>
             </div>
             <Padding height={13} />
@@ -100,7 +101,7 @@ const Component = ({ data, cx }) => {
               <FlexibleButton width="1.96rem" height="0.24rem" className={cx('auth-button-google')}>
                 <FlexibleImage source="/site/images/G-icon.jpg" x={13} y={13} />
                 <Padding width={7} />
-                로그인에 Google 계정 사용
+                {data.get('google')? google.get('displayName') : '로그인에 Google 계정 사용'}
                 <Padding width={10} />
               </FlexibleButton>
             </div>
