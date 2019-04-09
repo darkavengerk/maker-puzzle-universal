@@ -17,6 +17,10 @@ for(let y = now-14; y > now-100; y--) {
   years.push({value:y, label:y});
 }
 
+const disconnectGoogle = user => event => {
+  user.access('google').dataChanged(null);
+}
+
 const Component = ({ data, cx }) => {
   const facebook = data.access('makerProfile').access('facebook');
   const google = data.access('makerProfile').access('google');
@@ -84,26 +88,41 @@ const Component = ({ data, cx }) => {
 
         <FormItemMedium label={['로그인', '계정', '연결']} height="0.62rem" labelWidth={'1rem'} padding="0.23rem" >
           <div>
-            <div>
+            <div className={cx('auth-button-row')}>
               <FlexibleButton
+                onClick={e => window.open("/auth/facebook")}
                 width="1.96rem"
                 height="0.24rem"
                 padding="0"
                 backgroundColor="#485b97"
-                className={cx('auth-button-fb')}>
+                className={cx('auth-button-fb')}
+              >
                 <FlexibleImage source="/site/images/FB-icon.jpg" x={16} y={16} />
-                <Padding width={8} />
+                <Padding width={6} />
                 {data.get('facebook')? facebook.get('name') : '로그인에 Facebook 계정 사용'}
               </FlexibleButton>
+              <Padding width={12} />
+              <label>
+                {data.get('facebook') && '연결해제'}
+              </label>
             </div>
             <Padding height={13} />
-            <div>
-              <FlexibleButton width="1.96rem" height="0.24rem" className={cx('auth-button-google')}>
+            <div className={cx('auth-button-row')}>
+              <FlexibleButton 
+                onClick={e => window.open("/auth/google")}
+                width="1.96rem"
+                height="0.24rem"
+                className={cx('auth-button-google')}
+              >
                 <FlexibleImage source="/site/images/G-icon.jpg" x={13} y={13} />
                 <Padding width={7} />
                 {data.get('google')? google.get('displayName') : '로그인에 Google 계정 사용'}
                 <Padding width={10} />
               </FlexibleButton>
+              <Padding width={12} />
+              <label role="button" onClick={disconnectGoogle(data)}>
+                {data.get('google') && '연결해제'}
+              </label>
             </div>
           </div>
         </FormItemMedium>

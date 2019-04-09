@@ -21,6 +21,7 @@ import {
   Policy,
   Main, 
   Hello,
+  Refresh,
   Vote, 
   Dashboard, 
   About, 
@@ -81,6 +82,9 @@ export default (store) => {
             <Route path="dashboard" component={Dashboard} onEnter={requireAuth} />
             <Route path="about" component={About} />*/}
           </Route>
-        </Route>, <Route key="hello" path="hello" component={Hello} />]
+        </Route>, 
+        <Route key="hello" path="hello" component={Hello} />,
+        <Route key="refresh" path="refresh" component={Refresh} />,
+      ]
   );
 };

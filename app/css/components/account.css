@@ -58,15 +58,26 @@
   color: #ffffff;
 }
 
+.auth-button-row {
+  display: flex;
+  align-items: center;
+}
+.auth-button-row > label  {
+  font-size: 13px;
+  color: #a9a9a9;
+}
+
 .auth-button-fb {
-  font-size: 0.13rem;
+  font-size: 0.12rem;
   color: #ffffff;
   padding: 0;
+  line-height: 0.24rem;
 }
 
 .auth-button-google {
-  font-size: 0.13rem;
+  font-size: 0.12rem;
   color: #2c2c2c;
+  line-height: 0.24rem;
 }
 
 .info-form-agree {

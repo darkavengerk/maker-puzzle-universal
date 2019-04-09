@@ -129,8 +129,8 @@ export default (app) => {
     // Otherwise, the authentication has failed.
     GET('/auth/google/callback',
       passport.authenticate('google', {
-        successRedirect: '/hello',
-        failureRedirect: '/main'
+        successRedirect: '/refresh',
+        failureRedirect: '/refresh'
       })
     );
   }
@@ -142,8 +142,8 @@ export default (app) => {
 
     GET('/auth/facebook/callback',
       passport.authenticate('facebook', {
-        successRedirect: '/hello',
-        failureRedirect: '/main'
+        successRedirect: '/refresh',
+        failureRedirect: '/refresh'
       })
     );
   }
