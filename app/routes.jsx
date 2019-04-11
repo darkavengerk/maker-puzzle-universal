@@ -4,6 +4,7 @@ import { Route, IndexRoute, Switch } from 'react-router';
 import { 
   fetchVoteData,
   fetchMainData,
+  fetchAccountData,
   fetchSearchData,
   fetchMakerData,
   fetchProjectData,
@@ -15,10 +16,12 @@ import {
 import { 
   Root,
   App, 
+  Account, 
   Search, 
   Policy,
   Main, 
   Hello,
+  Refresh,
   Vote, 
   Dashboard, 
   About, 
@@ -40,7 +43,7 @@ export default (store) => {
     const { user: { authenticated }} = store.getState();
     if (!authenticated) {
       replace({
-        pathname: '/login',
+        pathname: '/main',
         state: { nextPathname: nextState.location.pathname }
       });
     }
@@ -64,6 +67,7 @@ export default (store) => {
             <Route exact path="main" component={Main} fetchData={fetchMainData} />
             <Route path="maker/:id/portfolio/:pid" component={Maker} fetchData={fetchMakerData} />
             <Route path="maker/:id" component={Maker} fetchData={fetchMakerData} />
+            <Route path="account/:category" component={Account} fetchData={fetchAccountData} onEnter={requireAuth} />
             <Route path="search/:keyword" component={Search} fetchData={fetchSearchData} />
             <Route path="policy/:section" component={Policy} fetchData={fetchPolicyData} />
             <Route path="more/:topic/:subtype/:sort" component={More} fetchData={fetchMoreData} />
@@ -78,6 +82,9 @@ export default (store) => {
             <Route path="dashboard" component={Dashboard} onEnter={requireAuth} />
             <Route path="about" component={About} />*/}
           </Route>
-        </Route>, <Route key="hello" path="hello" component={Hello} />]
+        </Route>, 
+        <Route key="hello" path="hello" component={Hello} />,
+        <Route key="refresh" path="refresh" component={Refresh} />,
+      ]
   );
 };

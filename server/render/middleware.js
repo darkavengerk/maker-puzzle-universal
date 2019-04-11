@@ -16,8 +16,11 @@ export default async function render(req, res) {
   const authenticated = req.isAuthenticated();
   const history = createMemoryHistory();
 
-  const user = req.user? req.user.toObject() : {};
-  user.feed = await common.buildFeed(user);
+  let user = {};
+  if(req.user && req.user.userid) {
+    user = await common.getPopulatedUser(req.user.userid, {password:0});
+    user.feed = await common.buildFeed(user);
+  }
   const store = configureStore({
     user: {
       account: user,

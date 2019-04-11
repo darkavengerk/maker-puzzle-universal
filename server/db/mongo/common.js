@@ -219,6 +219,21 @@ async function imageProcess({ images }) {
   });
 }
 
+async function getPopulatedUser(userid, removeFields={email:0, password:0}) {
+  const companyFeatures = populateFieldsForPortfolio.companyFeatures;
+  const userFeatures = populateFieldsForPortfolio.userFeatures;
+  return await User
+    .findOne({ userid }, removeFields)
+    .populate('companiesOwned', companyFeatures)
+    .populate('portfolios.user', userFeatures)
+    .populate('portfolios.project', companyFeatures)
+    .populate('portfolios.company', companyFeatures)
+    .populate('followers', userFeatures)
+    .populate('followings', userFeatures)
+    .populate('companyFollowings', companyFeatures)
+    .lean()
+}
+
 async function buildFeed(user) {
   const userid = user.userid;
   if(!userid) return [];
@@ -435,5 +450,6 @@ export default {
   cut,
   refineCompanyName,
   populateFieldsForPortfolio,
+  getPopulatedUser,
   buildFeed
 };

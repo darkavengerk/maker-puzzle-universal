@@ -7,15 +7,20 @@ function convertToFloat(input) {
   return input;
 }
 
-const Padding = ({width=0, height=0, inline=false}) => {
+const Padding = ({width=0, height=0, inline=false, children}) => {
   width = convertToFloat(width);
   height = convertToFloat(height);
-  const style = { width, height };
+  const style = { width, height,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',    
+  };
   if(width || inline) {
-    style.display = 'inline-block'
+    style.display = 'inline-flex'
   }
   return (
     <div style={style}>
+      { children }
     </div>
   );
 };

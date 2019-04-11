@@ -59,9 +59,9 @@ const Component = ({ maker, editing, onChange }) => {
 
   const addEntry = evt => featureEdited([...abilities, {order: abilities.length, title:'', ability:0 }]);
 
-  let abilitiesHTML = abilities.map(ab => {
+  let abilitiesHTML = abilities.map((ab,i) => {
     return (
-      <div key={ab.order} className={cx('ability-item')}>
+      <div key={i} className={cx('ability-item')}>
         <ContentEditable 
           className={cx('ability-title')}
           html={ab.title} 

@@ -14,7 +14,20 @@ export function featureEditSave(data) {
     } 
     return res;
   };
+}
 
+export function companyEditSave(company) {
+  return async (dispatch, getState) => {
+    const res = await Company().updateCompany({link_name: company.link_name, data: company});
+    
+    if (res.status === 200) {
+      dispatch({type:types.COMPANY_PROFILE_EDIT_SUCCESS, data: company});
+    }
+    else {
+      dispatch({type:types.COMPANY_PROFILE_EDIT_FAILURE});
+    } 
+    return res;
+  };
 }
 
 export function changePortfoiloOrder(oldIndex, index) {

@@ -21,7 +21,7 @@ export async function upload(req, res) {
   // Remove obsolete header
   var binary_buffer = Buffer.from(src.substr(chopper_index), 'base64');
   try {
-    await User.update({userid}, {$inc:{uploadCount:1}});
+    const result = await User.update({userid}, {$inc:{uploadCount:1}});
     const userFound = await User.findOne({userid});
     const fname = '/images/' + userid + '/' + userFound.uploadCount + '.' + _.last(data.name.split('.'));
     await fs.outputFile('public' + fname, binary_buffer, 'Binary');

@@ -18,36 +18,26 @@ import Image from '../models/image';
   userid: 'bbb' }
 */
 export default (req, accessToken, refreshToken, profile, done) => {
-  // if (req.user) {
-  //   return User.findOne({ google: profile.id }, (findOneErr, existingUser) => {
-  //     if (existingUser) {
-  //       return done(null, false, { message: 'There is already a Google account that belongs to you. Sign in with that account or delete it, then link it with your current account.' });
-  //     }
-  //     return User.findById(req.user.id, (findByIdErr, user) => {
-  //       user.google = profile.id;
-  //       user.tokens.push({ kind: 'google', accessToken });
-  //       user.name = user.profile.name || profile.displayName;
-  //       user.gender = user.profile.gender || profile._json.gender;
-  //       user.picture = user.profile.picture || profile._json.picture;
-  //       user.save((err) => {
-  //         done(err, user, { message: 'Google account has been linked.' });
-  //       });
-  //     });
-  //   });
-  // }
+
   return User.findOne({ google: profile.id }, (findByGoogleIdErr, existingUser) => {
+    const raw = {...profile._json, accessToken};
+    ['language', 'emails', 'domain'].map(key => delete raw[key]);
     if (existingUser) {
       return done(null, existingUser);
     }
     return User.findOne({ email: profile._json.emails[0].value }, async (findByEmailErr, existingEmailUser) => {
       if (existingEmailUser) {
-        await User.update({_id: existingEmailUser._id}, {$set:{google: profile.id}});
+        await User.update(
+          {_id: existingEmailUser._id}, 
+          {$set:{google: profile.id, 'makerProfile.google': raw}}
+        );
         return done(null, existingEmailUser);
       }
       const user = {};
       user.email = profile._json.emails[0].value;
       user.userid = user.email.split('@')[0];
       user.google = profile.id;
+      user.makerProfile = {google: raw};
       user.tokens = [{ kind: 'google', accessToken }];
       user.name = profile.displayName;
       user.picture = await Image.create({original: profile._json.image.url, status:'google'});
@@ -57,7 +47,6 @@ export default (req, accessToken, refreshToken, profile, done) => {
       if(profile._json.birthday) {
         user.birthYear = profile._json.birthday.split('-')[0];
       }
-
       const result = await User.signUp(user);
       done(null, result);
     });

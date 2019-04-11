@@ -46,7 +46,9 @@ const UserSchema = new mongoose.Schema({
       title: String,
       ability: Number,
       order: Number
-    }]
+    }],
+    google: {},
+    facebook: {},
   },
 
   features: [{

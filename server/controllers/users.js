@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import passport from 'passport';
 import  { models, common } from '../db';
 
@@ -110,6 +111,15 @@ export async function changePortfolioOrder(req, res) {
   await user.save();
 
   res.json(await getPopulatedUser(userid));
+}
+
+export async function updateUser(req, res) {
+  const userid = req.params.id;
+  const excludes = ['_id', 'type', 'uploadCount', 'tokens', '__v', 'score', 'count'];
+  let user = _.omit(req.body, excludes);
+
+  await User.update({userid:userid}, {$set: user});
+  await updateFeatures(req, res);
 }
 
 export async function updateFeatures(req, res) {
@@ -347,6 +357,7 @@ export default {
   login,
   logout,
   signUp,
+  updateUser,
   updateFeatures,
   addCompany,
   addPortfolio,

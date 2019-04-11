@@ -1,5 +1,6 @@
 import { push } from 'react-router-redux';
 import { authService } from '../services';
+import { Maker, Company } from '../services';
 
 import * as types from '../types';
 
@@ -69,6 +70,10 @@ export function loginMenu() {
   return { type: types.LOGIN_MENU };
 }
 
+export function accountEdit(isActive) {
+  return { type: isActive? types.ACCOUNT_EDITOR_START : types.ACCOUNT_EDITOR_END };
+}
+
 export function manualLogin(data) {
   return async (dispatch) => {
     dispatch(beginLogin());
@@ -130,5 +135,36 @@ export function logOut() {
     catch(err) {
       dispatch(logoutError());
     }
+  };
+}
+
+export function featureEditSave(data) {
+  return async (dispatch, getState) => {
+    const { user } = getState();
+    const res = await Maker().updateMakerFeatures({id:user.account.userid, data});
+    
+    if (res.status === 200) {
+      dispatch({type:types.PROFILE_EDIT_SUCCESS, data});
+    }
+    else {
+      dispatch({type:types.PROFILE_EDIT_FAILURE});
+    } 
+    return res;
+  };
+}
+
+export function userEditSave(data) {
+  return async (dispatch, getState) => {
+    const { user } = getState();
+    if(!user.account.userid) return;
+    const res = await Maker().updateUser({id:user.account.userid, data});
+    
+    if (res.status === 200) {
+      dispatch({type:types.PROFILE_EDIT_SUCCESS, data});
+    }
+    else {
+      dispatch({type:types.PROFILE_EDIT_FAILURE});
+    } 
+    return res;
   };
 }

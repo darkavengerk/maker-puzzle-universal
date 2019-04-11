@@ -1,4 +1,5 @@
 export { default as fetchVoteData } from './fetchVoteData';
+export { default as fetchAccountData } from './fetchAccountData';
 export { default as fetchMainData } from './fetchMainData';
 export { default as fetchMoreData } from './fetchMoreData';
 export { default as fetchSearchData } from './fetchSearchData';

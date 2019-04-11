@@ -26,7 +26,8 @@ const attempt = (
       return 'edit:portfolio'
     case types.PRODUCT_EDITOR_START:
       return 'edit:product'
-
+    case types.ACCOUNT_EDITOR_START:
+      return 'edit:account'
     case types.PORTFOLIO_EDITOR_CANCEL:
     case types.PORTFOLIO_EDIT_SUCCESS:
     case types.COMPANY_PORTFOLIO_EDITOR_CANCEL:
@@ -36,6 +37,7 @@ const attempt = (
     case types.CANCEL_LOGIN:
     case types.LOGIN_SUCCESS_USER:
     case types.SIGNUP_SUCCESS_USER:
+    case types.ACCOUNT_EDITOR_END:
       return '';
     default:
       return state;
