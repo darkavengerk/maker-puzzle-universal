@@ -7,7 +7,7 @@ function convertToFloat(input) {
   return input;
 }
 
-const TextInput = ({ height='100%', width='100%', data, children, ...props }) => {
+const TextInput = ({ height='100%', width='100%', data, password=false, children, ...props }) => {
   width = convertToFloat(width);
   height = convertToFloat(height);
   const style = {
@@ -21,7 +21,7 @@ const TextInput = ({ height='100%', width='100%', data, children, ...props }) =>
     return <div style={style} {...props}> { children } </div>
   }
   return <input 
-            type="text" 
+            type={password? 'password' : 'text'} 
             style={style} 
             value={data.get() || ''} 
             onChange={data.attach()} 

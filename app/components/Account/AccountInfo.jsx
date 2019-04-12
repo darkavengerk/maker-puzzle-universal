@@ -21,7 +21,7 @@ const disconnectGoogle = user => event => {
   user.access('google').dataChanged(null);
 }
 
-const Component = ({ data, cx }) => {
+const Component = ({ data, showPasswordPopup, cx }) => {
   const facebook = data.access('makerProfile').access('facebook');
   const google = data.access('makerProfile').access('google');
   const marketingAgreed = data.access('marketingAgreed');
@@ -52,6 +52,7 @@ const Component = ({ data, cx }) => {
             width="1rem"
             height="0.3rem"
             backgroundColor="#b1b1b1"
+            onClick={showPasswordPopup}
             className={cx('password-button')} />
         </FormItem>
 

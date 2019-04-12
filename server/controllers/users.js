@@ -69,6 +69,20 @@ export function login(req, res, next) {
   })(req, res, next);
 }
 
+export function password(req, res) {
+  const {id: userid, auth} = req.params;
+  if(!auth) {
+    if(!req.user || (req.user.userid !== userid)) {
+      return res.status(404).send('Not authorized');
+    }
+  }
+  const password = req.body.password;
+  User.encryptPassword(password, async (err, hash) => {
+    const result = await User.update({ userid }, {$set: { password: hash }});
+    res.json(result);
+  });
+}
+
 export async function addCompany(req, res) {
   const userid = req.params.id;
   let name = req.body.name;
@@ -357,6 +371,7 @@ export default {
   login,
   logout,
   signUp,
+  password,
   updateUser,
   updateFeatures,
   addCompany,
