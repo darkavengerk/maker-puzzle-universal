@@ -144,8 +144,13 @@ class Container extends Component {
         cancel={this.closePopup}
         roll={true} top={100}
       >
-        <Padding width={500} height={300}>
-          <Password data={this.dataBound.access('user')} onChange={this.closePopup} cx={cx}/>
+        <Padding width={450} height={172}>
+          <Password
+            data={this.dataBound.access('user')}
+            onChange={this.closePopup}
+            cancel={this.closePopup}
+            cx={cx}
+          />
         </Padding>
       </Popup>
     </div>;

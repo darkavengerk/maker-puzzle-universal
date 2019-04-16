@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import passport from 'passport';
+import crypto from 'crypto';
 import  { models, common } from '../db';
 
 const { 
@@ -69,17 +70,50 @@ export function login(req, res, next) {
   })(req, res, next);
 }
 
-export function password(req, res) {
+export async function passwordRequest(req, res) {
+  const {id: userid} = req.params;
+  const date = new Date();
+  var token = crypto.randomBytes(15).toString('hex');
+  const user = await User.findOne({ userid }).lean();
+  if(!user) return res.status(404).send('Not authorized');
+
+  let authPassword = await Misc.findOne({ title: 'auth-password' }).lean();
+  authPassword.data[userid] = {
+    token, userid, date
+  }
+  await Misc.update({ title: 'auth-password' }, authPassword);
+  common.sendEmail(
+    user.email,
+    'Password change link',
+    `<a href="http://localhost:3000/account/password/${userid}/${token}" target="blank">Click Here</a>`);
+  res.json({result: 'ok'});
+}
+
+export async function password(req, res) {
+  // auth
   const {id: userid, auth} = req.params;
+  if(req.user && (req.user.userid === userid)) {
+    // logged in
+    return changePassword(userid, password, (err, result) => res.json(result));
+  }
+
+  // check auth
+  // [{ token, date, userid }]
+  const authPassword = await Misc.findOne({title:'auth-password'});
+  if(authPassword) {
+    const matched = _.find(authPassword, item => auth && auth.token === auth && auth.userid === userid)
+  }
   if(!auth) {
     if(!req.user || (req.user.userid !== userid)) {
       return res.status(404).send('Not authorized');
     }
   }
-  const password = req.body.password;
+}
+
+async function changePassword(userid, password, cb) {
   User.encryptPassword(password, async (err, hash) => {
     const result = await User.update({ userid }, {$set: { password: hash }});
-    res.json(result);
+    cb(err, result);
   });
 }
 
@@ -372,6 +406,7 @@ export default {
   logout,
   signUp,
   password,
+  passwordRequest,
   updateUser,
   updateFeatures,
   addCompany,

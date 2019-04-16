@@ -63,6 +63,7 @@ export default (app) => {
 
   // user routes
   if (usersController) {
+    GET('/api/user/:id/password', usersController.passwordRequest);
     GET('/api/user/:id/:pid', usersController.single);
     GET('/api/user/:id', usersController.single);
     GET('/api/user', usersController.all);

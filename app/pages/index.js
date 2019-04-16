@@ -2,6 +2,7 @@ export { default as Root } from 'pages/Root';
 export { default as App } from 'pages/App';
 export { default as Main} from 'pages/Main';
 export { default as Account} from 'pages/Account';
+export { default as Password} from 'pages/Password';
 export { default as Hello} from 'pages/Hello';
 export { default as Refresh} from 'pages/Refresh';
 export { default as More} from 'pages/More';

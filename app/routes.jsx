@@ -17,6 +17,7 @@ import {
   Root,
   App, 
   Account, 
+  Password, 
   Search, 
   Policy,
   Main, 
@@ -67,6 +68,7 @@ export default (store) => {
             <Route exact path="main" component={Main} fetchData={fetchMainData} />
             <Route path="maker/:id/portfolio/:pid" component={Maker} fetchData={fetchMakerData} />
             <Route path="maker/:id" component={Maker} fetchData={fetchMakerData} />
+            <Route path="account/password/:id/:hash" component={Password} />
             <Route path="account/:category" component={Account} fetchData={fetchAccountData} onEnter={requireAuth} />
             <Route path="search/:keyword" component={Search} fetchData={fetchSearchData} />
             <Route path="policy/:section" component={Policy} fetchData={fetchPolicyData} />

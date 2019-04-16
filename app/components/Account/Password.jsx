@@ -25,35 +25,64 @@ class Password extends Component {
   async submitPassword() {
     const { user, onChange } = this.props;
     const { pw, pwCheck } = this.state;
-    user && user.userid && await authService().changePassword({id: user.userid, password: pw});
-    onChange();
+    if(pw && pw === pwCheck) {
+      user && user.userid && await authService().changePassword({id: user.userid, password: pw});
+      alert('변경되었습니다');
+      onChange();
+    }
+    else {
+      alert('유효하지 않습니다');
+    }
   }
 
   render() {
-    const { cx } = this.props;
+    const { cx, cancel } = this.props;
     return (
       <div className={cx('password-main')}>
-        <FormItem label="새 패스워드">
-          <TextInputRound 
-            width="4.58rem" 
-            password
-            data={this.data.access('pw')}
-          />
-        </FormItem>
-        <FormItem label="패스워드 확인">
-          <TextInputRound 
-            width="4.58rem" 
-            password
-            data={this.data.access('pwCheck')}
-          />
-        </FormItem>
+        <Padding height={22}/>
+        <TextInputRound
+          width={310}
+          height={36}
+          data={this.data.access('pw')}
+          placeholder="새 비밀번호"
+          borderColor="#919191"
+          radius="0.08rem"
+          password
+        />
+        <Padding height={9}/>
+        <TextInputRound
+          width={310}
+          height={36}
+          data={this.data.access('pwCheck')}
+          placeholder="다시 입력"
+          borderColor="#919191"
+          radius="0.08rem"
+          password
+        />
+        <Padding height={16}/>
         <FlexibleButton
-            value="비밀번호 변경"
-            width="1rem"
-            height="0.3rem"
-            backgroundColor="#b1b1b1"
-            onClick={this.submitPassword}
-            className={cx('password-button')} />
+          borderColor="#b3b3b3"
+          width="1.45rem"
+          height="0.36rem"
+          backgroundColor="#b3b3b3"
+          onClick={cancel}
+          className={cx('password-button')}>
+          취
+          <Padding width={15}/>
+          소
+        </FlexibleButton>
+        <Padding width={22} />
+        <FlexibleButton
+          borderColor="#f46e1f"
+          width="1.45rem"
+          height="0.36rem"
+          backgroundColor="#f46e1f"
+          onClick={this.submitPassword}
+          className={cx('password-button')}>
+          확
+          <Padding width={15}/>
+          인
+        </FlexibleButton>
       </div>
     );
   }
