@@ -71,11 +71,14 @@ export function login(req, res, next) {
 }
 
 export async function passwordRequest(req, res) {
-  const {id: userid} = req.params;
+  const { email } = req.params;
   const date = new Date();
-  var token = crypto.randomBytes(15).toString('hex');
-  const user = await User.findOne({ userid }).lean();
+  const user = await User.findOne({ email }).lean();
+
   if(!user) return res.status(404).send('Not authorized');
+
+  const userid = user.userid;
+  const token = crypto.randomBytes(15).toString('hex');
 
   let authPassword = await Misc.findOne({ title: 'auth-password' }).lean();
   authPassword.data[userid] = {

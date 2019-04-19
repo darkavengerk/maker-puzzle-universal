@@ -10,7 +10,11 @@ import { dismissMessage } from '../actions/messages';
 import SingleLine from '../components/SingleLine';
 import Padding from '../components/Padding';
 import FlexibleImage from '../components/FlexibleImage';
+import FlexibleButton from '../components/web/FlexibleButton';
+import autoBind from 'react-autobind';
 // import hourGlassSvg from '../images/hourglass.svg';
+
+import { authService } from '../services';
 
 import styles from '../css/components/login';
 const cx = classNames.bind(styles);
@@ -25,12 +29,7 @@ class LoginOrRegister extends Component {
   constructor(props) {
     super(props);
     this.state = {loginMode: 'main'};
-    this.handleOnSubmit = this.handleOnSubmit.bind(this);
-    this.toggleLoginMode = this.toggleLoginMode.bind(this);
-    this.emailLoginClicked = this.emailLoginClicked.bind(this);
-    this.genderSelected = this.genderSelected.bind(this);
-    this.yearSelected = this.yearSelected.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
+    autoBind(this);
   }
 
   yearSelected(year) {
@@ -57,6 +56,10 @@ class LoginOrRegister extends Component {
     else this.setState({loginMode: 'login'});
   }
 
+  requestPassword(event) {
+    this.setState({loginMode: 'request'});
+  }
+
   handleOnSubmit(event) {
     event.preventDefault();
 
@@ -73,10 +76,21 @@ class LoginOrRegister extends Component {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
-
     this.setState({
       [name]: value
     });
+  }
+
+  async sendPasswordRequest(event) {
+    const email = this.state.request;
+    if(email) {
+      const result = await authService().requestPasswordChange({ email });
+      alert('이메일이 발송되었습니다');
+    }
+    else {
+      this.setState({request:''});
+      alert('이메일을 입력해주십시오');
+    }
   }
 
   render() {
@@ -84,11 +98,7 @@ class LoginOrRegister extends Component {
 
     if(this.state.loginMode === 'main') {
       return (
-        <div
-          className={cx('login', {
-            waiting: isWaiting
-          })}
-        >
+        <div className={cx('login')}>
           <div className={cx('main-section')}>
             <h1 className={cx('title')}>메이커퍼즐 시작하기</h1>
             <Padding height="5" />
@@ -121,11 +131,7 @@ class LoginOrRegister extends Component {
     }
     else if(this.state.loginMode === 'login') {
       return (
-        <div
-          className={cx('login', {
-            waiting: isWaiting
-          })}
-        >
+        <div className={cx('login')}>
           <div className={cx('main-section')}>
             <div className={cx('top-button-area')}>
               <FlexibleImage 
@@ -182,7 +188,7 @@ class LoginOrRegister extends Component {
               <div
                 className={cx('text-link')}
                 role="button" 
-                onClick={e => alert('비밀번호 찾기 기능 준비 중: 관리자에게 문의하세요')}
+                onClick={this.requestPassword}
               >비밀번호 찾기</div>
             </div>
 
@@ -190,14 +196,49 @@ class LoginOrRegister extends Component {
         </div>
       );
     }
+    else if(this.state.loginMode === 'request') {
+      return <div className={cx('login')}>
+          <div className={cx('main-section')}>
+            <div className={cx('top-button-area')}>
+              <FlexibleImage 
+                source="/site/images/ic_reply_grey600_48dp.png" 
+                className={cx('button-back')}
+                role="button"
+                onClick={this.emailLoginClicked}
+                x={39} y={39}
+              />
+            </div>
+
+            <h1 className={cx('title')}>비밀번호 재설정</h1>
+            <p className={cx('helper', 'center')}>가입한 이메일로 비밀번호 재설정 링크를 보내드립니다.</p>
+            <form onSubmit={this.handleOnSubmit} className={cx('form-area')}>
+              <input
+                className={cx('input')}
+                type="email"
+                name="request"
+                value={this.state.request}
+                onChange={this.handleInputChange}
+                placeholder="가입한 이메일"
+              />
+              <FlexibleButton
+                className={cx('login-button')}
+                width={310}
+                height={33}
+                value={'확 인'} 
+                backgroundColor="#f46e1f"
+                borderColor="#f46e1f"
+                radius="0.05rem"
+                onClick={this.sendPasswordRequest} />
+              <Padding height="37" />
+            </form>
+
+          </div>
+        </div>
+    }
 
     else {
       return (
-        <div
-          className={cx('login', {
-            waiting: isWaiting
-          })}
-        >
+        <div className={cx('login')}>
           <div className={cx('main-section')}>
             <h1 className={cx('title')}>무료 회원가입</h1>
             <p className={cx('helper', 'center')}>추가 정보를 입력하고 회원가입을 완료하세요.</p>

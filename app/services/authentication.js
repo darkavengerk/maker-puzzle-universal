@@ -22,6 +22,10 @@ export default () => {
       url: `/api/user/${id}/password`,
       data: { password }
     }),
+    requestPasswordChange: ({ email }) => client.request({
+      method: 'GET',
+      url: `/api/user/${email}/password`
+    }),
     logOut: () => client.request({
       method: 'DELETE',
       url: '/sessions'
