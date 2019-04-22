@@ -17,10 +17,10 @@ export default () => {
       url: '/api/users',
       data
     }),
-    changePassword: ({ id, password }) => client.request({
+    changePassword: ({ id, password, hash }) => client.request({
       method: 'POST',
       url: `/api/user/${id}/password`,
-      data: { password }
+      data: { password, hash }
     }),
     requestPasswordChange: ({ email }) => client.request({
       method: 'GET',

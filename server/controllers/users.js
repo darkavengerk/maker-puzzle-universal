@@ -94,7 +94,8 @@ export async function passwordRequest(req, res) {
 
 export async function password(req, res) {
   // auth
-  const {id: userid, auth} = req.params;
+  const {id: userid} = req.params;
+  const { hash, password } = req.body;
   if(req.user && (req.user.userid === userid)) {
     // logged in
     return changePassword(userid, password, (err, result) => res.json(result));
@@ -103,14 +104,19 @@ export async function password(req, res) {
   // check auth
   // [{ token, date, userid }]
   const authPassword = await Misc.findOne({title:'auth-password'});
-  if(authPassword) {
-    const matched = _.find(authPassword, item => auth && auth.token === auth && auth.userid === userid)
-  }
-  if(!auth) {
-    if(!req.user || (req.user.userid !== userid)) {
-      return res.status(404).send('Not authorized');
+  if(hash && authPassword) {
+    const matched = authPassword.data && authPassword.data[userid];
+    if(matched && matched.token === hash) {
+      const timeDifference = new Date()-matched.date;
+      if(timeDifference < 2 * 1000 * 60 * 60) { // 2 hours limit
+        return changePassword(userid, password, (err, result) => res.json(result));
+      }
+      else {
+        return res.status(404).send('Time out');
+      }        
     }
   }
+  return res.status(404).send('Not authorized');
 }
 
 async function changePassword(userid, password, cb) {

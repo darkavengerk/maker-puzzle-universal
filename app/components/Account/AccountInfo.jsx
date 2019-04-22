@@ -18,7 +18,13 @@ for(let y = now-14; y > now-100; y--) {
 }
 
 const disconnectGoogle = user => event => {
+  user.access('makerProfile').access('google').dataChanged(null);
   user.access('google').dataChanged(null);
+}
+
+const disconnectFacebook = user => event => {
+  user.access('makerProfile').access('facebook').dataChanged(null);
+  user.access('facebook').dataChanged(null);
 }
 
 const Component = ({ data, showPasswordPopup, cx }) => {
@@ -100,11 +106,11 @@ const Component = ({ data, showPasswordPopup, cx }) => {
               >
                 <FlexibleImage source="/site/images/FB-icon.jpg" x={16} y={16} />
                 <Padding width={6} />
-                {data.get('facebook')? facebook.get('name') : '로그인에 Facebook 계정 사용'}
+                {facebook.get()? facebook.get('name') : '로그인에 Facebook 계정 사용'}
               </FlexibleButton>
               <Padding width={12} />
               <label>
-                {data.get('facebook') && '연결해제'}
+                {facebook.get() && '연결해제'}
               </label>
             </div>
             <Padding height={13} />
@@ -117,12 +123,12 @@ const Component = ({ data, showPasswordPopup, cx }) => {
               >
                 <FlexibleImage source="/site/images/G-icon.jpg" x={13} y={13} />
                 <Padding width={7} />
-                {data.get('google')? google.get('displayName') : '로그인에 Google 계정 사용'}
+                {google.get()? google.get('displayName') : '로그인에 Google 계정 사용'}
                 <Padding width={10} />
               </FlexibleButton>
               <Padding width={12} />
               <label role="button" onClick={disconnectGoogle(data)}>
-                {data.get('google') && '연결해제'}
+                {google.get() && '연결해제'}
               </label>
             </div>
           </div>

@@ -23,12 +23,17 @@ class Password extends Component {
   }
 
   async submitPassword() {
-    const { user, onChange } = this.props;
+    let { user, userid, onChange, hash } = this.props;
+    user = user.userid || userid;
     const { pw, pwCheck } = this.state;
     if(pw && pw === pwCheck) {
-      user && user.userid && await authService().changePassword({id: user.userid, password: pw});
-      alert('변경되었습니다');
-      onChange();
+      const result = user && await authService().changePassword({
+        id: user.userid || user, 
+        password: pw,
+        hash
+      });
+      alert('처리 결과: ', result);
+      onChange && onChange();
     }
     else {
       alert('유효하지 않습니다');

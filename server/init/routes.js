@@ -73,7 +73,6 @@ export default (app) => {
     POST('/api/user/:id/portfolios/order', usersController.changePortfolioOrder);
     POST('/api/user/:id/follow', usersController.follow);
     POST('/api/user/:id/unfollow', usersController.unfollow);
-    POST('/api/user/:id/password/:auth', usersController.password);
     POST('/api/user/:id/password', usersController.password);
     POST('/api/user/:id', usersController.updateUser);
     POST('/api/users', usersController.signUp);

@@ -6,6 +6,7 @@ import classNames from 'classnames/bind';
 import Link from '../components/Link';
 import SingleLine from '../components/SingleLine';
 import Padding from '../components/Padding';
+import Password from '../components/Account/Password';
 import { Main } from '../services';
 
 import styles from '../css/components/account';
@@ -19,10 +20,12 @@ class Container extends Component {
   }
 
   render() {
-    const { routeParams } = this.props;
+    const { hash, id } = this.props.routeParams;
     return (
       <div>
-        123password
+        <Padding height={50} />
+        <Password cx={cx} hash={hash} userid={id}/>
+        <Padding height={200} />
       </div>
     );
   }
