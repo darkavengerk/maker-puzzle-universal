@@ -88,7 +88,7 @@ export async function passwordRequest(req, res) {
   common.sendEmail(
     user.email,
     'Password change link',
-    `<a href="https://maker-puzzle.com/account/password/${userid}/${token}" target="blank">Click Here</a>`);
+    `<a href="https://www.maker-puzzle.com/account/password/${userid}/${token}" target="blank">Click Here</a>`);
   res.json({result: 'ok'});
 }
 
