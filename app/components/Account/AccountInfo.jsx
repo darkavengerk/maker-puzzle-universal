@@ -109,7 +109,7 @@ const Component = ({ data, showPasswordPopup, cx }) => {
                 {facebook.get()? facebook.get('name') : '로그인에 Facebook 계정 사용'}
               </FlexibleButton>
               <Padding width={12} />
-              <label>
+              <label role="button" onClick={disconnectFacebook(data)}>
                 {facebook.get() && '연결해제'}
               </label>
             </div>
