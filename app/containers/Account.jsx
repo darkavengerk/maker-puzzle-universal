@@ -8,12 +8,14 @@ import autoBind from 'react-autobind';
 import Layout from '../components/Account/Layout';
 import SimpleList from '../components/web/SimpleList';
 import AccountInfo from '../components/Account/AccountInfo';
+import Password from '../components/Account/Password';
 import Profile from '../components/Account/Profile';
 import Career from '../components/Account/Career';
 import Company from '../components/Account/Company';
 import Ability from '../components/Account/Ability';
 import Quit from '../components/Account/Quit';
 import Padding from '../components/Padding';
+import Popup from '../components/Popup';
 
 import Assist from '../utils/assist';
 import { DataBinder, DataTapper } from '../utils/DataBinder';
@@ -75,13 +77,22 @@ class Container extends Component {
     this.setState({selectedMenu : index});
   }
 
+  showPasswordPopup(event) {
+    this.setState({attempt: 'password'});
+  }
+
+  closePopup() {
+    this.setState({attempt: ''});
+  }
+
   getContent() {
     const user = this.dataBound.access('user', 'USER_UPDATE');
-    const { category} = this.props;
+    const { category } = this.props;
     switch(category) {
       case 'info': 
         return <AccountInfo 
           cx={cx}
+          showPasswordPopup={this.showPasswordPopup}
           data={user}
         />;
 
@@ -120,12 +131,29 @@ class Container extends Component {
   }
 
   render() {
-    const menu = <SimpleList 
-      items={linkNames} 
-      cx={cx}
-      selected={this.state.selectedMenu}
-      onClick={this.onClick}
-    />;
+    const user = this.dataBound.access('user', 'USER_UPDATE');
+    const menu = <div>
+      <SimpleList 
+        items={linkNames} 
+        cx={cx}
+        selected={this.state.selectedMenu}
+        onClick={this.onClick}
+      />
+      <Popup show={this.state.attempt === 'password'}
+        name="PasswordPopup"
+        cancel={this.closePopup}
+        roll={true} top={100}
+      >
+        <Padding width={450} height={172}>
+          <Password
+            data={this.dataBound.access('user')}
+            onChange={this.closePopup}
+            cancel={this.closePopup}
+            cx={cx}
+          />
+        </Padding>
+      </Popup>
+    </div>;
 
     return (
       <Layout

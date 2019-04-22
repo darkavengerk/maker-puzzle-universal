@@ -148,8 +148,13 @@ export class DataBinder {
     if(this.listeners[protocol.title]) {
       this.listeners[protocol.title].map(fn => fn(protocol));
     }
-    for(const key in this.children) {
-      this.children[key].flush({...protocol, data: this.data[key]});
+    if(this.data) {
+      for(const key in this.children) {
+        this.children[key].flush({...protocol, data: this.data[key]});
+      }      
+    }
+    else {
+      this.children = [];
     }
   }
 }

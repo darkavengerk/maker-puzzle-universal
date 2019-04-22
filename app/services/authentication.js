@@ -17,6 +17,15 @@ export default () => {
       url: '/api/users',
       data
     }),
+    changePassword: ({ id, password, hash }) => client.request({
+      method: 'POST',
+      url: `/api/user/${id}/password`,
+      data: { password, hash }
+    }),
+    requestPasswordChange: ({ email }) => client.request({
+      method: 'GET',
+      url: `/api/user/${email}/password`
+    }),
     logOut: () => client.request({
       method: 'DELETE',
       url: '/sessions'

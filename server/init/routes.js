@@ -63,16 +63,18 @@ export default (app) => {
 
   // user routes
   if (usersController) {
+    GET('/api/user/:email/password', usersController.passwordRequest);
     GET('/api/user/:id/:pid', usersController.single);
     GET('/api/user/:id', usersController.single);
     GET('/api/user', usersController.all);
     POST('/api/user/:id/features', usersController.updateFeatures);
-    POST('/api/user/:id', usersController.updateUser);
     POST('/api/user/:id/company', usersController.addCompany);
     POST('/api/user/:id/portfolio', usersController.addPortfolio);
     POST('/api/user/:id/portfolios/order', usersController.changePortfolioOrder);
     POST('/api/user/:id/follow', usersController.follow);
     POST('/api/user/:id/unfollow', usersController.unfollow);
+    POST('/api/user/:id/password', usersController.password);
+    POST('/api/user/:id', usersController.updateUser);
     POST('/api/users', usersController.signUp);
     POST('/sessions', usersController.login);
     DELETE('/sessions', usersController.logout);

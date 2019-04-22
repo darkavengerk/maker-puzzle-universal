@@ -2,8 +2,10 @@ import mongoose from 'mongoose';
 import path from 'path';
 import sharp from 'sharp';
 import aws from 'aws-sdk';
+import nodemailer from 'nodemailer';
 
 import { isProduction } from '../../../config/app';
+import { emailAccount } from '../../../config/secrets';
 import { refineCompanyName as refineName } from '../../../app/utils/functions';
 import Company, {autoComplete as companyAutoComplete} from './models/company';
 import Project, {autoComplete as projectAutoComplete} from './models/project';
@@ -441,6 +443,31 @@ const populateFieldsForPortfolio = {
   userFeatures : 'userid type name picture _id features',
 }
 
+async function sendEmail(receiver, title, content) {
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+      type: 'OAuth2',
+      user: emailAccount.user,
+      serviceClient: emailAccount.serviceClient,
+      privateKey: emailAccount.privateKey
+    },
+  });
+  try {
+    await transporter.verify();
+    await transporter.sendMail({
+      from: emailAccount.user,
+      to: receiver,
+      subject: title,
+      html: content,
+    });
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 export default {
   savePortfolio,
   imageProcess,
@@ -451,5 +478,6 @@ export default {
   refineCompanyName,
   populateFieldsForPortfolio,
   getPopulatedUser,
-  buildFeed
+  buildFeed,
+  sendEmail
 };

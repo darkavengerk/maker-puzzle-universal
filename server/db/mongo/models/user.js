@@ -101,6 +101,16 @@ function encryptPassword(next) {
   });
 }
 
+UserSchema.statics.encryptPassword = (password, cb) => {
+  return bcrypt.genSalt(5, (saltErr, salt) => {
+    if (saltErr) return cb(saltErr);
+    return bcrypt.hash(password, salt, null, (hashErr, hash) => {
+      if (hashErr) return cb(hashErr);
+      return cb(null, hash);
+    });
+  });
+};
+
 /**
  * Password hash middleware.
  */
