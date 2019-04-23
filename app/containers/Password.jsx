@@ -17,14 +17,42 @@ class Container extends Component {
   
   constructor(props) {
     super(props);
+    this.onChange = this.onChange.bind(this);
+    this.onCancel = this.onCancel.bind(this);
+    this.state = {done: false, message: ''};
+  }
+
+  onChange() {
+    this.setState({done: true, message: '비밀번호가 변경되었습니다'});
+  }
+
+  onCancel() {
+    this.setState({done: true, message: '취소되었습니다'});
   }
 
   render() {
     const { hash, id } = this.props.routeParams;
+    if(this.state.done) {
+      return <div>
+        <Padding height={50} width="100%"/>
+        <Padding height={30} width="100%">
+          <h1 className={cx('title')}>{this.state.message}</h1>
+        </Padding>
+      </div>;
+    }
     return (
       <div>
-        <Padding height={50} />
-        <Password cx={cx} hash={hash} userid={id}/>
+        <Padding height={50} width="100%"/>
+        <Padding height={30} width="100%">
+          <h1 className={cx('title')}>비밀번호 재설정</h1>
+        </Padding>
+        <Password
+          cx={cx}
+          hash={hash}
+          userid={id}
+          onChange={this.onChange}
+          cancel={this.onCancel}
+        />
         <Padding height={200} />
       </div>
     );

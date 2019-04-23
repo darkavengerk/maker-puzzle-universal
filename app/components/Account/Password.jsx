@@ -32,7 +32,7 @@ class Password extends Component {
         password: pw,
         hash
       });
-      alert('처리 결과: ', result);
+      alert('정상적으로 처리 되었습니다');
       onChange && onChange();
     }
     else {

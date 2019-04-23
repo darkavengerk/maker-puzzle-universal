@@ -68,7 +68,6 @@ export default (store) => {
             <Route exact path="main" component={Main} fetchData={fetchMainData} />
             <Route path="maker/:id/portfolio/:pid" component={Maker} fetchData={fetchMakerData} />
             <Route path="maker/:id" component={Maker} fetchData={fetchMakerData} />
-            <Route path="account/password/:id/:hash" component={Password} />
             <Route path="account/:category" component={Account} fetchData={fetchAccountData} onEnter={requireAuth} />
             <Route path="search/:keyword" component={Search} fetchData={fetchSearchData} />
             <Route path="policy/:section" component={Policy} fetchData={fetchPolicyData} />
@@ -85,6 +84,7 @@ export default (store) => {
             <Route path="about" component={About} />*/}
           </Route>
         </Route>, 
+        <Route path="account/password/:id/:hash" component={Password} />,
         <Route key="hello" path="hello" component={Hello} />,
         <Route key="refresh" path="refresh" component={Refresh} />,
       ]
