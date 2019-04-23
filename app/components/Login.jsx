@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 
-import { manualLogin, signUp } from '../actions/users';
+import { manualLogin, signUp, cancelLogin } from '../actions/users';
 import { dismissMessage } from '../actions/messages';
 import SingleLine from '../components/SingleLine';
 import Padding from '../components/Padding';
@@ -83,9 +83,11 @@ class LoginOrRegister extends Component {
 
   async sendPasswordRequest(event) {
     const email = this.state.request;
+    const { cancelLogin } = this.props;
     if(email) {
       const result = await authService().requestPasswordChange({ email });
       alert('이메일이 발송되었습니다');
+      cancelLogin();
     }
     else {
       this.setState({request:''});
@@ -399,5 +401,12 @@ function mapStateToProps({user}) {
 // Connects React component to the redux store
 // It does not modify the component class passed to it
 // Instead, it returns a new, connected component class, for you to use.
-export default connect(mapStateToProps, { manualLogin, signUp, clearMessage: dismissMessage })(LoginOrRegister);
+export default connect(mapStateToProps, 
+  { 
+    manualLogin,
+    signUp,
+    cancelLogin,
+    clearMessage: dismissMessage,
+  }
+)(LoginOrRegister);
 
