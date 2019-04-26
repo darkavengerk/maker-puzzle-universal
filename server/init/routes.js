@@ -74,6 +74,7 @@ export default (app) => {
     POST('/api/user/:id/follow', usersController.follow);
     POST('/api/user/:id/unfollow', usersController.unfollow);
     POST('/api/user/:id/password', usersController.password);
+    POST('/api/user/:userid/remove', usersController.remove);
     POST('/api/user/:id', usersController.updateUser);
     POST('/api/users', usersController.signUp);
     POST('/sessions', usersController.login);

@@ -330,22 +330,22 @@ async function createPortfolio(userid, portfolio) {
   return await common.savePortfolio({portfolio, user, company, project});
 }
 
+async function pullPortfolio(Model, portfolio) {
+  const found = await Model.findOne({'portfolios.pid' : portfolio.pid});
+    if(found) {
+      found.portfolios = found.portfolios.filter(p => p.pid !== portfolio.pid);
+      await found.save();
+    }
+}
+
 async function editPortfolio(userid, portfolio) {
 
   if(portfolio.companyChanged) {
-    const prevCompany = await Company.findOne({'portfolios.pid' : portfolio.pid});
-    if(prevCompany) {
-      prevCompany.portfolios = prevCompany.portfolios.filter(p => p.pid !== portfolio.pid);
-      await prevCompany.save();
-    }
+    await pullPortfolio(Company, portfolio);
   }
 
   if(portfolio.locationChanged) {
-    const prevProject = await Project.findOne({'portfolios.pid' : portfolio.pid});
-    if(prevProject) {
-      prevProject.portfolios = prevProject.portfolios.filter(p => p.pid !== portfolio.pid);
-      await prevProject.save();
-    }
+    await pullPortfolio(Project, portfolio);
   }
 
   return await createPortfolio(userid, portfolio);
@@ -358,33 +358,6 @@ export function logout(req, res) {
   req.logout();
   res.sendStatus(200);
 }
-
-// export async function signUp(req, res, next) {
-//   let userInfo = {...req.body};
-//   let userid = req.body.email.split('@')[0];
-//   let existingUser = await User.findOne({ userid });
-//   let idCount = 0;
-//   while(existingUser) {
-//     idCount += 1;
-//     userid += idCount;
-//     existingUser = await User.findOne({ userid });
-//   }
-//   userInfo['userid'] = userid;
-
-//   existingUser = await User.findOne({ email: userInfo.email });
-//   if (existingUser) {
-//     return res.sendStatus(409);
-//   }
-
-//   userInfo = await Metadata.populateMetadata('User', userInfo);
-
-//   const user = await User.create(userInfo);
-  
-//   return req.logIn(user, (loginErr) => {
-//     if (loginErr) return res.sendStatus(401);
-//     return res.json(user);
-//   });
-// }
 
 /**
  * POST /signup
@@ -408,12 +381,46 @@ export async function signUp(req, res, next) {
 
 }
 
+export async function remove(req, res, next) {
+  const { userid } = req.params;
+  const user = await User.findOne({ userid }).populate(['followings', 'followers']);
+
+  if(!user) return res.sendStatus('error: no user found');
+
+  // portfolio removal
+  for(const portfolio of user.portfolios) {
+    await pullPortfolio(Company, portfolio);
+    await pullPortfolio(Project, portfolio);
+  }
+
+  // following
+  await Company.update({followers: user._id}, {$pull: {followers: user._id}}, {multi:true});
+  await User.update({followers: user._id}, {$pull: {followers: user._id}}, {multi:true});
+  await User.update({followings: user._id}, {$pull: {followings: user._id}}, {multi:true});
+
+  const prefix = `[removed_${new Date() - 0}]`;
+  await User.update(
+    { userid }, 
+    {
+      $set: {
+        userid: prefix + user.userid,
+        email: prefix + user.email,
+        google: null,
+        facebook: null,
+        state:'DELETED'
+      }
+    }
+  );
+  logout(req, res);
+}
+
 export default {
   all,
   single,
   login,
   logout,
   signUp,
+  remove,
   password,
   passwordRequest,
   updateUser,

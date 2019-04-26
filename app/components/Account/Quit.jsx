@@ -8,7 +8,7 @@ import Padding from '../../components/Padding';
 import TextInputRound from '../../components/web/TextInputRound';
 import FlexibleButton from '../../components/web/FlexibleButton';
 
-const Component = ({ data, cx }) => {
+const Component = ({ data, quit, cx }) => {
 
   return (
     <div className={cx('info-main')}>
@@ -25,7 +25,9 @@ const Component = ({ data, cx }) => {
           radius={8}
           backgroundColor="#b1b1b1"
           borderColor="#979797"
-          className={cx('quit-button')} />
+          className={cx('quit-button')} 
+          onClick={quit}
+        />
       </section>
     </div>
   );

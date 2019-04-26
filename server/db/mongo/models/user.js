@@ -86,6 +86,8 @@ const UserSchema = new mongoose.Schema({
 
   google: String,
   facebook: String,
+
+  state: String,
 });
 
 function encryptPassword(next) {
