@@ -19,10 +19,21 @@ class SliderMain extends Component {
     this.state = {index: 0};
     this.clickLeft = this.clickLeft.bind(this);
     this.clickRight = this.clickRight.bind(this);
+    this.autoSlide = this.autoSlide.bind(this);
     this.pager = this.pager.bind(this);
+    this.autoSlideRef = setInterval(this.autoSlide, 1000);
+    this.slideTime = new Date();
+  }
+
+  autoSlide() {
+    const now = new Date();
+    if(now - this.slideTime >= 3000) {
+      this.clickRight();
+    }
   }
 
   clickLeft(evt) {
+    this.slideTime = new Date();
     return this.setState(prev => {
       const index = (prev.index || 0) - 1;
       return { index };
@@ -30,6 +41,7 @@ class SliderMain extends Component {
   }
 
   clickRight(evt) {
+    this.slideTime = new Date();
     return this.setState(prev => {
       const index = (prev.index || 0) + 1;
       return { index };
