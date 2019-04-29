@@ -110,9 +110,10 @@
   border-radius: 0.1rem;
   width: 4.58rem;
   height: 1.44rem;
-  padding: 0.02rem 0.1rem;
+  padding: 0.07rem 0.1rem;
   position: relative;
   top: -0.08rem;
+  font-family: NanumBarunGothic;
 }
 
 .about-maker:empty:before {
