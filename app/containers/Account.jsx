@@ -54,7 +54,7 @@ class Container extends Component {
 
     autoBind(this);
 
-    this.dataBound = new DataBinder(this.state, {component: this});
+    this.dataBound = new DataBinder({user: this.state.user1}, {component: this});
     // this.dataBound.listen('USER_UPDATE', protocol => {
     //   this.dataBound.set(protocol.data, 'user');
     //   this.setState({user: {...this.dataBound.get('user')}});

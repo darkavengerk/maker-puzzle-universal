@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 
 const Component = ({ items, selected, onClick, cx }) => {
-
   const menu = items.map((item, i) => (
     <div 
       key={i}
