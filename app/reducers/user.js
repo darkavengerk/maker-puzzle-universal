@@ -38,6 +38,7 @@ const attempt = (
     case types.LOGIN_SUCCESS_USER:
     case types.SIGNUP_SUCCESS_USER:
     case types.ACCOUNT_EDITOR_END:
+    case types.REQUEST_SUCCESS:
       return '';
     default:
       return state;
