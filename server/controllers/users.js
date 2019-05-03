@@ -85,10 +85,67 @@ export async function passwordRequest(req, res) {
     token, userid, date
   }
   await Misc.update({ title: 'auth-password' }, authPassword);
-  common.sendEmail(
-    user.email,
-    'Password change link',
-    `<a href="https://www.maker-puzzle.com/account/password/${userid}/${token}" target="blank">Click Here</a>`);
+  const logo = common.base64Encode('public/site/images/MAKER-PUZZLE-normal.png');
+  common.sendEmail({
+    receiver: user.email,
+    title: '비밀번호 재설정',
+    attachments: {
+      filename: 'logo.png',
+      content: logo,
+      cid: 'logo-maker-puzzle' // should be as unique as possible
+    },
+    html: `
+    <div style="background:whtie; width:100%; font-family: helvetica,arial,sans-serif">
+      <table style="width: 550px; height: 500px; background:white; margin: 0 auto">
+        <tbody>
+          <tr>
+            <td style="text-align:center;height:36px" align="center">
+              <img src="cid:logo-maker-puzzle" style="height:36px; width:175px;" />
+            </td>
+          </tr>
+          <tr>
+            <td style="height:15px" align="center">
+              <hr style="border-color: #d8d8d8">
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 0 30px; vertical-align: top;">
+              <table>
+                <tbody>
+                  <tr><td>
+                    <h3 style="width:168px;height:23px;font-size:20px;font-weight:normal;font-style:normal;font-stretch:normal;line-height:normal;letter-spacing:normal;color:#2c2c2c;">
+                      비밀번호 변경하기
+                    </h3>
+                  </td></tr>
+                  <tr>
+                    <td>
+                      회원님의 MAKER PUZZLE 계정에 대한 ‘비밀번호 변경 요청’을 접수했습니다.<br/>
+                만약 회원님이 비밀번호 변경을 요청하지 않으셨다면 이 이메일은 무시하세요. 
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <br/>
+                      <a 
+                        href="https://www.maker-puzzle.com/account/password/${userid}/${token}"
+                        target="blank"
+                        style="display:inline-block;max-width:150px;border-radius:8px;text-align:center;background-color:#ff5115;color:#fff;width:190px;font:bold 14px sans-serif;line-height:36px;text-decoration:none!important"
+                      >
+                        비밀번호 재설정
+                      </a>
+                      <div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+    `});
   res.json({result: 'ok'});
 }
 

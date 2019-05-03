@@ -3,6 +3,7 @@ import path from 'path';
 import sharp from 'sharp';
 import aws from 'aws-sdk';
 import nodemailer from 'nodemailer';
+import fs from 'fs';
 
 import { isProduction } from '../../../config/app';
 import { emailAccount } from '../../../config/secrets';
@@ -443,7 +444,13 @@ const populateFieldsForPortfolio = {
   userFeatures : 'userid type name picture _id features',
 }
 
-async function sendEmail(receiver, title, content) {
+function base64Encode(f) {
+  var bitmap = fs.readFileSync(f);
+  // return new Buffer(bitmap).toString('base64');
+  return new Buffer(bitmap);
+}
+
+async function sendEmail({receiver, title, html, attachments=[]}) {
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
@@ -461,7 +468,8 @@ async function sendEmail(receiver, title, content) {
       from: emailAccount.user,
       to: receiver,
       subject: title,
-      html: content,
+      html,
+      attachments
     });
   } catch (err) {
     console.error(err);
@@ -479,5 +487,6 @@ export default {
   populateFieldsForPortfolio,
   getPopulatedUser,
   buildFeed,
-  sendEmail
+  sendEmail,
+  base64Encode
 };
