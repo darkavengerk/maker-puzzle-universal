@@ -27,6 +27,10 @@ class SliderMain extends Component {
     }
   }
 
+  componentWillUnmount() {
+    clearInterval(this.autoSlideRef);
+  }
+
   autoSlide() {
     const now = new Date();
     if(now - this.slideTime >= 3000) {
