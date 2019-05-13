@@ -21,8 +21,10 @@ class SliderMain extends Component {
     this.clickRight = this.clickRight.bind(this);
     this.autoSlide = this.autoSlide.bind(this);
     this.pager = this.pager.bind(this);
-    this.autoSlideRef = setInterval(this.autoSlide, 1000);
-    this.slideTime = new Date();
+    if(typeof(window) !== 'undefined') {
+      this.autoSlideRef = setInterval(this.autoSlide, 1000);
+      this.slideTime = new Date();
+    }
   }
 
   autoSlide() {
