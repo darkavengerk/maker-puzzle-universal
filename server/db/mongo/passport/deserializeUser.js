@@ -3,6 +3,10 @@ import User from '../models/user';
 const sessionMap = {};
 
 export default (id, done) => {
+  // temp code for memory leak checking
+  return User.findById(id, (err, user) => {
+    done(err, user);
+  });
   const now = new Date().getTime();
   if(sessionMap[id]) {
     const time = sessionMap[id].time;

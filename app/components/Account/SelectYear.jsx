@@ -2,13 +2,12 @@ import React from 'react';
 
 import Select from '../../components/web/Select';
 
-const years = [];
-const now = new Date().getFullYear();
-for(let y = now-14; y > now-100; y--) {
-  years.push(y);
-}
-
 const SelectComponent = ({ height='100%', width='100%', placeholder, data, ...props }) => {
+  const years = [];
+  const now = new Date().getFullYear();
+  for(let y = now-14; y > now-100; y--) {
+    years.push(y);
+  }
   return <Select 
             height={height}
             width={width}

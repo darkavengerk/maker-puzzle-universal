@@ -11,12 +11,6 @@ import FormItemMedium from '../../components/web/FormItemMedium';
 import TextInputRound from '../../components/web/TextInputRound';
 import FlexibleButton from '../../components/web/FlexibleButton';
 
-const years = [];
-const now = new Date().getFullYear();
-for(let y = now-14; y > now-100; y--) {
-  years.push({value:y, label:y});
-}
-
 const disconnectGoogle = user => event => {
   user.access('makerProfile').access('google').dataChanged(null);
   user.access('google').dataChanged(null);

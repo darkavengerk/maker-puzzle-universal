@@ -19,12 +19,6 @@ import { authService } from '../services';
 import styles from '../css/components/login';
 const cx = classNames.bind(styles);
 
-const now = new Date().getFullYear();
-const years = [];
-for(let y = now-14; y > now-100; y--) {
-  years.push({value:y, label:y});
-}
-
 class LoginOrRegister extends Component {
   constructor(props) {
     super(props);
@@ -239,6 +233,11 @@ class LoginOrRegister extends Component {
     }
 
     else {
+      const now = new Date().getFullYear();
+      const years = [];
+      for(let y = now-14; y > now-100; y--) {
+        years.push({value:y, label:y});
+      }
       return (
         <div className={cx('login')}>
           <div className={cx('main-section')}>

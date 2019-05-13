@@ -16,11 +16,6 @@ import SelectCareer from '../../components/Account/SelectCareer';
 import { Company } from '../../services';
 import { createTextLinks } from '../../utils/functions';
 
-const years = [{value:-1, label:'재직중'}, {value:0, label:'1년 이하'}];
-for(let x=1; x<10; x++) {
-  years.push({value:x, label:x+'년'});
-}
-
 const Component = ({ data, history, cx }) => {
 
   const preventEnter = evt => {

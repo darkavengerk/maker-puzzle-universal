@@ -1,5 +1,5 @@
 
-var Trie = require('./trie').Trie;
+const Trie = require('./trie').Trie;
 
 class AutoComplete {
   constructor(config, callback){

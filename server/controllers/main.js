@@ -16,8 +16,6 @@ const {
   Count
 } = models;
 
-let mainContents = null;
-
 function getContents(model, query, sort, limit, loaded, populate) {
   if(typeof(sort) === 'string') {
     sort = (sort === 'popular')? {score:-1} : {_id:-1};
@@ -94,10 +92,12 @@ export async function buildContents(req, res) {
   // const [projects, projectsNew, companies, portfolios, companyPortfolios, companyPortfoliosRecent] = await Promise.all(loadings);
   // mainContents = { projects, projectsNew, companies, portfolios, companyPortfolios, companyPortfoliosRecent, subContents: await getSubContents() };
   const [projects, projectsNew, companyPortfoliosRecent] = await Promise.all(loadings);
-  mainContents = { projects, projectsNew, companyPortfoliosRecent, subContents: await getSubContents() };
+  const data = { projects, projectsNew, companyPortfoliosRecent, subContents: await getSubContents() };
+  await Misc.update({title: 'main-contents'}, {title: 'main-contents', data}, {upsert: true});
   if(req && res) {
-    res.json(mainContents);
+    res.json(data);
   }
+  return data;
 }
 
 async function populatePortfoilios(portfolios) {
@@ -110,13 +110,14 @@ async function populatePortfoilios(portfolios) {
 }
 
 export async function main(req, res) {
-  if(!mainContents)
-    await buildContents();
+  const mainContents = await Misc.findOne({title: 'main-contents'}).lean();
+  console.log(mainContents);
+  const data = mainContents.data || await buildContents();
   if(req.user && req.user.userid) {
     const user = await getPopulatedUser(req.user.userid);
     // mainContents.feed = await populatePortfoilios((await buildFeed(user)).slice(0,18));
   }
-  return res.json(mainContents);
+  return res.json(data);
 }
 
 export async function more(req, res) {
