@@ -111,7 +111,7 @@ async function populatePortfoilios(portfolios) {
 
 export async function main(req, res) {
   const mainContents = await Misc.findOne({title: 'main-contents'}).lean();
-  const data = mainContents.data || await buildContents();
+  const data = (mainContents && mainContents.data)? mainContents.data : await buildContents();
   if(req.user && req.user.userid) {
     const user = await getPopulatedUser(req.user.userid);
     // mainContents.feed = await populatePortfoilios((await buildFeed(user)).slice(0,18));

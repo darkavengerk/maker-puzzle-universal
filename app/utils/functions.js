@@ -1,6 +1,6 @@
 
 export function refineCompanyName(keyword) {
-  return keyword.replace('(주)', '').replace('주식회사', '').trim();
+  return keyword? keyword.replace('(주)', '').replace('주식회사', '').trim() : '';
 }
 
 export function createTextLinks(text) {  
