@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames/bind';
 import factory from '../utils/contentsTagFactory'
+import { refineCompanyName } from '../utils/functions'
 
 class User {
 
@@ -147,7 +148,7 @@ class Company extends User {
   }
 
   getHomeLink(data) {
-    return '/company/' + data.link_name;
+    return '/company/' + refineCompanyName(data.link_name);
   }
 
   createPortfolioLink(portfolio) {
