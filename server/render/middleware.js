@@ -33,7 +33,7 @@ export default async function render(req, res) {
       isWaiting: false,
       message: '',
       isLogin: true,
-      isMobile: md.mobile(),
+      isMobile: md.mobile() !== null,
     }
   }, history);
   const routes = createRoutes(store);
