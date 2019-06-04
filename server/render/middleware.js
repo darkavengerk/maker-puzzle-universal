@@ -1,5 +1,7 @@
 import { createMemoryHistory, match } from 'react-router';
 import axios from 'axios';
+import MobileDetect from 'mobile-detect';
+
 import createRoutes from '../../app/routes';
 import configureStore from '../../app/store/configureStore';
 import * as types from '../../app/types';
@@ -7,6 +9,8 @@ import pageRenderer from './pageRenderer';
 import fetchDataForRoute from '../../app/utils/fetchDataForRoute';
 import { sessionId } from '../../config/secrets';
 import  { common } from '../db';
+
+
 /*
  * Export render function to be used in server/config/routes.js
  * We grab the state passed in from the server and the req object from Express/Koa
@@ -21,13 +25,15 @@ export default async function render(req, res) {
     user = await common.getPopulatedUser(req.user.userid, {password:0});
     user.feed = await common.buildFeed(user);
   }
+  const md = new MobileDetect(req.headers['user-agent']);
   const store = configureStore({
     user: {
       account: user,
       authenticated,
       isWaiting: false,
       message: '',
-      isLogin: true
+      isLogin: true,
+      isMobile: md.mobile(),
     }
   }, history);
   const routes = createRoutes(store);
