@@ -32,8 +32,10 @@ export default async function render(req, res) {
       authenticated,
       isWaiting: false,
       message: '',
-      isLogin: true,
-      isMobile: md.mobile() !== null,
+      isLogin: true
+    },
+    env: {
+      mobile: md.mobile(),
     }
   }, history);
   const routes = createRoutes(store);

@@ -13,13 +13,6 @@ const isLogin = (
   }
 };
 
-const isMobile = (
-  state = false,
-  action
-) => {
-  return state;
-};
-
 const attempt = (
   state = '',
   action
@@ -148,7 +141,6 @@ const account = (
 
 const userReducer = combineReducers({
   isLogin,
-  isMobile,
   isWaiting,
   authenticated,
   message,

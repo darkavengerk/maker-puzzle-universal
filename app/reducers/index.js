@@ -14,6 +14,7 @@ import project from '../reducers/project';
 import param from '../reducers/param';
 import image from '../reducers/image';
 import screen from '../reducers/screen';
+import env from '../reducers/env';
 import * as types from '../types';
 
 const isFetching = (state = false, action) => {
@@ -52,7 +53,8 @@ const rootReducer = (state = {}, action) => {
     company,
     param,
     image,
-    screen
+    screen,
+    env
   })(oldState, action);
 
   return {
