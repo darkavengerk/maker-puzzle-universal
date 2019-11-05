@@ -83,7 +83,7 @@
     "lodash": "^4.17.11",
     "method-override": "^2.3.8",
     "mobile-detect": "^1.4.3",
-    "mongoose": "^4.9.3",
+    "mongoose": "^5.7.5",
     "nodemailer": "^6.1.0",
     "nodemailer-smtp-transport": "^2.7.4",
     "passport": "^0.3.2",
